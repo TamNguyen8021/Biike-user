@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 /// Runs the application.
 void main() {
-  runApp(Bikes());
+  runApp(Biike());
 }
 
 /// This widget is the root of your application.
-class Bikes extends StatelessWidget {
+class Biike extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
