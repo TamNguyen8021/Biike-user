@@ -9,7 +9,7 @@ class OpenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.blue,
+      backgroundColor: CustomColors.blue,
       body: Container(
         child: Center(
             child: Text(

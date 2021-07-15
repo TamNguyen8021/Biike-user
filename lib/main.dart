@@ -1,4 +1,5 @@
-import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/customer_home_page.dart';
+import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Runs the application.
@@ -15,9 +16,9 @@ class Biike extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           // Apply a combination of colors based on the provided one to entire app.
-          primarySwatch: Colors.blue,
-          fontFamily: 'SVN-Product Sans'),
-      home: OpenPage(),
+          primarySwatch: CustomColors.blue,
+          fontFamily: 'SVN-Product-Sans'),
+      home: CustomerHomePage(),
     );
   }
 }
