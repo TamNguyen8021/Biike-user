@@ -15,11 +15,13 @@ class FinishTripButton extends StatelessWidget {
         icon: Icon(Icons.check),
         label: Text(
           CustomStrings.finishTrip,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all<Color>(CustomColors.blue)),
+                MaterialStateProperty.all<Color>(CustomColors.blue),
+            elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );
   }

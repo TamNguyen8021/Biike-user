@@ -38,102 +38,100 @@ class _TripCardState extends State<TripCard> {
       height: 82,
       child: Row(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage(widget.avatarUrl),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage(widget.avatarUrl),
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          widget.name,
+                          style: TextStyle(
+                              color: widget.foregroundColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text(
+                            widget.time,
+                            style: TextStyle(
+                                color: widget.foregroundColor, fontSize: 12),
+                          ),
+                        ),
+                        Text(
+                          widget.date,
+                          style: TextStyle(
+                              color: widget.foregroundColor, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: <Widget>[
-                    Text(
-                      widget.name,
-                      style: TextStyle(
-                          color: widget.foregroundColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        widget.time,
-                        style: TextStyle(
-                            color: widget.foregroundColor, fontSize: 12),
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Icon(
+                        Icons.radio_button_on_outlined,
+                        color: widget.iconColor,
+                        size: 15,
                       ),
                     ),
                     Text(
-                      widget.date,
+                      widget.sourceStation,
                       style: TextStyle(
                           color: widget.foregroundColor, fontSize: 12),
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: Icon(
+                    Icons.more_vert_outlined,
+                    color: widget.iconColor,
+                    size: 15,
+                  ),
+                ),
+                Row(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Padding(
-<<<<<<< HEAD
-                          padding: const EdgeInsets.only(right: 10.0),
-=======
-                          padding: const EdgeInsets.only(right: 8.0),
->>>>>>> tamntt_template_ui
-                          child: Icon(
-                            Icons.radio_button_on_outlined,
-                            color: widget.iconColor,
-                            size: 15,
-                          ),
-                        ),
-                        Text(
-                          widget.sourceStation,
-                          style: TextStyle(
-                              color: widget.foregroundColor, fontSize: 12),
-                        ),
-                      ],
-                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                      padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
-                        Icons.more_vert_outlined,
+                        Icons.location_on,
                         color: widget.iconColor,
                         size: 15,
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-<<<<<<< HEAD
-                          padding: const EdgeInsets.only(right: 10.0),
-=======
-                          padding: const EdgeInsets.only(right: 8.0),
->>>>>>> tamntt_template_ui
-                          child: Icon(
-                            Icons.location_on,
-                            color: widget.iconColor,
-                            size: 15,
-                          ),
-                        ),
-                        Text(
-                          widget.destinationStation,
-                          style: TextStyle(
-                              color: widget.foregroundColor, fontSize: 12),
-                        ),
-                      ],
+                    Text(
+                      widget.destinationStation,
+                      style: TextStyle(
+                          color: widget.foregroundColor, fontSize: 12),
                     ),
                   ],
-                )
+                ),
               ],
             ),
-          ),
+          )
         ],
       ),
       decoration: BoxDecoration(
@@ -145,7 +143,7 @@ class _TripCardState extends State<TripCard> {
               spreadRadius: 0.5,
               blurRadius: 0.5,
               // changes position of shadow
-              offset: Offset(0, 1),
+              offset: Offset(0, 0.5),
             )
           ]),
     );

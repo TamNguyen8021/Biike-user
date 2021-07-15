@@ -26,38 +26,25 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         appBar: CustomAppBar(
           appBar: AppBar(),
           title: Padding(
-<<<<<<< HEAD
             padding: const EdgeInsets.only(left: 5.0),
-=======
-            padding: const EdgeInsets.only(left: 16.0),
->>>>>>> tamntt_template_ui
             child: Row(
               children: <Widget>[
-                Text(CustomStrings.appName),
+                Image.asset(
+                  'assets/images/logo-white.png',
+                  height: 25.0,
+                ),
                 Padding(
-<<<<<<< HEAD
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-=======
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
->>>>>>> tamntt_template_ui
                   child: SizedBox(
                     height: 20,
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Padding(
-<<<<<<< HEAD
                         padding: const EdgeInsets.symmetric(horizontal: 1.0),
                         child: Text(
                           CustomStrings.customerMode,
                           style:
                               TextStyle(color: CustomColors.blue, fontSize: 10),
-=======
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          CustomStrings.customerMode,
-                          style:
-                              TextStyle(color: CustomColors.blue, fontSize: 12),
->>>>>>> tamntt_template_ui
                         ),
                       ),
                       style: ButtonStyle(
@@ -87,11 +74,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         body: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-<<<<<<< HEAD
               padding: const EdgeInsets.all(22.0),
-=======
-              padding: const EdgeInsets.all(33.0),
->>>>>>> tamntt_template_ui
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -129,7 +112,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                         destinationStation: 'Chung cư SKY9'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 30.0),
+                    padding: const EdgeInsets.only(bottom: 35.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[FinishTripButton(), ContactButtons()],
@@ -170,7 +153,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(bottom: 25.0),
+                      padding: const EdgeInsets.only(bottom: 35.0),
                       child: ListTrips(list: [1, 2, 3, 4, 5])),
                 ],
               ),
@@ -178,6 +161,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          elevation: 1.0,
           onPressed: () {},
           backgroundColor: CustomColors.orange,
           child: Icon(

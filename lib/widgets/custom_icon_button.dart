@@ -25,7 +25,7 @@ class CustomIconButton extends StatelessWidget {
               spreadRadius: 0.5,
               blurRadius: 0.5,
               // changes position of shadow
-              offset: Offset(0, 1),
+              offset: Offset(0, 0.5),
             )
           ]),
       child: IconButton(
