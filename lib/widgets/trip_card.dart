@@ -82,7 +82,11 @@ class _TripCardState extends State<TripCard> {
                     Row(
                       children: <Widget>[
                         Padding(
+<<<<<<< HEAD
                           padding: const EdgeInsets.only(right: 10.0),
+=======
+                          padding: const EdgeInsets.only(right: 8.0),
+>>>>>>> tamntt_template_ui
                           child: Icon(
                             Icons.radio_button_on_outlined,
                             color: widget.iconColor,
@@ -107,7 +111,11 @@ class _TripCardState extends State<TripCard> {
                     Row(
                       children: <Widget>[
                         Padding(
+<<<<<<< HEAD
                           padding: const EdgeInsets.only(right: 10.0),
+=======
+                          padding: const EdgeInsets.only(right: 8.0),
+>>>>>>> tamntt_template_ui
                           child: Icon(
                             Icons.location_on,
                             color: widget.iconColor,
