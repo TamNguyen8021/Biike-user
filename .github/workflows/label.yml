@@ -8,13 +8,11 @@
 name: Labeler
 on: 
   pull_request:
-    branches:
-    - develop
+    branches: '*'
   push:
-    branches:
-    - develop
+    branches: '*'
   schedule:
-  - cron: "0 23 * * 1-6"
+  - cron: "0 23 * * *"
 
 jobs:
   label:
