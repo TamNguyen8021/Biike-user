@@ -17,7 +17,7 @@ class Biike extends StatelessWidget {
       theme: ThemeData(
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.blue,
-          fontFamily: 'SVN-Product Sans'),
+          fontFamily: 'SVN-Product-Sans'),
       home: CustomerHomePage(),
     );
   }

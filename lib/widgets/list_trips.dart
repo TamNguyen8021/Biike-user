@@ -22,7 +22,7 @@ class _ListTripsState extends State<ListTrips> {
         itemCount: widget.list.length,
         itemBuilder: (BuildContext context, int i) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 16.0),
             child: TripCard(
                 backgroundColor: CustomColors.lightGray,
                 foregroundColor: CustomColors.darkGray,

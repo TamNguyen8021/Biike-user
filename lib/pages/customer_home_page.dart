@@ -2,6 +2,8 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/app_bar.dart';
 import 'package:bikes_user/widgets/bottom_navigation.dart';
+import 'package:bikes_user/widgets/contact_buttons.dart';
+import 'package:bikes_user/widgets/finish_trip_button.dart';
 import 'package:bikes_user/widgets/list_trips.dart';
 import 'package:bikes_user/widgets/trip_card.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +58,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
           ),
           actionWidgets: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 20.0),
+              padding: const EdgeInsets.only(right: 16.0),
               child: IconButton(
                   onPressed: () {},
                   icon: Icon(
@@ -69,211 +71,86 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         body: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(33.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                CustomStrings.readyReminder,
-                                style: TextStyle(
-                                    color: CustomColors.darkGray, fontSize: 14),
-                              ),
-                            ],
-                          ),
+                        Text(
+                          CustomStrings.readyReminder,
+                          style: TextStyle(
+                              color: CustomColors.darkGray, fontSize: 14),
                         ),
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Text(
-                                '15' + CustomStrings.reminderTime,
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    color: CustomColors.blue,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12),
-                              ),
-                            ],
-                          ),
+                        Text(
+                          '15' + CustomStrings.reminderTime,
+                          style: TextStyle(
+                              color: CustomColors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: TripCard(
+                        backgroundColor: CustomColors.blue,
+                        foregroundColor: Colors.white,
+                        iconColor: Colors.white,
+                        avatarUrl: 'assets/images/test_avatar.jpg',
+                        name: 'Phát Đỗ',
+                        time: '06:45',
+                        date: CustomStrings.today,
+                        sourceStation: 'Đại học FPT TP.HCM',
+                        destinationStation: 'Chung cư SKY9'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30.0),
                     child: Row(
-                      children: <Widget>[
-                        TripCard(
-                            backgroundColor: CustomColors.blue,
-                            foregroundColor: Colors.white,
-                            iconColor: Colors.white,
-                            avatarUrl: 'assets/images/test_avatar.jpg',
-                            name: 'Phát Đỗ',
-                            time: '06:45',
-                            date: CustomStrings.today,
-                            sourceStation: 'Đại học FPT TP.HCM',
-                            destinationStation: 'Chung cư SKY9'),
-                      ],
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[FinishTripButton(), ContactButtons()],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
-                                height: 50,
-                                child: ElevatedButton.icon(
-                                  onPressed: () => {},
-                                  icon: Icon(Icons.check),
-                                  label: Text(
-                                    CustomStrings.finishTrip,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              CustomColors.blue)),
-                                ),
-                              ),
-                            ],
-                          ),
+                    padding: const EdgeInsets.only(bottom: 35.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 135.0,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5.0),
+                        child: Image.asset(
+                          'assets/images/demo_ads.jpg',
+                          fit: BoxFit.fill,
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    color: CustomColors.blue,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: CustomColors.darkGray
-                                            .withOpacity(0.5),
-                                        spreadRadius: 0.5,
-                                        blurRadius: 0.5,
-                                        // changes position of shadow
-                                        offset: Offset(0, 1),
-                                      )
-                                    ]),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.phone),
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    color: CustomColors.blue,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: CustomColors.darkGray
-                                            .withOpacity(0.5),
-                                        spreadRadius: 0.5,
-                                        blurRadius: 0.5,
-                                        // changes position of shadow
-                                        offset: Offset(0, 1),
-                                      )
-                                    ]),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.message),
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Expanded(
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            height: 150,
-                            color: CustomColors.blue,
-                            child: Image(
-                              image: AssetImage('assets/images/demo_ads.jpg'),
-                              fit: BoxFit.fill,
-                            ),
-                          )
-                        ],
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          CustomStrings.today,
-                          style: TextStyle(
-                              color: CustomColors.darkGray, fontSize: 14),
-                        )
-                      ],
+                    child: Text(
+                      CustomStrings.today,
+                      style:
+                          TextStyle(color: CustomColors.darkGray, fontSize: 14),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Row(
-                      children: <Widget>[
-                        TripCard(
-                            backgroundColor: CustomColors.lightGray,
-                            foregroundColor: CustomColors.darkGray,
-                            iconColor: CustomColors.blue,
-                            avatarUrl: 'assets/images/test_avatar.jpg',
-                            name: 'Phát Đỗ',
-                            time: '06:45',
-                            date: CustomStrings.today,
-                            sourceStation: 'Đại học FPT TP.HCM',
-                            destinationStation: 'Chung cư SKY9'),
-                      ],
-                    ),
+                    child: ListTrips(list: [1]),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          CustomStrings.otherDays,
-                          style: TextStyle(
-                              color: CustomColors.darkGray, fontSize: 14),
-                        )
-                      ],
+                    child: Text(
+                      CustomStrings.otherDays,
+                      style:
+                          TextStyle(color: CustomColors.darkGray, fontSize: 14),
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(bottom: 50.0),
+                      padding: const EdgeInsets.only(bottom: 25.0),
                       child: ListTrips(list: [1, 2, 3, 4, 5])),
                 ],
               ),
@@ -283,7 +160,6 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           backgroundColor: CustomColors.orange,
-          elevation: 0.0,
           child: Icon(
             Icons.add,
             size: 50,
