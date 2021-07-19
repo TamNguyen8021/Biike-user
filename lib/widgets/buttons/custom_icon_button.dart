@@ -17,11 +17,11 @@ class CustomIconButton extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-          color: CustomColors.blue,
+          color: CustomColors.kBlue,
           borderRadius: BorderRadius.all(Radius.circular(5)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: CustomColors.darkGray.withOpacity(0.5),
+              color: CustomColors.kDarkGray.withOpacity(0.5),
               spreadRadius: 0.5,
               blurRadius: 0.5,
               // changes position of shadow

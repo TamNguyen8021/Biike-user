@@ -1,8 +1,8 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-/// The state of the TripCard widget
-class TripCard extends StatefulWidget {
+/// The state of the [_UpcomingTripCardState] widget
+class UpcomingTripCard extends StatefulWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final Color iconColor;
@@ -13,7 +13,7 @@ class TripCard extends StatefulWidget {
   final String sourceStation;
   final String destinationStation;
 
-  const TripCard(
+  const UpcomingTripCard(
       {Key? key,
       required this.backgroundColor,
       required this.foregroundColor,
@@ -27,11 +27,11 @@ class TripCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TripCardState createState() => _TripCardState();
+  _UpcomingTripCardState createState() => _UpcomingTripCardState();
 }
 
-/// This widget contains a trip's details
-class _TripCardState extends State<TripCard> {
+/// This widget contains a upcoming trip's details
+class _UpcomingTripCardState extends State<UpcomingTripCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,7 +139,7 @@ class _TripCardState extends State<TripCard> {
           borderRadius: BorderRadius.all(Radius.circular(5)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: CustomColors.darkGray.withOpacity(0.5),
+              color: CustomColors.kDarkGray.withOpacity(0.5),
               spreadRadius: 0.5,
               blurRadius: 0.5,
               // changes position of shadow

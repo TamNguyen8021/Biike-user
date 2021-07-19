@@ -1,4 +1,4 @@
-import 'package:bikes_user/widgets/custom_icon_button.dart';
+import 'package:bikes_user/widgets/buttons/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class ContactButtons extends StatelessWidget {

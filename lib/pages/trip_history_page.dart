@@ -1,0 +1,92 @@
+import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/appbars/app_bar.dart';
+import 'package:bikes_user/widgets/lists/list_history_trips.dart';
+import 'package:flutter/material.dart';
+
+/// The trip history screen
+class TripHistoryPage extends StatelessWidget {
+  const TripHistoryPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: CustomAppBar(
+          appBar: AppBar(),
+          leadingWidget: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context)),
+          title: Text(
+            CustomStrings.kHistory,
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                decoration:
+                    BoxDecoration(color: Colors.white, boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: CustomColors.kDarkGray.withOpacity(0.3),
+                    // spreadRadius: 5,
+                    blurRadius: 5,
+                    // changes position of shadow
+                    offset: Offset(0, 4),
+                  )
+                ]),
+                child: TabBar(
+                  unselectedLabelColor: CustomColors.kDarkGray,
+                  unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+                  labelColor: CustomColors.kBlue,
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                  indicator: BoxDecoration(
+                      color: CustomColors.kLightGray,
+                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorPadding: EdgeInsets.all(10.0),
+                  tabs: const <Widget>[
+                    Tab(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Text(
+                          CustomStrings.kCustomerHistory,
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Text(
+                          CustomStrings.kDriverHistory,
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: TabBarView(children: <Widget>[
+                    ListHistoryTrips(
+                        listHistoryTrips: [1, 2, 3, 4, 5], itemPadding: 16.0),
+                    ListHistoryTrips(
+                        listHistoryTrips: [1, 2, 3, 4, 5], itemPadding: 16.0)
+                  ]),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -24,15 +24,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: AppBar(
-        leading: leadingWidget,
-        title: title,
-        backgroundColor: CustomColors.blue,
-        foregroundColor: Colors.white,
-        actions: actionWidgets,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(5))),
+      child: Visibility(
+        child: AppBar(
+          leading: leadingWidget,
+          title: title,
+          backgroundColor: CustomColors.kBlue,
+          foregroundColor: Colors.white,
+          actions: actionWidgets,
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(5))),
+        ),
       ),
     );
   }
