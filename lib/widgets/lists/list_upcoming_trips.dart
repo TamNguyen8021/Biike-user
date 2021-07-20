@@ -3,43 +3,37 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:flutter/material.dart';
 
-/// The state of the [_ListUpcomingTripsState] widget
-class ListUpcomingTrips extends StatefulWidget {
+/// A list of upcoming trips
+class ListUpcomingTrips extends StatelessWidget {
   final List listUpcomingTrips;
   final double itemPadding;
-  final bool isTodayActivity;
+  final bool isTodayFirstActivity;
 
   const ListUpcomingTrips(
       {Key? key,
       required this.listUpcomingTrips,
       required this.itemPadding,
-      required this.isTodayActivity})
+      required this.isTodayFirstActivity})
       : super(key: key);
 
-  @override
-  _ListUpcomingTripsState createState() => _ListUpcomingTripsState();
-}
-
-/// A list of upcoming trips
-class _ListUpcomingTripsState extends State<ListUpcomingTrips> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: widget.listUpcomingTrips.length,
+        itemCount: listUpcomingTrips.length,
         itemBuilder: (BuildContext context, int i) {
           Color backgroundColor = CustomColors.kLightGray;
           Color foregroundColor = CustomColors.kDarkGray;
           Color iconColor = CustomColors.kBlue;
-          if (i == 0 && widget.isTodayActivity) {
+          if (i == 0 && isTodayFirstActivity) {
             backgroundColor = CustomColors.kBlue;
             foregroundColor = Colors.white;
             iconColor = Colors.white;
           }
           return Padding(
-            padding: EdgeInsets.only(bottom: widget.itemPadding),
+            padding: EdgeInsets.only(bottom: itemPadding),
             child: UpcomingTripCard(
                 backgroundColor: backgroundColor,
                 foregroundColor: foregroundColor,

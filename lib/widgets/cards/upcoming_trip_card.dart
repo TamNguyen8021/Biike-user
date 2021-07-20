@@ -1,8 +1,8 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-/// The state of the [_UpcomingTripCardState] widget
-class UpcomingTripCard extends StatefulWidget {
+/// This widget contains an upcoming trip's details
+class UpcomingTripCard extends StatelessWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final Color iconColor;
@@ -27,12 +27,6 @@ class UpcomingTripCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  _UpcomingTripCardState createState() => _UpcomingTripCardState();
-}
-
-/// This widget contains a upcoming trip's details
-class _UpcomingTripCardState extends State<UpcomingTripCard> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       height: 82,
@@ -48,7 +42,7 @@ class _UpcomingTripCardState extends State<UpcomingTripCard> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage(widget.avatarUrl),
+                        backgroundImage: AssetImage(avatarUrl),
                       ),
                     ),
                     Column(
@@ -56,24 +50,24 @@ class _UpcomingTripCardState extends State<UpcomingTripCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.name,
+                          name,
                           style: TextStyle(
-                              color: widget.foregroundColor,
+                              color: foregroundColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
-                            widget.time,
-                            style: TextStyle(
-                                color: widget.foregroundColor, fontSize: 12),
+                            time,
+                            style:
+                                TextStyle(color: foregroundColor, fontSize: 12),
                           ),
                         ),
                         Text(
-                          widget.date,
-                          style: TextStyle(
-                              color: widget.foregroundColor, fontSize: 12),
+                          date,
+                          style:
+                              TextStyle(color: foregroundColor, fontSize: 12),
                         ),
                       ],
                     ),
@@ -93,14 +87,13 @@ class _UpcomingTripCardState extends State<UpcomingTripCard> {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.radio_button_on_outlined,
-                        color: widget.iconColor,
+                        color: iconColor,
                         size: 15,
                       ),
                     ),
                     Text(
-                      widget.sourceStation,
-                      style: TextStyle(
-                          color: widget.foregroundColor, fontSize: 12),
+                      sourceStation,
+                      style: TextStyle(color: foregroundColor, fontSize: 12),
                     ),
                   ],
                 ),
@@ -108,7 +101,7 @@ class _UpcomingTripCardState extends State<UpcomingTripCard> {
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Icon(
                     Icons.more_vert_outlined,
-                    color: widget.iconColor,
+                    color: iconColor,
                     size: 15,
                   ),
                 ),
@@ -118,14 +111,13 @@ class _UpcomingTripCardState extends State<UpcomingTripCard> {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.location_on,
-                        color: widget.iconColor,
+                        color: iconColor,
                         size: 15,
                       ),
                     ),
                     Text(
-                      widget.destinationStation,
-                      style: TextStyle(
-                          color: widget.foregroundColor, fontSize: 12),
+                      destinationStation,
+                      style: TextStyle(color: foregroundColor, fontSize: 12),
                     ),
                   ],
                 ),
@@ -135,7 +127,7 @@ class _UpcomingTripCardState extends State<UpcomingTripCard> {
         ],
       ),
       decoration: BoxDecoration(
-          color: widget.backgroundColor,
+          color: backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(5)),
           boxShadow: <BoxShadow>[
             BoxShadow(

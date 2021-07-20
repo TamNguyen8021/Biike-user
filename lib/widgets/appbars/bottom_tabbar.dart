@@ -3,8 +3,8 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 
 /// This widget is the bottom navigation bar on home page
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+class BottomTabBar extends StatelessWidget {
+  const BottomTabBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

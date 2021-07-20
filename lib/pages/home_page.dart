@@ -1,12 +1,12 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/appbars/app_bar.dart';
-import 'package:bikes_user/widgets/appbars/bottom_navigation.dart';
+import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
 import 'package:flutter/material.dart';
 
-/// The home page for tab navigation
+/// The home screen template for both ke-er and biker
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[homePage, activityPage],
         ),
-        bottomNavigationBar: BottomNavigation(),
+        bottomNavigationBar: BottomTabBar(),
       ),
     );
   }

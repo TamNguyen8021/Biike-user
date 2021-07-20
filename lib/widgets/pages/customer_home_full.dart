@@ -6,7 +6,7 @@ import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:flutter/material.dart';
 
-/// The state of the [_CustomerHomeFullState] widget
+/// The ke_er_home page widget
 class CustomerHomeFull extends StatefulWidget {
   const CustomerHomeFull({Key? key}) : super(key: key);
 
@@ -14,7 +14,7 @@ class CustomerHomeFull extends StatefulWidget {
   _CustomerHomeFullState createState() => _CustomerHomeFullState();
 }
 
-/// The customer home page widget
+///
 class _CustomerHomeFullState extends State<CustomerHomeFull> {
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class _CustomerHomeFullState extends State<CustomerHomeFull> {
                   child: ListUpcomingTrips(
                     listUpcomingTrips: [1],
                     itemPadding: 16.0,
-                    isTodayActivity: false,
+                    isTodayFirstActivity: false,
                   ),
                 ),
                 Padding(
@@ -109,7 +109,7 @@ class _CustomerHomeFullState extends State<CustomerHomeFull> {
                     child: ListUpcomingTrips(
                       listUpcomingTrips: [1, 2, 3, 4, 5],
                       itemPadding: 16.0,
-                      isTodayActivity: false,
+                      isTodayFirstActivity: false,
                     )),
               ],
             ),

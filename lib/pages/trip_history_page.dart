@@ -1,6 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/appbars/app_bar.dart';
+import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/lists/list_history_trips.dart';
 import 'package:flutter/material.dart';
 

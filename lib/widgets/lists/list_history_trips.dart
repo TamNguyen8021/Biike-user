@@ -1,7 +1,8 @@
 import 'package:bikes_user/widgets/cards/history_trip_card.dart';
 import 'package:flutter/material.dart';
 
-class ListHistoryTrips extends StatefulWidget {
+/// A list of history trips
+class ListHistoryTrips extends StatelessWidget {
   final List listHistoryTrips;
   final double itemPadding;
 
@@ -10,20 +11,15 @@ class ListHistoryTrips extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ListHistoryTripsState createState() => _ListHistoryTripsState();
-}
-
-class _ListHistoryTripsState extends State<ListHistoryTrips> {
-  @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: widget.listHistoryTrips.length,
+        itemCount: listHistoryTrips.length,
         itemBuilder: (BuildContext context, int i) {
           return Padding(
-            padding: EdgeInsets.only(bottom: widget.itemPadding),
+            padding: EdgeInsets.only(bottom: itemPadding),
             child: HistoryTripCard(
                 avatarUrl: 'assets/images/test_avatar.jpg',
                 name: 'Thảo Vân',

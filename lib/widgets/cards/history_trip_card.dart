@@ -1,8 +1,8 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-/// The state of the [_HistoryTripCardState] widget
-class HistoryTripCard extends StatefulWidget {
+/// This widget contains a history trip's details
+class HistoryTripCard extends StatelessWidget {
   final String avatarUrl;
   final String name;
   final String time;
@@ -23,15 +23,9 @@ class HistoryTripCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  _HistoryTripCardState createState() => _HistoryTripCardState();
-}
-
-/// This widget contains a history trip's details
-class _HistoryTripCardState extends State<HistoryTripCard> {
-  @override
   Widget build(BuildContext context) {
     Color statusColor;
-    if (widget.status == 'Thành công') {
+    if (status == 'Thành công') {
       statusColor = CustomColors.kBlue;
     } else {
       statusColor = CustomColors.kRed;
@@ -51,7 +45,7 @@ class _HistoryTripCardState extends State<HistoryTripCard> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage(widget.avatarUrl),
+                        backgroundImage: AssetImage(avatarUrl),
                       ),
                     ),
                     Column(
@@ -59,7 +53,7 @@ class _HistoryTripCardState extends State<HistoryTripCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.name,
+                          name,
                           style: TextStyle(
                               color: CustomColors.kDarkGray,
                               fontWeight: FontWeight.bold,
@@ -70,21 +64,21 @@ class _HistoryTripCardState extends State<HistoryTripCard> {
                             Padding(
                               padding: const EdgeInsets.only(right: 16.0),
                               child: Text(
-                                widget.time,
+                                time,
                                 style: TextStyle(
                                     color: CustomColors.kDarkGray,
                                     fontSize: 12),
                               ),
                             ),
                             Text(
-                              widget.date,
+                              date,
                               style: TextStyle(
                                   color: CustomColors.kDarkGray, fontSize: 12),
                             ),
                           ],
                         ),
                         Text(
-                          widget.status,
+                          status,
                           style: TextStyle(color: statusColor, fontSize: 12),
                         ),
                       ],
@@ -110,7 +104,7 @@ class _HistoryTripCardState extends State<HistoryTripCard> {
                       ),
                     ),
                     Text(
-                      widget.sourceStation,
+                      sourceStation,
                       style: TextStyle(
                           color: CustomColors.kDarkGray, fontSize: 12),
                     ),
@@ -135,7 +129,7 @@ class _HistoryTripCardState extends State<HistoryTripCard> {
                       ),
                     ),
                     Text(
-                      widget.destinationStation,
+                      destinationStation,
                       style: TextStyle(
                           color: CustomColors.kDarkGray, fontSize: 12),
                     ),

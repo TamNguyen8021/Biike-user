@@ -1,10 +1,13 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
+/// This widget is the icon button with custom color and box shadow
 class CustomIconButton extends StatelessWidget {
   final double? height;
   final double? width;
   final IconData icon;
+
+  /// The function which this button will execute
   final void Function()? function;
 
   const CustomIconButton(

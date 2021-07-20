@@ -59,7 +59,7 @@ class Activity extends StatelessWidget {
                 child: ListUpcomingTrips(
                   listUpcomingTrips: [1, 2],
                   itemPadding: 10.0,
-                  isTodayActivity: true,
+                  isTodayFirstActivity: true,
                 ),
               ),
               Padding(
@@ -73,7 +73,7 @@ class Activity extends StatelessWidget {
                 child: ListUpcomingTrips(
                   listUpcomingTrips: [1, 2],
                   itemPadding: 10.0,
-                  isTodayActivity: false,
+                  isTodayFirstActivity: false,
                 ),
               ),
             ],
