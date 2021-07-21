@@ -26,9 +26,11 @@ class Biike extends StatelessWidget {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
         '/activity': (BuildContext ctx) => Activity(
-              role: 'Customer',
+              role: 'Driver',
             ),
-        '/home': (BuildContext ctx) => HomePage(),
+        '/home': (BuildContext ctx) => HomePage(
+              role: 'Driver',
+            ),
       },
     );
   }

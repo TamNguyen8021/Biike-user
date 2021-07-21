@@ -51,7 +51,7 @@ class Activity extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: Text(
                   CustomStrings.kToday,
-                  style: TextStyle(fontSize: 14, color: CustomColors.kDarkGray),
+                  style: TextStyle(color: CustomColors.kDarkGray),
                 ),
               ),
               Padding(
@@ -65,8 +65,7 @@ class Activity extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: Text(CustomStrings.kTomorrow,
-                    style:
-                        TextStyle(fontSize: 14, color: CustomColors.kDarkGray)),
+                    style: TextStyle(color: CustomColors.kDarkGray)),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),

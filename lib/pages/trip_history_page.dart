@@ -31,7 +31,6 @@ class TripHistoryPage extends StatelessWidget {
                     BoxDecoration(color: Colors.white, boxShadow: <BoxShadow>[
                   BoxShadow(
                     color: CustomColors.kDarkGray.withOpacity(0.3),
-                    // spreadRadius: 5,
                     blurRadius: 5,
                     // changes position of shadow
                     offset: Offset(0, 4),
@@ -71,16 +70,18 @@ class TripHistoryPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height,
-                child: Padding(
-                  padding: const EdgeInsets.all(22.0),
-                  child: TabBarView(children: <Widget>[
-                    ListHistoryTrips(
-                        listHistoryTrips: [1, 2, 3, 4, 5], itemPadding: 16.0),
-                    ListHistoryTrips(
-                        listHistoryTrips: [1, 2, 3, 4, 5], itemPadding: 16.0)
-                  ]),
+              SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: Padding(
+                    padding: const EdgeInsets.all(22.0),
+                    child: TabBarView(children: <Widget>[
+                      ListHistoryTrips(
+                          listHistoryTrips: [1, 2, 3, 4, 5], itemPadding: 16.0),
+                      ListHistoryTrips(
+                          listHistoryTrips: [1, 2, 3, 4, 5], itemPadding: 16.0)
+                    ]),
+                  ),
                 ),
               )
             ],

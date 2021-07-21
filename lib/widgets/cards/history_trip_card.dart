@@ -98,7 +98,7 @@ class HistoryTripCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
-                        Icons.radio_button_on_outlined,
+                        Icons.adjust,
                         color: CustomColors.kBlue,
                         size: 15,
                       ),

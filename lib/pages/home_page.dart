@@ -4,30 +4,28 @@ import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
+import 'package:bikes_user/widgets/pages/driver_home.dart';
 import 'package:flutter/material.dart';
 
 /// The home screen template for both ke-er and biker
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String role;
+  const HomePage({Key? key, required this.role}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Widget homePage = CustomerHomeFull();
     Widget activityPage = Activity(
-      role: 'Customer',
+      role: role,
     );
-    String role = 'Customer';
     String modeButtonText = CustomStrings.kCustomerMode;
     Color modeButtonForegroundColor = CustomColors.kBlue;
     Color modeButtonBackgroundColor = CustomColors.kLightGray;
     if (role != 'Customer') {
-      homePage = CustomerHomeFull();
-      activityPage = Activity(
-        role: 'Driver',
-      );
+      homePage = DriverHome();
       modeButtonText = CustomStrings.kBikerMode;
       modeButtonBackgroundColor = CustomColors.kOrange;
-      modeButtonForegroundColor = Colors.white;
+      modeButtonForegroundColor = CustomColors.kLightGray;
     }
 
     return DefaultTabController(

@@ -7,15 +7,9 @@ import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:flutter/material.dart';
 
 /// The ke_er_home page widget
-class CustomerHomeFull extends StatefulWidget {
+class CustomerHomeFull extends StatelessWidget {
   const CustomerHomeFull({Key? key}) : super(key: key);
 
-  @override
-  _CustomerHomeFullState createState() => _CustomerHomeFullState();
-}
-
-///
-class _CustomerHomeFullState extends State<CustomerHomeFull> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +26,8 @@ class _CustomerHomeFullState extends State<CustomerHomeFull> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        CustomStrings.kReadyReminder,
-                        style: TextStyle(
-                            color: CustomColors.kDarkGray, fontSize: 14),
+                        CustomStrings.kCustomerReadyReminder,
+                        style: TextStyle(color: CustomColors.kDarkGray),
                       ),
                       Text(
                         '15' + CustomStrings.kReminderTime,
@@ -84,8 +77,7 @@ class _CustomerHomeFullState extends State<CustomerHomeFull> {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
                     CustomStrings.kToday,
-                    style:
-                        TextStyle(color: CustomColors.kDarkGray, fontSize: 14),
+                    style: TextStyle(color: CustomColors.kDarkGray),
                   ),
                 ),
                 Padding(
@@ -100,8 +92,7 @@ class _CustomerHomeFullState extends State<CustomerHomeFull> {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
                     CustomStrings.kOtherDays,
-                    style:
-                        TextStyle(color: CustomColors.kDarkGray, fontSize: 14),
+                    style: TextStyle(color: CustomColors.kDarkGray),
                   ),
                 ),
                 Padding(
