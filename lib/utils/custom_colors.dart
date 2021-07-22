@@ -22,4 +22,5 @@ class CustomColors {
   static const darkGray = Color(0xFF707070);
   static const orange = Color(0xFFFF7E1D);
   static const red = Color(0xFFFF0000);
+  static const white = Color(0xFFFFFFFF);
 }

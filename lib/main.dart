@@ -1,4 +1,6 @@
 import 'package:bikes_user/pages/customer_home_page.dart';
+import 'package:bikes_user/pages/verify_phone.dart';
+// import 'package:bikes_user/pages/welcome_1.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,7 @@ class Biike extends StatelessWidget {
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.blue,
           fontFamily: 'SVN-Product-Sans'),
-      home: CustomerHomePage(),
+      home: VerifiPhonePage(),
     );
   }
 }
