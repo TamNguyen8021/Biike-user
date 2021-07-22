@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.048" height="15.613" viewBox="0 0 23.048 15.613">
+  <g id="vietnam" transform="translate(0 -80)">
+    <path id="Path_2254" data-name="Path 2254" d="M23.048,93.457a2.152,2.152,0,0,1-2.23,2.156H2.23A2.152,2.152,0,0,1,0,93.457v-11.3A2.152,2.152,0,0,1,2.23,80H20.818a2.152,2.152,0,0,1,2.23,2.156Z" fill="#ed3432"/>
+    <path id="Path_2255" data-name="Path 2255" d="M48,80H66.587a2.152,2.152,0,0,1,2.23,2.156v11.3a2.282,2.282,0,0,1-2.379,2.156" transform="translate(-45.77)" fill="#d00"/>
+    <g id="Group_3940" data-name="Group 3940" transform="translate(0 80)">
+      <path id="Path_2256" data-name="Path 2256" d="M48,80H66.587a2.152,2.152,0,0,1,2.23,2.156V86.32" transform="translate(-45.77 -80)" fill="#cc0202"/>
+      <path id="Path_2257" data-name="Path 2257" d="M23.048,368.037a2.117,2.117,0,0,1-2.23,2.193H2.23A2.213,2.213,0,0,1,0,368" transform="translate(0 -354.617)" fill="#cc0202"/>
+    </g>
+    <path id="Path_2258" data-name="Path 2258" d="M162.564,159.2l.967,3.011h3.2l-2.565,1.97.967,3.048-2.565-1.859-2.565,1.9.967-3.123-2.565-1.933h3.2Z" transform="translate(-151.039 -75.52)" fill="#fdce0c"/>
+    <path id="Path_2259" data-name="Path 2259" d="M226.845,162.211l-.967-3.011-.967,3.011H224.8l2.862,2.528-.186-.632,2.565-1.9Z" transform="translate(-214.354 -75.52)" fill="#fc9c10"/>
+  </g>
+</svg>
