@@ -1,7 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
+// import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/widgets/buttons/finish_trip_button.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
@@ -42,14 +42,14 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 1.0),
                         child: Text(
-                          CustomStrings.customerMode,
+                          CustomStrings.kCustomerMode,
                           style:
-                              TextStyle(color: CustomColors.blue, fontSize: 10),
+                              TextStyle(color: CustomColors.kBlue, fontSize: 10),
                         ),
                       ),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              CustomColors.lightGray),
+                              CustomColors.kLightGray),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15)))),
@@ -84,14 +84,14 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          CustomStrings.readyReminder,
+                          CustomStrings.kCustomerReadyReminder,
                           style: TextStyle(
-                              color: CustomColors.darkGray, fontSize: 14),
+                              color: CustomColors.kDarkGray, fontSize: 14),
                         ),
                         Text(
-                          '15' + CustomStrings.reminderTime,
+                          '15' + CustomStrings.kReminderTime,
                           style: TextStyle(
-                              color: CustomColors.blue,
+                              color: CustomColors.kBlue,
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),
@@ -100,14 +100,14 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
-                    child: TripCard(
-                        backgroundColor: CustomColors.blue,
+                    child: UpcomingTripCard(
+                        backgroundColor: CustomColors.kBlue,
                         foregroundColor: Colors.white,
                         iconColor: Colors.white,
                         avatarUrl: 'assets/images/test_avatar.jpg',
                         name: 'Phát Đỗ',
                         time: '06:45',
-                        date: CustomStrings.today,
+                        date: CustomStrings.kToday,
                         sourceStation: 'Đại học FPT TP.HCM',
                         destinationStation: 'Chung cư SKY9'),
                   ),
@@ -135,26 +135,26 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
-                      CustomStrings.today,
+                      CustomStrings.kToday,
                       style:
-                          TextStyle(color: CustomColors.darkGray, fontSize: 14),
+                          TextStyle(color: CustomColors.kDarkGray, fontSize: 14),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ListTrips(list: [1]),
+                    child: ListUpcomingTrips(listUpcomingTrips: [1], isTodayFirstActivity: false, itemPadding: 16.0),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
-                      CustomStrings.otherDays,
+                      CustomStrings.kOtherDays,
                       style:
-                          TextStyle(color: CustomColors.darkGray, fontSize: 14),
+                          TextStyle(color: CustomColors.kDarkGray, fontSize: 14),
                     ),
                   ),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 35.0),
-                      child: ListTrips(list: [1, 2, 3, 4, 5])),
+                      child: ListUpcomingTrips(listUpcomingTrips: [1, 2, 3, 4, 5], isTodayFirstActivity: false, itemPadding: 16.0,)),
                 ],
               ),
             ),
@@ -163,14 +163,14 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         floatingActionButton: FloatingActionButton(
           elevation: 1.0,
           onPressed: () {},
-          backgroundColor: CustomColors.orange,
+          backgroundColor: CustomColors.kOrange,
           child: Icon(
             Icons.add,
             size: 50,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        bottomNavigationBar: BottomNavigation(),
+        bottomNavigationBar: BottomAppBar(),
       ),
     );
   }

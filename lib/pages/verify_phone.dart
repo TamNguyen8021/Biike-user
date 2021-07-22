@@ -1,9 +1,16 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 //the verify phone screen
-class VerifiPhonePage extends StatelessWidget {
-  const VerifiPhonePage({Key? key}) : super(key: key);
+class Verify extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new VerifiPhonePage();
+  }
+}
+class VerifiPhonePage extends State<Verify>{
+  // const VerifiPhonePage({Key? key}) : super(key: key);
   // final String phoneNumber;
 
   @override
@@ -32,11 +39,25 @@ class VerifiPhonePage extends StatelessWidget {
       elevation: 0,
       centerTitle: true,
       textTheme: Theme.of(context).textTheme,
-      ),
-      body: SafeArea(
-        child: Column() 
-      ),
       
-      );
+      ),
+      backgroundColor: CustomColors.kBlue,
+      body: new Container(
+          padding: const EdgeInsets.all(40.0),
+          child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new TextField(
+            decoration: new InputDecoration(labelText: CustomStrings.kInputVrifyCode,),
+            maxLength: 4,
+            cursorHeight: 18,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+          )
+        ],
+      
+      )
+      )
+    );
   }
 }

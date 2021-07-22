@@ -34,6 +34,7 @@ class CustomStrings {
   static const String kActivities = "Hoạt động";
 
   // Verify phone number screen
+  static const String kInputVrifyCode = "Nhập mã xác thực tại đây";
   static const String kVerifyPhone = "Xác thực số điện thoại";
 }
 
