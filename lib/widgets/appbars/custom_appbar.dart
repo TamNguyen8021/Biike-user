@@ -1,13 +1,14 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-/// This widget is the app bar on home page
+/// This widget is the top appbar on home page
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Widgets for leading property in [AppBar]
   final Widget? leadingWidget;
   final Widget? title;
   final AppBar appBar;
 
-  /// Widgets for 'action' property in [AppBar]
+  /// Widgets for action property in [AppBar]
   final List<Widget>? actionWidgets;
 
   const CustomAppBar(
@@ -24,15 +25,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: AppBar(
-        leading: leadingWidget,
-        title: title,
-        backgroundColor: CustomColors.blue,
-        foregroundColor: Colors.white,
-        actions: actionWidgets,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(5))),
+      child: Visibility(
+        child: AppBar(
+          leading: leadingWidget,
+          title: title,
+          backgroundColor: CustomColors.kBlue,
+          foregroundColor: Colors.white,
+          actions: actionWidgets,
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(5))),
+        ),
       ),
     );
   }

@@ -1,39 +1,36 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-/// The state of the TripCard widget
-class TripCard extends StatefulWidget {
-  final Color backgroundColor;
-  final Color foregroundColor;
-  final Color iconColor;
+/// This widget contains a history trip's details
+class HistoryTripCard extends StatelessWidget {
   final String avatarUrl;
   final String name;
   final String time;
   final String date;
+  final String status;
   final String sourceStation;
   final String destinationStation;
 
-  const TripCard(
-      {Key? key,
-      required this.backgroundColor,
-      required this.foregroundColor,
-      required this.iconColor,
-      required this.avatarUrl,
+  HistoryTripCard(
+      {required this.avatarUrl,
       required this.name,
       required this.time,
       required this.date,
+      required this.status,
       required this.sourceStation,
-      required this.destinationStation})
+      required this.destinationStation,
+      Key? key})
       : super(key: key);
 
   @override
-  _TripCardState createState() => _TripCardState();
-}
-
-/// This widget contains a trip's details
-class _TripCardState extends State<TripCard> {
-  @override
   Widget build(BuildContext context) {
+    Color statusColor;
+    if (status == 'Thành công') {
+      statusColor = CustomColors.kBlue;
+    } else {
+      statusColor = CustomColors.kRed;
+    }
+
     return Container(
       height: 82,
       child: Row(
@@ -48,7 +45,7 @@ class _TripCardState extends State<TripCard> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage(widget.avatarUrl),
+                        backgroundImage: AssetImage(avatarUrl),
                       ),
                     ),
                     Column(
@@ -56,24 +53,33 @@ class _TripCardState extends State<TripCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.name,
+                          name,
                           style: TextStyle(
-                              color: widget.foregroundColor,
+                              color: CustomColors.kDarkGray,
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            widget.time,
-                            style: TextStyle(
-                                color: widget.foregroundColor, fontSize: 12),
-                          ),
+                        Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(right: 16.0),
+                              child: Text(
+                                time,
+                                style: TextStyle(
+                                    color: CustomColors.kDarkGray,
+                                    fontSize: 12),
+                              ),
+                            ),
+                            Text(
+                              date,
+                              style: TextStyle(
+                                  color: CustomColors.kDarkGray, fontSize: 12),
+                            ),
+                          ],
                         ),
                         Text(
-                          widget.date,
-                          style: TextStyle(
-                              color: widget.foregroundColor, fontSize: 12),
+                          status,
+                          style: TextStyle(color: statusColor, fontSize: 12),
                         ),
                       ],
                     ),
@@ -92,15 +98,15 @@ class _TripCardState extends State<TripCard> {
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
-                        Icons.radio_button_on_outlined,
-                        color: widget.iconColor,
+                        Icons.adjust,
+                        color: CustomColors.kBlue,
                         size: 15,
                       ),
                     ),
                     Text(
-                      widget.sourceStation,
+                      sourceStation,
                       style: TextStyle(
-                          color: widget.foregroundColor, fontSize: 12),
+                          color: CustomColors.kDarkGray, fontSize: 12),
                     ),
                   ],
                 ),
@@ -108,7 +114,7 @@ class _TripCardState extends State<TripCard> {
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Icon(
                     Icons.more_vert_outlined,
-                    color: widget.iconColor,
+                    color: CustomColors.kBlue,
                     size: 15,
                   ),
                 ),
@@ -118,14 +124,14 @@ class _TripCardState extends State<TripCard> {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.location_on,
-                        color: widget.iconColor,
+                        color: CustomColors.kBlue,
                         size: 15,
                       ),
                     ),
                     Text(
-                      widget.destinationStation,
+                      destinationStation,
                       style: TextStyle(
-                          color: widget.foregroundColor, fontSize: 12),
+                          color: CustomColors.kDarkGray, fontSize: 12),
                     ),
                   ],
                 ),
@@ -135,11 +141,11 @@ class _TripCardState extends State<TripCard> {
         ],
       ),
       decoration: BoxDecoration(
-          color: widget.backgroundColor,
+          color: CustomColors.kLightGray,
           borderRadius: BorderRadius.all(Radius.circular(5)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: CustomColors.darkGray.withOpacity(0.5),
+              color: CustomColors.kDarkGray.withOpacity(0.5),
               spreadRadius: 0.5,
               blurRadius: 0.5,
               // changes position of shadow

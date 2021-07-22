@@ -17,18 +17,18 @@ class VerifiPhonePage extends StatelessWidget {
         child: Icon(
           Icons.arrow_back,
           size: 30,
-          color: CustomColors.blue,
+          color: CustomColors.kBlue,
         ),
       ),
       title: Text(
-        CustomStrings.kTextView,
+        CustomStrings.kVerifyPhone,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: CustomColors.white,
+          color: Colors.white,
         ),
       ),
-      backgroundColor: CustomColors.blue,
+      backgroundColor: CustomColors.kBlue,
       elevation: 0,
       centerTitle: true,
       textTheme: Theme.of(context).textTheme,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Contains custom color for the app
 class CustomColors {
-  static const Map<int, Color> _primaryColor = {
+  static const Map<int, Color> _kPrimaryColor = {
     50: Color.fromRGBO(12, 111, 249, .1),
     100: Color.fromRGBO(12, 111, 249, .2),
     200: Color.fromRGBO(12, 111, 249, .3),
@@ -15,6 +15,7 @@ class CustomColors {
     900: Color.fromRGBO(12, 111, 249, 1),
   };
 
+<<<<<<< HEAD
   static const blue = MaterialColor(0xFF0C6FF9, _primaryColor);
   static const darkBlue = Color(0xFF125BC2);
   static const lightBlue = Color(0xFFCBE1FF);
@@ -23,4 +24,13 @@ class CustomColors {
   static const orange = Color(0xFFFF7E1D);
   static const red = Color(0xFFFF0000);
   static const white = Color(0xFFFFFFFF);
+=======
+  static const kBlue = MaterialColor(0xFF0C6FF9, _kPrimaryColor);
+  static const kDarkBlue = Color(0xFF125BC2);
+  static const kLightBlue = Color(0xFFCBE1FF);
+  static const kLightGray = Color(0xFFF5F5F5);
+  static const kDarkGray = Color(0xFF707070);
+  static const kOrange = Color(0xFFFF7E1D);
+  static const kRed = Color(0xFFFF0000);
+>>>>>>> develop
 }

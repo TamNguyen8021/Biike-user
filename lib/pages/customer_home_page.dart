@@ -1,11 +1,11 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/app_bar.dart';
-import 'package:bikes_user/widgets/bottom_navigation.dart';
-import 'package:bikes_user/widgets/contact_buttons.dart';
-import 'package:bikes_user/widgets/finish_trip_button.dart';
-import 'package:bikes_user/widgets/list_trips.dart';
-import 'package:bikes_user/widgets/trip_card.dart';
+import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
+import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
+import 'package:bikes_user/widgets/buttons/finish_trip_button.dart';
+import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
+import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:flutter/material.dart';
 
 /// The state of the customer home page widget
