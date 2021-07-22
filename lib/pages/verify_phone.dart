@@ -21,7 +21,7 @@ class VerifiPhonePage extends StatelessWidget {
         ),
       ),
       title: Text(
-        CustomStrings.kTextVerify,
+        CustomStrings.kTextView,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,

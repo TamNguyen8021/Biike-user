@@ -14,4 +14,8 @@ class CustomStrings {
   // Bottom navigation
   static const String home = "Trang chủ";
   static const String activities = "Hoạt động";
+
+  //Verify Phone Number Page
+  static const String kTextView = "Xác thực số điện thoại";
 }
+
