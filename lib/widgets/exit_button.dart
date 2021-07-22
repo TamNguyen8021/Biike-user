@@ -17,7 +17,7 @@ class ExitButton extends StatelessWidget {
         child: Text(
           CustomStrings.btnExit,
           style: TextStyle(
-              color: CustomColors.darkGray, fontWeight: FontWeight.bold, fontSize: 12),
+              color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

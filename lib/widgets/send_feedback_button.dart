@@ -20,7 +20,7 @@ class SendFeedbackButton extends StatelessWidget {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.blue),
+            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.kBlue),
             elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );

@@ -20,7 +20,7 @@ class ViewTripButton extends StatelessWidget {
               fontSize: 12),
         ),
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.blue),
+            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.kBlue),
             elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );

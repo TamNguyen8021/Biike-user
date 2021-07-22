@@ -29,7 +29,7 @@ class FindingBikerSuccessPage extends StatelessWidget{
                             CustomStrings.foundBiker,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: CustomColors.blue, fontSize: 30, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: CustomColors.kBlue, fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ]

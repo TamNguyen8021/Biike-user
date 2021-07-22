@@ -45,7 +45,7 @@ class KeerFeedbackPage extends StatelessWidget{
                               CustomStrings.tripSuccess,
                               overflow: TextOverflow.clip,
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: CustomColors.blue, fontSize: 25, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: CustomColors.kBlue, fontSize: 25, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]
@@ -61,7 +61,7 @@ class KeerFeedbackPage extends StatelessWidget{
                               CustomStrings.rateReminder,
                               overflow: TextOverflow.clip,
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: CustomColors.darkGray, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: CustomColors.kDarkGray, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]
@@ -92,7 +92,7 @@ class KeerFeedbackPage extends StatelessWidget{
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Card(
-                      color: CustomColors.lightGray,
+                      color: CustomColors.kLightGray,
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextField(
@@ -123,7 +123,7 @@ class KeerFeedbackPage extends StatelessWidget{
                               CustomStrings.buyReminder,
                               overflow: TextOverflow.clip,
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: CustomColors.darkGray, fontSize: 12, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: CustomColors.kDarkGray, fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]

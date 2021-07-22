@@ -29,7 +29,7 @@ class FindingBikerFailPage extends StatelessWidget{
                             CustomStrings.findBikerFail,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: CustomColors.blue, fontSize: 30, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: CustomColors.kBlue, fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ]
@@ -59,7 +59,7 @@ class FindingBikerFailPage extends StatelessWidget{
                             CustomStrings.tips,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: CustomColors.blue, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: CustomColors.kBlue, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ]

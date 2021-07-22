@@ -17,10 +17,10 @@ class ReturnButton extends StatelessWidget {
         child: Text(
           CustomStrings.btnReturn,
           style: TextStyle(
-              color: CustomColors.darkGray, fontWeight: FontWeight.bold, fontSize: 12),
+              color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.lightGray),
+            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.kLightGray),
             elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );
