@@ -1,11 +1,11 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/return_button.dart';
+import 'package:bikes_user/widgets/exit_button.dart';
 import 'package:bikes_user/widgets/view_trip_button.dart';
 import 'package:flutter/material.dart';
 
-class CustomerBookSuccessPage extends StatelessWidget{
-  const CustomerBookSuccessPage({Key? key}) : super(key: key);
+class GetTripSuccessPage extends StatelessWidget{
+  const GetTripSuccessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomerBookSuccessPage extends StatelessWidget{
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            CustomStrings.foundDriver,
+                            CustomStrings.getTripSuccess,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: CustomColors.blue, fontSize: 30, fontWeight: FontWeight.bold),
@@ -46,7 +46,7 @@ class CustomerBookSuccessPage extends StatelessWidget{
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[ReturnButton()]
+                      children: <Widget>[ExitButton()]
                   ),
                 ),
               ],
@@ -57,5 +57,5 @@ class CustomerBookSuccessPage extends StatelessWidget{
     );
   }
 
-  //TODO: chèn hình
+//TODO: chèn hình
 }

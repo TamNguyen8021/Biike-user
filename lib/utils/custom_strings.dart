@@ -36,4 +36,13 @@ class CustomStrings {
   // bottom tabbar
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
+  // Waiting page
+  static const String foundBiker = "Đã tìm được người chở bạn!";
+  static const String getTripSuccess = "Nhận chở thành công!";
+  static const String findingBiker = "Đang tìm người chở";
+  static const String findBikerFail = "Không tìm thấy người chở ké";
+  static const String tips = "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé";
+  static const String viewTrip = "Xem chuyến đi";
+  static const String exitButton = "Thoát";
+  static const String returnButton = "Quay lại";
 }

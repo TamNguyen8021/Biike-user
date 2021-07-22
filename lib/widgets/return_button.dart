@@ -9,7 +9,8 @@ class ReturnButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35,
-      child: TextButton(
+      width: 200,
+      child: ElevatedButton(
         onPressed: () {
           // Navigator.pop(context);
         },
@@ -19,7 +20,7 @@ class ReturnButton extends StatelessWidget {
               color: CustomColors.darkGray, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.lightGray),
             elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );
