@@ -14,13 +14,13 @@ class FinishTripButton extends StatelessWidget {
         onPressed: () => {},
         icon: Icon(Icons.check),
         label: Text(
-          CustomStrings.finishTrip,
+          CustomStrings.kFinishTrip,
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all<Color>(CustomColors.blue),
+                MaterialStateProperty.all<Color>(CustomColors.kBlue),
             elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );

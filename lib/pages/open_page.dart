@@ -1,5 +1,4 @@
 import 'package:bikes_user/utils/custom_colors.dart';
-import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 
 /// The open screen
@@ -9,13 +8,13 @@ class OpenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.blue,
+      backgroundColor: CustomColors.kBlue,
       body: Container(
         child: Center(
-            child: Text(
-          CustomStrings.appName,
-          style: TextStyle(
-              fontSize: 50, color: Colors.white, fontStyle: FontStyle.italic),
+            child: Image(
+          image: AssetImage('assets/images/logo-white.png'),
+          width: 204,
+          height: 70,
         )),
       ),
     );
