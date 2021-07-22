@@ -3,14 +3,14 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Verify extends StatefulWidget {
+class InputName extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new VerifiPhonePage();
+    return new Input_Name();
   }
 }
 //the verify phone screen
-class VerifiPhonePage extends State<Verify>{
+class Input_Name extends State<InputName>{
   // const VerifiPhonePage({Key? key}) : super(key: key);
   // final String phoneNumber;
 
@@ -23,17 +23,19 @@ class VerifiPhonePage extends State<Verify>{
           Navigator.pop(context);
         },
         child: Icon(
-          Icons.arrow_back,
+          Icons.arrow_forward_rounded,
           size: 30,
           color: CustomColors.kBlue,
         ),
       ),
       title: Text(
-        CustomStrings.kVerifyPhone,
+        CustomStrings.kInputName,
+        textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.white,
+          
         ),
       ),
       backgroundColor: CustomColors.kBlue,
@@ -49,11 +51,11 @@ class VerifiPhonePage extends State<Verify>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new TextField(
-            decoration: new InputDecoration(labelText: CustomStrings.kInputVrifyCode,),
-            maxLength: 4,
-            cursorHeight: 18,
+            decoration: new InputDecoration(labelText: CustomStrings.kEnterName,),
+            maxLength: 50,
             keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+            readOnly: false,
+            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.singleLineFormatter],
           )
         ],
       

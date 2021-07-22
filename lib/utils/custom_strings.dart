@@ -36,5 +36,13 @@ class CustomStrings {
   // Verify phone number screen
   static const String kInputVrifyCode = "Nhập mã xác thực tại đây";
   static const String kVerifyPhone = "Xác thực số điện thoại";
+
+  //Input phone number screen
+  static const String kInputPhoneNumber = "Nhập số điện thoại tại đây";
+
+  
+  //Input name screen
+  static const String kInputName = "Nhập họ và tên tại đây";
+  static const String kEnterName = "Họ và tên";
 }
 
