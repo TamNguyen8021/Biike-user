@@ -1,4 +1,5 @@
 import 'package:bikes_user/pages/home_page.dart';
+import 'package:bikes_user/pages/input_name.dart';
 import 'package:bikes_user/pages/input_phone.dart';
 import 'package:bikes_user/pages/welcome_1.dart';
 import 'package:bikes_user/widgets/phones/phone_numbers.dart';
@@ -32,7 +33,7 @@ class Biike extends StatelessWidget {
         '/activity': (BuildContext ctx) => Activity(
               role: 'Driver',
             ),
-        '/home': (BuildContext ctx) => WelcomePage(),
+        '/home': (BuildContext ctx) => InputName(),
       },
     );
   }

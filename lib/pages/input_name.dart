@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 class InputName extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new Input_Name();
+    return new _InputName();
   }
 }
 //the verify phone screen
-class Input_Name extends State<InputName>{
+class _InputName extends State<InputName>{
   // const VerifiPhonePage({Key? key}) : super(key: key);
   // final String phoneNumber;
 
@@ -51,7 +51,7 @@ class Input_Name extends State<InputName>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new TextField(
-            decoration: new InputDecoration(labelText: CustomStrings.kEnterName,),
+            decoration: new InputDecoration(labelText: CustomStrings.kEnterName),
             maxLength: 50,
             keyboardType: TextInputType.number,
             readOnly: false,

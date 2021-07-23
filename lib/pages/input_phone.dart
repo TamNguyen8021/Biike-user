@@ -3,9 +3,11 @@ library intl_phone_field;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:intl_phone_field/countries.dart';
-import 'package:intl_phone_field/phone_number.dart';
+import 'package:bikes_user/widgets/phones/contries.dart';
+import 'package:bikes_user/widgets/phones/phone_numbers.dart';
 
+
+// ignore: must_be_immutable
 class PhoneField extends StatefulWidget {
   final bool obscureText;
   final TextAlign textAlign;
