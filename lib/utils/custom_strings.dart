@@ -32,4 +32,13 @@ class CustomStrings {
   // bottom tabbar
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
+
+  // trip details screen
+  static const String kTripDetails = "Chi tiết chuyến đi";
+  static const String kTripStatus = "Đang tìm...";
+  static const String kCancelTrip = "Hủy chuyến";
+  static const String kConfirmArrival = "Đánh dấu đã đến";
+
+  // book trip screen
+  static const String kBookNewTrip = "Tạo chuyến đi ké mới";
 }

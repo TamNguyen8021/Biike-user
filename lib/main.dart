@@ -1,8 +1,10 @@
+import 'package:bikes_user/pages/book_trip.dart';
 import 'package:bikes_user/pages/home_page.dart';
-import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/trip_details.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:flutter/material.dart';
 
 /// Runs the application.
@@ -31,6 +33,10 @@ class Biike extends StatelessWidget {
         '/home': (BuildContext ctx) => HomePage(
               role: 'Driver',
             ),
+        '/trip_details': (BuildContext ctx) => TripDetails(
+              role: 'Driver',
+            ),
+        '/book_trip': (BuildContext ctx) => BookTrip(),
       },
     );
   }
