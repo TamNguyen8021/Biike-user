@@ -73,7 +73,7 @@ class DriverHome extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(CustomStrings.kFilter,
-                          style: TextStyle(color: CustomColors.kDarkGray)),
+                          style: Theme.of(context).textTheme.bodyText2),
                     ),
                     IntrinsicHeight(
                       child: Row(

@@ -1,5 +1,4 @@
 import 'package:bikes_user/pages/home_page.dart';
-import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
@@ -20,16 +19,25 @@ class Biike extends StatelessWidget {
       theme: ThemeData(
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.kBlue,
-          fontFamily: 'SVN Product Sans'),
-      initialRoute: '/home',
+          scaffoldBackgroundColor: Colors.white,
+          fontFamily: 'SVN Product Sans',
+          textTheme: TextTheme(
+              headline6: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+              bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
+              bodyText2: TextStyle(color: CustomColors.kDarkGray),
+              button: TextStyle(fontSize: 10, color: Colors.white))),
+      initialRoute: '/customerHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
-        '/activity': (BuildContext ctx) => Activity(
+        '/driverHome': (BuildContext ctx) => HomePage(
               role: 'Driver',
             ),
-        '/home': (BuildContext ctx) => HomePage(
-              role: 'Driver',
+        '/customerHome': (BuildContext ctx) => HomePage(
+              role: 'Customer',
             ),
       },
     );

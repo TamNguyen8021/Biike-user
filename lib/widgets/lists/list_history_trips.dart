@@ -13,7 +13,8 @@ class ListHistoryTrips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        controller: ScrollController(),
+        physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: listHistoryTrips.length,
