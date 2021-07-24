@@ -13,7 +13,8 @@ class ListHistoryTrips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        controller: ScrollController(),
+        physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: listHistoryTrips.length,
@@ -21,7 +22,7 @@ class ListHistoryTrips extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(bottom: itemPadding),
             child: HistoryTripCard(
-                avatarUrl: 'assets/images/test_avatar.jpg',
+                avatarUrl: 'assets/images/profile-4.jpg',
                 name: 'Thảo Vân',
                 time: '11:35',
                 date: '15 Th 1',

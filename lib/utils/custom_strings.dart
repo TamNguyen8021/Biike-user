@@ -10,6 +10,10 @@ class CustomStrings {
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
 
+  // ke_er_home_blank
+  static const String kCreateTrip =
+      "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
+
   // driver_home screen
   static const String kDriverReadyReminder = "Bạn đang có 1 chuyến xe cần chở";
   static const String kFilter = "Lọc chuyến đi đang cần chở";
