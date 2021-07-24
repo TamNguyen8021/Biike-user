@@ -11,7 +11,7 @@ class FinishTripButton extends StatelessWidget {
       height: 35,
       child: ElevatedButton.icon(
           onPressed: () => {},
-          icon: Icon(Icons.check, size: 30),
+          icon: Icon(Icons.done_all, size: 25),
           label: Text(
             CustomStrings.kFinishTrip,
             style: TextStyle(fontWeight: FontWeight.bold),
