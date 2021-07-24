@@ -22,7 +22,7 @@ class Biike extends StatelessWidget {
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.kBlue,
           fontFamily: 'SVN Product Sans'),
-      initialRoute: '/profile',
+      initialRoute: '/home',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),

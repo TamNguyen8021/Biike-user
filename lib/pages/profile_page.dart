@@ -14,75 +14,97 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget homePage = CustomerHomeFull();
-    Widget activityPage = Activity(
-      role: role,
-    );
-    String modeButtonText = CustomStrings.kCustomerMode;
-    Color modeButtonForegroundColor = CustomColors.kBlue;
-    Color modeButtonBackgroundColor = CustomColors.kLightGray;
-    if (role != 'Customer') {
-      homePage = DriverHome();
-      modeButtonText = CustomStrings.kBikerMode;
-      modeButtonBackgroundColor = CustomColors.kOrange;
-      modeButtonForegroundColor = CustomColors.kLightGray;
-    }
-
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          appBar: AppBar(),
-          title: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: Row(
-              children: <Widget>[
-                Image.asset(
-                  'assets/images/logo-blue',
-                  height: 25.0,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Icon(
+                  Icons.arrow_back_rounded,
+                  color: Colors.black,
+                  size: 24,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: SizedBox(
-                    height: 20,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment(1, 0),
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 1.0),
-                        child: Text(
-                          modeButtonText,
-                          style: TextStyle(
-                              color: modeButtonForegroundColor, fontSize: 10),
-                        ),
-                      ),
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              modeButtonBackgroundColor),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)))),
+                      child: Text('Đi ké mode'),
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
                     ),
                   ),
-                ),
+                )
               ],
             ),
-          ),
-          actionWidgets: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.account_circle_rounded,
-                    color: Colors.white,
-                  )),
+            Container(
+              width: 120,
+              height: 120,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Image.asset(
+                'assets/images/profile-1.jpg',
+              ),
             ),
+            Text(
+              'Đỗ Hữu Phát',
+
+            ),
+            ElevatedButton(
+              child: Text('4.5'),
+
+              onPressed: () {
+                print('Button pressed ...');
+              },
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Số điện thoại',
+                ),
+                TextField(
+
+                ),
+
+                Text(
+                  'Email',
+
+                  ),
+                TextField(
+
+                ),
+
+                Text(
+                  'Hello World',
+
+                  ),
+                TextField(
+
+                ),
+
+                Text(
+                  'Hello World',
+
+                  ),
+
+                TextField(
+
+                ),
+
+
+              ],
+            ),
+
+            Divider(),
+
           ],
         ),
-        body: TabBarView(
-          children: <Widget>[homePage, activityPage],
-        ),
-        bottomNavigationBar: BottomTabBar(),
       ),
     );
   }
