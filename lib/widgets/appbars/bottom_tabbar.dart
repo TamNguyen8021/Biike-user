@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 /// This widget is the bottom navigation bar on home page
 class BottomTabBar extends StatelessWidget {
-  const BottomTabBar({Key? key}) : super(key: key);
+  final Function(int)? onTapFunction;
+  const BottomTabBar({Key? key, this.onTapFunction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,7 @@ class BottomTabBar extends StatelessWidget {
           indicator: BoxDecoration(
               color: CustomColors.kDarkBlue,
               borderRadius: BorderRadius.all(Radius.circular(30.0))),
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorPadding: EdgeInsets.all(10.0),
+          indicatorPadding: const EdgeInsets.all(10.0),
           tabs: const <Widget>[
             Tab(
               child: Padding(
@@ -66,6 +66,7 @@ class BottomTabBar extends StatelessWidget {
               ),
             ),
           ],
+          onTap: onTapFunction,
         ),
       ),
     );
