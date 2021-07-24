@@ -32,4 +32,12 @@ class CustomStrings {
   // bottom tabbar
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
+
+  //profile screen
+  static const String kEdit = "Chỉnh sửa";
+  static const String kSettings = "Cài đặt";
+  static const String kHelp = "Trợ giúp";
+  static const String kRateApp = "Đánh giá ứng dụng";
+  static const String kPhoneNo = "Số điện thoại";
+  static const String kEmail = "Email";
 }

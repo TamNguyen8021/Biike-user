@@ -14,96 +14,207 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String modeButtonText = CustomStrings.kCustomerMode;
+    String editButton = 'Chỉnh sửa';
+    String settingButton = 'Cài đặt';
+    String rateAppButton = 'Đánh giá ứng dụng';
+    String logOutButton = 'Đăng xuất';
+    Color modeButtonForegroundColor = CustomColors.kBlue;
+    Color modeButtonBackgroundColor = CustomColors.kLightGray;
+
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Icon(
-                  Icons.arrow_back_rounded,
-                  color: Colors.black,
-                  size: 24,
+      appBar: CustomAppBar(
+        appBar: AppBar(),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        actionWidgets: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: SizedBox(
+              height: 10,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                  child: Text(
+                    modeButtonText,
+                    style: TextStyle(
+                        color: modeButtonForegroundColor, fontSize: 10),
+                  ),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment(1, 0),
-                    child: ElevatedButton(
-                      child: Text('Đi ké mode'),
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        modeButtonBackgroundColor),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)))),
+              ),
+            ),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(22.0),
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+
+                        backgroundImage:
+                            AssetImage('assets/images/profile-1.jpg'),
+                      ),
+                      Text('Đỗ Hữu Phát'),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                          child: Text(
+                            '4.5',
+                            style: TextStyle(
+                                color: modeButtonForegroundColor, fontSize: 10),
+                          ),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                modeButtonBackgroundColor),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)))),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Số điện thoai'),
+                      TextField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: '034 866 9124'),
+                      ),
+
+                      Text('Email'),
+                      TextField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'phatdhse62856@fpt.edu.vn'),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                Padding(
+                    padding: const EdgeInsets.all(0),
+                child: SizedBox(
+                  height: 35,
+                  child: ElevatedButton.icon(
+                    onPressed: () => {},
+                    icon: Icon(Icons.edit),
+                    label: Text(
+                      editButton,
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
                     ),
+                    style: ButtonStyle(
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(CustomColors.kBlue),
+                        elevation: MaterialStateProperty.all<double>(0.0)),
+                  ),
+                ),
+                ),
+
+                Divider(),
+                Padding(
+                    padding: const EdgeInsets.all(0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 35,
+                        child: ElevatedButton.icon(
+                          onPressed: () => {},
+                          icon: Icon(
+                              Icons.settings,
+                            color: CustomColors.kDarkGray,
+                          ),
+                          label: Text(
+                            settingButton,
+                            style: TextStyle(
+                                color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(CustomColors.kLightGray),
+                              elevation: MaterialStateProperty.all<double>(0.0)),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 35,
+                        child: ElevatedButton.icon(
+                          onPressed: () => {},
+                          icon: Icon(
+                              Icons.help,
+                            color: CustomColors.kDarkGray,
+                          ),
+                          label: Text(
+                            CustomStrings.kHelp,
+                            style: TextStyle(
+                                color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(CustomColors.kLightGray),
+                              elevation: MaterialStateProperty.all<double>(0.0)),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 35,
+                        child: ElevatedButton.icon(
+                          onPressed: () => {},
+                          icon: Icon(
+                              Icons.star,
+                          color: CustomColors.kDarkGray,
+                          ),
+                          label: Text(
+                            CustomStrings.kRateApp,
+                            style: TextStyle(
+                                color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(CustomColors.kLightGray),
+                              elevation: MaterialStateProperty.all<double>(0.0)),
+                        ),
+                      ),
+
+                      Text(logOutButton),
+
+                    ],
                   ),
                 )
-              ],
-            ),
-            Container(
-              width: 120,
-              height: 120,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(
-                'assets/images/profile-1.jpg',
-              ),
-            ),
-            Text(
-              'Đỗ Hữu Phát',
-
-            ),
-            ElevatedButton(
-              child: Text('4.5'),
-
-              onPressed: () {
-                print('Button pressed ...');
-              },
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  'Số điện thoại',
-                ),
-                TextField(
-
-                ),
-
-                Text(
-                  'Email',
-
-                  ),
-                TextField(
-
-                ),
-
-                Text(
-                  'Hello World',
-
-                  ),
-                TextField(
-
-                ),
-
-                Text(
-                  'Hello World',
-
-                  ),
-
-                TextField(
-
-                ),
-
 
               ],
             ),
-
-            Divider(),
-
-          ],
+          ),
         ),
       ),
     );
