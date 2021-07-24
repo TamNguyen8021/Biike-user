@@ -3,7 +3,7 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
-import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
+// import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
 import 'package:bikes_user/widgets/pages/driver_home.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     String _route = '/driverHome';
-    Widget _homePage = CustomerHomeBlank();
+    Widget _homePage = CustomerHomeFull();
     Widget _activityPage = Activity(
       role: widget.role,
     );

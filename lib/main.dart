@@ -28,7 +28,17 @@ class Biike extends StatelessWidget {
                   color: Colors.white),
               bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
               bodyText2: TextStyle(color: CustomColors.kDarkGray),
-              button: TextStyle(fontSize: 10, color: Colors.white))),
+              button: TextStyle(fontSize: 10, color: Colors.white)),
+          tabBarTheme: TabBarTheme(
+            indicatorSize: TabBarIndicatorSize.label,
+          ),
+          iconTheme: IconThemeData(color: CustomColors.kBlue, size: 15),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(CustomColors.kBlue),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                      TextStyle(color: Colors.white, fontSize: 12))))),
       initialRoute: '/customerHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),

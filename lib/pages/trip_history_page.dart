@@ -43,8 +43,7 @@ class TripHistoryPage extends StatelessWidget {
                 indicator: BoxDecoration(
                     color: CustomColors.kLightGray,
                     borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorPadding: EdgeInsets.all(10.0),
+                indicatorPadding: const EdgeInsets.all(10.0),
                 tabs: const <Widget>[
                   Tab(
                     child: Padding(

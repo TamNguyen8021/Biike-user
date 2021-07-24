@@ -62,7 +62,7 @@ class HistoryTripCard extends StatelessWidget {
                         Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
+                              padding: const EdgeInsets.only(right: 8.0),
                               child: Text(
                                 time,
                                 style: Theme.of(context).textTheme.bodyText1,
@@ -99,8 +99,6 @@ class HistoryTripCard extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.adjust,
-                        color: CustomColors.kBlue,
-                        size: 15,
                       ),
                     ),
                     Text(
@@ -113,8 +111,6 @@ class HistoryTripCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Icon(
                     Icons.more_vert_outlined,
-                    color: CustomColors.kBlue,
-                    size: 15,
                   ),
                 ),
                 Row(
@@ -123,8 +119,6 @@ class HistoryTripCard extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.location_on,
-                        color: CustomColors.kBlue,
-                        size: 15,
                       ),
                     ),
                     Text(

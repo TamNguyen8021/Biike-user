@@ -20,8 +20,7 @@ class BottomTabBar extends StatelessWidget {
           indicator: BoxDecoration(
               color: CustomColors.kDarkBlue,
               borderRadius: BorderRadius.all(Radius.circular(30.0))),
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorPadding: EdgeInsets.all(10.0),
+          indicatorPadding: const EdgeInsets.all(10.0),
           tabs: const <Widget>[
             Tab(
               child: Padding(

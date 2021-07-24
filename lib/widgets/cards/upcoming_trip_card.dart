@@ -94,7 +94,6 @@ class UpcomingTripCard extends StatelessWidget {
                       child: Icon(
                         Icons.adjust,
                         color: iconColor,
-                        size: 15,
                       ),
                     ),
                     Text(
@@ -111,7 +110,6 @@ class UpcomingTripCard extends StatelessWidget {
                   child: Icon(
                     Icons.more_vert_outlined,
                     color: iconColor,
-                    size: 15,
                   ),
                 ),
                 Row(
@@ -121,7 +119,6 @@ class UpcomingTripCard extends StatelessWidget {
                       child: Icon(
                         Icons.location_on,
                         color: iconColor,
-                        size: 15,
                       ),
                     ),
                     Text(
