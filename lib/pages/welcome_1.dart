@@ -3,7 +3,7 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// The open screen
+/// The welcoe screen
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 

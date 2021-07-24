@@ -42,7 +42,13 @@ class CustomStrings {
 
   
   //Input name screen
-  static const String kInputName = "Nhập họ và tên tại đây";
+  static const String kInputName = "Nhập tên của bạn";
   static const String kEnterName = "Họ và tên";
+  static const String kHintName = "";
+  static const String kErrorName = "*Tên của bạn không hợp lệ";
+
+  //Choose mode screen
+  static const String kChooseMode = "Bắt đầu ứng dụng với vai trò là";
+  static const String kRemindWords = "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
 }
 

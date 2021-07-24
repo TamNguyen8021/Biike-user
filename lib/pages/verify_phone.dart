@@ -57,8 +57,33 @@ class VerifiPhonePage extends State<Verify>{
           )
         ],
       
-      )
-      )
+      ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+          FloatingActionButton(
+            elevation: 1.0,
+            onPressed: () {},
+            backgroundColor: Colors.white,
+            foregroundColor: CustomColors.kBlue,
+            child: const Icon(Icons.arrow_back_ios_rounded),
+        ),
+        FloatingActionButton(
+            elevation: 1.0,
+            onPressed: () {},
+            backgroundColor: Colors.white,
+            foregroundColor: CustomColors.kBlue,
+            child: const Icon(Icons.arrow_forward_ios_rounded),
+          )
+          ],
+        ),
+        )
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // bottomNavigationBar: BottomAppBar(),
     );
   }
 }

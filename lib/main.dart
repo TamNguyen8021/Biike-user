@@ -1,3 +1,5 @@
+import 'package:bikes_user/pages/choose_mode.dart';
+import 'package:bikes_user/pages/customer_home_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/input_name.dart';
 import 'package:bikes_user/pages/input_phone.dart';
@@ -33,7 +35,7 @@ class Biike extends StatelessWidget {
         '/activity': (BuildContext ctx) => Activity(
               role: 'Driver',
             ),
-        '/home': (BuildContext ctx) => InputName(),
+        '/home': (BuildContext ctx) => ChooseMode(),
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 
 class InputName extends StatefulWidget {
@@ -28,16 +29,16 @@ class _InputName extends State<InputName>{
           color: CustomColors.kBlue,
         ),
       ),
-      title: Text(
-        CustomStrings.kInputName,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
+      // title: Text(
+        // CustomStrings.kInputName,
+        // textAlign: TextAlign.center,
+        // style: TextStyle(
+        //   fontSize: 18,
+        //   fontWeight: FontWeight.bold,
+        //   color: Colors.white,
           
-        ),
-      ),
+      //   ),
+      // ),
       backgroundColor: CustomColors.kBlue,
       elevation: 0,
       centerTitle: true,
@@ -50,17 +51,48 @@ class _InputName extends State<InputName>{
           child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          new Text(
+            CustomStrings.kInputName,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          )
+          ),
           new TextField(
-            decoration: new InputDecoration(labelText: CustomStrings.kEnterName),
+            decoration: new InputDecoration(
+               enabledBorder: const OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white, width: 0.5)),
+              labelText: 
+              CustomStrings.kEnterName, 
+              hintText: CustomStrings.kHintName, 
+              labelStyle: TextStyle(color: Colors.white ),
+              errorText: CustomStrings.kErrorName,
+              errorStyle: TextStyle(color: Colors.white)
+              ),
+            onChanged: (value) {
+              
+            },
             maxLength: 50,
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.name,
             readOnly: false,
             inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.singleLineFormatter],
           )
         ],
       
       )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+          elevation: 1.0,
+          onPressed: () {},
+          backgroundColor: Colors.white,
+          foregroundColor: CustomColors.kBlue,
+          child: const Icon(Icons.arrow_forward_ios_rounded),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        bottomNavigationBar: BottomAppBar(),
+        
     );
   }
 }
