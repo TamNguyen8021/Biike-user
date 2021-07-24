@@ -74,7 +74,7 @@ class _InputName extends State<InputName>{
             onChanged: (value) {
               
             },
-            maxLength: 50,
+            // maxLength: 50,
             keyboardType: TextInputType.name,
             readOnly: false,
             inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.singleLineFormatter],

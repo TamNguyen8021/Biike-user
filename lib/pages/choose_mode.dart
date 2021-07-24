@@ -17,16 +17,9 @@ class _ChooseMode extends State<ChooseMode>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.kBlue,
-      
-      body: Stack(
-       children: <Widget>[
-        SvgPicture.asset("assets/images/biike-two-person.svg",fit: BoxFit.cover),
-        Positioned(
-          left: 20.0,
-          right: 20.0,
-          top: 20.0,
-          child: Container(
+      body: Container(
         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             // Container(
             //   child: 
@@ -44,13 +37,15 @@ class _ChooseMode extends State<ChooseMode>{
             Container(
               child: Image(
                 image: AssetImage("assets/images/voucher-toco.jpg"),
-                fit: BoxFit.contain,
+                width: 250.0,
+                height: 240.0,
               )
             ),
             Container(
               child: Image( 
               image: AssetImage("assets/images/voucher-toco.jpg"),
-                fit: BoxFit.contain,
+              height: 240.0,
+              width: 250.0,
               ),
             ),
             new Text(
@@ -64,9 +59,6 @@ class _ChooseMode extends State<ChooseMode>{
           ],
         )
         ),
-        )
-       ], 
-      ),
       floatingActionButton: FloatingActionButton(
           elevation: 1.0,
           onPressed: () {},

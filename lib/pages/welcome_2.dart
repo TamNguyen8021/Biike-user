@@ -15,7 +15,7 @@ class WelcomePage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              child: SvgPicture.asset("assets/images/biike-two-person.svg",fit: BoxFit.fill ),
+              child: SvgPicture.asset("assets/images/biike-two-person.svg",fit: BoxFit.fill,  ),
               
             )
           ],
