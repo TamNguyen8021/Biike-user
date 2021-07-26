@@ -1,8 +1,9 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/exit_button.dart';
-import 'package:bikes_user/widgets/view_trip_button.dart';
+import 'package:bikes_user/widgets/buttons/exit_button.dart';
+import 'package:bikes_user/widgets/buttons/view_trip_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FindingBikerPage extends StatelessWidget{
   const FindingBikerPage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class FindingBikerPage extends StatelessWidget{
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -36,21 +37,19 @@ class FindingBikerPage extends StatelessWidget{
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            //TODO: icon
-                            "Chỗ này là icon"
-                          ),
+                        SvgPicture.asset(
+                          'assets/images/loading-big.svg',
+                          height: 130,
                         ),
                       ]
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 30.0),
+                  padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -59,7 +58,7 @@ class FindingBikerPage extends StatelessWidget{
                             CustomStrings.tips,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: CustomColors.kBlue, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: CustomColors.kBlue, fontSize: 12, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ]

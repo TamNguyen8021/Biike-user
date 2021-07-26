@@ -44,7 +44,7 @@ class CustomStrings {
   static const String tripSuccess = "Chở ké thành công!";
   static const String buyReminder = "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
   static const String rateReminder = "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
-  static const String tips = "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé";
+  static const String tips = "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
   static const String viewTrip = "Xem chuyến đi";
   static const String btnExit = "Thoát";
   static const String btnReturn = "Quay lại";
