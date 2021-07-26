@@ -19,7 +19,7 @@ class KeerFeedbackPage extends StatelessWidget{
         body: Container(
           alignment: Alignment.center,
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
                   height: 200,
@@ -110,8 +110,15 @@ class KeerFeedbackPage extends StatelessWidget{
                               maxLines: 3,
                               maxLength: 250,
                               inputFormatters: [LengthLimitingTextInputFormatter(250)],
+                              style: TextStyle(color: CustomColors.kDarkGray),
                               decoration: InputDecoration(
                                 counter: Offstage(),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                               ),
                             ),
                           ),
@@ -125,27 +132,26 @@ class KeerFeedbackPage extends StatelessWidget{
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+                        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Flexible(
-                                child: Text(
-                                  CustomStrings.buyReminder,
-                                  overflow: TextOverflow.clip,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: CustomColors.kDarkGray, fontSize: 12, fontWeight: FontWeight.bold),
-                                ),
+                          children: <Widget>[
+                            Padding(
+                              padding:  const EdgeInsets.only(right: 20.0),
+                              child: SvgPicture.asset(
+                                'assets/images/coffee-cup.svg',
+                                height: 90,
+                                alignment: Alignment.centerLeft,
                               ),
-                            ]
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SvgPicture.asset(
-                          'assets/images/coffee-cup.svg',
-                          height: 120,
-                          alignment: Alignment.center,
+                            ),
+                            Flexible(
+                              child: Text(
+                                CustomStrings.buyReminder,
+                                overflow: TextOverflow.clip,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(color: CustomColors.kDarkGray, fontSize: 9.5, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ]
