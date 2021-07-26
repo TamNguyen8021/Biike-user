@@ -5,7 +5,6 @@ import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
-import 'package:bikes_user/pages/menu_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
