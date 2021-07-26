@@ -46,7 +46,7 @@ class Biike extends StatelessWidget {
                       MaterialStateProperty.all<Color>(CustomColors.kBlue),
                   textStyle: MaterialStateProperty.all<TextStyle>(
                       TextStyle(color: Colors.white, fontSize: 12))))),
-      initialRoute: '/menuPage',
+      initialRoute: '/customerHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
@@ -62,7 +62,6 @@ class Biike extends StatelessWidget {
         '/findBikerSuccess': (BuildContext ctx) => FindingBikerSuccessPage(),
         '/findBikerFail': (BuildContext ctx) => FindingBikerFailPage(),
         '/getTripSuccess': (BuildContext ctx) => GetTripSuccessPage(),
-        '/menuPage': (BuildContext ctx) => MenuPage(),
       },
     );
   }
