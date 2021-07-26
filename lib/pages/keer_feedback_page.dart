@@ -12,17 +12,16 @@ class KeerFeedbackPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          alignment: Alignment.center,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        alignment: Alignment.center,
+        child: SafeArea(
           child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  height: 200,
+                  height: 180,
                   child: Stack(
                     // alignment: Alignment.center,
                     children: <Widget>[
@@ -80,7 +79,7 @@ class KeerFeedbackPage extends StatelessWidget{
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Row(
+                        child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               RatingBar.builder(
@@ -94,7 +93,7 @@ class KeerFeedbackPage extends StatelessWidget{
                                 },
                                 itemBuilder: (context, _) => Icon(
                                   Icons.star,
-                                  color: Colors.amber,
+                                  color: CustomColors.kOrange,
                                 ),
                               ),
                             ]

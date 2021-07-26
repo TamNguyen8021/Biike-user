@@ -10,9 +10,7 @@ class FindingBikerSuccessPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         body: Stack(
           children: <Widget>[
             SvgPicture.asset(
@@ -23,59 +21,52 @@ class FindingBikerSuccessPage extends StatelessWidget{
             ),
             Container(
               alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(22.0),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(height: 170),
-                          ]
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 75.0),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Flexible(
-                              child: Text(
-                                CustomStrings.kFoundBiker,
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: CustomColors.kBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Flexible(
+                                child: Text(
+                                  CustomStrings.kFoundBiker,
+                                  overflow: TextOverflow.clip,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: CustomColors.kBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                          ]
+                            ]
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[ViewTripButton()]
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[ViewTripButton()]
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[ExitButton()]
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[ExitButton()]
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            )
+              )
+            ),
           ],
         ),
-      ),
     );
   }
-
-  //TODO: chèn hình
 }

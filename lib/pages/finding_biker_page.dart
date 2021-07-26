@@ -1,6 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/exit_button.dart';
+import 'package:bikes_user/widgets/buttons/return_button.dart';
 import 'package:bikes_user/widgets/buttons/view_trip_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,11 +11,10 @@ class FindingBikerPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          alignment: Alignment.center,
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(22.0),
             child: Column(
@@ -68,7 +68,7 @@ class FindingBikerPage extends StatelessWidget{
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[ViewTripButton()]
+                      children: <Widget>[ReturnButton()]
                   ),
                 ),
                 Padding(

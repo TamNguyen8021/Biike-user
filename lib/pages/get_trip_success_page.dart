@@ -10,9 +10,7 @@ class GetTripSuccessPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         body: Stack(
           children: <Widget>[
             SvgPicture.asset(
@@ -23,19 +21,14 @@ class GetTripSuccessPage extends StatelessWidget{
             ),
             Container(
               alignment: Alignment.center,
-              child: Padding(
+              child: SafeArea(
+                child: Padding(
                 padding: const EdgeInsets.all(22.0),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(height: 170),
-                          ]
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 75.0),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -70,12 +63,10 @@ class GetTripSuccessPage extends StatelessWidget{
                   ],
                 ),
               ),
-            )
+              ),
+            ),
           ],
         ),
-      ),
     );
   }
-
-//TODO: chèn hình
 }

@@ -13,17 +13,16 @@ class BikerFeedbackPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          alignment: Alignment.center,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        alignment: Alignment.center,
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: 200,
+                height: 180,
                 child: Stack(
                   // alignment: Alignment.center,
                   children: <Widget>[
