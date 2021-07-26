@@ -15,7 +15,7 @@ class SendFeedbackButton extends StatelessWidget {
           // Navigator.pop(context);
         },
         child: Text(
-          CustomStrings.btnSend,
+          CustomStrings.kBtnSend,
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
         ),

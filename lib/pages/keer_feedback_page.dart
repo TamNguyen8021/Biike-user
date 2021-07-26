@@ -53,7 +53,7 @@ class KeerFeedbackPage extends StatelessWidget{
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  CustomStrings.tripSuccess,
+                                  CustomStrings.kTripSuccess,
                                   overflow: TextOverflow.clip,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: CustomColors.kBlue, fontSize: 25, fontWeight: FontWeight.bold),
@@ -69,7 +69,7 @@ class KeerFeedbackPage extends StatelessWidget{
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  CustomStrings.rateReminder,
+                                  CustomStrings.kRateReminder,
                                   overflow: TextOverflow.clip,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: CustomColors.kDarkGray, fontWeight: FontWeight.bold),
@@ -145,7 +145,7 @@ class KeerFeedbackPage extends StatelessWidget{
                             ),
                             Flexible(
                               child: Text(
-                                CustomStrings.buyReminder,
+                                CustomStrings.kBuyReminder,
                                 overflow: TextOverflow.clip,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(color: CustomColors.kDarkGray, fontSize: 9.5, fontWeight: FontWeight.bold),

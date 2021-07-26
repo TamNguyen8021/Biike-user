@@ -13,7 +13,7 @@ class ViewTripButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => {},
         child: Text(
-          CustomStrings.viewTrip,
+          CustomStrings.kViewTrip,
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

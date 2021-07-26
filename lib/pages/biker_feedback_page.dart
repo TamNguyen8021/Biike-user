@@ -55,7 +55,7 @@ class BikerFeedbackPage extends StatelessWidget{
                           children: <Widget>[
                             Flexible(
                               child: Text(
-                                CustomStrings.tripSuccess,
+                                CustomStrings.kTripSuccess,
                                 overflow: TextOverflow.clip,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: CustomColors.kBlue, fontSize: 25, fontWeight: FontWeight.bold),
@@ -71,7 +71,7 @@ class BikerFeedbackPage extends StatelessWidget{
                           children: <Widget>[
                             Flexible(
                               child: Text(
-                                CustomStrings.rateReminder,
+                                CustomStrings.kRateReminder,
                                 overflow: TextOverflow.clip,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: CustomColors.kDarkGray, fontWeight: FontWeight.bold),

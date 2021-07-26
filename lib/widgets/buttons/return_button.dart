@@ -15,7 +15,7 @@ class ReturnButton extends StatelessWidget {
           // Navigator.pop(context);
         },
         child: Text(
-          CustomStrings.btnReturn,
+          CustomStrings.kBtnReturn,
           style: TextStyle(
               color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
         ),

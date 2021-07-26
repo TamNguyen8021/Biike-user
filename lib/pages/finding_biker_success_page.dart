@@ -44,7 +44,7 @@ class FindingBikerSuccessPage extends StatelessWidget{
                           children: <Widget>[
                             Flexible(
                               child: Text(
-                                CustomStrings.foundBiker,
+                                CustomStrings.kFoundBiker,
                                 overflow: TextOverflow.clip,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: CustomColors.kBlue, fontSize: 30, fontWeight: FontWeight.bold),

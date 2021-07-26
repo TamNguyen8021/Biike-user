@@ -26,7 +26,7 @@ class FindingBikerFailPage extends StatelessWidget{
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            CustomStrings.findBikerFail,
+                            CustomStrings.kFindBikerFail,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: CustomColors.kBlue, fontSize: 30, fontWeight: FontWeight.bold),
@@ -51,7 +51,7 @@ class FindingBikerFailPage extends StatelessWidget{
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            CustomStrings.tips,
+                            CustomStrings.kTips,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: CustomColors.kBlue, fontSize: 12, fontWeight: FontWeight.bold),

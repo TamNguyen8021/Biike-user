@@ -15,7 +15,7 @@ class ExitButton extends StatelessWidget {
           // Navigator.pop(context);
         },
         child: Text(
-          CustomStrings.btnExit,
+          CustomStrings.kBtnExit,
           style: TextStyle(
               color: CustomColors.kDarkGray, fontWeight: FontWeight.bold, fontSize: 12),
         ),
