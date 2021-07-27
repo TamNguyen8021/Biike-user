@@ -13,11 +13,14 @@ class GetTripSuccessPage extends StatelessWidget{
     return Scaffold(
         body: Stack(
           children: <Widget>[
-            SvgPicture.asset(
-              'assets/images/biike-two-person.svg',
-              alignment: Alignment.bottomCenter,
-              width: MediaQuery.of(context).size.width,
+            Container(
               height: MediaQuery.of(context).size.height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: SvgPicture.asset(
+                  'assets/images/biike-two-person.svg',
+                ),
+              ),
             ),
             Container(
               alignment: Alignment.center,
@@ -48,25 +51,24 @@ class GetTripSuccessPage extends StatelessWidget{
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[ViewTripButton()]
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[ExitButton()]
+                      child: IntrinsicWidth(
+                        stepWidth: 200,
+                        child: Column(
+                          children: <Widget>[
+                            ViewTripButton(),
+                            Padding(padding: EdgeInsets.all(10.0)),
+                            ExitButton(),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              ),
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }

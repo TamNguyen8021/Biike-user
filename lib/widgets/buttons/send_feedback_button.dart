@@ -8,8 +8,6 @@ class SendFeedbackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35,
-      width: 100,
       child: ElevatedButton(
         onPressed: () {
           // Navigator.pop(context);
@@ -20,6 +18,8 @@ class SendFeedbackButton extends StatelessWidget {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
         ),
         style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsets>(
+                EdgeInsets.symmetric(horizontal: 35.0)),
             backgroundColor: MaterialStateProperty.all<Color>(CustomColors.kBlue),
             elevation: MaterialStateProperty.all<double>(0.0)),
       ),

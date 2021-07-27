@@ -13,11 +13,12 @@ class KeerFeedbackPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: Container(
-        alignment: Alignment.center,
+        // alignment: Alignment.center,
         child: SafeArea(
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
@@ -71,7 +72,7 @@ class KeerFeedbackPage extends StatelessWidget{
                                   CustomStrings.kRateReminder,
                                   overflow: TextOverflow.clip,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: CustomColors.kDarkGray, fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: CustomColors.kDarkGray),
                                 ),
                               ),
                             ]
@@ -100,7 +101,7 @@ class KeerFeedbackPage extends StatelessWidget{
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                         child: Card(
                           color: CustomColors.kLightGray,
                           child: Padding(
@@ -157,6 +158,7 @@ class KeerFeedbackPage extends StatelessWidget{
                   ),
                 ),
               ]
+          ),
           ),
         ),
       ),

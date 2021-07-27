@@ -9,7 +9,7 @@ class ViewTripButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35,
-      width: 200,
+      width: double.infinity,
       child: ElevatedButton(
         onPressed: () => {},
         child: Text(

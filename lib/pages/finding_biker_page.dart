@@ -2,7 +2,6 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/exit_button.dart';
 import 'package:bikes_user/widgets/buttons/return_button.dart';
-import 'package:bikes_user/widgets/buttons/view_trip_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -58,7 +57,7 @@ class FindingBikerPage extends StatelessWidget{
                             CustomStrings.kTips,
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: CustomColors.kBlue, fontSize: 12, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: CustomColors.kBlue, fontSize: 12),
                           ),
                         ),
                       ]
@@ -66,16 +65,15 @@ class FindingBikerPage extends StatelessWidget{
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[ReturnButton()]
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[ExitButton()]
+                  child: IntrinsicWidth(
+                    stepWidth: 200,
+                    child: Column(
+                      children: <Widget>[
+                        ReturnButton(),
+                        Padding(padding: EdgeInsets.all(10.0)),
+                        ExitButton(),
+                      ],
+                    ),
                   ),
                 ),
               ],
