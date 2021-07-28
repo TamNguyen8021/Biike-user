@@ -35,7 +35,7 @@ class FindingBikerFailPage extends StatelessWidget{
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 75.0),
+                  padding: const EdgeInsets.symmetric(vertical: 60.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
@@ -54,9 +54,9 @@ class FindingBikerFailPage extends StatelessWidget{
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 15.0),
                   child: IntrinsicWidth(
-                    stepWidth: 200,
+                    stepWidth: 150,
                     child: Column(
                       children: <Widget>[
                         ReturnButton(),

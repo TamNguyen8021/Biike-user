@@ -66,7 +66,7 @@ class FindingBikerPage extends StatelessWidget{
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: IntrinsicWidth(
-                    stepWidth: 200,
+                    stepWidth: 150,
                     child: Column(
                       children: <Widget>[
                         ReturnButton(),
