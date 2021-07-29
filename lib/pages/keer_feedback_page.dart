@@ -10,6 +10,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 class KeerFeedbackPage extends StatelessWidget{
   const KeerFeedbackPage({Key? key}) : super(key: key);
 
+  Widget _image(String asset) {
+    return SvgPicture.asset(
+      asset,
+      height: 30.0,
+      width: 30.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,19 +91,20 @@ class KeerFeedbackPage extends StatelessWidget{
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              RatingBar.builder(
+                              RatingBar(
                                 //initialRating: 3,
                                 minRating: 1,
                                 allowHalfRating: false,
                                 itemCount: 5,
+                                ratingWidget: RatingWidget(
+                                  full: _image('assets/images/full_star.svg'),
+                                  half: _image(''),
+                                  empty: _image('assets/images/empty_star.svg'),
+                                ),
                                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                                 onRatingUpdate: (rating) {
                                   print(rating);
                                 },
-                                itemBuilder: (context, _) => Icon(
-                                  Icons.star,
-                                  color: CustomColors.kOrange,
-                                ),
                               ),
                             ]
                         ),

@@ -11,6 +11,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 class BikerFeedbackPage extends StatelessWidget{
   const BikerFeedbackPage({Key? key}) : super(key: key);
 
+  Widget _image(String asset) {
+    return SvgPicture.asset(
+      asset,
+      height: 30.0,
+      width: 30.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +71,25 @@ class BikerFeedbackPage extends StatelessWidget{
                                 ]
                             ),
                           ),
+                          Container(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text (
+                                  "EXP",
+                                  style: new TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 2.0)),
+                                Icon(Icons.star, size: 20, color: Colors.white),
+                              ],
+                            ),
+                            decoration: new BoxDecoration (
+                                borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+                                color: CustomColors.kOrange,
+
+                            ),
+                            padding: new EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
                             child: Row(
@@ -84,19 +111,20 @@ class BikerFeedbackPage extends StatelessWidget{
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  RatingBar.builder(
+                                  RatingBar(
                                     //initialRating: 3,
                                     minRating: 1,
                                     allowHalfRating: false,
                                     itemCount: 5,
+                                    ratingWidget: RatingWidget(
+                                      full: _image('assets/images/full_star.svg'),
+                                      half: _image(''),
+                                      empty: _image('assets/images/empty_star.svg'),
+                                    ),
                                     itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                                     onRatingUpdate: (rating) {
                                       print(rating);
                                     },
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: CustomColors.kOrange,
-                                    ),
                                   ),
                                 ]
                             ),

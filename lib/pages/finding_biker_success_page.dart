@@ -17,9 +17,12 @@ class FindingBikerSuccessPage extends StatelessWidget{
               height: MediaQuery.of(context).size.height,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset(
-                  'assets/images/biike-two-person.svg',
-                  height: MediaQuery.of(context).size.height / 3,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                  child: SvgPicture.asset(
+                    'assets/images/biike-two-person.svg',
+                    width: MediaQuery.of(context).size.width,
+                  ),
                 ),
               ),
             ),
