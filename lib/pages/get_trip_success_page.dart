@@ -19,6 +19,7 @@ class GetTripSuccessPage extends StatelessWidget{
                 alignment: Alignment.bottomCenter,
                 child: SvgPicture.asset(
                   'assets/images/biike-two-person.svg',
+                  height: MediaQuery.of(context).size.height / 3,
                 ),
               ),
             ),
