@@ -1,4 +1,10 @@
+import 'package:bikes_user/pages/biker_feedback_page.dart';
+import 'package:bikes_user/pages/finding_biker_fail_page.dart';
+import 'package:bikes_user/pages/finding_biker_page.dart';
+import 'package:bikes_user/pages/finding_biker_success_page.dart';
+import 'package:bikes_user/pages/get_trip_success_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
+import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
@@ -49,6 +55,12 @@ class Biike extends StatelessWidget {
         '/customerHome': (BuildContext ctx) => HomePage(
               role: 'Customer',
             ),
+        '/bikerFeedback': (BuildContext ctx) => BikerFeedbackPage(),
+        '/keerFeedback': (BuildContext ctx) => KeerFeedbackPage(),
+        '/findBiker': (BuildContext ctx) => FindingBikerPage(),
+        '/findBikerSuccess': (BuildContext ctx) => FindingBikerSuccessPage(),
+        '/findBikerFail': (BuildContext ctx) => FindingBikerFailPage(),
+        '/getTripSuccess': (BuildContext ctx) => GetTripSuccessPage(),
       },
     );
   }
