@@ -45,7 +45,7 @@ class Biike extends StatelessWidget {
                       MaterialStateProperty.all<Color>(CustomColors.kBlue),
                   textStyle: MaterialStateProperty.all<TextStyle>(
                       TextStyle(color: Colors.white, fontSize: 12))))),
-      initialRoute: '/customerHome',
+      initialRoute: '/keerFeedback',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
