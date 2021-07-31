@@ -29,7 +29,7 @@ class DriverHome extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             CustomStrings.kDriverReadyReminder,
-                            style: TextStyle(color: CustomColors.kDarkGray),
+                            style: Theme.of(context).textTheme.bodyText2,
                           ),
                           Text(
                             '15' + CustomStrings.kReminderTime,
@@ -47,9 +47,9 @@ class DriverHome extends StatelessWidget {
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
                           iconColor: Colors.white,
-                          avatarUrl: 'assets/images/test_avatar.jpg',
-                          name: 'Phát Đỗ',
-                          time: '06:45',
+                          avatarUrl: 'assets/images/profile-4.jpg',
+                          name: 'Thảo Vân',
+                          time: '06:35',
                           date: CustomStrings.kToday,
                           sourceStation: 'Đại học FPT TP.HCM',
                           destinationStation: 'Chung cư SKY9'),
@@ -73,7 +73,7 @@ class DriverHome extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(CustomStrings.kFilter,
-                          style: TextStyle(color: CustomColors.kDarkGray)),
+                          style: Theme.of(context).textTheme.bodyText2),
                     ),
                     IntrinsicHeight(
                       child: Row(
@@ -106,15 +106,13 @@ class DriverHome extends StatelessWidget {
                                                   right: 5.0),
                                               child: Icon(
                                                 Icons.event_outlined,
-                                                color: CustomColors.kBlue,
-                                                size: 15,
                                               ),
                                             ),
                                             Text(
                                               CustomStrings.kToday,
-                                              style: TextStyle(
-                                                  color: CustomColors.kDarkGray,
-                                                  fontSize: 12),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
                                             ),
                                           ],
                                         ),
@@ -129,15 +127,13 @@ class DriverHome extends StatelessWidget {
                                                   right: 5.0),
                                               child: Icon(
                                                 Icons.access_time,
-                                                color: CustomColors.kBlue,
-                                                size: 15,
                                               ),
                                             ),
                                             Text(
                                               CustomStrings.kSelectHour,
-                                              style: TextStyle(
-                                                  color: CustomColors.kDarkGray,
-                                                  fontSize: 12),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
                                             ),
                                           ],
                                         ),
@@ -149,6 +145,7 @@ class DriverHome extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: Container(
+                                padding: const EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
                                     color: CustomColors.kLightGray,
                                     borderRadius: BorderRadius.circular(5),
@@ -160,35 +157,39 @@ class DriverHome extends StatelessWidget {
                                         offset: Offset(0, 1),
                                       )
                                     ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Row(
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 10.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 5.0),
-                                            child: Icon(
-                                              Icons.adjust,
-                                              color: CustomColors.kBlue,
-                                              size: 15,
-                                            ),
+                                          Icon(
+                                            Icons.adjust,
                                           ),
-                                          Text(
-                                            CustomStrings.kSelectSourceStation,
-                                            style: TextStyle(
-                                                color: CustomColors.kDarkGray,
-                                                fontSize: 12),
+                                          Icon(
+                                            Icons.more_vert_outlined,
+                                          ),
+                                          Icon(
+                                            Icons.location_on,
                                           ),
                                         ],
                                       ),
-                                      Row(
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
-                                          Icon(
-                                            Icons.more_vert_outlined,
-                                            color: CustomColors.kBlue,
-                                            size: 15,
+                                          Text(
+                                            CustomStrings.kSelectSourceStation,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                           Expanded(
                                             child: Divider(
@@ -196,34 +197,21 @@ class DriverHome extends StatelessWidget {
                                                   .withOpacity(0.3),
                                             ),
                                           ),
-                                          Icon(
-                                            Icons.swap_vert_sharp,
-                                            color: CustomColors.kBlue,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 5.0),
-                                            child: Icon(
-                                              Icons.location_on,
-                                              color: CustomColors.kBlue,
-                                              size: 15,
-                                            ),
-                                          ),
                                           Text(
                                             CustomStrings
                                                 .kSelectDestinationStation,
-                                            style: TextStyle(
-                                                color: CustomColors.kDarkGray,
-                                                fontSize: 12),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Icon(
+                                      Icons.swap_vert_sharp,
+                                      size: 30,
+                                    ),
+                                  ],
                                 )),
                           )
                         ],

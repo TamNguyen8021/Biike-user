@@ -10,6 +10,10 @@ class CustomStrings {
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
 
+  // ke_er_home_blank
+  static const String kCreateTrip =
+      "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
+
   // driver_home screen
   static const String kDriverReadyReminder = "Bạn đang có 1 chuyến xe cần chở";
   static const String kFilter = "Lọc chuyến đi đang cần chở";
@@ -32,4 +36,17 @@ class CustomStrings {
   // bottom tabbar
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
+  // Waiting page
+  static const String kFoundBiker = "Đã tìm được người chở bạn!";
+  static const String kGetTripSuccess = "Nhận chở thành công!";
+  static const String kFindingBiker = "Đang tìm người chở";
+  static const String kFindBikerFail = "Không tìm thấy người chở ké";
+  static const String kTripSuccess = "Chở ké thành công!";
+  static const String kBuyReminder = "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
+  static const String kRateReminder = "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
+  static const String kTips = "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
+  static const String kViewTrip = "Xem chuyến đi";
+  static const String kBtnExit = "Thoát";
+  static const String kBtnReturn = "Quay lại";
+  static const String kBtnSend = "Gửi";
 }

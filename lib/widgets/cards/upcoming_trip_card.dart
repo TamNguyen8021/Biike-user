@@ -51,23 +51,29 @@ class UpcomingTripCard extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           name,
-                          style: TextStyle(
-                              color: foregroundColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(
+                                  color: foregroundColor,
+                                  fontWeight: FontWeight.bold),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
                             time,
-                            style:
-                                TextStyle(color: foregroundColor, fontSize: 12),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(color: foregroundColor),
                           ),
                         ),
                         Text(
                           date,
-                          style:
-                              TextStyle(color: foregroundColor, fontSize: 12),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(color: foregroundColor),
                         ),
                       ],
                     ),
@@ -88,12 +94,14 @@ class UpcomingTripCard extends StatelessWidget {
                       child: Icon(
                         Icons.adjust,
                         color: iconColor,
-                        size: 15,
                       ),
                     ),
                     Text(
                       sourceStation,
-                      style: TextStyle(color: foregroundColor, fontSize: 12),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: foregroundColor),
                     ),
                   ],
                 ),
@@ -102,7 +110,6 @@ class UpcomingTripCard extends StatelessWidget {
                   child: Icon(
                     Icons.more_vert_outlined,
                     color: iconColor,
-                    size: 15,
                   ),
                 ),
                 Row(
@@ -112,12 +119,14 @@ class UpcomingTripCard extends StatelessWidget {
                       child: Icon(
                         Icons.location_on,
                         color: iconColor,
-                        size: 15,
                       ),
                     ),
                     Text(
                       destinationStation,
-                      style: TextStyle(color: foregroundColor, fontSize: 12),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: foregroundColor),
                     ),
                   ],
                 ),
