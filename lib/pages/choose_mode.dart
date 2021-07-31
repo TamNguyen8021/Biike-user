@@ -21,10 +21,10 @@ class _ChooseMode extends State<ChooseMode>{
         child: Column(
            crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // Container(
-            //   child: 
-            //   SvgPicture.asset("assets/images/biike-two-person.svg",fit: BoxFit.fill ),
-            // ),
+            Container(
+              child: 
+              SvgPicture.asset("assets/images/blank.svg" ),
+            ),
             new Text(
               CustomStrings.kChooseMode,
               textAlign: TextAlign.right,
