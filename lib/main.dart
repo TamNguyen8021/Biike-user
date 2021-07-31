@@ -2,6 +2,7 @@ import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/manage_bike_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class Biike extends StatelessWidget {
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.kBlue,
           fontFamily: 'SVN Product Sans'),
-      initialRoute: '/profile',
+      initialRoute: '/manage_bike',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
 
@@ -36,6 +37,9 @@ class Biike extends StatelessWidget {
         '/profile': (BuildContext ctx) => ProfilePage(
               role: 'Driver',
             ),
+        '/manage_bike': (BuildContext ctx) => ManageBikePage(
+          role: 'Driver',
+        ),
       },
     );
   }
