@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final AppBar appBar;
   final bool isVisible;
+  final bool hasShape;
 
   /// Widgets for action property in [AppBar]
   final List<Widget>? actionWidgets;
@@ -15,6 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar(
       {Key? key,
       required this.isVisible,
+      required this.hasShape,
       this.leadingWidget,
       this.title,
       required this.appBar,
@@ -23,14 +25,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       : super(key: key);
 
   @override
-  Size get preferredSize =>
-      new Size.fromHeight(appBar.preferredSize.height + 40.0);
-
-  set preferredSize(Size newPreferredSize) =>
-      new Size.fromHeight(appBar.preferredSize.height);
+  Size get preferredSize {
+    Size appbarSize = new Size.fromHeight(appBar.preferredSize.height);
+    if (bottomAppBar != null) {
+      appbarSize = new Size.fromHeight(appBar.preferredSize.height + 40.0);
+    }
+    return appbarSize;
+  }
 
   @override
   Widget build(BuildContext context) {
+    ShapeBorder? shapeBorder;
+    if (hasShape) {
+      shapeBorder = RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)));
+    }
     return Visibility(
       visible: isVisible,
       child: AppBar(
@@ -38,8 +47,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: title,
         actions: actionWidgets,
         bottom: bottomAppBar,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(5))),
+        shape: shapeBorder,
       ),
     );
   }

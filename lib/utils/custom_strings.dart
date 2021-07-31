@@ -5,7 +5,7 @@ class CustomStrings {
   static const String kReminderTime = " phút nữa";
   static const String kFinishTrip = "Đánh dấu đã đến";
   static const String kCustomerMode = "Đi ké mode";
-  static const String kBikerMode = "Chở mode";
+  static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
@@ -45,6 +45,9 @@ class CustomStrings {
   static const String kPhoneNo = "Số điện thoại";
   static const String kEmail = "Email";
   static const String kLogOut = "Đăng xuất";
+
+  // '023-cus-update_profile' screen
+  static const String kEditProfile = "Chỉnh sửa thông tin cá nhân";
 
   // finding_driver_success screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";

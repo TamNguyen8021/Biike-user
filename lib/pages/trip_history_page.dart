@@ -15,13 +15,13 @@ class TripHistoryPage extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           isVisible: true,
+          hasShape: false,
           appBar: AppBar(),
           leadingWidget: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.pop(context)),
           title: Text(
             CustomStrings.kHistory,
-            style: Theme.of(context).textTheme.headline6,
           ),
           bottomAppBar: PreferredSize(
             preferredSize: new Size.fromHeight(0),
