@@ -1,6 +1,6 @@
 import 'package:bikes_user/pages/edit_profile_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
-import 'package:bikes_user/pages/profile_page.dart';
+import 'package:bikes_user/pages/customer_profile_page.dart';
 import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
@@ -65,7 +65,7 @@ class Biike extends StatelessWidget {
         '/customerHome': (BuildContext ctx) => HomePage(
               role: 'Customer',
             ),
-        '/profile': (BuildContext ctx) => ProfilePage(
+        '/profile': (BuildContext ctx) => CustomerProfilePage(
               role: 'Customer',
             ),
         '/editProfile': (BuildContext ctx) => EditProfilePage(),

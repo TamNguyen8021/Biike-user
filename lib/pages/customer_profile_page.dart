@@ -9,10 +9,10 @@ import 'package:bikes_user/widgets/others/user_rating.dart';
 import 'package:flutter/material.dart';
 
 /// The profile screen
-class ProfilePage extends StatelessWidget {
+class CustomerProfilePage extends StatelessWidget {
   final String role;
 
-  const ProfilePage({Key? key, required this.role}) : super(key: key);
+  const CustomerProfilePage({Key? key, required this.role}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
