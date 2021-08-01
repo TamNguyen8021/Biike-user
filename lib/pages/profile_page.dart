@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
@@ -104,22 +106,26 @@ class ProfilePage extends StatelessWidget {
                       child: SizedBox(
                         height: 35,
                         child: ElevatedButton.icon(
-                          onPressed: () =>
-                              {Navigator.pushNamed(context, '/editProfile')},
-                          icon: Icon(Icons.edit),
-                          label: Text(
-                            CustomStrings.kEdit,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  CustomColors.kBlue),
-                              elevation:
-                                  MaterialStateProperty.all<double>(0.0)),
-                        ),
+                            onPressed: () =>
+                                {Navigator.pushNamed(context, '/editProfile')},
+                            icon: Icon(
+                              Icons.edit,
+                              size: 22,
+                            ),
+                            label: Text(
+                              CustomStrings.kEdit,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .button!
+                                  .copyWith(fontSize: 12),
+                            ),
+                            style: Theme.of(context)
+                                .elevatedButtonTheme
+                                .style!
+                                .copyWith(
+                                    elevation:
+                                        MaterialStateProperty.all<double>(
+                                            0.0))),
                       ),
                     ),
                     Padding(

@@ -52,7 +52,8 @@ class Biike extends StatelessWidget {
                   textStyle: MaterialStateProperty.all<TextStyle>(
                       TextStyle(color: Colors.white, fontSize: 12)))),
           inputDecorationTheme: InputDecorationTheme(
-              contentPadding: const EdgeInsets.only(top: 12.0))),
+              contentPadding: const EdgeInsets.only(top: 12.0),
+              labelStyle: TextStyle(fontWeight: FontWeight.normal))),
       initialRoute: '/customerHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),

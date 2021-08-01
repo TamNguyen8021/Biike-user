@@ -48,6 +48,11 @@ class CustomStrings {
 
   // '023-cus-update_profile' screen
   static const String kEditProfile = "Chỉnh sửa thông tin cá nhân";
+  static const String kFullName = "Họ và tên";
+  static const String kGender = "Giới tính";
+  static const String kMale = "Nam";
+  static const String kFemale = "Nữ";
+  static const String kOthers = "Khác";
 
   // finding_driver_success screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";
