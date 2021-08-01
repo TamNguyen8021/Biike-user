@@ -5,7 +5,7 @@ class CustomStrings {
   static const String kReminderTime = " phút nữa";
   static const String kFinishTrip = "Đánh dấu đã đến";
   static const String kCustomerMode = "Đi ké mode";
-  static const String kBikerMode = "Chở mode";
+  static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
@@ -36,17 +36,46 @@ class CustomStrings {
   // bottom tabbar
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
-  // Waiting page
+
+  //profile screen
+  static const String kEdit = "Chỉnh sửa";
+  static const String kSettings = "Cài đặt";
+  static const String kHelp = "Trợ giúp";
+  static const String kRateApp = "Đánh giá ứng dụng";
+  static const String kPhoneNo = "Số điện thoại";
+  static const String kEmail = "Email";
+  static const String kLogOut = "Đăng xuất";
+
+  // '023-cus-update_profile' screen
+  static const String kEditProfile = "Chỉnh sửa thông tin cá nhân";
+  static const String kFullName = "Họ và tên";
+  static const String kGender = "Giới tính";
+  static const String kMale = "Nam";
+  static const String kFemale = "Nữ";
+  static const String kOthers = "Khác";
+
+  // finding_driver_success screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";
-  static const String kGetTripSuccess = "Nhận chở thành công!";
-  static const String kFindingBiker = "Đang tìm người chở";
-  static const String kFindBikerFail = "Không tìm thấy người chở ké";
-  static const String kTripSuccess = "Chở ké thành công!";
-  static const String kBuyReminder = "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
-  static const String kRateReminder = "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
-  static const String kTips = "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
   static const String kViewTrip = "Xem chuyến đi";
+
+  // get_trip_success screen
+  static const String kGetTripSuccess = "Nhận chở thành công!";
+
+  // finding_driver screen
+  static const String kFindingBiker = "Đang tìm người chở";
+
+  // finding_driver_fail screen
+  static const String kFindBikerFail = "Không tìm thấy người chở ké";
+  static const String kTips =
+      "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
   static const String kBtnExit = "Thoát";
   static const String kBtnReturn = "Quay lại";
+
+  // ke_er_feedback screen
+  static const String kTripSuccess = "Chở ké thành công!";
+  static const String kBuyReminder =
+      "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
+  static const String kRateReminder =
+      "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
   static const String kBtnSend = "Gửi";
 }

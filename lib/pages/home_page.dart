@@ -1,9 +1,7 @@
-import 'package:bikes_user/utils/custom_colors.dart';
-import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
+import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
-// import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
 import 'package:bikes_user/widgets/pages/driver_home.dart';
 import 'package:flutter/material.dart';
@@ -23,20 +21,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    String _route = '/driverHome';
     Widget _homePage = CustomerHomeFull();
     Widget _activityPage = Activity(
       role: widget.role,
     );
-    String _modeButtonText = CustomStrings.kCustomerMode;
-    Color _modeButtonForegroundColor = CustomColors.kBlue;
-    Color _modeButtonBackgroundColor = CustomColors.kLightGray;
+
     if (widget.role != 'Customer') {
-      _route = '/customerHome';
       _homePage = DriverHome();
-      _modeButtonText = CustomStrings.kBikerMode;
-      _modeButtonBackgroundColor = CustomColors.kOrange;
-      _modeButtonForegroundColor = CustomColors.kLightGray;
     }
 
     return DefaultTabController(
@@ -58,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               }
               return CustomAppBar(
                 isVisible: isAppBarVisible,
+                hasShape: true,
                 appBar: AppBar(),
                 title: Padding(
                   padding: const EdgeInsets.only(left: 5.0),
@@ -69,32 +61,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: SizedBox(
-                          height: 20,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(context, _route);
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 1.0),
-                              child: Text(
-                                _modeButtonText,
-                                style: TextStyle(
-                                    color: _modeButtonForegroundColor,
-                                    fontSize: 10),
-                              ),
-                            ),
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        _modeButtonBackgroundColor),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15)))),
-                          ),
-                        ),
+                        child: SwitchRoleButton(role: 'Customer'),
                       ),
                     ],
                   ),
@@ -103,7 +70,9 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0),
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/profile');
+                        },
                         icon: Icon(
                           Icons.account_circle_rounded,
                           color: Colors.white,

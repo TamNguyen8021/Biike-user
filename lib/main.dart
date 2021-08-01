@@ -1,9 +1,11 @@
+import 'package:bikes_user/pages/edit_profile_page.dart';
+import 'package:bikes_user/pages/home_page.dart';
+import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
-import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
@@ -27,11 +29,15 @@ class Biike extends StatelessWidget {
           primarySwatch: CustomColors.kBlue,
           scaffoldBackgroundColor: Colors.white,
           fontFamily: 'SVN Product Sans',
-          textTheme: TextTheme(
-              headline6: TextStyle(
+          appBarTheme: AppBarTheme(
+              backwardsCompatibility: false,
+              elevation: 0.0,
+              backgroundColor: CustomColors.kBlue,
+              titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.white)),
+          textTheme: TextTheme(
               bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
               bodyText2: TextStyle(color: CustomColors.kDarkGray),
               button: TextStyle(fontSize: 10, color: Colors.white)),
@@ -44,8 +50,11 @@ class Biike extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(CustomColors.kBlue),
                   textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(color: Colors.white, fontSize: 12))))),
-      initialRoute: '/keerFeedback',
+                      TextStyle(color: Colors.white, fontSize: 12)))),
+          inputDecorationTheme: InputDecorationTheme(
+              contentPadding: const EdgeInsets.only(top: 12.0),
+              labelStyle: TextStyle(fontWeight: FontWeight.normal))),
+      initialRoute: '/customerHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
@@ -55,6 +64,10 @@ class Biike extends StatelessWidget {
         '/customerHome': (BuildContext ctx) => HomePage(
               role: 'Customer',
             ),
+        '/profile': (BuildContext ctx) => ProfilePage(
+              role: 'Customer',
+            ),
+        '/editProfile': (BuildContext ctx) => EditProfilePage(),
         '/bikerFeedback': (BuildContext ctx) => BikerFeedbackPage(),
         '/keerFeedback': (BuildContext ctx) => KeerFeedbackPage(),
         '/findBiker': (BuildContext ctx) => FindingBikerPage(),
