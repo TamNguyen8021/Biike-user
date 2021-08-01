@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final String role;
+  final String route;
 
-  SwitchRoleButton({Key? key, required this.role}) : super(key: key);
+  SwitchRoleButton({Key? key, required this.role, required this.route})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String _route = '/driverHome';
+    // String _route = '/driverHome';
     String _modeButtonText = CustomStrings.kCustomerMode;
     Color _modeButtonForegroundColor = CustomColors.kBlue;
     Color _modeButtonBackgroundColor = CustomColors.kLightGray;
     if (role != 'Customer') {
-      _route = '/customerHome';
+      // _route = '/customerHome';
       _modeButtonText = CustomStrings.kDriverMode;
       _modeButtonBackgroundColor = CustomColors.kOrange;
       _modeButtonForegroundColor = CustomColors.kLightGray;
@@ -24,7 +26,7 @@ class SwitchRoleButton extends StatelessWidget {
       height: 20,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, _route);
+          Navigator.pushReplacementNamed(context, route);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 1.0),

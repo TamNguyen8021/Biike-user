@@ -120,8 +120,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   SizedBox(
                     height: 35,
                     child: ElevatedButton.icon(
-                        onPressed: () =>
-                            {Navigator.pushNamed(context, '/profile')},
+                        onPressed: () => {Navigator.pop(context)},
                         icon: Icon(
                           Icons.save,
                           size: 22,

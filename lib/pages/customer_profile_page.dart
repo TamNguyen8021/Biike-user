@@ -23,7 +23,7 @@ class CustomerProfilePage extends StatelessWidget {
         appBar: AppBar(),
         leadingWidget: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, '/customerHome');
           },
           icon: Icon(
             Icons.arrow_back,
@@ -33,7 +33,10 @@ class CustomerProfilePage extends StatelessWidget {
           Padding(
               padding:
                   const EdgeInsets.only(right: 16.0, top: 19.0, bottom: 19.0),
-              child: SwitchRoleButton(role: role))
+              child: SwitchRoleButton(
+                role: role,
+                route: '/driverProfile',
+              ))
         ],
       ),
       body: SafeArea(

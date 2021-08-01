@@ -55,6 +55,9 @@ class CustomStrings {
   static const String kOthers = "Khác";
   static const String kSave = "Lưu";
 
+  // 'driver-profile' screen
+  static const String kManageBike = "Quản lý xe";
+
   // finding_driver_success screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";
   static const String kViewTrip = "Xem chuyến đi";
