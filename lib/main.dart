@@ -34,9 +34,10 @@ class Biike extends StatelessWidget {
               elevation: 0.0,
               backgroundColor: CustomColors.kBlue,
               titleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white)),
+                  fontSize: 13,
+                  color: Colors.white,
+                  letterSpacing: 0.5,
+                  fontFamily: 'SVN Product Sans')),
           textTheme: TextTheme(
               bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
               bodyText2: TextStyle(color: CustomColors.kDarkGray),

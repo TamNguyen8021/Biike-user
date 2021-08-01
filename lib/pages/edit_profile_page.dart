@@ -25,12 +25,30 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22.0),
+          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 20.0),
           child: Column(
             children: <Widget>[
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profile-1.jpg'),
-                radius: 50,
+              Stack(
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/profile-1.jpg'),
+                    radius: 55,
+                  ),
+                  Positioned(
+                    top: 75,
+                    left: 80,
+                    child: CircleAvatar(
+                      radius: 15,
+                      backgroundColor: CustomColors.kBlue,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.camera_alt),
+                        iconSize: 15,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
               ),
               Form(
                   child: Column(
@@ -43,37 +61,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     decoration:
                         InputDecoration(labelText: CustomStrings.kFullName),
                   ),
-                  TextFormField(
-                    initialValue: '034 866 9124',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: CustomColors.kDarkGray),
-                    decoration:
-                        InputDecoration(labelText: CustomStrings.kPhoneNo),
-                  ),
-                  TextFormField(
-                    initialValue: 'phatdhse64000@fpt.edu.vn',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: CustomColors.kDarkGray),
-                    decoration:
-                        InputDecoration(labelText: CustomStrings.kEmail),
-                  ),
                   DropdownButtonFormField<Gender>(
                     value: _gender,
                     decoration:
                         InputDecoration(labelText: CustomStrings.kGender),
                     items: const <DropdownMenuItem<Gender>>[
                       DropdownMenuItem<Gender>(
-                        child: Text(CustomStrings.kMale),
+                        child: Text(
+                          CustomStrings.kMale,
+                          style: TextStyle(
+                              color: CustomColors.kDarkGray,
+                              fontWeight: FontWeight.bold),
+                        ),
                         value: Gender.Male,
                       ),
                       DropdownMenuItem<Gender>(
-                        child: Text(CustomStrings.kFemale),
+                        child: Text(CustomStrings.kFemale,
+                            style: TextStyle(
+                                color: CustomColors.kDarkGray,
+                                fontWeight: FontWeight.bold)),
                         value: Gender.Female,
                       ),
                       DropdownMenuItem<Gender>(
-                        child: Text(CustomStrings.kOthers),
+                        child: Text(CustomStrings.kOthers,
+                            style: TextStyle(
+                                color: CustomColors.kDarkGray,
+                                fontWeight: FontWeight.bold)),
                         value: Gender.Other,
                       ),
                     ],
@@ -82,7 +95,51 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         _gender = gender;
                       });
                     },
-                  )
+                  ),
+                  TextFormField(
+                    initialValue: '034 866 9124',
+                    keyboardType: TextInputType.phone,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: CustomColors.kDarkGray),
+                    decoration:
+                        InputDecoration(labelText: CustomStrings.kPhoneNo),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: TextFormField(
+                      initialValue: 'phatdhse64000@fpt.edu.vn',
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: CustomColors.kDarkGray),
+                      decoration:
+                          InputDecoration(labelText: CustomStrings.kEmail),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 35,
+                    child: ElevatedButton.icon(
+                        onPressed: () =>
+                            {Navigator.pushNamed(context, '/profile')},
+                        icon: Icon(
+                          Icons.save,
+                          size: 22,
+                        ),
+                        label: Text(
+                          CustomStrings.kSave,
+                          style: Theme.of(context)
+                              .textTheme
+                              .button!
+                              .copyWith(fontSize: 12),
+                        ),
+                        style: Theme.of(context)
+                            .elevatedButtonTheme
+                            .style!
+                            .copyWith(
+                                elevation:
+                                    MaterialStateProperty.all<double>(0.0))),
+                  ),
                 ],
               ))
             ],

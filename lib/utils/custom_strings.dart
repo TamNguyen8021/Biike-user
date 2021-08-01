@@ -37,7 +37,7 @@ class CustomStrings {
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
 
-  //profile screen
+  //'022-cus-profile' screen
   static const String kEdit = "Chỉnh sửa";
   static const String kSettings = "Cài đặt";
   static const String kHelp = "Trợ giúp";
@@ -53,6 +53,7 @@ class CustomStrings {
   static const String kMale = "Nam";
   static const String kFemale = "Nữ";
   static const String kOthers = "Khác";
+  static const String kSave = "Lưu";
 
   // finding_driver_success screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";
