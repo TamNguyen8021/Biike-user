@@ -25,11 +25,13 @@ class _HomePageState extends State<HomePage> {
     Widget _activityPage = Activity(
       role: widget.role,
     );
-    String _route = '/customerHome';
+    String _homeRoute = '/driverHome';
+    String _profileRoute = '/customerProfile';
 
     if (widget.role != 'Customer') {
       _homePage = DriverHome();
-      _route = '/driverHome';
+      _homeRoute = '/customerHome';
+      _profileRoute = '/driverProfile';
     }
 
     return DefaultTabController(
@@ -65,8 +67,8 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: SwitchRoleButton(
-                          role: 'Customer',
-                          route: _route,
+                          role: widget.role,
+                          route: _homeRoute,
                         ),
                       ),
                     ],
@@ -77,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(right: 16.0),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/customerProfile');
+                          Navigator.pushNamed(context, _profileRoute);
                         },
                         icon: Icon(
                           Icons.account_circle_rounded,

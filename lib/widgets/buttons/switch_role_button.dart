@@ -11,12 +11,10 @@ class SwitchRoleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // String _route = '/driverHome';
     String _modeButtonText = CustomStrings.kCustomerMode;
     Color _modeButtonForegroundColor = CustomColors.kBlue;
     Color _modeButtonBackgroundColor = CustomColors.kLightGray;
     if (role != 'Customer') {
-      // _route = '/customerHome';
       _modeButtonText = CustomStrings.kDriverMode;
       _modeButtonBackgroundColor = CustomColors.kOrange;
       _modeButtonForegroundColor = CustomColors.kLightGray;

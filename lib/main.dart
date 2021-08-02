@@ -59,7 +59,7 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/exchangeVoucher',
+      initialRoute: '/driverHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
