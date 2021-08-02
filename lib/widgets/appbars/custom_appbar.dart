@@ -49,8 +49,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           if (actionWidgets != null) {
             if (role == 'Customer') {
+              Navigator.pop(context);
               Navigator.pushReplacementNamed(context, '/customerHome');
             } else {
+              Navigator.pop(context);
               Navigator.pushReplacementNamed(context, '/driverHome');
             }
           } else {
