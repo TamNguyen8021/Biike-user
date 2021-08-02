@@ -98,12 +98,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   TextFormField(
                     initialValue: '034 866 9124',
-                    keyboardType: TextInputType.phone,
+                    readOnly: true,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: CustomColors.kDarkGray),
-                    decoration:
-                        InputDecoration(labelText: CustomStrings.kPhoneNo),
+                        color: CustomColors.kDarkGray.withOpacity(0.5)),
+                    decoration: InputDecoration(
+                        labelText: CustomStrings.kPhoneNo,
+                        labelStyle: Theme.of(context)
+                            .inputDecorationTheme
+                            .labelStyle!
+                            .copyWith(
+                                color:
+                                    CustomColors.kDarkGray.withOpacity(0.5))),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
