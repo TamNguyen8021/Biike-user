@@ -1,3 +1,4 @@
+import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
@@ -58,7 +59,7 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/viewUser',
+      initialRoute: '/exchangeVoucher',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
@@ -82,6 +83,7 @@ class Biike extends StatelessWidget {
         '/findBikerSuccess': (BuildContext ctx) => FindingBikerSuccessPage(),
         '/findBikerFail': (BuildContext ctx) => FindingBikerFailPage(),
         '/getTripSuccess': (BuildContext ctx) => GetTripSuccessPage(),
+        '/exchangeVoucher': (BuildContext ctx) => DriverPointPage(),
       },
     );
   }
