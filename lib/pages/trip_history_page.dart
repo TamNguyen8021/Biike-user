@@ -17,9 +17,7 @@ class TripHistoryPage extends StatelessWidget {
           isVisible: true,
           hasShape: false,
           appBar: AppBar(),
-          leadingWidget: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context)),
+          hasLeading: true,
           title: Text(
             CustomStrings.kHistory,
           ),

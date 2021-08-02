@@ -18,14 +18,8 @@ class DriverProfilePage extends StatelessWidget {
         isVisible: true,
         hasShape: false,
         appBar: AppBar(),
-        leadingWidget: IconButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/driverHome');
-          },
-          icon: Icon(
-            Icons.arrow_back,
-          ),
-        ),
+        hasLeading: true,
+        role: 'Driver',
         actionWidgets: <Widget>[
           Padding(
               padding:

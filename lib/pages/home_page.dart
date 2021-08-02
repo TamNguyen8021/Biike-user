@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
               return CustomAppBar(
                 isVisible: isAppBarVisible,
                 hasShape: true,
+                hasLeading: false,
                 appBar: AppBar(),
                 title: Padding(
                   padding: const EdgeInsets.only(left: 5.0),

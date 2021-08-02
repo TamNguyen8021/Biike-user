@@ -21,14 +21,8 @@ class CustomerProfilePage extends StatelessWidget {
         isVisible: true,
         hasShape: false,
         appBar: AppBar(),
-        leadingWidget: IconButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/customerHome');
-          },
-          icon: Icon(
-            Icons.arrow_back,
-          ),
-        ),
+        hasLeading: true,
+        role: 'Customer',
         actionWidgets: <Widget>[
           Padding(
               padding:

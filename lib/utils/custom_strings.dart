@@ -58,6 +58,11 @@ class CustomStrings {
   // 'driver-profile' screen
   static const String kManageBike = "Quản lý xe";
 
+  // '024-view_user' screen
+  static const String kViewUser = "Xem bạn chở";
+  static const String kCall = "Gọi điện";
+  static const String kMessage = "Nhắn tin";
+
   // finding_driver_success screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";
   static const String kViewTrip = "Xem chuyến đi";

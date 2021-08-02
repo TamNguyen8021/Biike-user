@@ -10,6 +10,7 @@ import 'package:bikes_user/pages/get_trip_success_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
+import 'package:bikes_user/pages/view_user_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -52,11 +53,12 @@ class Biike extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(CustomColors.kBlue),
                   textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(color: Colors.white, fontSize: 12)))),
+                      TextStyle(color: Colors.white, fontSize: 12)),
+                  elevation: MaterialStateProperty.all<double>(2.0))),
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/customerHome',
+      initialRoute: '/viewUser',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
@@ -73,6 +75,7 @@ class Biike extends StatelessWidget {
               role: 'Driver',
             ),
         '/editProfile': (BuildContext ctx) => EditProfilePage(),
+        '/viewUser': (BuildContext ctx) => ViewUserPage(),
         '/bikerFeedback': (BuildContext ctx) => BikerFeedbackPage(),
         '/keerFeedback': (BuildContext ctx) => KeerFeedbackPage(),
         '/findBiker': (BuildContext ctx) => FindingBikerPage(),

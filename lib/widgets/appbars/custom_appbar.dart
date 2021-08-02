@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 /// This widget is the top appbar on home page
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// Widgets for leading property in [AppBar]
-  final Widget? leadingWidget;
+  final String? role;
+  final bool hasLeading;
   final Widget? title;
   final AppBar appBar;
   final bool isVisible;
@@ -15,9 +15,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar(
       {Key? key,
+      this.role,
       required this.isVisible,
       required this.hasShape,
-      this.leadingWidget,
+      required this.hasLeading,
       this.title,
       required this.appBar,
       this.actionWidgets,
@@ -36,9 +37,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     ShapeBorder? shapeBorder;
+    Widget? leadingWidget;
+
     if (hasShape) {
       shapeBorder = RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)));
+    }
+
+    if (hasLeading) {
+      leadingWidget = IconButton(
+        onPressed: () {
+          if (actionWidgets != null) {
+            if (role == 'Customer') {
+              Navigator.pushReplacementNamed(context, '/customerHome');
+            } else {
+              Navigator.pushReplacementNamed(context, '/driverHome');
+            }
+          } else {
+            Navigator.pop(context);
+          }
+        },
+        icon: Icon(
+          Icons.arrow_back,
+        ),
+      );
     }
     return Visibility(
       visible: isVisible,

@@ -20,6 +20,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: CustomAppBar(
         isVisible: true,
         hasShape: true,
+        hasLeading: true,
         appBar: AppBar(),
         title: Text(CustomStrings.kEditProfile),
       ),
