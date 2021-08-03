@@ -24,6 +24,9 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
       length: 2,
       child: Scaffold(
         appBar: CustomAppBar(
+          isVisible: true,
+          hasLeading: false,
+          hasShape: true,
           appBar: AppBar(),
           title: Padding(
             padding: const EdgeInsets.only(left: 5.0),
@@ -43,8 +46,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 1.0),
                         child: Text(
                           CustomStrings.kCustomerMode,
-                          style:
-                              TextStyle(color: CustomColors.kBlue, fontSize: 10),
+                          style: TextStyle(
+                              color: CustomColors.kBlue, fontSize: 10),
                         ),
                       ),
                       style: ButtonStyle(
@@ -136,25 +139,32 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
                       CustomStrings.kToday,
-                      style:
-                          TextStyle(color: CustomColors.kDarkGray, fontSize: 14),
+                      style: TextStyle(
+                          color: CustomColors.kDarkGray, fontSize: 14),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ListUpcomingTrips(listUpcomingTrips: [1], isTodayFirstActivity: false, itemPadding: 16.0),
+                    child: ListUpcomingTrips(
+                        listUpcomingTrips: [1],
+                        isTodayFirstActivity: false,
+                        itemPadding: 16.0),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
                       CustomStrings.kOtherDays,
-                      style:
-                          TextStyle(color: CustomColors.kDarkGray, fontSize: 14),
+                      style: TextStyle(
+                          color: CustomColors.kDarkGray, fontSize: 14),
                     ),
                   ),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 35.0),
-                      child: ListUpcomingTrips(listUpcomingTrips: [1, 2, 3, 4, 5], isTodayFirstActivity: false, itemPadding: 16.0,)),
+                      child: ListUpcomingTrips(
+                        listUpcomingTrips: [1, 2, 3, 4, 5],
+                        isTodayFirstActivity: false,
+                        itemPadding: 16.0,
+                      )),
                 ],
               ),
             ),

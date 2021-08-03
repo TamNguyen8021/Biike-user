@@ -17,7 +17,10 @@ class ListCustomers extends StatelessWidget {
         itemCount: listCustomers.length,
         itemBuilder: (BuildContext context, int i) {
           return Padding(
-              padding: EdgeInsets.only(bottom: 8.0), child: CustomerCard());
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: CustomerCard(
+                avatarUrl: 'assets/images/profile-2.jpg',
+              ));
         });
   }
 }

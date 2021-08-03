@@ -1,6 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
+import 'package:bikes_user/widgets/buttons/custom_floating_button.dart';
 import 'package:bikes_user/widgets/buttons/finish_trip_button.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
@@ -45,7 +46,7 @@ class CustomerHomeFull extends StatelessWidget {
                       backgroundColor: CustomColors.kBlue,
                       foregroundColor: Colors.white,
                       iconColor: Colors.white,
-                      avatarUrl: 'assets/images/test_avatar.jpg',
+                      avatarUrl: 'assets/images/profile-1.jpg',
                       name: 'Phát Đỗ',
                       time: '06:45',
                       date: CustomStrings.kToday,
@@ -59,17 +60,15 @@ class CustomerHomeFull extends StatelessWidget {
                     children: <Widget>[FinishTripButton(), ContactButtons()],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 35.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 135.0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5.0),
-                      child: Image.asset(
-                        'assets/images/demo_ads.jpg',
-                        fit: BoxFit.fill,
-                      ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 35.0),
+                  width: double.infinity,
+                  height: 135.0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: Image.asset(
+                      'assets/images/ads-heiniken.jpg',
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -107,15 +106,7 @@ class CustomerHomeFull extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 1.0,
-        onPressed: () {},
-        backgroundColor: CustomColors.kOrange,
-        child: Icon(
-          Icons.add,
-          size: 50,
-        ),
-      ),
+      floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
