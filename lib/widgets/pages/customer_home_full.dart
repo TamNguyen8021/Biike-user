@@ -6,7 +6,6 @@ import 'package:bikes_user/widgets/buttons/finish_trip_button.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 /// The ke_er_home page widget
 class CustomerHomeFull extends StatelessWidget {
@@ -61,13 +60,16 @@ class CustomerHomeFull extends StatelessWidget {
                     children: <Widget>[FinishTripButton(), ContactButtons()],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 35.0),
-                  child: SvgPicture.asset(
-                    'assets/images/blank.svg',
-                    fit: BoxFit.fill,
-                    width: double.infinity,
-                    height: 135.0,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 35.0),
+                  width: double.infinity,
+                  height: 135.0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: Image.asset(
+                      'assets/images/ads-heiniken.jpg',
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 Padding(

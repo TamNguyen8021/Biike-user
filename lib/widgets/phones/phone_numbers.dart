@@ -1,8 +1,3 @@
-
-import 'package:bikes_user/utils/custom_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 class PhoneNumber {
   String? countryISOCode;
   String? countryCode;

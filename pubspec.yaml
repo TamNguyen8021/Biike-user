@@ -23,13 +23,16 @@ environment:
 dependencies:
   flutter_rating_bar: ^4.0.0
   flutter:
-    sdk: flutter
-  introduction_screen: ^2.1.0
+    sdk: flutter  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   lint: ^1.5.3
+<<<<<<< HEAD
+=======
+  introduction_screen: ^2.1.0
+>>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
   pin_code_fields: ^7.3.0
   flutter_svg: ^0.22.0
   intl_phone_number_input: ^0.7.0+2
