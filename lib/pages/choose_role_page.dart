@@ -2,15 +2,9 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 
-class ChooseMode extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new _ChooseMode();
-  }
-}
+class ChooseRolePage extends StatelessWidget {
+  const ChooseRolePage({Key? key}) : super(key: key);
 
-/// The welcoe screen
-class _ChooseMode extends State<ChooseMode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

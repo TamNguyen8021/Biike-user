@@ -37,12 +37,13 @@ class CustomStrings {
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
 
-  // Verify phone number screen
-  static const String kInputVrifyCode = "Nhập mã xác thực tại đây";
+  // '008-verify-phone' screen
+  static const String kInputVerifyCode = "Nhập mã xác minh";
   static const String kVerifyPhone = "Xác thực số điện thoại";
 
-  //Input phone number screen
-  static const String kInputPhoneNumber = "Nhập số điện thoại tại đây";
+  // '007-input-phone' screen
+  static const String kInputPhoneNumber = "Nhập số điện thoại";
+  static const String kErrorInputPhoneNumber = "*sdt của bạn không hợp lệ";
 
   //Input name screen
   static const String kInputName = "Nhập tên của bạn";
@@ -54,6 +55,7 @@ class CustomStrings {
   static const String kChooseMode = "Bắt đầu ứng dụng với vai trò là";
   static const String kRemindWords =
       "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
+
   //'022-cus-profile' screen
   static const String kEdit = "Chỉnh sửa";
   static const String kSettings = "Cài đặt";

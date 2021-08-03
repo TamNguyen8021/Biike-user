@@ -3,18 +3,15 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Verify extends StatefulWidget {
+/// The '008-verify-phone' screen
+class VerifyPhonePage extends StatefulWidget {
+  const VerifyPhonePage({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() {
-    return new VerifiPhonePage();
-  }
+  _VerifyPhonePageState createState() => _VerifyPhonePageState();
 }
 
-//the verify phone screen
-class VerifiPhonePage extends State<Verify> {
-  // const VerifiPhonePage({Key? key}) : super(key: key);
-  // final String phoneNumber;
-
+class _VerifyPhonePageState extends State<VerifyPhonePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +26,14 @@ class VerifiPhonePage extends State<Verify> {
               color: CustomColors.kBlue,
             ),
           ),
+          title: Text(
+            CustomStrings.kVerifyPhone,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
           backgroundColor: CustomColors.kBlue,
           elevation: 0,
           centerTitle: true,
@@ -36,26 +41,10 @@ class VerifiPhonePage extends State<Verify> {
         ),
         backgroundColor: CustomColors.kBlue,
         body: new Container(
-          decoration: BoxDecoration(
-              //  border: Border.all(width: 1.0),
-              image: DecorationImage(
-                  image: AssetImage(
-                    "images/line-map-2.png",
-                  ),
-                  // alignment: AlignmentDirectional.bottomCenter
-                  fit: BoxFit.fitWidth)),
-          padding: const EdgeInsets.all(0.0),
+          padding: const EdgeInsets.all(40.0),
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text(
-                CustomStrings.kVerifyPhone,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
               new TextField(
                 decoration: new InputDecoration(
                   labelText: CustomStrings.kInputVerifyCode,
@@ -66,19 +55,15 @@ class VerifiPhonePage extends State<Verify> {
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly
                 ],
-              ),
+              )
             ],
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: Container(height: 50.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FloatingActionButton(
                 elevation: 1.0,
