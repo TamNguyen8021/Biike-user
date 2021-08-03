@@ -1,11 +1,4 @@
 import 'package:bikes_user/pages/choose_mode.dart';
-import 'package:bikes_user/pages/customer_home_page.dart';
-import 'package:bikes_user/pages/home_page.dart';
-import 'package:bikes_user/pages/input_name.dart';
-import 'package:bikes_user/pages/input_phone.dart';
-import 'package:bikes_user/pages/welcome_1.dart';
-import 'package:bikes_user/widgets/phones/phone_numbers.dart';
-import 'package:bikes_user/pages/verify_phone.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
