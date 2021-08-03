@@ -1,10 +1,10 @@
+import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/choose_role_page.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/customer_profile_page.dart';
-import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';

@@ -164,10 +164,10 @@ class KeerFeedbackPage extends StatelessWidget {
                               child: Text(
                                 CustomStrings.kBuyReminder,
                                 overflow: TextOverflow.clip,
-                                textAlign: TextAlign.center,
+                                textAlign: TextAlign.left,
                                 style: TextStyle(
                                     color: CustomColors.kDarkGray,
-                                    fontSize: 12),
+                                    fontSize: 12.0),
                               ),
                             ),
                           ],
