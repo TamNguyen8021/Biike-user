@@ -52,23 +52,6 @@ class CustomStrings {
 
   //Choose mode screen
   static const String kChooseMode = "Bắt đầu ứng dụng với vai trò là";
-<<<<<<< HEAD
-  static const String kRemindWords = "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
-  // Waiting page
-  static const String kFoundBiker = "Đã tìm được người chở bạn!";
-  static const String kGetTripSuccess = "Nhận chở thành công!";
-  static const String kFindingBiker = "Đang tìm người chở";
-  static const String kFindBikerFail = "Không tìm thấy người chở ké";
-  static const String kTripSuccess = "Chở ké thành công!";
-  static const String kBuyReminder = "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
-  static const String kRateReminder = "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
-  static const String kTips = "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
-  static const String kViewTrip = "Xem chuyến đi";
-  static const String kBtnExit = "Thoát";
-  static const String kBtnReturn = "Quay lại";
-  static const String kBtnSend = "Gửi";
-}
-=======
   static const String kRemindWords =
       "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
   //'022-cus-profile' screen
@@ -113,7 +96,6 @@ class CustomStrings {
       "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
   static const String kBtnExit = "Thoát";
   static const String kBtnReturn = "Quay lại";
->>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
 
   // ke_er_feedback screen
   static const String kTripSuccess = "Chở ké thành công!";
