@@ -18,13 +18,19 @@ class _ChooseMode extends State<ChooseMode>{
     return Scaffold(
       backgroundColor: CustomColors.kBlue,
       body: Container(
+        decoration:  BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/line-map.png"),
+                        
+                        fit: BoxFit.cover
+                        )),
         child: Column(
            crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              child: 
-              SvgPicture.asset("assets/images/blank.svg" ),
-            ),
+            // Container(
+            //   child: 
+            //   SvgPicture.asset("assets/images/blank.svg" ),
+            // ),
             new Text(
               CustomStrings.kChooseMode,
               textAlign: TextAlign.right,

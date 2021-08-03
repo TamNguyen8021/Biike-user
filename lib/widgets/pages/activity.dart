@@ -10,11 +10,11 @@ class Activity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String roleActivity;
+    String _roleActivity;
     if (role == 'Customer') {
-      roleActivity = CustomStrings.kCustomerActivity;
+      _roleActivity = CustomStrings.kCustomerActivity;
     } else {
-      roleActivity = CustomStrings.kDriverActivity;
+      _roleActivity = CustomStrings.kDriverActivity;
     }
 
     return Scaffold(
@@ -32,7 +32,7 @@ class Activity extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        roleActivity,
+                        _roleActivity,
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class Activity extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: Text(
                   CustomStrings.kToday,
-                  style: TextStyle(color: CustomColors.kDarkGray),
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
               Padding(
@@ -65,7 +65,7 @@ class Activity extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: Text(CustomStrings.kTomorrow,
-                    style: TextStyle(color: CustomColors.kDarkGray)),
+                    style: Theme.of(context).textTheme.bodyText2),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),

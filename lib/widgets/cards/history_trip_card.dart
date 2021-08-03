@@ -24,11 +24,11 @@ class HistoryTripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color statusColor;
+    Color _statusColor;
     if (status == 'Thành công') {
-      statusColor = CustomColors.kBlue;
+      _statusColor = CustomColors.kBlue;
     } else {
-      statusColor = CustomColors.kRed;
+      _statusColor = CustomColors.kRed;
     }
 
     return Container(
@@ -54,32 +54,32 @@ class HistoryTripCard extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           name,
-                          style: TextStyle(
-                              color: CustomColors.kDarkGray,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                         Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
+                              padding: const EdgeInsets.only(right: 8.0),
                               child: Text(
                                 time,
-                                style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 12),
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                             ),
                             Text(
                               date,
-                              style: TextStyle(
-                                  color: CustomColors.kDarkGray, fontSize: 12),
+                              style: Theme.of(context).textTheme.bodyText1,
                             ),
                           ],
                         ),
                         Text(
                           status,
-                          style: TextStyle(color: statusColor, fontSize: 12),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(color: _statusColor),
                         ),
                       ],
                     ),
@@ -99,14 +99,11 @@ class HistoryTripCard extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.adjust,
-                        color: CustomColors.kBlue,
-                        size: 15,
                       ),
                     ),
                     Text(
                       sourceStation,
-                      style: TextStyle(
-                          color: CustomColors.kDarkGray, fontSize: 12),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ],
                 ),
@@ -114,8 +111,6 @@ class HistoryTripCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Icon(
                     Icons.more_vert_outlined,
-                    color: CustomColors.kBlue,
-                    size: 15,
                   ),
                 ),
                 Row(
@@ -124,14 +119,11 @@ class HistoryTripCard extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.location_on,
-                        color: CustomColors.kBlue,
-                        size: 15,
                       ),
                     ),
                     Text(
                       destinationStation,
-                      style: TextStyle(
-                          color: CustomColors.kDarkGray, fontSize: 12),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ],
                 ),

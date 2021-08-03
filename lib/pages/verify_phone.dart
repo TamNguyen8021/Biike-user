@@ -28,14 +28,7 @@ class VerifiPhonePage extends State<Verify>{
           color: CustomColors.kBlue,
         ),
       ),
-      title: Text(
-        CustomStrings.kVerifyPhone,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
+      
       backgroundColor: CustomColors.kBlue,
       elevation: 0,
       centerTitle: true,
@@ -44,26 +37,51 @@ class VerifiPhonePage extends State<Verify>{
       ),
       backgroundColor: CustomColors.kBlue,
       body: new Container(
-          padding: const EdgeInsets.all(40.0),
+         decoration:  BoxDecoration(
+          //  border: Border.all(width: 1.0),
+                    image: DecorationImage(
+                        image: AssetImage("images/line-map-2.png", ),
+                        // alignment: AlignmentDirectional.bottomCenter
+                        fit: BoxFit.fitWidth
+                        )),
+                      
+          padding: const EdgeInsets.all(0.0),
           child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          
+          new Text(
+        CustomStrings.kVerifyPhone,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
           new TextField(
             decoration: new InputDecoration(labelText: CustomStrings.kInputVrifyCode,),
             maxLength: 4,
             cursorHeight: 18,
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-          )
+          ),
+          
         ],
+        
       
       ),
+      
       ),
+      bottomNavigationBar: BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      child: Container(height: 50.0),
+    ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
+          
           children: <Widget>[
           FloatingActionButton(
             elevation: 1.0,
@@ -71,6 +89,7 @@ class VerifiPhonePage extends State<Verify>{
             backgroundColor: Colors.white,
             foregroundColor: CustomColors.kBlue,
             child: const Icon(Icons.arrow_back_ios_rounded),
+            
         ),
         FloatingActionButton(
             elevation: 1.0,

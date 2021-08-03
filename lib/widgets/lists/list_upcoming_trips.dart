@@ -38,7 +38,7 @@ class ListUpcomingTrips extends StatelessWidget {
                 backgroundColor: backgroundColor,
                 foregroundColor: foregroundColor,
                 iconColor: iconColor,
-                avatarUrl: 'assets/images/test_avatar.jpg',
+                avatarUrl: 'assets/images/profile-4.jpg',
                 name: 'Thảo Vân',
                 time: '11:35',
                 date: CustomStrings.kToday,

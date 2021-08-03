@@ -29,16 +29,7 @@ class _InputName extends State<InputName>{
           color: CustomColors.kBlue,
         ),
       ),
-      // title: Text(
-        // CustomStrings.kInputName,
-        // textAlign: TextAlign.center,
-        // style: TextStyle(
-        //   fontSize: 18,
-        //   fontWeight: FontWeight.bold,
-        //   color: Colors.white,
-          
-      //   ),
-      // ),
+      
       backgroundColor: CustomColors.kBlue,
       elevation: 0,
       centerTitle: true,
@@ -47,35 +38,30 @@ class _InputName extends State<InputName>{
       ),
       backgroundColor: CustomColors.kBlue,
       body: new Container(
+         decoration:  BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/line-map.png"),
+                        
+                        fit: BoxFit.cover
+                        )),
           padding: const EdgeInsets.all(40.0),
           child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Text(
-            CustomStrings.kInputName,
+        CustomStrings.kInputName,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.white,
-          )
-          ),
+          
+        ),
+      ),
           new TextField(
-            decoration: new InputDecoration(
-               enabledBorder: const OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white, width: 0.5)),
-              labelText: 
-              CustomStrings.kEnterName, 
-              hintText: CustomStrings.kHintName, 
-              labelStyle: TextStyle(color: Colors.white ),
-              errorText: CustomStrings.kErrorName,
-              errorStyle: TextStyle(color: Colors.white)
-              ),
-            onChanged: (value) {
-              
-            },
-            // maxLength: 50,
-            keyboardType: TextInputType.name,
+            decoration: new InputDecoration(labelText: CustomStrings.kEnterName),
+            maxLength: 50,
+            keyboardType: TextInputType.number,
             readOnly: false,
             inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.singleLineFormatter],
           )
