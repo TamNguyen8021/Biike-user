@@ -61,7 +61,7 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/inputPhone',
+      initialRoute: '/open',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/inputPhone': (BuildContext ctx) => InputPhonePage(),

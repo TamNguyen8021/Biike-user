@@ -13,11 +13,8 @@ class OpenPage extends StatelessWidget {
         child: Center(
             child: Image(
           image: AssetImage('assets/images/logo-app-blue.jpg'),
-          // width: 204,
-          // height: 70,
           fit: BoxFit.cover,
-          )
-        ),
+        )),
       ),
     );
   }
