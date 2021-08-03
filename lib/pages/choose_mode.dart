@@ -16,66 +16,46 @@ class _ChooseMode extends State<ChooseMode> {
     return Scaffold(
       backgroundColor: CustomColors.kBlue,
       body: Container(
-<<<<<<< HEAD
-        decoration:  BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/line-map.png"),
-                        
-                        fit: BoxFit.cover
-                        )),
-        child: Column(
-           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            // Container(
-            //   child: 
-            //   SvgPicture.asset("assets/images/blank.svg" ),
-            // ),
-            new Text(
-              CustomStrings.kChooseMode,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-              ),
-            ),
-            Container(
-=======
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/line-map.png"),
+                  fit: BoxFit.cover)),
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          // Container(
-          //   child:
-          //   SvgPicture.asset("assets/images/biike-two-person.svg",fit: BoxFit.fill ),
-          // ),
-          new Text(
-            CustomStrings.kChooseMode,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          Container(
->>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
-              child: Image(
-            image: AssetImage("assets/images/voucher-toco.jpg"),
-            width: 250.0,
-            height: 240.0,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              // Container(
+              //   child:
+              //   SvgPicture.asset("assets/images/blank.svg" ),
+              // ),
+              new Text(
+                CustomStrings.kChooseMode,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              Container(
+                  child: Image(
+                image: AssetImage("assets/images/voucher-toco.jpg"),
+                width: 250.0,
+                height: 240.0,
+              )),
+              Container(
+                child: Image(
+                  image: AssetImage("assets/images/voucher-toco.jpg"),
+                  height: 240.0,
+                  width: 250.0,
+                ),
+              ),
+              new Text(CustomStrings.kRemindWords,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ))
+            ],
           )),
-          Container(
-            child: Image(
-              image: AssetImage("assets/images/voucher-toco.jpg"),
-              height: 240.0,
-              width: 250.0,
-            ),
-          ),
-          new Text(CustomStrings.kRemindWords,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-              ))
-        ],
-      )),
       floatingActionButton: FloatingActionButton(
         elevation: 1.0,
         onPressed: () {},

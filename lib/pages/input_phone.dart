@@ -1,19 +1,14 @@
 library intl_phone_field;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:bikes_user/widgets/phones/contries.dart';
-import 'package:bikes_user/widgets/phones/phone_numbers.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-
-// ignore: must_be_immutable
 class PhoneField extends StatefulWidget {
   @override
   _PhoneField createState() => _PhoneField();
 }
-class _PhoneField extends State<PhoneField>{
+
+class _PhoneField extends State<PhoneField> {
   GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -31,7 +26,8 @@ class _PhoneField extends State<PhoneField>{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 30),IntlPhoneField(
+                SizedBox(height: 30),
+                IntlPhoneField(
                   decoration: InputDecoration(
                     labelText: 'Phone Number',
                     border: OutlineInputBorder(
@@ -64,5 +60,3 @@ class _PhoneField extends State<PhoneField>{
     );
   }
 }
-
-
