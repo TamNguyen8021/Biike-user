@@ -1,3 +1,4 @@
+import 'package:bikes_user/pages/choose_mode.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile_page.dart';
@@ -66,6 +67,7 @@ class Biike extends StatelessWidget {
         '/driverHome': (BuildContext ctx) => HomePage(
               role: 'Driver',
             ),
+        '/chooseMode': (BuildContext ctx) => ChooseMode(),
         '/customerHome': (BuildContext ctx) => HomePage(
               role: 'Customer',
             ),
