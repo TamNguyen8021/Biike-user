@@ -1,4 +1,4 @@
-import 'package:bikes_user/pages/choose_mode.dart';
+import 'package:bikes_user/pages/choose_role_page.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile_page.dart';
@@ -9,6 +9,7 @@ import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
+import 'package:bikes_user/pages/input_phone_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
@@ -60,14 +61,15 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/driverHome',
+      initialRoute: '/inputPhone',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
+        '/inputPhone': (BuildContext ctx) => InputPhonePage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
         '/driverHome': (BuildContext ctx) => HomePage(
               role: 'Driver',
             ),
-        '/chooseMode': (BuildContext ctx) => ChooseMode(),
+        '/chooseRole': (BuildContext ctx) => ChooseRolePage(),
         '/customerHome': (BuildContext ctx) => HomePage(
               role: 'Customer',
             ),
