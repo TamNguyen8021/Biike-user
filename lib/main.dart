@@ -1,18 +1,31 @@
+<<<<<<< HEAD
+=======
 import 'package:bikes_user/pages/choose_mode.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile_page.dart';
 import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/customer_profile_page.dart';
+>>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
 import 'package:bikes_user/pages/biker_feedback_page.dart';
+import 'package:bikes_user/pages/choose_mode.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
+<<<<<<< HEAD
+import 'package:bikes_user/pages/home_page.dart';
+import 'package:bikes_user/pages/input_name.dart';
+import 'package:bikes_user/pages/keer_feedback_page.dart';
+import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/trip_history_page.dart';
+import 'package:bikes_user/pages/verify_phone.dart';
+=======
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/view_user_page.dart';
+>>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -55,15 +68,33 @@ class Biike extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(CustomColors.kBlue),
                   textStyle: MaterialStateProperty.all<TextStyle>(
+<<<<<<< HEAD
+                      TextStyle(color: Colors.white, fontSize: 12))))),
+=======
                       TextStyle(color: Colors.white, fontSize: 12)),
                   elevation: MaterialStateProperty.all<double>(2.0))),
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
+>>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
       initialRoute: '/driverHome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
+<<<<<<< HEAD
+        '/driverHome': (BuildContext ctx) => Verify(
+        //       role: 'Driver',
+        //     ),
+        // '/customerHome': (BuildContext ctx) => HomePage(
+        //       role: 'Customer',
+            ),
+      //   '/bikerFeedback': (BuildContext ctx) => BikerFeedbackPage(),
+      //   '/keerFeedback': (BuildContext ctx) => KeerFeedbackPage(),
+      //   '/findBiker': (BuildContext ctx) => FindingBikerPage(),
+      //   '/findBikerSuccess': (BuildContext ctx) => FindingBikerSuccessPage(),
+      //   '/findBikerFail': (BuildContext ctx) => FindingBikerFailPage(),
+      //   '/getTripSuccess': (BuildContext ctx) => GetTripSuccessPage(),
+=======
         '/driverHome': (BuildContext ctx) => HomePage(
               role: 'Driver',
             ),
@@ -86,6 +117,7 @@ class Biike extends StatelessWidget {
         '/findBikerFail': (BuildContext ctx) => FindingBikerFailPage(),
         '/getTripSuccess': (BuildContext ctx) => GetTripSuccessPage(),
         '/exchangeVoucher': (BuildContext ctx) => DriverPointPage(),
+>>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
       },
     );
   }

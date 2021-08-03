@@ -16,6 +16,31 @@ class _ChooseMode extends State<ChooseMode> {
     return Scaffold(
       backgroundColor: CustomColors.kBlue,
       body: Container(
+<<<<<<< HEAD
+        decoration:  BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/line-map.png"),
+                        
+                        fit: BoxFit.cover
+                        )),
+        child: Column(
+           crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            // Container(
+            //   child: 
+            //   SvgPicture.asset("assets/images/blank.svg" ),
+            // ),
+            new Text(
+              CustomStrings.kChooseMode,
+              textAlign: TextAlign.right,
+              style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white
+              ),
+            ),
+            Container(
+=======
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -30,6 +55,7 @@ class _ChooseMode extends State<ChooseMode> {
                 fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Container(
+>>>>>>> a63d98c078571a9a8735a28b25a3336afe5f26a4
               child: Image(
             image: AssetImage("assets/images/voucher-toco.jpg"),
             width: 250.0,
