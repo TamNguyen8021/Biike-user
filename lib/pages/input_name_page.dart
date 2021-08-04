@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 
+/// '009-input-name' screen
 class InputNamePage extends StatefulWidget {
   const InputNamePage({Key? key}) : super(key: key);
 
@@ -11,82 +12,68 @@ class InputNamePage extends StatefulWidget {
   _InputNamePageState createState() => _InputNamePageState();
 }
 
-//the verify phone screen
 class _InputNamePageState extends State<InputNamePage> {
-  // const VerifiPhonePage({Key? key}) : super(key: key);
-  // final String phoneNumber;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_forward_rounded,
-            size: 30,
-            color: CustomColors.kBlue,
-          ),
-        ),
-        // title: Text(
-        // CustomStrings.kInputName,
-        // textAlign: TextAlign.center,
-        // style: TextStyle(
-        //   fontSize: 18,
-        //   fontWeight: FontWeight.bold,
-        //   color: Colors.white,
-
-        //   ),
-        // ),
-        backgroundColor: CustomColors.kBlue,
-        elevation: 0,
-        centerTitle: true,
-        textTheme: Theme.of(context).textTheme,
-      ),
       backgroundColor: CustomColors.kBlue,
-      body: new Container(
-          padding: const EdgeInsets.all(40.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Text(CustomStrings.kInputName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  )),
-              new TextField(
-                decoration: new InputDecoration(
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 0.5)),
-                    labelText: CustomStrings.kEnterName,
-                    hintText: CustomStrings.kHintName,
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorText: CustomStrings.kErrorName,
-                    errorStyle: TextStyle(color: Colors.white)),
-                onChanged: (value) {},
-                // maxLength: 50,
-                keyboardType: TextInputType.name,
-                readOnly: false,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.singleLineFormatter
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/line-map.png'),
+                fit: BoxFit.fill,
+                colorFilter: ColorFilter.mode(
+                    CustomColors.kLightGray.withOpacity(0.5),
+                    BlendMode.dstIn))),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 100.0, left: 22.0, right: 22.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(CustomStrings.kInputName,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                      )),
+                  TextFormField(
+                    initialValue: "Phương Uyên",
+                    keyboardType: TextInputType.name,
+                    style: TextStyle(color: Colors.white),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'\p{L}+'))
+                    ],
+                    decoration: InputDecoration(
+                        errorText: CustomStrings.kErrorName,
+                        errorStyle:
+                            TextStyle(color: Colors.white, fontSize: 14),
+                        contentPadding: const EdgeInsets.only(top: 20.0),
+                        focusedErrorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    CustomColors.kLightGray.withOpacity(0.8))),
+                        errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    CustomColors.kLightGray.withOpacity(0.8)))),
+                  ),
                 ],
-              )
-            ],
-          )),
+              ),
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-        elevation: 1.0,
         onPressed: () {},
         backgroundColor: Colors.white,
-        foregroundColor: CustomColors.kBlue,
-        child: const Icon(Icons.arrow_forward_ios_rounded),
+        child: Icon(
+          Icons.arrow_forward_ios,
+          color: CustomColors.kBlue,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: BottomAppBar(),
     );
   }
 }

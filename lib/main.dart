@@ -9,12 +9,13 @@ import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
+import 'package:bikes_user/pages/input_name_page.dart';
 import 'package:bikes_user/pages/input_phone_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/view_user_page.dart';
-import 'package:bikes_user/pages/welcome.dart';
+import 'package:bikes_user/pages/welcome_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -62,11 +63,12 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/welcome',
+      initialRoute: '/inputName',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/welcome': (BuildContext ctx) => WelcomePage(),
         '/inputPhone': (BuildContext ctx) => InputPhonePage(),
+        '/inputName': (BuildContext ctx) => InputNamePage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
         '/driverHome': (BuildContext ctx) => HomePage(
               role: 'Driver',

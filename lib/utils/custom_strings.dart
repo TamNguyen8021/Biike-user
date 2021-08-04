@@ -11,10 +11,8 @@ class CustomStrings {
   static const String kInputPhoneNumber = "Nhập số điện thoại";
   static const String kErrorInputPhoneNumber = "*sdt của bạn không hợp lệ";
 
-  //Input name screen
+  // '009-input-name' screen
   static const String kInputName = "Nhập tên của bạn";
-  static const String kEnterName = "Họ và tên";
-  static const String kHintName = "";
   static const String kErrorName = "*Tên của bạn không hợp lệ";
 
   //Choose mode screen
