@@ -34,10 +34,7 @@ class _InputNamePageState extends State<InputNamePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(CustomStrings.kInputName,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                      )),
+                      style: Theme.of(context).textTheme.headline1),
                   TextFormField(
                     initialValue: "Phương Uyên",
                     keyboardType: TextInputType.name,
@@ -66,11 +63,14 @@ class _InputNamePageState extends State<InputNamePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/chooseRole');
+        },
         backgroundColor: Colors.white,
+        foregroundColor: CustomColors.kBlue,
         child: Icon(
           Icons.arrow_forward_ios,
-          color: CustomColors.kBlue,
+          size: 25,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
