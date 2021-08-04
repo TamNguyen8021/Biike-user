@@ -40,4 +40,6 @@ class CustomStrings {
   static const String kRateApp = "Đánh giá ứng dụng";
   static const String kPhoneNo = "Số điện thoại";
   static const String kEmail = "Email";
+
+  static const String kBookNewTrip = "kBookNewTrip";
 }

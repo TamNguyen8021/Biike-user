@@ -2,6 +2,8 @@ import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
 import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/add_bike_page.dart';
+import 'package:bikes_user/pages/get_voucher_page.dart ';
 import 'package:bikes_user/pages/manage_bike_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
@@ -23,7 +25,7 @@ class Biike extends StatelessWidget {
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.kBlue,
           fontFamily: 'SVN Product Sans'),
-      initialRoute: '/manage_bike',
+      initialRoute: '/add_bike',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
 
@@ -40,6 +42,13 @@ class Biike extends StatelessWidget {
         '/manage_bike': (BuildContext ctx) => ManageBikePage(
           role: 'Driver',
         ),
+        '/add_bike': (BuildContext ctx) => AddBikePage(
+          role: 'Driver',
+        ),
+
+        '/get_voucher': (BuildContext ctx) => GetVoucherPage(
+          role: 'Driver',
+        ), //GetVoucherPage
       },
     );
   }
