@@ -1,5 +1,27 @@
 /// Contains all strings which used in the app
 class CustomStrings {
+  // '002-welcome-1' screen
+  static const String kIntroduction = "Ứng dụng kết nối đi ké xe miễn phí";
+
+  // '008-verify-phone' screen
+  static const String kInputVerifyCode = "Nhập mã xác minh";
+  static const String kVerifyPhone = "Xác thực số điện thoại";
+
+  // '007-input-phone' screen
+  static const String kInputPhoneNumber = "Nhập số điện thoại";
+  static const String kErrorInputPhoneNumber = "*sdt của bạn không hợp lệ";
+
+  //Input name screen
+  static const String kInputName = "Nhập tên của bạn";
+  static const String kEnterName = "Họ và tên";
+  static const String kHintName = "";
+  static const String kErrorName = "*Tên của bạn không hợp lệ";
+
+  //Choose mode screen
+  static const String kChooseMode = "Bắt đầu ứng dụng với vai trò là";
+  static const String kRemindWords =
+      "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
+
   // ke_er_home screen
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
   static const String kReminderTime = " phút nữa";
@@ -36,25 +58,6 @@ class CustomStrings {
   // bottom tabbar
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
-
-  // '008-verify-phone' screen
-  static const String kInputVerifyCode = "Nhập mã xác minh";
-  static const String kVerifyPhone = "Xác thực số điện thoại";
-
-  // '007-input-phone' screen
-  static const String kInputPhoneNumber = "Nhập số điện thoại";
-  static const String kErrorInputPhoneNumber = "*sdt của bạn không hợp lệ";
-
-  //Input name screen
-  static const String kInputName = "Nhập tên của bạn";
-  static const String kEnterName = "Họ và tên";
-  static const String kHintName = "";
-  static const String kErrorName = "*Tên của bạn không hợp lệ";
-
-  //Choose mode screen
-  static const String kChooseMode = "Bắt đầu ứng dụng với vai trò là";
-  static const String kRemindWords =
-      "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
 
   //'022-cus-profile' screen
   static const String kEdit = "Chỉnh sửa";

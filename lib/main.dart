@@ -14,6 +14,7 @@ import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/view_user_page.dart';
+import 'package:bikes_user/pages/welcome.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -61,9 +62,10 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/open',
+      initialRoute: '/welcome',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
+        '/welcome': (BuildContext ctx) => WelcomePage(),
         '/inputPhone': (BuildContext ctx) => InputPhonePage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
         '/driverHome': (BuildContext ctx) => HomePage(
