@@ -3,6 +3,7 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// '010-choose-role' screen
 class ChooseRolePage extends StatelessWidget {
   const ChooseRolePage({Key? key}) : super(key: key);
 
