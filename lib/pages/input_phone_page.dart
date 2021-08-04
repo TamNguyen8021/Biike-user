@@ -33,11 +33,10 @@ class _InputPhonePageState extends State<InputPhonePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(CustomStrings.kInputPhoneNumber,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                      )),
+                  Text(
+                    CustomStrings.kInputPhoneNumber,
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
                   IntlPhoneField(
                     keyboardType: TextInputType.phone,
                     initialCountryCode: 'VN',
@@ -72,9 +71,10 @@ class _InputPhonePageState extends State<InputPhonePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.white,
+        foregroundColor: CustomColors.kBlue,
         child: Icon(
           Icons.arrow_forward_ios,
-          color: CustomColors.kBlue,
+          size: 25,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
