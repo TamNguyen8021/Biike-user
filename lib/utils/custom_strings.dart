@@ -15,10 +15,16 @@ class CustomStrings {
   static const String kInputName = "Nhập tên của bạn";
   static const String kErrorName = "*Tên của bạn không hợp lệ";
 
-  //Choose mode screen
-  static const String kChooseMode = "Bắt đầu ứng dụng với vai trò là";
+  // '010-choose-role' screen
+  static const String kChooseMode = "Bắt đầu ứng dụng\nvới vai trò là";
+  static const String kDriverRole = "Người chở";
+  static const String kCustomerRole = "Người đi ké";
+  static const String kDriverDescription =
+      "Lựa chọn người bạn muốn chở, bắt đầu hành trình, nhận điểm thưởng và đổi lấy những voucher giá trị";
+  static const String kCustomerDescription =
+      "Tạo chuyến đi của bạn và lên xe đi ké!";
   static const String kRemindWords =
-      "Bạn có thể đổi sang chế độ còn lại khi sử dụng ứng dụng";
+      "Bạn có thể đổi sang chế độ còn lại\nkhi sử dụng ứng dụng";
 
   // ke_er_home screen
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
