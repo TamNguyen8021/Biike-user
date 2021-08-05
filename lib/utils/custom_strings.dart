@@ -33,12 +33,15 @@ class CustomStrings {
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
 
-  // trip details screen
+  // trip detail screen
   static const String kTripDetails = "Chi tiết chuyến đi";
   static const String kTripStatus = "Đang tìm...";
   static const String kCancelTrip = "Hủy chuyến";
   static const String kConfirmArrival = "Đánh dấu đã đến";
+  static const String kStartTrip = "Bắt đầu chuyến đi";
+  static const String kCompleteTrip = "Hoàn thành";
 
   // book trip screen
   static const String kBookNewTrip = "Tạo chuyến đi ké mới";
+  static const String kBookScheduleTrip = "Đặt lịch ké";
 }

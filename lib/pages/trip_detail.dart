@@ -5,9 +5,20 @@ import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class TripDetails extends StatelessWidget {
+class TripDetail extends StatelessWidget {
   final String role;
-  const TripDetails({Key? key, required this.role}) : super(key: key);
+
+  /// isWaitingForDriver is only used for customer
+  final bool isWaitingForDriver;
+
+  /// isTripCompleted is used both for customer and driver
+  final bool isTripCompleted;
+  const TripDetail(
+      {Key? key,
+      required this.role,
+      required this.isWaitingForDriver,
+      required this.isTripCompleted})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -297,6 +308,7 @@ class TripDetails extends StatelessWidget {
           ),
         ));
 
+    /// These two button is for driver
     final cancelButton = Padding(
         padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
         child: Container(
@@ -345,6 +357,68 @@ class TripDetails extends StatelessWidget {
           ),
         ));
 
+    /// These two button is for customer
+    final startTripButton = Padding(
+        padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+        child: Container(
+          width: 165,
+          decoration: BoxDecoration(
+              color: CustomColors.kBlue,
+              borderRadius: BorderRadius.circular(5)),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.navigation,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  CustomStrings.kStartTrip,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ));
+
+    final completeTripButton = Padding(
+        padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+        child: Container(
+          width: 165,
+          decoration: BoxDecoration(
+              color: CustomColors.kBlue,
+              borderRadius: BorderRadius.circular(5)),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.done_all_rounded,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  CustomStrings.kCompleteTrip,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ));
+
+    final driverFindingCard;
+    if (isWaitingForDriver) {
+      driverFindingCard = waitingForTrip;
+    } else {
+      driverFindingCard = driverInformation;
+    }
+
     return Scaffold(
       appBar: navigationBar,
       body: SafeArea(
@@ -355,15 +429,30 @@ class TripDetails extends StatelessWidget {
               informationBar,
               mapsViewer,
               tripInformation,
-              waitingForTrip,
-              // driverInformation,
+              driverFindingCard,
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    cancelButton,
-                    // confirmArrivalButton,
+                    if (role == "Driver") ...[
+                      cancelButton,
+                      if (!isWaitingForDriver) ...[
+                        SizedBox(
+                          width: 10,
+                        ),
+                        confirmArrivalButton,
+                      ],
+                    ] else ...[
+                      cancelButton,
+                      SizedBox(
+                        width: 10,
+                      ),
+                      if (!isTripCompleted)
+                        startTripButton
+                      else
+                        completeTripButton,
+                    ],
                   ],
                 ),
               ),

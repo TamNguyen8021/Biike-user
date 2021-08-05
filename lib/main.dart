@@ -1,7 +1,8 @@
+import 'package:bikes_user/pages/book_schedule_trip.dart';
 import 'package:bikes_user/pages/book_trip.dart';
 import 'package:bikes_user/pages/home_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
-import 'package:bikes_user/pages/trip_details.dart';
+import 'package:bikes_user/pages/trip_detail.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
@@ -23,7 +24,8 @@ class Biike extends StatelessWidget {
           // Apply a combination of colors based on the provided one to entire app.
           primarySwatch: CustomColors.kBlue,
           fontFamily: 'SVN Product Sans'),
-      initialRoute: '/home',
+      // initialRoute: '/home',
+      initialRoute: '/book_schedule_trip',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
@@ -33,10 +35,13 @@ class Biike extends StatelessWidget {
         '/home': (BuildContext ctx) => HomePage(
               role: 'Driver',
             ),
-        '/trip_details': (BuildContext ctx) => TripDetails(
+        '/trip_detail': (BuildContext ctx) => TripDetail(
               role: 'Driver',
+              isWaitingForDriver: false,
+              isTripCompleted: false,
             ),
         '/book_trip': (BuildContext ctx) => BookTrip(),
+        '/book_schedule_trip': (BuildContext ctx) => BookScheduleTrip(),
       },
     );
   }
