@@ -69,7 +69,9 @@ class _InputPhonePageState extends State<InputPhonePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/verifyPhone');
+        },
         backgroundColor: Colors.white,
         foregroundColor: CustomColors.kBlue,
         child: Icon(
