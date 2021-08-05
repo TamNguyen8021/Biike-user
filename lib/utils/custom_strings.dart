@@ -10,6 +10,13 @@ class CustomStrings {
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
 
+  //login_page 
+  static const String kLogoApp = "Biiké";
+  static const String kIntroQuote = "Ứng dụng kết nối đi xe miễn phí";
+  static const  String kLoginButton = "Đăng nhập bằng số điện thoại";
+  static const String kConfirmTerm = "Bằng việc đăng nhập vào ứng dụng, bạn đồng ý với";
+  static const String kTerm = "Điều khoản dịch vụ và chính sách bảo mật";
+
   // ke_er_home_blank
   static const String kCreateTrip =
       "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
