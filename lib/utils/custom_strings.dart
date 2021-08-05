@@ -5,7 +5,7 @@ class CustomStrings {
 
   // '008-verify-phone' screen
   static const String kInputVerifyCode = "Nhập mã xác minh";
-  static const String kVerifyPhone = "Xác thực số điện thoại";
+  static const String kResendVerifyCode = "Gửi lại mã";
 
   // '007-input-phone' screen
   static const String kInputPhoneNumber = "Nhập số điện thoại";
