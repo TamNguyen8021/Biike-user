@@ -11,6 +11,7 @@ import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
 import 'package:bikes_user/pages/input_phone_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
+import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/view_user_page.dart';
@@ -61,9 +62,10 @@ class Biike extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(top: 12.0),
               labelStyle: TextStyle(fontWeight: FontWeight.normal))),
-      initialRoute: '/inputPhone',
+      initialRoute: '/login',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
+        '/login': (BuildContext ctx) => Login_Page(),
         '/inputPhone': (BuildContext ctx) => InputPhonePage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
         '/driverHome': (BuildContext ctx) => HomePage(
