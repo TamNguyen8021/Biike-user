@@ -3,13 +3,21 @@ class CustomStrings {
   // '002-welcome-1' screen
   static const String kIntroduction = "Ứng dụng kết nối đi ké xe miễn phí";
 
-  // '008-verify-phone' screen
-  static const String kInputVerifyCode = "Nhập mã xác minh";
-  static const String kResendVerifyCode = "Gửi lại mã";
+  // '006-login'
+  static const String kLogoApp = "Biiké";
+  static const String kIntroQuote = "Ứng dụng kết nối đi ké xe miễn phí";
+  static const String kLoginButton = "Đăng nhập bằng số điện thoại";
+  static const String kConfirmTerm =
+      "Bằng việc đăng nhập vào ứng dụng, bạn đồng ý với";
+  static const String kTerm = "Điều khoản dịch vụ và chính sách bảo mật";
 
   // '007-input-phone' screen
   static const String kInputPhoneNumber = "Nhập số điện thoại";
   static const String kErrorInputPhoneNumber = "*sdt của bạn không hợp lệ";
+
+  // '008-verify-phone' screen
+  static const String kInputVerifyCode = "Nhập mã xác minh";
+  static const String kResendVerifyCode = "Gửi lại mã";
 
   // '009-input-name' screen
   static const String kInputName = "Nhập tên của bạn";
@@ -35,13 +43,6 @@ class CustomStrings {
   static const String kToday = "Hôm nay";
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
-
-  //login_page 
-  static const String kLogoApp = "Biiké";
-  static const String kIntroQuote = "Ứng dụng kết nối đi xe miễn phí";
-  static const  String kLoginButton = "Đăng nhập bằng số điện thoại";
-  static const String kConfirmTerm = "Bằng việc đăng nhập vào ứng dụng, bạn đồng ý với";
-  static const String kTerm = "Điều khoản dịch vụ và chính sách bảo mật";
 
   // ke_er_home_blank
   static const String kCreateTrip =

@@ -1,6 +1,5 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/buttons/log_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,58 +11,87 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: CustomColors.kBlue,
-        body: Center(
-            child: Column(
+        body: Stack(
+          alignment: Alignment.center,
           children: <Widget>[
-            new Text(CustomStrings.kLogoApp,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 120,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  wordSpacing: 4.0,
-                )),
-            new Text(CustomStrings.kIntroQuote,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.white,
-                  wordSpacing: 1.0,
-                )),
-            // Padding(
-            //         padding: const EdgeInsets.all(10.0),
-            //         child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.center,
-            //             children: <Widget>[LoginButton()]),
-            //       ),
-            LoginButton(),
-            new Text(CustomStrings.kConfirmTerm,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.white,
-                  wordSpacing: 1.0,
-                )),
-            new Text(CustomStrings.kTerm,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: CustomColors.kRed,
-                  wordSpacing: 1.0,
-                )),
-            Container(
-              child: SvgPicture.asset("assets/images/biike-two-person.svg",
-                  fit: BoxFit.fill),
-            )
-            // Container(
-            //   decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //             image: AssetImage("assets/images/line-map.png"),
-            //             fit: BoxFit.cover
-            //             )
-            //   ),
-            // )
+            Padding(
+              padding: const EdgeInsets.only(top: 100.0),
+              child: Column(
+                children: <Widget>[
+                  Image(
+                    image: AssetImage('assets/images/logo-white.png'),
+                    width: 204,
+                    height: 70,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Text(CustomStrings.kIntroQuote,
+                        style: TextStyle(
+                          color: CustomColors.kLightGray.withOpacity(0.7),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        CustomStrings.kLoginButton,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          elevation: MaterialStateProperty.all<double>(5.0),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              EdgeInsets.only(
+                                  left: 60.0,
+                                  right: 30.0,
+                                  top: 20.0,
+                                  bottom: 20.0))),
+                    ),
+                  ),
+                  // LoginButton(),
+                  Text(CustomStrings.kConfirmTerm,
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.white,
+                      )),
+                  Text(
+                    CustomStrings.kTerm,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: CustomColors.kOrange.withOpacity(0.9),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Image(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 0.6,
+                image: AssetImage('assets/images/line-map.png'),
+                fit: BoxFit.fitWidth,
+                color: CustomColors.kLightGray.withOpacity(0.3),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3,
+                padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                child: SvgPicture.asset(
+                  "assets/images/biike-two-person.svg",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
           ],
-        )));
+        ));
   }
 }
