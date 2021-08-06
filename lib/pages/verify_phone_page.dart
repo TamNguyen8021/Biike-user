@@ -2,6 +2,7 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 /// The '008-verify-phone' screen
 class VerifyPhonePage extends StatefulWidget {
@@ -15,75 +16,109 @@ class _VerifyPhonePageState extends State<VerifyPhonePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back,
-              size: 30,
-              color: CustomColors.kBlue,
-            ),
-          ),
-          title: Text(
-            CustomStrings.kVerifyPhone,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: CustomColors.kBlue,
-          elevation: 0,
-          centerTitle: true,
-          textTheme: Theme.of(context).textTheme,
-        ),
-        backgroundColor: CustomColors.kBlue,
-        body: new Container(
-          padding: const EdgeInsets.all(40.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: CustomColors.kBlue,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/line-map.png'),
+                fit: BoxFit.fill,
+                colorFilter: ColorFilter.mode(
+                    CustomColors.kLightGray.withOpacity(0.5),
+                    BlendMode.dstIn))),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100.0, left: 22.0, right: 22.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new TextField(
-                decoration: new InputDecoration(
-                  labelText: CustomStrings.kInputVerifyCode,
+              Text(
+                CustomStrings.kInputVerifyCode,
+                style: Theme.of(context).textTheme.headline1,
+              ),
+              Container(
+                width: 200.0,
+                margin: const EdgeInsets.only(bottom: 5.0, top: 10.0),
+                child: PinCodeTextField(
+                  appContext: context,
+                  length: 4,
+                  keyboardType: TextInputType.number,
+                  cursorColor: Colors.white,
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(fontSize: 40),
+                  pastedTextStyle: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(fontSize: 40),
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.underline,
+                    activeColor: Colors.white,
+                    inactiveColor: Colors.white,
+                  ),
+                  onChanged: (code) {},
+                  beforeTextPaste: (text) {
+                    return true;
+                  },
                 ),
-                maxLength: 4,
-                cursorHeight: 18,
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 2.0),
+                    child: Icon(
+                      Icons.refresh,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    CustomStrings.kResendVerifyCode,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(color: Colors.white),
+                  )
                 ],
               )
             ],
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                elevation: 1.0,
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                foregroundColor: CustomColors.kBlue,
-                child: const Icon(Icons.arrow_back_ios_rounded),
+      ),
+      floatingActionButton: Container(
+        width: 130,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/inputPhone');
+              },
+              backgroundColor: Colors.white,
+              foregroundColor: CustomColors.kBlue,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 25,
+                ),
               ),
-              FloatingActionButton(
-                elevation: 1.0,
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                foregroundColor: CustomColors.kBlue,
-                child: const Icon(Icons.arrow_forward_ios_rounded),
-              )
-            ],
-          ),
-        )
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        // bottomNavigationBar: BottomAppBar(),
-        );
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/inputName');
+              },
+              backgroundColor: Colors.white,
+              foregroundColor: CustomColors.kBlue,
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 25,
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
