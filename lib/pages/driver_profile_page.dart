@@ -6,6 +6,7 @@ import 'package:bikes_user/widgets/half_oval_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// The driver profile screen
 class DriverProfilePage extends StatelessWidget {
   final String role;
 

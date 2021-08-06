@@ -8,7 +8,7 @@ import 'package:bikes_user/widgets/half_oval_bar.dart';
 import 'package:bikes_user/widgets/others/user_rating.dart';
 import 'package:flutter/material.dart';
 
-/// The profile screen
+/// The customer profile screen
 class CustomerProfilePage extends StatelessWidget {
   final String role;
 

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// The 'driver-feedback' screen
 class BikerFeedbackPage extends StatelessWidget {
   const BikerFeedbackPage({Key? key}) : super(key: key);
 
