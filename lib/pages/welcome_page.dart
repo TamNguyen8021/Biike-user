@@ -12,8 +12,7 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: CustomColors.kBlue,
-        body: Center(
-            child: Stack(
+        body: Stack(
           children: <Widget>[
             Positioned(
               width: MediaQuery.of(context).size.width,
@@ -59,6 +58,6 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
           ],
-        )));
+        ));
   }
 }
