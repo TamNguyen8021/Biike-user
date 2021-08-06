@@ -4,6 +4,7 @@ import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
+/// The '023-update_profile' screen
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 

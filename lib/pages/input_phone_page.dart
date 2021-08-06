@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
+/// The '007-input-phone' screen
 class InputPhonePage extends StatefulWidget {
   const InputPhonePage({Key? key}) : super(key: key);
 

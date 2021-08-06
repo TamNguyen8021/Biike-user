@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// The '020-cus-feedback_trip' screen
 class KeerFeedbackPage extends StatelessWidget {
   const KeerFeedbackPage({Key? key}) : super(key: key);
 
