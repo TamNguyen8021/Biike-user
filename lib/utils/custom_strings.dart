@@ -7,9 +7,8 @@ class CustomStrings {
   static const String kLogoApp = "Biiké";
   static const String kIntroQuote = "Ứng dụng kết nối đi ké xe miễn phí";
   static const String kLoginButton = "Đăng nhập bằng số điện thoại";
-  static const String kConfirmTerm =
-      "Bằng việc đăng nhập vào ứng dụng, bạn đồng ý với";
-  static const String kTerm = "Điều khoản dịch vụ và chính sách bảo mật";
+  static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
+  static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
 
   // '007-input-phone' screen
   static const String kInputPhoneNumber = "Nhập số điện thoại";

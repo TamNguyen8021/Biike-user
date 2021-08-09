@@ -37,35 +37,36 @@ class LoginPage extends StatelessWidget {
                       child: Text(
                         CustomStrings.kLoginButton,
                         style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
+                          color: CustomColors.kDarkBlue,
+                          fontSize: 13,
+                        ),
                       ),
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),
                           elevation: MaterialStateProperty.all<double>(5.0),
                           padding: MaterialStateProperty.all<EdgeInsets>(
-                              EdgeInsets.only(
-                                  left: 60.0,
-                                  right: 30.0,
-                                  top: 20.0,
-                                  bottom: 20.0))),
+                              EdgeInsets.symmetric(
+                                  horizontal: 50.0, vertical: 20.0))),
                     ),
                   ),
-                  // LoginButton(),
-                  Text(CustomStrings.kConfirmTerm,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
-                      )),
-                  Text(
-                    CustomStrings.kTerm,
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: CustomColors.kOrange.withOpacity(0.9),
+                  // Text(CustomStrings.kConfirmTerm,
+                  //     style: Theme.of(context).textTheme.subtitle1),
+                  // Text(
+                  //   CustomStrings.kTerm,
+                  //   style: Theme.of(context).textTheme.subtitle1,
+                  // ),
+                  CircleAvatar(
+                    backgroundColor: CustomColors.kDarkBlue,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.fingerprint,
+                      ),
+                      color: Colors.white,
+                      iconSize: 25,
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
