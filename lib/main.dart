@@ -55,7 +55,8 @@ class Biike extends StatelessWidget {
             headline2: TextStyle(
                 fontSize: 18,
                 color: CustomColors.kBlue,
-                fontWeight: FontWeight.bold)),
+                fontWeight: FontWeight.bold),
+            subtitle1: TextStyle(color: Colors.white, fontSize: 10)),
         tabBarTheme: TabBarTheme(
           indicatorSize: TabBarIndicatorSize.label,
         ),
