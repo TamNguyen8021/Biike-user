@@ -20,9 +20,9 @@ class CustomStrings {
   static const String kResendVerifyCode = "Yêu cầu gửi lại mã sau 59 giây";
   static const String kInvalidPin = "Mã xác nhận không chính xác";
 
-  // '009-input-name' screen
+  // '004.3_input_name' screen
   static const String kInputName = "Nhập tên của bạn";
-  static const String kErrorName = "*Tên của bạn không hợp lệ";
+  static const String kErrorName = "Tên của bạn không hợp lệ";
 
   // '010-choose-role' screen
   static const String kChooseMode = "Bắt đầu ứng dụng\nvới vai trò là";

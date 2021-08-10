@@ -1,5 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/others/error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
@@ -38,24 +39,16 @@ class _InputNamePageState extends State<InputNamePage> {
                   TextFormField(
                     initialValue: "Phương Uyên",
                     keyboardType: TextInputType.name,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'\p{L}+'))
+                      // FilteringTextInputFormatter.allow(RegExp(r'\p{L}+'))
                     ],
                     decoration: InputDecoration(
-                        errorText: CustomStrings.kErrorName,
-                        errorStyle:
-                            TextStyle(color: Colors.white, fontSize: 14),
-                        contentPadding: const EdgeInsets.only(top: 20.0),
-                        focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color:
-                                    CustomColors.kLightGray.withOpacity(0.8))),
-                        errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color:
-                                    CustomColors.kLightGray.withOpacity(0.8)))),
+                      contentPadding: const EdgeInsets.only(top: 20.0),
+                    ),
                   ),
+                  ErrorText(
+                      errorText: CustomStrings.kErrorName, marginTop: 50.0)
                 ],
               ),
             ),

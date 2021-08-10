@@ -81,7 +81,7 @@ class Biike extends StatelessWidget {
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         ),
       ),
-      initialRoute: '/inputPhone',
+      initialRoute: '/inputName',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/welcome': (BuildContext ctx) => WelcomePage(),
