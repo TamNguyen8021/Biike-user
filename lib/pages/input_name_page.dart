@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 
-/// '009-input-name' screen
+/// '004.3_input_name' screen
 class InputNamePage extends StatefulWidget {
   const InputNamePage({Key? key}) : super(key: key);
 
