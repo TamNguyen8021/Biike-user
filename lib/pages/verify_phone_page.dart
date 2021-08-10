@@ -1,10 +1,11 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/others/error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-/// The '008-verify-phone' screen
+/// The '004.2_verify_phone' screen
 class VerifyPhonePage extends StatefulWidget {
   const VerifyPhonePage({Key? key}) : super(key: key);
 
@@ -80,7 +81,11 @@ class _VerifyPhonePageState extends State<VerifyPhonePage> {
                         .copyWith(color: Colors.white),
                   )
                 ],
-              )
+              ),
+              ErrorText(
+                errorText: CustomStrings.kInvalidPin,
+                marginTop: 25.0,
+              ),
             ],
           ),
         ),

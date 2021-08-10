@@ -10,14 +10,15 @@ class CustomStrings {
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
   static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
 
-  // '007-input-phone' screen
+  // '004.1_input_phone_no' screen
   static const String kInputPhoneNumber = "Nhập số điện thoại";
   static const String kErrorInputPhoneNumber =
       "Số điện thoại của bạn không hợp lệ";
 
-  // '008-verify-phone' screen
+  // '004.2_verify_phone' screen
   static const String kInputVerifyCode = "Nhập mã xác minh";
-  static const String kResendVerifyCode = "Gửi lại mã";
+  static const String kResendVerifyCode = "Yêu cầu gửi lại mã sau 59 giây";
+  static const String kInvalidPin = "Mã xác nhận không chính xác";
 
   // '009-input-name' screen
   static const String kInputName = "Nhập tên của bạn";

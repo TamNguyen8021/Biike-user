@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 
 class ErrorText extends StatelessWidget {
   final String errorText;
+  final double marginTop;
 
-  const ErrorText({Key? key, required this.errorText}) : super(key: key);
+  const ErrorText({Key? key, required this.errorText, required this.marginTop})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 50.0),
+      margin: EdgeInsets.only(top: marginTop),
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(

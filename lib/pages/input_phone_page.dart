@@ -57,7 +57,9 @@ class _InputPhonePageState extends State<InputPhonePage> {
                       inputFormatters: [MaskedInputFormatter('00 000 0000')],
                     ),
                   ),
-                  ErrorText(errorText: CustomStrings.kErrorInputPhoneNumber)
+                  ErrorText(
+                      errorText: CustomStrings.kErrorInputPhoneNumber,
+                      marginTop: 50.0),
                 ],
               ),
             ),
