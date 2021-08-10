@@ -71,9 +71,17 @@ class Biike extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.only(top: 12.0),
           labelStyle: TextStyle(fontWeight: FontWeight.normal),
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          focusedBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          errorBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          focusedErrorBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         ),
       ),
-      initialRoute: '/login',
+      initialRoute: '/inputPhone',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/welcome': (BuildContext ctx) => WelcomePage(),

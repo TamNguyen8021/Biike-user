@@ -12,7 +12,8 @@ class CustomStrings {
 
   // '007-input-phone' screen
   static const String kInputPhoneNumber = "Nhập số điện thoại";
-  static const String kErrorInputPhoneNumber = "*sdt của bạn không hợp lệ";
+  static const String kErrorInputPhoneNumber =
+      "Số điện thoại của bạn không hợp lệ";
 
   // '008-verify-phone' screen
   static const String kInputVerifyCode = "Nhập mã xác minh";

@@ -1,5 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/others/error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
@@ -38,31 +39,25 @@ class _InputPhonePageState extends State<InputPhonePage> {
                     CustomStrings.kInputPhoneNumber,
                     style: Theme.of(context).textTheme.headline1,
                   ),
-                  IntlPhoneField(
-                    keyboardType: TextInputType.phone,
-                    initialCountryCode: 'VN',
-                    initialValue: '34 866 9124',
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: IntlPhoneField(
+                      keyboardType: TextInputType.phone,
+                      initialCountryCode: 'VN',
+                      initialValue: '34 866 9124',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(top: 20.0),
-                        errorText: CustomStrings.kErrorInputPhoneNumber,
-                        errorStyle:
-                            TextStyle(color: Colors.white, fontSize: 14),
                         counterText: "",
-                        focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color:
-                                    CustomColors.kLightGray.withOpacity(0.8))),
-                        errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color:
-                                    CustomColors.kLightGray.withOpacity(0.8)))),
-                    dropdownDecoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)),
-                    showDropdownIcon: false,
-                    inputFormatters: [MaskedInputFormatter('00 000 0000')],
+                      ),
+                      dropdownDecoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      showDropdownIcon: false,
+                      inputFormatters: [MaskedInputFormatter('00 000 0000')],
+                    ),
                   ),
+                  ErrorText(errorText: CustomStrings.kErrorInputPhoneNumber)
                 ],
               ),
             ),
