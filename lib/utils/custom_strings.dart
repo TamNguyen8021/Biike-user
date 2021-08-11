@@ -24,7 +24,7 @@ class CustomStrings {
   static const String kInputName = "Nhập tên của bạn";
   static const String kErrorName = "Tên của bạn không hợp lệ";
 
-  // '010-choose-role' screen
+  // '004.4_choose_mode' screen
   static const String kChooseMode = "Bắt đầu ứng dụng\nvới vai trò là";
   static const String kDriverRole = "Người chở";
   static const String kCustomerRole = "Người đi ké";

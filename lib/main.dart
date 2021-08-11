@@ -1,5 +1,5 @@
 import 'package:bikes_user/pages/biker_feedback_page.dart';
-import 'package:bikes_user/pages/choose_role_page.dart';
+import 'package:bikes_user/pages/choose_mode_page.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile_page.dart';
@@ -81,7 +81,7 @@ class Biike extends StatelessWidget {
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         ),
       ),
-      initialRoute: '/inputName',
+      initialRoute: '/chooseMode',
       routes: {
         '/open': (BuildContext ctx) => OpenPage(),
         '/welcome': (BuildContext ctx) => WelcomePage(),
@@ -89,7 +89,7 @@ class Biike extends StatelessWidget {
         '/inputPhone': (BuildContext ctx) => InputPhonePage(),
         '/verifyPhone': (BuildContext ctx) => VerifyPhonePage(),
         '/inputName': (BuildContext ctx) => InputNamePage(),
-        '/chooseRole': (BuildContext ctx) => ChooseRolePage(),
+        '/chooseMode': (BuildContext ctx) => ChooseModePage(),
         '/history': (BuildContext ctx) => TripHistoryPage(),
         '/driverHome': (BuildContext ctx) => HomePage(
               role: 'Driver',

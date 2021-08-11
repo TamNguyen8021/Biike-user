@@ -1,11 +1,13 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/buttons/next_page_button.dart';
+import 'package:bikes_user/widgets/buttons/previous_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// '010-choose-role' screen
-class ChooseRolePage extends StatelessWidget {
-  const ChooseRolePage({Key? key}) : super(key: key);
+/// '004.4_choose_mode' screen
+class ChooseModePage extends StatelessWidget {
+  const ChooseModePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,13 +113,14 @@ class ChooseRolePage extends StatelessWidget {
               ],
             ),
           )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.white,
-        foregroundColor: CustomColors.kBlue,
-        child: Icon(
-          Icons.arrow_forward_ios,
-          size: 25,
+      floatingActionButton: Container(
+        width: 130,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            PreviousPageButton(route: '/inputName'),
+            NextPageButton(route: '/inputName'),
+          ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
