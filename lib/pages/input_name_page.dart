@@ -1,5 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/buttons/next_page_button.dart';
 import 'package:bikes_user/widgets/others/error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -55,17 +56,7 @@ class _InputNamePageState extends State<InputNamePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, '/chooseRole');
-        },
-        backgroundColor: Colors.white,
-        foregroundColor: CustomColors.kBlue,
-        child: Icon(
-          Icons.arrow_forward_ios,
-          size: 25,
-        ),
-      ),
+      floatingActionButton: NextPageButton(route: '/chooseMode'),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
