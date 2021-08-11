@@ -1,5 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/buttons/next_page_button.dart';
+import 'package:bikes_user/widgets/buttons/previous_page_button.dart';
 import 'package:bikes_user/widgets/others/error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,31 +97,8 @@ class _VerifyPhonePageState extends State<VerifyPhonePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/inputPhone');
-              },
-              backgroundColor: Colors.white,
-              foregroundColor: CustomColors.kBlue,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 14.0),
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: 25,
-                ),
-              ),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/inputName');
-              },
-              backgroundColor: Colors.white,
-              foregroundColor: CustomColors.kBlue,
-              child: Icon(
-                Icons.arrow_forward_ios,
-                size: 25,
-              ),
-            )
+            PreviousPageButton(route: '/inputPhone'),
+            NextPageButton(route: '/inputName'),
           ],
         ),
       ),
