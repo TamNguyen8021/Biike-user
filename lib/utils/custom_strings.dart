@@ -35,7 +35,8 @@ class CustomStrings {
   static const String kRemindWords =
       "Bạn có thể đổi sang chế độ còn lại\nkhi sử dụng ứng dụng";
 
-  // ke_er_home screen
+  // 'ke_er_home' screen
+  static const String kTopBiker = "Top Biker tháng ";
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
   static const String kReminderTime = " phút nữa";
   static const String kFinishTrip = "Đánh dấu đã đến";
