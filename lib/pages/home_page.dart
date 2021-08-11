@@ -2,6 +2,7 @@ import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
+// import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
 import 'package:bikes_user/widgets/pages/driver_home.dart';
 import 'package:flutter/material.dart';

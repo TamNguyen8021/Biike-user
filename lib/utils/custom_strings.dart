@@ -46,7 +46,7 @@ class CustomStrings {
   static const String kOtherDays = "Mấy hôm sau";
   static const String kFindingDriver = "Đang tìm...";
 
-  // ke_er_home_blank
+  // 'ke_er_home_blank' screen
   static const String kCreateTrip =
       "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
 
