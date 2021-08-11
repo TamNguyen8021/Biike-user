@@ -9,6 +9,7 @@ class NextPageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'nextPageButton',
       onPressed: () {
         Navigator.pushReplacementNamed(context, route);
       },

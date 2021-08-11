@@ -9,6 +9,7 @@ class PreviousPageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'previousPageButton',
       onPressed: () {
         Navigator.pushReplacementNamed(context, route);
       },
