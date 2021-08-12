@@ -39,7 +39,8 @@ class CustomStrings {
   static const String kTopBiker = "Top Biker tháng ";
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
   static const String kReminderTime = " phút nữa";
-  static const String kFinishTrip = "Đánh dấu đã đến";
+  static const String kConfirmFinishTrip = "Đánh dấu đã đến";
+  static const String kFinishTrip = "Đã đến";
   static const String kCustomerMode = "Đi ké mode";
   static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";

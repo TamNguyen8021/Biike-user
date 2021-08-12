@@ -5,6 +5,7 @@ import 'package:bikes_user/widgets/pages/activity.dart';
 // import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
 import 'package:bikes_user/widgets/pages/driver_home.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 /// The home screen template for both ke-er and biker
@@ -76,16 +77,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 actionWidgets: <Widget>[
+                  IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, _profileRoute);
-                        },
-                        icon: Icon(
-                          Icons.account_circle_rounded,
-                          color: Colors.white,
-                        )),
+                    padding: const EdgeInsets.fromLTRB(0.0, 16.0, 20.0, 16.0),
+                    child: CircularProfileAvatar(
+                      'assets/images/profile-1.jpg',
+                      radius: 12,
+                      onTap: () {
+                        Navigator.pushNamed(context, _profileRoute);
+                      },
+                    ),
                   ),
                 ],
               );
