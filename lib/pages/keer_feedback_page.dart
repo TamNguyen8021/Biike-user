@@ -1,7 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/send_feedback_button.dart';
-import 'package:bikes_user/widgets/half_oval_bar.dart';
+import 'package:bikes_user/widgets/painters/half_oval_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
