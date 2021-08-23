@@ -74,10 +74,13 @@ class CustomStrings {
   static const String kHome = "Trang chủ";
   static const String kActivities = "Hoạt động";
 
-  //'022-cus-profile' screen
+  //'ke_er_profile' screen
   static const String kEdit = "Chỉnh sửa";
+  static const String kSavedAddress = "Sổ địa chỉ";
   static const String kSettings = "Cài đặt";
-  static const String kHelp = "Trợ giúp";
+  static const String kBlockList = "Danh sách hạn chế";
+  static const String kSOS = "Số điện thoại S.O.S";
+  static const String kHelp = "Trợ giúp/Gọi đến Biiké";
   static const String kRateApp = "Đánh giá ứng dụng";
   static const String kPhoneNo = "Số điện thoại";
   static const String kEmail = "Email";
