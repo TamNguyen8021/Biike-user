@@ -27,13 +27,17 @@ class _ProfileTextFieldState extends State<ProfileTextField> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.kLightGray)),
+            borderSide:
+                BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.kLightGray)),
+            borderSide:
+                BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.kLightGray)),
+            borderSide:
+                BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.kLightGray)),
+            borderSide:
+                BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
       ),
     );
   }
