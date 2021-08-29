@@ -1,5 +1,6 @@
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_button.dart';
 import 'package:bikes_user/widgets/buttons/profile_buttons.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/widgets/others/profile_text_field.dart';
@@ -88,30 +89,11 @@ class CustomerProfilePage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: SizedBox(
-                          height: 35,
-                          child: ElevatedButton.icon(
-                              onPressed: () => {
-                                    Navigator.pushNamed(context, '/editProfile')
-                                  },
-                              icon: Icon(
-                                Icons.edit,
-                                size: 22,
-                              ),
-                              label: Text(
-                                CustomStrings.kEdit,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .button!
-                                    .copyWith(fontSize: 12),
-                              ),
-                              style: Theme.of(context)
-                                  .elevatedButtonTheme
-                                  .style!
-                                  .copyWith(
-                                      elevation:
-                                          MaterialStateProperty.all<double>(
-                                              0.0))),
+                        child: CustomElevatedButton(
+                          route: '/editProfile',
+                          text: CustomStrings.kEdit,
+                          icon: Icons.edit,
+                          elevation: 0.0,
                         ),
                       ),
                       ProfileButtons(),
