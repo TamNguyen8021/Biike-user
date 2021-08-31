@@ -1,12 +1,14 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_button.dart';
 import 'package:bikes_user/widgets/buttons/profile_buttons.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/widgets/others/profile_text_field.dart';
+import 'package:bikes_user/widgets/others/user_rating_and_score.dart';
 import 'package:bikes_user/widgets/painters/half_oval_painter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 /// The driver profile screen
 class DriverProfilePage extends StatelessWidget {
@@ -70,67 +72,7 @@ class DriverProfilePage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 4.0),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 4.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Container(
-                            padding: const EdgeInsets.only(right: 4.0),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    right: BorderSide(
-                                        color: CustomColors.kDarkGray
-                                            .withOpacity(0.15)))),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '4.5',
-                                  style: TextStyle(
-                                      fontSize: 11, color: Colors.white),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 2.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/empty_star.svg',
-                                    width: 10,
-                                    height: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 10.0, right: 4.0),
-                            child: Text(
-                              '1000',
-                              style:
-                                  TextStyle(fontSize: 11, color: Colors.white),
-                            ),
-                          ),
-                          SvgPicture.asset(
-                            'assets/images/crown.svg',
-                            height: 10,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: CustomColors.kOrange,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: CustomColors.kDarkGray.withOpacity(0.3),
-                              // changes position of shadow
-                              offset: Offset(0, 1.5),
-                            )
-                          ]),
-                    ),
+                    UserRatingAndScore(),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: ProfileTextField(
@@ -152,60 +94,24 @@ class DriverProfilePage extends StatelessWidget {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(right: 4.0),
-                            child: SizedBox(
-                              height: 35,
-                              child: ElevatedButton.icon(
-                                  onPressed: () => {
-                                        Navigator.pushNamed(
-                                            context, '/editProfile')
-                                      },
-                                  icon: Icon(
-                                    Icons.two_wheeler,
-                                    size: 22,
-                                  ),
-                                  label: Text(
-                                    CustomStrings.kManageBike,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .button!
-                                        .copyWith(fontSize: 12),
-                                  ),
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                          elevation:
-                                              MaterialStateProperty.all<double>(
-                                                  0.0))),
+                            child: CustomElevatedButton(
+                              onPressedFunc: () => Get.toNamed('editProfile'),
+                              text: CustomStrings.kManageBike,
+                              elevation: 0.0,
+                              icon: Icons.two_wheeler,
+                              backgroundColor: CustomColors.kBlue,
+                              foregroundColor: Colors.white,
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 4.0),
-                            child: SizedBox(
-                              height: 35,
-                              child: ElevatedButton.icon(
-                                  onPressed: () => {
-                                        Navigator.pushNamed(
-                                            context, '/editProfile')
-                                      },
-                                  icon: Icon(
-                                    Icons.edit,
-                                    size: 22,
-                                  ),
-                                  label: Text(
-                                    CustomStrings.kEdit,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .button!
-                                        .copyWith(fontSize: 12),
-                                  ),
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                          elevation:
-                                              MaterialStateProperty.all<double>(
-                                                  0.0))),
+                            child: CustomElevatedButton(
+                              onPressedFunc: () => Get.toNamed('/editProfile'),
+                              text: CustomStrings.kEdit,
+                              icon: Icons.edit,
+                              elevation: 0.0,
+                              backgroundColor: CustomColors.kBlue,
+                              foregroundColor: Colors.white,
                             ),
                           ),
                         ],

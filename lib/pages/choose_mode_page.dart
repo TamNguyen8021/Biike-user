@@ -4,6 +4,7 @@ import 'package:bikes_user/widgets/buttons/next_page_button.dart';
 import 'package:bikes_user/widgets/buttons/previous_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 /// '004.4_choose_mode' screen
 class ChooseModePage extends StatelessWidget {
@@ -30,7 +31,10 @@ class ChooseModePage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 100.0, bottom: 20.0),
                   child: Text(
                     CustomStrings.kChooseMode,
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1!
+                        .copyWith(color: Colors.white),
                   ),
                 ),
                 Container(
@@ -107,8 +111,10 @@ class ChooseModePage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: Text(CustomStrings.kRemindWords,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: CustomColors.kLightGray.withOpacity(0.8))),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: Colors.white)),
                 )
               ],
             ),
@@ -118,8 +124,18 @@ class ChooseModePage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            PreviousPageButton(route: '/inputName'),
-            NextPageButton(route: '/inputName'),
+            PreviousPageButton(
+              onPressedFunc: () => Get.back(),
+              backgroundColor: Colors.white,
+              foregroundColor: CustomColors.kBlue,
+              hoverColor: CustomColors.kLightGray,
+            ),
+            NextPageButton(
+              onPressedFunc: () => Get.offAllNamed('/customerHome'),
+              backgroundColor: Colors.white,
+              foregroundColor: CustomColors.kBlue,
+              hoverColor: CustomColors.kLightGray,
+            ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// This widget is the top appbar on home page
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -49,14 +50,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           if (actionWidgets != null) {
             if (role == 'Customer') {
-              Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/customerHome');
+              Get.offAllNamed('/customerHome');
             } else {
-              Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/driverHome');
+              Get.offAllNamed('/driverHome');
             }
           } else {
-            Navigator.pop(context);
+            Get.back();
           }
         },
         icon: Icon(

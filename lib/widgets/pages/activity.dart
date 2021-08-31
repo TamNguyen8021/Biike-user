@@ -2,6 +2,7 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// The activity page widget
 class Activity extends StatelessWidget {
@@ -39,8 +40,7 @@ class Activity extends StatelessWidget {
                             color: CustomColors.kBlue),
                       ),
                       IconButton(
-                          onPressed: () =>
-                              Navigator.pushNamed(context, '/history'),
+                          onPressed: () => Get.toNamed('/history'),
                           icon: Icon(
                             Icons.history,
                             color: CustomColors.kBlue,

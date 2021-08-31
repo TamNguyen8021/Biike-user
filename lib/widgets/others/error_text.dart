@@ -15,7 +15,7 @@ class ErrorText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.8),
+        color: CustomColors.kLightBlue,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Text(

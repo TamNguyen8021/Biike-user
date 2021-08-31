@@ -1,7 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-class ProfileTextField extends StatefulWidget {
+class ProfileTextField extends StatelessWidget {
   final bool isReadOnly;
   final String initialValue;
   final String labelText;
@@ -14,18 +14,13 @@ class ProfileTextField extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ProfileTextFieldState createState() => _ProfileTextFieldState();
-}
-
-class _ProfileTextFieldState extends State<ProfileTextField> {
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      readOnly: widget.isReadOnly,
-      initialValue: widget.initialValue,
+      readOnly: isReadOnly,
+      initialValue: initialValue,
       style: Theme.of(context).textTheme.headline6,
       decoration: InputDecoration(
-        labelText: widget.labelText,
+        labelText: labelText,
         enabledBorder: UnderlineInputBorder(
             borderSide:
                 BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),

@@ -3,7 +3,7 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// The '006-login' screen
+/// The '003.1_login' screen
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -50,23 +50,23 @@ class LoginPage extends StatelessWidget {
                                   horizontal: 50.0, vertical: 20.0))),
                     ),
                   ),
-                  // Text(CustomStrings.kConfirmTerm,
-                  //     style: Theme.of(context).textTheme.subtitle1),
-                  // Text(
-                  //   CustomStrings.kTerm,
-                  //   style: Theme.of(context).textTheme.subtitle1,
-                  // ),
-                  CircleAvatar(
-                    backgroundColor: CustomColors.kDarkBlue,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.fingerprint,
-                      ),
-                      color: Colors.white,
-                      iconSize: 25,
-                    ),
-                  )
+                  Text(CustomStrings.kConfirmTerm,
+                      style: Theme.of(context).textTheme.subtitle1),
+                  Text(
+                    CustomStrings.kTerm,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  // CircleAvatar(
+                  //   backgroundColor: CustomColors.kDarkBlue,
+                  //   child: IconButton(
+                  //     onPressed: () {},
+                  //     icon: Icon(
+                  //       Icons.fingerprint,
+                  //     ),
+                  //     color: Colors.white,
+                  //     iconSize: 25,
+                  //   ),
+                  // )
                 ],
               ),
             ),

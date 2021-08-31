@@ -1,10 +1,9 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-// import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// The '002-welcome' screen
+/// The '002.1_welcome_1' screen
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -43,6 +42,7 @@ class WelcomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 0.6,
                 image: AssetImage('assets/images/line-map.png'),
                 fit: BoxFit.fitWidth,
+                color: CustomColors.kLightGray.withOpacity(0.5),
               ),
             ),
             Align(

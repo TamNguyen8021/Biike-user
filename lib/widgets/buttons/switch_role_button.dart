@@ -1,6 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final String role;
@@ -24,7 +25,7 @@ class SwitchRoleButton extends StatelessWidget {
       height: 20,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, route);
+          Get.offAllNamed(route);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 1.0),

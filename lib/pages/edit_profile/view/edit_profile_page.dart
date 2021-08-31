@@ -1,23 +1,19 @@
+import 'package:bikes_user/pages/edit_profile/controller/edit_profile_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_button.dart';
 import 'package:bikes_user/widgets/others/profile_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// The 'update_profile' screen
-class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+class EditProfilePage extends StatelessWidget {
+  final editProfileController = Get.find<EditProfileController>();
 
-  @override
-  _EditProfilePageState createState() => _EditProfilePageState();
-}
-
-class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
-    Gender? _gender = Gender.Male;
-
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,
@@ -56,10 +52,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Form(
                   child: Column(
                 children: <Widget>[
-                  ProfileTextField(
-                      isReadOnly: false,
-                      initialValue: 'Nguyễn Hoàng Thảo Vân',
-                      labelText: CustomStrings.kFullName),
+                  Obx(
+                    () => ProfileTextField(
+                        isReadOnly: false,
+                        initialValue: '${editProfileController.fullname}',
+                        labelText: CustomStrings.kFullName),
+                  ),
                   TextFormField(
                     initialValue: '034 866 9124',
                     readOnly: true,
@@ -88,76 +86,64 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               color: CustomColors.kDarkGray.withOpacity(0.2))),
                     ),
                   ),
-                  ProfileTextField(
-                      isReadOnly: false,
-                      initialValue: 'phatdhse62854@fpt.edu.vn',
-                      labelText: CustomStrings.kEmail),
+                  Obx(
+                    () => ProfileTextField(
+                        isReadOnly: false,
+                        initialValue: '${editProfileController.email}',
+                        labelText: CustomStrings.kEmail),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 25.0),
-                    child: DropdownButtonFormField<Gender>(
-                      value: _gender,
-                      icon: Visibility(
-                          visible: false, child: Icon(Icons.arrow_downward)),
-                      decoration: InputDecoration(
-                        labelText: CustomStrings.kGender,
-                        labelStyle: TextStyle(fontSize: 14),
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color:
-                                    CustomColors.kDarkGray.withOpacity(0.2))),
+                    child: Obx(
+                      () => DropdownButtonFormField<Gender>(
+                        value: editProfileController.gender.value,
+                        icon: Visibility(
+                            visible: false, child: Icon(Icons.arrow_downward)),
+                        decoration: InputDecoration(
+                          labelText: CustomStrings.kGender,
+                          labelStyle: TextStyle(fontSize: 14),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      CustomColors.kDarkGray.withOpacity(0.2))),
+                        ),
+                        items: <DropdownMenuItem<Gender>>[
+                          DropdownMenuItem<Gender>(
+                            child: Text(
+                              CustomStrings.kMale,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            value: Gender.Male,
+                          ),
+                          DropdownMenuItem<Gender>(
+                            child: Text(
+                              CustomStrings.kFemale,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            value: Gender.Female,
+                          ),
+                          DropdownMenuItem<Gender>(
+                            child: Text(
+                              CustomStrings.kOthers,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            value: Gender.Other,
+                          ),
+                        ],
+                        onChanged: (Gender? gender) {
+                          editProfileController.changeGender(gender);
+                        },
                       ),
-                      items: <DropdownMenuItem<Gender>>[
-                        DropdownMenuItem<Gender>(
-                          child: Text(
-                            CustomStrings.kMale,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          value: Gender.Male,
-                        ),
-                        DropdownMenuItem<Gender>(
-                          child: Text(
-                            CustomStrings.kFemale,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          value: Gender.Female,
-                        ),
-                        DropdownMenuItem<Gender>(
-                          child: Text(
-                            CustomStrings.kOthers,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          value: Gender.Other,
-                        ),
-                      ],
-                      onChanged: (Gender? gender) {
-                        setState(() {
-                          _gender = gender;
-                        });
-                      },
                     ),
                   ),
-                  SizedBox(
-                    height: 35,
-                    child: ElevatedButton.icon(
-                        onPressed: () => {Navigator.pop(context)},
-                        icon: Icon(
-                          Icons.save,
-                          size: 22,
-                        ),
-                        label: Text(
-                          CustomStrings.kSave,
-                          style: Theme.of(context)
-                              .textTheme
-                              .button!
-                              .copyWith(fontSize: 12),
-                        ),
-                        style: Theme.of(context)
-                            .elevatedButtonTheme
-                            .style!
-                            .copyWith(
-                                elevation:
-                                    MaterialStateProperty.all<double>(0.0))),
-                  ),
+                  CustomElevatedButton(
+                    onPressedFunc: () => Get.back(),
+                    text: CustomStrings.kSave,
+                    icon: Icons.save,
+                    elevation: 0.0,
+                    backgroundColor: CustomColors.kBlue,
+                    foregroundColor: Colors.white,
+                  )
                 ],
               ))
             ],

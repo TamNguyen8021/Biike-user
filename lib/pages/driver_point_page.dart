@@ -59,9 +59,39 @@ class DriverPointPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: ListVouchers(listVouchers: [1, 2, 3, 4, 5, 6]),
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.fromLTRB(22.0, 16.0, 22.0, 10.0),
+              decoration: BoxDecoration(
+                color: CustomColors.kBlue,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      CustomStrings.kTradedVouchers,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+            Divider(
+              color: CustomColors.kDarkGray.withOpacity(0.5),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
+              child: ListVouchers(listVouchers: [1, 2, 3, 4, 5, 6]),
+            ),
+          ],
         ),
       )),
     );

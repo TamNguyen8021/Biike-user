@@ -1,12 +1,12 @@
 /// Contains all strings which used in the app
 class CustomStrings {
-  // '002-welcome-1' screen
+  // '002.1_welcome_1' screen
   static const String kIntroduction = "Ứng dụng kết nối đi ké xe miễn phí";
 
-  // '006-login'
+  // '003.1_login'
   static const String kLogoApp = "Biiké";
   static const String kIntroQuote = "Ứng dụng kết nối đi ké xe miễn phí";
-  static const String kLoginButton = "Đăng nhập bằng số điện thoại";
+  static const String kLoginButton = "Đăng ký/Đăng nhập bằng số điện thoại";
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
   static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
 
@@ -51,7 +51,7 @@ class CustomStrings {
   static const String kCreateTrip =
       "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
 
-  // driver_home screen
+  // 'driver_home' screen
   static const String kDriverReadyReminder = "Bạn đang có 1 chuyến xe cần chở";
   static const String kFilter = "Lọc chuyến đi đang cần chở";
   static const String kSelectHour = "Chọn giờ";
@@ -60,12 +60,12 @@ class CustomStrings {
   static const String kDecline = "Từ chối";
   static const String kAccept = "Chấp nhận";
 
-  // trip history screen
+  // 'trip_history' screen
   static const String kHistory = "Lịch sử";
   static const String kCustomerHistory = "Đi ké";
   static const String kDriverHistory = "Chở ké";
 
-  // activity screen
+  // 'activity' screen
   static const String kDriverActivity = "Lịch chở";
   static const String kCustomerActivity = "Lịch ké";
   static const String kTomorrow = "Ngày mai";
@@ -86,7 +86,7 @@ class CustomStrings {
   static const String kEmail = "Email";
   static const String kLogOut = "Đăng xuất";
 
-  // '023-cus-update_profile' screen
+  // 'update_profile' screen
   static const String kEditProfile = "Chỉnh sửa thông tin cá nhân";
   static const String kFullName = "Họ và tên";
   static const String kGender = "Giới tính";
@@ -98,29 +98,32 @@ class CustomStrings {
   // 'driver-profile' screen
   static const String kManageBike = "Quản lý xe";
 
-  // '024-view_user' screen
+  // 'view_user' screen
   static const String kViewUser = "Xem bạn chở";
+  static const String kSchool = "Trường";
   static const String kCall = "Gọi điện";
   static const String kMessage = "Nhắn tin";
+  static const String kReport = "Báo cáo";
+  static const String kNoHistoryTrip = "Không có lịch sử đi chung";
 
-  // finding_driver_success screen
+  // 'finding_driver_success' screen
   static const String kFoundBiker = "Đã tìm được người chở bạn!";
   static const String kViewTrip = "Xem chuyến đi";
 
-  // get_trip_success screen
+  // 'get_trip_success' screen
   static const String kGetTripSuccess = "Nhận chở thành công!";
 
-  // finding_driver screen
+  // 'finding_driver' screen
   static const String kFindingBiker = "Đang tìm người chở";
 
-  // finding_driver_fail screen
+  // 'finding_driver_fail' screen
   static const String kFindBikerFail = "Không tìm thấy người chở ké";
   static const String kTips =
       "Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!";
   static const String kBtnExit = "Thoát";
   static const String kBtnReturn = "Quay lại";
 
-  // ke_er_feedback screen
+  // 'ke_er_feedback' screen
   static const String kTripSuccess = "Chở ké thành công!";
   static const String kBuyReminder =
       "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
@@ -128,6 +131,7 @@ class CustomStrings {
       "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
   static const String kBtnSend = "Gửi";
 
-  // 'driver-point' screen
+  // 'driver_point' screen
   static const String kListVouchers = "Danh mục đổi quà";
+  static const String kTradedVouchers = "Quà đã đổi";
 }

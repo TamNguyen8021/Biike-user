@@ -9,7 +9,7 @@ import 'package:bikes_user/widgets/others/ad_container.dart';
 import 'package:bikes_user/widgets/others/top_biker.dart';
 import 'package:flutter/material.dart';
 
-/// The ke_er_home page widget
+/// The 'ke_er_home' screen widget
 class CustomerHomeFull extends StatelessWidget {
   const CustomerHomeFull({Key? key}) : super(key: key);
 

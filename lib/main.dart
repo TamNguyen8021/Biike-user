@@ -2,24 +2,30 @@ import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/choose_mode_page.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
-import 'package:bikes_user/pages/edit_profile_page.dart';
-import 'package:bikes_user/pages/home_page.dart';
+import 'package:bikes_user/pages/edit_profile/binding/edit_profile_binding.dart';
+import 'package:bikes_user/pages/edit_profile/view/edit_profile_page.dart';
+import 'package:bikes_user/pages/home/binding/home_binding.dart';
+import 'package:bikes_user/pages/home/view/home_page.dart';
 import 'package:bikes_user/pages/customer_profile_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
-import 'package:bikes_user/pages/input_name_page.dart';
-import 'package:bikes_user/pages/input_phone_page.dart';
+import 'package:bikes_user/pages/input_name/binding/input_name_binding.dart';
+import 'package:bikes_user/pages/input_name/view/input_name_page.dart';
+import 'package:bikes_user/pages/input_phone/binding/input_phone_binding.dart';
+import 'package:bikes_user/pages/input_phone/view/input_phone_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
-import 'package:bikes_user/pages/verify_phone_page.dart';
-import 'package:bikes_user/pages/view_user_page.dart';
+import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
+import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
+import 'package:bikes_user/pages/view_user/view/view_user_page.dart';
 import 'package:bikes_user/pages/welcome_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// Runs the application.
 void main() {
@@ -30,7 +36,7 @@ void main() {
 class Biike extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       // Remove debug banner when running app.
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -51,7 +57,7 @@ class Biike extends StatelessWidget {
             bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
             bodyText2: TextStyle(color: CustomColors.kDarkGray),
             button: TextStyle(fontSize: 10, color: Colors.white),
-            headline1: TextStyle(fontSize: 25, color: Colors.white),
+            headline1: TextStyle(fontSize: 25, color: CustomColors.kBlue),
             headline2: TextStyle(
                 fontSize: 18,
                 color: CustomColors.kBlue,
@@ -75,48 +81,75 @@ class Biike extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.only(top: 12.0),
           labelStyle: TextStyle(fontWeight: FontWeight.normal),
-          enabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-          focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-          errorBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-          focusedErrorBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
+          focusedBorder: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
+          errorBorder: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
+          focusedErrorBorder: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         ),
       ),
       initialRoute: '/customerHome',
-      routes: {
-        '/open': (BuildContext ctx) => OpenPage(),
-        '/welcome': (BuildContext ctx) => WelcomePage(),
-        '/login': (BuildContext ctx) => LoginPage(),
-        '/inputPhone': (BuildContext ctx) => InputPhonePage(),
-        '/verifyPhone': (BuildContext ctx) => VerifyPhonePage(),
-        '/inputName': (BuildContext ctx) => InputNamePage(),
-        '/chooseMode': (BuildContext ctx) => ChooseModePage(),
-        '/history': (BuildContext ctx) => TripHistoryPage(),
-        '/driverHome': (BuildContext ctx) => HomePage(
-              role: 'Driver',
-            ),
-        '/customerHome': (BuildContext ctx) => HomePage(
-              role: 'Customer',
-            ),
-        '/customerProfile': (BuildContext ctx) => CustomerProfilePage(
-              role: 'Customer',
-            ),
-        '/driverProfile': (BuildContext ctx) => DriverProfilePage(
-              role: 'Driver',
-            ),
-        '/editProfile': (BuildContext ctx) => EditProfilePage(),
-        '/viewUser': (BuildContext ctx) => ViewUserPage(),
-        '/bikerFeedback': (BuildContext ctx) => BikerFeedbackPage(),
-        '/keerFeedback': (BuildContext ctx) => KeerFeedbackPage(),
-        '/findBiker': (BuildContext ctx) => FindingBikerPage(),
-        '/findBikerSuccess': (BuildContext ctx) => FindingBikerSuccessPage(),
-        '/findBikerFail': (BuildContext ctx) => FindingBikerFailPage(),
-        '/getTripSuccess': (BuildContext ctx) => GetTripSuccessPage(),
-        '/exchangeVoucher': (BuildContext ctx) => DriverPointPage(),
-      },
+      getPages: [
+        GetPage(name: '/open', page: () => OpenPage()),
+        GetPage(name: '/welcome', page: () => WelcomePage()),
+        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(
+            name: '/inputPhone',
+            page: () => InputPhonePage(),
+            binding: InputPhoneBinding()),
+        GetPage(
+            name: '/verifyPhone',
+            page: () => VerifyPhonePage(),
+            binding: VerifyPhoneBinding()),
+        GetPage(
+            name: '/inputName',
+            page: () => InputNamePage(),
+            binding: InputNameBinding()),
+        GetPage(name: '/chooseMode', page: () => ChooseModePage()),
+        GetPage(name: '/history', page: () => TripHistoryPage()),
+        GetPage(
+            name: '/driverHome',
+            page: () => HomePage(
+                  role: 'Driver',
+                ),
+            binding: HomeBinding()),
+        GetPage(
+            name: '/customerHome',
+            page: () => HomePage(
+                  role: 'Customer',
+                ),
+            binding: HomeBinding()),
+        GetPage(
+            name: '/customerProfile',
+            page: () => CustomerProfilePage(
+                  role: 'Customer',
+                )),
+        GetPage(
+            name: '/driverProfile',
+            page: () => DriverProfilePage(
+                  role: 'Driver',
+                )),
+        GetPage(
+            name: '/editProfile',
+            page: () => EditProfilePage(),
+            binding: EditProfileBinding()),
+        GetPage(name: '/viewUser', page: () => ViewUserPage()),
+        GetPage(name: '/bikerFeedback', page: () => BikerFeedbackPage()),
+        GetPage(name: '/keerFeedback', page: () => KeerFeedbackPage()),
+        GetPage(name: '/findBiker', page: () => FindingBikerPage()),
+        GetPage(
+            name: '/findBikerSuccess', page: () => FindingBikerSuccessPage()),
+        GetPage(name: '/findBikerFail', page: () => FindingBikerFailPage()),
+        GetPage(name: '/getTripSuccess', page: () => GetTripSuccessPage()),
+        GetPage(name: '/exchangeVoucher', page: () => DriverPointPage()),
+      ],
     );
   }
 }
