@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// This widget shows the finish trip button
-class FinishTripButton extends StatelessWidget {
+class ConfirmArrivalButton extends StatelessWidget {
   final homeController = Get.find<HomeController>();
 
   @override

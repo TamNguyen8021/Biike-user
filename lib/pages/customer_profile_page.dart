@@ -1,7 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/widgets/buttons/custom_elevated_button.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/widgets/buttons/profile_buttons.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/widgets/others/profile_text_field.dart';
@@ -76,6 +76,7 @@ class CustomerProfilePage extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: ProfileTextField(
                             isReadOnly: true,
+                            isEditProfile: false,
                             initialValue: '034 866 9124',
                             labelText: CustomStrings.kPhoneNo),
                       ),
@@ -83,12 +84,13 @@ class CustomerProfilePage extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 25.0),
                         child: ProfileTextField(
                             isReadOnly: true,
+                            isEditProfile: false,
                             initialValue: 'phatdhse62856@fpt.edu.vn',
                             labelText: CustomStrings.kEmail),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: CustomElevatedButton(
+                        child: CustomElevatedIconButton(
                           onPressedFunc: () => Get.toNamed('/editProfile'),
                           text: CustomStrings.kEdit,
                           icon: Icons.edit,

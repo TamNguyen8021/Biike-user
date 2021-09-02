@@ -1,6 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class UserRatingAndScore extends StatelessWidget {
   const UserRatingAndScore({Key? key}) : super(key: key);
@@ -37,18 +38,25 @@ class UserRatingAndScore extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 4.0),
-            child: Text(
-              '1000',
-              style: TextStyle(fontSize: 11, color: Colors.white),
+          GestureDetector(
+            onTap: () => Get.toNamed('/exchangeVoucher'),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 4.0),
+                  child: Text(
+                    '1000',
+                    style: TextStyle(fontSize: 11, color: Colors.white),
+                  ),
+                ),
+                SvgPicture.asset(
+                  'assets/images/crown.svg',
+                  height: 10,
+                  color: Colors.white,
+                ),
+              ],
             ),
           ),
-          SvgPicture.asset(
-            'assets/images/crown.svg',
-            height: 10,
-            color: Colors.white,
-          )
         ],
       ),
       decoration: BoxDecoration(

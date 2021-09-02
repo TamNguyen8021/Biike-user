@@ -134,4 +134,29 @@ class CustomStrings {
   // 'driver_point' screen
   static const String kListVouchers = "Danh mục đổi quà";
   static const String kTradedVouchers = "Quà đã đổi";
+
+  // 'trip_detail' screen
+  static const String kTripDetails = "Chi tiết chuyến đi";
+  static const String kTripStatus = "Đang tìm...";
+  static const String kCancelTrip = "Hủy chuyến";
+  static const String kConfirmArrival = "Đánh dấu đã đến";
+  static const String kStartTrip = "Bắt đầu chuyến đi";
+  static const String kCompleteTrip = "Hoàn thành";
+
+  // 'book_trip' screen
+  static const String kBookNewTrip = "Tạo chuyến đi ké mới";
+  static const String kFrom = "Từ";
+  static const String kChooseFrom = "Chọn điểm đi";
+  static const String kTo = "Đến";
+  static const String kChooseTo = "Chọn điểm đến";
+  static const String kBookScheduleTrip = "Đặt lịch ké";
+  static const String kBookNowTrip = "Ké now";
+
+  // 'book_schedule_trip' screen
+  static const String kTime = "Thời gian";
+  static const String kChooseDate = "Chọn ngày";
+  static const String kChooseTime = "Chọn giờ";
+  static const String kRepeat = "Lặp lại";
+  static const String kRepeatTo = "Lặp lại đến";
+  static const String kCancel = "Hủy";
 }

@@ -2,7 +2,7 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/widgets/buttons/create_trip_button.dart';
-import 'package:bikes_user/widgets/buttons/finish_trip_button.dart';
+import 'package:bikes_user/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
@@ -60,7 +60,10 @@ class CustomerHomeFull extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[FinishTripButton(), ContactButtons()],
+                      children: <Widget>[
+                        ConfirmArrivalButton(),
+                        ContactButtons()
+                      ],
                     ),
                   ],
                 ),
@@ -103,7 +106,7 @@ class CustomerHomeFull extends StatelessWidget {
                       isTodayFirstActivity: false,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 40.0),
+                      padding: const EdgeInsets.only(bottom: 70.0),
                       child: AdContainer(),
                     ),
                   ],

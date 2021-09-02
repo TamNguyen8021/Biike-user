@@ -3,7 +3,7 @@ import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/widgets/buttons/custom_elevated_button.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/widgets/others/profile_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,43 +55,20 @@ class EditProfilePage extends StatelessWidget {
                   Obx(
                     () => ProfileTextField(
                         isReadOnly: false,
+                        isEditProfile: true,
                         initialValue: '${editProfileController.fullname}',
                         labelText: CustomStrings.kFullName),
                   ),
-                  TextFormField(
-                    initialValue: '034 866 9124',
-                    readOnly: true,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: CustomColors.kDarkGray.withOpacity(0.5),
-                        fontSize: 14),
-                    decoration: InputDecoration(
-                      labelText: CustomStrings.kPhoneNo,
-                      labelStyle: Theme.of(context)
-                          .inputDecorationTheme
-                          .labelStyle!
-                          .copyWith(
-                              color: CustomColors.kDarkGray.withOpacity(0.5)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: CustomColors.kDarkGray.withOpacity(0.2))),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: CustomColors.kDarkGray.withOpacity(0.2))),
-                      errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: CustomColors.kDarkGray.withOpacity(0.2))),
-                      focusedErrorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: CustomColors.kDarkGray.withOpacity(0.2))),
-                    ),
-                  ),
-                  Obx(
-                    () => ProfileTextField(
-                        isReadOnly: false,
-                        initialValue: '${editProfileController.email}',
-                        labelText: CustomStrings.kEmail),
-                  ),
+                  ProfileTextField(
+                      isReadOnly: true,
+                      isEditProfile: true,
+                      initialValue: '034 866 9124',
+                      labelText: CustomStrings.kPhoneNo),
+                  ProfileTextField(
+                      isReadOnly: true,
+                      isEditProfile: true,
+                      initialValue: 'vannthse123456@fpt.edu.vn',
+                      labelText: CustomStrings.kEmail),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 25.0),
                     child: Obx(
@@ -136,7 +113,7 @@ class EditProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  CustomElevatedButton(
+                  CustomElevatedIconButton(
                     onPressedFunc: () => Get.back(),
                     text: CustomStrings.kSave,
                     icon: Icons.save,

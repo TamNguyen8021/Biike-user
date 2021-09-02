@@ -1,14 +1,17 @@
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTextField extends StatelessWidget {
   final bool isReadOnly;
+  final bool isEditProfile;
   final String initialValue;
   final String labelText;
 
   const ProfileTextField(
       {Key? key,
       required this.isReadOnly,
+      required this.isEditProfile,
       required this.initialValue,
       required this.labelText})
       : super(key: key);
@@ -18,9 +21,24 @@ class ProfileTextField extends StatelessWidget {
     return TextFormField(
       readOnly: isReadOnly,
       initialValue: initialValue,
-      style: Theme.of(context).textTheme.headline6,
+      style: isReadOnly && isEditProfile
+          ? Theme.of(context)
+              .textTheme
+              .headline6!
+              .copyWith(color: CustomColors.kDarkGray.withOpacity(0.5))
+          : Theme.of(context).textTheme.headline6,
+      validator: (value) {
+        if (labelText == CustomStrings.kPhoneNo) {
+          if (value!.length != 10) {
+            print('Invalid phone number');
+          }
+        }
+      },
       decoration: InputDecoration(
         labelText: labelText,
+        labelStyle: isReadOnly && isEditProfile
+            ? TextStyle(color: CustomColors.kDarkGray.withOpacity(0.5))
+            : null,
         enabledBorder: UnderlineInputBorder(
             borderSide:
                 BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),

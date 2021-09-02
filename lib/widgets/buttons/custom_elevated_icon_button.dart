@@ -1,7 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomElevatedButton extends StatelessWidget {
+class CustomElevatedIconButton extends StatelessWidget {
   final Function() onPressedFunc;
   final double? width;
   final IconData? icon;
@@ -10,7 +10,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color foregroundColor;
   final double elevation;
 
-  const CustomElevatedButton(
+  const CustomElevatedIconButton(
       {Key? key,
       required this.onPressedFunc,
       this.width,

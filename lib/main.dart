@@ -1,4 +1,6 @@
 import 'package:bikes_user/pages/biker_feedback_page.dart';
+import 'package:bikes_user/pages/book_schedule_trip/binding/book_schedule_trip_binding.dart';
+import 'package:bikes_user/pages/book_trip/binding/book_trip_binding.dart';
 import 'package:bikes_user/pages/choose_mode_page.dart';
 import 'package:bikes_user/pages/driver_point_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
@@ -17,7 +19,10 @@ import 'package:bikes_user/pages/input_phone/binding/input_phone_binding.dart';
 import 'package:bikes_user/pages/input_phone/view/input_phone_page.dart';
 import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/login_page.dart';
+import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page.dart';
+import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/trip_detail_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
 import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
@@ -56,12 +61,16 @@ class Biike extends StatelessWidget {
         textTheme: TextTheme(
             bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
             bodyText2: TextStyle(color: CustomColors.kDarkGray),
-            button: TextStyle(fontSize: 10, color: Colors.white),
+            button: TextStyle(color: Colors.white),
             headline1: TextStyle(fontSize: 25, color: CustomColors.kBlue),
             headline2: TextStyle(
                 fontSize: 18,
                 color: CustomColors.kBlue,
                 fontWeight: FontWeight.bold),
+            headline3: TextStyle(
+              fontSize: 16,
+              color: CustomColors.kDarkGray,
+            ),
             headline6: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: CustomColors.kDarkGray,
@@ -78,6 +87,12 @@ class Biike extends StatelessWidget {
                 textStyle: MaterialStateProperty.all<TextStyle>(
                     TextStyle(color: Colors.white, fontSize: 12)),
                 elevation: MaterialStateProperty.all<double>(2.0))),
+        textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+          textStyle: MaterialStateProperty.all<TextStyle>(
+              TextStyle(color: Colors.white, fontSize: 12)),
+          elevation: MaterialStateProperty.all<double>(2.0),
+        )),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.only(top: 12.0),
           labelStyle: TextStyle(fontWeight: FontWeight.normal),
@@ -149,6 +164,21 @@ class Biike extends StatelessWidget {
         GetPage(name: '/findBikerFail', page: () => FindingBikerFailPage()),
         GetPage(name: '/getTripSuccess', page: () => GetTripSuccessPage()),
         GetPage(name: '/exchangeVoucher', page: () => DriverPointPage()),
+        GetPage(
+            name: '/tripDetail',
+            page: () => TripDetail(
+                  role: 'Driver',
+                  isWaitingForDriver: false,
+                  isTripCompleted: false,
+                )),
+        GetPage(
+            name: '/bookTrip',
+            page: () => BookTripPage(),
+            binding: BookTripBinding()),
+        GetPage(
+            name: '/bookScheduleTrip',
+            page: () => BookScheduleTripPage(),
+            binding: BookScheduleTripBinding()),
       ],
     );
   }

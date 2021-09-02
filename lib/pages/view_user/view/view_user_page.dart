@@ -1,7 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/widgets/buttons/custom_elevated_button.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/widgets/others/profile_text_field.dart';
 import 'package:bikes_user/widgets/others/user_rating.dart';
 import 'package:flutter/material.dart';
@@ -54,12 +54,14 @@ class ViewUserPage extends StatelessWidget {
                     ),
                     ProfileTextField(
                         isReadOnly: true,
+                        isEditProfile: false,
                         initialValue: '034 866 9124',
                         labelText: CustomStrings.kPhoneNo),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 30.0),
                       child: ProfileTextField(
                           isReadOnly: true,
+                          isEditProfile: false,
                           initialValue: 'Đại học FPT TP.HCM',
                           labelText: CustomStrings.kSchool),
                     ),
@@ -68,7 +70,7 @@ class ViewUserPage extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(right: 6.0),
-                          child: CustomElevatedButton(
+                          child: CustomElevatedIconButton(
                             onPressedFunc: () {},
                             text: CustomStrings.kCall,
                             elevation: 2.0,
@@ -80,7 +82,7 @@ class ViewUserPage extends StatelessWidget {
                         Padding(
                           padding:
                               const EdgeInsets.only(left: 6.0, right: 12.0),
-                          child: CustomElevatedButton(
+                          child: CustomElevatedIconButton(
                             onPressedFunc: () {},
                             text: CustomStrings.kMessage,
                             elevation: 2.0,
@@ -89,7 +91,7 @@ class ViewUserPage extends StatelessWidget {
                             foregroundColor: Colors.white,
                           ),
                         ),
-                        CustomElevatedButton(
+                        CustomElevatedIconButton(
                           onPressedFunc: () {},
                           text: CustomStrings.kReport,
                           elevation: 2.0,
