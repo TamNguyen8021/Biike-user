@@ -97,7 +97,7 @@ class DriverProfilePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 4.0),
                             child: CustomElevatedIconButton(
-                              onPressedFunc: () => Get.toNamed('editProfile'),
+                              onPressedFunc: () => Get.toNamed('/manageBike'),
                               text: CustomStrings.kManageBike,
                               elevation: 0.0,
                               icon: Icons.two_wheeler,

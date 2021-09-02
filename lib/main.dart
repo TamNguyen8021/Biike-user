@@ -2,7 +2,7 @@ import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/binding/book_schedule_trip_binding.dart';
 import 'package:bikes_user/pages/book_trip/binding/book_trip_binding.dart';
 import 'package:bikes_user/pages/choose_mode_page.dart';
-import 'package:bikes_user/pages/driver_point_page.dart';
+import 'package:bikes_user/pages/exchange_voucher_page.dart';
 import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile/binding/edit_profile_binding.dart';
 import 'package:bikes_user/pages/edit_profile/view/edit_profile_page.dart';
@@ -23,6 +23,8 @@ import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_detail_page.dart';
+import 'package:bikes_user/pages/add_bike_page.dart';
+import 'package:bikes_user/pages/manage_bike_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
 import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
@@ -54,9 +56,9 @@ class Biike extends StatelessWidget {
             elevation: 0.0,
             backgroundColor: CustomColors.kBlue,
             titleTextStyle: TextStyle(
-                fontSize: 13,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
                 color: Colors.white,
-                letterSpacing: 0.5,
                 fontFamily: 'SVN Product Sans')),
         textTheme: TextTheme(
             bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
@@ -89,9 +91,8 @@ class Biike extends StatelessWidget {
                 elevation: MaterialStateProperty.all<double>(2.0))),
         textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
-          textStyle: MaterialStateProperty.all<TextStyle>(
-              TextStyle(color: Colors.white, fontSize: 12)),
-          elevation: MaterialStateProperty.all<double>(2.0),
+          textStyle:
+              MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 12)),
         )),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.only(top: 12.0),
@@ -163,7 +164,7 @@ class Biike extends StatelessWidget {
             name: '/findBikerSuccess', page: () => FindingBikerSuccessPage()),
         GetPage(name: '/findBikerFail', page: () => FindingBikerFailPage()),
         GetPage(name: '/getTripSuccess', page: () => GetTripSuccessPage()),
-        GetPage(name: '/exchangeVoucher', page: () => DriverPointPage()),
+        GetPage(name: '/exchangeVoucher', page: () => ExchangeVoucherPage()),
         GetPage(
             name: '/tripDetail',
             page: () => TripDetail(
@@ -179,6 +180,18 @@ class Biike extends StatelessWidget {
             name: '/bookScheduleTrip',
             page: () => BookScheduleTripPage(),
             binding: BookScheduleTripBinding()),
+        GetPage(
+          name: '/manageBike',
+          page: () => ManageBikePage(
+            role: 'Driver',
+          ),
+        ),
+        GetPage(
+          name: '/addBike',
+          page: () => AddBikePage(
+            role: 'Driver',
+          ),
+        ),
       ],
     );
   }

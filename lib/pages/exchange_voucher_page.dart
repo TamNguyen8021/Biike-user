@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// The 'driver-point' screen
-class DriverPointPage extends StatelessWidget {
-  const DriverPointPage({Key? key}) : super(key: key);
+class ExchangeVoucherPage extends StatelessWidget {
+  const ExchangeVoucherPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
