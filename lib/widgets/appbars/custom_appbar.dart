@@ -1,9 +1,10 @@
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// This widget is the top appbar on home page
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String? role;
+  final Role? role;
   final bool hasLeading;
   final Widget? title;
   final AppBar appBar;
@@ -49,7 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidget = IconButton(
         onPressed: () {
           if (actionWidgets != null) {
-            if (role == 'Customer') {
+            if (role == Role.Customer) {
               Get.offAllNamed('/customerHome');
             } else {
               Get.offAllNamed('/driverHome');

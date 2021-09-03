@@ -1,5 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/widgets/buttons/profile_buttons.dart';
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 
 /// The driver profile screen
 class DriverProfilePage extends StatelessWidget {
-  final String role;
+  final Role role;
 
   const DriverProfilePage({Key? key, required this.role}) : super(key: key);
 
@@ -24,7 +25,7 @@ class DriverProfilePage extends StatelessWidget {
         hasShape: false,
         appBar: AppBar(),
         hasLeading: true,
-        role: 'Driver',
+        role: Role.Driver,
         actionWidgets: <Widget>[
           Padding(
               padding:

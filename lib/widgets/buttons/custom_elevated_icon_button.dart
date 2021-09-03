@@ -37,17 +37,14 @@ class CustomElevatedIconButton extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .button!
-                .copyWith(fontSize: 12, color: foregroundColor),
+                .copyWith(color: foregroundColor),
           ),
-          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                elevation: MaterialStateProperty.all<double>(elevation),
-                backgroundColor: backgroundColor == CustomColors.kBlue
-                    ? null
-                    : MaterialStateProperty.all<Color>(backgroundColor),
-                foregroundColor: foregroundColor == Colors.white
-                    ? null
-                    : MaterialStateProperty.all<Color>(foregroundColor),
-              )),
+          style: ElevatedButton.styleFrom(
+            elevation: elevation,
+            primary:
+                backgroundColor == CustomColors.kBlue ? null : backgroundColor,
+            onPrimary: foregroundColor == Colors.white ? null : foregroundColor,
+          )),
     );
   }
 }

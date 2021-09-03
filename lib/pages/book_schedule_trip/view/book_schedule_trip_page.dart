@@ -9,6 +9,7 @@ import 'package:bikes_user/widgets/buttons/time_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// 'book_schedule_trip' screen
 class BookScheduleTripPage extends StatelessWidget {
   final bookScheduleTripController = Get.find<BookScheduleTripController>();
 
@@ -49,31 +50,23 @@ class BookScheduleTripPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: Obx(
-                        () => ChooseDateTimeButton(
-                            text: bookScheduleTripController
-                                    .isDateSelected.value
-                                ? '${bookScheduleTripController.selectedDate.value.toLocal()}'
-                                    .split(' ')[0]
-                                : CustomStrings.kChooseDate,
-                            onPressedFunc: () =>
-                                bookScheduleTripController.selectDate(context)),
-                      ),
+                    Obx(
+                      () => ChooseDateTimeButton(
+                          text: bookScheduleTripController.isDateSelected.value
+                              ? '${bookScheduleTripController.selectedDate.value.toLocal()}'
+                                  .split(' ')[0]
+                              : CustomStrings.kChooseDate,
+                          onPressedFunc: () =>
+                              bookScheduleTripController.selectDate(context)),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Obx(
-                        () => ChooseDateTimeButton(
-                            text: bookScheduleTripController
-                                    .isTimeSelected.value
-                                ? '${bookScheduleTripController.selectedTime.value.format(context)}'
-                                    .split(' ')[0]
-                                : CustomStrings.kChooseTime,
-                            onPressedFunc: () =>
-                                bookScheduleTripController.selectTime(context)),
-                      ),
+                    Obx(
+                      () => ChooseDateTimeButton(
+                          text: bookScheduleTripController.isTimeSelected.value
+                              ? '${bookScheduleTripController.selectedTime.value.format(context)}'
+                                  .split(' ')[0]
+                              : CustomStrings.kChooseTime,
+                          onPressedFunc: () =>
+                              bookScheduleTripController.selectTime(context)),
                     ),
                   ],
                 ),

@@ -1,18 +1,19 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// The activity page widget
 class Activity extends StatelessWidget {
-  final String role;
+  final Role role;
   const Activity({Key? key, required this.role}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String _roleActivity;
-    if (role == 'Customer') {
+    if (role == Role.Customer) {
       _roleActivity = CustomStrings.kCustomerActivity;
     } else {
       _roleActivity = CustomStrings.kDriverActivity;

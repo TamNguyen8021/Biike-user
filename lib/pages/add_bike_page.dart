@@ -1,10 +1,10 @@
+import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// The home screen template for both ke-er and biker
 class AddBikePage extends StatelessWidget {
-  final String role;
+  final Role role;
   const AddBikePage({Key? key, required this.role}) : super(key: key);
 
   @override

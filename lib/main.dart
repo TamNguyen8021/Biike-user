@@ -22,7 +22,8 @@ import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page.dart';
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
 import 'package:bikes_user/pages/open_page.dart';
-import 'package:bikes_user/pages/trip_detail_page.dart';
+import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart';
+import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
 import 'package:bikes_user/pages/manage_bike_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
@@ -31,6 +32,7 @@ import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
 import 'package:bikes_user/pages/view_user/view/view_user_page.dart';
 import 'package:bikes_user/pages/welcome_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +50,7 @@ class Biike extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // Apply a combination of colors based on the provided one to entire app.
-        primarySwatch: CustomColors.kBlue,
+        primaryColor: CustomColors.kBlue,
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'SVN Product Sans',
         appBarTheme: AppBarTheme(
@@ -63,7 +65,8 @@ class Biike extends StatelessWidget {
         textTheme: TextTheme(
             bodyText1: TextStyle(fontSize: 12, color: CustomColors.kDarkGray),
             bodyText2: TextStyle(color: CustomColors.kDarkGray),
-            button: TextStyle(color: Colors.white),
+            button: TextStyle(
+                fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
             headline1: TextStyle(fontSize: 25, color: CustomColors.kBlue),
             headline2: TextStyle(
                 fontSize: 18,
@@ -133,24 +136,24 @@ class Biike extends StatelessWidget {
         GetPage(
             name: '/driverHome',
             page: () => HomePage(
-                  role: 'Driver',
+                  role: Role.Driver,
                 ),
             binding: HomeBinding()),
         GetPage(
             name: '/customerHome',
             page: () => HomePage(
-                  role: 'Customer',
+                  role: Role.Customer,
                 ),
             binding: HomeBinding()),
         GetPage(
             name: '/customerProfile',
             page: () => CustomerProfilePage(
-                  role: 'Customer',
+                  role: Role.Customer,
                 )),
         GetPage(
             name: '/driverProfile',
             page: () => DriverProfilePage(
-                  role: 'Driver',
+                  role: Role.Driver,
                 )),
         GetPage(
             name: '/editProfile',
@@ -166,12 +169,12 @@ class Biike extends StatelessWidget {
         GetPage(name: '/getTripSuccess', page: () => GetTripSuccessPage()),
         GetPage(name: '/exchangeVoucher', page: () => ExchangeVoucherPage()),
         GetPage(
-            name: '/tripDetail',
-            page: () => TripDetail(
-                  role: 'Driver',
-                  isWaitingForDriver: false,
-                  isTripCompleted: false,
-                )),
+            name: '/tripDetails',
+            page: () => TripDetailsPage(
+                  role: Role.Customer,
+                  isWaitingForDriver: true,
+                ),
+            binding: TripDetailsBinding()),
         GetPage(
             name: '/bookTrip',
             page: () => BookTripPage(),
@@ -183,13 +186,13 @@ class Biike extends StatelessWidget {
         GetPage(
           name: '/manageBike',
           page: () => ManageBikePage(
-            role: 'Driver',
+            role: Role.Driver,
           ),
         ),
         GetPage(
           name: '/addBike',
           page: () => AddBikePage(
-            role: 'Driver',
+            role: Role.Driver,
           ),
         ),
       ],

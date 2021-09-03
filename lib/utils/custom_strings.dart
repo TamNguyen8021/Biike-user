@@ -40,7 +40,7 @@ class CustomStrings {
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
   static const String kReminderTime = " phút nữa";
   static const String kConfirmFinishTrip = "Đánh dấu đã đến";
-  static const String kFinishTrip = "Đã đến";
+  static const String kArriveAtDestination = "Đã đến";
   static const String kCustomerMode = "Đi ké mode";
   static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";
@@ -137,6 +137,9 @@ class CustomStrings {
 
   // 'trip_detail' screen
   static const String kTripDetails = "Chi tiết chuyến đi";
+  static const String kSupport = "Trợ giúp";
+  static const String kNewTrip = "Đã tạo";
+  static const String kTripHasDriver = "Đã được nhận chở";
   static const String kTripStatus = "Đang tìm...";
   static const String kCancelTrip = "Hủy chuyến";
   static const String kConfirmArrival = "Đánh dấu đã đến";

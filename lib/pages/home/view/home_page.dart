@@ -1,4 +1,5 @@
 import 'package:bikes_user/pages/home/controller/home_controller.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 
 /// The home screen template for both ke-er and biker
 class HomePage extends StatelessWidget {
-  final String role;
+  final Role role;
 
   HomePage({Key? key, required this.role}) : super(key: key);
 
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
     String _homeRoute = '/driverHome';
     String _profileRoute = '/customerProfile';
 
-    if (role != 'Customer') {
+    if (role != Role.Customer) {
       _homePage = DriverHome();
       _homeRoute = '/customerHome';
       _profileRoute = '/driverProfile';

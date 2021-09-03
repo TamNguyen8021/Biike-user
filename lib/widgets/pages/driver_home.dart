@@ -60,7 +60,9 @@ class DriverHome extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        ConfirmArrivalButton(),
+                        ConfirmArrivalButton(
+                          isOnHomeScreen: true,
+                        ),
                         ContactButtons()
                       ],
                     ),

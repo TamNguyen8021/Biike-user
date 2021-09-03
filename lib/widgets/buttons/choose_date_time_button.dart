@@ -12,7 +12,7 @@ class ChooseDateTimeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 3,
+      width: MediaQuery.of(context).size.width / 2 - 54.0,
       child: ElevatedButton(
         onPressed: onPressedFunc,
         style: ElevatedButton.styleFrom(

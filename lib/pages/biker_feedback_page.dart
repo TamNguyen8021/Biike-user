@@ -1,8 +1,8 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/buttons/send_feedback_button.dart';
 import 'package:bikes_user/widgets/painters/half_oval_painter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -169,7 +169,11 @@ class BikerFeedbackPage extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[SendFeedbackButton()]),
+                            children: <Widget>[
+                              SendFeedbackButton(
+                                role: Role.Driver,
+                              )
+                            ]),
                       ),
                     ]),
               ),

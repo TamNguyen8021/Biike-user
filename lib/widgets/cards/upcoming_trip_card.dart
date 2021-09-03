@@ -30,7 +30,7 @@ class UpcomingTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed('/tripDetail'),
+      onTap: () => Get.toNamed('/tripDetails'),
       child: Container(
         height: 82,
         child: Row(

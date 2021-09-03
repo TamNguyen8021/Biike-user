@@ -5,10 +5,10 @@ import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/widgets/others/map_viewer.dart';
 import 'package:bikes_user/widgets/others/station_dropdown_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// 'book_trip' screen
 class BookTripPage extends StatelessWidget {
   final bookTripController = Get.find<BookTripController>();
 

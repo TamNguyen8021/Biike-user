@@ -1,10 +1,11 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SwitchRoleButton extends StatelessWidget {
-  final String role;
+  final Role role;
   final String route;
 
   SwitchRoleButton({Key? key, required this.role, required this.route})
@@ -15,7 +16,7 @@ class SwitchRoleButton extends StatelessWidget {
     String _modeButtonText = CustomStrings.kCustomerMode;
     Color _modeButtonForegroundColor = CustomColors.kBlue;
     Color _modeButtonBackgroundColor = CustomColors.kLightGray;
-    if (role != 'Customer') {
+    if (role != Role.Customer) {
       _modeButtonText = CustomStrings.kDriverMode;
       _modeButtonBackgroundColor = CustomColors.kOrange;
       _modeButtonForegroundColor = CustomColors.kLightGray;
