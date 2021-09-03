@@ -175,5 +175,7 @@ class CustomStrings {
 
   // 'add_bike' screen
   static const String kAddBike = 'Thêm xe mới';
+  static const String kCheckBikeInfo = 'Vui lòng kiểm tra thông tin xe';
   static const String kNumberPlate = 'Biển số đăng ký';
+  static const String kTakePictureAgain = 'Chụp lại';
 }

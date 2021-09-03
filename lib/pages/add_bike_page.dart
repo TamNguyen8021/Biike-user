@@ -1,111 +1,81 @@
-import 'package:bikes_user/utils/enums.dart';
+import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
+import 'package:bikes_user/widgets/others/text_container.dart';
 import 'package:flutter/material.dart';
 
-/// The home screen template for both ke-er and biker
+/// 'add_bike' screen
 class AddBikePage extends StatelessWidget {
-  final Role role;
-  const AddBikePage({Key? key, required this.role}) : super(key: key);
+  const AddBikePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // String modeButtonText = CustomStrings.kCustomerMode;
-    String addBikeText = 'Thêm xe mới';
-    // String settingButton = 'Cài đặt';
-    // String rateAppButton = 'Đánh giá ứng dụng';
-    // String logOutButton = 'Đăng xuất';
-    // String bikeNumberPlate = '75A - 456.15';
-    String bikeOwner = 'Tên chủ xe';
-    // String bikeOwerValue = 'Đỗ Hữu Phát';
-    String bikeCategory = 'Loại xe';
-    // String bikeCategoryValue = 'Tay ga';
-    String bikeBrand = 'Hiệu xe';
-    // String bikeBrandValue = 'Yamaha';
-    String bikeColor = 'Màu xe';
-    // String bikeColorValue = 'Tím';
-    // Color modeButtonForegroundColor = CustomColors.kBlue;
-    // Color modeButtonBackgroundColor = CustomColors.kLightGray;
-
-    // List<String> listBikeCategory = [
-    //   "Đại học FPT TP.HCM",
-    //   'Two',
-    //   'Free',
-    //   'Four'
-    // ];
-    // List<String> listBikeBrand = [
-    //   "Cổng khu công nghệ cao",
-    //   'Two',
-    //   'Free',
-    //   'Four'
-    // ];
-    // List<String> listBikeColor = [
-    //   "Cổng khu công nghệ cao",
-    //   'Two',
-    //   'Free',
-    //   'Four'
-    // ];
-
-    // String valueChoose = '0';
-    // List listItem = ['1', '2', '3'];
-
-    int _value = 1;
-
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          isVisible: true,
-          appBar: AppBar(),
-          hasShape: true,
-          hasLeading: true,
-          title: Text(
-            addBikeText,
-          ),
+    return Scaffold(
+      appBar: CustomAppBar(
+        isVisible: true,
+        appBar: AppBar(),
+        hasShape: true,
+        hasLeading: true,
+        title: Text(
+          CustomStrings.kAddBike,
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(22.0),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(bottom: 16.0),
+                child: Text(
+                  CustomStrings.kCheckBikeInfo,
+                  style: TextStyle(color: CustomColors.kBlue),
+                ),
+              ),
+              Text(CustomStrings.kBikeOwner),
+              TextContainer(text: 'Đỗ Hữu Phát'),
+              Text(CustomStrings.kBikeBrand),
+              TextContainer(text: 'WAVE ALPHA'),
+              Text(CustomStrings.kBikeCategory),
+              TextContainer(text: 'Yamaha'),
+              Text(CustomStrings.kBikeColor),
+              TextContainer(text: 'Đỏ-Đen'),
+              Text(CustomStrings.kNumberPlate),
+              TextContainer(text: '64V1-4170'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    height: 10.0,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10.0, left: 30.0),
+                      child: CustomElevatedIconButton(
+                        onPressedFunc: () {},
+                        text: CustomStrings.kTakePictureAgain,
+                        backgroundColor: CustomColors.kLightGray,
+                        foregroundColor: CustomColors.kDarkGray,
+                        elevation: 0.0,
+                        icon: Icons.photo_camera_outlined,
+                      ),
+                    ),
                   ),
-                  Text(bikeOwner),
-                  TextField(
-                    decoration:
-                        new InputDecoration.collapsed(hintText: 'Nhập họ tên'),
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Text(bikeCategory),
-                  DropdownButton(
-                      value: _value, items: [], hint: Text("Chọn loại xe")),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Text(bikeBrand),
-                  DropdownButton(
-                      value: _value, items: [], hint: Text("Chọn hiệu xe")),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Text(bikeColor),
-                  DropdownButton(
-                      value: _value, items: [], hint: Text("Chọn màu xe")),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Text('Biển số xe'),
-                  TextField(
-                    decoration: new InputDecoration.collapsed(
-                        hintText: 'Nhập biển số xe'),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 30.0),
+                      child: CustomElevatedIconButton(
+                        onPressedFunc: () {},
+                        text: CustomStrings.kSave,
+                        backgroundColor: CustomColors.kBlue,
+                        foregroundColor: Colors.white,
+                        elevation: 2.0,
+                        icon: Icons.save,
+                      ),
+                    ),
                   )
-                ]),
-          ),
-        ),
+                ],
+              )
+            ]),
       ),
     );
   }
