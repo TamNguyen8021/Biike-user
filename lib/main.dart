@@ -114,7 +114,7 @@ class Biike extends StatelessWidget {
                   BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         ),
       ),
-      initialRoute: '/customerHome',
+      initialRoute: '/driverHome',
       getPages: [
         GetPage(name: '/open', page: () => OpenPage()),
         GetPage(name: '/welcome', page: () => WelcomePage()),
@@ -186,14 +186,13 @@ class Biike extends StatelessWidget {
         GetPage(
           name: '/manageBike',
           page: () => ManageBikePage(
-            role: Role.Driver,
+            hasBike: false,
+            isBikeVerified: false,
           ),
         ),
         GetPage(
           name: '/addBike',
-          page: () => AddBikePage(
-            role: Role.Driver,
-          ),
+          page: () => AddBikePage(),
         ),
       ],
     );

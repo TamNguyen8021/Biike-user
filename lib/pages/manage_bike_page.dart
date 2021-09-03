@@ -1,176 +1,171 @@
 import 'package:bikes_user/utils/custom_colors.dart';
-import 'package:bikes_user/utils/enums.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-/// The home screen template for both ke-er and biker
+/// 'manage_bike' screen
 class ManageBikePage extends StatelessWidget {
-  final Role role;
-  const ManageBikePage({Key? key, required this.role}) : super(key: key);
+  final bool hasBike;
+  final bool isBikeVerified;
+
+  const ManageBikePage(
+      {Key? key, required this.hasBike, required this.isBikeVerified})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // String modeButtonText = CustomStrings.kCustomerMode;
-    String manageBikeText = 'Quản lý xe';
-    // String settingButton = 'Cài đặt';
-    // String rateAppButton = 'Đánh giá ứng dụng';
-    // String logOutButton = 'Đăng xuất';
-    String bikeNumberPlate = '75A - 456.15';
-    String bikeOwner = 'Tên chủ xe';
-    String bikeOwerValue = 'Đỗ Hữu Phát';
-    String bikeCategory = 'Loại xe';
-    String bikeCategoryValue = 'Tay ga';
-    String bikeBrand = 'Hiệu xe';
-    String bikeBrandValue = 'Yamaha';
-    String bikeColor = 'Màu xe';
-    String bikeColorValue = 'Tím';
-    // Color modeButtonForegroundColor = CustomColors.kBlue;
-    // Color modeButtonBackgroundColor = CustomColors.kLightGray;
-
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          isVisible: true,
-          hasLeading: true,
-          hasShape: true,
-          appBar: AppBar(),
-          title: Text(
-            manageBikeText,
-          ),
+    return Scaffold(
+      appBar: CustomAppBar(
+        isVisible: true,
+        hasLeading: true,
+        hasShape: true,
+        appBar: AppBar(),
+        title: Text(
+          CustomStrings.kManageBike,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 10.0,
+        actionWidgets: <Widget>[
+          if (hasBike) ...[
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.delete),
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    height: 250,
+            ),
+          ] else ...[
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: IconButton(
+                onPressed: () => Get.toNamed('/addBike'),
+                icon: Icon(Icons.add),
+              ),
+            ),
+          ]
+        ],
+      ),
+      body: hasBike
+          ? Container(
+              margin: const EdgeInsets.all(22.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              decoration: BoxDecoration(
+                  color: CustomColors.kLightGray,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: CustomColors.kDarkGray.withOpacity(0.3),
+                      // changes position of shadow
+                      offset: Offset(0, 1.5),
+                    )
+                  ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(
+                          Icons.two_wheeler,
+                          size: 25,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          '75A - 456.15',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(fontSize: 20),
+                        ),
+                      ),
+                      if (isBikeVerified) ...[
+                        Text(
+                          CustomStrings.kBikeVerified,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(color: CustomColors.kBlue),
+                        ),
+                      ] else ...[
+                        Text(
+                          CustomStrings.kWaitingVerified,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(color: CustomColors.kOrange),
+                        ),
+                      ]
+                    ]),
+                  ),
+                  Divider(
+                      // color: CustomColors.kRed,
+                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.two_wheeler,
-                                color: CustomColors.kBlue,
-                                size: 30,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                bikeNumberPlate,
-                                style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ]),
-                        Divider(),
-                        Row(children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(30, 10, 10, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  bikeOwner,
-                                  style: TextStyle(
-                                      color: CustomColors.kDarkGray,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  bikeOwerValue,
-                                  style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  bikeCategory,
-                                  style: TextStyle(
-                                      color: CustomColors.kDarkGray,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  bikeCategoryValue,
-                                  style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  bikeBrand,
-                                  style: TextStyle(
-                                      color: CustomColors.kDarkGray,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  bikeBrandValue,
-                                  style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  bikeColor,
-                                  style: TextStyle(
-                                      color: CustomColors.kDarkGray,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  bikeColorValue,
-                                  style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        Text(
+                          CustomStrings.kBikeOwner,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Text(
+                            'Đỗ Hữu Phát',
+                            style: Theme.of(context).textTheme.headline6,
                           ),
-                        ]),
+                        ),
+                        Text(
+                          CustomStrings.kBikeBrand,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Text(
+                            'Yamaha',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        Text(
+                          CustomStrings.kBikeCategory,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Text(
+                            'Tay ga',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        Text(
+                          CustomStrings.kBikeColor,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'Tím',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: CustomColors.kLightGray,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: CustomColors.kDarkGray.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 0.5,
-                            // changes position of shadow
-                            offset: Offset(0, 0.5),
-                          )
-                        ]),
                   ),
+                ],
+              ),
+            )
+          : Container(
+              alignment: Alignment.topCenter,
+              margin: const EdgeInsets.only(top: 30.0),
+              child: Text(
+                CustomStrings.kSuggestAddBike,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: CustomColors.kDarkGray,
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+              ),
+            ),
     );
   }
 }

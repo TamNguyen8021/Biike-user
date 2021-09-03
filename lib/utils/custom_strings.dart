@@ -96,7 +96,7 @@ class CustomStrings {
   static const String kSave = "Lưu";
 
   // 'driver-profile' screen
-  static const String kManageBike = "Quản lý xe";
+  static const String kManageBike = "Quản lí xe";
 
   // 'view_user' screen
   static const String kViewUser = "Xem bạn chở";
@@ -162,4 +162,18 @@ class CustomStrings {
   static const String kRepeat = "Lặp lại";
   static const String kRepeatTo = "Lặp lại đến";
   static const String kCancel = "Hủy";
+
+  // 'bike_manager' screen
+  static const String kBikeVerified = 'Đã xác minh';
+  static const String kWaitingVerified = 'Đang xác minh';
+  static const String kBikeOwner = 'Tên chủ xe';
+  static const String kBikeCategory = 'Loại xe';
+  static const String kBikeBrand = 'Nhãn hiệu';
+  static const String kBikeColor = 'Màu sơn';
+  static const String kSuggestAddBike =
+      'Bạn chưa thêm xe.\nHãy chọn + để thêm xe';
+
+  // 'add_bike' screen
+  static const String kAddBike = 'Thêm xe mới';
+  static const String kNumberPlate = 'Biển số đăng ký';
 }
