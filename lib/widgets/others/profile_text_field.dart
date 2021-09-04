@@ -1,5 +1,4 @@
 import 'package:bikes_user/utils/custom_colors.dart';
-import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTextField extends StatelessWidget {
@@ -27,13 +26,6 @@ class ProfileTextField extends StatelessWidget {
               .headline6!
               .copyWith(color: CustomColors.kDarkGray.withOpacity(0.5))
           : Theme.of(context).textTheme.headline6,
-      validator: (value) {
-        if (labelText == CustomStrings.kPhoneNo) {
-          if (value!.length != 10) {
-            print('Invalid phone number');
-          }
-        }
-      },
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: isReadOnly && isEditProfile

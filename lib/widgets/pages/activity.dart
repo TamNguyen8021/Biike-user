@@ -1,3 +1,4 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
@@ -7,13 +8,12 @@ import 'package:get/get.dart';
 
 /// The activity page widget
 class Activity extends StatelessWidget {
-  final Role role;
-  const Activity({Key? key, required this.role}) : super(key: key);
+  const Activity({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String _roleActivity;
-    if (role == Role.Customer) {
+    if (Biike.role.value == Role.Customer) {
       _roleActivity = CustomStrings.kCustomerActivity;
     } else {
       _roleActivity = CustomStrings.kDriverActivity;

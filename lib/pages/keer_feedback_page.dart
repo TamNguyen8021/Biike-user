@@ -1,6 +1,5 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/buttons/send_feedback_button.dart';
 import 'package:bikes_user/widgets/painters/half_oval_painter.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +22,7 @@ class KeerFeedbackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Container(
-        // alignment: Alignment.center,
         child: SafeArea(
           child: SingleChildScrollView(
             child:
@@ -34,7 +31,6 @@ class KeerFeedbackPage extends StatelessWidget {
               Container(
                 height: 180,
                 child: Stack(
-                  // alignment: Alignment.center,
                   children: <Widget>[
                     CustomPaint(
                       painter: HalfOvalPainter(),
@@ -147,11 +143,7 @@ class KeerFeedbackPage extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              SendFeedbackButton(
-                                role: Role.Customer,
-                              )
-                            ]),
+                            children: <Widget>[SendFeedbackButton()]),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(

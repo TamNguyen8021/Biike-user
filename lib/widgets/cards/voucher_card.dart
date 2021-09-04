@@ -8,7 +8,7 @@ class VoucherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
       decoration: BoxDecoration(
           color: CustomColors.kLightGray,
           borderRadius: BorderRadius.circular(5),
@@ -22,7 +22,7 @@ class VoucherCard extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 8.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Image(

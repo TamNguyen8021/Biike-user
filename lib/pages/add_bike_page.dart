@@ -1,9 +1,11 @@
+import 'package:bikes_user/pages/manage_bike/controller/manage_bike_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/widgets/others/text_container.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// 'add_bike' screen
 class AddBikePage extends StatelessWidget {
@@ -11,6 +13,8 @@ class AddBikePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final manageBikeController = Get.find<ManageBikeController>();
+
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,
@@ -64,7 +68,11 @@ class AddBikePage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10.0, right: 30.0),
                       child: CustomElevatedIconButton(
-                        onPressedFunc: () {},
+                        onPressedFunc: () {
+                          manageBikeController.addBike();
+                          Get.back();
+                          Get.offNamed('/manageBike');
+                        },
                         text: CustomStrings.kSave,
                         backgroundColor: CustomColors.kBlue,
                         foregroundColor: Colors.white,

@@ -1,3 +1,4 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,19 +39,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    ShapeBorder? shapeBorder;
-    Widget? leadingWidget;
+    ShapeBorder? _shapeBorder;
+    Widget? _leadingWidget;
 
     if (hasShape) {
-      shapeBorder = RoundedRectangleBorder(
+      _shapeBorder = RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)));
     }
 
     if (hasLeading) {
-      leadingWidget = IconButton(
+      _leadingWidget = IconButton(
         onPressed: () {
-          if (actionWidgets != null) {
-            if (role == Role.Customer) {
+          if (ModalRoute.of(context)!.settings.name.toString() == '/profile') {
+            if (Biike.role.value == Role.Customer) {
               Get.offAllNamed('/customerHome');
             } else {
               Get.offAllNamed('/driverHome');
@@ -67,11 +68,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Visibility(
       visible: isVisible,
       child: AppBar(
-        leading: leadingWidget,
+        leading: _leadingWidget,
         title: title,
         actions: actionWidgets,
         bottom: bottomAppBar,
-        shape: shapeBorder,
+        shape: _shapeBorder,
       ),
     );
   }

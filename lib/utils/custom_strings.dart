@@ -5,8 +5,7 @@ class CustomStrings {
 
   // '003.1_login'
   static const String kLogoApp = "Biiké";
-  static const String kIntroQuote = "Ứng dụng kết nối đi ké xe miễn phí";
-  static const String kLoginButton = "Đăng ký/Đăng nhập bằng số điện thoại";
+  static const String kLoginButton = "Xác thực bằng email FPT";
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
   static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
 

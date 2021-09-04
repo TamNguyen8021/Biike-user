@@ -1,7 +1,9 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/pages/home/view/home_page.dart';
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +24,7 @@ class ConfirmArrivalButton extends StatelessWidget {
 
     return SizedBox(
       height: 35,
-      width: isOnHomeScreen ? 152 : null,
+      width: isOnHomeScreen ? 170 : null,
       child: Obx(() => ElevatedButton.icon(
             onPressed: () {
               if (isOnHomeScreen && isAtDestination.isFalse) {
@@ -30,13 +32,16 @@ class ConfirmArrivalButton extends StatelessWidget {
                 buttonColor.value = CustomColors.kDarkGray;
                 buttonText.value = CustomStrings.kArriveAtDestination;
               } else if (!isOnHomeScreen) {
+                Biike.role.value = Role.Customer;
                 Get.offAllNamed('/keerFeedback');
               }
             },
             icon: Icon(Icons.done_all, size: 25),
             label: Text(
               buttonText.value,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.width >= 400 ? 12 : 10),
             ),
             style: ElevatedButton.styleFrom(
               elevation: 0.0,

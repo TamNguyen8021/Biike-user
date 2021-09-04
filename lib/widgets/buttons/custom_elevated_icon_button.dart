@@ -34,10 +34,15 @@ class CustomElevatedIconButton extends StatelessWidget {
           ),
           label: Text(
             text,
-            style: Theme.of(context)
-                .textTheme
-                .button!
-                .copyWith(color: foregroundColor),
+            style: MediaQuery.of(context).size.width >= 400
+                ? Theme.of(context)
+                    .textTheme
+                    .button!
+                    .copyWith(color: foregroundColor)
+                : Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: foregroundColor),
           ),
           style: ElevatedButton.styleFrom(
             elevation: elevation,

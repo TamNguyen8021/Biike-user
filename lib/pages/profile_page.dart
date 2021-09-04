@@ -1,3 +1,4 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
@@ -11,11 +12,9 @@ import 'package:bikes_user/widgets/painters/half_oval_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// The customer profile screen
-class CustomerProfilePage extends StatelessWidget {
-  final Role role;
-
-  const CustomerProfilePage({Key? key, required this.role}) : super(key: key);
+/// 'profile' screen
+class ProfilePage extends StatelessWidget {
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +24,15 @@ class CustomerProfilePage extends StatelessWidget {
         hasShape: false,
         appBar: AppBar(),
         hasLeading: true,
-        role: Role.Customer,
+        role: Biike.role.value,
         actionWidgets: <Widget>[
           Padding(
-              padding:
-                  const EdgeInsets.only(right: 16.0, top: 19.0, bottom: 19.0),
-              child: SwitchRoleButton(
-                role: role,
-                route: '/driverProfile',
-              ))
+            padding:
+                const EdgeInsets.only(right: 16.0, top: 19.0, bottom: 19.0),
+            child: SwitchRoleButton(
+              route: '/profile',
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -91,13 +90,35 @@ class CustomerProfilePage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: CustomElevatedIconButton(
-                          onPressedFunc: () => Get.toNamed('/editProfile'),
-                          text: CustomStrings.kEdit,
-                          icon: Icons.edit,
-                          elevation: 0.0,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
+                        child: Obx(
+                          () => Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              if (Biike.role.value == Role.Driver) ...[
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: CustomElevatedIconButton(
+                                    onPressedFunc: () =>
+                                        Get.toNamed('/manageBike'),
+                                    text: CustomStrings.kManageBike,
+                                    elevation: 0.0,
+                                    icon: Icons.two_wheeler,
+                                    backgroundColor: CustomColors.kBlue,
+                                    foregroundColor: Colors.white,
+                                  ),
+                                ),
+                              ],
+                              CustomElevatedIconButton(
+                                onPressedFunc: () =>
+                                    Get.toNamed('/editProfile'),
+                                text: CustomStrings.kEdit,
+                                icon: Icons.edit,
+                                elevation: 0.0,
+                                backgroundColor: CustomColors.kBlue,
+                                foregroundColor: Colors.white,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       ProfileButtons(),

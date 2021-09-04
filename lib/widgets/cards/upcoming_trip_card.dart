@@ -1,5 +1,7 @@
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 /// This widget contains an upcoming trip's details
@@ -41,13 +43,24 @@ class UpcomingTripCard extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage(avatarUrl),
+                      if (avatarUrl != CustomStrings.kFindingDriver) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: AssetImage(avatarUrl),
+                          ),
                         ),
-                      ),
+                      ] else ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 8.0),
+                          child: SvgPicture.asset(
+                            'assets/images/loading.svg',
+                            height: 50,
+                          ),
+                        ),
+                      ],
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,

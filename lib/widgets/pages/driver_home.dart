@@ -236,7 +236,7 @@ class DriverHome extends StatelessWidget {
                   children: <Widget>[
                     ListUpcomingTrips(
                       listUpcomingTrips: [1, 2, 3, 4],
-                      itemPadding: 8.0,
+                      itemPadding: 12.0,
                       isTodayFirstActivity: false,
                     ),
                     AdContainer(),

@@ -21,11 +21,10 @@ class CustomTextButton extends StatelessWidget {
     return Container(
       width: width,
       child: TextButton(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsets>(
-              EdgeInsets.symmetric(vertical: 20.0)),
-          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
-          foregroundColor: MaterialStateProperty.all<Color>(foregroundColor),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 12.0),
+          backgroundColor: backgroundColor,
+          primary: foregroundColor,
         ),
         onPressed: onPressedFunc,
         child: Text(text),

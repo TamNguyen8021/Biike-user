@@ -1,3 +1,4 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/pages/trip_details/controller/trip_details_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
@@ -16,14 +17,11 @@ import 'package:get/get.dart';
 class TripDetailsPage extends StatelessWidget {
   final tripDetailsController = Get.find<TripDetailsController>();
 
-  final Role role;
-
   /// Only used for customer
   final bool isWaitingForDriver;
 
   TripDetailsPage({
     Key? key,
-    required this.role,
     required this.isWaitingForDriver,
   }) : super(key: key);
 
@@ -93,68 +91,77 @@ class TripDetailsPage extends StatelessWidget {
               IntrinsicHeight(
                 child: Row(
                   children: <Widget>[
-                    Expanded(
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border(
-                                right: BorderSide(
-                                    color: CustomColors.kDarkGray
-                                        .withOpacity(0.1))),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 5.0),
-                                      child: Icon(
-                                        Icons.event_outlined,
-                                      ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                            right: BorderSide(
+                                color:
+                                    CustomColors.kDarkGray.withOpacity(0.1))),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              margin: const EdgeInsets.only(bottom: 5.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color:
+                                        CustomColors.kDarkGray.withOpacity(0.1),
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 5.0),
+                                    child: Icon(
+                                      Icons.event_outlined,
                                     ),
-                                    Text(
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Text(
                                       '08/03/2021',
                                       style: TextStyle(
                                           color: CustomColors.kDarkGray),
                                     ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5.0),
+                                  child: Icon(
+                                    Icons.access_time,
+                                  ),
                                 ),
-                                Divider(
-                                  color:
-                                      CustomColors.kDarkGray.withOpacity(0.1),
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 5.0),
-                                      child: Icon(
-                                        Icons.access_time,
-                                      ),
-                                    ),
-                                    Text(
-                                      '06:35',
-                                      style: TextStyle(
-                                          color: CustomColors.kDarkGray),
-                                    ),
-                                  ],
+                                Text(
+                                  '06:35',
+                                  style:
+                                      TextStyle(color: CustomColors.kDarkGray),
                                 ),
                               ],
                             ),
-                          )),
+                          ],
+                        ),
+                      ),
                     ),
                     Expanded(
-                      flex: 2,
                       child: Container(
+                          padding: const EdgeInsets.only(left: 8.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Row(
                                 children: <Widget>[
@@ -171,18 +178,8 @@ class TripDetailsPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.more_vert_outlined,
-                                  ),
-                                  Expanded(
-                                    child: Divider(
-                                      color: CustomColors.kDarkGray
-                                          .withOpacity(0.1),
-                                    ),
-                                  ),
-                                ],
+                              Icon(
+                                Icons.more_vert_outlined,
                               ),
                               Row(
                                 children: <Widget>[
@@ -263,57 +260,54 @@ class TripDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Center(
-                          child: SizedBox(
-                            width: isWaitingForDriver ? 152 : double.infinity,
-                            child: CustomElevatedIconButton(
-                              onPressedFunc: () {},
-                              text: CustomStrings.kCancelTrip,
-                              backgroundColor: CustomColors.kLightGray,
-                              foregroundColor: CustomColors.kDarkGray,
-                              elevation: 0.0,
-                              icon: Icons.clear,
-                            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Center(
+                        child: SizedBox(
+                          width: isWaitingForDriver ? 152 : double.infinity,
+                          child: CustomElevatedIconButton(
+                            onPressedFunc: () {},
+                            text: CustomStrings.kCancelTrip,
+                            backgroundColor: CustomColors.kLightGray,
+                            foregroundColor: CustomColors.kDarkGray,
+                            elevation: 0.0,
+                            icon: Icons.clear,
                           ),
                         ),
                       ),
                     ),
-                    if (!isWaitingForDriver) ...[
-                      if (role == Role.Driver) ...[
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Obx(
-                              () => CustomElevatedIconButton(
-                                onPressedFunc: () => tripDetailsController
-                                    .changeToFinishTripButton(),
-                                text: '${tripDetailsController.buttonText}',
-                                backgroundColor: CustomColors.kBlue,
-                                foregroundColor: Colors.white,
-                                elevation: 0.0,
-                                icon: tripDetailsController.buttonIcon.value,
-                              ),
+                  ),
+                  if (!isWaitingForDriver) ...[
+                    if (Biike.role.value == Role.Driver) ...[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Obx(
+                            () => CustomElevatedIconButton(
+                              onPressedFunc: () => tripDetailsController
+                                  .changeToFinishTripButton(),
+                              text: '${tripDetailsController.buttonText}',
+                              backgroundColor: CustomColors.kBlue,
+                              foregroundColor: Colors.white,
+                              elevation: 0.0,
+                              icon: tripDetailsController.buttonIcon.value,
                             ),
                           ),
                         ),
-                      ] else ...[
-                        Expanded(
-                          child: ConfirmArrivalButton(
-                            isOnHomeScreen: false,
-                          ),
+                      ),
+                    ] else ...[
+                      Expanded(
+                        child: ConfirmArrivalButton(
+                          isOnHomeScreen: false,
                         ),
-                      ]
-                    ],
+                      ),
+                    ]
                   ],
-                ),
+                ],
               ),
             ],
           ),

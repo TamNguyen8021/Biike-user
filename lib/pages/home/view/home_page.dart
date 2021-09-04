@@ -1,3 +1,4 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/pages/home/controller/home_controller.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
@@ -13,25 +14,21 @@ import 'package:get/get.dart';
 
 /// The home screen template for both ke-er and biker
 class HomePage extends StatelessWidget {
-  final Role role;
-
-  HomePage({Key? key, required this.role}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     Widget _homePage = CustomerHomeFull();
-    Widget _activityPage = Activity(
-      role: role,
-    );
+    Widget _activityPage = Activity();
     String _homeRoute = '/driverHome';
-    String _profileRoute = '/customerProfile';
+    String _profileRoute = '/profile';
 
-    if (role != Role.Customer) {
+    if (Biike.role.value == Role.Driver) {
       _homePage = DriverHome();
       _homeRoute = '/customerHome';
-      _profileRoute = '/driverProfile';
+      // _profileRoute = '/driverProfile';
     }
 
     return DefaultTabController(
@@ -68,7 +65,7 @@ class HomePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: SwitchRoleButton(
-                            role: role,
+                            // onPressedFunc: () => Get.offAllNamed(_homeRoute),
                             route: _homeRoute,
                           ),
                         ),
@@ -81,7 +78,7 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 16.0, 20.0, 16.0),
                       child: CircularProfileAvatar(
-                        'assets/images/profile-1.jpg',
+                        'https://i.pinimg.com/originals/eb/b0/2a/ebb02aedec9bc74f65e38311c7e14d34.png',
                         radius: 12,
                         onTap: () {
                           Get.toNamed(_profileRoute);

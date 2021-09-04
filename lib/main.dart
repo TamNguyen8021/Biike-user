@@ -1,14 +1,14 @@
 import 'package:bikes_user/pages/biker_feedback_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/binding/book_schedule_trip_binding.dart';
 import 'package:bikes_user/pages/book_trip/binding/book_trip_binding.dart';
-import 'package:bikes_user/pages/choose_mode_page.dart';
+import 'package:bikes_user/pages/choose_mode/binding/choose_mode_binding.dart';
+import 'package:bikes_user/pages/choose_mode/view/choose_mode_page.dart';
 import 'package:bikes_user/pages/exchange_voucher_page.dart';
-import 'package:bikes_user/pages/driver_profile_page.dart';
 import 'package:bikes_user/pages/edit_profile/binding/edit_profile_binding.dart';
 import 'package:bikes_user/pages/edit_profile/view/edit_profile_page.dart';
 import 'package:bikes_user/pages/home/binding/home_binding.dart';
 import 'package:bikes_user/pages/home/view/home_page.dart';
-import 'package:bikes_user/pages/customer_profile_page.dart';
+import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
@@ -21,15 +21,16 @@ import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page.dart';
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
+import 'package:bikes_user/pages/manage_bike/binding/manage_bike_binding.dart';
 import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart';
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
-import 'package:bikes_user/pages/manage_bike_page.dart';
+import 'package:bikes_user/pages/manage_bike/view/manage_bike_page.dart';
 import 'package:bikes_user/pages/trip_history_page.dart';
 import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
 import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
-import 'package:bikes_user/pages/view_user/view/view_user_page.dart';
+import 'package:bikes_user/pages/view_user_page.dart';
 import 'package:bikes_user/pages/welcome_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/enums.dart';
@@ -43,6 +44,8 @@ void main() {
 
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
+  static Rx<Role> role = Role.None.obs;
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -114,7 +117,7 @@ class Biike extends StatelessWidget {
                   BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         ),
       ),
-      initialRoute: '/driverHome',
+      initialRoute: '/open',
       getPages: [
         GetPage(name: '/open', page: () => OpenPage()),
         GetPage(name: '/welcome', page: () => WelcomePage()),
@@ -131,30 +134,23 @@ class Biike extends StatelessWidget {
             name: '/inputName',
             page: () => InputNamePage(),
             binding: InputNameBinding()),
-        GetPage(name: '/chooseMode', page: () => ChooseModePage()),
+        GetPage(
+            name: '/chooseMode',
+            page: () => ChooseModePage(),
+            binding: ChooseModeBinding()),
         GetPage(name: '/history', page: () => TripHistoryPage()),
         GetPage(
             name: '/driverHome',
-            page: () => HomePage(
-                  role: Role.Driver,
-                ),
+            page: () => HomePage(),
             binding: HomeBinding()),
         GetPage(
             name: '/customerHome',
-            page: () => HomePage(
-                  role: Role.Customer,
-                ),
+            page: () => HomePage(),
             binding: HomeBinding()),
         GetPage(
-            name: '/customerProfile',
-            page: () => CustomerProfilePage(
-                  role: Role.Customer,
-                )),
-        GetPage(
-            name: '/driverProfile',
-            page: () => DriverProfilePage(
-                  role: Role.Driver,
-                )),
+          name: '/profile',
+          page: () => ProfilePage(),
+        ),
         GetPage(
             name: '/editProfile',
             page: () => EditProfilePage(),
@@ -171,8 +167,7 @@ class Biike extends StatelessWidget {
         GetPage(
             name: '/tripDetails',
             page: () => TripDetailsPage(
-                  role: Role.Customer,
-                  isWaitingForDriver: true,
+                  isWaitingForDriver: false,
                 ),
             binding: TripDetailsBinding()),
         GetPage(
@@ -186,9 +181,9 @@ class Biike extends StatelessWidget {
         GetPage(
           name: '/manageBike',
           page: () => ManageBikePage(
-            hasBike: false,
             isBikeVerified: false,
           ),
+          binding: ManageBikeBinding(),
         ),
         GetPage(
           name: '/addBike',
