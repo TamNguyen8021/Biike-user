@@ -8,6 +8,7 @@ class ContactButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 10.0),

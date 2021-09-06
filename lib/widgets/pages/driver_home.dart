@@ -1,9 +1,11 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
-import 'package:bikes_user/widgets/buttons/finish_trip_button.dart';
+import 'package:bikes_user/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
-import 'package:bikes_user/widgets/lists/list_customers.dart';
+import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
+import 'package:bikes_user/widgets/others/ad_container.dart';
+import 'package:bikes_user/widgets/others/top_biker.dart';
 import 'package:flutter/material.dart';
 
 /// The driver_home page widget
@@ -22,8 +24,9 @@ class DriverHome extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 4.0),
                 child: Column(
                   children: <Widget>[
+                    TopBiker(),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: 8.0, top: 16.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -56,7 +59,12 @@ class DriverHome extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[FinishTripButton(), ContactButtons()],
+                      children: <Widget>[
+                        ConfirmArrivalButton(
+                          isOnHomeScreen: true,
+                        ),
+                        ContactButtons()
+                      ],
                     ),
                   ],
                 ),
@@ -221,11 +229,20 @@ class DriverHome extends StatelessWidget {
                 ),
               ),
               Divider(color: CustomColors.kLightGray),
-              Container(
-                child: ListCustomers(
-                  listCustomers: [1],
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
+                child: Column(
+                  children: <Widget>[
+                    ListUpcomingTrips(
+                      listUpcomingTrips: [1, 2, 3, 4],
+                      itemPadding: 12.0,
+                      isTodayFirstActivity: false,
+                    ),
+                    AdContainer(),
+                  ],
                 ),
-              )
+              ),
             ],
           ),
         ),

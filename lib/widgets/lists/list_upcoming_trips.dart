@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
@@ -18,6 +20,8 @@ class ListUpcomingTrips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _isWaitingDriver = Random().nextBool();
+
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -38,8 +42,12 @@ class ListUpcomingTrips extends StatelessWidget {
                 backgroundColor: backgroundColor,
                 foregroundColor: foregroundColor,
                 iconColor: iconColor,
-                avatarUrl: 'assets/images/profile-4.jpg',
-                name: 'Thảo Vân',
+                avatarUrl: _isWaitingDriver
+                    ? CustomStrings.kFindingDriver
+                    : 'assets/images/profile-4.jpg',
+                name: _isWaitingDriver
+                    ? CustomStrings.kFindingDriver
+                    : 'Thảo Vân',
                 time: '11:35',
                 date: CustomStrings.kToday,
                 sourceStation: 'Chung cư SKY9',
