@@ -15,7 +15,7 @@ class TripDetailsController extends GetxController {
     if (buttonIcon.value != Icons.done_all) {
       buttonIcon.value = Icons.done_all;
     } else {
-      Get.offAllNamed('/bikerFeedback');
+      Get.offAllNamed('/feedback');
     }
   }
 }
