@@ -1,4 +1,5 @@
-import 'package:bikes_user/pages/biker_feedback_page.dart';
+import 'package:bikes_user/pages/feedback_page/binding/feedback_binding.dart';
+import 'package:bikes_user/pages/feedback_page/view/feedback_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/binding/book_schedule_trip_binding.dart';
 import 'package:bikes_user/pages/book_trip/binding/book_trip_binding.dart';
 import 'package:bikes_user/pages/choose_mode/binding/choose_mode_binding.dart';
@@ -17,7 +18,6 @@ import 'package:bikes_user/pages/input_name/binding/input_name_binding.dart';
 import 'package:bikes_user/pages/input_name/view/input_name_page.dart';
 import 'package:bikes_user/pages/input_phone/binding/input_phone_binding.dart';
 import 'package:bikes_user/pages/input_phone/view/input_phone_page.dart';
-import 'package:bikes_user/pages/keer_feedback_page.dart';
 import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page.dart';
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
@@ -154,8 +154,10 @@ class Biike extends StatelessWidget {
             page: () => EditProfilePage(),
             binding: EditProfileBinding()),
         GetPage(name: '/viewUser', page: () => ViewUserPage()),
-        GetPage(name: '/bikerFeedback', page: () => BikerFeedbackPage()),
-        GetPage(name: '/keerFeedback', page: () => KeerFeedbackPage()),
+        GetPage(
+            name: '/feedback',
+            page: () => FeedbackPage(),
+            binding: FeedbackBinding()),
         GetPage(name: '/findBiker', page: () => FindingBikerPage()),
         GetPage(
             name: '/findBikerSuccess', page: () => FindingBikerSuccessPage()),

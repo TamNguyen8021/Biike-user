@@ -123,7 +123,8 @@ class CustomStrings {
   static const String kBtnReturn = "Quay lại";
 
   // 'ke_er_feedback' screen
-  static const String kTripSuccess = "Chở ké thành công!";
+  static const String kTripSuccessBiker = "Chở ké thành công!";
+  static const String kTripSuccessKeer = "Đi ké thành công!";
   static const String kBuyReminder =
       "Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!";
   static const String kRateReminder =

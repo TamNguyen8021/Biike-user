@@ -33,7 +33,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                 buttonText.value = CustomStrings.kArriveAtDestination;
               } else if (!isOnHomeScreen) {
                 Biike.role.value = Role.Customer;
-                Get.offAllNamed('/keerFeedback');
+                Get.offAllNamed('/feedback');
               }
             },
             icon: Icon(Icons.done_all, size: 25),
