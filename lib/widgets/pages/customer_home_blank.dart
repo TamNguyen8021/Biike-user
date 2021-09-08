@@ -1,5 +1,8 @@
+import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/buttons/custom_floating_button.dart';
+import 'package:bikes_user/widgets/buttons/create_trip_button.dart';
+import 'package:bikes_user/widgets/others/top_biker.dart';
+import 'package:bikes_user/widgets/painters/tooltip_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,25 +16,34 @@ class CustomerHomeBlank extends StatelessWidget {
         child: SafeArea(
             child: Container(
           width: MediaQuery.of(context).size.width,
-          // height: double.infinity,
           padding: const EdgeInsets.all(22.0),
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: SvgPicture.asset('assets/images/blank.svg'),
-              ),
-              Text(
-                CustomStrings.kCreateTrip,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText2,
+              TopBiker(),
+              SvgPicture.asset('assets/images/blank.svg'),
+              CustomPaint(
+                foregroundPainter: TooltipPainter(),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  decoration: BoxDecoration(
+                    color: CustomColors.kLightGray,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Text(
+                    CustomStrings.kCreateTrip,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
               ),
             ],
           ),
         )),
       ),
-      floatingActionButton: CustomFloatingButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: CreateTripButton(),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
     );
   }
 }

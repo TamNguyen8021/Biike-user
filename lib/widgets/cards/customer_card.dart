@@ -1,5 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/widgets/others/user_rating.dart';
 import 'package:flutter/material.dart';
 
 /// This widget contains a customer trip's details
@@ -31,38 +32,7 @@ class CustomerCard extends StatelessWidget {
                   color: CustomColors.kBlue, fontWeight: FontWeight.bold),
             ),
           ),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-            decoration: BoxDecoration(
-                color: CustomColors.kOrange,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: CustomColors.kDarkGray.withOpacity(0.3),
-                    // changes position of shadow
-                    offset: Offset(0, 1.5),
-                  )
-                ]),
-            child: Text.rich(TextSpan(children: <InlineSpan>[
-              TextSpan(
-                  text: '4.5',
-                  style: TextStyle(fontSize: 10, color: Colors.white)),
-              WidgetSpan(
-                  child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.0),
-              )),
-              WidgetSpan(
-                  child: Padding(
-                padding: const EdgeInsets.only(bottom: 2.0),
-                child: Icon(
-                  Icons.star_rate_rounded,
-                  size: 11,
-                  color: Colors.white,
-                ),
-              ))
-            ])),
-          ),
+          UserRating(score: '4.5'),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
             decoration: BoxDecoration(
@@ -91,7 +61,7 @@ class CustomerCard extends StatelessWidget {
                               Text(
                                 CustomStrings.kToday,
                                 style: Theme.of(context).textTheme.bodyText1,
-                              ),
+                              )
                             ],
                           ),
                         ),
