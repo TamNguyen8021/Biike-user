@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
@@ -13,7 +11,7 @@ class FeedbackController extends GetxController {
     _feedback = feedback;
   }
 
-  bool sendFeedback() {
+  bool isSendFeedbackSuccess() {
     //TODO
     print(_star.toString() + " - " + _feedback.toString());
     return true;

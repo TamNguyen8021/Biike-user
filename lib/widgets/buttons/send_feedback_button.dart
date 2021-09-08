@@ -17,7 +17,7 @@ class SendFeedbackButton extends StatelessWidget {
     return SizedBox(
       child: ElevatedButton(
         onPressed: () {
-          if (feedbackController.sendFeedback()) {
+          if (feedbackController.isSendFeedbackSuccess()) {
             print('Send feedback success');
             switch (Biike.role.value) {
               case Role.Driver:
