@@ -1,6 +1,7 @@
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/pages/feedback_page/controller/feedback_cotroller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_error_strings.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/buttons/send_feedback_button.dart';
@@ -16,8 +17,14 @@ class FeedbackPage extends StatelessWidget {
   final feedbackController = Get.find<FeedbackController>();
 
   FeedbackPage({Key? key}) : super(key: key);
-  // var _star;
-  // var _feedback;
+
+  Future<bool> _onBackPressed() {
+    Get.snackbar('Error', FeedbackError.kNotRated,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM);
+    return Future.value(false);
+  }
 
   Widget _image(String asset) {
     return SvgPicture.asset(
@@ -29,7 +36,9 @@ class FeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () => _onBackPressed(),
+      child: Scaffold(
       // resizeToAvoidBottomInset: false,
       body: Container(
         // alignment: Alignment.center,
@@ -146,7 +155,6 @@ class FeedbackPage extends StatelessWidget {
                                       itemPadding:
                                       EdgeInsets.symmetric(horizontal: 4.0),
                                       onRatingUpdate: (star) {
-                                        print(star);
                                         feedbackController.updateStarRating(star);
                                       },
                                     ),
@@ -177,7 +185,6 @@ class FeedbackPage extends StatelessWidget {
                                           vertical: 10.0, horizontal: 15.0),
                                     ),
                                     onChanged: (feedback) {
-                                      print(feedback);
                                       feedbackController.updateFeedback(feedback);
                                     },
                                   ),
@@ -228,6 +235,7 @@ class FeedbackPage extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }

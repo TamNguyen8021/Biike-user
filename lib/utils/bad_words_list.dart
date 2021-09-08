@@ -1,0 +1,13 @@
+List<String> additionalBadWords = [
+  'địt',
+  'đm',
+  'đụ',
+  'vl',
+  'đít',
+  'cặc',
+  'cứt',
+  'lồn',
+  'buồi',
+  'đbrr',
+  'đbgr'
+];
