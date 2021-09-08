@@ -22,7 +22,6 @@ import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page.dart';
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
 import 'package:bikes_user/pages/manage_bike/binding/manage_bike_binding.dart';
-import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart';
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
@@ -117,9 +116,8 @@ class Biike extends StatelessWidget {
                   BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         ),
       ),
-      initialRoute: '/open',
+      initialRoute: '/welcome',
       getPages: [
-        GetPage(name: '/open', page: () => OpenPage()),
         GetPage(name: '/welcome', page: () => WelcomePage()),
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(

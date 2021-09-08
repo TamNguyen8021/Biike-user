@@ -1,0 +1,30 @@
+{
+  "user": [
+    {
+      "user_phone_number": "0123456789",
+      "user_email": "abcse123456@fpt.edu.vn",
+      "name": "ABC",
+      "avatar": null,
+      "gender": 1,
+      "user_status": 1,
+      "last_login_device": "Samsung Galaxy Note 3 Neo",
+      "last_login_time": "2021-04-23T18:25:43.511Z",
+      "star": 5,
+      "create_date": "2021-04-23T18:25:43.511Z",
+      "is_bike_verified": null
+    },
+    {
+      "user_phone_number": "9876543210",
+      "user_email": "defse123457@fpt.edu.vn",
+      "name": "DEF",
+      "avatar": null,
+      "gender": 1,
+      "user_status": 1,
+      "last_login_device": "Samsung Galaxy Note 3 Neo",
+      "last_login_time": "2021-04-23T18:26:43.511Z",
+      "star": 5,
+      "create_date": "2021-04-23T18:26:43.511Z",
+      "is_bike_verified": true
+    }
+  ]
+}
