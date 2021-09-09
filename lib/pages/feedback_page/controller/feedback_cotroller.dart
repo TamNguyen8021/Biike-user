@@ -1,17 +1,17 @@
+import 'package:bikes_user/utils/BadWordsFilter/bad_words_filter.dart';
 import 'package:bikes_user/utils/custom_error_strings.dart';
 import 'package:get/get.dart';
-import 'package:profanity_filter/profanity_filter.dart';
 
 class FeedbackController extends GetxController {
   var _star, _feedback;
-  final filter = ProfanityFilter();
+  final filter = BadWordsFilter();
 
   bool _isStarRated() {
     return _star != null ? true : false;
   }
 
   bool _isFeedbackContainsBadWords() {
-    return _feedback != null && filter.hasProfanity(_feedback);
+    return _feedback != null && filter.hasBadWords(_feedback);
   }
 
   void updateStarRating(star) {

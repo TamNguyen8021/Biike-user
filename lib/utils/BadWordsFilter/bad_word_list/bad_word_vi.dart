@@ -1,4 +1,4 @@
-List<String> additionalBadWords = [
+List<String> badWordsListVi = [
   'địt',
   'đm',
   'đụ',
