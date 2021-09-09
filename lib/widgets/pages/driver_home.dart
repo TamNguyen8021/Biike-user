@@ -1,3 +1,4 @@
+import 'package:bikes_user/pages/home/controller/search_trip_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
@@ -6,11 +7,30 @@ import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
 import 'package:bikes_user/widgets/others/top_biker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// The driver_home page widget
 class DriverHome extends StatelessWidget {
-  const DriverHome({Key? key}) : super(key: key);
+  final searchTripController = Get.find<SearchTripController>();
+
+  DriverHome({Key? key}) : super(key: key);
+
+  final List<String> dropdownFromArray = [
+    CustomStrings.kChooseFrom,
+    'Đại học FPT TP.HCM',
+    'Two',
+    'Free',
+    'Four'
+  ];
+  final List<String> dropdownToArray = [
+    CustomStrings.kChooseTo,
+    'Cổng khu công nghệ cao',
+    'Two',
+    'Free',
+    'Four'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -116,12 +136,22 @@ class DriverHome extends StatelessWidget {
                                                 Icons.event_outlined,
                                               ),
                                             ),
-                                            Text(
-                                              CustomStrings.kToday,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1,
-                                            ),
+                                            Obx(() => RichText(
+                                              text: TextSpan(
+                                                  text: searchTripController.isDateSelected.value
+                                                      ? '${searchTripController.dateSelected.value.toLocal()}'.split(' ')[0]
+                                                      : CustomStrings.kToday,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
+                                                  recognizer: TapGestureRecognizer()
+                                                    ..onTap = () {
+                                                      //TODO
+                                                      searchTripController.selectDate(context);
+                                                    }
+                                                ),
+                                              )
+                                            ), // chọn ngày
                                           ],
                                         ),
                                         Divider(
@@ -137,11 +167,21 @@ class DriverHome extends StatelessWidget {
                                                 Icons.access_time,
                                               ),
                                             ),
-                                            Text(
-                                              CustomStrings.kSelectHour,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1,
+                                            Obx(() => RichText(
+                                              text: TextSpan(
+                                                  text: searchTripController.isTimeSelected.value
+                                                      ? '${searchTripController.timeSelected.value.format(context)}'.split(' ')[0]
+                                                      : CustomStrings.kSelectHour,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
+                                                  recognizer: TapGestureRecognizer()
+                                                    ..onTap = () {
+                                                      //TODO
+                                                      searchTripController.selectTime(context);
+                                                    }
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -193,25 +233,36 @@ class DriverHome extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: <Widget>[
-                                          Text(
-                                            CustomStrings.kSelectSourceStation,
-                                            style: Theme.of(context)
+                                          RichText(
+                                            text: TextSpan(
+                                              text: CustomStrings.kSelectSourceStation,
+                                              style: Theme.of(context)
                                                 .textTheme
                                                 .bodyText1,
-                                          ),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  //TODO
+                                                }
+                                            ),
+                                          ), // Điểm đến
                                           Expanded(
                                             child: Divider(
                                               color: CustomColors.kDarkGray
                                                   .withOpacity(0.3),
                                             ),
                                           ),
-                                          Text(
-                                            CustomStrings
-                                                .kSelectDestinationStation,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                          ),
+                                          RichText(
+                                            text: TextSpan(
+                                                text: CustomStrings.kSelectDestinationStation,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1,
+                                                recognizer: TapGestureRecognizer()
+                                                  ..onTap = () {
+                                                    //TODO
+                                                  }
+                                            ),
+                                          ), // điểm đi
                                         ],
                                       ),
                                     ),
