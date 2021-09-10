@@ -7,18 +7,18 @@ part 'trip.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Trip {
-  final int tripId;
-  final String customerPhoneNumber;
+  final int? tripId;
+  final String? customerPhoneNumber;
   final String? driverPhoneNumber;
-  final int routeId;
+  final int? routeId;
   final DateTime timeBook;
   final DateTime? timePickUp;
   final DateTime? timeFinished;
-  final int status;
+  final int? tripStatus;
   final String? numberPlate;
-  final bool isSchedule;
+  final bool? isSchedule;
   final String? cancelPersonPhoneNumber;
 
   Trip(
@@ -29,7 +29,7 @@ class Trip {
       this.timeBook,
       this.timePickUp,
       this.timeFinished,
-      this.status,
+      this.tripStatus,
       this.numberPlate,
       this.isSchedule,
       this.cancelPersonPhoneNumber);

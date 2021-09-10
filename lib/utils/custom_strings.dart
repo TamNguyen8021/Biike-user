@@ -63,15 +63,16 @@ class CustomStrings {
   static const String kHistory = "Lịch sử";
   static const String kCustomerHistory = "Đi ké";
   static const String kDriverHistory = "Chở ké";
+  static const String kTripFinished = "Thành công";
+  static const String kTripCanceled = "Đã hủy";
 
   // 'activity' screen
-  static const String kDriverActivity = "Lịch chở";
-  static const String kCustomerActivity = "Lịch ké";
   static const String kTomorrow = "Ngày mai";
 
   // bottom tabbar
   static const String kHome = "Trang chủ";
-  static const String kActivities = "Hoạt động";
+  static const String kCustomerActivities = "Lịch ké";
+  static const String kDriverActivities = "Lịch chở";
 
   //'ke_er_profile' screen
   static const String kEdit = "Chỉnh sửa";
@@ -178,4 +179,12 @@ class CustomStrings {
   static const String kCheckBikeInfo = 'Vui lòng kiểm tra thông tin xe';
   static const String kNumberPlate = 'Biển số đăng ký';
   static const String kTakePictureAgain = 'Chụp lại';
+
+  // Error message
+  static const String kError = 'Thông báo lỗi';
+  static const String kErrorMessage =
+      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké';
+
+  // loading
+  static const String kLoading = 'Đang chạy...';
 }

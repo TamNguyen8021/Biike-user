@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A list of history trips
 class ListHistoryTrips extends StatelessWidget {
-  final List listHistoryTrips;
+  final List<dynamic> listHistoryTrips;
   final double itemPadding;
 
   const ListHistoryTrips(
@@ -17,17 +17,18 @@ class ListHistoryTrips extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: listHistoryTrips.length,
-        itemBuilder: (BuildContext context, int i) {
+        itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: EdgeInsets.only(bottom: itemPadding),
             child: HistoryTripCard(
-                avatarUrl: 'assets/images/profile-4.jpg',
-                name: 'Thảo Vân',
-                time: '11:35',
-                date: '15 Th 1',
-                status: 'Thành công',
-                sourceStation: 'Chung cư SKY9',
-                destinationStation: 'Đại học FPT TP.HCM'),
+                avatarUrl: listHistoryTrips.elementAt(index).avatarUrl,
+                name: listHistoryTrips.elementAt(index).name,
+                time: listHistoryTrips.elementAt(index).time,
+                date: listHistoryTrips.elementAt(index).date,
+                status: listHistoryTrips.elementAt(index).status,
+                sourceStation: listHistoryTrips.elementAt(index).sourceStation,
+                destinationStation:
+                    listHistoryTrips.elementAt(index).destinationStation),
           );
         });
   }

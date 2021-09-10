@@ -65,7 +65,6 @@ class HomePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: SwitchRoleButton(
-                            // onPressedFunc: () => Get.offAllNamed(_homeRoute),
                             route: _homeRoute,
                           ),
                         ),
@@ -78,7 +77,7 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 16.0, 20.0, 16.0),
                       child: CircularProfileAvatar(
-                        'https://i.pinimg.com/originals/eb/b0/2a/ebb02aedec9bc74f65e38311c7e14d34.png',
+                        'https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128',
                         radius: 12,
                         onTap: () {
                           Get.toNamed(_profileRoute);

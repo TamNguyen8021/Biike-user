@@ -1,5 +1,7 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 
 /// This widget is the bottom navigation bar on home page
@@ -21,7 +23,7 @@ class BottomTabBar extends StatelessWidget {
               color: CustomColors.kDarkBlue,
               borderRadius: BorderRadius.all(Radius.circular(30.0))),
           indicatorPadding: const EdgeInsets.all(10.0),
-          tabs: const <Widget>[
+          tabs: <Widget>[
             Tab(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -47,19 +49,24 @@ class BottomTabBar extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text.rich(
                   TextSpan(
-                    children: [
+                    children: <InlineSpan>[
                       WidgetSpan(
                           child: Icon(
                         Icons.calendar_today_rounded,
                       )),
                       WidgetSpan(
-                          child: Padding(
-                        padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 5.0),
-                        child: Text(CustomStrings.kActivities,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 5.0),
+                          child: Text(
+                            Biike.role.value == Role.Customer
+                                ? CustomStrings.kCustomerActivities
+                                : CustomStrings.kDriverActivities,
                             style: TextStyle(
                               fontSize: 10,
-                            )),
-                      )),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

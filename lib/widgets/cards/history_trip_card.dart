@@ -1,4 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +10,7 @@ class HistoryTripCard extends StatelessWidget {
   final String name;
   final String time;
   final String date;
-  final String status;
+  final TripStatus status;
   final String sourceStation;
   final String destinationStation;
 
@@ -25,11 +27,24 @@ class HistoryTripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _statusColor;
-    if (status == 'Thành công') {
-      _statusColor = CustomColors.kBlue;
-    } else {
+    Color _statusColor = CustomColors.kBlue;
+    String _statusText = '';
+
+    if (status != TripStatus.Finished) {
       _statusColor = CustomColors.kRed;
+    }
+
+    switch (status) {
+      case TripStatus.Finding:
+      case TripStatus.Waiting:
+      case TripStatus.Started:
+      case TripStatus.Finished:
+        _statusText = CustomStrings.kTripFinished;
+        break;
+      case TripStatus.Canceled:
+        _statusText = CustomStrings.kTripCanceled;
+        break;
+      default:
     }
 
     return GestureDetector(
@@ -47,7 +62,7 @@ class HistoryTripCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: CircleAvatar(
                           radius: 30,
-                          backgroundImage: AssetImage(avatarUrl),
+                          backgroundImage: NetworkImage(avatarUrl),
                         ),
                       ),
                       Column(
@@ -77,7 +92,7 @@ class HistoryTripCard extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            status,
+                            _statusText,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!

@@ -7,14 +7,14 @@ part 'bike.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Bike {
   final int bikeId;
   final String userPhoneNumber;
   final String numberPlate;
   final String color;
   final String brand;
-  final bool isDeleted;
+  final bool isBikeDeleted;
 
   Bike(
     this.bikeId,
@@ -22,7 +22,7 @@ class Bike {
     this.numberPlate,
     this.color,
     this.brand,
-    this.isDeleted,
+    this.isBikeDeleted,
   );
 
   /// A necessary factory constructor for creating a new Bike instance

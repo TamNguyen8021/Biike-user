@@ -14,9 +14,9 @@ class Activity extends StatelessWidget {
   Widget build(BuildContext context) {
     String _roleActivity;
     if (Biike.role.value == Role.Customer) {
-      _roleActivity = CustomStrings.kCustomerActivity;
+      _roleActivity = CustomStrings.kCustomerActivities;
     } else {
-      _roleActivity = CustomStrings.kDriverActivity;
+      _roleActivity = CustomStrings.kDriverActivities;
     }
 
     return Scaffold(
@@ -41,7 +41,7 @@ class Activity extends StatelessWidget {
                             color: CustomColors.kBlue),
                       ),
                       IconButton(
-                          onPressed: () => Get.toNamed('/history'),
+                          onPressed: () => Get.toNamed('/tripHistory'),
                           icon: Icon(
                             Icons.history,
                             color: CustomColors.kBlue,

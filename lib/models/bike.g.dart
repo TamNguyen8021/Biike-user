@@ -8,20 +8,20 @@ part of 'bike.dart';
 
 Bike _$BikeFromJson(Map<String, dynamic> json) {
   return Bike(
-    json['bikeId'] as int,
-    json['userPhoneNumber'] as String,
-    json['numberPlate'] as String,
+    json['bike_id'] as int,
+    json['user_phone_number'] as String,
+    json['number_plate'] as String,
     json['color'] as String,
     json['brand'] as String,
-    json['isDeleted'] as bool,
+    json['is_bike_deleted'] as bool,
   );
 }
 
 Map<String, dynamic> _$BikeToJson(Bike instance) => <String, dynamic>{
-      'bikeId': instance.bikeId,
-      'userPhoneNumber': instance.userPhoneNumber,
-      'numberPlate': instance.numberPlate,
+      'bike_id': instance.bikeId,
+      'user_phone_number': instance.userPhoneNumber,
+      'number_plate': instance.numberPlate,
       'color': instance.color,
       'brand': instance.brand,
-      'isDeleted': instance.isDeleted,
+      'is_bike_deleted': instance.isBikeDeleted,
     };
