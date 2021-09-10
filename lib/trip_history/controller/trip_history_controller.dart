@@ -22,6 +22,7 @@ class TripHistoryController extends GetxController {
   /// Author: TamNTT
   Future<void> getHistoryTrips({required BuildContext context}) async {
     historyTrips.clear();
+    print(historyTrips.length);
     String response = await DefaultAssetBundle.of(context)
         .loadString('assets/files/history_trip.json');
     var data = jsonDecode(response);
@@ -35,7 +36,7 @@ class TripHistoryController extends GetxController {
     }
     print('loaded data length: ' + loadedData.length.toString());
     for (var item in loadedData) {
-      // print(item);
+      print(item);
       User user = User.fromJson(item);
       // print(user.toJson());
       Trip trip = Trip.fromJson(item);
@@ -48,8 +49,14 @@ class TripHistoryController extends GetxController {
       String date = trip.timeBook.day.toString() +
           ' Th ' +
           trip.timeBook.month.toString();
-      String time =
-          trip.timeBook.hour.toString() + ':' + trip.timeBook.minute.toString();
+      String time = '';
+      if (trip.timeBook.hour < 10) {
+        time += '0';
+      }
+      time = time +
+          trip.timeBook.hour.toString() +
+          ':' +
+          trip.timeBook.minute.toString();
       switch (trip.tripStatus) {
         case 1:
           tripStatus = TripStatus.Finding;

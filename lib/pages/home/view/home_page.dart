@@ -4,8 +4,9 @@ import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
+import 'package:bikes_user/widgets/others/loading.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
-// import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
+import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
 import 'package:bikes_user/widgets/pages/customer_home_full.dart';
 import 'package:bikes_user/widgets/pages/driver_home.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
@@ -28,86 +29,110 @@ class HomePage extends StatelessWidget {
     if (Biike.role.value == Role.Driver) {
       _homePage = DriverHome();
       _homeRoute = '/customerHome';
-      // _profileRoute = '/driverProfile';
     }
 
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(new AppBar().preferredSize.height),
-          child: Builder(
-            builder: (context) {
-              switch (DefaultTabController.of(context)!.index) {
-                case 0:
-                  homeController.setAppBarVisible(true);
-                  break;
-                case 1:
-                  homeController.setAppBarVisible(false);
-                  break;
-                default:
-                  break;
-              }
-              return Obx(
-                () => CustomAppBar(
-                  isVisible: homeController.isAppBarVisible.value,
-                  hasShape: true,
-                  hasLeading: false,
-                  appBar: AppBar(),
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/images/logo-white.png',
-                          height: 25.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: SwitchRoleButton(
-                            route: _homeRoute,
+    return FutureBuilder(
+        future: homeController.getUpcomingTrips(context: context),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          return DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: PreferredSize(
+                preferredSize:
+                    Size.fromHeight(new AppBar().preferredSize.height),
+                child: Builder(
+                  builder: (context) {
+                    switch (DefaultTabController.of(context)!.index) {
+                      case 0:
+                        homeController.setAppBarVisible(true);
+                        break;
+                      case 1:
+                        homeController.setAppBarVisible(false);
+                        break;
+                      default:
+                        break;
+                    }
+                    return Obx(
+                      () => CustomAppBar(
+                        isVisible: homeController.isAppBarVisible.value,
+                        hasShape: true,
+                        hasLeading: false,
+                        appBar: AppBar(),
+                        title: Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Row(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/logo-white.png',
+                                height: 25.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
+                                child: SwitchRoleButton(
+                                  route: _homeRoute,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  actionWidgets: <Widget>[
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.notifications)),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 16.0, 20.0, 16.0),
-                      child: CircularProfileAvatar(
-                        'https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128',
-                        radius: 12,
-                        onTap: () {
-                          Get.toNamed(_profileRoute);
-                        },
+                        actionWidgets: <Widget>[
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.notifications)),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                0.0, 16.0, 20.0, 16.0),
+                            child: CircularProfileAvatar(
+                              'https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128',
+                              radius: 12,
+                              onTap: () {
+                                Get.toNamed(_profileRoute);
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        ),
-        body: TabBarView(
-          children: <Widget>[_homePage, _activityPage],
-        ),
-        bottomNavigationBar: BottomTabBar(
-          onTapFunction: (index) {
-            switch (index) {
-              case 0:
-                homeController.setAppBarVisible(true);
-                break;
-              case 1:
-                homeController.setAppBarVisible(false);
-                break;
-              default:
-                break;
-            }
-          },
-        ),
-      ),
-    );
+              ),
+              body: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      homeController.upcomingTrips.isNotEmpty) ...[
+                    _homePage
+                  ] else if (snapshot.connectionState ==
+                      ConnectionState.waiting) ...[
+                    Loading(),
+                  ] else if (snapshot.connectionState == ConnectionState.done &&
+                      homeController.upcomingTrips.isEmpty) ...[
+                    if (Biike.role.value == Role.Customer) ...[
+                      CustomerHomeBlank(),
+                    ]
+                  ],
+                  _activityPage,
+                ],
+              ),
+              bottomNavigationBar: BottomTabBar(
+                onTapFunction: (index) {
+                  switch (index) {
+                    case 0:
+                      homeController.setAppBarVisible(true);
+                      homeController.getUpcomingTrips(context: context);
+                      break;
+                    case 1:
+                      homeController.setAppBarVisible(false);
+                      homeController.getUpcomingTrips(context: context);
+                      break;
+                    default:
+                      break;
+                  }
+                },
+              ),
+            ),
+          );
+        });
   }
 }

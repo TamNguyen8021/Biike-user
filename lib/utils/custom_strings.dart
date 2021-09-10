@@ -43,7 +43,8 @@ class CustomStrings {
   static const String kCustomerMode = "Đi ké mode";
   static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";
-  static const String kOtherDays = "Mấy hôm sau";
+  // static const String kOtherDays = "Mấy hôm sau";
+  static const String kUpcomingTrips = "Những chuyến sắp tới";
   static const String kFindingDriver = "Đang tìm...";
 
   // 'ke_er_home_blank' screen
@@ -65,6 +66,8 @@ class CustomStrings {
   static const String kDriverHistory = "Chở ké";
   static const String kTripFinished = "Thành công";
   static const String kTripCanceled = "Đã hủy";
+  static const String kNoCustomerHistoryTrips = "Không có lịch sử đi ké";
+  static const String kNoDriverHistoryTrips = "Không có lịch sử chở ké";
 
   // 'activity' screen
   static const String kTomorrow = "Ngày mai";

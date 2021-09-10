@@ -1,3 +1,4 @@
+import 'package:bikes_user/pages/home/controller/home_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
@@ -7,6 +8,7 @@ import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
 import 'package:bikes_user/widgets/others/top_biker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// The driver_home page widget
 class DriverHome extends StatelessWidget {
@@ -14,6 +16,19 @@ class DriverHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.find<HomeController>();
+
+    List<String> earliestUpcomingTripDate =
+        homeController.upcomingTrips[0].date.toString().split('Th');
+    int earliestUpcomingTripDay = int.parse(earliestUpcomingTripDate.first);
+    int earliestUpcomingTripMonth = int.parse(earliestUpcomingTripDate.last);
+
+    List<String> earliestUpcomingTripTime =
+        homeController.upcomingTrips[0].time.toString().split(':');
+    int earliestUpcomingTripHour = int.parse(earliestUpcomingTripTime.first);
+    int earliestUpcomingTripMin = int.parse(earliestUpcomingTripTime.last);
+    DateTime currentTime = DateTime.now();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -24,55 +39,65 @@ class DriverHome extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 4.0),
                 child: Column(
                   children: <Widget>[
-                    TopBiker(),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0, top: 16.0),
-                      child: Row(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: TopBiker(),
+                    ),
+                    if (earliestUpcomingTripDay == currentTime.day &&
+                        earliestUpcomingTripMonth == currentTime.month &&
+                        earliestUpcomingTripHour == currentTime.hour &&
+                        earliestUpcomingTripMin - currentTime.minute == 15) ...[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              CustomStrings.kDriverReadyReminder,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                            Text(
+                              '15' + CustomStrings.kReminderTime,
+                              style: TextStyle(
+                                  color: CustomColors.kBlue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: UpcomingTripCard(
+                            backgroundColor: CustomColors.kBlue,
+                            foregroundColor: Colors.white,
+                            iconColor: Colors.white,
+                            avatarUrl:
+                                homeController.upcomingTrips[0].avatarUrl,
+                            name: homeController.upcomingTrips[0].name,
+                            time: homeController.upcomingTrips[0].time,
+                            date: CustomStrings.kToday,
+                            sourceStation:
+                                homeController.upcomingTrips[0].sourceStation,
+                            destinationStation: homeController
+                                .upcomingTrips[0].destinationStation),
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            CustomStrings.kDriverReadyReminder,
-                            style: Theme.of(context).textTheme.bodyText2,
+                          ConfirmArrivalButton(
+                            isOnHomeScreen: true,
                           ),
-                          Text(
-                            '15' + CustomStrings.kReminderTime,
-                            style: TextStyle(
-                                color: CustomColors.kBlue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12),
-                          ),
+                          ContactButtons()
                         ],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: UpcomingTripCard(
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
-                          iconColor: Colors.white,
-                          avatarUrl: 'assets/images/profile-4.jpg',
-                          name: 'Thảo Vân',
-                          time: '06:35',
-                          date: CustomStrings.kToday,
-                          sourceStation: 'Đại học FPT TP.HCM',
-                          destinationStation: 'Chung cư SKY9'),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        ConfirmArrivalButton(
-                          isOnHomeScreen: true,
-                        ),
-                        ContactButtons()
-                      ],
-                    ),
+                    ] else ...[
+                      AdContainer(),
+                    ]
                   ],
                 ),
               ),
-              Divider(
-                color: CustomColors.kLightGray,
-                thickness: 1,
-              ),
+              Divider(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
                 child: Column(
@@ -124,10 +149,7 @@ class DriverHome extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        Divider(
-                                          color: CustomColors.kDarkGray
-                                              .withOpacity(0.3),
-                                        ),
+                                        Divider(),
                                         Row(
                                           children: <Widget>[
                                             Padding(
@@ -200,10 +222,7 @@ class DriverHome extends StatelessWidget {
                                                 .bodyText1,
                                           ),
                                           Expanded(
-                                            child: Divider(
-                                              color: CustomColors.kDarkGray
-                                                  .withOpacity(0.3),
-                                            ),
+                                            child: Divider(),
                                           ),
                                           Text(
                                             CustomStrings
@@ -228,18 +247,19 @@ class DriverHome extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(color: CustomColors.kLightGray),
+              Divider(),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
+                padding: EdgeInsets.fromLTRB(22.0, 5.0, 22.0,
+                    homeController.upcomingTrips.length > 2 ? 35.0 : 8.0),
                 child: Column(
                   children: <Widget>[
-                    ListUpcomingTrips(
-                      listUpcomingTrips: [1, 2, 3, 4],
-                      itemPadding: 12.0,
-                      isTodayFirstActivity: false,
-                    ),
-                    AdContainer(),
+                    // if (homeController.upcomingTrips.isNotEmpty) ...[
+                    //   ListUpcomingTrips(
+                    //     listUpcomingTrips:
+                    //         homeController.upcomingTrips.toList(),
+                    //     itemPadding: 12.0,
+                    //   ),
+                    // ],
                   ],
                 ),
               ),

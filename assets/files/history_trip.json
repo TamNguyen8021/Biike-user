@@ -3,7 +3,7 @@
 		{
 			"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 			"user_fullname": "Yến Linh",
-			"time_book": "2021-01-15T06:35:43.511Z",
+			"time_book": "2020-10-15T06:35:43.511Z",
 			"trip_status": 4,
 			"starting_point_name": "Chung cư SKY9",
 			"destination_name": "Đại học FPT TP.HCM"
@@ -17,22 +17,5 @@
 			"destination_name": "Đại học FPT TP.HCM"
 		}
 	],
-	[
-		{
-			"avatar": "https://ui-avatars.com/api/?name=Thao+Van&background=random&rounded=true&size=128",
-			"user_fullname": "Thảo Vân",
-			"time_book": "2021-01-15T06:35:43.511Z",
-			"trip_status": 5,
-			"starting_point_name": "Chung cư SKY9",
-			"destination_name": "Đại học FPT TP.HCM"
-		},
-		{
-			"avatar": "https://ui-avatars.com/api/?name=Thao+Van&background=random&rounded=true&size=128",
-			"user_fullname": "Thảo Vân",
-			"time_book": "2021-01-15T06:35:43.511Z",
-			"trip_status": 4,
-			"starting_point_name": "Chung cư SKY9",
-			"destination_name": "Đại học FPT TP.HCM"
-		}
-	]
+	[]
 ]
