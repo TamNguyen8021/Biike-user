@@ -4,7 +4,6 @@ class CustomStrings {
   static const String kIntroduction = "Ứng dụng kết nối đi ké xe miễn phí";
 
   // '003.1_login'
-  static const String kLogoApp = "Biiké";
   static const String kLoginButton = "Xác thực bằng email FPT";
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
   static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
@@ -38,15 +37,12 @@ class CustomStrings {
   static const String kTopBiker = "Top Biker tháng ";
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
   static const String kReminderTime = " phút nữa";
-  static const String kConfirmFinishTrip = "Đánh dấu đã đến";
   static const String kArriveAtDestination = "Đã đến";
   static const String kCustomerMode = "Đi ké mode";
   static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";
-  static const String kOtherDays = "Mấy hôm sau";
+  static const String kUpcomingTrips = "Những chuyến sắp tới";
   static const String kFindingDriver = "Đang tìm...";
-
-  // 'ke_er_home_blank' screen
   static const String kCreateTrip =
       "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
 
@@ -65,9 +61,8 @@ class CustomStrings {
   static const String kDriverHistory = "Chở ké";
   static const String kTripFinished = "Thành công";
   static const String kTripCanceled = "Đã hủy";
-
-  // 'activity' screen
-  static const String kTomorrow = "Ngày mai";
+  static const String kNoCustomerHistoryTrips = "Không có lịch sử đi ké";
+  static const String kNoDriverHistoryTrips = "Không có lịch sử chở ké";
 
   // bottom tabbar
   static const String kHome = "Trang chủ";
@@ -141,7 +136,6 @@ class CustomStrings {
   static const String kSupport = "Trợ giúp";
   static const String kNewTrip = "Đã tạo";
   static const String kTripHasDriver = "Đã được nhận chở";
-  static const String kTripStatus = "Đang tìm...";
   static const String kCancelTrip = "Hủy chuyến";
   static const String kConfirmArrival = "Đánh dấu đã đến";
   static const String kStartTrip = "Bắt đầu chuyến đi";

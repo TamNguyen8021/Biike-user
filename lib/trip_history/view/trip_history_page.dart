@@ -4,6 +4,7 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/lists/list_history_trips.dart';
+import 'package:bikes_user/widgets/others/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -102,32 +103,28 @@ class TripHistoryPage extends StatelessWidget {
                             height: MediaQuery.of(context).size.height,
                             padding: const EdgeInsets.all(22.0),
                             child: TabBarView(children: <Widget>[
-                              ListHistoryTrips(
-                                  listHistoryTrips:
-                                      tripHistoryController.historyTrips,
-                                  itemPadding: 16.0),
-                              ListHistoryTrips(
-                                  listHistoryTrips:
-                                      tripHistoryController.historyTrips,
-                                  itemPadding: 16.0),
+                              Obx(
+                                () => ListHistoryTrips(
+                                    role: tripHistoryController.role.value,
+                                    listHistoryTrips: tripHistoryController
+                                        .historyTrips
+                                        .toList(),
+                                    itemPadding: 16.0),
+                              ),
+                              Obx(
+                                () => ListHistoryTrips(
+                                    role: tripHistoryController.role.value,
+                                    listHistoryTrips: tripHistoryController
+                                        .historyTrips
+                                        .toList(),
+                                    itemPadding: 16.0),
+                              ),
                             ]),
                           )
                         ],
                       ),
                     )
-                  : Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: CircularProgressIndicator(),
-                          ),
-                          Text(CustomStrings.kLoading),
-                        ],
-                      ),
-                    ),
+                  : Loading(),
             ),
           );
         });

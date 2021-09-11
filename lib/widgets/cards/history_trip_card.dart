@@ -14,7 +14,7 @@ class HistoryTripCard extends StatelessWidget {
   final String sourceStation;
   final String destinationStation;
 
-  HistoryTripCard(
+  const HistoryTripCard(
       {required this.avatarUrl,
       required this.name,
       required this.time,
@@ -29,6 +29,7 @@ class HistoryTripCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Color _statusColor = CustomColors.kBlue;
     String _statusText = '';
+    double screenWidth = MediaQuery.of(context).size.width;
 
     if (status != TripStatus.Finished) {
       _statusColor = CustomColors.kRed;
@@ -59,9 +60,10 @@ class HistoryTripCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth >= 400 ? 8.0 : 5.0),
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: screenWidth >= 400 ? 30 : 29,
                           backgroundImage: NetworkImage(avatarUrl),
                         ),
                       ),
@@ -79,7 +81,8 @@ class HistoryTripCard extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
+                                padding: EdgeInsets.only(
+                                    right: screenWidth >= 400 ? 16.0 : 5.0),
                                 child: Text(
                                   time,
                                   style: Theme.of(context).textTheme.bodyText1,
@@ -113,7 +116,7 @@ class HistoryTripCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding: const EdgeInsets.only(right: 8.0),
                         child: Icon(
                           Icons.adjust,
                         ),
@@ -133,7 +136,7 @@ class HistoryTripCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding: const EdgeInsets.only(right: 8.0),
                         child: Icon(
                           Icons.location_on,
                         ),
@@ -155,10 +158,8 @@ class HistoryTripCard extends StatelessWidget {
             boxShadow: <BoxShadow>[
               BoxShadow(
                 color: CustomColors.kDarkGray.withOpacity(0.5),
-                spreadRadius: 0.5,
-                blurRadius: 0.5,
                 // changes position of shadow
-                offset: Offset(0, 0.5),
+                offset: Offset(0, 1),
               )
             ]),
       ),

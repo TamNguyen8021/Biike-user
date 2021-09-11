@@ -21,10 +21,8 @@ class SendFeedbackButton extends StatelessWidget {
             print('Send feedback success');
             switch (Biike.role.value) {
               case Role.Driver:
-                Get.offAllNamed('/driverHome');
-                break;
               case Role.Customer:
-                Get.offAllNamed('/customerHome');
+                Get.offAllNamed('/home');
                 break;
               default:
                 Get.defaultDialog(

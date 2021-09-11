@@ -141,14 +141,7 @@ class Biike extends StatelessWidget {
             name: '/tripHistory',
             page: () => TripHistoryPage(),
             binding: TripHistoryBinding()),
-        GetPage(
-            name: '/driverHome',
-            page: () => HomePage(),
-            binding: HomeBinding()),
-        GetPage(
-            name: '/customerHome',
-            page: () => HomePage(),
-            binding: HomeBinding()),
+        GetPage(name: '/home', page: () => HomePage(), binding: HomeBinding()),
         GetPage(
           name: '/profile',
           page: () => ProfilePage(),
