@@ -83,9 +83,7 @@ class ExchangeVoucherPage extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(
-              color: CustomColors.kDarkGray.withOpacity(0.5),
-            ),
+            Divider(),
             Padding(
               padding:
                   const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
