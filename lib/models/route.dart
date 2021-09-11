@@ -7,20 +7,20 @@ part 'route.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Route {
   final int routeId;
   final int startingPointId;
   final int destinationId;
   final int defaultPrice;
-  final bool isDeleted;
+  final bool isRouteDeleted;
 
   Route(
     this.routeId,
     this.startingPointId,
     this.destinationId,
     this.defaultPrice,
-    this.isDeleted,
+    this.isRouteDeleted,
   );
 
   /// A necessary factory constructor for creating a new Route instance

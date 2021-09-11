@@ -1,30 +1,21 @@
-{
-  "history_trip": [
-    {
-      "trip_id": 1,
-      "customer_phone_number": "0123456789",
-      "driver_phone_number": "9876543210",
-      "route_id": 1,
-      "time_book": "2021-04-23T18:25:43.511Z",
-      "time_pick_up": "2021-04-23T18:25:43.511Z",
-      "time_finished": "2021-04-23T18:25:43.511Z",
-      "status": 2,
-      "number_plate": "14GV-001",
-      "is_schedule": true,
-      "cancelperson_phone_number": null
-    },
-    {
-      "trip_id": 2,
-      "customer_phone_number": "0123456789",
-      "driver_phone_number": "",
-      "route_id": 1,
-      "time_book": "2021-04-23T18:25:43.511Z",
-      "time_pick_up": "",
-      "time_finished": "",
-      "status": 3,
-      "number_plate": "",
-      "is_schedule": true,
-      "cancelperson_phone_number": "0123456789"
-    }
-  ]
-}
+[
+	[
+		{
+			"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
+			"user_fullname": "Yến Linh",
+			"time_book": "2020-10-15T06:35:43.511Z",
+			"trip_status": 4,
+			"starting_point_name": "Chung cư SKY9",
+			"destination_name": "Đại học FPT TP.HCM"
+		},
+		{
+			"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
+			"user_fullname": "Yến Linh",
+			"time_book": "2021-01-15T06:35:43.511Z",
+			"trip_status": 5,
+			"starting_point_name": "Chung cư SKY9",
+			"destination_name": "Đại học FPT TP.HCM"
+		}
+	],
+	[]
+]

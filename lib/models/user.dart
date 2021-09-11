@@ -7,30 +7,30 @@ part 'user.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class User {
-  final String userPhoneNumber;
-  final String userEmail;
-  final String name;
-  final String? avatar;
-  final int gender;
-  final int status;
-  final String lastLoginDevice;
-  final DateTime lastLoginTime;
-  final double star;
-  final DateTime createDate;
-  final bool isBikeVerified;
+  final String? userPhoneNumber;
+  final String? userEmail;
+  final String userFullname;
+  final String avatar;
+  final int? gender;
+  final int? userStatus;
+  final String? lastLoginDevice;
+  final DateTime? lastLoginTime;
+  final double? userStar;
+  final DateTime? createDate;
+  final bool? isBikeVerified;
 
   User(
       this.userPhoneNumber,
       this.userEmail,
-      this.name,
+      this.userFullname,
       this.avatar,
       this.gender,
-      this.status,
+      this.userStatus,
       this.lastLoginDevice,
       this.lastLoginTime,
-      this.star,
+      this.userStar,
       this.createDate,
       this.isBikeVerified);
 

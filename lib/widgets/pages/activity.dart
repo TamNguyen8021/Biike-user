@@ -1,8 +1,10 @@
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/pages/home/controller/home_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
+import 'package:bikes_user/widgets/others/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,11 +14,11 @@ class Activity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _roleActivity;
-    if (Biike.role.value == Role.Customer) {
-      _roleActivity = CustomStrings.kCustomerActivity;
-    } else {
-      _roleActivity = CustomStrings.kDriverActivity;
+    final homeController = Get.find<HomeController>();
+
+    String _roleActivity = CustomStrings.kCustomerActivities;
+    if (Biike.role.value != Role.Customer) {
+      _roleActivity = CustomStrings.kDriverActivities;
     }
 
     return Scaffold(
@@ -24,12 +26,12 @@ class Activity extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Padding(
-          padding: EdgeInsets.all(22.0),
+          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 40.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(bottom: 35.0),
+                padding: const EdgeInsets.only(bottom: 30.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -41,41 +43,24 @@ class Activity extends StatelessWidget {
                             color: CustomColors.kBlue),
                       ),
                       IconButton(
-                          onPressed: () => Get.toNamed('/history'),
+                          onPressed: () => Get.toNamed('/tripHistory'),
                           icon: Icon(
                             Icons.history,
                             color: CustomColors.kBlue,
                           ))
                     ]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Text(
-                  CustomStrings.kToday,
-                  style: Theme.of(context).textTheme.bodyText2,
+              if (homeController.upcomingTrips.isNotEmpty) ...[
+                Padding(
+                  padding: EdgeInsets.only(bottom: 30.0),
+                  child: ListUpcomingTrips(
+                    listUpcomingTrips: homeController.upcomingTrips,
+                    itemPadding: 10.0,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 30.0),
-                child: ListUpcomingTrips(
-                  listUpcomingTrips: [1, 2],
-                  itemPadding: 10.0,
-                  isTodayFirstActivity: true,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Text(CustomStrings.kTomorrow,
-                    style: Theme.of(context).textTheme.bodyText2),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 8.0),
-                child: ListUpcomingTrips(
-                  listUpcomingTrips: [1, 2],
-                  itemPadding: 10.0,
-                  isTodayFirstActivity: false,
-                ),
-              ),
+              ] else ...[
+                Loading(),
+              ]
             ],
           ),
         )),

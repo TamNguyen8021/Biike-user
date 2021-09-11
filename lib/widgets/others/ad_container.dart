@@ -6,7 +6,6 @@ class AdContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 35.0),
       width: double.infinity,
       height: 135.0,
       child: ClipRRect(

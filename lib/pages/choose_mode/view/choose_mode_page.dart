@@ -184,10 +184,8 @@ class ChooseModePage extends StatelessWidget {
             ),
             NextPageButton(
               onPressedFunc: () {
-                if (Biike.role.value == Role.Customer) {
-                  Get.offAllNamed('/customerHome');
-                } else if (Biike.role.value == Role.Driver) {
-                  Get.offAllNamed('/driverHome');
+                if (Biike.role.value != Role.None) {
+                  Get.offAllNamed('/home');
                 } else {
                   Get.defaultDialog(
                       title: 'Nhắc nhở',

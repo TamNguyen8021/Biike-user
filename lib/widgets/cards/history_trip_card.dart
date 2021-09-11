@@ -1,4 +1,6 @@
 import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,11 +10,11 @@ class HistoryTripCard extends StatelessWidget {
   final String name;
   final String time;
   final String date;
-  final String status;
+  final TripStatus status;
   final String sourceStation;
   final String destinationStation;
 
-  HistoryTripCard(
+  const HistoryTripCard(
       {required this.avatarUrl,
       required this.name,
       required this.time,
@@ -25,11 +27,25 @@ class HistoryTripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _statusColor;
-    if (status == 'Thành công') {
-      _statusColor = CustomColors.kBlue;
-    } else {
+    Color _statusColor = CustomColors.kBlue;
+    String _statusText = '';
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (status != TripStatus.Finished) {
       _statusColor = CustomColors.kRed;
+    }
+
+    switch (status) {
+      case TripStatus.Finding:
+      case TripStatus.Waiting:
+      case TripStatus.Started:
+      case TripStatus.Finished:
+        _statusText = CustomStrings.kTripFinished;
+        break;
+      case TripStatus.Canceled:
+        _statusText = CustomStrings.kTripCanceled;
+        break;
+      default:
     }
 
     return GestureDetector(
@@ -44,10 +60,11 @@ class HistoryTripCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth >= 400 ? 8.0 : 5.0),
                         child: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage(avatarUrl),
+                          radius: screenWidth >= 400 ? 30 : 29,
+                          backgroundImage: NetworkImage(avatarUrl),
                         ),
                       ),
                       Column(
@@ -64,7 +81,8 @@ class HistoryTripCard extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
+                                padding: EdgeInsets.only(
+                                    right: screenWidth >= 400 ? 16.0 : 5.0),
                                 child: Text(
                                   time,
                                   style: Theme.of(context).textTheme.bodyText1,
@@ -77,7 +95,7 @@ class HistoryTripCard extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            status,
+                            _statusText,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
@@ -98,7 +116,7 @@ class HistoryTripCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding: const EdgeInsets.only(right: 8.0),
                         child: Icon(
                           Icons.adjust,
                         ),
@@ -118,7 +136,7 @@ class HistoryTripCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding: const EdgeInsets.only(right: 8.0),
                         child: Icon(
                           Icons.location_on,
                         ),
@@ -140,10 +158,8 @@ class HistoryTripCard extends StatelessWidget {
             boxShadow: <BoxShadow>[
               BoxShadow(
                 color: CustomColors.kDarkGray.withOpacity(0.5),
-                spreadRadius: 0.5,
-                blurRadius: 0.5,
                 // changes position of shadow
-                offset: Offset(0, 0.5),
+                offset: Offset(0, 1),
               )
             ]),
       ),

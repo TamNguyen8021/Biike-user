@@ -250,7 +250,7 @@ class TripDetailsPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        CustomStrings.kTripStatus,
+                        CustomStrings.kFindingDriver,
                         style: TextStyle(
                           color: CustomColors.kBlue,
                           fontWeight: FontWeight.bold,

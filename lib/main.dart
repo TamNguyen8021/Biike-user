@@ -26,7 +26,8 @@ import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart'
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
 import 'package:bikes_user/pages/manage_bike/view/manage_bike_page.dart';
-import 'package:bikes_user/pages/trip_history_page.dart';
+import 'package:bikes_user/trip_history/binding/trip_history_binding.dart';
+import 'package:bikes_user/trip_history/view/trip_history_page.dart';
 import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
 import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
 import 'package:bikes_user/pages/view_user_page.dart';
@@ -136,15 +137,11 @@ class Biike extends StatelessWidget {
             name: '/chooseMode',
             page: () => ChooseModePage(),
             binding: ChooseModeBinding()),
-        GetPage(name: '/history', page: () => TripHistoryPage()),
         GetPage(
-            name: '/driverHome',
-            page: () => HomePage(),
-            binding: HomeBinding()),
-        GetPage(
-            name: '/customerHome',
-            page: () => HomePage(),
-            binding: HomeBinding()),
+            name: '/tripHistory',
+            page: () => TripHistoryPage(),
+            binding: TripHistoryBinding()),
+        GetPage(name: '/home', page: () => HomePage(), binding: HomeBinding()),
         GetPage(
           name: '/profile',
           page: () => ProfilePage(),

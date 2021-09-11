@@ -7,16 +7,16 @@ part 'area.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Area {
   final int areaId;
-  final String name;
-  final bool isDeleted;
+  final String areaName;
+  final bool isAreaDeleted;
 
   Area(
     this.areaId,
-    this.name,
-    this.isDeleted,
+    this.areaName,
+    this.isAreaDeleted,
   );
 
   /// A necessary factory constructor for creating a new Area instance

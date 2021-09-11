@@ -4,7 +4,6 @@ class CustomStrings {
   static const String kIntroduction = "Ứng dụng kết nối đi ké xe miễn phí";
 
   // '003.1_login'
-  static const String kLogoApp = "Biiké";
   static const String kLoginButton = "Xác thực bằng email FPT";
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
   static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
@@ -38,15 +37,12 @@ class CustomStrings {
   static const String kTopBiker = "Top Biker tháng ";
   static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
   static const String kReminderTime = " phút nữa";
-  static const String kConfirmFinishTrip = "Đánh dấu đã đến";
   static const String kArriveAtDestination = "Đã đến";
   static const String kCustomerMode = "Đi ké mode";
   static const String kDriverMode = "Chở mode";
   static const String kToday = "Hôm nay";
-  static const String kOtherDays = "Mấy hôm sau";
+  static const String kUpcomingTrips = "Những chuyến sắp tới";
   static const String kFindingDriver = "Đang tìm...";
-
-  // 'ke_er_home_blank' screen
   static const String kCreateTrip =
       "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
 
@@ -63,15 +59,15 @@ class CustomStrings {
   static const String kHistory = "Lịch sử";
   static const String kCustomerHistory = "Đi ké";
   static const String kDriverHistory = "Chở ké";
-
-  // 'activity' screen
-  static const String kDriverActivity = "Lịch chở";
-  static const String kCustomerActivity = "Lịch ké";
-  static const String kTomorrow = "Ngày mai";
+  static const String kTripFinished = "Thành công";
+  static const String kTripCanceled = "Đã hủy";
+  static const String kNoCustomerHistoryTrips = "Không có lịch sử đi ké";
+  static const String kNoDriverHistoryTrips = "Không có lịch sử chở ké";
 
   // bottom tabbar
   static const String kHome = "Trang chủ";
-  static const String kActivities = "Hoạt động";
+  static const String kCustomerActivities = "Lịch ké";
+  static const String kDriverActivities = "Lịch chở";
 
   //'ke_er_profile' screen
   static const String kEdit = "Chỉnh sửa";
@@ -140,7 +136,6 @@ class CustomStrings {
   static const String kSupport = "Trợ giúp";
   static const String kNewTrip = "Đã tạo";
   static const String kTripHasDriver = "Đã được nhận chở";
-  static const String kTripStatus = "Đang tìm...";
   static const String kCancelTrip = "Hủy chuyến";
   static const String kConfirmArrival = "Đánh dấu đã đến";
   static const String kStartTrip = "Bắt đầu chuyến đi";
@@ -178,4 +173,12 @@ class CustomStrings {
   static const String kCheckBikeInfo = 'Vui lòng kiểm tra thông tin xe';
   static const String kNumberPlate = 'Biển số đăng ký';
   static const String kTakePictureAgain = 'Chụp lại';
+
+  // Error message
+  static const String kError = 'Thông báo lỗi';
+  static const String kErrorMessage =
+      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké';
+
+  // loading
+  static const String kLoading = 'Đang chạy...';
 }
