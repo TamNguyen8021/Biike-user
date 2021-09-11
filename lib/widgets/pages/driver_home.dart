@@ -6,7 +6,6 @@ import 'package:bikes_user/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
-import 'package:bikes_user/widgets/others/select_station_dialog.dart';
 import 'package:bikes_user/widgets/others/top_biker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

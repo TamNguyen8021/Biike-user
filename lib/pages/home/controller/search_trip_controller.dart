@@ -28,7 +28,7 @@ class SearchTripController extends GetxController {
       context: context,
       builder: (context) =>
           SelectStationDialog(
-              title: CustomStrings.kSelectSourceStation,
+              title: CustomStrings.kSelectDestinationStation,
               selectedStation: fromStation.value
           ),
     );
