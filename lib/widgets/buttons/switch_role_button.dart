@@ -14,11 +14,9 @@ class SwitchRoleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<String> _modeButtonText = CustomStrings.kCustomerMode.obs;
     Rx<Color> _modeButtonForegroundColor = CustomColors.kBlue.obs;
-    Rx<Color> _modeButtonBackgroundColor = CustomColors.kLightGray.obs;
     if (Biike.role.value == Role.Driver) {
       _modeButtonText.value = CustomStrings.kDriverMode;
-      _modeButtonBackgroundColor.value = CustomColors.kOrange;
-      _modeButtonForegroundColor.value = Colors.white;
+      _modeButtonForegroundColor.value = CustomColors.kOrange;
     }
 
     return SizedBox(
@@ -29,12 +27,10 @@ class SwitchRoleButton extends StatelessWidget {
             if (Biike.role.value == Role.Customer) {
               Biike.role.value = Role.Driver;
               _modeButtonText.value = CustomStrings.kDriverMode;
-              _modeButtonBackgroundColor.value = CustomColors.kOrange;
               _modeButtonForegroundColor.value = Colors.white;
             } else {
               Biike.role.value = Role.Customer;
               _modeButtonText.value = CustomStrings.kCustomerMode;
-              _modeButtonBackgroundColor.value = CustomColors.kLightGray;
               _modeButtonForegroundColor.value = CustomColors.kBlue;
             }
             if (ModalRoute.of(context)!.settings.name.toString() !=
@@ -51,7 +47,7 @@ class SwitchRoleButton extends StatelessWidget {
             ),
           ),
           style: ElevatedButton.styleFrom(
-            primary: _modeButtonBackgroundColor.value,
+            primary: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),

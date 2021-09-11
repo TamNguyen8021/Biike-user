@@ -1,3 +1,5 @@
+import 'package:bikes_user/main.dart';
+import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,6 +70,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: actionWidgets,
         bottom: bottomAppBar,
         shape: _shapeBorder,
+        backgroundColor: Biike.role.value == Role.Customer
+            ? CustomColors.kBlue
+            : CustomColors.kOrange,
       ),
     );
   }
