@@ -6,6 +6,7 @@ import 'package:bikes_user/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
+import 'package:bikes_user/widgets/others/select_station_dialog.dart';
 import 'package:bikes_user/widgets/others/top_biker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -16,21 +17,6 @@ class DriverHome extends StatelessWidget {
   final searchTripController = Get.find<SearchTripController>();
 
   DriverHome({Key? key}) : super(key: key);
-
-  final List<String> dropdownFromArray = [
-    CustomStrings.kChooseFrom,
-    'Đại học FPT TP.HCM',
-    'Two',
-    'Free',
-    'Four'
-  ];
-  final List<String> dropdownToArray = [
-    CustomStrings.kChooseTo,
-    'Cổng khu công nghệ cao',
-    'Two',
-    'Free',
-    'Four'
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -233,42 +219,55 @@ class DriverHome extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: <Widget>[
-                                          RichText(
-                                            text: TextSpan(
-                                              text: CustomStrings.kSelectSourceStation,
-                                              style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  //TODO
-                                                }
-                                            ),
-                                          ), // Điểm đến
+                                          Obx(() =>
+                                              RichText(
+                                                text: TextSpan(
+                                                    text: searchTripController.fromStation.value == CustomStrings.kSelectSourceStation
+                                                      ? CustomStrings.kSelectSourceStation
+                                                      : searchTripController.fromStation.value,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1,
+                                                    recognizer: TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        //TODO
+                                                        searchTripController.selectFromStation(context);
+                                                      }
+                                                ),
+                                              ), // điểm đi
+                                          ),
                                           Expanded(
                                             child: Divider(
                                               color: CustomColors.kDarkGray
                                                   .withOpacity(0.3),
                                             ),
                                           ),
-                                          RichText(
-                                            text: TextSpan(
-                                                text: CustomStrings.kSelectDestinationStation,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1,
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = () {
-                                                    //TODO
-                                                  }
-                                            ),
-                                          ), // điểm đi
+                                          Obx(() =>
+                                              RichText(
+                                                text: TextSpan(
+                                                    text: searchTripController.toStation.value == CustomStrings.kSelectDestinationStation
+                                                        ? CustomStrings.kSelectDestinationStation
+                                                        : searchTripController.toStation.value,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1,
+                                                    recognizer: TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        //TODO
+                                                        searchTripController.selectToStation(context);
+                                                      }
+                                                ),
+                                              ), // điểm đến
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.swap_vert_sharp,
-                                      size: 30,
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.swap_vert_sharp,
+                                          size: 30,
+                                        ),
+                                        onPressed: () => searchTripController.switchFromAndToStation()
                                     ),
                                   ],
                                 )),
