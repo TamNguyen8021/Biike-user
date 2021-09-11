@@ -57,9 +57,7 @@ class Biike extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'SVN Product Sans',
         appBarTheme: AppBarTheme(
-            backwardsCompatibility: false,
             elevation: 0.0,
-            backgroundColor: CustomColors.kBlue,
             titleTextStyle: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,

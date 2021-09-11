@@ -65,9 +65,7 @@ class CustomerCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Divider(
-                          color: CustomColors.kDarkGray.withOpacity(0.15),
-                        ),
+                        Divider(),
                         Padding(
                           padding:
                               const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),

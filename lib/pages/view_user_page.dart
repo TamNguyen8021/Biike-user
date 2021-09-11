@@ -138,9 +138,7 @@ class ViewUserPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(
-                color: CustomColors.kDarkGray.withOpacity(0.5),
-              ),
+              Divider(),
               Text(
                 CustomStrings.kNoHistoryTrip,
                 style: Theme.of(context).textTheme.bodyText1,

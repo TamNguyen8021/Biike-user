@@ -101,9 +101,7 @@ class ManageBikePage extends StatelessWidget {
                         ]
                       ]),
                     ),
-                    Divider(
-                        // color: CustomColors.kRed,
-                        ),
+                    Divider(),
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: Column(
