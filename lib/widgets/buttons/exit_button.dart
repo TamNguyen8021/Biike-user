@@ -11,7 +11,7 @@ class ExitButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => Get.offAllNamed('/customerHome'),
+        onPressed: () => Get.offAllNamed('/home'),
         child: Text(
           CustomStrings.kBtnExit,
           style: TextStyle(

@@ -1,4 +1,3 @@
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,11 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       _leadingWidget = IconButton(
         onPressed: () {
           if (ModalRoute.of(context)!.settings.name.toString() == '/profile') {
-            if (Biike.role.value == Role.Customer) {
-              Get.offAllNamed('/customerHome');
-            } else {
-              Get.offAllNamed('/driverHome');
-            }
+            Get.offAllNamed('/home');
           } else {
             Get.back();
           }

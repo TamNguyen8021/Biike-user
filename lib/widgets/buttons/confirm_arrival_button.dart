@@ -20,7 +20,7 @@ class ConfirmArrivalButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<bool> isAtDestination = false.obs;
     Rx<Color> buttonColor = CustomColors.kBlue.obs;
-    Rx<String> buttonText = CustomStrings.kConfirmFinishTrip.obs;
+    Rx<String> buttonText = CustomStrings.kConfirmArrival.obs;
 
     return SizedBox(
       height: 35,

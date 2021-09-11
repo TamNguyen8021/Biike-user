@@ -1,14 +1,10 @@
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/pages/home/controller/home_controller.dart';
-import 'package:bikes_user/utils/enums.dart';
 import 'package:bikes_user/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/widgets/others/loading.dart';
 import 'package:bikes_user/widgets/pages/activity.dart';
-import 'package:bikes_user/widgets/pages/customer_home_blank.dart';
-import 'package:bikes_user/widgets/pages/customer_home_full.dart';
-import 'package:bikes_user/widgets/pages/driver_home.dart';
+import 'package:bikes_user/widgets/pages/home.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,16 +17,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget _homePage = CustomerHomeFull();
-    Widget _activityPage = Activity();
-    String _homeRoute = '/driverHome';
-    String _profileRoute = '/profile';
-
-    if (Biike.role.value == Role.Driver) {
-      _homePage = DriverHome();
-      _homeRoute = '/customerHome';
-    }
-
     return FutureBuilder(
         future: homeController.getUpcomingTrips(context: context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -70,7 +56,7 @@ class HomePage extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 child: SwitchRoleButton(
-                                  route: _homeRoute,
+                                  route: '/home',
                                 ),
                               ),
                             ],
@@ -87,7 +73,7 @@ class HomePage extends StatelessWidget {
                               'https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128',
                               radius: 12,
                               onTap: () {
-                                Get.toNamed(_profileRoute);
+                                Get.toNamed('/profile');
                               },
                             ),
                           ),
@@ -100,19 +86,12 @@ class HomePage extends StatelessWidget {
               body: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      homeController.upcomingTrips.isNotEmpty) ...[
-                    _homePage
-                  ] else if (snapshot.connectionState ==
-                      ConnectionState.waiting) ...[
+                  if (snapshot.connectionState == ConnectionState.done) ...[
+                    Home(),
+                  ] else ...[
                     Loading(),
-                  ] else if (snapshot.connectionState == ConnectionState.done &&
-                      homeController.upcomingTrips.isEmpty) ...[
-                    if (Biike.role.value == Role.Customer) ...[
-                      CustomerHomeBlank(),
-                    ]
                   ],
-                  _activityPage,
+                  Activity(),
                 ],
               ),
               bottomNavigationBar: BottomTabBar(
