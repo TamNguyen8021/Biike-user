@@ -1,4 +1,4 @@
-import 'package:bikes_user/pages/feedback_page/controller/feedback_cotroller.dart';
+import 'package:bikes_user/pages/feedback_page/controller/feedback_controller.dart';
 import 'package:get/get.dart';
 
 class FeedbackBinding extends Bindings {

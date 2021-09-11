@@ -1,5 +1,5 @@
 import 'package:bikes_user/main.dart';
-import 'package:bikes_user/pages/feedback_page/controller/feedback_cotroller.dart';
+import 'package:bikes_user/pages/feedback_page/controller/feedback_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_error_strings.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
