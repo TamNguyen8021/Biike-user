@@ -1,3 +1,4 @@
+import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 /// This allows the `User` class to access private members in
@@ -11,7 +12,11 @@ part 'user.g.dart';
 class User {
   final String? userPhoneNumber;
   final String? userEmail;
+
+  @JsonKey(defaultValue: CustomStrings.kFindingDriver)
   final String userFullname;
+
+  @JsonKey(defaultValue: 'assets/images/loading.svg')
   final String avatar;
   final int? gender;
   final int? userStatus;

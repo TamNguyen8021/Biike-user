@@ -61,6 +61,7 @@ class Biike extends StatelessWidget {
             titleTextStyle: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
+                backgroundColor: CustomColors.kBlue,
                 color: Colors.white,
                 fontFamily: 'SVN Product Sans')),
         textTheme: TextTheme(

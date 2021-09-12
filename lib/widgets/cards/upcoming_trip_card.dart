@@ -13,6 +13,7 @@ class UpcomingTripCard extends StatelessWidget {
   final String name;
   final String time;
   final String date;
+  final int year;
   final String sourceStation;
   final String destinationStation;
 
@@ -25,6 +26,7 @@ class UpcomingTripCard extends StatelessWidget {
       required this.name,
       required this.time,
       required this.date,
+      required this.year,
       required this.sourceStation,
       required this.destinationStation})
       : super(key: key);
@@ -54,9 +56,9 @@ class UpcomingTripCard extends StatelessWidget {
                       ] else ...[
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 16.0, horizontal: 8.0),
+                              vertical: 16.0, horizontal: 24.0),
                           child: SvgPicture.asset(
-                            'assets/images/loading.svg',
+                            avatarUrl,
                             height: 50,
                           ),
                         ),

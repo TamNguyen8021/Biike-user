@@ -215,8 +215,8 @@ class TripDetailsPage extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: CircleAvatar(
                           radius: 45,
-                          backgroundImage:
-                              AssetImage('assets/images/profile-1.jpg'),
+                          backgroundImage: AssetImage(
+                              'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
                         ),
                       ),
                       Expanded(

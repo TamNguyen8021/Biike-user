@@ -26,23 +26,39 @@ class Home extends StatelessWidget {
     List<String>? earliestUpcomingTripDate;
     int? earliestUpcomingTripDay;
     int? earliestUpcomingTripMonth;
+    int? earliestUpcomingTripYear;
 
     List<String>? earliestUpcomingTripTime;
     int? earliestUpcomingTripHour;
     int? earliestUpcomingTripMin;
     DateTime? currentTime;
+    String timeLeft = '';
 
     if (homeController.upcomingTrips.isNotEmpty) {
       earliestUpcomingTripDate =
           homeController.upcomingTrips[0].date.toString().split('Th');
       earliestUpcomingTripDay = int.parse(earliestUpcomingTripDate.first);
       earliestUpcomingTripMonth = int.parse(earliestUpcomingTripDate.last);
+      earliestUpcomingTripYear = homeController.upcomingTrips[0].year;
 
       earliestUpcomingTripTime =
           homeController.upcomingTrips[0].time.toString().split(':');
       earliestUpcomingTripHour = int.parse(earliestUpcomingTripTime.first);
       earliestUpcomingTripMin = int.parse(earliestUpcomingTripTime.last);
       currentTime = DateTime.now();
+      if (earliestUpcomingTripHour - currentTime.hour > 0) {
+        timeLeft = timeLeft +
+            (earliestUpcomingTripHour - currentTime.hour).toString() +
+            CustomStrings.kReminderHour;
+      }
+      if (earliestUpcomingTripHour - currentTime.hour > 0) {
+        timeLeft = timeLeft +
+            (earliestUpcomingTripMin - currentTime.minute).abs().toString() +
+            CustomStrings.kReminderMinute;
+      }
+      if (timeLeft.isNotEmpty) {
+        timeLeft += CustomStrings.kReminderLeft;
+      }
     }
 
     return Scaffold(
@@ -62,25 +78,21 @@ class Home extends StatelessWidget {
                       if (homeController.upcomingTrips.isNotEmpty) ...[
                         if (earliestUpcomingTripDay == currentTime!.day &&
                             earliestUpcomingTripMonth == currentTime.month &&
-                            earliestUpcomingTripHour == currentTime.hour &&
-                            (earliestUpcomingTripMin! - currentTime.minute <=
-                                    15 &&
-                                earliestUpcomingTripMin - currentTime.minute >=
-                                    0)) ...[
+                            earliestUpcomingTripYear == currentTime.year) ...[
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  CustomStrings.kCustomerReadyReminder,
+                                  Biike.role.value == Role.Customer
+                                      ? CustomStrings.kCustomerReadyReminder
+                                      : CustomStrings.kDriverReadyReminder,
                                   style:
                                       TextStyle(color: CustomColors.kDarkGray),
                                 ),
                                 Text(
-                                  (earliestUpcomingTripMin - currentTime.minute)
-                                          .toString() +
-                                      CustomStrings.kReminderTime,
+                                  timeLeft,
                                   style: TextStyle(
                                       color: CustomColors.kBlue,
                                       fontWeight: FontWeight.bold,
@@ -100,6 +112,7 @@ class Home extends StatelessWidget {
                                 name: homeController.upcomingTrips[0].name,
                                 time: homeController.upcomingTrips[0].time,
                                 date: CustomStrings.kToday,
+                                year: homeController.upcomingTrips[0].year,
                                 sourceStation: homeController
                                     .upcomingTrips[0].sourceStation,
                                 destinationStation: homeController

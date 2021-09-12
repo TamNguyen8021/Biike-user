@@ -27,6 +27,7 @@ class ListUpcomingTrips extends StatelessWidget {
                 name: listUpcomingTrips.elementAt(index).name,
                 time: listUpcomingTrips.elementAt(index).time,
                 date: listUpcomingTrips.elementAt(index).date,
+                year: listUpcomingTrips.elementAt(index).year,
                 sourceStation: listUpcomingTrips.elementAt(index).sourceStation,
                 destinationStation:
                     listUpcomingTrips.elementAt(index).destinationStation),

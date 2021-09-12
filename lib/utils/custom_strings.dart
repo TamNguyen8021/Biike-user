@@ -35,8 +35,10 @@ class CustomStrings {
 
   // 'ke_er_home' screen
   static const String kTopBiker = "Top Biker tháng ";
-  static const String kCustomerReadyReminder = "Chuẩn bị đi ké!";
-  static const String kReminderTime = " phút nữa";
+  static const String kCustomerReadyReminder = "Chuyến sắp ké";
+  static const String kReminderMinute = " phút ";
+  static const String kReminderHour = " tiếng ";
+  static const String kReminderLeft = " nữa";
   static const String kArriveAtDestination = "Đã đến";
   static const String kCustomerMode = "Đi ké mode";
   static const String kDriverMode = "Chở mode";
@@ -47,7 +49,7 @@ class CustomStrings {
       "Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!";
 
   // 'driver_home' screen
-  static const String kDriverReadyReminder = "Bạn đang có 1 chuyến xe cần chở";
+  static const String kDriverReadyReminder = "Chuyến sắp chở";
   static const String kFilter = "Lọc chuyến đi đang cần chở";
   static const String kSelectHour = "Chọn giờ";
   static const String kSelectSourceStation = "Chọn điểm đi";

@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
                                     horizontal: 10.0),
                                 child: SwitchRoleButton(
                                   route: '/home',
+                                  isOnProfilePage: false,
                                 ),
                               ),
                             ],

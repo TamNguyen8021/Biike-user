@@ -1,12 +1,12 @@
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/pages/home/view/home_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// This widget is the top appbar on home page
+/// This widget is the top appbar on [HomePage]
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Role? role;
   final bool hasLeading;
   final Widget? title;
   final AppBar appBar;
@@ -19,7 +19,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar(
       {Key? key,
-      this.role,
       required this.isVisible,
       required this.hasShape,
       required this.hasLeading,
@@ -65,14 +64,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Visibility(
       visible: isVisible,
       child: AppBar(
+        backwardsCompatibility: false,
         leading: _leadingWidget,
         title: title,
         actions: actionWidgets,
         bottom: bottomAppBar,
         shape: _shapeBorder,
-        backgroundColor: Biike.role.value == Role.Customer
-            ? CustomColors.kBlue
-            : CustomColors.kOrange,
+        backgroundColor: ModalRoute.of(context)!.settings.name == '/home' &&
+                Biike.role.value == Role.Driver
+            ? CustomColors.kOrange
+            : CustomColors.kBlue,
       ),
     );
   }

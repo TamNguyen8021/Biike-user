@@ -31,8 +31,8 @@ class ViewUserPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/profile-1.jpg'),
+                        backgroundImage: NetworkImage(
+                            'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
                         radius: 55,
                       ),
                     ),

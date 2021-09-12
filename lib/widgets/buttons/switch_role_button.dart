@@ -7,16 +7,26 @@ import 'package:get/get.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final String route;
+  final bool isOnProfilePage;
 
-  SwitchRoleButton({Key? key, required this.route}) : super(key: key);
+  SwitchRoleButton({
+    Key? key,
+    required this.route,
+    required this.isOnProfilePage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Rx<String> _modeButtonText = CustomStrings.kCustomerMode.obs;
     Rx<Color> _modeButtonForegroundColor = CustomColors.kBlue.obs;
-    if (Biike.role.value == Role.Driver) {
-      _modeButtonText.value = CustomStrings.kDriverMode;
-      _modeButtonForegroundColor.value = CustomColors.kOrange;
+    Rx<Color> _modeButtonBackgroundColor = Colors.white.obs;
+    if (isOnProfilePage) {
+      _modeButtonForegroundColor.value = Colors.white;
+      _modeButtonBackgroundColor.value = CustomColors.kOrange;
+    } else {
+      if (Biike.role.value == Role.Driver) {
+        _modeButtonForegroundColor.value = CustomColors.kOrange;
+        _modeButtonBackgroundColor.value = Colors.white;
+      }
     }
 
     return SizedBox(
@@ -26,28 +36,29 @@ class SwitchRoleButton extends StatelessWidget {
           onPressed: () {
             if (Biike.role.value == Role.Customer) {
               Biike.role.value = Role.Driver;
-              _modeButtonText.value = CustomStrings.kDriverMode;
-              _modeButtonForegroundColor.value = Colors.white;
-            } else {
+              if (!isOnProfilePage) {
+                _modeButtonForegroundColor.value = CustomColors.kOrange;
+              }
+            } else if (Biike.role.value == Role.Driver) {
               Biike.role.value = Role.Customer;
-              _modeButtonText.value = CustomStrings.kCustomerMode;
-              _modeButtonForegroundColor.value = CustomColors.kBlue;
+              if (!isOnProfilePage) {
+                _modeButtonForegroundColor.value = CustomColors.kBlue;
+              }
             }
-            if (ModalRoute.of(context)!.settings.name.toString() !=
-                '/profile') {
-              Get.offAllNamed(route);
-            }
+            Get.offAllNamed(route);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 1.0),
             child: Text(
-              _modeButtonText.value,
+              Biike.role.value == Role.Customer
+                  ? CustomStrings.kCustomerMode
+                  : CustomStrings.kDriverMode,
               style: TextStyle(
                   color: _modeButtonForegroundColor.value, fontSize: 10),
             ),
           ),
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
+            primary: _modeButtonBackgroundColor.value,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),

@@ -24,13 +24,13 @@ class ProfilePage extends StatelessWidget {
         hasShape: false,
         appBar: AppBar(),
         hasLeading: true,
-        role: Biike.role.value,
         actionWidgets: <Widget>[
           Padding(
             padding:
                 const EdgeInsets.only(right: 16.0, top: 19.0, bottom: 19.0),
             child: SwitchRoleButton(
               route: '/profile',
+              isOnProfilePage: true,
             ),
           ),
         ],
@@ -52,8 +52,8 @@ class ProfilePage extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/images/profile-1.jpg'),
+                          backgroundImage: NetworkImage(
+                              'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
                           radius: 50,
                         ),
                       )
@@ -90,35 +90,32 @@ class ProfilePage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Obx(
-                          () => Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              if (Biike.role.value == Role.Driver) ...[
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 4.0),
-                                  child: CustomElevatedIconButton(
-                                    onPressedFunc: () =>
-                                        Get.toNamed('/manageBike'),
-                                    text: CustomStrings.kManageBike,
-                                    elevation: 0.0,
-                                    icon: Icons.two_wheeler,
-                                    backgroundColor: CustomColors.kBlue,
-                                    foregroundColor: Colors.white,
-                                  ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            if (Biike.role.value == Role.Driver) ...[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: CustomElevatedIconButton(
+                                  onPressedFunc: () =>
+                                      Get.toNamed('/manageBike'),
+                                  text: CustomStrings.kManageBike,
+                                  elevation: 0.0,
+                                  icon: Icons.two_wheeler,
+                                  backgroundColor: CustomColors.kBlue,
+                                  foregroundColor: Colors.white,
                                 ),
-                              ],
-                              CustomElevatedIconButton(
-                                onPressedFunc: () =>
-                                    Get.toNamed('/editProfile'),
-                                text: CustomStrings.kEdit,
-                                icon: Icons.edit,
-                                elevation: 0.0,
-                                backgroundColor: CustomColors.kBlue,
-                                foregroundColor: Colors.white,
                               ),
                             ],
-                          ),
+                            CustomElevatedIconButton(
+                              onPressedFunc: () => Get.toNamed('/editProfile'),
+                              text: CustomStrings.kEdit,
+                              icon: Icons.edit,
+                              elevation: 0.0,
+                              backgroundColor: CustomColors.kBlue,
+                              foregroundColor: Colors.white,
+                            ),
+                          ],
                         ),
                       ),
                       ProfileButtons(),

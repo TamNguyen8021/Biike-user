@@ -10,8 +10,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     json['user_phone_number'] as String?,
     json['user_email'] as String?,
-    json['user_fullname'] as String,
-    json['avatar'] as String,
+    json['user_fullname'] as String? ?? 'Đang tìm...',
+    json['avatar'] as String? ?? 'assets/images/loading.svg',
     json['gender'] as int?,
     json['user_status'] as int?,
     json['last_login_device'] as String?,

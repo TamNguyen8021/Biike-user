@@ -30,8 +30,8 @@ class HomeController extends GetxController {
     String response = await DefaultAssetBundle.of(context)
         .loadString('assets/files/upcoming_trips.json');
     List<dynamic> data = jsonDecode(response);
-    print('data: ' + data.toString());
-    print('data length: ' + data.length.toString());
+    // print('data: ' + data.toString());
+    // print('data length: ' + data.length.toString());
     for (int i = 0; i < data.length; i++) {
       User user = User.fromJson(data[i]);
       // print(user.toJson());
@@ -70,6 +70,7 @@ class HomeController extends GetxController {
           name: user.userFullname,
           time: time,
           date: date,
+          year: trip.timeBook.year,
           sourceStation: startingStation.startingPointName,
           destinationStation: destinationStation.destinationName);
 

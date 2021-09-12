@@ -30,7 +30,8 @@ class EditProfilePage extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/profile-1.jpg'),
+                    backgroundImage: AssetImage(
+                        'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
                     radius: 55,
                   ),
                   Positioned(

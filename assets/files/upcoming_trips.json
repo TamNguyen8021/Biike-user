@@ -1,17 +1,28 @@
 [
 	{
+		"user_id": 1,
 		"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 		"user_fullname": "Yến Linh",
-		"time_book": "2020-09-11T10:45:43.511Z",
+		"time_book": "2021-09-12T23:45:43.511Z",
 		"trip_status": 2,
 		"starting_point_name": "Chung cư SKY9",
 		"destination_name": "Đại học FPT TP.HCM"
 	},
 	{
+		"user_id": 1,
 		"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 		"user_fullname": "Yến Linh",
 		"time_book": "2021-09-15T06:35:43.511Z",
 		"trip_status": 2,
+		"starting_point_name": "Chung cư SKY9",
+		"destination_name": "Đại học FPT TP.HCM"
+	},
+	{
+		"user_id": 1,
+		"avatar": null,
+		"user_fullname": null,
+		"time_book": "2021-09-15T06:35:43.511Z",
+		"trip_status": 1,
 		"starting_point_name": "Chung cư SKY9",
 		"destination_name": "Đại học FPT TP.HCM"
 	}
