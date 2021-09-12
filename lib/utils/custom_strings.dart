@@ -58,6 +58,7 @@ class CustomStrings {
   static const String kSelectDestinationStation = "Chọn điểm đến";
   static const String kDecline = "Từ chối";
   static const String kAccept = "Chấp nhận";
+  static const String kAcceptTrip = "Nhận chuyến";
 
   // 'trip_history' screen
   static const String kHistory = "Lịch sử";

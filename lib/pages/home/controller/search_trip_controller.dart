@@ -1,3 +1,4 @@
+import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/others/select_station_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,6 +39,10 @@ class SearchTripController extends GetxController {
     // Nếu chưa chọn cả 2 trạm thì không switch
     if (fromStation.value == CustomStrings.kSelectSourceStation &&
       toStation.value == CustomStrings.kSelectDestinationStation) {
+      Get.defaultDialog(
+          title: 'Nhắc nhở',
+          middleText: 'Bạn chưa chọn điểm đi và điểm đến',
+          middleTextStyle: TextStyle(color: CustomColors.kDarkGray));
       return;
     }
 

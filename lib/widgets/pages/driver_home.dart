@@ -4,6 +4,7 @@ import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
+import 'package:bikes_user/widgets/lists/list_searched_trip.dart';
 import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
 import 'package:bikes_user/widgets/others/top_biker.dart';
@@ -283,11 +284,14 @@ class DriverHome extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
                 child: Column(
                   children: <Widget>[
-                    ListUpcomingTrips(
-                      listUpcomingTrips: [1, 2, 3, 4],
-                      itemPadding: 12.0,
-                      isTodayFirstActivity: false,
-                    ),
+                    ListSearchedTrips(
+                        listSearchedTrips: [1, 2, 3, 4],
+                        itemPadding: 12.0),
+                    // ListUpcomingTrips(
+                    //   listUpcomingTrips: [1, 2, 3, 4],
+                    //   itemPadding: 12.0,
+                    //   isTodayFirstActivity: false,
+                    // ),
                     AdContainer(),
                   ],
                 ),

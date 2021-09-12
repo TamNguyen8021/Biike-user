@@ -1,5 +1,7 @@
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +13,11 @@ class ExitButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => Get.offAllNamed('/customerHome'),
+        onPressed: () => {
+          Biike.role.value == Role.Customer
+            ? Get.offAllNamed('/customerHome')
+            : Get.offAllNamed('/driverHome')
+        },
         child: Text(
           CustomStrings.kBtnExit,
           style: TextStyle(
