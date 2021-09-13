@@ -22,7 +22,6 @@ class TripHistoryController extends GetxController {
   /// Author: TamNTT
   Future<void> getHistoryTrips({required BuildContext context}) async {
     historyTrips.clear();
-    print(historyTrips.length);
     String response = await DefaultAssetBundle.of(context)
         .loadString('assets/files/history_trip.json');
     var data = jsonDecode(response);
@@ -34,9 +33,9 @@ class TripHistoryController extends GetxController {
     if (role.value != Role.Customer) {
       loadedData = driverHistoryTrips;
     }
-    print('loaded data length: ' + loadedData.length.toString());
+    // print('loaded data length: ' + loadedData.length.toString());
     for (var item in loadedData) {
-      print(item);
+      // print(item);
       User user = User.fromJson(item);
       // print(user.toJson());
       Trip trip = Trip.fromJson(item);

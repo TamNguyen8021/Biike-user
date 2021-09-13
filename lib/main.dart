@@ -26,11 +26,12 @@ import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart'
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
 import 'package:bikes_user/pages/manage_bike/view/manage_bike_page.dart';
+import 'package:bikes_user/pages/view_user/binding/view_user_binding.dart';
 import 'package:bikes_user/trip_history/binding/trip_history_binding.dart';
 import 'package:bikes_user/trip_history/view/trip_history_page.dart';
 import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
 import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
-import 'package:bikes_user/pages/view_user_page.dart';
+import 'package:bikes_user/pages/view_user/view/view_user_page.dart';
 import 'package:bikes_user/pages/welcome_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/enums.dart';
@@ -100,7 +101,7 @@ class Biike extends StatelessWidget {
               MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 12)),
         )),
         inputDecorationTheme: InputDecorationTheme(
-          contentPadding: const EdgeInsets.only(top: 12.0),
+          contentPadding: const EdgeInsets.only(top: 8.0),
           labelStyle: TextStyle(fontWeight: FontWeight.normal),
           enabledBorder: UnderlineInputBorder(
               borderSide:
@@ -149,7 +150,10 @@ class Biike extends StatelessWidget {
             name: '/editProfile',
             page: () => EditProfilePage(),
             binding: EditProfileBinding()),
-        GetPage(name: '/viewUser', page: () => ViewUserPage()),
+        GetPage(
+            name: '/viewUser',
+            page: () => ViewUserPage(),
+            binding: ViewUserBinding()),
         GetPage(
             name: '/feedback',
             page: () => FeedbackPage(),

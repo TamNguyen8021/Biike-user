@@ -1,5 +1,6 @@
 [
 	{
+		"trip_id": 3,
 		"user_id": 1,
 		"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 		"user_fullname": "Yến Linh",
@@ -9,6 +10,7 @@
 		"destination_name": "Đại học FPT TP.HCM"
 	},
 	{
+		"trip_id": 4,
 		"user_id": 1,
 		"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 		"user_fullname": "Yến Linh",
@@ -18,7 +20,8 @@
 		"destination_name": "Đại học FPT TP.HCM"
 	},
 	{
-		"user_id": 1,
+		"trip_id": 5,
+		"user_id": null,
 		"avatar": null,
 		"user_fullname": null,
 		"time_book": "2021-09-15T06:35:43.511Z",

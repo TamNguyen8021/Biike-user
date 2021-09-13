@@ -64,7 +64,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Visibility(
       visible: isVisible,
       child: AppBar(
-        backwardsCompatibility: false,
         leading: _leadingWidget,
         title: title,
         actions: actionWidgets,

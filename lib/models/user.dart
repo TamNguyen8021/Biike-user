@@ -10,21 +10,28 @@ part 'user.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class User {
-  final String? userPhoneNumber;
-  final String? userEmail;
+  int? userId;
+
+  @JsonKey(defaultValue: '')
+  late String userPhoneNumber;
+
+  String? userEmail;
 
   @JsonKey(defaultValue: CustomStrings.kFindingDriver)
-  final String userFullname;
+  late String userFullname;
 
   @JsonKey(defaultValue: 'assets/images/loading.svg')
-  final String avatar;
-  final int? gender;
-  final int? userStatus;
-  final String? lastLoginDevice;
-  final DateTime? lastLoginTime;
-  final double? userStar;
-  final DateTime? createDate;
-  final bool? isBikeVerified;
+  late String avatar;
+
+  @JsonKey(defaultValue: -1)
+  late int gender;
+
+  int? userStatus;
+  String? lastLoginDevice;
+  DateTime? lastLoginTime;
+  double? userStar;
+  DateTime? createDate;
+  bool? isBikeVerified;
 
   User(
       this.userPhoneNumber,
@@ -38,6 +45,13 @@ class User {
       this.userStar,
       this.createDate,
       this.isBikeVerified);
+
+  User.empty() {
+    this.avatar = '';
+    this.userFullname = '';
+    this.userPhoneNumber = '';
+    this.gender = -1;
+  }
 
   /// A necessary factory constructor for creating a new User instance
   /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.
