@@ -284,14 +284,12 @@ class DriverHome extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
                 child: Column(
                   children: <Widget>[
-                    ListSearchedTrips(
-                        listSearchedTrips: [1, 2, 3, 4],
-                        itemPadding: 12.0),
-                    // ListUpcomingTrips(
-                    //   listUpcomingTrips: [1, 2, 3, 4],
-                    //   itemPadding: 12.0,
-                    //   isTodayFirstActivity: false,
-                    // ),
+                    Obx(() =>
+                        ListSearchedTrips(
+                            // listSearchedTrips: searchTripController.listSearchedTrip.value,
+                            listSearchedTrips: [1, 2, 3, 4],
+                            itemPadding: 12.0),
+                    ),
                     AdContainer(),
                   ],
                 ),

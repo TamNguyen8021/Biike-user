@@ -12,6 +12,7 @@ class SearchTripController extends GetxController {
   Rx<bool> isTimeSelected = false.obs;
   Rx<String> fromStation = CustomStrings.kSelectSourceStation.obs;
   Rx<String> toStation = CustomStrings.kSelectDestinationStation.obs;
+  Rx<List> listSearchedTrip = [].obs;
 
   Future<void> selectFromStation(BuildContext context) async {
     this.fromStation.value = await showDialog(
@@ -93,5 +94,14 @@ class SearchTripController extends GetxController {
       isTimeSelected.value = true;
       timeSelected.value = picked;
     }
+  }
+
+  bool acceptTrip(int tripId) {
+    //TODO send data (tripId, bikerId) to server
+    return true;
+  }
+
+  void searchedTrip() {
+    listSearchedTrip.value = [1, 2, 3, 4];
   }
 }

@@ -33,6 +33,7 @@ class ListSearchedTrips extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(bottom: itemPadding),
             child: SearchedTripCard(
+                tripId: 1, //listSearchedTrips[i].getTripId(),
                 backgroundColor: backgroundColor,
                 foregroundColor: foregroundColor,
                 iconColor: iconColor,

@@ -6,9 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 /// This widget contains an searched trip's details
-// ignore: must_be_immutable
 class SearchedTripCard extends StatelessWidget {
-  Rx<bool> isSelected = false.obs;
+  final int tripId;
   final Color backgroundColor;
   final Color foregroundColor;
   final Color iconColor;
@@ -21,6 +20,7 @@ class SearchedTripCard extends StatelessWidget {
 
   SearchedTripCard(
       {Key? key,
+        required this.tripId,
         required this.backgroundColor,
         required this.foregroundColor,
         required this.iconColor,
@@ -34,8 +34,10 @@ class SearchedTripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Rx<bool> isSelected = false.obs;
+
     return GestureDetector(
-      onTap: () => {this.isSelected.value = !this.isSelected.value},
+      onTap: () => {isSelected.value = !isSelected.value},
       child: Container(
         height: 82,
         child: Row(
@@ -154,7 +156,7 @@ class SearchedTripCard extends StatelessWidget {
                     ],
                   ),
                 )
-                : AcceptTripButton()
+                : AcceptTripButton(tripId: 1) //TODO
             ),
           ],
         ),
