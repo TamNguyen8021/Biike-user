@@ -58,9 +58,9 @@ class BottomTabBar extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 5.0),
                           child: Text(
-                            Biike.role.value == Role.Customer
-                                ? CustomStrings.kCustomerActivities
-                                : CustomStrings.kDriverActivities,
+                            Biike.role.value == Role.keer
+                                ? CustomStrings.kKeerActivities
+                                : CustomStrings.kBikerActivities,
                             style: TextStyle(
                               fontSize: 10,
                             ),

@@ -70,7 +70,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         bottom: bottomAppBar,
         shape: _shapeBorder,
         backgroundColor: ModalRoute.of(context)!.settings.name == '/home' &&
-                Biike.role.value == Role.Driver
+                Biike.role.value == Role.biker
             ? CustomColors.kOrange
             : CustomColors.kBlue,
       ),

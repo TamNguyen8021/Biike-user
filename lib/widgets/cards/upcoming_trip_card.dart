@@ -11,6 +11,7 @@ class UpcomingTripCard extends StatelessWidget {
   final Color? iconColor;
   final String avatarUrl;
   final String name;
+  final String phoneNo;
   final String time;
   final String date;
   final int year;
@@ -24,6 +25,7 @@ class UpcomingTripCard extends StatelessWidget {
       this.iconColor,
       required this.avatarUrl,
       required this.name,
+      required this.phoneNo,
       required this.time,
       required this.date,
       required this.year,
@@ -45,7 +47,7 @@ class UpcomingTripCard extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      if (name != CustomStrings.kFindingDriver) ...[
+                      if (name != CustomStrings.kFinding) ...[
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CircleAvatar(

@@ -18,10 +18,22 @@ class ListHistoryTrips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String _noHistoryMessage = '';
+
+    switch (role) {
+      case Role.keer:
+        _noHistoryMessage = CustomStrings.kNoKeerHistoryTrips;
+        break;
+      case Role.biker:
+        _noHistoryMessage = CustomStrings.kNoBikerHistoryTrips;
+        break;
+      default:
+        _noHistoryMessage = CustomStrings.kNoHistoryTrip;
+        break;
+    }
+
     if (listHistoryTrips.isEmpty) {
-      return Text(role == Role.Customer
-          ? CustomStrings.kNoCustomerHistoryTrips
-          : CustomStrings.kNoDriverHistoryTrips);
+      return Text(_noHistoryMessage);
     } else {
       return ListView.builder(
           physics: NeverScrollableScrollPhysics(),

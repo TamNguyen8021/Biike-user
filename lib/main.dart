@@ -45,7 +45,7 @@ void main() {
 
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
-  static Rx<Role> role = Role.None.obs;
+  static Rx<Role> role = Role.none.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class Biike extends StatelessWidget {
         GetPage(
             name: '/tripDetails',
             page: () => TripDetailsPage(
-                  isWaitingForDriver: false,
+                  isWaitingForBiker: false,
                 ),
             binding: TripDetailsBinding()),
         GetPage(

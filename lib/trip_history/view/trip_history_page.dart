@@ -59,7 +59,7 @@ class TripHistoryPage extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 25.0),
                             child: Text(
-                              CustomStrings.kCustomerHistory,
+                              CustomStrings.kKeerHistory,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
@@ -69,7 +69,7 @@ class TripHistoryPage extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 25.0),
                             child: Text(
-                              CustomStrings.kDriverHistory,
+                              CustomStrings.kBikerHistory,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
@@ -79,12 +79,12 @@ class TripHistoryPage extends StatelessWidget {
                       onTap: (int index) {
                         switch (index) {
                           case 0:
-                            tripHistoryController.role.value = Role.Customer;
+                            tripHistoryController.role.value = Role.keer;
                             tripHistoryController.getHistoryTrips(
                                 context: context);
                             break;
                           case 1:
-                            tripHistoryController.role.value = Role.Driver;
+                            tripHistoryController.role.value = Role.biker;
                             tripHistoryController.getHistoryTrips(
                                 context: context);
                             break;
@@ -95,7 +95,7 @@ class TripHistoryPage extends StatelessWidget {
                   ),
                 ),
               ),
-              body: tripHistoryController.historyTrips.isNotEmpty
+              body: snapshot.connectionState == ConnectionState.done
                   ? SingleChildScrollView(
                       child: Column(
                         children: <Widget>[

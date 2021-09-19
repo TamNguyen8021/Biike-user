@@ -15,7 +15,7 @@ class TripHistoryController extends GetxController {
   // final tripHistoryProvider = Get.find<TripHistoryProvider>();
 
   RxList<dynamic> historyTrips = [].obs;
-  Rx<Role> role = Role.Customer.obs;
+  Rx<Role> role = Role.keer.obs;
 
   /// Load history trips from json file.
   ///
@@ -25,16 +25,9 @@ class TripHistoryController extends GetxController {
     String response = await DefaultAssetBundle.of(context)
         .loadString('assets/files/history_trip.json');
     var data = jsonDecode(response);
-    var customerHistoryTrips = data[0];
-    // print('customer: ' + customerHistoryTrips.toString());
-    var driverHistoryTrips = data[1];
-    // print('driver: ' + driverHistoryTrips.toString());
-    var loadedData = customerHistoryTrips;
-    if (role.value != Role.Customer) {
-      loadedData = driverHistoryTrips;
-    }
-    // print('loaded data length: ' + loadedData.length.toString());
-    for (var item in loadedData) {
+    var tempHistoryTrips = data;
+    // print('tempHistoryTrips: ' + tempHistoryTrips.toString());
+    for (var item in tempHistoryTrips) {
       // print(item);
       User user = User.fromJson(item);
       // print(user.toJson());
@@ -58,22 +51,22 @@ class TripHistoryController extends GetxController {
           trip.timeBook.minute.toString();
       switch (trip.tripStatus) {
         case 1:
-          tripStatus = TripStatus.Finding;
+          tripStatus = TripStatus.finding;
           break;
         case 2:
-          tripStatus = TripStatus.Waiting;
+          tripStatus = TripStatus.waiting;
           break;
         case 3:
-          tripStatus = TripStatus.Started;
+          tripStatus = TripStatus.started;
           break;
         case 4:
-          tripStatus = TripStatus.Finished;
+          tripStatus = TripStatus.finished;
           break;
         case 5:
-          tripStatus = TripStatus.Canceled;
+          tripStatus = TripStatus.canceled;
           break;
         default:
-          tripStatus = TripStatus.None;
+          tripStatus = TripStatus.none;
           Get.defaultDialog(
               title: CustomStrings.kError,
               middleText: CustomStrings.kErrorMessage);

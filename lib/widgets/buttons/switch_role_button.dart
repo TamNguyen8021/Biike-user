@@ -23,7 +23,7 @@ class SwitchRoleButton extends StatelessWidget {
       _modeButtonForegroundColor.value = Colors.white;
       _modeButtonBackgroundColor.value = CustomColors.kOrange;
     } else {
-      if (Biike.role.value == Role.Driver) {
+      if (Biike.role.value == Role.biker) {
         _modeButtonForegroundColor.value = CustomColors.kOrange;
         _modeButtonBackgroundColor.value = Colors.white;
       }
@@ -34,13 +34,13 @@ class SwitchRoleButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           onPressed: () {
-            if (Biike.role.value == Role.Customer) {
-              Biike.role.value = Role.Driver;
+            if (Biike.role.value == Role.keer) {
+              Biike.role.value = Role.biker;
               if (!isOnProfilePage) {
                 _modeButtonForegroundColor.value = CustomColors.kOrange;
               }
-            } else if (Biike.role.value == Role.Driver) {
-              Biike.role.value = Role.Customer;
+            } else if (Biike.role.value == Role.biker) {
+              Biike.role.value = Role.keer;
               if (!isOnProfilePage) {
                 _modeButtonForegroundColor.value = CustomColors.kBlue;
               }
@@ -50,9 +50,9 @@ class SwitchRoleButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 1.0),
             child: Text(
-              Biike.role.value == Role.Customer
-                  ? CustomStrings.kCustomerMode
-                  : CustomStrings.kDriverMode,
+              Biike.role.value == Role.keer
+                  ? CustomStrings.kKeerMode
+                  : CustomStrings.kBikerMode,
               style: TextStyle(
                   color: _modeButtonForegroundColor.value, fontSize: 10),
             ),

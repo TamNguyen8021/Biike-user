@@ -91,21 +91,21 @@ class EditProfilePage extends StatelessWidget {
                               CustomStrings.kMale,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.Male,
+                            value: Gender.male,
                           ),
                           DropdownMenuItem<Gender>(
                             child: Text(
                               CustomStrings.kFemale,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.Female,
+                            value: Gender.female,
                           ),
                           DropdownMenuItem<Gender>(
                             child: Text(
                               CustomStrings.kOthers,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.Other,
+                            value: Gender.other,
                           ),
                         ],
                         onChanged: (Gender? gender) {

@@ -12,14 +12,14 @@ class Route {
   final int routeId;
   final int startingPointId;
   final int destinationId;
-  final int defaultPrice;
+  final int defaultPoint;
   final bool isRouteDeleted;
 
   Route(
     this.routeId,
     this.startingPointId,
     this.destinationId,
-    this.defaultPrice,
+    this.defaultPoint,
     this.isRouteDeleted,
   );
 

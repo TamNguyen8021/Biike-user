@@ -5,7 +5,6 @@ import 'package:bikes_user/widgets/lists/list_vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// The 'driver-point' screen
 class ExchangeVoucherPage extends StatelessWidget {
   const ExchangeVoucherPage({Key? key}) : super(key: key);
 

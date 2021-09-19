@@ -1,6 +1,6 @@
 import 'package:bikes_user/utils/custom_strings.dart';
 
-enum Gender { Male, Female, Other }
+enum Gender { male, female, other }
 
 extension GenderExtension on Gender {
   String getGenderText(int gender) {
@@ -17,5 +17,5 @@ extension GenderExtension on Gender {
   }
 }
 
-enum Role { None, Customer, Driver }
-enum TripStatus { None, Finding, Waiting, Started, Finished, Canceled }
+enum Role { none, keer, biker }
+enum TripStatus { none, finding, waiting, started, finished, canceled }

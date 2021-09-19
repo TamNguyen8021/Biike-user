@@ -17,12 +17,12 @@ import 'package:get/get.dart';
 class TripDetailsPage extends StatelessWidget {
   final tripDetailsController = Get.find<TripDetailsController>();
 
-  /// Only used for customer
-  final bool isWaitingForDriver;
+  /// Only used for ke-er
+  final bool isWaitingForBiker;
 
   TripDetailsPage({
     Key? key,
-    required this.isWaitingForDriver,
+    required this.isWaitingForBiker,
   }) : super(key: key);
 
   @override
@@ -75,9 +75,9 @@ class TripDetailsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      isWaitingForDriver
+                      isWaitingForBiker
                           ? CustomStrings.kNewTrip
-                          : CustomStrings.kTripHasDriver,
+                          : CustomStrings.kTripHasBiker,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Text(
@@ -210,7 +210,7 @@ class TripDetailsPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5)),
                 child: Row(
                   children: <Widget>[
-                    if (!isWaitingForDriver) ...[
+                    if (!isWaitingForBiker) ...[
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: CircleAvatar(
@@ -237,7 +237,9 @@ class TripDetailsPage extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 10.0),
-                              child: ContactButtons(),
+                              child: ContactButtons(
+                                phoneNo: '',
+                              ),
                             ),
                           ],
                         ),
@@ -250,7 +252,7 @@ class TripDetailsPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        CustomStrings.kFindingDriver,
+                        CustomStrings.kFinding,
                         style: TextStyle(
                           color: CustomColors.kBlue,
                           fontWeight: FontWeight.bold,
@@ -268,7 +270,7 @@ class TripDetailsPage extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Center(
                         child: SizedBox(
-                          width: isWaitingForDriver ? 152 : double.infinity,
+                          width: isWaitingForBiker ? 152 : double.infinity,
                           child: CustomElevatedIconButton(
                             onPressedFunc: () {},
                             text: CustomStrings.kCancelTrip,
@@ -281,8 +283,8 @@ class TripDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (!isWaitingForDriver) ...[
-                    if (Biike.role.value == Role.Driver) ...[
+                  if (!isWaitingForBiker) ...[
+                    if (Biike.role.value == Role.biker) ...[
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10.0),

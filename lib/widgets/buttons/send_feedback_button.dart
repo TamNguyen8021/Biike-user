@@ -20,8 +20,8 @@ class SendFeedbackButton extends StatelessWidget {
           if (feedbackController.isSendFeedbackSuccess()) {
             print('Send feedback success');
             switch (Biike.role.value) {
-              case Role.Driver:
-              case Role.Customer:
+              case Role.biker:
+              case Role.keer:
                 Get.offAllNamed('/home');
                 break;
               default:

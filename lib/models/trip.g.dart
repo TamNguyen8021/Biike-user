@@ -9,8 +9,8 @@ part of 'trip.dart';
 Trip _$TripFromJson(Map<String, dynamic> json) {
   return Trip(
     json['trip_id'] as int?,
-    json['customer_phone_number'] as String?,
-    json['driver_phone_number'] as String?,
+    json['keer_id'] as int?,
+    json['biker_id'] as int?,
     json['route_id'] as int?,
     DateTime.parse(json['time_book'] as String),
     json['time_pick_up'] == null
@@ -22,14 +22,15 @@ Trip _$TripFromJson(Map<String, dynamic> json) {
     json['trip_status'] as int?,
     json['number_plate'] as String?,
     json['is_schedule'] as bool?,
-    json['cancel_person_phone_number'] as String?,
+    json['cancel_person_id'] as int?,
+    json['cancel_reason'] as String?,
   );
 }
 
 Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'trip_id': instance.tripId,
-      'customer_phone_number': instance.customerPhoneNumber,
-      'driver_phone_number': instance.driverPhoneNumber,
+      'keer_id': instance.keerId,
+      'biker_id': instance.bikerId,
       'route_id': instance.routeId,
       'time_book': instance.timeBook.toIso8601String(),
       'time_pick_up': instance.timePickUp?.toIso8601String(),
@@ -37,5 +38,6 @@ Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'trip_status': instance.tripStatus,
       'number_plate': instance.numberPlate,
       'is_schedule': instance.isSchedule,
-      'cancel_person_phone_number': instance.cancelPersonPhoneNumber,
+      'cancel_person_id': instance.cancelPersonId,
+      'cancel_reason': instance.cancelReason,
     };

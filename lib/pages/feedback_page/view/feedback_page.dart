@@ -71,9 +71,9 @@ class FeedbackPage extends StatelessWidget {
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  Biike.role.value == Role.Driver
-                                    ? CustomStrings.kTripSuccessBiker
-                                    : CustomStrings.kTripSuccessKeer,
+                                  Biike.role.value == Role.biker
+                                      ? CustomStrings.kTripSuccessBiker
+                                      : CustomStrings.kTripSuccessKeer,
                                   overflow: TextOverflow.clip,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -84,29 +84,31 @@ class FeedbackPage extends StatelessWidget {
                               ),
                             ]),
                       ),
-                      Biike.role.value == Role.Driver
+                      Biike.role.value == Role.biker
                           ? Container(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(
-                              "EXP",
-                              style: new TextStyle(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5.0, horizontal: 2.0)),
-                            Icon(Icons.star, size: 20, color: Colors.white),
-                          ],
-                        ),
-                        decoration: new BoxDecoration(
-                          borderRadius:
-                          new BorderRadius.all(new Radius.circular(20.0)),
-                          color: CustomColors.kOrange,
-                        ),
-                        padding: new EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
-                      )
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Text(
+                                    "EXP",
+                                    style: new TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0, horizontal: 2.0)),
+                                  Icon(Icons.star,
+                                      size: 20, color: Colors.white),
+                                ],
+                              ),
+                              decoration: new BoxDecoration(
+                                borderRadius: new BorderRadius.all(
+                                    new Radius.circular(20.0)),
+                                color: CustomColors.kOrange,
+                              ),
+                              padding:
+                                  new EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
+                            )
                           : Padding(padding: const EdgeInsets.only(top: 2.0)),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -126,103 +128,105 @@ class FeedbackPage extends StatelessWidget {
                             ]),
                       ),
                       Form(
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 15.0, top: 10.0),
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    RatingBar(
-                                      //initialRating: 3,
-                                      minRating: 1,
-                                      allowHalfRating: false,
-                                      itemCount: 5,
-                                      ratingWidget: RatingWidget(
-                                        full: _image('assets/images/full_star.svg'),
-                                        half: _image(''),
-                                        empty: _image('assets/images/empty_star.svg'),
-                                      ),
-                                      itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 4.0),
-                                      onRatingUpdate: (star) {
-                                        print(star);
-                                        feedbackController.updateStarRating(star);
-                                      },
+                          child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 15.0, top: 10.0),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  RatingBar(
+                                    //initialRating: 3,
+                                    minRating: 1,
+                                    allowHalfRating: false,
+                                    itemCount: 5,
+                                    ratingWidget: RatingWidget(
+                                      full:
+                                          _image('assets/images/full_star.svg'),
+                                      half: _image(''),
+                                      empty: _image(
+                                          'assets/images/empty_star.svg'),
                                     ),
-                                  ]),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 20.0, top: 10.0),
-                              child: Card(
-                                color: CustomColors.kLightGray,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    maxLines: 3,
-                                    maxLength: 250,
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(250)
-                                    ],
-                                    style: TextStyle(color: CustomColors.kDarkGray),
-                                    decoration: InputDecoration(
-                                      counter: Offstage(),
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 15.0),
-                                    ),
-                                    onChanged: (feedback) {
-                                      print(feedback);
-                                      feedbackController.updateFeedback(feedback);
+                                    itemPadding:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    onRatingUpdate: (star) {
+                                      print(star);
+                                      feedbackController.updateStarRating(star);
                                     },
                                   ),
+                                ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20.0, right: 20.0, top: 10.0),
+                            child: Card(
+                              color: CustomColors.kLightGray,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: TextField(
+                                  maxLines: 3,
+                                  maxLength: 250,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(250)
+                                  ],
+                                  style:
+                                      TextStyle(color: CustomColors.kDarkGray),
+                                  decoration: InputDecoration(
+                                    counter: Offstage(),
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 15.0),
+                                  ),
+                                  onChanged: (feedback) {
+                                    print(feedback);
+                                    feedbackController.updateFeedback(feedback);
+                                  },
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[SendFeedbackButton()]),
-                            ),
-                          ],
-                        )
-                      ),
-                      Biike.role.value == Role.Customer
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[SendFeedbackButton()]),
+                          ),
+                        ],
+                      )),
+                      Biike.role.value == Role.keer
                           ? Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20.0, horizontal: 10.0),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: SvgPicture.asset(
-                                'assets/images/coffee-cup.svg',
-                                height: 90,
-                                alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 10.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: SvgPicture.asset(
+                                      'assets/images/coffee-cup.svg',
+                                      height: 90,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      CustomStrings.kBuyReminder,
+                                      overflow: TextOverflow.clip,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: CustomColors.kDarkGray,
+                                          fontSize: 12.0),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                CustomStrings.kBuyReminder,
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 12.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
+                            )
                           : Padding(padding: const EdgeInsets.only(top: 2.0)),
-                    ]
-                ),
+                    ]),
               ),
             ]),
           ),

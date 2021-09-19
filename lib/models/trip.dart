@@ -10,8 +10,8 @@ part 'trip.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Trip {
   final int? tripId;
-  final String? customerPhoneNumber;
-  final String? driverPhoneNumber;
+  final int? keerId;
+  final int? bikerId;
   final int? routeId;
   final DateTime timeBook;
   final DateTime? timePickUp;
@@ -19,12 +19,13 @@ class Trip {
   final int? tripStatus;
   final String? numberPlate;
   final bool? isSchedule;
-  final String? cancelPersonPhoneNumber;
+  final int? cancelPersonId;
+  final String? cancelReason;
 
   Trip(
       this.tripId,
-      this.customerPhoneNumber,
-      this.driverPhoneNumber,
+      this.keerId,
+      this.bikerId,
       this.routeId,
       this.timeBook,
       this.timePickUp,
@@ -32,7 +33,8 @@ class Trip {
       this.tripStatus,
       this.numberPlate,
       this.isSchedule,
-      this.cancelPersonPhoneNumber);
+      this.cancelPersonId,
+      this.cancelReason);
 
   /// A necessary factory constructor for creating a new Trip instance
   /// from a map. Pass the map to the generated `_$TripFromJson()` constructor.

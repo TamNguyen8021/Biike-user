@@ -2,9 +2,10 @@
 	{
 		"trip_id": 3,
 		"user_id": 1,
+		"user_phone_number": "0123456789",
 		"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 		"user_fullname": "Yến Linh",
-		"time_book": "2021-09-12T23:45:43.511Z",
+		"time_book": "2021-09-18T21:45:43.511Z",
 		"trip_status": 2,
 		"starting_point_name": "Chung cư SKY9",
 		"destination_name": "Đại học FPT TP.HCM"
@@ -12,6 +13,7 @@
 	{
 		"trip_id": 4,
 		"user_id": 1,
+		"user_phone_number": "0123456789",
 		"avatar": "https://ui-avatars.com/api/?name=Yen+Linh&background=random&rounded=true&size=128",
 		"user_fullname": "Yến Linh",
 		"time_book": "2021-09-15T06:35:43.511Z",
@@ -22,6 +24,7 @@
 	{
 		"trip_id": 5,
 		"user_id": null,
+		"user_phone_number": null,
 		"avatar": null,
 		"user_fullname": null,
 		"time_book": "2021-09-15T06:35:43.511Z",

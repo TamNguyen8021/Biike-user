@@ -8,9 +8,9 @@ part of 'area.dart';
 
 Area _$AreaFromJson(Map<String, dynamic> json) {
   return Area(
-    json['area_id'] as int,
-    json['area_name'] as String,
-    json['is_area_deleted'] as bool,
+    json['area_id'] as int?,
+    json['area_name'] as String? ?? 'Đại học FPT TP.HCM',
+    json['is_area_deleted'] as bool?,
   );
 }
 

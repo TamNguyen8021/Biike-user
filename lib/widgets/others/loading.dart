@@ -1,4 +1,3 @@
-import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatelessWidget {
@@ -15,7 +14,6 @@ class Loading extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16.0),
             child: CircularProgressIndicator(),
           ),
-          Text(CustomStrings.kLoading),
         ],
       ),
     );

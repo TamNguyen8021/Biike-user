@@ -1,9 +1,12 @@
+import 'package:bikes_user/utils/common_functions.dart';
 import 'package:bikes_user/widgets/buttons/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 
 /// This widget includes two buttons: call and message
 class ContactButtons extends StatelessWidget {
-  const ContactButtons({Key? key}) : super(key: key);
+  final String phoneNo;
+
+  const ContactButtons({Key? key, required this.phoneNo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +19,14 @@ class ContactButtons extends StatelessWidget {
             icon: Icons.phone,
             height: 35.0,
             width: 35.0,
-            function: () {},
+            function: () => CommonFunctions().makingPhoneCall(phoneNo: phoneNo),
           ),
         ),
         CustomIconButton(
           icon: Icons.message,
           height: 35.0,
           width: 35.0,
-          function: () {},
+          function: () => CommonFunctions().makingSms(phoneNo: phoneNo),
         ),
       ],
     );

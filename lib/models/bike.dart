@@ -9,16 +9,16 @@ part 'bike.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Bike {
-  final int bikeId;
-  final String userPhoneNumber;
-  final String numberPlate;
-  final String color;
-  final String brand;
-  final bool isBikeDeleted;
+  final int? bikeId;
+  final int? userId;
+  final String? numberPlate;
+  final String? color;
+  final String? brand;
+  final bool? isBikeDeleted;
 
   Bike(
     this.bikeId,
-    this.userPhoneNumber,
+    this.userId,
     this.numberPlate,
     this.color,
     this.brand,

@@ -17,7 +17,7 @@ class User {
 
   String? userEmail;
 
-  @JsonKey(defaultValue: CustomStrings.kFindingDriver)
+  @JsonKey(defaultValue: CustomStrings.kFinding)
   late String userFullname;
 
   @JsonKey(defaultValue: 'assets/images/loading.svg')

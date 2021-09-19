@@ -46,18 +46,24 @@ class Home extends StatelessWidget {
       earliestUpcomingTripHour = int.parse(earliestUpcomingTripTime.first);
       earliestUpcomingTripMin = int.parse(earliestUpcomingTripTime.last);
       currentTime = DateTime.now();
+
       if (earliestUpcomingTripHour - currentTime.hour > 0) {
         timeLeft = timeLeft +
             (earliestUpcomingTripHour - currentTime.hour).toString() +
             CustomStrings.kReminderHour;
       }
-      if (earliestUpcomingTripHour - currentTime.hour > 0) {
+
+      if (timeLeft.isNotEmpty) {
         timeLeft = timeLeft +
             (earliestUpcomingTripMin - currentTime.minute).abs().toString() +
-            CustomStrings.kReminderMinute;
-      }
-      if (timeLeft.isNotEmpty) {
-        timeLeft += CustomStrings.kReminderLeft;
+            CustomStrings.kReminderMinute +
+            CustomStrings.kReminderLeft;
+      } else if (earliestUpcomingTripHour == currentTime.hour &&
+          earliestUpcomingTripMin - currentTime.minute > 0) {
+        timeLeft = timeLeft +
+            (earliestUpcomingTripMin - currentTime.minute).toString() +
+            CustomStrings.kReminderMinute +
+            CustomStrings.kReminderLeft;
       }
     }
 
@@ -85,9 +91,9 @@ class Home extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  Biike.role.value == Role.Customer
-                                      ? CustomStrings.kCustomerReadyReminder
-                                      : CustomStrings.kDriverReadyReminder,
+                                  Biike.role.value == Role.keer
+                                      ? CustomStrings.kKeerReadyReminder
+                                      : CustomStrings.kBikerReadyReminder,
                                   style:
                                       TextStyle(color: CustomColors.kDarkGray),
                                 ),
@@ -110,6 +116,8 @@ class Home extends StatelessWidget {
                                 avatarUrl:
                                     homeController.upcomingTrips[0].avatarUrl,
                                 name: homeController.upcomingTrips[0].name,
+                                phoneNo:
+                                    homeController.upcomingTrips[0].phoneNo,
                                 time: homeController.upcomingTrips[0].time,
                                 date: CustomStrings.kToday,
                                 year: homeController.upcomingTrips[0].year,
@@ -124,7 +132,10 @@ class Home extends StatelessWidget {
                               ConfirmArrivalButton(
                                 isOnHomeScreen: true,
                               ),
-                              ContactButtons()
+                              ContactButtons(
+                                phoneNo:
+                                    homeController.upcomingTrips[0].phoneNo,
+                              )
                             ],
                           ),
                         ],
@@ -136,7 +147,7 @@ class Home extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Divider(),
                 ),
-                if (Biike.role.value == Role.Customer) ...[
+                if (Biike.role.value == Role.keer) ...[
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 22.0),
                     child: Column(
@@ -349,7 +360,7 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Biike.role.value == Role.Customer
+      floatingActionButton: Biike.role.value == Role.keer
           ? Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[

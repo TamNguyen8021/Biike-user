@@ -16,9 +16,9 @@ class Activity extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeController = Get.find<HomeController>();
 
-    String _roleActivity = CustomStrings.kCustomerActivities;
-    if (Biike.role.value != Role.Customer) {
-      _roleActivity = CustomStrings.kDriverActivities;
+    String _roleActivity = CustomStrings.kKeerActivities;
+    if (Biike.role.value != Role.keer) {
+      _roleActivity = CustomStrings.kBikerActivities;
     }
 
     return Scaffold(

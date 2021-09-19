@@ -68,6 +68,7 @@ class HomeController extends GetxController {
           iconColor: iconColor,
           avatarUrl: user.avatar,
           name: user.userFullname,
+          phoneNo: user.userPhoneNumber,
           time: time,
           date: date,
           year: trip.timeBook.year,

@@ -1,3 +1,4 @@
+import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 /// This allows the `Area` class to access private members in
@@ -9,15 +10,22 @@ part 'area.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Area {
-  final int areaId;
-  final String areaName;
-  final bool isAreaDeleted;
+  late final int? areaId;
+
+  @JsonKey(defaultValue: CustomStrings.fptHCMUni)
+  late final String areaName;
+
+  late final bool? isAreaDeleted;
 
   Area(
     this.areaId,
     this.areaName,
     this.isAreaDeleted,
   );
+
+  Area.empty() {
+    areaName = '';
+  }
 
   /// A necessary factory constructor for creating a new Area instance
   /// from a map. Pass the map to the generated `_$AreaFromJson()` constructor.

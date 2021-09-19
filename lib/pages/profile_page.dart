@@ -93,7 +93,7 @@ class ProfilePage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            if (Biike.role.value == Role.Driver) ...[
+                            if (Biike.role.value == Role.biker) ...[
                               Padding(
                                 padding: const EdgeInsets.only(right: 4.0),
                                 child: CustomElevatedIconButton(

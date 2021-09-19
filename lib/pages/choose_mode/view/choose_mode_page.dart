@@ -47,8 +47,8 @@ class ChooseModePage extends StatelessWidget {
                     child: Container(
                         margin: const EdgeInsets.only(bottom: 20.0),
                         decoration: BoxDecoration(
-                            color: chooseModeController
-                                .driverBackgroundColor.value,
+                            color:
+                                chooseModeController.bikerBackgroundColor.value,
                             borderRadius: BorderRadius.circular(5)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -61,23 +61,23 @@ class ChooseModePage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      CustomStrings.kDriverRole,
+                                      CustomStrings.kBikerRole,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline2!
                                           .copyWith(
                                             color: chooseModeController
-                                                .driverTitleAndIconColor.value,
+                                                .bikerTitleAndIconColor.value,
                                           ),
                                     ),
                                     Text(
-                                      CustomStrings.kDriverDescription,
+                                      CustomStrings.kBikerDescription,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1!
                                           .copyWith(
                                             color: chooseModeController
-                                                .driverTextColor.value,
+                                                .bikerTextColor.value,
                                           ),
                                       overflow: TextOverflow.clip,
                                     )
@@ -90,13 +90,13 @@ class ChooseModePage extends StatelessWidget {
                               child: SvgPicture.asset(
                                 'assets/images/scooter-front-view.svg',
                                 color: chooseModeController
-                                    .driverTitleAndIconColor.value,
+                                    .bikerTitleAndIconColor.value,
                               ),
                             ),
                           ],
                         )),
                     onTap: () {
-                      chooseModeController.selectDriverMode();
+                      chooseModeController.selectBikerMode();
                     },
                   ),
                 ),
@@ -105,8 +105,7 @@ class ChooseModePage extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 30.0),
                       decoration: BoxDecoration(
-                          color: chooseModeController
-                              .customerBackgroundColor.value,
+                          color: chooseModeController.keerBackgroundColor.value,
                           borderRadius: BorderRadius.circular(5)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -119,23 +118,23 @@ class ChooseModePage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    CustomStrings.kCustomerRole,
+                                    CustomStrings.kKeerRole,
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline2!
                                         .copyWith(
                                           color: chooseModeController
-                                              .customerTitleAndIconColor.value,
+                                              .keerTitleAndIconColor.value,
                                         ),
                                   ),
                                   Text(
-                                    CustomStrings.kCustomerDescription,
+                                    CustomStrings.kKeerDescription,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1!
                                         .copyWith(
                                           color: chooseModeController
-                                              .customerTextColor.value,
+                                              .keerTextColor.value,
                                         ),
                                     overflow: TextOverflow.clip,
                                   )
@@ -148,14 +147,14 @@ class ChooseModePage extends StatelessWidget {
                             child: SvgPicture.asset(
                               'assets/images/helmet.svg',
                               color: chooseModeController
-                                  .customerTitleAndIconColor.value,
+                                  .keerTitleAndIconColor.value,
                             ),
                           ),
                         ],
                       ),
                     ),
                     onTap: () {
-                      chooseModeController.selectCustomerMode();
+                      chooseModeController.selectKeerMode();
                     },
                   ),
                 ),
@@ -184,7 +183,7 @@ class ChooseModePage extends StatelessWidget {
             ),
             NextPageButton(
               onPressedFunc: () {
-                if (Biike.role.value != Role.None) {
+                if (Biike.role.value != Role.none) {
                   Get.offAllNamed('/home');
                 } else {
                   Get.defaultDialog(

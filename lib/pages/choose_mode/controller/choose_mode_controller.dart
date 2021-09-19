@@ -7,59 +7,59 @@ import 'package:get/get.dart';
 
 /// Manage states of [ChooseModePage]
 class ChooseModeController extends GetxController {
-  Rx<bool> isCustomerModeSelected = false.obs;
-  Rx<Color> customerBackgroundColor = CustomColors.kLightGray.obs;
-  Rx<Color> customerTitleAndIconColor = CustomColors.kBlue.obs;
-  Rx<Color> customerTextColor = CustomColors.kDarkGray.obs;
+  Rx<bool> isKeerModeSelected = false.obs;
+  Rx<Color> keerBackgroundColor = CustomColors.kLightGray.obs;
+  Rx<Color> keerTitleAndIconColor = CustomColors.kBlue.obs;
+  Rx<Color> keerTextColor = CustomColors.kDarkGray.obs;
 
-  Rx<bool> isDriverModeSelected = false.obs;
-  Rx<Color> driverBackgroundColor = CustomColors.kLightGray.obs;
-  Rx<Color> driverTitleAndIconColor = CustomColors.kBlue.obs;
-  Rx<Color> driverTextColor = CustomColors.kDarkGray.obs;
+  Rx<bool> isBikerModeSelected = false.obs;
+  Rx<Color> bikerBackgroundColor = CustomColors.kLightGray.obs;
+  Rx<Color> bikerTitleAndIconColor = CustomColors.kBlue.obs;
+  Rx<Color> bikerTextColor = CustomColors.kDarkGray.obs;
 
-  void selectCustomerMode() {
-    if (isCustomerModeSelected.isFalse) {
-      if (isDriverModeSelected.isTrue) {
-        Biike.role.value = Role.None;
-        isDriverModeSelected.value = false;
-        driverBackgroundColor.value = CustomColors.kLightGray;
-        driverTitleAndIconColor.value = CustomColors.kBlue;
-        driverTextColor.value = CustomColors.kDarkGray;
+  void selectKeerMode() {
+    if (isKeerModeSelected.isFalse) {
+      if (isBikerModeSelected.isTrue) {
+        Biike.role.value = Role.none;
+        isBikerModeSelected.value = false;
+        bikerBackgroundColor.value = CustomColors.kLightGray;
+        bikerTitleAndIconColor.value = CustomColors.kBlue;
+        bikerTextColor.value = CustomColors.kDarkGray;
       }
 
-      isCustomerModeSelected.value = true;
-      Biike.role.value = Role.Customer;
-      customerBackgroundColor.value = CustomColors.kOrange;
-      customerTitleAndIconColor.value = customerTextColor.value = Colors.white;
+      isKeerModeSelected.value = true;
+      Biike.role.value = Role.keer;
+      keerBackgroundColor.value = CustomColors.kOrange;
+      keerTitleAndIconColor.value = keerTextColor.value = Colors.white;
     } else {
-      isCustomerModeSelected.value = false;
-      Biike.role.value = Role.None;
-      customerBackgroundColor.value = CustomColors.kLightGray;
-      customerTitleAndIconColor.value = CustomColors.kBlue;
-      customerTextColor.value = CustomColors.kDarkGray;
+      isKeerModeSelected.value = false;
+      Biike.role.value = Role.none;
+      keerBackgroundColor.value = CustomColors.kLightGray;
+      keerTitleAndIconColor.value = CustomColors.kBlue;
+      keerTextColor.value = CustomColors.kDarkGray;
     }
   }
 
-  void selectDriverMode() {
-    if (isDriverModeSelected.isFalse) {
-      if (isCustomerModeSelected.isTrue) {
-        Biike.role.value = Role.None;
-        isCustomerModeSelected.value = false;
-        customerBackgroundColor.value = CustomColors.kLightGray;
-        customerTitleAndIconColor.value = CustomColors.kBlue;
-        customerTextColor.value = CustomColors.kDarkGray;
+  void selectBikerMode() {
+    if (isBikerModeSelected.isFalse) {
+      if (isKeerModeSelected.isTrue) {
+        Biike.role.value = Role.none;
+        isKeerModeSelected.value = false;
+        keerBackgroundColor.value = CustomColors.kLightGray;
+        keerTitleAndIconColor.value = CustomColors.kBlue;
+        keerTextColor.value = CustomColors.kDarkGray;
       }
 
-      isDriverModeSelected.value = true;
-      Biike.role.value = Role.Driver;
-      driverBackgroundColor.value = CustomColors.kOrange;
-      driverTitleAndIconColor.value = driverTextColor.value = Colors.white;
+      isBikerModeSelected.value = true;
+      Biike.role.value = Role.biker;
+      bikerBackgroundColor.value = CustomColors.kOrange;
+      bikerTitleAndIconColor.value = bikerTextColor.value = Colors.white;
     } else {
-      isDriverModeSelected.value = false;
-      Biike.role.value = Role.None;
-      driverBackgroundColor.value = CustomColors.kLightGray;
-      driverTitleAndIconColor.value = CustomColors.kBlue;
-      driverTextColor.value = CustomColors.kDarkGray;
+      isBikerModeSelected.value = false;
+      Biike.role.value = Role.none;
+      bikerBackgroundColor.value = CustomColors.kLightGray;
+      bikerTitleAndIconColor.value = CustomColors.kBlue;
+      bikerTextColor.value = CustomColors.kDarkGray;
     }
   }
 }

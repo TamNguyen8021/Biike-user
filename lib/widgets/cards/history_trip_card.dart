@@ -31,18 +31,18 @@ class HistoryTripCard extends StatelessWidget {
     String _statusText = '';
     double screenWidth = MediaQuery.of(context).size.width;
 
-    if (status != TripStatus.Finished) {
+    if (status != TripStatus.finished) {
       _statusColor = CustomColors.kRed;
     }
 
     switch (status) {
-      case TripStatus.Finding:
-      case TripStatus.Waiting:
-      case TripStatus.Started:
-      case TripStatus.Finished:
+      case TripStatus.finding:
+      case TripStatus.waiting:
+      case TripStatus.started:
+      case TripStatus.finished:
         _statusText = CustomStrings.kTripFinished;
         break;
-      case TripStatus.Canceled:
+      case TripStatus.canceled:
         _statusText = CustomStrings.kTripCanceled;
         break;
       default:
