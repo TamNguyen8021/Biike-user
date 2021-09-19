@@ -5,6 +5,7 @@ import 'package:bikes_user/widgets/lists/list_vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// The screen to view list of vouchers for redeem
 class ExchangeVoucherPage extends StatelessWidget {
   const ExchangeVoucherPage({Key? key}) : super(key: key);
 
