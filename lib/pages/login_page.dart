@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 
 /// The '003.1_login' screen
 class LoginPage extends StatelessWidget {
+  static const String routeName = '/login';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override

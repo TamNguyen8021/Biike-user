@@ -3,6 +3,19 @@ class CustomStrings {
   // '002.1_welcome_1' screen
   static const String kIntroduction = "Ứng dụng kết nối đi ké xe miễn phí";
 
+  //'002.,.2,.3' screen
+  static const String kSkip = "Bỏ qua>>";
+  static const String kFree = "Hoàn toàn miễn phí";
+  static const String kFirstDescription = "Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì khi sử dụng app";
+  static const String kSecondDescription = "Biiké kết nối những người có chung hành trình, giúp tận dụng những chiếc yên xe vốn lãng phí";
+  static const String kThirdDescription = "Biiké giúp giảm thiểu lượng xe lưu thông, giảm kẹt xe, khói bụi và bảo vệ môi trường";
+  static const String kConnectSociaty = "Kết nối cộng đồng";
+  static const String kProtectEnviroment = "Bảo vệ môi trường";
+  static const String kStartOnBoard = "Bắt đầu";
+
+
+
+
   // '003.1_login'
   static const String kLoginButton = "Xác thực bằng email FPT";
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";

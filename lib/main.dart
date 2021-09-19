@@ -9,6 +9,8 @@ import 'package:bikes_user/pages/edit_profile/binding/edit_profile_binding.dart'
 import 'package:bikes_user/pages/edit_profile/view/edit_profile_page.dart';
 import 'package:bikes_user/pages/home/binding/home_binding.dart';
 import 'package:bikes_user/pages/home/view/home_page.dart';
+import 'package:bikes_user/pages/on_board_screen/on_board.dart';
+import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
@@ -117,10 +119,12 @@ class Biike extends StatelessWidget {
                   BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
         ),
       ),
-      initialRoute: '/welcome',
+      initialRoute: '/open',
       getPages: [
+        GetPage(name: OnBoardScreen.routeName, page: () => OnBoardScreen()),
+        GetPage(name: '/open', page: () => OpenPage()),
         GetPage(name: '/welcome', page: () => WelcomePage()),
-        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: LoginPage.routeName, page: () => LoginPage()),
         GetPage(
             name: '/inputPhone',
             page: () => InputPhonePage(),

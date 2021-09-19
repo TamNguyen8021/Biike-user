@@ -4,9 +4,9 @@
     <item android:drawable="@color/blue" />
 
     <!-- You can insert your own image assets here -->
-    <item>
+    <!-- <item>
         <bitmap
             android:gravity="center"
             android:src="@mipmap/ic_biike" />
-    </item>
+    </item> -->
 </layer-list>
