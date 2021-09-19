@@ -81,6 +81,7 @@ class CustomerHomeFull extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    //banner
                     AdContainer(),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
