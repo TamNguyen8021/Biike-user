@@ -7,18 +7,26 @@ import 'package:get/get.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final String route;
+  final bool isOnProfilePage;
 
-  SwitchRoleButton({Key? key, required this.route}) : super(key: key);
+  SwitchRoleButton({
+    Key? key,
+    required this.route,
+    required this.isOnProfilePage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Rx<String> _modeButtonText = CustomStrings.kCustomerMode.obs;
     Rx<Color> _modeButtonForegroundColor = CustomColors.kBlue.obs;
-    Rx<Color> _modeButtonBackgroundColor = CustomColors.kLightGray.obs;
-    if (Biike.role.value == Role.Driver) {
-      _modeButtonText.value = CustomStrings.kDriverMode;
-      _modeButtonBackgroundColor.value = CustomColors.kOrange;
+    Rx<Color> _modeButtonBackgroundColor = Colors.white.obs;
+    if (isOnProfilePage) {
       _modeButtonForegroundColor.value = Colors.white;
+      _modeButtonBackgroundColor.value = CustomColors.kOrange;
+    } else {
+      if (Biike.role.value == Role.biker) {
+        _modeButtonForegroundColor.value = CustomColors.kOrange;
+        _modeButtonBackgroundColor.value = Colors.white;
+      }
     }
 
     return SizedBox(
@@ -26,26 +34,25 @@ class SwitchRoleButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           onPressed: () {
-            if (Biike.role.value == Role.Customer) {
-              Biike.role.value = Role.Driver;
-              _modeButtonText.value = CustomStrings.kDriverMode;
-              _modeButtonBackgroundColor.value = CustomColors.kOrange;
-              _modeButtonForegroundColor.value = Colors.white;
-            } else {
-              Biike.role.value = Role.Customer;
-              _modeButtonText.value = CustomStrings.kCustomerMode;
-              _modeButtonBackgroundColor.value = CustomColors.kLightGray;
-              _modeButtonForegroundColor.value = CustomColors.kBlue;
+            if (Biike.role.value == Role.keer) {
+              Biike.role.value = Role.biker;
+              if (!isOnProfilePage) {
+                _modeButtonForegroundColor.value = CustomColors.kOrange;
+              }
+            } else if (Biike.role.value == Role.biker) {
+              Biike.role.value = Role.keer;
+              if (!isOnProfilePage) {
+                _modeButtonForegroundColor.value = CustomColors.kBlue;
+              }
             }
-            if (ModalRoute.of(context)!.settings.name.toString() !=
-                '/profile') {
-              Get.offAllNamed(route);
-            }
+            Get.offAllNamed(route);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 1.0),
             child: Text(
-              _modeButtonText.value,
+              Biike.role.value == Role.keer
+                  ? CustomStrings.kKeerMode
+                  : CustomStrings.kBikerMode,
               style: TextStyle(
                   color: _modeButtonForegroundColor.value, fontSize: 10),
             ),

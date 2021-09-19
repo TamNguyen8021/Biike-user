@@ -6,25 +6,29 @@ import 'package:get/get.dart';
 
 /// This widget contains an upcoming trip's details
 class UpcomingTripCard extends StatelessWidget {
-  final Color backgroundColor;
-  final Color foregroundColor;
-  final Color iconColor;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final Color? iconColor;
   final String avatarUrl;
   final String name;
+  final String phoneNo;
   final String time;
   final String date;
+  final int year;
   final String sourceStation;
   final String destinationStation;
 
   const UpcomingTripCard(
       {Key? key,
-      required this.backgroundColor,
-      required this.foregroundColor,
-      required this.iconColor,
+      this.backgroundColor,
+      this.foregroundColor,
+      this.iconColor,
       required this.avatarUrl,
       required this.name,
+      required this.phoneNo,
       required this.time,
       required this.date,
+      required this.year,
       required this.sourceStation,
       required this.destinationStation})
       : super(key: key);
@@ -43,20 +47,20 @@ class UpcomingTripCard extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      if (avatarUrl != CustomStrings.kFindingDriver) ...[
+                      if (name != CustomStrings.kFinding) ...[
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CircleAvatar(
                             radius: 30,
-                            backgroundImage: AssetImage(avatarUrl),
+                            backgroundImage: NetworkImage(avatarUrl),
                           ),
                         ),
                       ] else ...[
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 16.0, horizontal: 8.0),
+                              vertical: 16.0, horizontal: 24.0),
                           child: SvgPicture.asset(
-                            'assets/images/loading.svg',
+                            avatarUrl,
                             height: 50,
                           ),
                         ),
@@ -71,7 +75,9 @@ class UpcomingTripCard extends StatelessWidget {
                                 .textTheme
                                 .bodyText1!
                                 .copyWith(
-                                    color: foregroundColor,
+                                    color: foregroundColor != null
+                                        ? foregroundColor
+                                        : CustomColors.kDarkGray,
                                     fontWeight: FontWeight.bold),
                           ),
                           Padding(
@@ -81,7 +87,10 @@ class UpcomingTripCard extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
-                                  .copyWith(color: foregroundColor),
+                                  .copyWith(
+                                      color: foregroundColor != null
+                                          ? foregroundColor
+                                          : CustomColors.kDarkGray),
                             ),
                           ),
                           Text(
@@ -89,7 +98,10 @@ class UpcomingTripCard extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
-                                .copyWith(color: foregroundColor),
+                                .copyWith(
+                                    color: foregroundColor != null
+                                        ? foregroundColor
+                                        : CustomColors.kDarkGray),
                           ),
                         ],
                       ),
@@ -109,15 +121,17 @@ class UpcomingTripCard extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: Icon(
                           Icons.adjust,
-                          color: iconColor,
+                          color: iconColor != null
+                              ? iconColor
+                              : CustomColors.kBlue,
                         ),
                       ),
                       Text(
                         sourceStation,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: foregroundColor),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: foregroundColor != null
+                                ? foregroundColor
+                                : CustomColors.kDarkGray),
                       ),
                     ],
                   ),
@@ -125,7 +139,7 @@ class UpcomingTripCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 2.0),
                     child: Icon(
                       Icons.more_vert_outlined,
-                      color: iconColor,
+                      color: iconColor != null ? iconColor : CustomColors.kBlue,
                     ),
                   ),
                   Row(
@@ -134,15 +148,17 @@ class UpcomingTripCard extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: Icon(
                           Icons.location_on,
-                          color: iconColor,
+                          color: iconColor != null
+                              ? iconColor
+                              : CustomColors.kBlue,
                         ),
                       ),
                       Text(
                         destinationStation,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: foregroundColor),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: foregroundColor != null
+                                ? foregroundColor
+                                : CustomColors.kDarkGray),
                       ),
                     ],
                   ),
@@ -152,15 +168,15 @@ class UpcomingTripCard extends StatelessWidget {
           ],
         ),
         decoration: BoxDecoration(
-            color: backgroundColor,
+            color: backgroundColor != null
+                ? backgroundColor
+                : CustomColors.kLightGray,
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
                 color: CustomColors.kDarkGray.withOpacity(0.5),
-                spreadRadius: 0.5,
-                blurRadius: 0.5,
                 // changes position of shadow
-                offset: Offset(0, 0.5),
+                offset: Offset(0, 1),
               )
             ]),
       ),

@@ -39,106 +39,109 @@ class FeedbackPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => _onBackPressed(),
       child: Scaffold(
-      // resizeToAvoidBottomInset: false,
-      body: Container(
-        // alignment: Alignment.center,
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: <
-                    Widget>[
-              Container(
-                height: 180,
-                child: Stack(
-                  // alignment: Alignment.center,
-                  children: <Widget>[
-                    CustomPaint(
-                      painter: HalfOvalPainter(),
-                      child: Container(height: 150),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: SvgPicture.asset(
-                        'assets/images/happy-face.svg',
-                        height: 120,
-                        alignment: Alignment.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(22.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+        // resizeToAvoidBottomInset: false,
+        body: Container(
+          // alignment: Alignment.center,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: <
+                      Widget>[
+                Container(
+                  height: 180,
+                  child: Stack(
+                    // alignment: Alignment.center,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 10.0, left: 10.0, right: 10.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Flexible(
-                                child: Text(
-                                  Biike.role.value == Role.Driver
-                                    ? CustomStrings.kTripSuccessBiker
-                                    : CustomStrings.kTripSuccessKeer,
-                                  overflow: TextOverflow.clip,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: CustomColors.kBlue,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ]),
+                      CustomPaint(
+                        painter: HalfOvalPainter(),
+                        child: Container(height: 150),
                       ),
-                      Biike.role.value == Role.Driver
-                          ? Container(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(
-                              "EXP",
-                              style: new TextStyle(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5.0, horizontal: 2.0)),
-                            Icon(Icons.star, size: 20, color: Colors.white),
-                          ],
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: SvgPicture.asset(
+                          'assets/images/happy-face.svg',
+                          height: 120,
+                          alignment: Alignment.center,
                         ),
-                        decoration: new BoxDecoration(
-                          borderRadius:
-                          new BorderRadius.all(new Radius.circular(20.0)),
-                          color: CustomColors.kOrange,
-                        ),
-                        padding: new EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
-                      )
-                          : Padding(padding: const EdgeInsets.only(top: 2.0)),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Flexible(
-                                child: Text(
-                                  CustomStrings.kRateReminder,
-                                  overflow: TextOverflow.clip,
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      TextStyle(color: CustomColors.kDarkGray),
-                                ),
-                              ),
-                            ]),
                       ),
-                      Form(
-                        child: Column(
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 10.0, left: 10.0, right: 10.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Flexible(
+                                  child: Text(
+                                    Biike.role.value == Role.biker
+                                        ? CustomStrings.kTripSuccessBiker
+                                        : CustomStrings.kTripSuccessKeer,
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: CustomColors.kBlue,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                        Biike.role.value == Role.biker
+                            ? Container(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Text(
+                                      "EXP",
+                                      style: new TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5.0, horizontal: 2.0)),
+                                    Icon(Icons.star,
+                                        size: 20, color: Colors.white),
+                                  ],
+                                ),
+                                decoration: new BoxDecoration(
+                                  borderRadius: new BorderRadius.all(
+                                      new Radius.circular(20.0)),
+                                  color: CustomColors.kOrange,
+                                ),
+                                padding: new EdgeInsets.fromLTRB(
+                                    15.0, 5.0, 15.0, 5.0),
+                              )
+                            : Padding(padding: const EdgeInsets.only(top: 2.0)),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Flexible(
+                                  child: Text(
+                                    CustomStrings.kRateReminder,
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: CustomColors.kDarkGray),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                        Form(
+                            child: Column(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 15.0, top: 10.0),
+                              padding: const EdgeInsets.only(
+                                  bottom: 15.0, top: 10.0),
                               child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
@@ -148,14 +151,17 @@ class FeedbackPage extends StatelessWidget {
                                       allowHalfRating: false,
                                       itemCount: 5,
                                       ratingWidget: RatingWidget(
-                                        full: _image('assets/images/full_star.svg'),
+                                        full: _image(
+                                            'assets/images/full_star.svg'),
                                         half: _image(''),
-                                        empty: _image('assets/images/empty_star.svg'),
+                                        empty: _image(
+                                            'assets/images/empty_star.svg'),
                                       ),
                                       itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 4.0),
+                                          EdgeInsets.symmetric(horizontal: 4.0),
                                       onRatingUpdate: (star) {
-                                        feedbackController.updateStarRating(star);
+                                        feedbackController
+                                            .updateStarRating(star);
                                       },
                                     ),
                                   ]),
@@ -173,7 +179,8 @@ class FeedbackPage extends StatelessWidget {
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(250)
                                     ],
-                                    style: TextStyle(color: CustomColors.kDarkGray),
+                                    style: TextStyle(
+                                        color: CustomColors.kDarkGray),
                                     decoration: InputDecoration(
                                       counter: Offstage(),
                                       border: InputBorder.none,
@@ -185,7 +192,8 @@ class FeedbackPage extends StatelessWidget {
                                           vertical: 10.0, horizontal: 15.0),
                                     ),
                                     onChanged: (feedback) {
-                                      feedbackController.updateFeedback(feedback);
+                                      feedbackController
+                                          .updateFeedback(feedback);
                                     },
                                   ),
                                 ),
@@ -198,44 +206,43 @@ class FeedbackPage extends StatelessWidget {
                                   children: <Widget>[SendFeedbackButton()]),
                             ),
                           ],
-                        )
-                      ),
-                      Biike.role.value == Role.Customer
-                          ? Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20.0, horizontal: 10.0),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: SvgPicture.asset(
-                                'assets/images/coffee-cup.svg',
-                                height: 90,
-                                alignment: Alignment.centerLeft,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                CustomStrings.kBuyReminder,
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    color: CustomColors.kDarkGray,
-                                    fontSize: 12.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                          : Padding(padding: const EdgeInsets.only(top: 2.0)),
-                    ]
+                        )),
+                        Biike.role.value == Role.keer
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 10.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 20.0),
+                                      child: SvgPicture.asset(
+                                        'assets/images/coffee-cup.svg',
+                                        height: 90,
+                                        alignment: Alignment.centerLeft,
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Text(
+                                        CustomStrings.kBuyReminder,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                            color: CustomColors.kDarkGray,
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Padding(padding: const EdgeInsets.only(top: 2.0)),
+                      ]),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 }

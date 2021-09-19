@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 /// On [HomePage] screen, this widget means user has arrived at the pick up point.
 ///
-/// On [TripDetailsPage] screen, customer taps this button to finish a trip.
+/// On [TripDetailsPage] screen, ke-er taps this button to finish a trip.
 class ConfirmArrivalButton extends StatelessWidget {
   final isOnHomeScreen;
 
@@ -20,7 +20,7 @@ class ConfirmArrivalButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<bool> isAtDestination = false.obs;
     Rx<Color> buttonColor = CustomColors.kBlue.obs;
-    Rx<String> buttonText = CustomStrings.kConfirmFinishTrip.obs;
+    Rx<String> buttonText = CustomStrings.kConfirmArrival.obs;
 
     return SizedBox(
       height: 35,
@@ -32,7 +32,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                 buttonColor.value = CustomColors.kDarkGray;
                 buttonText.value = CustomStrings.kArriveAtDestination;
               } else if (!isOnHomeScreen) {
-                Biike.role.value = Role.Customer;
+                Biike.role.value = Role.keer;
                 Get.offAllNamed('/feedback');
               }
             },

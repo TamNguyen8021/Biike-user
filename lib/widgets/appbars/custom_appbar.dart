@@ -1,11 +1,12 @@
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/pages/home/view/home_page.dart';
+import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// This widget is the top appbar on home page
+/// This widget is the top appbar on [HomePage]
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Role? role;
   final bool hasLeading;
   final Widget? title;
   final AppBar appBar;
@@ -18,7 +19,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar(
       {Key? key,
-      this.role,
       required this.isVisible,
       required this.hasShape,
       required this.hasLeading,
@@ -51,11 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       _leadingWidget = IconButton(
         onPressed: () {
           if (ModalRoute.of(context)!.settings.name.toString() == '/profile') {
-            if (Biike.role.value == Role.Customer) {
-              Get.offAllNamed('/customerHome');
-            } else {
-              Get.offAllNamed('/driverHome');
-            }
+            Get.offAllNamed('/home');
           } else {
             Get.back();
           }
@@ -65,15 +61,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     }
-    return Visibility(
-      visible: isVisible,
-      child: AppBar(
-        leading: _leadingWidget,
-        title: title,
-        actions: actionWidgets,
-        bottom: bottomAppBar,
-        shape: _shapeBorder,
-      ),
+
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 500),
+      child: isVisible
+          ? AppBar(
+              leading: _leadingWidget,
+              title: title,
+              actions: actionWidgets,
+              bottom: bottomAppBar,
+              shape: _shapeBorder,
+              backgroundColor:
+                  ModalRoute.of(context)!.settings.name == '/home' &&
+                          Biike.role.value == Role.biker
+                      ? CustomColors.kOrange
+                      : CustomColors.kBlue,
+            )
+          : SizedBox.shrink(),
     );
   }
 }

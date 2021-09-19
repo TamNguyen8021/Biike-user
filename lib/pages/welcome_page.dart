@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import 'on_board_screen/on_board.dart';
+
 /// The '002.1_welcome_1' screen
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
-  Future<String> _navigateToLoginScreen() async {
+  Future<void> _navigateToLoginScreen() async {
     await Future.delayed(Duration(seconds: 3)).then((value) {
-      Get.offAllNamed('/login');
+      Get.offAllNamed(OnBoardScreen.routeName);
     });
-    return '/login';
   }
 
   @override

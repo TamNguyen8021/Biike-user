@@ -9,6 +9,8 @@ import 'package:bikes_user/pages/edit_profile/binding/edit_profile_binding.dart'
 import 'package:bikes_user/pages/edit_profile/view/edit_profile_page.dart';
 import 'package:bikes_user/pages/home/binding/home_binding.dart';
 import 'package:bikes_user/pages/home/view/home_page.dart';
+import 'package:bikes_user/pages/on_board_screen/on_board.dart';
+import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
@@ -22,15 +24,16 @@ import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page.dart';
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
 import 'package:bikes_user/pages/manage_bike/binding/manage_bike_binding.dart';
-import 'package:bikes_user/pages/open_page.dart';
 import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart';
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
 import 'package:bikes_user/pages/manage_bike/view/manage_bike_page.dart';
-import 'package:bikes_user/pages/trip_history_page.dart';
+import 'package:bikes_user/pages/view_user/binding/view_user_binding.dart';
+import 'package:bikes_user/trip_history/binding/trip_history_binding.dart';
+import 'package:bikes_user/trip_history/view/trip_history_page.dart';
 import 'package:bikes_user/pages/verify_phone/binding/verify_phone_binding.dart';
 import 'package:bikes_user/pages/verify_phone/view/verify_phone_page.dart';
-import 'package:bikes_user/pages/view_user_page.dart';
+import 'package:bikes_user/pages/view_user/view/view_user_page.dart';
 import 'package:bikes_user/pages/welcome_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/enums.dart';
@@ -44,7 +47,7 @@ void main() {
 
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
-  static Rx<Role> role = Role.None.obs;
+  static Rx<Role> role = Role.none.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +60,11 @@ class Biike extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'SVN Product Sans',
         appBarTheme: AppBarTheme(
-            backwardsCompatibility: false,
             elevation: 0.0,
-            backgroundColor: CustomColors.kBlue,
             titleTextStyle: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
+                backgroundColor: CustomColors.kBlue,
                 color: Colors.white,
                 fontFamily: 'SVN Product Sans')),
         textTheme: TextTheme(
@@ -101,7 +103,7 @@ class Biike extends StatelessWidget {
               MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 12)),
         )),
         inputDecorationTheme: InputDecorationTheme(
-          contentPadding: const EdgeInsets.only(top: 12.0),
+          contentPadding: const EdgeInsets.only(top: 8.0),
           labelStyle: TextStyle(fontWeight: FontWeight.normal),
           enabledBorder: UnderlineInputBorder(
               borderSide:
@@ -119,9 +121,10 @@ class Biike extends StatelessWidget {
       ),
       initialRoute: '/open',
       getPages: [
+        GetPage(name: OnBoardScreen.routeName, page: () => OnBoardScreen()),
         GetPage(name: '/open', page: () => OpenPage()),
         GetPage(name: '/welcome', page: () => WelcomePage()),
-        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: LoginPage.routeName, page: () => LoginPage()),
         GetPage(
             name: '/inputPhone',
             page: () => InputPhonePage(),
@@ -138,15 +141,11 @@ class Biike extends StatelessWidget {
             name: '/chooseMode',
             page: () => ChooseModePage(),
             binding: ChooseModeBinding()),
-        GetPage(name: '/history', page: () => TripHistoryPage()),
         GetPage(
-            name: '/driverHome',
-            page: () => HomePage(),
-            binding: HomeBinding()),
-        GetPage(
-            name: '/customerHome',
-            page: () => HomePage(),
-            binding: HomeBinding()),
+            name: '/tripHistory',
+            page: () => TripHistoryPage(),
+            binding: TripHistoryBinding()),
+        GetPage(name: '/home', page: () => HomePage(), binding: HomeBinding()),
         GetPage(
           name: '/profile',
           page: () => ProfilePage(),
@@ -155,7 +154,10 @@ class Biike extends StatelessWidget {
             name: '/editProfile',
             page: () => EditProfilePage(),
             binding: EditProfileBinding()),
-        GetPage(name: '/viewUser', page: () => ViewUserPage()),
+        GetPage(
+            name: '/viewUser',
+            page: () => ViewUserPage(),
+            binding: ViewUserBinding()),
         GetPage(
             name: '/feedback',
             page: () => FeedbackPage(),
@@ -169,7 +171,7 @@ class Biike extends StatelessWidget {
         GetPage(
             name: '/tripDetails',
             page: () => TripDetailsPage(
-                  isWaitingForDriver: false,
+                  isWaitingForBiker: false,
                 ),
             binding: TripDetailsBinding()),
         GetPage(

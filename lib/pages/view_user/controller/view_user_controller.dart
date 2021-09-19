@@ -1,0 +1,286 @@
+import 'dart:convert';
+
+import 'package:bikes_user/models/area.dart';
+import 'package:bikes_user/models/destination_station.dart';
+import 'package:bikes_user/models/starting_station.dart';
+import 'package:bikes_user/models/trip.dart';
+import 'package:bikes_user/models/user.dart';
+import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/utils/custom_strings.dart';
+import 'package:bikes_user/utils/enums.dart';
+import 'package:bikes_user/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/widgets/cards/history_trip_card.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class ViewUserController extends GetxController {
+  User user = User.empty();
+  Area area = Area.empty();
+  RxList<dynamic> historyTrips = [].obs;
+
+  /// Gets user info and shows it on [context] .
+  ///
+  /// Author: TamNTT
+  Future<void> getUserInfo({required BuildContext context}) async {
+    String response = await DefaultAssetBundle.of(context)
+        .loadString('assets/files/user.json');
+    Map<String, dynamic> data = jsonDecode(response);
+    // print('data: ' + data.toString());
+    // print('data length: ' + data.length.toString());
+    user = User.fromJson(data);
+    area = Area.fromJson(data);
+    // print(user.toJson());
+  }
+
+  /// Gets history trips with the user and shows it on [context].
+  ///
+  /// Author: TamNTT
+  Future<void> getUserHistoryTrips({required BuildContext context}) async {
+    historyTrips.clear();
+    String response = await DefaultAssetBundle.of(context)
+        .loadString('assets/files/history_trip.json');
+    var data = jsonDecode(response);
+    var tempHistoryTrips = data;
+    // print('tempHistoryTrips: ' + tempHistoryTrips.toString());
+    for (var item in tempHistoryTrips) {
+      // print(item);
+      User user = User.fromJson(item);
+      // print(user.toJson());
+      Trip trip = Trip.fromJson(item);
+      // print(trip.toJson());
+      StartingStation startingStation = StartingStation.fromJson(item);
+      // print(startingStation.toJson());
+      DestinationStation destinationStation = DestinationStation.fromJson(item);
+      // print(destinationStation.toJson());
+      TripStatus tripStatus;
+      String date = trip.timeBook.day.toString() +
+          ' Th ' +
+          trip.timeBook.month.toString();
+      String time = '';
+      if (trip.timeBook.hour < 10) {
+        time += '0';
+      }
+      time = time +
+          trip.timeBook.hour.toString() +
+          ':' +
+          trip.timeBook.minute.toString();
+      switch (trip.tripStatus) {
+        case 1:
+          tripStatus = TripStatus.finding;
+          break;
+        case 2:
+          tripStatus = TripStatus.waiting;
+          break;
+        case 3:
+          tripStatus = TripStatus.started;
+          break;
+        case 4:
+          tripStatus = TripStatus.finished;
+          break;
+        case 5:
+          tripStatus = TripStatus.canceled;
+          break;
+        default:
+          tripStatus = TripStatus.none;
+          Get.defaultDialog(
+              title: CustomStrings.kError,
+              middleText: CustomStrings.kErrorMessage);
+      }
+
+      HistoryTripCard historyTripCard = HistoryTripCard(
+          avatarUrl: user.avatar,
+          name: user.userFullname,
+          time: time,
+          date: date,
+          status: tripStatus,
+          sourceStation: startingStation.startingPointName,
+          destinationStation: destinationStation.destinationName);
+
+      historyTrips.add(historyTripCard);
+      // print(historyTrips.length);
+    }
+  }
+
+  /// Display a dialog on [context] to report a user.
+  ///
+  /// Author: TamNTT
+  dynamic showReportDialog({required BuildContext context}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    CustomStrings.kReport,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: TextFormField(
+                      maxLines: 10,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
+                        hintText: CustomStrings.kEnterYourReport,
+                        filled: true,
+                        fillColor: CustomColors.kLightGray,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: 150,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          CustomTextButton(
+                              backgroundColor: CustomColors.kBlue,
+                              foregroundColor: Colors.white,
+                              text: CustomStrings.kReport,
+                              onPressedFunc: () {
+                                Get.back();
+                                _showThankYouForReportDialog(context: context);
+                              }),
+                          CustomTextButton(
+                              backgroundColor: CustomColors.kRed,
+                              foregroundColor: Colors.white,
+                              text: CustomStrings.kReportAndBlock,
+                              onPressedFunc: () {
+                                Get.back();
+                                _showConfirmBlockDialog(context: context);
+                              }),
+                          CustomTextButton(
+                              backgroundColor: CustomColors.kLightGray,
+                              foregroundColor: CustomColors.kDarkGray,
+                              text: CustomStrings.kBtnExit,
+                              onPressedFunc: () {
+                                Get.back();
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  /// Display a dialog on [context] to confirm if user wants to block another user.
+  ///
+  /// Author: TamNTT
+  dynamic _showConfirmBlockDialog({required BuildContext context}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    CustomStrings.kConfirmBlock,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0, bottom: 30.0),
+                    child: Text(
+                      CustomStrings.kSeeBlacklist,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: 100,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          CustomTextButton(
+                              backgroundColor: CustomColors.kBlue,
+                              foregroundColor: Colors.white,
+                              text: CustomStrings.kSure,
+                              onPressedFunc: () {
+                                Get.back();
+                                _showThankYouForReportDialog(context: context);
+                              }),
+                          CustomTextButton(
+                              backgroundColor: CustomColors.kLightGray,
+                              foregroundColor: CustomColors.kDarkGray,
+                              text: CustomStrings.kBtnExit,
+                              onPressedFunc: () {
+                                Get.back();
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  /// Display a dialog on [context] to thank you user for their report.
+  ///
+  /// Author: TamNTT
+  dynamic _showThankYouForReportDialog({required BuildContext context}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 22.0, horizontal: 16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    CustomStrings.kThankYouForReport,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(
+                      CustomStrings.kSorryMessage,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      overflow: TextOverflow.clip,
+                    ),
+                  ),
+                  Center(
+                    child: CustomTextButton(
+                        width: 100,
+                        backgroundColor: CustomColors.kLightGray,
+                        foregroundColor: CustomColors.kDarkGray,
+                        text: CustomStrings.kBtnExit,
+                        onPressedFunc: () {
+                          Get.back();
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}

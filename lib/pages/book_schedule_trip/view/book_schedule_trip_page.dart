@@ -154,7 +154,7 @@ class BookScheduleTripPage extends StatelessWidget {
                     foregroundColor: Colors.white,
                     width: 135,
                     text: CustomStrings.kBookScheduleTrip,
-                    onPressedFunc: () => Get.offAllNamed('/customerHome'),
+                    onPressedFunc: () => Get.offAllNamed('/home'),
                   ),
                 ),
               ),

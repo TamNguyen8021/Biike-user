@@ -30,7 +30,8 @@ class EditProfilePage extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/profile-1.jpg'),
+                    backgroundImage: NetworkImage(
+                        'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
                     radius: 55,
                   ),
                   Positioned(
@@ -90,21 +91,21 @@ class EditProfilePage extends StatelessWidget {
                               CustomStrings.kMale,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.Male,
+                            value: Gender.male,
                           ),
                           DropdownMenuItem<Gender>(
                             child: Text(
                               CustomStrings.kFemale,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.Female,
+                            value: Gender.female,
                           ),
                           DropdownMenuItem<Gender>(
                             child: Text(
                               CustomStrings.kOthers,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.Other,
+                            value: Gender.other,
                           ),
                         ],
                         onChanged: (Gender? gender) {
