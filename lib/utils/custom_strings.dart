@@ -139,6 +139,7 @@ class CustomStrings {
   static const String kRateReminder =
       "Hãy đánh giá trải nghiệm của bạn cùng \"người ấy\" hôm nay nhé!";
   static const String kBtnSend = "Gửi";
+  static const String kSendSuccess = "Gửi feedback thành công";
 
   // 'biker_point' screen
   static const String kListVouchers = "Danh mục đổi quà";

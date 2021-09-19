@@ -1,4 +1,3 @@
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/pages/view_user/controller/view_user_controller.dart';
 import 'package:bikes_user/utils/common_functions.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
