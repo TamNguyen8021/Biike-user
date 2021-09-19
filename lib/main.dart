@@ -37,6 +37,8 @@ import 'package:bikes_user/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'pages/on_board_screen/on_board.dart';
+
 /// Runs the application.
 void main() {
   runApp(Biike());
@@ -57,7 +59,6 @@ class Biike extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'SVN Product Sans',
         appBarTheme: AppBarTheme(
-            backwardsCompatibility: false,
             elevation: 0.0,
             backgroundColor: CustomColors.kBlue,
             titleTextStyle: TextStyle(
@@ -119,9 +120,10 @@ class Biike extends StatelessWidget {
       ),
       initialRoute: '/open',
       getPages: [
+        GetPage(name: OnBoardScreen.routeName, page: () => OnBoardScreen()),
         GetPage(name: '/open', page: () => OpenPage()),
         GetPage(name: '/welcome', page: () => WelcomePage()),
-        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: LoginPage.routeName, page: () => LoginPage()),
         GetPage(
             name: '/inputPhone',
             page: () => InputPhonePage(),

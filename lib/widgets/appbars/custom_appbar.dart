@@ -65,15 +65,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     }
-    return Visibility(
-      visible: isVisible,
-      child: AppBar(
-        leading: _leadingWidget,
-        title: title,
-        actions: actionWidgets,
-        bottom: bottomAppBar,
-        shape: _shapeBorder,
-      ),
+    // sửa lỗi giựt khi switch: vanlnt
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 500),
+      child: isVisible
+          ? AppBar(
+              leading: _leadingWidget,
+              title: title,
+              actions: actionWidgets,
+              bottom: bottomAppBar,
+              shape: _shapeBorder,
+            )
+          : SizedBox.shrink(),
     );
   }
 }
