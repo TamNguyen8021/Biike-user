@@ -23,6 +23,8 @@ import 'package:bikes_user/pages/book_schedule_trip/view/book_schedule_trip_page
 import 'package:bikes_user/pages/book_trip/view/book_trip_page.dart';
 import 'package:bikes_user/pages/manage_bike/binding/manage_bike_binding.dart';
 import 'package:bikes_user/pages/open_page.dart';
+import 'package:bikes_user/pages/top_biker/binding/top_biker_binding.dart';
+import 'package:bikes_user/pages/top_biker/view/top_biker_page.dart';
 import 'package:bikes_user/pages/trip_details/binding/trip_details_binding.dart';
 import 'package:bikes_user/pages/trip_details/view/trip_details_page.dart';
 import 'package:bikes_user/pages/add_bike_page.dart';
@@ -190,6 +192,11 @@ class Biike extends StatelessWidget {
         GetPage(
           name: '/addBike',
           page: () => AddBikePage(),
+        ),
+        GetPage(
+            name: '/topBiker',
+            page: () => TopBikerPage(),
+            binding: TopBikerBinding(),
         ),
       ],
     );
