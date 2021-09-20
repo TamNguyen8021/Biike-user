@@ -1,4 +1,6 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -8,8 +10,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dar
 import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/ad_container.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/top_biker.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -301,7 +301,8 @@ class Home extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: <Widget>[
                                               Text(
-                                                CustomStrings.kSelectSourceStation.tr,
+                                                CustomStrings
+                                                    .kSelectSourceStation.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1,
@@ -310,7 +311,9 @@ class Home extends StatelessWidget {
                                                 child: Divider(),
                                               ),
                                               Text(
-                                                CustomStrings.kSelectDestinationStation.tr,
+                                                CustomStrings
+                                                    .kSelectDestinationStation
+                                                    .tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1,

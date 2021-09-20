@@ -1,10 +1,10 @@
 import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/text_container.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/text_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

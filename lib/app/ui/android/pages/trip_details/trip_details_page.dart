@@ -1,4 +1,6 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -7,8 +9,6 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/map_viewer.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/user_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

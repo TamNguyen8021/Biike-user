@@ -1,9 +1,9 @@
 import 'package:bikes_user/app/controllers/input_phone_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/error_text.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';

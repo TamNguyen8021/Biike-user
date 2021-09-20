@@ -1,11 +1,11 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +44,8 @@ class Activity extends StatelessWidget {
                             color: CustomColors.kBlue),
                       ),
                       IconButton(
-                          onPressed: () => Get.toNamed(CommonRoutes.TRIP_HISTORY),
+                          onPressed: () =>
+                              Get.toNamed(CommonRoutes.TRIP_HISTORY),
                           icon: Icon(
                             Icons.history,
                             color: CustomColors.kBlue,
