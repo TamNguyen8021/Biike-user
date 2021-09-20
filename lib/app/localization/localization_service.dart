@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:ui';
 import 'package:bikes_user/app/localization/en_US/en_us_translations.dart';
 import 'package:bikes_user/app/localization/vi_VN/vi_vn_translations.dart';

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/feedback_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/main.dart';
@@ -18,14 +19,6 @@ class FeedbackPage extends StatelessWidget {
 
   FeedbackPage({Key? key}) : super(key: key);
 
-  Future<bool> _onBackPressed() {
-    Get.snackbar('Error', CustomErrorsString.kNotRated.tr,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM);
-    return Future.value(false);
-  }
-
   Widget _image(String asset) {
     return SvgPicture.asset(
       asset,
@@ -37,7 +30,7 @@ class FeedbackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _onBackPressed(),
+      onWillPop: () => CommonFunctions().onBackPressed(errorMessage: CustomErrorsString.kNotRated),
       child: Scaffold(
         // resizeToAvoidBottomInset: false,
         body: Container(

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/bottom_tabbar.dart';
@@ -18,7 +19,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return WillPopScope(
+      onWillPop: () => CommonFunctions().onBackPressed(),
+      child: FutureBuilder(
         future: homeController.getUpcomingTrips(context: context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return DefaultTabController(
@@ -114,6 +117,8 @@ class HomePage extends StatelessWidget {
               ),
             ),
           );
-        });
+        },
+      ),
+    );
   }
 }

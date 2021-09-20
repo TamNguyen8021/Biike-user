@@ -23,7 +23,7 @@ class SendFeedbackButton extends StatelessWidget {
           // validate feedback
           String validateMsg = feedbackController.validateFeedback();
           if (_NO_ERR_MSG.compareTo(validateMsg) != _STRING_EQUALS) {
-            Get.snackbar('Error', validateMsg,
+            Get.snackbar(CustomErrorsString.kError.tr, validateMsg.tr,
                 backgroundColor: Colors.red,
                 colorText: Colors.white,
                 snackPosition: SnackPosition.BOTTOM);
@@ -40,15 +40,15 @@ class SendFeedbackButton extends StatelessWidget {
                 break;
               default:
                 Get.defaultDialog(
-                  title: 'Error',
-                  middleText: 'User role error!',
+                  title: CustomErrorsString.kError.tr,
+                  middleText: CustomErrorsString.kSendFailed.tr,
                   middleTextStyle: TextStyle(color: CustomColors.kDarkGray),
                 );
                 break;
             }
           } else {
             Get.defaultDialog(
-              title: 'Error',
+              title: CustomErrorsString.kError.tr,
               middleText: CustomErrorsString.kSendFailed.tr,
               middleTextStyle: TextStyle(color: CustomColors.kDarkGray),
             );

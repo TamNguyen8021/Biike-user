@@ -1,6 +1,7 @@
 final Map<String, String> en = {
   // '002.1_welcome_1' screen
   'kIntroduction' : 'Free hitchhiking app',
+  'kConfirm' : 'Confirm',
 
   //'002.,.2,.3' screen
   'kSkip' : 'Skip>>',
@@ -186,8 +187,11 @@ final Map<String, String> en = {
   'kTakePictureAgain' : 'Chụp lại',
 
   // Error message
-  'kError' : 'Thông báo lỗi',
+  'kError' : 'Error!',
   'kErrorMessage' : 'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
+  'kNotRated' : 'Please rate your trip experience',
+  'kIncludeBadWords' : 'Please don\'t use bad words',
+  'kSendFailed' : 'Send feedback failed!',
 
   // Default area name
   'fptHCMUni' : 'Đại học FPT TP.HCM',

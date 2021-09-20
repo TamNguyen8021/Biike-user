@@ -301,8 +301,7 @@ class Home extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: <Widget>[
                                               Text(
-                                                CustomStrings
-                                                    .kSelectSourceStation,
+                                                CustomStrings.kSelectSourceStation.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1,
@@ -311,8 +310,7 @@ class Home extends StatelessWidget {
                                                 child: Divider(),
                                               ),
                                               Text(
-                                                CustomStrings
-                                                    .kSelectDestinationStation,
+                                                CustomStrings.kSelectDestinationStation.tr,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1,

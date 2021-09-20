@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TripDetailsController extends GetxController {
-  Rx<String> buttonText = CustomStrings.kStartTrip.obs;
+  Rx<String> buttonText = CustomStrings.kStartTrip.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
   Function onPressedFunc = () {};
 
