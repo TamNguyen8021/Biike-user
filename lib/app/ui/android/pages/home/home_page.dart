@@ -4,7 +4,7 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/loading.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/activity.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/home.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';

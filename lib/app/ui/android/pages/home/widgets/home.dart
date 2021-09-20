@@ -8,8 +8,8 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dar
 import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/ad_container.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/top_biker.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

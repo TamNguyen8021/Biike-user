@@ -7,9 +7,9 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/loading.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/profile_text_field.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/user_rating.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

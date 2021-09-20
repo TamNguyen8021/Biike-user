@@ -4,8 +4,8 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/map_viewer.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/station_dropdown_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

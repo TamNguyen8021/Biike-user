@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/loading.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';

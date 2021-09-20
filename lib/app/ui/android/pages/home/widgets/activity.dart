@@ -5,7 +5,7 @@ import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_history/widgets/loading.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
