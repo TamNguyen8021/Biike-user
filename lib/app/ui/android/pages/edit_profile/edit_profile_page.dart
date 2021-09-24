@@ -1,5 +1,4 @@
-import 'package:bikes_user/app/controllers/edit_profile_controller.dart';
-import 'package:bikes_user/app/data/enums/gender_enum.dart';
+import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -10,7 +9,7 @@ import 'package:get/get.dart';
 
 /// The 'update_profile' screen
 class EditProfilePage extends StatelessWidget {
-  final editProfileController = Get.find<EditProfileController>();
+  final _profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,8 @@ class EditProfilePage extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
+                    backgroundImage:
+                        NetworkImage(_profileController.user.avatar),
                     radius: 55,
                   ),
                   Positioned(
@@ -57,24 +56,24 @@ class EditProfilePage extends StatelessWidget {
                     () => ProfileTextField(
                         isReadOnly: false,
                         isEditProfile: true,
-                        initialValue: '${editProfileController.fullname}',
+                        initialValue: '${_profileController.user.userFullname}',
                         labelText: CustomStrings.kFullName.tr),
                   ),
                   ProfileTextField(
                       isReadOnly: true,
                       isEditProfile: true,
-                      initialValue: '034 866 9124',
+                      initialValue: _profileController.user.userPhoneNumber,
                       labelText: CustomStrings.kPhoneNo.tr),
                   ProfileTextField(
                       isReadOnly: true,
                       isEditProfile: true,
-                      initialValue: 'vannthse123456@fpt.edu.vn',
+                      initialValue: _profileController.user.userEmail,
                       labelText: CustomStrings.kEmail.tr),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 25.0),
                     child: Obx(
-                      () => DropdownButtonFormField<Gender>(
-                        value: editProfileController.gender.value,
+                      () => DropdownButtonFormField<int>(
+                        value: _profileController.user.gender,
                         icon: Visibility(
                             visible: false, child: Icon(Icons.arrow_downward)),
                         decoration: InputDecoration(
@@ -85,31 +84,31 @@ class EditProfilePage extends StatelessWidget {
                                   color:
                                       CustomColors.kDarkGray.withOpacity(0.2))),
                         ),
-                        items: <DropdownMenuItem<Gender>>[
-                          DropdownMenuItem<Gender>(
+                        items: <DropdownMenuItem<int>>[
+                          DropdownMenuItem<int>(
                             child: Text(
                               CustomStrings.kMale.tr,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.male,
+                            value: 1,
                           ),
-                          DropdownMenuItem<Gender>(
+                          DropdownMenuItem<int>(
                             child: Text(
                               CustomStrings.kFemale.tr,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.female,
+                            value: 2,
                           ),
-                          DropdownMenuItem<Gender>(
+                          DropdownMenuItem<int>(
                             child: Text(
                               CustomStrings.kOthers.tr,
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: Gender.other,
+                            value: 3,
                           ),
                         ],
-                        onChanged: (Gender? gender) {
-                          editProfileController.changeGender(gender);
+                        onChanged: (int? gender) {
+                          _profileController.changeGender(gender);
                         },
                       ),
                     ),

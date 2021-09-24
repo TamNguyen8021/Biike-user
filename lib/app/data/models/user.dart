@@ -8,14 +8,15 @@ part 'user.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class User {
   int? userId;
 
   @JsonKey(defaultValue: '')
   late String userPhoneNumber;
 
-  String? userEmail;
+  @JsonKey(defaultValue: '')
+  late String userEmail;
 
   @JsonKey(defaultValue: CustomStrings.kFinding)
   late String userFullname;
@@ -26,6 +27,7 @@ class User {
   @JsonKey(defaultValue: -1)
   late int gender;
 
+  DateTime? birthDate;
   int? userStatus;
   String? lastLoginDevice;
   DateTime? lastLoginTime;
@@ -39,6 +41,7 @@ class User {
       this.userFullname,
       this.avatar,
       this.gender,
+      this.birthDate,
       this.userStatus,
       this.lastLoginDevice,
       this.lastLoginTime,
@@ -48,6 +51,7 @@ class User {
 
   User.empty() {
     this.avatar = '';
+    this.userEmail = '';
     this.userFullname = '';
     this.userPhoneNumber = '';
     this.gender = -1;

@@ -17,7 +17,7 @@ import 'package:bikes_user/app/bindings/book_schedule_trip_binding.dart';
 import 'package:bikes_user/app/bindings/book_trip_binding.dart';
 import 'package:bikes_user/app/bindings/choose_mode_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/choose_mode/choose_mode_page.dart';
-import 'package:bikes_user/app/bindings/edit_profile_binding.dart';
+import 'package:bikes_user/app/bindings/profile_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_profile/edit_profile_page.dart';
 import 'package:bikes_user/app/bindings/home_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/home/home_page.dart';
@@ -71,11 +71,12 @@ class AppPages {
     GetPage(
       name: CommonRoutes.PROFILE,
       page: () => ProfilePage(),
+      binding: ProfileBinding(),
     ),
     GetPage(
         name: CommonRoutes.EDIT_PROFILE,
         page: () => EditProfilePage(),
-        binding: EditProfileBinding()),
+        binding: ProfileBinding()),
     GetPage(
         name: CommonRoutes.VIEW_USER,
         page: () => ViewUserPage(),

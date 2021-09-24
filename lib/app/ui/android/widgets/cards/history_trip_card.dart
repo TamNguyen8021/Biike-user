@@ -68,41 +68,45 @@ class HistoryTripCard extends StatelessWidget {
                           backgroundImage: NetworkImage(avatarUrl),
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: screenWidth >= 400 ? 16.0 : 5.0),
-                                child: Text(
-                                  time,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      right: screenWidth >= 400 ? 16.0 : 5.0),
+                                  child: Text(
+                                    time,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                ),
+                                Text(
+                                  date,
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
-                              ),
-                              Text(
-                                date,
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ],
-                          ),
-                          Text(
-                            _statusText,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(color: _statusColor),
-                          ),
-                        ],
+                              ],
+                            ),
+                            Text(
+                              _statusText,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(color: _statusColor),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -122,9 +126,12 @@ class HistoryTripCard extends StatelessWidget {
                           Icons.adjust,
                         ),
                       ),
-                      Text(
-                        sourceStation,
-                        style: Theme.of(context).textTheme.bodyText1,
+                      Expanded(
+                        child: Text(
+                          sourceStation,
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -142,9 +149,12 @@ class HistoryTripCard extends StatelessWidget {
                           Icons.location_on,
                         ),
                       ),
-                      Text(
-                        destinationStation,
-                        style: Theme.of(context).textTheme.bodyText1,
+                      Expanded(
+                        child: Text(
+                          destinationStation,
+                          style: Theme.of(context).textTheme.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),

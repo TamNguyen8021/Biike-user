@@ -56,7 +56,7 @@ class ViewUserPage extends StatelessWidget {
     ];
 
     return FutureBuilder(
-        future: viewUserController.getUserInfo(context: context),
+        future: viewUserController.getUserInfo(context: context, userId: 1),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             // viewUserController.getUserHistoryTrips(context: context);
@@ -102,11 +102,28 @@ class ViewUserPage extends StatelessWidget {
                                             color: CustomColors.kDarkGray,
                                             fontWeight: FontWeight.bold)),
                                   ),
-                                  Text(
-                                    gender.getGenderText(
-                                        viewUserController.user.gender),
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        gender.getGenderText(
+                                            viewUserController.user.gender),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                      if (viewUserController.user.birthDate !=
+                                          null) ...[
+                                        Text(
+                                          ' | ' +
+                                              viewUserController
+                                                  .user.birthDate!.year
+                                                  .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ]
+                                    ],
                                   ),
                                   ProfileTextField(
                                       isReadOnly: true,

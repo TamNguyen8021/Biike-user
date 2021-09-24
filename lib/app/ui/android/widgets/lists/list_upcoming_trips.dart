@@ -1,5 +1,7 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// A list of upcoming trips
 class ListUpcomingTrips extends StatelessWidget {
@@ -14,6 +16,11 @@ class ListUpcomingTrips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (listUpcomingTrips.isEmpty) {
+      return Text(
+        CustomStrings.kNoUpcomingTrips.tr,
+      );
+    }
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,

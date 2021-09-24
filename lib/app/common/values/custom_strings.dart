@@ -62,6 +62,9 @@ class CustomStrings {
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
 
+  // 'activity' screen
+  static const String kNoUpcomingTrips = 'kNoUpcomingTrips';
+
   // 'trip_history' screen
   static const String kHistory = 'kHistory';
   static const String kKeerHistory = 'kKeerHistory';

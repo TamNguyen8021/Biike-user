@@ -5,6 +5,7 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,10 +15,14 @@ class TripHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tripHistoryController = Get.find<TripHistoryController>();
+    final _tripHistoryController = Get.find<TripHistoryController>();
+    final Role role = Role.none;
 
     return FutureBuilder(
-        future: tripHistoryController.getHistoryTrips(context: context),
+        future: _tripHistoryController.getHistoryTrips(
+            context: context,
+            userId: 1,
+            role: role.getRoleNum(Biike.role.value)),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return DefaultTabController(
             length: 2,
@@ -76,17 +81,21 @@ class TripHistoryPage extends StatelessWidget {
                           ),
                         )
                       ],
-                      onTap: (int index) {
+                      onTap: (int index) async {
                         switch (index) {
                           case 0:
-                            tripHistoryController.role.value = Role.keer;
-                            tripHistoryController.getHistoryTrips(
-                                context: context);
+                            _tripHistoryController.role.value = Role.keer;
+                            await _tripHistoryController.getHistoryTrips(
+                                context: context,
+                                userId: 1,
+                                role: role.getRoleNum(Biike.role.value));
                             break;
                           case 1:
-                            tripHistoryController.role.value = Role.biker;
-                            tripHistoryController.getHistoryTrips(
-                                context: context);
+                            _tripHistoryController.role.value = Role.biker;
+                            await _tripHistoryController.getHistoryTrips(
+                                context: context,
+                                userId: 1,
+                                role: role.getRoleNum(Biike.role.value));
                             break;
                           default:
                         }
@@ -105,16 +114,16 @@ class TripHistoryPage extends StatelessWidget {
                             child: TabBarView(children: <Widget>[
                               Obx(
                                 () => ListHistoryTrips(
-                                    role: tripHistoryController.role.value,
-                                    listHistoryTrips: tripHistoryController
+                                    role: _tripHistoryController.role.value,
+                                    listHistoryTrips: _tripHistoryController
                                         .historyTrips
                                         .toList(),
                                     itemPadding: 16.0),
                               ),
                               Obx(
                                 () => ListHistoryTrips(
-                                    role: tripHistoryController.role.value,
-                                    listHistoryTrips: tripHistoryController
+                                    role: _tripHistoryController.role.value,
+                                    listHistoryTrips: _tripHistoryController
                                         .historyTrips
                                         .toList(),
                                     itemPadding: 16.0),

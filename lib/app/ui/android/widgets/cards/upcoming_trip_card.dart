@@ -48,7 +48,7 @@ class UpcomingTripCard extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      if (name != CustomStrings.kFinding.tr) ...[
+                      if (name != CustomStrings.kFinding) ...[
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CircleAvatar(
@@ -66,25 +66,38 @@ class UpcomingTripCard extends StatelessWidget {
                           ),
                         ),
                       ],
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(
-                                    color: foregroundColor != null
-                                        ? foregroundColor
-                                        : CustomColors.kDarkGray,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: Text(
-                              time,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              name.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                      color: foregroundColor != null
+                                          ? foregroundColor
+                                          : CustomColors.kDarkGray,
+                                      fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: Text(
+                                time,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                        color: foregroundColor != null
+                                            ? foregroundColor
+                                            : CustomColors.kDarkGray),
+                              ),
+                            ),
+                            Text(
+                              date,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
@@ -93,18 +106,8 @@ class UpcomingTripCard extends StatelessWidget {
                                           ? foregroundColor
                                           : CustomColors.kDarkGray),
                             ),
-                          ),
-                          Text(
-                            date,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(
-                                    color: foregroundColor != null
-                                        ? foregroundColor
-                                        : CustomColors.kDarkGray),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -127,12 +130,18 @@ class UpcomingTripCard extends StatelessWidget {
                               : CustomColors.kBlue,
                         ),
                       ),
-                      Text(
-                        sourceStation,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: foregroundColor != null
-                                ? foregroundColor
-                                : CustomColors.kDarkGray),
+                      Expanded(
+                        child: Text(
+                          sourceStation,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(
+                                  color: foregroundColor != null
+                                      ? foregroundColor
+                                      : CustomColors.kDarkGray),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -154,12 +163,18 @@ class UpcomingTripCard extends StatelessWidget {
                               : CustomColors.kBlue,
                         ),
                       ),
-                      Text(
-                        destinationStation,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: foregroundColor != null
-                                ? foregroundColor
-                                : CustomColors.kDarkGray),
+                      Expanded(
+                        child: Text(
+                          destinationStation,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(
+                                  color: foregroundColor != null
+                                      ? foregroundColor
+                                      : CustomColors.kDarkGray),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),

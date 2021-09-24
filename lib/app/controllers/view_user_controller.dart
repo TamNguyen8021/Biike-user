@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
+import 'package:bikes_user/app/data/providers/view_user_provider.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/data/models/area.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
@@ -12,8 +13,11 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ViewUserController extends GetxController {
+  final _viewUserProvider = Get.put(ViewUserProvider());
+
   User user = User.empty();
   Area area = Area.empty();
   RxList<dynamic> historyTrips = [].obs;
@@ -21,10 +25,9 @@ class ViewUserController extends GetxController {
   /// Gets user info and shows it on [context] .
   ///
   /// Author: TamNTT
-  Future<void> getUserInfo({required BuildContext context}) async {
-    String response = await DefaultAssetBundle.of(context)
-        .loadString('assets/files/user.json');
-    Map<String, dynamic> data = jsonDecode(response);
+  Future<void> getUserInfo(
+      {required BuildContext context, required int userId}) async {
+    var data = await _viewUserProvider.getUser(userId: userId);
     // print('data: ' + data.toString());
     // print('data length: ' + data.length.toString());
     user = User.fromJson(data);
@@ -56,14 +59,7 @@ class ViewUserController extends GetxController {
       String date = trip.timeBook.day.toString() +
           ' Th ' +
           trip.timeBook.month.toString();
-      String time = '';
-      if (trip.timeBook.hour < 10) {
-        time += '0';
-      }
-      time = time +
-          trip.timeBook.hour.toString() +
-          ':' +
-          trip.timeBook.minute.toString();
+
       switch (trip.tripStatus) {
         case 1:
           tripStatus = TripStatus.finding;
@@ -90,7 +86,7 @@ class ViewUserController extends GetxController {
       HistoryTripCard historyTripCard = HistoryTripCard(
           avatarUrl: user.avatar,
           name: user.userFullname,
-          time: time,
+          time: DateFormat('HH:mm').format(trip.timeBook),
           date: date,
           status: tripStatus,
           sourceStation: startingStation.startingPointName,

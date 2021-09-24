@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
@@ -19,6 +20,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _profileController = Get.find<ProfileController>();
+
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,
@@ -53,8 +56,8 @@ class ProfilePage extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://ui-avatars.com/api/?name=Huu+Phat&background=random&rounded=true&size=128'),
+                          backgroundImage:
+                              NetworkImage(_profileController.user.avatar),
                           radius: 50,
                         ),
                       )
@@ -68,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 6.0),
                         child: Text(
-                          'Đỗ Hữu Phát',
+                          _profileController.user.userFullname,
                           style: Theme.of(context).textTheme.headline2,
                         ),
                       ),
@@ -78,7 +81,8 @@ class ProfilePage extends StatelessWidget {
                         child: ProfileTextField(
                             isReadOnly: true,
                             isEditProfile: false,
-                            initialValue: '034 866 9124',
+                            initialValue:
+                                _profileController.user.userPhoneNumber,
                             labelText: CustomStrings.kPhoneNo.tr),
                       ),
                       Padding(
@@ -86,7 +90,7 @@ class ProfilePage extends StatelessWidget {
                         child: ProfileTextField(
                             isReadOnly: true,
                             isEditProfile: false,
-                            initialValue: 'phatdhse62856@fpt.edu.vn',
+                            initialValue: _profileController.user.userEmail,
                             labelText: CustomStrings.kEmail.tr),
                       ),
                       Padding(
