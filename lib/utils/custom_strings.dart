@@ -179,4 +179,13 @@ class CustomStrings {
   static const String kCheckBikeInfo = 'Vui lòng kiểm tra thông tin xe';
   static const String kNumberPlate = 'Biển số đăng ký';
   static const String kTakePictureAgain = 'Chụp lại';
+
+  // 'top_biker' screen
+  static const String kBikerRank = 'Bảng xếp hạng Biker';
+  static const String kMonth = 'Tháng ';
+  static const String kTopBikerInfoFirstContent = 'Bảng xếp hạng Biker vinh danh'
+      ' những tài xế chở ké có hoạt động nổi bật, đạt được nhiều điểm thưởng.';
+  static const String kTopBikerInfoSecondContent = 'Các Biker tại Bảng xếp hạng '
+      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biké.';
+  static const String kGotIt = 'Đã hiểu';
 }
