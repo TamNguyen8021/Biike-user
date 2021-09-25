@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -7,7 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ExchangeVoucherPage extends StatelessWidget {
-  const ExchangeVoucherPage({Key? key}) : super(key: key);
+  ExchangeVoucherPage({Key? key}) : super(key: key);
+
+  final voucherController = Get.find<VoucherController>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +90,11 @@ class ExchangeVoucherPage extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
-              child: ListVouchers(listVouchers: [1, 2, 3, 4, 5, 6]),
+              child:
+                  Obx(() =>
+                      // ListVouchers(listVouchers: [1, 2, 3, 4, 5, 6]),
+                    ListVouchers(listVouchers: voucherController.getVoucherList()),
+                  ),
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/bindings/voucher_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board.dart';
@@ -86,7 +87,10 @@ class AppPages {
         name: CommonRoutes.FIND_BIKER_SUCCESS, page: () => FindingBikerSuccessPage()),
     GetPage(name: CommonRoutes.FIND_BIKER_FAIL, page: () => FindingBikerFailPage()),
     GetPage(name: CommonRoutes.GET_TRIP_SUCCESS, page: () => GetTripSuccessPage()),
-    GetPage(name: CommonRoutes.EXCHANGE_VOUCHER, page: () => ExchangeVoucherPage()),
+    GetPage(
+        name: CommonRoutes.EXCHANGE_VOUCHER,
+        page: () => ExchangeVoucherPage(),
+        binding: VoucherBinding()),
     GetPage(
         name: CommonRoutes.TRIP_DETAILS,
         page: () => TripDetailsPage(
