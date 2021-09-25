@@ -195,4 +195,18 @@ final Map<String, String> en = {
 
   // Default area name
   'fptHCMUni' : 'Đại học FPT TP.HCM',
+
+  // 'app_setting' screen
+  'kAppSetting' : 'App Setting',
+  'kAccountSecurity': 'Account Security',
+  'kChangePassword' : 'Change Password',
+  'kLoginByFingerprint' : 'Login by Fingerprint',
+  'kLanguage' : 'Language',
+  'kOther' : 'Other',
+  'kFollowOnFacebook' : 'Follow Biké on Facebook',
+  'kWebsite' : 'Website',
+  'kTermOfUse' : 'Terms of Use',
+  'kPrivacyPolicy' : 'Privacy Policy',
+  'kDevelopBy' : 'Develop by Biké Team,\nFPT HCM City University',
+  'kDevelopAt' : 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC'
 };

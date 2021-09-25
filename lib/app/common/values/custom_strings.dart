@@ -188,4 +188,18 @@ class CustomStrings {
 
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';
+
+  // 'app_setting' screen
+  static const String kAppSetting = 'kAppSetting';
+  static const String kAccountSecurity = 'kAccountSecurity';
+  static const String kChangePassword = 'kChangePassword';
+  static const String kLoginByFingerprint = 'kLoginByFingerprint';
+  static const String kLanguage = 'kLanguage';
+  static const String kOther = 'kOther';
+  static const String kFollowOnFacebook = 'kFollowOnFacebook';
+  static const String kWebsite = 'kWebsite';
+  static const String kTermOfUse = 'kTermOfUse';
+  static const String kPrivacyPolicy = 'kPrivacyPolicy';
+  static const String kDevelopBy = 'kDevelopBy';
+  static const String kDevelopAt = 'kDevelopAt';
 }

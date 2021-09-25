@@ -195,4 +195,18 @@ final Map<String, String> vi = {
 
   // Default area name
   'fptHCMUni' : 'Đại học FPT TP.HCM',
+
+  // 'app_setting' screen
+  'kAppSetting' : 'Cài đặt ứng dụng',
+  'kAccountSecurity' : 'Bảo mật tài khoản',
+  'kChangePassword' : 'Đổi mật khẩu',
+  'kLoginByFingerprint' : 'Đăng nhập bằng vân tay',
+  'kLanguage' : 'Ngôn ngữ',
+  'kOther' : 'Khác',
+  'kFollowOnFacebook' : 'Theo dõi Biké trên Facebook',
+  'kWebsite' : 'Website',
+  'kTermOfUse' : 'Điều khoản sử dụng',
+  'kPrivacyPolicy' : 'Chính sách bảo mật',
+  'kDevelopBy' : 'Biké được phát triển bởi Biké Team,\nĐại học FPT TP.HCM',
+  'kDevelopAt' : 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM'
 };
