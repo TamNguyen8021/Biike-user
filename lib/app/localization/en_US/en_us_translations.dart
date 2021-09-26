@@ -208,5 +208,8 @@ final Map<String, String> en = {
   'kTermOfUse' : 'Terms of Use',
   'kPrivacyPolicy' : 'Privacy Policy',
   'kDevelopBy' : 'Develop by Biké Team,\nFPT HCM City University',
-  'kDevelopAt' : 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC'
+  'kDevelopAt' : 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
+
+  // 'address_book' screen
+  'kAddressBook' : 'Address Book',
 };

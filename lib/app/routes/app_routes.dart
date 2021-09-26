@@ -24,4 +24,6 @@ abstract class CommonRoutes {
   static const MANAGE_BIKE = '/manageBike';
   static const ADD_BIKE = '/addBike';
   static const APP_SETTING = '/appSetting';
+  static const ADDRESS_BOOK = '/addressBook';
+  static const ADD_ADDRESS_BOOK = '/addAddressBook';
 }

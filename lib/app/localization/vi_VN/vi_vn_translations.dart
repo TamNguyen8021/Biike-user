@@ -208,5 +208,8 @@ final Map<String, String> vi = {
   'kTermOfUse' : 'Điều khoản sử dụng',
   'kPrivacyPolicy' : 'Chính sách bảo mật',
   'kDevelopBy' : 'Biké được phát triển bởi Biké Team,\nĐại học FPT TP.HCM',
-  'kDevelopAt' : 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM'
+  'kDevelopAt' : 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM',
+
+  // 'address_book' screen
+  'kAddressBook' : 'Sổ địa chỉ',
 };

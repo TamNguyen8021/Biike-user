@@ -202,4 +202,7 @@ class CustomStrings {
   static const String kPrivacyPolicy = 'kPrivacyPolicy';
   static const String kDevelopBy = 'kDevelopBy';
   static const String kDevelopAt = 'kDevelopAt';
+
+  // 'address_book' screen
+  static const String kAddressBook = 'kAddressBook';
 }
