@@ -1,8 +1,12 @@
+import 'package:bikes_user/app/bindings/add_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/address_book_binding.dart';
 import 'package:bikes_user/app/bindings/app_setting_binding.dart';
+import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
+import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
@@ -125,6 +129,16 @@ class AppPages {
         name: CommonRoutes.ADDRESS_BOOK,
         page: () => AddressBookPage(),
         binding: AddressBookBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.EDIT_ADDRESS_BOOK,
+        page: () => EditAddressBookPage(),
+        binding: EditAddressBookBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.ADD_ADDRESS_BOOK,
+        page: () => AddAddressBookPage(),
+        binding: AddAddressBookBinding()
     ),
   ];
 }

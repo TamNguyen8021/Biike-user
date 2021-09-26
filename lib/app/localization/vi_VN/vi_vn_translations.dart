@@ -212,4 +212,13 @@ final Map<String, String> vi = {
 
   // 'address_book' screen
   'kAddressBook' : 'Sổ địa chỉ',
+
+  // 'edit_address_book' screen
+  'kEditAddressBook' : 'Chỉnh sửa địa chỉ',
+
+  // 'add_address_book' screen
+  'kAddAddressBook' : 'Thêm vào sổ địa chỉ',
+  'kName' : 'Tên',
+  'kAddress' : 'Địa chỉ',
+  'kNote' : 'Ghi chú',
 };

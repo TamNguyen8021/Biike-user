@@ -212,4 +212,13 @@ final Map<String, String> en = {
 
   // 'address_book' screen
   'kAddressBook' : 'Address Book',
+
+  // 'edit_address_book' screen
+  'kEditAddressBook' : 'Edit Address Book',
+
+  // 'add_address_book' screen
+  'kAddAddressBook' : 'Add Address Book',
+  'kName' : 'Name',
+  'kAddress' : 'Address',
+  'kNote' : 'Note',
 };

@@ -205,4 +205,13 @@ class CustomStrings {
 
   // 'address_book' screen
   static const String kAddressBook = 'kAddressBook';
+
+  // 'edit_address_book' screen
+  static const String kEditAddressBook = 'kEditAddressBook';
+
+  // 'add_address_book' screen
+  static const String kAddAddressBook = 'kAddAddressBook';
+  static const String kName = 'kName';
+  static const String kAddress = 'kAddress';
+  static const String kNote = 'kNote';
 }

@@ -17,7 +17,7 @@ class AddressBookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(CommonRoutes.TRIP_DETAILS),
+      onTap: () => Get.toNamed(CommonRoutes.EDIT_ADDRESS_BOOK),
       child: Container(
         height: 72,
         child: Padding(
