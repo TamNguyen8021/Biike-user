@@ -221,6 +221,9 @@ final Map<String, String> en = {
   'kName' : 'Name',
   'kAddress' : 'Address',
   'kNote' : 'Note',
+  'kEnterName' : 'Enter name',
+  'kSelectAddress' : 'Select address',
+  'kEnterNote' : 'Enter note',
 
   // 'sos_number' screen
   'kSOSNumber' : 'S.O.S number',
@@ -233,6 +236,7 @@ final Map<String, String> en = {
   // 'add_sos_number' screen
   'kAddSOSNumber' : 'Add S.O.S number',
   'kNumberPhone' : 'Number',
+  'kEnterNumberPhone' : 'Enter number',
 
   // 'edit_sos_number' screen
   'kEditSOSNumber' : 'Edit S.O.S number',

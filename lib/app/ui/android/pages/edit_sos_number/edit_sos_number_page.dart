@@ -58,7 +58,7 @@ class EditSOSNumberPage extends StatelessWidget {
                       ),
                       Obx(
                             () => SOSNumberTextField(
-                            hintText: 'Nhập tên',
+                            hintText: CustomStrings.kEnterName.tr,
                             isReadOnly: false,
                             isEditSOSNumber: true,
                             initialValue: '${editSOSNumberController.name}',
@@ -84,7 +84,7 @@ class EditSOSNumberPage extends StatelessWidget {
                       ),
                       Obx(
                             () => SOSNumberTextField(
-                            hintText: 'Nhập số điện thoại',
+                            hintText: CustomStrings.kEnterNumberPhone.tr,
                             isReadOnly: false,
                             isEditSOSNumber: true,
                             initialValue: '${editSOSNumberController.number}',

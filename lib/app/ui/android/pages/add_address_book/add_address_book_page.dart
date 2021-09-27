@@ -50,7 +50,7 @@ class AddAddressBookPage extends StatelessWidget {
                       ),
                       Obx(
                             () => AddressBookTextField(
-                                hintText: 'Nhập tên',
+                                hintText: CustomStrings.kEnterName.tr,
                                 isReadOnly: false,
                                 isEditAddressBook: true,
                                 initialValue: '${addAddressBookPageController.name}',
@@ -76,7 +76,7 @@ class AddAddressBookPage extends StatelessWidget {
                       ),
                       Obx(
                             () => AddressBookTextActionField(
-                                hintText: 'Chọn địa chỉ',
+                                hintText: CustomStrings.kSelectAddress.tr,
                                 isReadOnly: true,
                                 isEditAddressBook: true,
                                 initialValue: '${addAddressBookPageController.address}',
@@ -102,7 +102,7 @@ class AddAddressBookPage extends StatelessWidget {
                       ),
                       Obx(
                             () => AddressBookTextField(
-                                hintText: 'Nhập ghi chú',
+                                hintText: CustomStrings.kEnterNote.tr,
                                 isReadOnly: false,
                                 isEditAddressBook: true,
                                 initialValue: '${addAddressBookPageController.note}',

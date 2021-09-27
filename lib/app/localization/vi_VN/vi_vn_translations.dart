@@ -221,6 +221,9 @@ final Map<String, String> vi = {
   'kName' : 'Tên',
   'kAddress' : 'Địa chỉ',
   'kNote' : 'Ghi chú',
+  'kEnterName' : 'Nhập tên',
+  'kSelectAddress' : 'Chọn địa chỉ',
+  'kEnterNote' : 'Nhập ghi chú',
 
   // 'sos_number' screen
   'kSOSNumber' : 'Số điện thoại S.O.S',
@@ -233,6 +236,7 @@ final Map<String, String> vi = {
   // 'add_sos_number' screen
   'kAddSOSNumber' : 'Thêm số điện thoại S.O.S',
   'kNumberPhone' : 'Số điện thoại',
+  'kEnterNumberPhone' : 'Nhập số điện thoại',
 
   // 'edit_sos_number' screen
   'kEditSOSNumber' : 'Chỉnh sửa số điện thoại S.O.S',

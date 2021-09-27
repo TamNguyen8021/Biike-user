@@ -49,7 +49,7 @@ class AddSOSNumberPage extends StatelessWidget {
                       ),
                       Obx(
                             () => SOSNumberTextField(
-                            hintText: 'Nhập tên',
+                            hintText: CustomStrings.kEnterName.tr,
                             isReadOnly: false,
                             isEditSOSNumber: true,
                             initialValue: '${addSOSNumberController.name}',
@@ -75,7 +75,7 @@ class AddSOSNumberPage extends StatelessWidget {
                       ),
                       Obx(
                             () => SOSNumberTextField(
-                            hintText: 'Nhập số điện thoại',
+                            hintText: CustomStrings.kEnterNumberPhone.tr,
                             isReadOnly: false,
                             isEditSOSNumber: true,
                             initialValue: '${addSOSNumberController.number}',

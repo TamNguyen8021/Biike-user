@@ -214,6 +214,9 @@ class CustomStrings {
   static const String kName = 'kName';
   static const String kAddress = 'kAddress';
   static const String kNote = 'kNote';
+  static const String kEnterName = 'kEnterName';
+  static const String kSelectAddress = 'kSelectAddress';
+  static const String kEnterNote = 'kEnterNote';
 
   // 'sos_number' screen
   static const String kSOSNumber = 'kSOSNumber';
@@ -226,6 +229,7 @@ class CustomStrings {
   // 'add_sos_number' screen
   static const String kAddSOSNumber = 'kAddSOSNumber';
   static const String kNumberPhone = 'kNumberPhone';
+  static const String kEnterNumberPhone = 'kEnterNumberPhone';
 
   // 'edit_sos_number' screen
   static const String kEditSOSNumber = 'kEditSOSNumber';
