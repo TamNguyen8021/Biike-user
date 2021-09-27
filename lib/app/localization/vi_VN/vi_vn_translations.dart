@@ -221,4 +221,19 @@ final Map<String, String> vi = {
   'kName' : 'Tên',
   'kAddress' : 'Địa chỉ',
   'kNote' : 'Ghi chú',
+
+  // 'sos_number' screen
+  'kSOSNumber' : 'Số điện thoại S.O.S',
+  'kSOSNumberFirstDescription' : 'Biké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi\nđến ',
+  'kSOSNumberSecondDescription' : ' khi bạn nhấn vào nút\n',
+  'kNeedSOS' : 'Tôi cần Cảnh sát/Xe cấp cứu',
+  'kSOSNumberThirdDescription' : ' trong khi đi xe và gọi',
+  'kSOSReachLimit' : 'Bạn đã thêm tối đa các số điện thoại S.O.S',
+
+  // 'add_sos_number' screen
+  'kAddSOSNumber' : 'Thêm số điện thoại S.O.S',
+  'kNumberPhone' : 'Số điện thoại',
+
+  // 'edit_sos_number' screen
+  'kEditSOSNumber' : 'Chỉnh sửa số điện thoại S.O.S',
 };

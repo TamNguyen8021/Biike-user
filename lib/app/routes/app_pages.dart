@@ -2,6 +2,7 @@ import 'package:bikes_user/app/bindings/add_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/address_book_binding.dart';
 import 'package:bikes_user/app/bindings/app_setting_binding.dart';
 import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
+import 'package:bikes_user/app/bindings/sos_number_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
@@ -17,6 +18,7 @@ import 'package:bikes_user/app/ui/android/pages/get_trip/get_trip_success_page.d
 import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/open/open_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/profile_page.dart';
+import 'package:bikes_user/app/ui/android/pages/sos_number/sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
 import 'package:get/get.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
@@ -139,6 +141,11 @@ class AppPages {
         name: CommonRoutes.ADD_ADDRESS_BOOK,
         page: () => AddAddressBookPage(),
         binding: AddAddressBookBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.SOS_NUMBER,
+        page: () => SOSNumberPage(),
+        binding: SOSNumberBinding()
     ),
   ];
 }

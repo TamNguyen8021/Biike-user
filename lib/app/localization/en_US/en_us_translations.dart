@@ -221,4 +221,19 @@ final Map<String, String> en = {
   'kName' : 'Name',
   'kAddress' : 'Address',
   'kNote' : 'Note',
+
+  // 'sos_number' screen
+  'kSOSNumber' : 'S.O.S number',
+  'kSOSNumberFirstDescription' : 'Biké will send SMS which contains information of trip\nto ',
+  'kSOSNumberSecondDescription' : ' when you press on\n',
+  'kNeedSOS' : 'I need Police/Ambulance',
+  'kSOSNumberThirdDescription' : ' while on road',
+  'kSOSReachLimit' : 'Reach S.O.S phone number limit',
+
+  // 'add_sos_number' screen
+  'kAddSOSNumber' : 'Add S.O.S number',
+  'kNumberPhone' : 'Number',
+
+  // 'edit_sos_number' screen
+  'kEditSOSNumber' : 'Edit S.O.S number',
 };

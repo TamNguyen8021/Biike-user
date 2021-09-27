@@ -107,7 +107,9 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                Get.toNamed(CommonRoutes.SOS_NUMBER);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(
