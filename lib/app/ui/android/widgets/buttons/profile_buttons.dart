@@ -78,7 +78,9 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                Get.toNamed(CommonRoutes.BAN_LIST);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(

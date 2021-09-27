@@ -240,4 +240,8 @@ final Map<String, String> vi = {
 
   // 'edit_sos_number' screen
   'kEditSOSNumber' : 'Chỉnh sửa số điện thoại S.O.S',
+
+  // 'ban_list' screen
+  'kBanList' : 'Danh sách hạn chế',
+  'kUnBlock' : 'Bỏ chặn'
 };

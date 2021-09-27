@@ -2,6 +2,7 @@ import 'package:bikes_user/app/bindings/add_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/add_sos_number_binding.dart';
 import 'package:bikes_user/app/bindings/address_book_binding.dart';
 import 'package:bikes_user/app/bindings/app_setting_binding.dart';
+import 'package:bikes_user/app/bindings/ban_list_binding.dart';
 import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/edit_sos_number_binding.dart';
 import 'package:bikes_user/app/bindings/sos_number_binding.dart';
@@ -10,6 +11,7 @@ import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_boo
 import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
+import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
@@ -160,6 +162,11 @@ class AppPages {
         name: CommonRoutes.EDIT_SOS_NUMBER,
         page: () => EditSOSNumberPage(),
         binding: EditSOSNumberBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.BAN_LIST,
+        page: () => BanListPage(),
+        binding: BanListBinding()
     ),
   ];
 }

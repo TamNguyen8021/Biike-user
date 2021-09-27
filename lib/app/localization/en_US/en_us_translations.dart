@@ -240,4 +240,8 @@ final Map<String, String> en = {
 
   // 'edit_sos_number' screen
   'kEditSOSNumber' : 'Edit S.O.S number',
+
+  // 'ban_list' screen
+  'kBanList' : 'Ban List',
+  'kUnBlock' : 'Unblock'
 };

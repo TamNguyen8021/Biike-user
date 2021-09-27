@@ -233,4 +233,8 @@ class CustomStrings {
 
   // 'edit_sos_number' screen
   static const String kEditSOSNumber = 'kEditSOSNumber';
+
+  // 'ban_list' screen
+  static const String kBanList = 'kBanList';
+  static const String kUnBlock = 'kUnBlock';
 }

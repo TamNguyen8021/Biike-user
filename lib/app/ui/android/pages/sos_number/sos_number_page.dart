@@ -42,16 +42,16 @@ class SOSNumberPage extends StatelessWidget {
                   )
               ),
               SOSNumberDescription(),
-              Padding(
-                    padding: const EdgeInsets.only(top: 22.0),
-                    child: Text(
-                        CustomStrings.kSOSReachLimit.tr,
-                        style: TextStyle(
-                            fontSize: 10.0,
-                            color: CustomColors.kDarkGray
-                        )
-                  ),
-              ),
+              // Padding(
+              //       padding: const EdgeInsets.only(top: 22.0),
+              //       child: Text(
+              //           CustomStrings.kSOSReachLimit.tr,
+              //           style: TextStyle(
+              //               fontSize: 10.0,
+              //               color: CustomColors.kDarkGray
+              //           )
+              //     ),
+              // ),
             ]),
       ),
       floatingActionButton: AddSOSNumberButton(),

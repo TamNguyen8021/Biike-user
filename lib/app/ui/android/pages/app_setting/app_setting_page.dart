@@ -3,7 +3,6 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/account_security_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/change_language_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/other_setting_buttons.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
