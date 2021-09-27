@@ -3,14 +3,17 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
-import 'package:bikes_user/app/ui/android/pages/exchange_voucher/exchange_voucher_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/exchange_voucher_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_fail_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/get_trip/get_trip_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/open/open_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/profile_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
+import 'package:bikes_user/app/ui/android/pages/your_voucher/your_voucher_details_page.dart';
+import 'package:bikes_user/app/ui/android/pages/your_voucher/your_vouchers_page.dart';
 import 'package:get/get.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/feedback/feedback_page.dart';
@@ -115,6 +118,19 @@ class AppPages {
     GetPage(
       name: CommonRoutes.ADD_BIKE,
       page: () => AddBikePage(),
+    ),
+    GetPage(
+      name: CommonRoutes.VOUCHER_DETAILS,
+      page: () => VoucherDetailPage(),
+    ),
+    GetPage(
+      name: CommonRoutes.YOUR_VOUCHER_DETAIL,
+      page: () => YourVoucherDetailPage(),
+    ),
+    GetPage(
+      name: CommonRoutes.YOUR_VOUCHERS,
+      page: () => YourVoucherPage(),
+      binding: VoucherBinding(),
     ),
   ];
 }

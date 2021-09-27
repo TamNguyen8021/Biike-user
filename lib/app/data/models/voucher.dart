@@ -9,30 +9,30 @@ part 'voucher.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class Voucher {
-  final int? voucherId;
-  final int? voucherCategoryId;
-  final String? voucherName;
-  final String? brand;
-  final DateTime? startDate;
-  final DateTime? endDate;
-  final int? quantity;
-  final int? remaining;
-  final int? amountOfPoint;
-  final String? description;
-  final String? termsAndConditions;
+  final int voucherId;
+  final int voucherCategoryId;
+  final String voucherName;
+  final String brand;
+  final DateTime startDate;
+  final DateTime endDate;
+  final int quantity;
+  final int remaining;
+  final int amountOfPoint;
+  final String description;
+  final String termsAndConditions;
 
   Voucher({
-      this.voucherId,
-      this.voucherCategoryId,
-      this.voucherName,
-      this.brand,
-      this.startDate,
-      this.endDate,
-      this.quantity,
-      this.remaining,
-      this.amountOfPoint,
-      this.description,
-      this.termsAndConditions
+      required this.voucherId,
+      required this.voucherCategoryId,
+      required this.voucherName,
+      required this.brand,
+      required this.startDate,
+      required this.endDate,
+      required this.quantity,
+      required this.remaining,
+      required this.amountOfPoint,
+      required this.description,
+      required this.termsAndConditions
   });
 
   /// A necessary factory constructor for creating a new DestinationStation instance

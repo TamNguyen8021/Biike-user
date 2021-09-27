@@ -13,4 +13,15 @@ class VoucherProvider extends GetConnect {
     }
     return Future.error(response.statusText!);
   }
+
+  Future<dynamic> getYourVoucherList() async {
+    //TODO
+    final response = await
+      get("https://biike-api.azurewebsites.net/api/biike/v1/vouchers");
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.bodyString.toString());
+    }
+    return Future.error(response.statusText!);
+  }
 }

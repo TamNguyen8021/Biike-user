@@ -1,4 +1,5 @@
-import 'package:bikes_user/app/ui/android/widgets/cards/voucher_card.dart';
+import 'package:bikes_user/app/data/models/voucher.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_card.dart';
 import 'package:flutter/material.dart';
 
 class ListVouchers extends StatelessWidget {
@@ -16,7 +17,7 @@ class ListVouchers extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           return Padding(
             padding: EdgeInsets.only(bottom: 10.0),
-            child: VoucherCard(),
+            child: VoucherCard(voucher: Voucher.fromJson(listVouchers[i])),
           );
         });
   }

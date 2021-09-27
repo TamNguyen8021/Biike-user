@@ -186,6 +186,18 @@ final Map<String, String> vi = {
   'kNumberPlate' : 'Biển số đăng ký',
   'kTakePictureAgain' : 'Chụp lại',
 
+  // 'voucher_detail' screen
+  'kGiftDetail' : 'Chi tiết quà tặng',
+  'kYourVoucher' : 'Quà của bạn',
+  'kVoucherDetail' : 'Thông tin voucher',
+  'kYourVoucherDetail' : 'Chi tiết quà của bạn',
+  'kTermsAndConditions' : 'Điều kiện sử dụng',
+  'kAvailableUntil' : 'Ưu đãi đến ',
+  'kExchangeNow' : 'Đổi ngay',
+  'kBrand' : 'Cửa hàng: ',
+  'kHsd' : 'HSD: ',
+  'kYourCode' : 'Mã của bạn',
+
   // Error message
   'kError' : 'Thông báo lỗi',
   'kErrorMessage' : 'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',

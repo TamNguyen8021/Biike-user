@@ -9,7 +9,7 @@ part of 'area.dart';
 Area _$AreaFromJson(Map<String, dynamic> json) {
   return Area(
     json['area_id'] as int?,
-    json['area_name'] as String? ?? 'Đại học FPT TP.HCM',
+    json['area_name'] as String? ?? 'fptHCMUni',
     json['is_area_deleted'] as bool?,
   );
 }

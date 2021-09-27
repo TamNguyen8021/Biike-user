@@ -1,8 +1,9 @@
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/lists/list_vouchers.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/list_vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -64,26 +65,31 @@ class ExchangeVoucherPage extends StatelessWidget {
           child: SafeArea(
         child: Column(
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(10.0),
-              margin: const EdgeInsets.fromLTRB(22.0, 16.0, 22.0, 10.0),
-              decoration: BoxDecoration(
-                color: CustomColors.kBlue,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      CustomStrings.kTradedVouchers.tr,
-                      style: TextStyle(color: Colors.white),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(CommonRoutes.YOUR_VOUCHERS);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.fromLTRB(22.0, 16.0, 22.0, 10.0),
+                decoration: BoxDecoration(
+                  color: CustomColors.kBlue,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        CustomStrings.kTradedVouchers.tr,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  )
-                ],
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
               ),
             ),
             Divider(),
@@ -92,7 +98,6 @@ class ExchangeVoucherPage extends StatelessWidget {
                   const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
               child:
                   Obx(() =>
-                      // ListVouchers(listVouchers: [1, 2, 3, 4, 5, 6]),
                     ListVouchers(listVouchers: voucherController.getVoucherList()),
                   ),
             ),

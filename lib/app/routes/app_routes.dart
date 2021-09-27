@@ -23,4 +23,7 @@ abstract class CommonRoutes {
   static const BOOK_SCHEDULE_TRIP = '/bookScheduleTrip';
   static const MANAGE_BIKE = '/manageBike';
   static const ADD_BIKE = '/addBike';
+  static const VOUCHER_DETAILS = '/voucherDetails';
+  static const YOUR_VOUCHERS = '/yourVouchers';
+  static const YOUR_VOUCHER_DETAIL = '/yourVoucherDetail';
 }
