@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,9 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                Get.toNamed(CommonRoutes.ADDRESS_BOOK);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(
@@ -45,7 +48,9 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                  Get.toNamed(CommonRoutes.APP_SETTING);
+                },
               child: Row(
                 children: <Widget>[
                   Padding(
@@ -74,7 +79,9 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                Get.toNamed(CommonRoutes.BAN_LIST);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(
@@ -103,7 +110,9 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                Get.toNamed(CommonRoutes.SOS_NUMBER);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(

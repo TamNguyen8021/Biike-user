@@ -213,4 +213,54 @@ final Map<String, String> en = {
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
+
+  // 'app_setting' screen
+  'kAppSetting': 'App Setting',
+  'kAccountSecurity': 'Account Security',
+  'kChangePassword': 'Change Password',
+  'kLoginByFingerprint': 'Login by Fingerprint',
+  'kLanguage': 'Language',
+  'kOther': 'Other',
+  'kFollowOnFacebook': 'Follow Biké on Facebook',
+  'kWebsite': 'Website',
+  'kTermOfUse': 'Terms of Use',
+  'kPrivacyPolicy': 'Privacy Policy',
+  'kDevelopBy': 'Develop by Biké Team,\nFPT HCM City University',
+  'kDevelopAt': 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
+
+  // 'address_book' screen
+  'kAddressBook': 'Address Book',
+
+  // 'edit_address_book' screen
+  'kEditAddressBook': 'Edit Address Book',
+
+  // 'add_address_book' screen
+  'kAddAddressBook': 'Add Address Book',
+  'kName': 'Name',
+  'kAddress': 'Address',
+  'kNote': 'Note',
+  'kEnterName': 'Enter name',
+  'kSelectAddress': 'Select address',
+  'kEnterNote': 'Enter note',
+
+  // 'sos_number' screen
+  'kSOSNumber': 'S.O.S number',
+  'kSOSNumberFirstDescription':
+      'Biké will send SMS which contains information of trip\nto ',
+  'kSOSNumberSecondDescription': ' when you press on\n',
+  'kNeedSOS': 'I need Police/Ambulance',
+  'kSOSNumberThirdDescription': ' while on road',
+  'kSOSReachLimit': 'Reach S.O.S phone number limit',
+
+  // 'add_sos_number' screen
+  'kAddSOSNumber': 'Add S.O.S number',
+  'kNumberPhone': 'Number',
+  'kEnterNumberPhone': 'Enter number',
+
+  // 'edit_sos_number' screen
+  'kEditSOSNumber': 'Edit S.O.S number',
+
+  // 'ban_list' screen
+  'kBanList': 'Ban List',
+  'kUnBlock': 'Unblock'
 };

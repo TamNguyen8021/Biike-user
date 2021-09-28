@@ -1,4 +1,19 @@
+import 'package:bikes_user/app/bindings/add_address_book_binding.dart';
+import 'package:bikes_user/app/bindings/add_sos_number_binding.dart';
+import 'package:bikes_user/app/bindings/address_book_binding.dart';
+import 'package:bikes_user/app/bindings/app_setting_binding.dart';
+import 'package:bikes_user/app/bindings/ban_list_binding.dart';
+import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
+import 'package:bikes_user/app/bindings/edit_sos_number_binding.dart';
+import 'package:bikes_user/app/bindings/sos_number_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
+import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
+import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
+import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
+import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
+import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
+import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
@@ -9,6 +24,7 @@ import 'package:bikes_user/app/ui/android/pages/get_trip/get_trip_success_page.d
 import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/open/open_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/profile_page.dart';
+import 'package:bikes_user/app/ui/android/pages/sos_number/sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
 import 'package:get/get.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
@@ -114,6 +130,46 @@ class AppPages {
     GetPage(
       name: CommonRoutes.ADD_BIKE,
       page: () => AddBikePage(),
+    ),
+    GetPage(
+        name: CommonRoutes.APP_SETTING,
+        page: () => AppSettingPage(),
+        binding: AppSettingBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.ADDRESS_BOOK,
+        page: () => AddressBookPage(),
+        binding: AddressBookBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.EDIT_ADDRESS_BOOK,
+        page: () => EditAddressBookPage(),
+        binding: EditAddressBookBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.ADD_ADDRESS_BOOK,
+        page: () => AddAddressBookPage(),
+        binding: AddAddressBookBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.SOS_NUMBER,
+        page: () => SOSNumberPage(),
+        binding: SOSNumberBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.ADD_SOS_NUMBER,
+        page: () => AddSOSNumberPage(),
+        binding: AddSOSNumberBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.EDIT_SOS_NUMBER,
+        page: () => EditSOSNumberPage(),
+        binding: EditSOSNumberBinding()
+    ),
+    GetPage(
+        name: CommonRoutes.BAN_LIST,
+        page: () => BanListPage(),
+        binding: BanListBinding()
     ),
   ];
 }

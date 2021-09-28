@@ -215,4 +215,54 @@ final Map<String, String> vi = {
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
+
+  // 'app_setting' screen
+  'kAppSetting': 'Cài đặt ứng dụng',
+  'kAccountSecurity': 'Bảo mật tài khoản',
+  'kChangePassword': 'Đổi mật khẩu',
+  'kLoginByFingerprint': 'Đăng nhập bằng vân tay',
+  'kLanguage': 'Ngôn ngữ',
+  'kOther': 'Khác',
+  'kFollowOnFacebook': 'Theo dõi Biké trên Facebook',
+  'kWebsite': 'Website',
+  'kTermOfUse': 'Điều khoản sử dụng',
+  'kPrivacyPolicy': 'Chính sách bảo mật',
+  'kDevelopBy': 'Biké được phát triển bởi Biké Team,\nĐại học FPT TP.HCM',
+  'kDevelopAt': 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM',
+
+  // 'address_book' screen
+  'kAddressBook': 'Sổ địa chỉ',
+
+  // 'edit_address_book' screen
+  'kEditAddressBook': 'Chỉnh sửa địa chỉ',
+
+  // 'add_address_book' screen
+  'kAddAddressBook': 'Thêm vào sổ địa chỉ',
+  'kName': 'Tên',
+  'kAddress': 'Địa chỉ',
+  'kNote': 'Ghi chú',
+  'kEnterName': 'Nhập tên',
+  'kSelectAddress': 'Chọn địa chỉ',
+  'kEnterNote': 'Nhập ghi chú',
+
+  // 'sos_number' screen
+  'kSOSNumber': 'Số điện thoại S.O.S',
+  'kSOSNumberFirstDescription':
+      'Biké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi\nđến ',
+  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút\n',
+  'kNeedSOS': 'Tôi cần Cảnh sát/Xe cấp cứu',
+  'kSOSNumberThirdDescription': ' trong khi đi xe và gọi',
+  'kSOSReachLimit': 'Bạn đã thêm tối đa các số điện thoại S.O.S',
+
+  // 'add_sos_number' screen
+  'kAddSOSNumber': 'Thêm số điện thoại S.O.S',
+  'kNumberPhone': 'Số điện thoại',
+  'kEnterNumberPhone': 'Nhập số điện thoại',
+
+  // 'edit_sos_number' screen
+  'kEditSOSNumber': 'Chỉnh sửa số điện thoại S.O.S',
+
+  // 'ban_list' screen
+  'kBanList': 'Danh sách hạn chế',
+  'kUnBlock': 'Bỏ chặn'
 };
