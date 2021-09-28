@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/providers/view_user_provider.dart';
@@ -22,38 +21,41 @@ class ViewUserController extends GetxController {
   Area area = Area.empty();
   RxList<dynamic> historyTrips = [].obs;
 
-  /// Gets user info and shows it on [context] .
+  /// Gets partner's profile and shows it on [context] .
   ///
   /// Author: TamNTT
-  Future<void> getUserInfo(
-      {required BuildContext context, required int userId}) async {
-    var data = await _viewUserProvider.getUser(userId: userId);
+  Future<void> getPartnerProfile(
+      {required BuildContext context, required int partnerId}) async {
+    var partnerProfile =
+        await _viewUserProvider.getPartnerProfile(partnerId: partnerId);
     // print('data: ' + data.toString());
     // print('data length: ' + data.length.toString());
-    user = User.fromJson(data);
-    area = Area.fromJson(data);
+    user = User.fromJson(partnerProfile);
+    area = Area.fromJson(partnerProfile);
     // print(user.toJson());
   }
 
-  /// Gets history trips with the user and shows it on [context].
+  /// Gets history trips with partner and shows it on [context].
   ///
   /// Author: TamNTT
-  Future<void> getUserHistoryTrips({required BuildContext context}) async {
+  Future<void> getHistoryTripsWithPartner(
+      {required BuildContext context,
+      required int userId,
+      required int partnerId}) async {
     historyTrips.clear();
-    String response = await DefaultAssetBundle.of(context)
-        .loadString('assets/files/history_trip.json');
-    var data = jsonDecode(response);
-    var tempHistoryTrips = data;
-    // print('tempHistoryTrips: ' + tempHistoryTrips.toString());
-    for (var item in tempHistoryTrips) {
+    List historyTripsWithPartner = await _viewUserProvider.getHistoryPairTrips(
+        userId: userId, partnerId: partnerId);
+    // print('data: ' + tempHistoryTrips.toString());
+    for (var historyTrip in historyTripsWithPartner) {
       // print(item);
-      User user = User.fromJson(item);
+      User user = User.fromJson(historyTrip);
       // print(user.toJson());
-      Trip trip = Trip.fromJson(item);
+      Trip trip = Trip.fromJson(historyTrip);
       // print(trip.toJson());
-      StartingStation startingStation = StartingStation.fromJson(item);
+      StartingStation startingStation = StartingStation.fromJson(historyTrip);
       // print(startingStation.toJson());
-      DestinationStation destinationStation = DestinationStation.fromJson(item);
+      DestinationStation destinationStation =
+          DestinationStation.fromJson(historyTrip);
       // print(destinationStation.toJson());
       TripStatus tripStatus;
       String date = trip.timeBook.day.toString() +
@@ -84,6 +86,7 @@ class ViewUserController extends GetxController {
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(
+          userId: user.userId,
           avatarUrl: user.avatar,
           name: user.userFullname,
           time: DateFormat('HH:mm').format(trip.timeBook),

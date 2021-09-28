@@ -44,84 +44,89 @@ final Map<String, String> en = {
   'kRemindWords': 'Bạn có thể đổi sang chế độ còn lại\nkhi sử dụng ứng dụng',
 
   // 'ke_er_home' screen
-  'kTopBiker': 'Top Biker tháng',
-  'kKeerReadyReminder': 'Upcoming trip',
-  'kReminderMinute': ' phút ',
-  'kReminderHour': ' tiếng ',
-  'kReminderLeft': ' nữa',
-  'kArriveAtDestination': 'Đã đến',
-  'kKeerMode': 'Đi ké mode',
-  'kBikerMode': 'Chở mode',
-  'kToday': 'Hôm nay',
-  'kUpcomingTrips': 'Những chuyến sắp tới',
-  'kFinding': 'Đang tìm...',
+  'kTopBiker': 'Top Biker on ',
+  'kKeerReadyReminder': 'Ready to go!',
+  'kReminderMinute': ' minutes ',
+  'kReminderHour': ' hours ',
+  'kReminderLeft': ' left',
+  'kArriveAtDestination': 'Has arrived',
+  'kKeerMode': 'Ké-er mode',
+  'kBikerMode': 'Biker mode',
+  'kToday': 'Today',
+  'kUpcomingTrips': 'Upcoming trips',
+  'kFinding': 'Finding...',
   'kCreateTrip':
       'Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!',
+  'kConfirmArrivalTitle': 'Are you sure you are at your pick up point?',
+  'kConfirmArrivalMessageForKeer': 'We\'ll send a notification to your biker',
+  'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your ké-er',
 
   // 'biker_home' screen
-  'kBikerReadyReminder': 'Chuyến sắp chở',
-  'kFilter': 'Lọc chuyến đi đang cần chở',
-  'kSelectHour': 'Chọn giờ',
-  'kSelectSourceStation': 'Chọn điểm đi',
-  'kSelectDestinationStation': 'Chọn điểm đến',
-  'kDecline': 'Từ chối',
-  'kAccept': 'Chấp nhận',
+  'kBikerReadyReminder': 'Ready to go!',
+  'kFilter': 'Filter trips',
+  'kSelectHour': 'Hour',
+  'kSelectSourceStation': 'Select departure',
+  'kSelectDestinationStation': 'Select destination',
+  'kDecline': 'Decline',
+  'kAccept': 'Accept',
 
   // 'activity' screen
   'kNoUpcomingTrips': 'No upcoming trips',
 
   // 'trip_history' screen
-  'kHistory': 'Lịch sử',
-  'kKeerHistory': 'Đi ké',
-  'kBikerHistory': 'Chở ké',
-  'kTripFinished': 'Thành công',
-  'kTripCanceled': 'Đã hủy',
-  'kNoKeerHistoryTrips': 'Không có lịch sử đi ké',
-  'kNoBikerHistoryTrips': 'Không có lịch sử chở ké',
+  'kHistory': 'History',
+  'kKeerHistory': 'Ké-er',
+  'kBikerHistory': 'Biker',
+  'kTripFinished': 'Finished',
+  'kTripCanceled': 'Canceled',
+  'kNoKeerHistoryTrips': 'No history trips as Ké-er',
+  'kNoBikerHistoryTrips': 'No history trips as Biker',
 
   // bottom tabbar
-  'kHome': 'Trang chủ',
-  'kKeerActivities': 'Lịch ké',
-  'kBikerActivities': 'Lịch chở',
+  'kHome': 'Home',
+  'kKeerActivities': 'Activity',
+  'kBikerActivities': 'Activity',
 
   //'profile' screen
-  'kEdit': 'Chỉnh sửa',
-  'kSavedAddress': 'Sổ địa chỉ',
-  'kSettings': 'Cài đặt',
-  'kBlockList': 'Danh sách hạn chế',
-  'kSOS': 'Số điện thoại S.O.S',
-  'kHelp': 'Trợ giúp/Gọi đến Biiké',
-  'kRateApp': 'Đánh giá ứng dụng',
-  'kPhoneNo': 'Số điện thoại',
+  'kEdit': 'Edit',
+  'kSavedAddress': 'Address book',
+  'kSettings': 'Settings',
+  'kBlockList': 'Blacklist',
+  'kSOS': 'Call S.O.S',
+  'kHelp': 'Help/Call Biiké',
+  'kRateApp': 'Rate our app',
+  'kPhoneNo': 'Phone number',
   'kEmail': 'Email',
-  'kLogOut': 'Đăng xuất',
+  'kLogOut': 'Sign out',
 
   // 'update_profile' screen
-  'kEditProfile': 'Chỉnh sửa thông tin cá nhân',
-  'kFullName': 'Họ và tên',
-  'kGender': 'Giới tính',
-  'kMale': 'Nam',
-  'kFemale': 'Nữ',
-  'kOthers': 'Khác',
-  'kSave': 'Lưu',
+  'kEditProfile': 'Edit profile',
+  'kFullName': 'Full name',
+  'kGender': 'Gender',
+  'kMale': 'Male',
+  'kFemale': 'Female',
+  'kOthers': 'Other',
+  'kSave': 'Save',
+  'kBirthDate': 'Date of birth',
+  'kEditProfileSuccess': 'Your profile was edited',
 
   // 'biker_profile' screen
-  'kManageBike': 'Quản lí xe',
+  'kManageBike': 'Manage bike',
 
   // 'view_user' screen
-  'kViewUser': 'Xem bạn chở',
-  'kSchool': 'Trường',
-  'kCall': 'Gọi điện',
-  'kMessage': 'Nhắn tin',
-  'kReport': 'Báo cáo',
-  'kNoHistoryTrip': 'Không có lịch sử đi chung',
-  'kHasHistoryTrip': 'Lịch sử đi chung',
-  'kEnterYourReport': 'Nhập phản ánh của bạn về người này...',
-  'kReportAndBlock': 'Báo cáo và chặn',
-  'kConfirmBlock': 'Bạn có chắc chắn\nmuốn chặn người này?',
+  'kViewUser': 'View partner profile',
+  'kSchool': 'School',
+  'kCall': 'Call',
+  'kMessage': 'Message',
+  'kReport': 'Report',
+  'kNoHistoryTrip': 'No history trips with this person',
+  'kHasHistoryTrip': 'History trips with this person',
+  'kEnterYourReport': 'Type your feedback about this person...',
+  'kReportAndBlock': 'Report and block',
+  'kConfirmBlock': 'Are you sure you\nwant to block this person?',
   'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn\ntại trang hồ sơ cá nhân',
-  'kSure': 'Chắc chắn',
-  'kThankYouForReport': 'Cảm ơn bạn đã báo cáo',
+  'kSure': 'Sure',
+  'kThankYouForReport': 'Thank you for your report',
   'kSorryMessage':
       'Biiké rất tiếc vì những trải nghiệm chưa được hoàn hảo. Biiké đã nhận được thông tin báo cáo và sẽ xử lý trong thời gian sớm nhất.',
 
@@ -139,8 +144,8 @@ final Map<String, String> en = {
   'kFindBikerFail': 'Không tìm thấy người chở ké',
   'kTips':
       'Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!',
-  'kBtnExit': 'Thoát',
-  'kBtnReturn': 'Quay lại',
+  'kBtnExit': 'Exit',
+  'kBtnReturn': 'Back',
 
   // 'ke_er_feedback' screen
   'kTripSuccessBiker': 'Chở ké thành công!',
@@ -149,20 +154,20 @@ final Map<String, String> en = {
       'Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!',
   'kRateReminder':
       'Hãy đánh giá trải nghiệm của bạn cùng \'người ấy\' hôm nay nhé!',
-  'kBtnSend': 'Gửi',
-  'kSendSuccess': 'Gửi feedback thành công',
+  'kBtnSend': 'Send',
+  'kSendSuccess': 'Feedback was sent successfully',
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
   'kTradedVouchers': 'Quà đã đổi',
 
   // 'trip_detail' screen
-  'kTripDetails': 'Chi tiết chuyến đi',
+  'kTripDetails': 'View trip details',
   'kSupport': 'Trợ giúp',
   'kNewTrip': 'Đã tạo',
   'kTripHasBiker': 'Đã được nhận chở',
   'kCancelTrip': 'Hủy chuyến',
-  'kConfirmArrival': 'Đánh dấu đã đến',
+  'kConfirmArrival': 'Confirm arrival',
   'kStartTrip': 'Bắt đầu chuyến đi',
   'kCompleteTrip': 'Hoàn thành',
 
@@ -176,26 +181,26 @@ final Map<String, String> en = {
   'kBookNowTrip': 'Ké now',
 
   // 'book_schedule_trip' screen
-  'kTime': 'Thời gian',
-  'kChooseDate': 'Chọn ngày',
+  'kTime': 'Time',
+  'kChooseDate': 'Choose Date',
   'kChooseTime': 'Chọn giờ',
-  'kRepeat': 'Lặp lại',
+  'kRepeat': 'Repeat',
   'kRepeatTo': 'Lặp lại đến',
-  'kCancel': 'Hủy',
+  'kCancel': 'Cancel',
 
   // 'bike_manager' screen
   'kBikeVerified': 'Đã xác minh',
   'kWaitingVerified': 'Đang xác minh',
-  'kBikeOwner': 'Tên chủ xe',
-  'kBikeCategory': 'Loại xe',
-  'kBikeBrand': 'Nhãn hiệu',
-  'kBikeColor': 'Màu sơn',
-  'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
+  'kBikeOwner': 'Owner\'s name',
+  'kBikeCategory': 'Category',
+  'kBikeBrand': 'Brand',
+  'kBikeColor': 'Color',
+  'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
 
   // 'add_bike' screen
-  'kAddBike': 'Thêm xe mới',
-  'kCheckBikeInfo': 'Vui lòng kiểm tra thông tin xe',
-  'kNumberPlate': 'Biển số đăng ký',
+  'kAddBike': 'Add bike',
+  'kCheckBikeInfo': 'Please check your bike information',
+  'kNumberPlate': 'Number plate',
   'kTakePictureAgain': 'Chụp lại',
 
   // Error message
@@ -207,5 +212,5 @@ final Map<String, String> en = {
   'kSendFailed': 'Send feedback failed!',
 
   // Default area name
-  'fptHCMUni': 'Đại học FPT TP.HCM',
+  'fptHCMUni': 'FPT University in HCM',
 };

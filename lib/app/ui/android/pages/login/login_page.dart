@@ -2,6 +2,7 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -59,12 +60,13 @@ class LoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: TextButton(
-                      onPressed: () => Get.offAllNamed(CommonRoutes.INPUT_PHONE),
+                      onPressed: () =>
+                          Get.offAllNamed(CommonRoutes.INPUT_PHONE),
                       child: Text(
                         CustomStrings.kLoginButton.tr,
                         style: TextStyle(
                           color: CustomColors.kDarkBlue,
-                          fontSize: 13,
+                          fontSize: 13.sp,
                         ),
                       ),
                       style: TextButton.styleFrom(

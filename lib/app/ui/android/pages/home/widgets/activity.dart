@@ -7,6 +7,7 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 /// The activity page widget
@@ -27,7 +28,7 @@ class Activity extends StatelessWidget {
     return FutureBuilder(
         future: homeController.getUpcomingTrips(
             context: context,
-            userId: 1,
+            userId: Biike.userId,
             role: _role.getRoleNum(Biike.role.value)),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -49,7 +50,7 @@ class Activity extends StatelessWidget {
                                 Text(
                                   _roleActivity,
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.bold,
                                       color: CustomColors.kBlue),
                                 ),

@@ -28,15 +28,11 @@ import 'package:bikes_user/app/ui/android/pages/register/input_phone_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_schedule_trip/book_schedule_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/book_trip_page.dart';
 import 'package:bikes_user/app/bindings/manage_bike_binding.dart';
-import 'package:bikes_user/app/bindings/trip_details_binding.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/manage_bike_page.dart';
-import 'package:bikes_user/app/bindings/view_user_binding.dart';
 import 'package:bikes_user/app/bindings/trip_history_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/bindings/verify_phone_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/register/verify_phone_page.dart';
-import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
 
 class AppPages {
   static final pages = [
@@ -67,7 +63,10 @@ class AppPages {
     GetPage(
         name: CommonRoutes.HOME,
         page: () => HomePage(),
-        binding: HomeBinding()),
+        bindings: <Bindings>[
+          HomeBinding(),
+          ProfileBinding(),
+        ]),
     GetPage(
       name: CommonRoutes.PROFILE,
       page: () => ProfilePage(),
@@ -77,10 +76,6 @@ class AppPages {
         name: CommonRoutes.EDIT_PROFILE,
         page: () => EditProfilePage(),
         binding: ProfileBinding()),
-    GetPage(
-        name: CommonRoutes.VIEW_USER,
-        page: () => ViewUserPage(),
-        binding: ViewUserBinding()),
     GetPage(
         name: CommonRoutes.FEEDBACK,
         page: () => FeedbackPage(),
@@ -95,12 +90,12 @@ class AppPages {
         name: CommonRoutes.GET_TRIP_SUCCESS, page: () => GetTripSuccessPage()),
     GetPage(
         name: CommonRoutes.EXCHANGE_VOUCHER, page: () => ExchangeVoucherPage()),
-    GetPage(
-        name: CommonRoutes.TRIP_DETAILS,
-        page: () => TripDetailsPage(
-              isWaitingForBiker: false,
-            ),
-        binding: TripDetailsBinding()),
+    // GetPage(
+    //     name: CommonRoutes.TRIP_DETAILS,
+    //     page: () => TripDetailsPage(
+    //           isWaitingForBiker: false,
+    //         ),
+    //     binding: TripDetailsBinding()),
     GetPage(
         name: CommonRoutes.BOOK_TRIP,
         page: () => BookTripPage(),

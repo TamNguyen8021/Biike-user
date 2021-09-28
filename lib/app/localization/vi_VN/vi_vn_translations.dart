@@ -57,6 +57,11 @@ final Map<String, String> vi = {
   'kFinding': 'Đang tìm...',
   'kCreateTrip':
       'Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!',
+  'kConfirmArrivalTitle': 'Bạn thực sự đã đến điểm đón?',
+  'kConfirmArrivalMessageForKeer':
+      'Chúng tôi sẽ gửi thông báo cho tài xế của bạn',
+  'kConfirmArrivalMessageForBiker':
+      'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
 
   // 'biker_home' screen
   'kBikerReadyReminder': 'Chuyến sắp chở',
@@ -104,12 +109,14 @@ final Map<String, String> vi = {
   'kFemale': 'Nữ',
   'kOthers': 'Khác',
   'kSave': 'Lưu',
+  'kBirthDate': 'Ngày sinh',
+  'kEditProfileSuccess': 'Chỉnh sửa thông tin thành công',
 
   // 'biker_profile' screen
   'kManageBike': 'Quản lí xe',
 
   // 'view_user' screen
-  'kViewUser': 'Xem bạn chở',
+  'kViewUser': 'Xem bạn đồng hành',
   'kSchool': 'Trường',
   'kCall': 'Gọi điện',
   'kMessage': 'Nhắn tin',

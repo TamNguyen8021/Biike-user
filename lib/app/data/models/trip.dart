@@ -9,7 +9,7 @@ part 'trip.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class Trip {
-  final int? tripId;
+  final int tripId;
   final int? keerId;
   final int? bikerId;
   final int? routeId;

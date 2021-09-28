@@ -10,6 +10,7 @@ import 'package:bikes_user/app/ui/android/widgets/painters/half_oval_painter.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +31,8 @@ class FeedbackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => CommonFunctions().onBackPressed(errorMessage: CustomErrorsString.kNotRated),
+      onWillPop: () => CommonFunctions()
+          .onBackPressed(errorMessage: CustomErrorsString.kNotRated),
       child: Scaffold(
         // resizeToAvoidBottomInset: false,
         body: Container(
@@ -80,7 +82,7 @@ class FeedbackPage extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: CustomColors.kBlue,
-                                        fontSize: 25,
+                                        fontSize: 25.sp,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -94,7 +96,7 @@ class FeedbackPage extends StatelessWidget {
                                     Text(
                                       "EXP",
                                       style: new TextStyle(
-                                          color: Colors.white, fontSize: 12),
+                                          color: Colors.white, fontSize: 12.sp),
                                     ),
                                     Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -222,7 +224,7 @@ class FeedbackPage extends StatelessWidget {
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             color: CustomColors.kDarkGray,
-                                            fontSize: 12.0),
+                                            fontSize: 12.sp),
                                       ),
                                     ),
                                   ],

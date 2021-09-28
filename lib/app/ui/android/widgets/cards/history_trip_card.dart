@@ -1,5 +1,6 @@
+import 'package:bikes_user/app/bindings/view_user_binding.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 
 /// This widget contains a history trip's details
 class HistoryTripCard extends StatelessWidget {
+  final int userId;
   final String avatarUrl;
   final String name;
   final String time;
@@ -16,7 +18,8 @@ class HistoryTripCard extends StatelessWidget {
   final String destinationStation;
 
   const HistoryTripCard(
-      {required this.avatarUrl,
+      {required this.userId,
+      required this.avatarUrl,
       required this.name,
       required this.time,
       required this.date,
@@ -174,7 +177,9 @@ class HistoryTripCard extends StatelessWidget {
               )
             ]),
       ),
-      onTap: () => Get.toNamed(CommonRoutes.VIEW_USER),
+      // onTap: () => Get.toNamed(CommonRoutes.VIEW_USER),
+      onTap: () => Get.to(() => ViewUserPage(userId: userId),
+          binding: ViewUserBinding()),
     );
   }
 }

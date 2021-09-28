@@ -1,14 +1,20 @@
+import 'dart:io';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TopBiker extends StatelessWidget {
   const TopBiker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String systemLocale = Platform.localeName;
     String currentMonth = DateTime.now().month.toString();
+    if (systemLocale == 'en_US') {
+      currentMonth = DateFormat.MMMM().format(DateTime.now());
+    }
 
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 10.0),

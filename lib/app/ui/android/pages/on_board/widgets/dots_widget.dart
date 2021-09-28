@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/data/models/on_board/on_board.dart';
+import 'package:bikes_user/app/ui/android/pages/on_board/on_board/on_board.dart';
 import 'package:flutter/material.dart';
 
 class DotsWidget extends StatelessWidget {
@@ -22,8 +22,7 @@ class DotsWidget extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color:
-                indexState.value == entry.key ? Colors.white : Colors.black,
+            color: indexState.value == entry.key ? Colors.white : Colors.black,
           ),
         );
       }).toList(),

@@ -57,6 +57,8 @@ class HomeController extends GetxController {
       }
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
+          tripId: trip.tripId,
+          userId: user.userId,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           iconColor: iconColor,
@@ -70,7 +72,7 @@ class HomeController extends GetxController {
           destinationStation: destinationStation.destinationName);
 
       upcomingTrips.add(upcomingTripCard);
-      print(upcomingTrips.length);
+      // print(upcomingTrips.length);
     }
   }
 }

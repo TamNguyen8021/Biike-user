@@ -1,6 +1,6 @@
-
-import 'package:bikes_user/app/data/models/on_board/on_board.dart';
+import 'package:bikes_user/app/ui/android/pages/on_board/on_board/on_board.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ItemOnBoardWidget extends StatelessWidget {
   const ItemOnBoardWidget({
@@ -14,7 +14,7 @@ class ItemOnBoardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height:30),
+        const SizedBox(height: 30),
         ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Image.asset(
@@ -30,7 +30,7 @@ class ItemOnBoardWidget extends StatelessWidget {
             itemOnBoard.title,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 25,
+              fontSize: 25.sp,
             ),
           ),
         ),
@@ -41,7 +41,7 @@ class ItemOnBoardWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
         ),

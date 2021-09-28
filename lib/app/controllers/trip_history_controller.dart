@@ -1,5 +1,4 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/starting_station.dart';
@@ -18,7 +17,7 @@ class TripHistoryController extends GetxController {
       Get.put(TripHistoryProvider());
 
   RxList<dynamic> historyTrips = [].obs;
-  Rx<Role> role = Role.keer.obs;
+  // Rx<Role> role = Role.keer.obs;
 
   /// Load history trips from API based on [userId] and [role].
   ///
@@ -30,7 +29,7 @@ class TripHistoryController extends GetxController {
     historyTrips.clear();
     List response =
         await _tripHistoryProvider.getHistoryTrips(userId: userId, role: role);
-    print(response);
+    // print(response);
 
     for (var historyTrip in response) {
       // print(item);
@@ -72,6 +71,7 @@ class TripHistoryController extends GetxController {
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(
+          userId: user.userId,
           avatarUrl: user.avatar,
           name: user.userFullname,
           time: DateFormat('HH:mm').format(trip.timeBook),

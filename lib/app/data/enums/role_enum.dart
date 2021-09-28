@@ -7,9 +7,9 @@ extension RoleExtension on Role {
   int getRoleNum(Role role) {
     switch (role) {
       case Role.keer:
-        return 0;
-      case Role.biker:
         return 1;
+      case Role.biker:
+        return 2;
       default:
         return -1;
     }

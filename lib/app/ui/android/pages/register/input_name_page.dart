@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// '004.3_input_name' screen
 class InputNamePage extends StatelessWidget {
@@ -42,7 +43,7 @@ class InputNamePage extends StatelessWidget {
                     () => TextFormField(
                       initialValue: '${inputNameController.fullname}',
                       keyboardType: TextInputType.name,
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
                       inputFormatters: [
                         // FilteringTextInputFormatter.allow(RegExp(r'\p{L}+'))
                       ],

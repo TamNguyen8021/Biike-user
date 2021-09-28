@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/routes/app_routes.dart';
-import 'package:bikes_user/app/data/models/on_board/on_board.dart';
 import 'package:bikes_user/app/common/values/images.dart';
+import 'package:bikes_user/app/ui/android/pages/on_board/on_board/on_board.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'widgets/dots_widget.dart';
 import 'widgets/item_onboard_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// The '001.2_onboard ' screen
 class OnBoardPage extends HookWidget {
@@ -58,7 +59,8 @@ class OnBoardPage extends HookWidget {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       child: Text(CustomStrings.kSkip.tr,
-                          style: TextStyle(color: Colors.white, fontSize: 19)),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 19.sp)),
                       onPressed: () {
                         Get.offAllNamed(CommonRoutes.LOGIN);
                       },

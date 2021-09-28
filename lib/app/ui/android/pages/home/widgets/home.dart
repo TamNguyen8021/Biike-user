@@ -13,6 +13,7 @@ import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -26,15 +27,18 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final Role _role = Role.none;
 
-    List<String>? _earliestUpcomingTripDate;
-    int? _earliestUpcomingTripDay;
-    int? _earliestUpcomingTripMonth;
-    int? _earliestUpcomingTripYear;
+    List<String>? _earliestUpcomingTripDate = [
+      DateTime.now().day.toString(),
+      DateTime.now().month.toString()
+    ];
+    int? _earliestUpcomingTripDay = int.parse(_earliestUpcomingTripDate.first);
+    int? _earliestUpcomingTripMonth = int.parse(_earliestUpcomingTripDate.last);
+    int? _earliestUpcomingTripYear = DateTime.now().year;
 
     List<String>? _earliestUpcomingTripTime;
     int? _earliestUpcomingTripHour;
     int? _earliestUpcomingTripMin;
-    DateTime? _currentTime;
+    DateTime _currentTime = DateTime.now();
     String _timeLeft = '';
 
     if (homeController.upcomingTrips.isNotEmpty) {
@@ -48,7 +52,6 @@ class Home extends StatelessWidget {
           homeController.upcomingTrips[0].time.toString().split(':');
       _earliestUpcomingTripHour = int.parse(_earliestUpcomingTripTime.first);
       _earliestUpcomingTripMin = int.parse(_earliestUpcomingTripTime.last);
-      _currentTime = DateTime.now();
 
       if (_earliestUpcomingTripHour - _currentTime.hour > 0) {
         _timeLeft = _timeLeft +
@@ -73,7 +76,7 @@ class Home extends StatelessWidget {
     return FutureBuilder(
       future: homeController.getUpcomingTrips(
           context: context,
-          userId: 1,
+          userId: Biike.userId,
           role: _role.getRoleNum(Biike.role.value)),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -93,7 +96,7 @@ class Home extends StatelessWidget {
                             ),
                             if (homeController.upcomingTrips.isNotEmpty) ...[
                               if (_earliestUpcomingTripDay ==
-                                      _currentTime!.day &&
+                                      _currentTime.day &&
                                   _earliestUpcomingTripMonth ==
                                       _currentTime.month &&
                                   _earliestUpcomingTripYear ==
@@ -118,7 +121,7 @@ class Home extends StatelessWidget {
                                         style: TextStyle(
                                             color: CustomColors.kBlue,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 12),
+                                            fontSize: 12.sp),
                                       ),
                                     ],
                                   ),
@@ -126,6 +129,10 @@ class Home extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10.0),
                                   child: UpcomingTripCard(
+                                      tripId: homeController
+                                          .upcomingTrips[0].tripId,
+                                      userId: homeController
+                                          .upcomingTrips[0].userId,
                                       backgroundColor: CustomColors.kBlue,
                                       foregroundColor: Colors.white,
                                       iconColor: Colors.white,

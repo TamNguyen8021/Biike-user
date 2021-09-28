@@ -1,4 +1,5 @@
-import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/bindings/trip_details_binding.dart';
+import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 
 /// This widget contains an upcoming trip's details
 class UpcomingTripCard extends StatelessWidget {
+  final int tripId;
+  final int userId;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? iconColor;
@@ -21,6 +24,8 @@ class UpcomingTripCard extends StatelessWidget {
 
   const UpcomingTripCard(
       {Key? key,
+      required this.tripId,
+      required this.userId,
       this.backgroundColor,
       this.foregroundColor,
       this.iconColor,
@@ -37,7 +42,12 @@ class UpcomingTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(CommonRoutes.TRIP_DETAILS),
+      onTap: () => Get.to(
+          () => TripDetailsPage(
+              isWaitingForBiker: avatarUrl.isEmpty ? true : false,
+              tripId: tripId,
+              userId: userId),
+          binding: TripDetailsBinding()),
       child: Container(
         height: 82,
         child: Row(
