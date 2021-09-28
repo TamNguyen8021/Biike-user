@@ -4,6 +4,7 @@ import 'package:bikes_user/app/routes/app_pages.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 /// Runs the application.
@@ -14,18 +15,22 @@ void main() {
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
   static Rx<Role> role = Role.none.obs;
+  static int userId = 1;
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      // Remove debug banner when running app.
-      debugShowCheckedModeBanner: false,
-      theme: appThemeData,
-      initialRoute: CommonRoutes.OPEN,
-      getPages: AppPages.pages,
-      locale: LocalizationService.locale,
-      fallbackLocale: LocalizationService.fallbackLocale,
-      translations: LocalizationService(),
+    return ScreenUtilInit(
+      designSize: Size(360, 780),
+      builder: () => GetMaterialApp(
+        // Remove debug banner when running app.
+        debugShowCheckedModeBanner: false,
+        theme: appThemeData,
+        initialRoute: CommonRoutes.OPEN,
+        getPages: AppPages.pages,
+        locale: LocalizationService.locale,
+        fallbackLocale: LocalizationService.fallbackLocale,
+        translations: LocalizationService(),
+      ),
     );
   }
 }

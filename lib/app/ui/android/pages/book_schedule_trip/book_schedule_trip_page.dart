@@ -53,6 +53,7 @@ class BookScheduleTripPage extends StatelessWidget {
                   children: <Widget>[
                     Obx(
                       () => ChooseDateTimeButton(
+                          isOnProfilePage: false,
                           text: bookScheduleTripController.isDateSelected.value
                               ? '${bookScheduleTripController.selectedDate.value.toLocal()}'
                                   .split(' ')[0]
@@ -62,6 +63,7 @@ class BookScheduleTripPage extends StatelessWidget {
                     ),
                     Obx(
                       () => ChooseDateTimeButton(
+                          isOnProfilePage: false,
                           text: bookScheduleTripController.isTimeSelected.value
                               ? '${bookScheduleTripController.selectedTime.value.format(context)}'
                                   .split(' ')[0]
@@ -135,6 +137,7 @@ class BookScheduleTripPage extends StatelessWidget {
                       ),
                       Obx(
                         () => ChooseDateTimeButton(
+                            isOnProfilePage: false,
                             text: bookScheduleTripController
                                     .isRepeatedDateSelected.value
                                 ? '${bookScheduleTripController.repeatedDate.value.toLocal()}'

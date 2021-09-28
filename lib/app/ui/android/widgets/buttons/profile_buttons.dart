@@ -3,6 +3,7 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileButtons extends StatelessWidget {
   const ProfileButtons({Key? key}) : super(key: key);
@@ -193,7 +194,7 @@ class ProfileButtons extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
-                          .copyWith(fontSize: 9),
+                          .copyWith(fontSize: 9.sp),
                     ),
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/exit_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/return_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 /// The '015-cus-book-now-failed' screen
@@ -32,7 +33,7 @@ class FindingBikerFailPage extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: CustomColors.kBlue,
-                                fontSize: 30,
+                                fontSize: 30.sp,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -53,7 +54,7 @@ class FindingBikerFailPage extends StatelessWidget {
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: CustomColors.kBlue, fontSize: 12),
+                                color: CustomColors.kBlue, fontSize: 12.sp),
                           ),
                         ),
                       ]),

@@ -7,9 +7,9 @@ part 'trip.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class Trip {
-  final int? tripId;
+  final int tripId;
   final int? keerId;
   final int? bikerId;
   final int? routeId;

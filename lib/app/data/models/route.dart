@@ -7,7 +7,7 @@ part 'route.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class Route {
   final int routeId;
   final int startingPointId;

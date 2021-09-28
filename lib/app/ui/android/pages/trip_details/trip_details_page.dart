@@ -19,10 +19,14 @@ class TripDetailsPage extends StatelessWidget {
 
   /// Only used for ke-er
   final bool isWaitingForBiker;
+  final int tripId;
+  final int userId;
 
   TripDetailsPage({
     Key? key,
     required this.isWaitingForBiker,
+    required this.tripId,
+    required this.userId,
   }) : super(key: key);
 
   @override

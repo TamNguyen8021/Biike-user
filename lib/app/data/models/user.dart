@@ -8,14 +8,16 @@ part 'user.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class User {
-  int? userId;
+  @JsonKey(defaultValue: -1)
+  late int userId;
 
   @JsonKey(defaultValue: '')
   late String userPhoneNumber;
 
-  String? userEmail;
+  @JsonKey(defaultValue: '')
+  late String userEmail;
 
   @JsonKey(defaultValue: CustomStrings.kFinding)
   late String userFullname;
@@ -26,10 +28,19 @@ class User {
   @JsonKey(defaultValue: -1)
   late int gender;
 
+  @JsonKey(defaultValue: '2000-01-01 00:00:00Z')
+  late String birthDate;
+
   int? userStatus;
   String? lastLoginDevice;
   DateTime? lastLoginTime;
-  double? userStar;
+
+  @JsonKey(defaultValue: 0.0)
+  late double userStar;
+
+  @JsonKey(defaultValue: 0)
+  late int totalPoint;
+
   DateTime? createDate;
   bool? isBikeVerified;
 
@@ -39,6 +50,7 @@ class User {
       this.userFullname,
       this.avatar,
       this.gender,
+      this.birthDate,
       this.userStatus,
       this.lastLoginDevice,
       this.lastLoginTime,
@@ -47,10 +59,15 @@ class User {
       this.isBikeVerified);
 
   User.empty() {
+    this.userId = -1;
     this.avatar = '';
+    this.userEmail = '';
     this.userFullname = '';
     this.userPhoneNumber = '';
     this.gender = -1;
+    this.birthDate = '';
+    this.userStar = 0.0;
+    this.totalPoint = 0;
   }
 
   /// A necessary factory constructor for creating a new User instance

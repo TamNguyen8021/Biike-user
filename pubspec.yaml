@@ -41,6 +41,8 @@ dependencies:
   flutter_hooks: ^0.18.0
   # open link
   url_launcher: ^6.0.11
+  intl: ^0.17.0
+  flutter_screenutil: ^5.0.0+2
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,11 +1,6 @@
-import 'package:bikes_user/app/controllers/address_book_controller.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/controllers/ban_list_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/add_address_book_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/cards/address_book_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/ban_list_card.dart';
-import 'package:bikes_user/app/ui/android/widgets/lists/list_address_books.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_ban.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +11,7 @@ class BanListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final banListController = Get.find<BanListController>();
+    // final banListController = Get.find<BanListController>();
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -29,21 +24,19 @@ class BanListPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-            children: <Widget>[
-              Container(
-                  height: MediaQuery.of(context).size.height,
-                  padding: const EdgeInsets.all(22.0),
-                  child: ListBan(
-                    banList: [
-                      BanListCard(name: 'Võ Thị Kim Thuỳ'),
-                      BanListCard(name: 'Võ Thị Kim Thuỳ'),
-                      BanListCard(name: 'Võ Thị Kim Thuỳ'),
-                    ],
-                    itemPadding: 10.0,
-                  )
-              ),
-            ]),
+        child: Column(children: <Widget>[
+          Container(
+              height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.all(22.0),
+              child: ListBan(
+                banList: [
+                  BanListCard(name: 'Võ Thị Kim Thuỳ'),
+                  BanListCard(name: 'Võ Thị Kim Thuỳ'),
+                  BanListCard(name: 'Võ Thị Kim Thuỳ'),
+                ],
+                itemPadding: 10.0,
+              )),
+        ]),
       ),
     );
   }

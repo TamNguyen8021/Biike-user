@@ -5,6 +5,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 'manage_bike' screen
 class ManageBikePage extends StatelessWidget {
@@ -80,7 +81,7 @@ class ManageBikePage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6!
-                                .copyWith(fontSize: 20),
+                                .copyWith(fontSize: 20.sp),
                           ),
                         ),
                         if (isBikeVerified) ...[
