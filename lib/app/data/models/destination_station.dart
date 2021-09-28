@@ -7,7 +7,7 @@ part 'destination_station.g.dart';
 
 // An annotation for the code generator to know that this class needs the
 // JSON serialization logic to be generated.
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class DestinationStation {
   final int? stationId;
   final int? areaId;

@@ -45,6 +45,7 @@ class ListHistoryTrips extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.only(bottom: itemPadding),
               child: HistoryTripCard(
+                  userId: listHistoryTrips.elementAt(index).userId,
                   avatarUrl: listHistoryTrips.elementAt(index).avatarUrl,
                   name: listHistoryTrips.elementAt(index).name,
                   time: listHistoryTrips.elementAt(index).time,

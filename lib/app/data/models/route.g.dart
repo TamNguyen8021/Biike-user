@@ -8,18 +8,18 @@ part of 'route.dart';
 
 Route _$RouteFromJson(Map<String, dynamic> json) {
   return Route(
-    json['route_id'] as int,
-    json['starting_point_id'] as int,
-    json['destination_id'] as int,
-    json['default_point'] as int,
-    json['is_route_deleted'] as bool,
+    json['routeId'] as int,
+    json['startingPointId'] as int,
+    json['destinationId'] as int,
+    json['defaultPoint'] as int,
+    json['isRouteDeleted'] as bool,
   );
 }
 
 Map<String, dynamic> _$RouteToJson(Route instance) => <String, dynamic>{
-      'route_id': instance.routeId,
-      'starting_point_id': instance.startingPointId,
-      'destination_id': instance.destinationId,
-      'default_point': instance.defaultPoint,
-      'is_route_deleted': instance.isRouteDeleted,
+      'routeId': instance.routeId,
+      'startingPointId': instance.startingPointId,
+      'destinationId': instance.destinationId,
+      'defaultPoint': instance.defaultPoint,
+      'isRouteDeleted': instance.isRouteDeleted,
     };

@@ -4,6 +4,7 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// This widget is the bottom navigation bar on home page
 class BottomTabBar extends StatelessWidget {
@@ -37,7 +38,7 @@ class BottomTabBar extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 5.0),
                         child: Text(CustomStrings.kHome.tr,
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 10.sp,
                             )),
                       )),
                     ],
@@ -63,7 +64,7 @@ class BottomTabBar extends StatelessWidget {
                                 ? CustomStrings.kKeerActivities.tr
                                 : CustomStrings.kBikerActivities.tr,
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 10.sp,
                             ),
                           ),
                         ),

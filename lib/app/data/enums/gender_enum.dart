@@ -16,4 +16,15 @@ extension GenderExtension on Gender {
         return '';
     }
   }
+
+  Gender getGenderEnum(int gender) {
+    switch (gender) {
+      case 1:
+        return Gender.male;
+      case 2:
+        return Gender.female;
+      default:
+        return Gender.other;
+    }
+  }
 }

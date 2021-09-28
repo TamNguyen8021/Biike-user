@@ -52,6 +52,11 @@ class CustomStrings {
   static const String kUpcomingTrips = 'kUpcomingTrips';
   static const String kFinding = 'kFinding';
   static const String kCreateTrip = 'kCreateTrip';
+  static const String kConfirmArrivalTitle = 'kConfirmArrivalTitle';
+  static const String kConfirmArrivalMessageForKeer =
+      'kConfirmArrivalMessageForKeer';
+  static const String kConfirmArrivalMessageForBiker =
+      'kConfirmArrivalMessageForBiker';
 
   // 'biker_home' screen
   static const String kBikerReadyReminder = 'kBikerReadyReminder';
@@ -61,6 +66,9 @@ class CustomStrings {
   static const String kSelectDestinationStation = 'kSelectDestinationStation';
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
+
+  // 'activity' screen
+  static const String kNoUpcomingTrips = 'kNoUpcomingTrips';
 
   // 'trip_history' screen
   static const String kHistory = 'kHistory';
@@ -96,6 +104,8 @@ class CustomStrings {
   static const String kFemale = 'kFemale';
   static const String kOthers = 'kOthers';
   static const String kSave = 'kSave';
+  static const String kBirthDate = 'kBirthDate';
+  static const String kEditProfileSuccess = 'kEditProfileSuccess';
 
   // 'biker_profile' screen
   static const String kManageBike = 'kManageBike';

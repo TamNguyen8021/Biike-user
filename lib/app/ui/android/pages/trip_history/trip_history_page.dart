@@ -5,8 +5,10 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// The trip history screen
 class TripHistoryPage extends StatelessWidget {
@@ -14,10 +16,11 @@ class TripHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tripHistoryController = Get.find<TripHistoryController>();
+    final _tripHistoryController = Get.find<TripHistoryController>();
 
     return FutureBuilder(
-        future: tripHistoryController.getHistoryTrips(context: context),
+        future: _tripHistoryController.getHistoryTrips(
+            context: context, userId: Biike.userId, role: 1),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return DefaultTabController(
             length: 2,
@@ -61,7 +64,7 @@ class TripHistoryPage extends StatelessWidget {
                             child: Text(
                               CustomStrings.kKeerHistory.tr,
                               style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
+                                  fontSize: 10.sp, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -71,22 +74,24 @@ class TripHistoryPage extends StatelessWidget {
                             child: Text(
                               CustomStrings.kBikerHistory.tr,
                               style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
+                                  fontSize: 10.sp, fontWeight: FontWeight.bold),
                             ),
                           ),
                         )
                       ],
-                      onTap: (int index) {
+                      onTap: (int index) async {
                         switch (index) {
                           case 0:
-                            tripHistoryController.role.value = Role.keer;
-                            tripHistoryController.getHistoryTrips(
-                                context: context);
+                            await _tripHistoryController.getHistoryTrips(
+                                context: context,
+                                userId: Biike.userId,
+                                role: 1);
                             break;
                           case 1:
-                            tripHistoryController.role.value = Role.biker;
-                            tripHistoryController.getHistoryTrips(
-                                context: context);
+                            await _tripHistoryController.getHistoryTrips(
+                                context: context,
+                                userId: Biike.userId,
+                                role: 2);
                             break;
                           default:
                         }
@@ -105,16 +110,16 @@ class TripHistoryPage extends StatelessWidget {
                             child: TabBarView(children: <Widget>[
                               Obx(
                                 () => ListHistoryTrips(
-                                    role: tripHistoryController.role.value,
-                                    listHistoryTrips: tripHistoryController
+                                    role: Role.keer,
+                                    listHistoryTrips: _tripHistoryController
                                         .historyTrips
                                         .toList(),
                                     itemPadding: 16.0),
                               ),
                               Obx(
                                 () => ListHistoryTrips(
-                                    role: tripHistoryController.role.value,
-                                    listHistoryTrips: tripHistoryController
+                                    role: Role.biker,
+                                    listHistoryTrips: _tripHistoryController
                                         .historyTrips
                                         .toList(),
                                     itemPadding: 16.0),

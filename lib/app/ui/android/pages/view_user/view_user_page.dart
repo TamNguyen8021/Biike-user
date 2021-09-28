@@ -10,12 +10,16 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 'view_user' page
 class ViewUserPage extends StatelessWidget {
-  const ViewUserPage({Key? key}) : super(key: key);
+  final userId;
+
+  const ViewUserPage({Key? key, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,7 @@ class ViewUserPage extends StatelessWidget {
 
     final contactAndReportButtons = <Widget>[
       CustomElevatedIconButton(
+        width: 100,
         onPressedFunc: () => CommonFunctions()
             .makingPhoneCall(phoneNo: viewUserController.user.userPhoneNumber),
         text: CustomStrings.kCall.tr,
@@ -35,6 +40,7 @@ class ViewUserPage extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         child: CustomElevatedIconButton(
+          width: 100,
           onPressedFunc: () => CommonFunctions()
               .makingSms(phoneNo: viewUserController.user.userPhoneNumber),
           text: CustomStrings.kMessage.tr,
@@ -45,6 +51,7 @@ class ViewUserPage extends StatelessWidget {
         ),
       ),
       CustomElevatedIconButton(
+        width: 100,
         onPressedFunc: () =>
             viewUserController.showReportDialog(context: context),
         text: CustomStrings.kReport.tr,
@@ -56,7 +63,8 @@ class ViewUserPage extends StatelessWidget {
     ];
 
     return FutureBuilder(
-        future: viewUserController.getUserInfo(context: context),
+        future: viewUserController.getPartnerProfile(
+            context: context, partnerId: userId),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             // viewUserController.getUserHistoryTrips(context: context);
@@ -98,15 +106,36 @@ class ViewUserPage extends StatelessWidget {
                                     child: Text(
                                         viewUserController.user.userFullname,
                                         style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 18.sp,
                                             color: CustomColors.kDarkGray,
                                             fontWeight: FontWeight.bold)),
                                   ),
-                                  Text(
-                                    gender.getGenderText(
-                                        viewUserController.user.gender),
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        gender.getGenderText(
+                                            viewUserController.user.gender),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                      if (DateTime.parse(viewUserController
+                                                  .user.birthDate)
+                                              .year !=
+                                          DateTime.now().year) ...[
+                                        Text(
+                                          ' | ' +
+                                              DateTime.parse(viewUserController
+                                                      .user.birthDate)
+                                                  .year
+                                                  .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ]
+                                    ],
                                   ),
                                   ProfileTextField(
                                       isReadOnly: true,
@@ -141,8 +170,11 @@ class ViewUserPage extends StatelessWidget {
                             ),
                             Divider(),
                             FutureBuilder(
-                                future: viewUserController.getUserHistoryTrips(
-                                    context: context),
+                                future: viewUserController
+                                    .getHistoryTripsWithPartner(
+                                        context: context,
+                                        userId: Biike.userId,
+                                        partnerId: userId),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<dynamic> snapshot) {
                                   if (snapshot.connectionState ==

@@ -3,9 +3,15 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserRatingAndScore extends StatelessWidget {
-  const UserRatingAndScore({Key? key}) : super(key: key);
+  final double rating;
+  final int score;
+
+  const UserRatingAndScore(
+      {Key? key, required this.rating, required this.score})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +30,8 @@ class UserRatingAndScore extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  '4.5',
-                  style: TextStyle(fontSize: 11, color: Colors.white),
+                  rating.toString(),
+                  style: TextStyle(fontSize: 11.sp, color: Colors.white),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2.0),
@@ -46,8 +52,8 @@ class UserRatingAndScore extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 4.0),
                   child: Text(
-                    '1000',
-                    style: TextStyle(fontSize: 11, color: Colors.white),
+                    score.toString(),
+                    style: TextStyle(fontSize: 11.sp, color: Colors.white),
                   ),
                 ),
                 SvgPicture.asset(
