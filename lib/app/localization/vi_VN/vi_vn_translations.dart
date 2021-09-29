@@ -264,5 +264,14 @@ final Map<String, String> vi = {
 
   // 'ban_list' screen
   'kBanList': 'Danh sách hạn chế',
-  'kUnBlock': 'Bỏ chặn'
+  'kUnBlock': 'Bỏ chặn',
+
+  // 'first_save_address' screen
+  'kSaveAddressFirstDescription' : 'Lưu nơi ở, nơi làm  việc,\nnơi học tập',
+  'kLater' : 'Để sau',
+  'kSaveAddressSecondDescription' : 'Để Biké có thể dễ dàng kết nối\nnhững hàng trình',
+
+  // 'search_address' screen
+  'kSearchAddress' : 'Tìm địa chỉ',
+  'kEnterAddress' : 'Nhập địa chỉ',
 };

@@ -247,4 +247,13 @@ class CustomStrings {
   // 'ban_list' screen
   static const String kBanList = 'kBanList';
   static const String kUnBlock = 'kUnBlock';
+
+  // 'first_save_address' screen
+  static const String kSaveAddressFirstDescription = 'kSaveAddressFirstDescription';
+  static const String kLater = 'kLater';
+  static const String kSaveAddressSecondDescription = 'kSaveAddressSecondDescription';
+
+  // 'search_address' screen
+  static const String kSearchAddress = 'kSearchAddress';
+  static const String kEnterAddress = 'kEnterAddress';
 }

@@ -262,5 +262,14 @@ final Map<String, String> en = {
 
   // 'ban_list' screen
   'kBanList': 'Ban List',
-  'kUnBlock': 'Unblock'
+  'kUnBlock': 'Unblock',
+
+  // 'first_save_address' screen
+  'kSaveAddressFirstDescription' : 'Save your home, office or school address',
+  'kLater' : 'Later',
+  'kSaveAddressSecondDescription' : 'Biké can connect your trips easier',
+
+  // 'search_address' screen
+  'kSearchAddress' : 'Search address',
+  'kEnterAddress' : 'Enter address',
 };

@@ -185,7 +185,7 @@ class ChooseModePage extends StatelessWidget {
             NextPageButton(
               onPressedFunc: () {
                 if (Biike.role.value != Role.none) {
-                  Get.offAllNamed(CommonRoutes.HOME);
+                  Get.toNamed(CommonRoutes.FIRST_SAVE_ADDRESS);
                 } else {
                   Get.defaultDialog(
                       title: 'Nhắc nhở',
