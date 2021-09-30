@@ -202,7 +202,7 @@ class Home extends StatelessWidget {
                                   child: ListUpcomingTrips(
                                     listUpcomingTrips:
                                         homeController.upcomingTrips.sublist(1),
-                                    itemPadding: 16.0, isTodayFirstActivity: true,
+                                    itemPadding: 16.0,
                                   ),
                                 ),
                               ]

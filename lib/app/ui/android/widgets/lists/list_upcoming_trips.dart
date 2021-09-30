@@ -11,7 +11,7 @@ class ListUpcomingTrips extends StatelessWidget {
   const ListUpcomingTrips({
     Key? key,
     required this.listUpcomingTrips,
-    required this.itemPadding, required bool isTodayFirstActivity,
+    required this.itemPadding, 
   }) : super(key: key);
 
   @override

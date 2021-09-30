@@ -97,7 +97,6 @@ class CustomerHomeFull extends StatelessWidget {
                     ListUpcomingTrips(
                       listUpcomingTrips: [1],
                       itemPadding: 16.0,
-                      isTodayFirstActivity: false,
                     ),
                     AdContainer(),
                     Padding(
@@ -110,7 +109,6 @@ class CustomerHomeFull extends StatelessWidget {
                     ListUpcomingTrips(
                       listUpcomingTrips: [1, 2, 3, 4, 5],
                       itemPadding: 12.0,
-                      isTodayFirstActivity: false,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 70.0),
