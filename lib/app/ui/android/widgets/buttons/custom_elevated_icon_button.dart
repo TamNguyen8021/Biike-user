@@ -2,7 +2,7 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedIconButton extends StatelessWidget {
-  final Function() onPressedFunc;
+  final Function()? onPressedFunc;
   final double? width;
   final IconData? icon;
   final String text;

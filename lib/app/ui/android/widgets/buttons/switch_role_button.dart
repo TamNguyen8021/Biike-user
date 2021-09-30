@@ -4,6 +4,7 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final String route;
@@ -54,7 +55,7 @@ class SwitchRoleButton extends StatelessWidget {
                   ? CustomStrings.kKeerMode.tr
                   : CustomStrings.kBikerMode.tr,
               style: TextStyle(
-                  color: _modeButtonForegroundColor.value, fontSize: 10),
+                  color: _modeButtonForegroundColor.value, fontSize: 10.sp),
             ),
           ),
           style: ElevatedButton.styleFrom(

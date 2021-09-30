@@ -8,36 +8,36 @@ part of 'trip.dart';
 
 Trip _$TripFromJson(Map<String, dynamic> json) {
   return Trip(
-    json['trip_id'] as int?,
-    json['keer_id'] as int?,
-    json['biker_id'] as int?,
-    json['route_id'] as int?,
-    DateTime.parse(json['time_book'] as String),
-    json['time_pick_up'] == null
+    json['tripId'] as int,
+    json['keerId'] as int?,
+    json['bikerId'] as int?,
+    json['routeId'] as int?,
+    DateTime.parse(json['timeBook'] as String),
+    json['timePickUp'] == null
         ? null
-        : DateTime.parse(json['time_pick_up'] as String),
-    json['time_finished'] == null
+        : DateTime.parse(json['timePickUp'] as String),
+    json['timeFinished'] == null
         ? null
-        : DateTime.parse(json['time_finished'] as String),
-    json['trip_status'] as int?,
-    json['number_plate'] as String?,
-    json['is_schedule'] as bool?,
-    json['cancel_person_id'] as int?,
-    json['cancel_reason'] as String?,
+        : DateTime.parse(json['timeFinished'] as String),
+    json['tripStatus'] as int?,
+    json['numberPlate'] as String?,
+    json['isSchedule'] as bool?,
+    json['cancelPersonId'] as int?,
+    json['cancelReason'] as String?,
   );
 }
 
 Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
-      'trip_id': instance.tripId,
-      'keer_id': instance.keerId,
-      'biker_id': instance.bikerId,
-      'route_id': instance.routeId,
-      'time_book': instance.timeBook.toIso8601String(),
-      'time_pick_up': instance.timePickUp?.toIso8601String(),
-      'time_finished': instance.timeFinished?.toIso8601String(),
-      'trip_status': instance.tripStatus,
-      'number_plate': instance.numberPlate,
-      'is_schedule': instance.isSchedule,
-      'cancel_person_id': instance.cancelPersonId,
-      'cancel_reason': instance.cancelReason,
+      'tripId': instance.tripId,
+      'keerId': instance.keerId,
+      'bikerId': instance.bikerId,
+      'routeId': instance.routeId,
+      'timeBook': instance.timeBook.toIso8601String(),
+      'timePickUp': instance.timePickUp?.toIso8601String(),
+      'timeFinished': instance.timeFinished?.toIso8601String(),
+      'tripStatus': instance.tripStatus,
+      'numberPlate': instance.numberPlate,
+      'isSchedule': instance.isSchedule,
+      'cancelPersonId': instance.cancelPersonId,
+      'cancelReason': instance.cancelReason,
     };

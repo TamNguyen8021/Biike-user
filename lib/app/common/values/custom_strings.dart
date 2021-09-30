@@ -52,6 +52,11 @@ class CustomStrings {
   static const String kUpcomingTrips = 'kUpcomingTrips';
   static const String kFinding = 'kFinding';
   static const String kCreateTrip = 'kCreateTrip';
+  static const String kConfirmArrivalTitle = 'kConfirmArrivalTitle';
+  static const String kConfirmArrivalMessageForKeer =
+      'kConfirmArrivalMessageForKeer';
+  static const String kConfirmArrivalMessageForBiker =
+      'kConfirmArrivalMessageForBiker';
 
   // 'biker_home' screen
   static const String kBikerReadyReminder = 'kBikerReadyReminder';
@@ -61,6 +66,9 @@ class CustomStrings {
   static const String kSelectDestinationStation = 'kSelectDestinationStation';
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
+
+  // 'activity' screen
+  static const String kNoUpcomingTrips = 'kNoUpcomingTrips';
 
   // 'trip_history' screen
   static const String kHistory = 'kHistory';
@@ -96,6 +104,8 @@ class CustomStrings {
   static const String kFemale = 'kFemale';
   static const String kOthers = 'kOthers';
   static const String kSave = 'kSave';
+  static const String kBirthDate = 'kBirthDate';
+  static const String kEditProfileSuccess = 'kEditProfileSuccess';
 
   // 'biker_profile' screen
   static const String kManageBike = 'kManageBike';
@@ -200,4 +210,53 @@ class CustomStrings {
 
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';
+
+  // 'app_setting' screen
+  static const String kAppSetting = 'kAppSetting';
+  static const String kAccountSecurity = 'kAccountSecurity';
+  static const String kChangePassword = 'kChangePassword';
+  static const String kLoginByFingerprint = 'kLoginByFingerprint';
+  static const String kLanguage = 'kLanguage';
+  static const String kOther = 'kOther';
+  static const String kFollowOnFacebook = 'kFollowOnFacebook';
+  static const String kWebsite = 'kWebsite';
+  static const String kTermOfUse = 'kTermOfUse';
+  static const String kPrivacyPolicy = 'kPrivacyPolicy';
+  static const String kDevelopBy = 'kDevelopBy';
+  static const String kDevelopAt = 'kDevelopAt';
+
+  // 'address_book' screen
+  static const String kAddressBook = 'kAddressBook';
+
+  // 'edit_address_book' screen
+  static const String kEditAddressBook = 'kEditAddressBook';
+
+  // 'add_address_book' screen
+  static const String kAddAddressBook = 'kAddAddressBook';
+  static const String kName = 'kName';
+  static const String kAddress = 'kAddress';
+  static const String kNote = 'kNote';
+  static const String kEnterName = 'kEnterName';
+  static const String kSelectAddress = 'kSelectAddress';
+  static const String kEnterNote = 'kEnterNote';
+
+  // 'sos_number' screen
+  static const String kSOSNumber = 'kSOSNumber';
+  static const String kSOSNumberFirstDescription = 'kSOSNumberFirstDescription';
+  static const String kSOSNumberSecondDescription = 'kSOSNumberSecondDescription';
+  static const String kNeedSOS = 'kNeedSOS';
+  static const String kSOSNumberThirdDescription = 'kSOSNumberThirdDescription';
+  static const String kSOSReachLimit = 'kSOSReachLimit';
+
+  // 'add_sos_number' screen
+  static const String kAddSOSNumber = 'kAddSOSNumber';
+  static const String kNumberPhone = 'kNumberPhone';
+  static const String kEnterNumberPhone = 'kEnterNumberPhone';
+
+  // 'edit_sos_number' screen
+  static const String kEditSOSNumber = 'kEditSOSNumber';
+
+  // 'ban_list' screen
+  static const String kBanList = 'kBanList';
+  static const String kUnBlock = 'kUnBlock';
 }

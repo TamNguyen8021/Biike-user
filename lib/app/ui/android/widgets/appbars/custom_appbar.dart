@@ -50,7 +50,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (hasLeading) {
       _leadingWidget = IconButton(
         onPressed: () {
-          if (ModalRoute.of(context)!.settings.name.toString() == CommonRoutes.PROFILE) {
+          if (ModalRoute.of(context)!.settings.name.toString() ==
+              CommonRoutes.PROFILE) {
             Get.offAllNamed(CommonRoutes.HOME);
           } else {
             Get.back();

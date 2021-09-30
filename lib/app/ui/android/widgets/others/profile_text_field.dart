@@ -6,20 +6,23 @@ class ProfileTextField extends StatelessWidget {
   final bool isEditProfile;
   final String initialValue;
   final String labelText;
+  final Function(String)? onChangedFunc;
 
-  const ProfileTextField(
-      {Key? key,
-      required this.isReadOnly,
-      required this.isEditProfile,
-      required this.initialValue,
-      required this.labelText})
-      : super(key: key);
+  const ProfileTextField({
+    Key? key,
+    required this.isReadOnly,
+    required this.isEditProfile,
+    required this.initialValue,
+    required this.labelText,
+    this.onChangedFunc,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: isReadOnly,
       initialValue: initialValue,
+      onChanged: onChangedFunc,
       style: isReadOnly && isEditProfile
           ? Theme.of(context)
               .textTheme

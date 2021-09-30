@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// The '004.2_verify_phone' screen
 class VerifyPhonePage extends StatelessWidget {
@@ -37,11 +38,11 @@ class VerifyPhonePage extends StatelessWidget {
                 textStyle: Theme.of(context)
                     .textTheme
                     .headline1!
-                    .copyWith(fontSize: 40),
+                    .copyWith(fontSize: 40.sp),
                 pastedTextStyle: Theme.of(context)
                     .textTheme
                     .headline1!
-                    .copyWith(fontSize: 40),
+                    .copyWith(fontSize: 40.sp),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.underline,
                   activeColor: CustomColors.kLightGray,

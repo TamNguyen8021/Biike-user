@@ -5,9 +5,11 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/list_vouchers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+/// The screen to view list of vouchers for redeem
 class ExchangeVoucherPage extends StatelessWidget {
   ExchangeVoucherPage({Key? key}) : super(key: key);
 
@@ -42,7 +44,7 @@ class ExchangeVoucherPage extends StatelessWidget {
               child: Text.rich(TextSpan(children: <InlineSpan>[
                 TextSpan(
                     text: '1000',
-                    style: TextStyle(fontSize: 11, color: Colors.white)),
+                    style: TextStyle(fontSize: 11.sp, color: Colors.white)),
                 WidgetSpan(
                     child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.0),

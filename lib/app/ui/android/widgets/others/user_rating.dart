@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserRating extends StatelessWidget {
   final String score;
@@ -23,7 +24,8 @@ class UserRating extends StatelessWidget {
           ]),
       child: Text.rich(TextSpan(children: <InlineSpan>[
         TextSpan(
-            text: score, style: TextStyle(fontSize: 11, color: Colors.white)),
+            text: score,
+            style: TextStyle(fontSize: 11.sp, color: Colors.white)),
         WidgetSpan(
             child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 2.0),

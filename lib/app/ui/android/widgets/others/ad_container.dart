@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/data/models/banner/banner.dart';
+import 'package:bikes_user/app/ui/android/pages/home/banner/banner.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
