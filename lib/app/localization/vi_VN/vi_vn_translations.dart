@@ -216,6 +216,8 @@ final Map<String, String> vi = {
   'kBrand' : 'Cửa hàng: ',
   'kHsd' : 'HSD: ',
   'kYourCode' : 'Mã của bạn',
+  'kExchangeVoucherSuccess' : 'Đổi voucher thành công!',
+  'kViewAVoucher' : 'Xem',
 
   // Error message
   'kError': 'Thông báo lỗi',

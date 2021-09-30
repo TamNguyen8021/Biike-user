@@ -143,12 +143,14 @@ class AppPages {
       page: () => YourVoucherDetailPage(),
     ),
     GetPage(
-      name: CommonRoutes.YOUR_VOUCHERS,
-      page: () => YourVoucherPage(),
-      binding: VoucherBinding(),
         name: CommonRoutes.APP_SETTING,
         page: () => AppSettingPage(),
         binding: AppSettingBinding()
+    ),
+    GetPage(
+      name: CommonRoutes.YOUR_VOUCHERS,
+      page: () => YourVoucherPage(),
+      binding: VoucherBinding(),
     ),
     GetPage(
         name: CommonRoutes.ADDRESS_BOOK,

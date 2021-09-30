@@ -5,7 +5,7 @@ class VoucherController extends GetxController {
   RxList<dynamic> _voucherList = [].obs;
 
   List<dynamic> getVoucherList() {
-    _voucherList.clear();
+    // _voucherList.clear();
     VoucherProvider provider = new VoucherProvider();
     provider.getVoucherList()
         .then((list) =>
@@ -15,7 +15,7 @@ class VoucherController extends GetxController {
   }
 
   List<dynamic> getYourVoucherList() {
-    _voucherList.clear();
+    // _voucherList.clear();
     VoucherProvider provider = new VoucherProvider();
     provider.getYourVoucherList()
         .then((list) =>

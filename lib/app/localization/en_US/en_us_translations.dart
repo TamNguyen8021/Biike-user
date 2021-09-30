@@ -214,6 +214,8 @@ final Map<String, String> en = {
   'kBrand' : 'Brand: ',
   'kHsd' : 'Until: ',
   'kYourCode' : 'Your code',
+  'kExchangeVoucherSuccess' : 'Exchange voucher successful!',
+  'kViewAVoucher' : 'View',
 
   // Error message
   'kError': 'Error!',

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -13,7 +14,8 @@ import 'package:get/get.dart';
 class ExchangeVoucherPage extends StatelessWidget {
   ExchangeVoucherPage({Key? key}) : super(key: key);
 
-  final voucherController = Get.find<VoucherController>();
+  final _voucherController = Get.find<VoucherController>();
+  final _profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class ExchangeVoucherPage extends StatelessWidget {
                   ]),
               child: Text.rich(TextSpan(children: <InlineSpan>[
                 TextSpan(
-                    text: '1000',
+                    text: _profileController.user.totalPoint.toString(),
                     style: TextStyle(fontSize: 11.sp, color: Colors.white)),
                 WidgetSpan(
                     child: Padding(
@@ -54,7 +56,7 @@ class ExchangeVoucherPage extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 2.0),
                   child: SvgPicture.asset(
                     'assets/images/crown.svg',
-                    height: 10,
+                    height: 10.sp,
                     color: Colors.white,
                   ),
                 ))
@@ -100,7 +102,7 @@ class ExchangeVoucherPage extends StatelessWidget {
                   const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
               child:
                   Obx(() =>
-                    ListVouchers(listVouchers: voucherController.getVoucherList()),
+                    ListVouchers(listVouchers: _voucherController.getVoucherList()),
                   ),
             ),
           ],
