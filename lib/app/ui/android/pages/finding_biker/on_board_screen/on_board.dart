@@ -1,8 +1,9 @@
+
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/models/on_board/on_board.dart';
 import 'package:bikes_user/resource/images.dart';
-import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -26,11 +27,11 @@ class OnBoardScreen extends HookWidget {
     OnBoardItems(
         des: CustomStrings.kSecondDescription,
         pathImage: ImageResource.roundedOnBoard,
-        title: CustomStrings.kConnectSociaty),
+        title: CustomStrings.kConnectSociety),
     OnBoardItems(
       des: CustomStrings.kThirdDescription,
       pathImage: ImageResource.herbOnBoard,
-      title: CustomStrings.kProtectEnviroment,
+      title: CustomStrings.kProtectEnvironment,
     ),
   ];
 

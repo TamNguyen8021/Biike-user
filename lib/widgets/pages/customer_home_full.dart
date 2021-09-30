@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dart';
@@ -5,9 +6,9 @@ import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart'
 import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 /// The 'ke_er_home' screen widget
 class CustomerHomeFull extends StatelessWidget {
@@ -32,11 +33,11 @@ class CustomerHomeFull extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            CustomStrings.kCustomerReadyReminder,
+                            CustomStrings.kKeerReadyReminder,
                             style: TextStyle(color: CustomColors.kDarkGray),
                           ),
                           Text(
-                            '15' + CustomStrings.kReminderTime,
+                            '15' + CustomStrings.kReminderMinute,
                             style: TextStyle(
                                 color: CustomColors.kBlue,
                                 fontWeight: FontWeight.bold,
@@ -102,7 +103,7 @@ class CustomerHomeFull extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        CustomStrings.kOtherDays,
+                        CustomStrings.kOther.tr,
                         style: TextStyle(color: CustomColors.kDarkGray),
                       ),
                     ),
