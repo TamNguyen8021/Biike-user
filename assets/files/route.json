@@ -1,0 +1,11 @@
+{
+  "route": [
+    {
+      "route_id": 1,
+      "starting_point_id": 1,
+      "destination_id": 2,
+      "default_price": null,
+      "is_deleted": false
+    }
+  ]
+}

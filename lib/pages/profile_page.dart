@@ -1,15 +1,15 @@
+import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
+import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/profile_buttons.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/user_rating_and_score.dart';
+import 'package:bikes_user/app/ui/android/widgets/painters/half_oval_painter.dart';
+import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
-import 'package:bikes_user/pages/login_page.dart';
-import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/utils/enums.dart';
-import 'package:bikes_user/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/widgets/buttons/custom_elevated_icon_button.dart';
-import 'package:bikes_user/widgets/buttons/profile_buttons.dart';
-import 'package:bikes_user/widgets/buttons/switch_role_button.dart';
-import 'package:bikes_user/widgets/others/profile_text_field.dart';
-import 'package:bikes_user/widgets/others/user_rating_and_score.dart';
-import 'package:bikes_user/widgets/painters/half_oval_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,13 +25,13 @@ class ProfilePage extends StatelessWidget {
         hasShape: false,
         appBar: AppBar(),
         hasLeading: true,
-        role: Biike.role.value,
+        // role: Biike.role.value,
         actionWidgets: <Widget>[
           Padding(
             padding:
                 const EdgeInsets.only(right: 16.0, top: 19.0, bottom: 19.0),
             child: SwitchRoleButton(
-              route: '/profile',
+              route: '/profile', isOnProfilePage: true,
             ),
           ),
         ],
@@ -72,7 +72,7 @@ class ProfilePage extends StatelessWidget {
                           style: Theme.of(context).textTheme.headline2,
                         ),
                       ),
-                      UserRatingAndScore(),
+                      UserRatingAndScore(rating: 10, score: 5,),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: ProfileTextField(
@@ -95,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                           () => Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              if (Biike.role.value == Role.Driver) ...[
+                              if (Biike.role.value == Role.biker) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(right: 4.0),
                                   child: CustomElevatedIconButton(

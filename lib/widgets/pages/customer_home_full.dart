@@ -1,12 +1,12 @@
-import 'package:bikes_user/utils/custom_colors.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
+import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
+import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
-import 'package:bikes_user/widgets/buttons/contact_buttons.dart';
-import 'package:bikes_user/widgets/buttons/create_trip_button.dart';
-import 'package:bikes_user/widgets/buttons/confirm_arrival_button.dart';
-import 'package:bikes_user/widgets/lists/list_upcoming_trips.dart';
-import 'package:bikes_user/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/widgets/others/ad_container.dart';
-import 'package:bikes_user/widgets/others/top_biker.dart';
 import 'package:flutter/material.dart';
 
 /// The 'ke_er_home' screen widget
@@ -56,7 +56,11 @@ class CustomerHomeFull extends StatelessWidget {
                           time: '06:45',
                           date: CustomStrings.kToday,
                           sourceStation: 'Đại học FPT TP.HCM',
-                          destinationStation: 'Chung cư SKY9'),
+                          destinationStation: 'Chung cư SKY9', 
+                          phoneNo: '', 
+                          tripId: 1,
+                          userId: 1,
+                          year: 2021,),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +68,7 @@ class CustomerHomeFull extends StatelessWidget {
                         ConfirmArrivalButton(
                           isOnHomeScreen: true,
                         ),
-                        ContactButtons()
+                        ContactButtons(phoneNo: '',)
                       ],
                     ),
                   ],
