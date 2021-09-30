@@ -1,4 +1,5 @@
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/pages/login_page.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
 import 'package:bikes_user/utils/enums.dart';
@@ -122,6 +123,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       ProfileButtons(),
+                      // button logout
                       Padding(
                         padding: const EdgeInsets.only(bottom: 24.0),
                         child: TextButton(
@@ -129,7 +131,9 @@ class ProfilePage extends StatelessWidget {
                             CustomStrings.kLogOut,
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.offAllNamed(LoginPage.routeName);
+                          },
                         ),
                       )
                     ],

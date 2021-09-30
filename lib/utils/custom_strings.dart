@@ -6,19 +6,19 @@ class CustomStrings {
   //'002.,.2,.3' screen
   static const String kSkip = "Bỏ qua>>";
   static const String kFree = "Hoàn toàn miễn phí";
-  static const String kFirstDescription = "Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì khi sử dụng app";
-  static const String kSecondDescription = "Biiké kết nối những người có chung hành trình, giúp tận dụng những chiếc yên xe vốn lãng phí";
-  static const String kThirdDescription = "Biiké giúp giảm thiểu lượng xe lưu thông, giảm kẹt xe, khói bụi và bảo vệ môi trường";
+  static const String kFirstDescription =
+      "Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì khi sử dụng app";
+  static const String kSecondDescription =
+      "Biiké kết nối những người có chung hành trình, giúp tận dụng những chiếc yên xe vốn lãng phí";
+  static const String kThirdDescription =
+      "Biiké giúp giảm thiểu lượng xe lưu thông, giảm kẹt xe, khói bụi và bảo vệ môi trường";
   static const String kConnectSociaty = "Kết nối cộng đồng";
   static const String kProtectEnviroment = "Bảo vệ môi trường";
   static const String kStartOnBoard = "Bắt đầu";
 
-
-
-
   // '003.1_login'
   static const String kLogoApp = "Biiké";
-  static const String kLoginButton = "Xác thực bằng email FPT";
+  static const String kLoginButton = "Xác thực bằng số điện thoại";
   static const String kConfirmTerm = "Bằng việc đăng ký, bạn đồng ý với";
   static const String kTerm = "Điều khoản dịch vụ và Chính sách bảo mật";
 
@@ -95,6 +95,7 @@ class CustomStrings {
   static const String kHelp = "Trợ giúp/Gọi đến Biiké";
   static const String kRateApp = "Đánh giá ứng dụng";
   static const String kPhoneNo = "Số điện thoại";
+  static const String kChangeLanguage = "Doi ngon ngu";
   static const String kEmail = "Email";
   static const String kLogOut = "Đăng xuất";
 

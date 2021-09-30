@@ -9,12 +9,12 @@ import 'package:bikes_user/pages/edit_profile/binding/edit_profile_binding.dart'
 import 'package:bikes_user/pages/edit_profile/view/edit_profile_page.dart';
 import 'package:bikes_user/pages/home/binding/home_binding.dart';
 import 'package:bikes_user/pages/home/view/home_page.dart';
+import 'package:bikes_user/pages/login/password.dart';
 import 'package:bikes_user/pages/profile_page.dart';
 import 'package:bikes_user/pages/finding_biker_fail_page.dart';
 import 'package:bikes_user/pages/finding_biker_page.dart';
 import 'package:bikes_user/pages/finding_biker_success_page.dart';
 import 'package:bikes_user/pages/get_trip_success_page.dart';
-import 'package:bikes_user/pages/input_name/binding/input_name_binding.dart';
 import 'package:bikes_user/pages/input_name/view/input_name_page.dart';
 import 'package:bikes_user/pages/input_phone/binding/input_phone_binding.dart';
 import 'package:bikes_user/pages/input_phone/view/input_phone_page.dart';
@@ -133,9 +133,15 @@ class Biike extends StatelessWidget {
             page: () => VerifyPhonePage(),
             binding: VerifyPhoneBinding()),
         GetPage(
-            name: '/inputName',
-            page: () => InputNamePage(),
-            binding: InputNameBinding()),
+          name: '/passwordScreen',
+          page: () => PasswordScreen(
+            nameUser: Get.arguments ?? '',
+          ),
+        ),
+        GetPage(
+          name: InputNamePage.routeName,
+          page: () => InputNamePage(),
+        ),
         GetPage(
             name: '/chooseMode',
             page: () => ChooseModePage(),

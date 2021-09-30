@@ -1,3 +1,4 @@
+import 'package:bikes_user/pages/input_name/view/input_name_page.dart';
 import 'package:bikes_user/pages/verify_phone/controller/verify_phone_controller.dart';
 import 'package:bikes_user/utils/custom_colors.dart';
 import 'package:bikes_user/utils/custom_strings.dart';
@@ -11,6 +12,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 /// The '004.2_verify_phone' screen
 class VerifyPhonePage extends StatelessWidget {
+  static const String routeName = '/verifyPhoneScreen';
   final verifyPhoneController = Get.find<VerifyPhoneController>();
 
   @override
@@ -89,7 +91,7 @@ class VerifyPhonePage extends StatelessWidget {
               hoverColor: CustomColors.kDarkGray,
             ),
             NextPageButton(
-              onPressedFunc: () => Get.offAllNamed('/inputName'),
+              onPressedFunc: () => Get.offAllNamed(InputNamePage.routeName),
               backgroundColor: CustomColors.kBlue,
               foregroundColor: Colors.white,
               hoverColor: CustomColors.kDarkGray,
