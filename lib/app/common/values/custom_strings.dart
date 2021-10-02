@@ -67,6 +67,13 @@ class CustomStrings {
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
 
+  // 'top_biker' screen
+  static const String kBikerRank = 'kBikerRank';
+  static const String kMonth = 'kMonth';
+  static const String kTopBikerInfoFirstContent = 'kTopBikerInfoFirstContent';
+  static const String kTopBikerInfoSecondContent = 'kTopBikerInfoSecondContent';
+  static const String kGotIt = 'kGotIt';
+
   // 'activity' screen
   static const String kNoUpcomingTrips = 'kNoUpcomingTrips';
 

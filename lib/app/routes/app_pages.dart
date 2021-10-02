@@ -15,6 +15,8 @@ import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
+import 'package:bikes_user/app/ui/android/pages/finding_biker/top_biker/binding/top_biker_binding.dart';
+import 'package:bikes_user/app/ui/android/pages/finding_biker/top_biker/view/top_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
 import 'package:bikes_user/app/ui/android/pages/exchange_voucher/exchange_voucher_page.dart';
@@ -84,6 +86,11 @@ class AppPages {
           ProfileBinding(),
         ]),
     GetPage(
+      name: CommonRoutes.TOP_BIKER,
+      page: () => TopBikerPage(),
+      binding: TopBikerBinding(),
+    ),
+    GetPage(
       name: CommonRoutes.PROFILE,
       page: () => ProfilePage(),
       binding: ProfileBinding(),
@@ -134,42 +141,34 @@ class AppPages {
     GetPage(
         name: CommonRoutes.APP_SETTING,
         page: () => AppSettingPage(),
-        binding: AppSettingBinding()
-    ),
+        binding: AppSettingBinding()),
     GetPage(
         name: CommonRoutes.ADDRESS_BOOK,
         page: () => AddressBookPage(),
-        binding: AddressBookBinding()
-    ),
+        binding: AddressBookBinding()),
     GetPage(
         name: CommonRoutes.EDIT_ADDRESS_BOOK,
         page: () => EditAddressBookPage(),
-        binding: EditAddressBookBinding()
-    ),
+        binding: EditAddressBookBinding()),
     GetPage(
         name: CommonRoutes.ADD_ADDRESS_BOOK,
         page: () => AddAddressBookPage(),
-        binding: AddAddressBookBinding()
-    ),
+        binding: AddAddressBookBinding()),
     GetPage(
         name: CommonRoutes.SOS_NUMBER,
         page: () => SOSNumberPage(),
-        binding: SOSNumberBinding()
-    ),
+        binding: SOSNumberBinding()),
     GetPage(
         name: CommonRoutes.ADD_SOS_NUMBER,
         page: () => AddSOSNumberPage(),
-        binding: AddSOSNumberBinding()
-    ),
+        binding: AddSOSNumberBinding()),
     GetPage(
         name: CommonRoutes.EDIT_SOS_NUMBER,
         page: () => EditSOSNumberPage(),
-        binding: EditSOSNumberBinding()
-    ),
+        binding: EditSOSNumberBinding()),
     GetPage(
         name: CommonRoutes.BAN_LIST,
         page: () => BanListPage(),
-        binding: BanListBinding()
-    ),
+        binding: BanListBinding()),
   ];
 }
