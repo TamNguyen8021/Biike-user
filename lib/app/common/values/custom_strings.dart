@@ -154,15 +154,17 @@ class CustomStrings {
   static const String kListVouchers = 'kListVouchers';
   static const String kTradedVouchers = 'kTradedVouchers';
 
-  // 'trip_detail' screen
+  // 'trip_details' screen
   static const String kTripDetails = 'kTripDetails';
   static const String kSupport = 'kSupport';
   static const String kNewTrip = 'kNewTrip';
-  static const String kTripHasBiker = 'kTripHasBiker';
   static const String kCancelTrip = 'kCancelTrip';
   static const String kConfirmArrival = 'kConfirmArrival';
   static const String kStartTrip = 'kStartTrip';
   static const String kCompleteTrip = 'kCompleteTrip';
+  static const String kTripHasFinished = 'kTripHasFinished';
+  static const String kYourFeedback = 'kYourFeedback';
+  static const String kPartnerFeedback = 'kPartnerFeedback';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';
@@ -231,7 +233,8 @@ class CustomStrings {
   // 'sos_number' screen
   static const String kSOSNumber = 'kSOSNumber';
   static const String kSOSNumberFirstDescription = 'kSOSNumberFirstDescription';
-  static const String kSOSNumberSecondDescription = 'kSOSNumberSecondDescription';
+  static const String kSOSNumberSecondDescription =
+      'kSOSNumberSecondDescription';
   static const String kNeedSOS = 'kNeedSOS';
   static const String kSOSNumberThirdDescription = 'kSOSNumberThirdDescription';
   static const String kSOSReachLimit = 'kSOSReachLimit';

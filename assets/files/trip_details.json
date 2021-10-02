@@ -1,12 +1,30 @@
 {
 	"tripId": 1,
 	"userId": 1,
+	"tripStatus": 4,
 	"createdTime": "2021-03-08T05:07:00.000",
 	"timeBook": "2021-03-08T06:35:00.000",
-	"timePickUp": "2021-03-08T06:07:00.000",
+	"timeFinished": "2021-03-08T06:07:00.000",
 	"startingPointName": "Chung cư SKY9",
 	"destinationName": "Chung cư SKY9",
-	"avatar": "https://ui-avatars.com/api/?name=Gia+Hung&background=random&rounded=true&size=128",
+	"avatar": "https://ui-avatars.com/api/?name=Gia+Hung&rounded=true&size=128",
 	"userFullname": "Giang Gia Hưng",
-	"userStar": 4.5
+	"userStar": 4.5,
+	"userPhoneNumber": "0123456789",
+	"feedbacks": [
+		{
+			"feedbackId": 1,
+			"userId": 1,
+			"tripStar": 4,
+			"feedbackContent": "Bạn thơm, đúng giờ.",
+			"criteria": ""
+		},
+		{
+			"feedbackId": 2,
+			"userId": 4,
+			"tripStar": 4,
+			"feedbackContent": "Bạn tuyệt lắm.",
+			"criteria": ""
+		}
+	]
 }

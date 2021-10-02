@@ -163,15 +163,17 @@ final Map<String, String> vi = {
   'kListVouchers': 'Danh mục đổi quà',
   'kTradedVouchers': 'Quà đã đổi',
 
-  // 'trip_detail' screen
+  // 'trip_details' screen
   'kTripDetails': 'Chi tiết chuyến đi',
   'kSupport': 'Trợ giúp',
   'kNewTrip': 'Đã tạo',
-  'kTripHasBiker': 'Đã được nhận chở',
   'kCancelTrip': 'Hủy chuyến',
   'kConfirmArrival': 'Đánh dấu đã đến',
   'kStartTrip': 'Bắt đầu chuyến đi',
   'kCompleteTrip': 'Hoàn thành',
+  'kTripHasFinished': 'Đã hoàn thành',
+  'kYourFeedback': 'Feedback từ bạn',
+  'kPartnerFeedback': 'Feedback từ người đồng hành',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',

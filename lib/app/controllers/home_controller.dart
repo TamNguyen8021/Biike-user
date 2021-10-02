@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/starting_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
@@ -5,6 +6,7 @@ import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/home_provider.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +17,7 @@ class HomeController extends GetxController {
 
   Rx<bool> isAppBarVisible = true.obs;
   List upcomingTrips = [];
+  final Role _role = Role.none;
 
   /// Show/hide appbar depends on [isVisible]
   ///
@@ -26,11 +29,10 @@ class HomeController extends GetxController {
   /// Load upcoming trips from API based on [userId] and [role].
   ///
   /// Author: TamNTT
-  Future<void> getUpcomingTrips(
-      {required BuildContext context, required userId, required role}) async {
+  Future<void> getUpcomingTrips({required BuildContext context}) async {
     upcomingTrips.clear();
-    List response =
-        await _homeProvider.getUpcomingTrips(userId: userId, role: role);
+    List response = await _homeProvider.getUpcomingTrips(
+        userId: Biike.userId, role: _role.getRoleNum(Biike.role.value));
     // print('response: ' + response.toString());
     // print('response length: ' + response.length.toString());
     for (int i = 0; i < response.length; i++) {
@@ -43,9 +45,9 @@ class HomeController extends GetxController {
       DestinationStation destinationStation =
           DestinationStation.fromJson(response[i]);
       // print(destinationStation.toJson());
-      String date = trip.timeBook.day.toString() +
+      String date = DateTime.parse(trip.timeBook).day.toString() +
           ' Th ' +
-          trip.timeBook.month.toString();
+          DateTime.parse(trip.timeBook).month.toString();
 
       Color backgroundColor = CustomColors.kLightGray;
       Color foregroundColor = CustomColors.kDarkGray;
@@ -65,9 +67,9 @@ class HomeController extends GetxController {
           avatarUrl: user.avatar,
           name: user.userFullname,
           phoneNo: user.userPhoneNumber,
-          time: DateFormat('HH:mm').format(trip.timeBook),
+          time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
           date: date,
-          year: trip.timeBook.year,
+          year: DateTime.parse(trip.timeBook).year,
           sourceStation: startingStation.startingPointName,
           destinationStation: destinationStation.destinationName);
 
