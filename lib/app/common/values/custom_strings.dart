@@ -67,6 +67,13 @@ class CustomStrings {
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
 
+  // 'top_biker' screen
+  static const String kBikerRank = 'kBikerRank';
+  static const String kMonth = 'kMonth';
+  static const String kTopBikerInfoFirstContent = 'kTopBikerInfoFirstContent';
+  static const String kTopBikerInfoSecondContent = 'kTopBikerInfoSecondContent';
+  static const String kGotIt = 'kGotIt';
+
   // 'activity' screen
   static const String kNoUpcomingTrips = 'kNoUpcomingTrips';
 
@@ -245,7 +252,8 @@ class CustomStrings {
   // 'sos_number' screen
   static const String kSOSNumber = 'kSOSNumber';
   static const String kSOSNumberFirstDescription = 'kSOSNumberFirstDescription';
-  static const String kSOSNumberSecondDescription = 'kSOSNumberSecondDescription';
+  static const String kSOSNumberSecondDescription =
+      'kSOSNumberSecondDescription';
   static const String kNeedSOS = 'kNeedSOS';
   static const String kSOSNumberThirdDescription = 'kSOSNumberThirdDescription';
   static const String kSOSReachLimit = 'kSOSReachLimit';
