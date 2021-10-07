@@ -145,7 +145,8 @@ class EditProfilePage extends StatelessWidget {
                             _profileController.birthDate.value =
                                 await CommonFunctions().selectDate(
                                     context: context,
-                                    selectedDate: _profileController.birthDate);
+                                    selectedDate: _profileController.birthDate,
+                                    isBirthDatePicker: true);
                             _profileController.user.birthDate =
                                 _profileController.birthDate.value.toString();
                             isSaveButtonDisable.value =

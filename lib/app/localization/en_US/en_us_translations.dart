@@ -194,7 +194,7 @@ final Map<String, String> en = {
   // 'book_schedule_trip' screen
   'kTime': 'Time',
   'kChooseDate': 'Choose date',
-  'kChooseTime': 'Chọn time',
+  'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
   'kRepeatTo': 'Repeat until',
   'kCancel': 'Cancel',

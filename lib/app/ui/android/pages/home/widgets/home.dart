@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 /// The home screen widget
 class Home extends StatelessWidget {
@@ -246,45 +248,85 @@ class Home extends StatelessWidget {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: <Widget>[
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 5.0),
-                                                        child: Icon(
-                                                          Icons.event_outlined,
-                                                        ),
+                                                  Obx(
+                                                    () => GestureDetector(
+                                                      child: Row(
+                                                        children: <Widget>[
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 5.0),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .event_outlined,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            homeController
+                                                                .searchDateString
+                                                                .value,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1,
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        CustomStrings.kToday.tr,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                      ),
-                                                    ],
+                                                      onTap: () async {
+                                                        homeController
+                                                            .searchDateString
+                                                            .value = DateFormat(
+                                                                'dd-MM-yyyy')
+                                                            .format(await CommonFunctions().selectDate(
+                                                                context:
+                                                                    context,
+                                                                selectedDate:
+                                                                    homeController
+                                                                        .searchDate,
+                                                                isBirthDatePicker:
+                                                                    false));
+                                                      },
+                                                    ),
                                                   ),
                                                   Divider(),
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 5.0),
-                                                        child: Icon(
-                                                          Icons.access_time,
-                                                        ),
+                                                  Obx(
+                                                    () => GestureDetector(
+                                                      child: Row(
+                                                        children: <Widget>[
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 5.0),
+                                                            child: Icon(
+                                                              Icons.access_time,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            homeController
+                                                                .searchTimeString
+                                                                .value,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1,
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        CustomStrings
-                                                            .kSelectHour.tr,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                      ),
-                                                    ],
+                                                      onTap: () async {
+                                                        homeController
+                                                                .searchTimeString
+                                                                .value =
+                                                            await CommonFunctions()
+                                                                .selectTime(
+                                                                    context:
+                                                                        context,
+                                                                    selectedTime:
+                                                                        homeController
+                                                                            .searchTime);
+                                                      },
+                                                    ),
                                                   ),
                                                 ],
                                               ),

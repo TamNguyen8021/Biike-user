@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/starting_station.dart';
@@ -16,7 +17,13 @@ class HomeController extends GetxController {
   final _homeProvider = Get.put(HomeProvider());
 
   Rx<bool> isAppBarVisible = true.obs;
+  Rx<DateTime> searchDate = DateTime.now().obs;
+  Rx<TimeOfDay> searchTime = TimeOfDay.now().obs;
+  Rx<String> searchDateString = CustomStrings.kChooseDate.tr.obs;
+  Rx<String> searchTimeString = CustomStrings.kChooseTime.tr.obs;
+
   List upcomingTrips = [];
+  Map<int?, String> stations = {};
   final Role _role = Role.none;
 
   /// Show/hide appbar depends on [isVisible]
@@ -26,7 +33,7 @@ class HomeController extends GetxController {
     isAppBarVisible.value = isVisible;
   }
 
-  /// Load upcoming trips from API based on [userId] and [role].
+  /// Load upcoming trips from API.
   ///
   /// Author: TamNTT
   Future<void> getUpcomingTrips({required BuildContext context}) async {
@@ -75,6 +82,18 @@ class HomeController extends GetxController {
 
       upcomingTrips.add(upcomingTripCard);
       // print(upcomingTrips.length);
+    }
+  }
+
+  /// Load stations from API.
+  ///
+  /// Author: TamNTT
+  Future<void> getStations({required int page}) async {
+    List response = await _homeProvider.getStations(page: page);
+    for (var station in response) {
+      StartingStation startingStation = StartingStation.fromJson(station);
+      stations.putIfAbsent(
+          startingStation.stationId, () => startingStation.startingPointName);
     }
   }
 }

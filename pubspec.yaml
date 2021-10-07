@@ -31,7 +31,10 @@ dependencies:
     git:
       url: git://github.com/ch-muhammad-adil/flutter-plugin-circular_profile_avatar.git
       ref: master
-  get: ^4.3.8
+  get:
+    git:
+      url: git://github.com/jonataslaw/getx.git
+      ref: master
   json_annotation: ^4.0.1
   
   # support ui

@@ -59,14 +59,23 @@ class CommonFunctions {
   /// Author: TamNTT
   Future<DateTime> selectDate(
       {required BuildContext context,
-      required Rx<DateTime> selectedDate}) async {
-    // Rx<bool> isDateSelected = false.obs;
+      required Rx<DateTime> selectedDate,
+      required bool isBirthDatePicker}) async {
+    DateTime _currentTime = DateTime.now();
+    DateTime _firstDate = DateTime(_currentTime.year - 90);
+    DateTime _lastDate = DateTime(_currentTime.year - 18);
+
+    if (!isBirthDatePicker) {
+      _firstDate = _currentTime;
+      _lastDate = DateTime(
+          _currentTime.year, _currentTime.month, _currentTime.day + 15);
+    }
 
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: selectedDate.value,
-      firstDate: DateTime(DateTime.now().year - 90),
-      lastDate: DateTime(DateTime.now().year - 18),
+      firstDate: _firstDate,
+      lastDate: _lastDate,
       helpText: CustomStrings.kChooseDate.tr,
       cancelText: CustomStrings.kCancel.tr,
       fieldLabelText: CustomStrings.kBirthDate,
@@ -75,6 +84,25 @@ class CommonFunctions {
       selectedDate.value = pickedDate;
     }
     return selectedDate.value;
+  }
+
+  /// Show a time picker on [context].
+  ///
+  /// Author: TamNTT
+  Future<String> selectTime(
+      {required BuildContext context,
+      required Rx<TimeOfDay> selectedTime}) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: selectedTime.value,
+      helpText: CustomStrings.kChooseTime.tr,
+      cancelText: CustomStrings.kCancel.tr,
+    );
+    if (pickedTime != null) {
+      selectedTime.value = pickedTime;
+    }
+    return MaterialLocalizations.of(context)
+        .formatTimeOfDay(selectedTime.value, alwaysUse24HourFormat: true);
   }
 
   /// Display a dialog on [context] for success message.
