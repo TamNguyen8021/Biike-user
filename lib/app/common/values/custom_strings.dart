@@ -30,6 +30,8 @@ class CustomStrings {
   // '004.3_input_name' screen
   static const String kInputName = 'kInputName';
   static const String kErrorName = 'kErrorName';
+  static const String kInputEmail = 'kInputEmail';
+  static const String kErrorEmail = 'kErrorEmail';
 
   // '004.4_choose_mode' screen
   static const String kChooseMode = 'kChooseMode';

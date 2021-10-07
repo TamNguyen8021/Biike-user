@@ -46,3 +46,9 @@ app.*.map.json
 /android/app/release
 .fvm
 .vscode
+lib/app/data/models/area.g.dart
+lib/app/data/models/area.g.dart
+lib/app/data/models/bike.g.dart
+lib/network/retrofit.g.dart
+lib/app/data/models/user.g.dart
+lib/injectable/injectable.config.dart

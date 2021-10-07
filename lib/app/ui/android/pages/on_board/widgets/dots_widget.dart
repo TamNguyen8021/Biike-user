@@ -9,7 +9,7 @@ class DotsWidget extends StatelessWidget {
   }) : super(key: key);
 
   final List<OnBoardItems> listOnBoard;
-  final ValueNotifier<int> indexState;
+  final int indexState;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DotsWidget extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: indexState.value == entry.key ? Colors.white : Colors.black,
+            color: indexState == entry.key ? Colors.white : Colors.black,
           ),
         );
       }).toList(),

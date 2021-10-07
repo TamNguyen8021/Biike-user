@@ -5,7 +5,7 @@ abstract class CommonRoutes {
   static const LOGIN = '/login';
   static const INPUT_PHONE = '/inputPhone';
   static const VERIFY_PHONE = '/verifyPhone';
-  static const INPUT_NAME = '/inputName';
+  static const REGISTER = '/inputName';
   static const CHOOSE_MODE = '/chooseMode';
   static const TRIP_HISTORY = '/tripHistory';
   static const HOME = '/home';

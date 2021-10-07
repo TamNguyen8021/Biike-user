@@ -5,6 +5,9 @@ import 'package:bikes_user/app/bindings/app_setting_binding.dart';
 import 'package:bikes_user/app/bindings/ban_list_binding.dart';
 import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/edit_sos_number_binding.dart';
+import 'package:bikes_user/app/bindings/input_name_email_binding/input_name_email_binding.dart';
+import 'package:bikes_user/app/bindings/login/login_binding.dart';
+import 'package:bikes_user/app/bindings/open_page/open_page_bingding.dart';
 import 'package:bikes_user/app/bindings/sos_number_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
@@ -37,10 +40,7 @@ import 'package:bikes_user/app/bindings/profile_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_profile/edit_profile_page.dart';
 import 'package:bikes_user/app/bindings/home_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/home/home_page.dart';
-import 'package:bikes_user/app/bindings/input_name_binding.dart';
-import 'package:bikes_user/app/ui/android/pages/register/input_name_page.dart';
-import 'package:bikes_user/app/bindings/input_phone_binding.dart';
-import 'package:bikes_user/app/ui/android/pages/register/input_phone_page.dart';
+import 'package:bikes_user/app/ui/android/pages/register/register_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_schedule_trip/book_schedule_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/book_trip_page.dart';
 import 'package:bikes_user/app/bindings/manage_bike_binding.dart';
@@ -53,21 +53,30 @@ import 'package:bikes_user/app/ui/android/pages/register/verify_phone_page.dart'
 class AppPages {
   static final pages = [
     GetPage(name: CommonRoutes.ON_BOARD, page: () => OnBoardPage()),
-    GetPage(name: CommonRoutes.OPEN, page: () => OpenPage()),
-    GetPage(name: CommonRoutes.WELCOME, page: () => WelcomePage()),
-    GetPage(name: CommonRoutes.LOGIN, page: () => LoginPage()),
     GetPage(
-        name: CommonRoutes.INPUT_PHONE,
-        page: () => InputPhonePage(),
-        binding: InputPhoneBinding()),
+      name: CommonRoutes.OPEN,
+      page: () => OpenPage(),
+      binding: OpenPageBingding(),
+    ),
+    GetPage(name: CommonRoutes.WELCOME, page: () => WelcomePage()),
+    GetPage(
+      name: CommonRoutes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
+    ),
     GetPage(
         name: CommonRoutes.VERIFY_PHONE,
-        page: () => VerifyPhonePage(),
+        page: () {
+          final phone = Get.arguments['fullPhone'] ?? '';
+          return VerifyPhonePage.initial(phone);
+        },
         binding: VerifyPhoneBinding()),
     GetPage(
-        name: CommonRoutes.INPUT_NAME,
-        page: () => InputNamePage(),
-        binding: InputNameBinding()),
+        name: CommonRoutes.REGISTER,
+        page: () {
+          return RegisterPage();
+        },
+        binding: InputNameEmailBinding()),
     GetPage(
         name: CommonRoutes.CHOOSE_MODE,
         page: () => ChooseModePage(),
@@ -134,42 +143,34 @@ class AppPages {
     GetPage(
         name: CommonRoutes.APP_SETTING,
         page: () => AppSettingPage(),
-        binding: AppSettingBinding()
-    ),
+        binding: AppSettingBinding()),
     GetPage(
         name: CommonRoutes.ADDRESS_BOOK,
         page: () => AddressBookPage(),
-        binding: AddressBookBinding()
-    ),
+        binding: AddressBookBinding()),
     GetPage(
         name: CommonRoutes.EDIT_ADDRESS_BOOK,
         page: () => EditAddressBookPage(),
-        binding: EditAddressBookBinding()
-    ),
+        binding: EditAddressBookBinding()),
     GetPage(
         name: CommonRoutes.ADD_ADDRESS_BOOK,
         page: () => AddAddressBookPage(),
-        binding: AddAddressBookBinding()
-    ),
+        binding: AddAddressBookBinding()),
     GetPage(
         name: CommonRoutes.SOS_NUMBER,
         page: () => SOSNumberPage(),
-        binding: SOSNumberBinding()
-    ),
+        binding: SOSNumberBinding()),
     GetPage(
         name: CommonRoutes.ADD_SOS_NUMBER,
         page: () => AddSOSNumberPage(),
-        binding: AddSOSNumberBinding()
-    ),
+        binding: AddSOSNumberBinding()),
     GetPage(
         name: CommonRoutes.EDIT_SOS_NUMBER,
         page: () => EditSOSNumberPage(),
-        binding: EditSOSNumberBinding()
-    ),
+        binding: EditSOSNumberBinding()),
     GetPage(
         name: CommonRoutes.BAN_LIST,
         page: () => BanListPage(),
-        binding: BanListBinding()
-    ),
+        binding: BanListBinding()),
   ];
 }
