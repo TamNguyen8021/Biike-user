@@ -17,6 +17,10 @@ class ExchangeVoucherPage extends StatelessWidget {
   final _voucherController = Get.find<VoucherController>();
   final _profileController = Get.find<ProfileController>();
 
+  List _fetchVoucher() {
+    return _voucherController.getVoucherList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +106,7 @@ class ExchangeVoucherPage extends StatelessWidget {
                   const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
               child:
                   Obx(() =>
-                    ListVouchers(listVouchers: _voucherController.getVoucherList()),
+                    ListVouchers(listVouchers: _fetchVoucher()),
                   ),
             ),
           ],

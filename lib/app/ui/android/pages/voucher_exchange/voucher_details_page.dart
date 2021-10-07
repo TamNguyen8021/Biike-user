@@ -39,7 +39,7 @@ class VoucherDetailPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ExchangeVoucherButton(),
+              child: ExchangeVoucherButton(voucherId: voucher.voucherId),
             ),
           ],
         ),

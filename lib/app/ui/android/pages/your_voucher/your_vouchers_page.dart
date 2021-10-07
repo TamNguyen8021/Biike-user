@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/controllers/redemption_controller.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/your_voucher/widget/your_voucher_list.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -10,6 +11,11 @@ class YourVoucherPage extends StatelessWidget {
   YourVoucherPage({Key? key}) : super(key: key);
 
   final voucherController = Get.find<VoucherController>();
+  final _redemptionController = Get.find<RedemptionController>();
+
+  List _fetchVouchers() {
+    return _redemptionController.getYourVoucherList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class YourVoucherPage extends StatelessWidget {
                   const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
                   child:
                   Obx(() =>
-                      YourVoucherList(listVouchers: voucherController.getVoucherList()),
+                      YourVoucherList(listVouchers: _fetchVouchers()),
                   ),
                 ),
               ],
