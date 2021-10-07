@@ -1,27 +1,18 @@
 import 'dart:convert';
 
+import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:get/get.dart';
 
 class VoucherProvider extends GetConnect {
-
-  @override
-  void onInit() {
-    httpClient.addAuthenticator<dynamic>((request) async {
-      final response = await get("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU");
-      final token = response.body['token'];
-
-      request.headers['Authorization'] = "$token";
-      return request;
-    });
-  }
-
   Future<dynamic> getVoucherList() async {
+
     final response = await
-      get("https://biike-api.azurewebsites.net/api/biike/v1/vouchers");
+      get("https://biike-api.azurewebsites.net/api/biike/v1/vouchers?page=1&limit=10",
+      headers: await new CommonProvider().getHeaders());
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.bodyString.toString());
+      return response.body['data'];
     }
     return Future.error(response.statusText!);
   }
