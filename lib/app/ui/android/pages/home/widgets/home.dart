@@ -74,7 +74,9 @@ class Home extends StatelessWidget {
     }
 
     return FutureBuilder(
-      future: homeController.getUpcomingTrips(context: context),
+      future: Biike.role.value == Role.keer
+          ? homeController.getUpcomingTrips(context: context)
+          : homeController.getStations(page: 1),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
@@ -226,7 +228,7 @@ class Home extends StatelessWidget {
                                       padding:
                                           const EdgeInsets.only(right: 8.0),
                                       child: Container(
-                                          width: 105,
+                                          width: 110,
                                           decoration: BoxDecoration(
                                               color: CustomColors.kLightGray,
                                               borderRadius:

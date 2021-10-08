@@ -6,11 +6,6 @@ class ProfileProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.addAuthenticator<dynamic>((request) async {
-      // print('addAuthenticator');
-      // final response = await httpClient.post(
-      //     'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU');
-      // final token = response.body['idToken'];
-      // print(token);
       // Set the header
       request.headers['Authorization'] = 'Bearer ${UrlStrings.token}';
       return request;
@@ -25,10 +20,11 @@ class ProfileProvider extends GetConnect {
   /// Author: TamNTT
   Future getProfile({required int userId}) async {
     final response = await get(UrlStrings.userUrl + '$userId/profile');
+    // print(response.statusText);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      print(response.body);
+      // print(response.body);
       return response.body;
     }
   }

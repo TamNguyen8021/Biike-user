@@ -20,7 +20,7 @@ Future<void> main() async {
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
   static Rx<Role> role = Role.none.obs;
-  static int userId = 1;
+  static int userId = -1;
 
   @override
   Widget build(BuildContext context) {

@@ -143,4 +143,43 @@ class CommonFunctions {
           );
         });
   }
+
+  /// Display a dialog on [context] for error message.
+  ///
+  /// Author: TamNTT
+  dynamic showErrorDialog(
+      {required BuildContext context, required String message}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: SvgPicture.asset(
+                      'assets/images/error.svg',
+                      height: 50,
+                    ),
+                  ),
+                  Text(
+                    message.tr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
 }

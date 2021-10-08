@@ -3,6 +3,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:bikes_user/app/common/functions/snackbar.dart';
@@ -32,6 +33,8 @@ class LoginController extends GetxController {
     if (messageSignin.isEmpty) {
       if (_firebaseServices.isVerifyEmail) {
         UrlStrings.token = await _firebaseServices.token;
+        Biike.userId =
+            int.parse(_firebaseServices.firebaseAuth.currentUser!.uid);
         Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;
       }
