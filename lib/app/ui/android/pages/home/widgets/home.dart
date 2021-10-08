@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 /// The home screen widget
 class Home extends StatelessWidget {
@@ -25,8 +27,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Role _role = Role.none;
-
     List<String>? _earliestUpcomingTripDate = [
       DateTime.now().day.toString(),
       DateTime.now().month.toString()
@@ -74,10 +74,9 @@ class Home extends StatelessWidget {
     }
 
     return FutureBuilder(
-      future: homeController.getUpcomingTrips(
-          context: context,
-          userId: Biike.userId,
-          role: _role.getRoleNum(Biike.role.value)),
+      future: Biike.role.value == Role.keer
+          ? homeController.getUpcomingTrips(context: context)
+          : homeController.getStations(page: 1),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
@@ -225,80 +224,118 @@ class Home extends StatelessWidget {
                               IntrinsicHeight(
                                 child: Row(
                                   children: <Widget>[
-                                    Expanded(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8.0),
-                                        child: Container(
-                                            decoration: BoxDecoration(
-                                                color: CustomColors.kLightGray,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                boxShadow: <BoxShadow>[
-                                                  BoxShadow(
-                                                    color: CustomColors
-                                                        .kDarkGray
-                                                        .withOpacity(0.4),
-                                                    // changes position of shadow
-                                                    offset: Offset(0, 1),
-                                                  )
-                                                ]),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: <Widget>[
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 5.0),
-                                                        child: Icon(
-                                                          Icons.event_outlined,
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: Container(
+                                          width: 110,
+                                          decoration: BoxDecoration(
+                                              color: CustomColors.kLightGray,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              boxShadow: <BoxShadow>[
+                                                BoxShadow(
+                                                  color: CustomColors.kDarkGray
+                                                      .withOpacity(0.4),
+                                                  // changes position of shadow
+                                                  offset: Offset(0, 1),
+                                                )
+                                              ]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Obx(
+                                                  () => GestureDetector(
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 5.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .event_outlined,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Text(
-                                                        CustomStrings.kToday.tr,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Divider(),
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 5.0),
-                                                        child: Icon(
-                                                          Icons.access_time,
+                                                        Text(
+                                                          homeController
+                                                              .searchDateString
+                                                              .value,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
                                                         ),
-                                                      ),
-                                                      Text(
-                                                        CustomStrings
-                                                            .kSelectHour.tr,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
+                                                    onTap: () async {
+                                                      homeController
+                                                          .searchDateString
+                                                          .value = DateFormat(
+                                                              'dd-MM-yyyy')
+                                                          .format(await CommonFunctions().selectDate(
+                                                              context: context,
+                                                              selectedDate:
+                                                                  homeController
+                                                                      .searchDate,
+                                                              isBirthDatePicker:
+                                                                  false));
+                                                    },
                                                   ),
-                                                ],
-                                              ),
-                                            )),
-                                      ),
+                                                ),
+                                                Divider(),
+                                                Obx(
+                                                  () => GestureDetector(
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 5.0),
+                                                          child: Icon(
+                                                            Icons.access_time,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          homeController
+                                                              .searchTimeString
+                                                              .value,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onTap: () async {
+                                                      homeController
+                                                              .searchTimeString
+                                                              .value =
+                                                          await CommonFunctions()
+                                                              .selectTime(
+                                                                  context:
+                                                                      context,
+                                                                  selectedTime:
+                                                                      homeController
+                                                                          .searchTime);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )),
                                     ),
                                     Expanded(
-                                      flex: 2,
                                       child: Container(
+                                          // width:
+                                          //     MediaQuery.of(context).size.width /
+                                          //         2,
                                           padding: const EdgeInsets.all(8.0),
                                           decoration: BoxDecoration(
                                               color: CustomColors.kLightGray,

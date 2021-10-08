@@ -62,7 +62,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     }
-
+    // sửa lỗi giựt khi switch: vanlnt
     return AnimatedSwitcher(
       duration: Duration(milliseconds: 500),
       child: isVisible

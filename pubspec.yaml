@@ -14,13 +14,14 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   flutter:
     sdk: flutter  
+  email_validator: ^2.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
   lint: ^1.6.0
   introduction_screen: ^2.1.0
-  pin_code_fields: ^7.3.0
+
   flutter_svg: ^0.22.0
   intl_phone_field:
     git:
@@ -31,23 +32,51 @@ dependencies:
     git:
       url: git://github.com/ch-muhammad-adil/flutter-plugin-circular_profile_avatar.git
       ref: master
-  get: ^4.3.8
+  get:
+    git:
+      url: git://github.com/jonataslaw/getx.git
+      ref: master
+  
+  pin_code_fields: ^7.3.0
+
   json_annotation: ^4.0.1
   
   # support ui
   carousel_slider: ^4.0.0
-
+  awesome_dialog: ^2.1.1
+  
   # flutter hook
   flutter_hooks: ^0.18.0
   # open link
   url_launcher: ^6.0.11
   intl: ^0.17.0
   flutter_screenutil: ^5.0.0+2
+
+  # firebase service
+  firebase_auth: ^3.1.2
+  firebase_core: ^1.7.0
+  google_sign_in: ^5.1.1
+
+  # api 
+  retrofit: ^2.0.1
+  dio: ^4.0.0
+
+  # di
+  get_it: ^7.2.0
+  injectable: ^1.5.0
+
+  # local storage
+  shared_preferences: ^2.0.8
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.1.2
   json_serializable: ^4.1.4
+  retrofit_generator: any
+  injectable_generator: any
+
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

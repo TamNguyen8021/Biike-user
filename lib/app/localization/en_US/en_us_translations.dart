@@ -65,8 +65,8 @@ final Map<String, String> en = {
   'kBikerReadyReminder': 'Ready to go!',
   'kFilter': 'Filter trips',
   'kSelectHour': 'Hour',
-  'kSelectSourceStation': 'Select departure',
-  'kSelectDestinationStation': 'Select destination',
+  'kSelectSourceStation': 'Departure station',
+  'kSelectDestinationStation': 'Destination station',
   'kDecline': 'Decline',
   'kAccept': 'Accept',
 
@@ -170,31 +170,33 @@ final Map<String, String> en = {
   'kListVouchers': 'Danh mục đổi quà',
   'kTradedVouchers': 'Quà đã đổi',
 
-  // 'trip_detail' screen
+  // 'trip_details' screen
   'kTripDetails': 'View trip details',
-  'kSupport': 'Trợ giúp',
-  'kNewTrip': 'Đã tạo',
-  'kTripHasBiker': 'Đã được nhận chở',
-  'kCancelTrip': 'Hủy chuyến',
+  'kSupport': 'Help',
+  'kNewTrip': 'Created',
+  'kCancelTrip': 'Cancel trip',
   'kConfirmArrival': 'Confirm arrival',
-  'kStartTrip': 'Bắt đầu chuyến đi',
-  'kCompleteTrip': 'Hoàn thành',
+  'kStartTrip': 'Start trip',
+  'kCompleteTrip': 'Finish trip',
+  'kTripHasFinished': 'Finished',
+  'kYourFeedback': 'Your feedback',
+  'kPartnerFeedback': 'Partner\'s feedback',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
-  'kFrom': 'Từ',
-  'kChooseFrom': 'Chọn điểm đi',
-  'kTo': 'Đến',
-  'kChooseTo': 'Chọn điểm đến',
-  'kBookScheduleTrip': 'Đặt lịch ké',
-  'kBookNowTrip': 'Ké now',
+  'kFrom': 'From',
+  'kChooseFrom': 'Departure station',
+  'kTo': 'To',
+  'kChooseTo': 'Destination station',
+  'kBookScheduleTrip': 'Book trip',
+  'kBookNowTrip': 'Ké Now',
 
   // 'book_schedule_trip' screen
   'kTime': 'Time',
-  'kChooseDate': 'Choose Date',
-  'kChooseTime': 'Chọn giờ',
+  'kChooseDate': 'Choose date',
+  'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
-  'kRepeatTo': 'Lặp lại đến',
+  'kRepeatTo': 'Repeat until',
   'kCancel': 'Cancel',
 
   // 'bike_manager' screen

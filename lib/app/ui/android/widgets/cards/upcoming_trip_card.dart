@@ -42,11 +42,7 @@ class UpcomingTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(
-          () => TripDetailsPage(
-              isWaitingForBiker: avatarUrl.isEmpty ? true : false,
-              tripId: tripId,
-              userId: userId),
+      onTap: () => Get.to(() => TripDetailsPage(tripId: tripId, userId: userId),
           binding: TripDetailsBinding()),
       child: Container(
         height: 82,

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "423374600719",
+    "project_id": "biike-c6a70",
+    "storage_bucket": "biike-c6a70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423374600719:android:0224a2a62f81ab7ee7c17a",
+        "android_client_info": {
+          "package_name": "com.example.bikes_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423374600719-lbs8te9pjj5tvphtv7bh9n5v2v0a5mga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAerTTEiEeU_71n_Qxcr0V_6VZ244qOlsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423374600719-lbs8te9pjj5tvphtv7bh9n5v2v0a5mga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
