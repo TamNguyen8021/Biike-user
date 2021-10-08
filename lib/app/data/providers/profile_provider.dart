@@ -5,16 +5,14 @@ import 'package:get/get.dart';
 class ProfileProvider extends GetConnect {
   @override
   void onInit() {
-    httpClient.baseUrl = UrlStrings.baseUrl;
-
     httpClient.addAuthenticator<dynamic>((request) async {
-      print('addAuthenticator');
-      final response = await httpClient.post(
-          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU');
-      final token = response.body['idToken'];
-      print(token);
+      // print('addAuthenticator');
+      // final response = await httpClient.post(
+      //     'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU');
+      // final token = response.body['idToken'];
+      // print(token);
       // Set the header
-      request.headers['Authorization'] = 'Bearer $token';
+      request.headers['Authorization'] = 'Bearer ${UrlStrings.token}';
       return request;
     });
 
@@ -26,12 +24,11 @@ class ProfileProvider extends GetConnect {
   ///
   /// Author: TamNTT
   Future getProfile({required int userId}) async {
-    final response = await httpClient
-        .get(httpClient.baseUrl! + UrlStrings.userUrl + '$userId/profile');
+    final response = await get(UrlStrings.userUrl + '$userId/profile');
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      // print(response.body);
+      print(response.body);
       return response.body;
     }
   }
@@ -42,9 +39,7 @@ class ProfileProvider extends GetConnect {
   Future<String> editProfile(
       {required int userId, required dynamic body}) async {
     print(body);
-    final response = await httpClient.put(
-        httpClient.baseUrl! + UrlStrings.userUrl + '$userId/profile',
-        body: body);
+    final response = await put(UrlStrings.userUrl + '$userId/profile', body);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

@@ -4,6 +4,7 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating_and_score.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -12,6 +13,7 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_b
 import 'package:bikes_user/app/ui/android/widgets/buttons/profile_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/half_oval_painter.dart';
+import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,8 +26,7 @@ class ProfilePage extends StatelessWidget {
     final _profileController = Get.find<ProfileController>();
 
     return FutureBuilder(
-        future: _profileController.getProfile(
-            context: context, userId: Biike.userId),
+        future: _profileController.getProfile(context: context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
@@ -143,7 +144,12 @@ class ProfilePage extends StatelessWidget {
                                     style:
                                         Theme.of(context).textTheme.bodyText2,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    final firebaseServices =
+                                        getIt<FirebaseServices>();
+                                    firebaseServices.firebaseAuth.signOut();
+                                    Get.offAllNamed(CommonRoutes.LOGIN);
+                                  },
                                 ),
                               )
                             ],

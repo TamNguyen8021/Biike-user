@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 class HomeProvider extends GetConnect {
   @override
   void onInit() {
-    httpClient.baseUrl = UrlStrings.baseUrl;
-
     // It's will attach 'token' property on header from all requests
     // httpClient.addRequestModifier<dynamic>((request) {
     //   request.headers['id_token'] =
@@ -15,13 +13,13 @@ class HomeProvider extends GetConnect {
     // });
 
     httpClient.addAuthenticator<dynamic>((request) async {
-      print('addAuthenticator');
-      final response = await httpClient.post(
-          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU');
-      final token = response.body['idToken'];
-      print(token);
+      // print('addAuthenticator');
+      // final response = await httpClient.post(
+      //     'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU');
+      // final token = response.body['idToken'];
+      // print(token);
       // Set the header
-      request.headers['Authorization'] = 'Bearer $token';
+      request.headers['Authorization'] = 'Bearer ${UrlStrings.token}';
       return request;
     });
 
@@ -34,12 +32,14 @@ class HomeProvider extends GetConnect {
   /// Author: TamNTT
   Future<List> getUpcomingTrips(
       {required int userId, required int role}) async {
-    final response = await httpClient.get(httpClient.baseUrl! +
-        UrlStrings.tripUrl +
-        '$userId/upcoming?role=$role&page=1&limit=10');
+    final response = await get(
+        UrlStrings.tripUrl + '$userId/upcoming?role=$role&page=1&limit=10');
+    print(UrlStrings.tripUrl + '$userId/upcoming?role=$role&page=1&limit=10');
+    print(response.statusText);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
+      print(response.body);
       return response.body['data'];
     }
   }
@@ -48,8 +48,7 @@ class HomeProvider extends GetConnect {
   ///
   /// Author: TamNTT
   Future<List> getStations({required int page}) async {
-    final response =
-        await httpClient.get(UrlStrings.stationUrl + '?$page=$page&limit=10');
+    final response = await get(UrlStrings.stationUrl + '?$page=$page&limit=10');
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

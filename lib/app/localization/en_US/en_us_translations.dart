@@ -65,8 +65,8 @@ final Map<String, String> en = {
   'kBikerReadyReminder': 'Ready to go!',
   'kFilter': 'Filter trips',
   'kSelectHour': 'Hour',
-  'kSelectSourceStation': 'Select departure',
-  'kSelectDestinationStation': 'Select destination',
+  'kSelectSourceStation': 'Departure station',
+  'kSelectDestinationStation': 'Destination station',
   'kDecline': 'Decline',
   'kAccept': 'Accept',
 

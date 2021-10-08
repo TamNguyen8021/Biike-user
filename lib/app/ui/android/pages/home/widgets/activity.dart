@@ -62,7 +62,7 @@ class Activity extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 30.0),
                           child: ListUpcomingTrips(
                             listUpcomingTrips: homeController.upcomingTrips,
-                            itemPadding: 10.0,
+                            itemPadding: 10.0, 
                           ),
                         ),
                       ],

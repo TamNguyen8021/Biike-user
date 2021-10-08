@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+
 /// The '002.1_welcome_1' screen
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);

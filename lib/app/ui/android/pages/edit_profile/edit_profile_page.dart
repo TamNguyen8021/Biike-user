@@ -6,7 +6,6 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -165,7 +164,6 @@ class EditProfilePage extends StatelessWidget {
                             : () {
                                 _profileController.editProfile(
                                     context: context,
-                                    userId: Biike.userId,
                                     user: _profileController.user);
                               },
                         text: CustomStrings.kSave.tr,

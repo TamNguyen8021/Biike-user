@@ -5,6 +5,9 @@ import 'package:bikes_user/app/bindings/app_setting_binding.dart';
 import 'package:bikes_user/app/bindings/ban_list_binding.dart';
 import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/edit_sos_number_binding.dart';
+import 'package:bikes_user/app/bindings/input_name_email_binding.dart';
+import 'package:bikes_user/app/bindings/login_binding.dart';
+import 'package:bikes_user/app/bindings/open_page_bingding.dart';
 import 'package:bikes_user/app/bindings/sos_number_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
@@ -15,8 +18,6 @@ import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
-import 'package:bikes_user/app/ui/android/pages/finding_biker/top_biker/binding/top_biker_binding.dart';
-import 'package:bikes_user/app/ui/android/pages/finding_biker/top_biker/view/top_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
 import 'package:bikes_user/app/ui/android/pages/exchange_voucher/exchange_voucher_page.dart';
@@ -27,6 +28,8 @@ import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/open/open_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/profile_page.dart';
 import 'package:bikes_user/app/ui/android/pages/sos_number/sos_number_page.dart';
+import 'package:bikes_user/app/bindings/top_biker_binding.dart';
+import 'package:bikes_user/app/ui/android/pages/top_biker/top_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
 import 'package:get/get.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
@@ -39,10 +42,7 @@ import 'package:bikes_user/app/bindings/profile_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_profile/edit_profile_page.dart';
 import 'package:bikes_user/app/bindings/home_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/home/home_page.dart';
-import 'package:bikes_user/app/bindings/input_name_binding.dart';
-import 'package:bikes_user/app/ui/android/pages/register/input_name_page.dart';
-import 'package:bikes_user/app/bindings/input_phone_binding.dart';
-import 'package:bikes_user/app/ui/android/pages/register/input_phone_page.dart';
+import 'package:bikes_user/app/ui/android/pages/register/register_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_schedule_trip/book_schedule_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/book_trip_page.dart';
 import 'package:bikes_user/app/bindings/manage_bike_binding.dart';
@@ -55,21 +55,30 @@ import 'package:bikes_user/app/ui/android/pages/register/verify_phone_page.dart'
 class AppPages {
   static final pages = [
     GetPage(name: CommonRoutes.ON_BOARD, page: () => OnBoardPage()),
-    GetPage(name: CommonRoutes.OPEN, page: () => OpenPage()),
-    GetPage(name: CommonRoutes.WELCOME, page: () => WelcomePage()),
-    GetPage(name: CommonRoutes.LOGIN, page: () => LoginPage()),
     GetPage(
-        name: CommonRoutes.INPUT_PHONE,
-        page: () => InputPhonePage(),
-        binding: InputPhoneBinding()),
+      name: CommonRoutes.OPEN,
+      page: () => OpenPage(),
+      binding: OpenPageBingding(),
+    ),
+    GetPage(name: CommonRoutes.WELCOME, page: () => WelcomePage()),
+    GetPage(
+      name: CommonRoutes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
+    ),
     GetPage(
         name: CommonRoutes.VERIFY_PHONE,
-        page: () => VerifyPhonePage(),
+        page: () {
+          final phone = Get.arguments['fullPhone'] ?? '';
+          return VerifyPhonePage.initial(phone);
+        },
         binding: VerifyPhoneBinding()),
     GetPage(
-        name: CommonRoutes.INPUT_NAME,
-        page: () => InputNamePage(),
-        binding: InputNameBinding()),
+        name: CommonRoutes.REGISTER,
+        page: () {
+          return RegisterPage();
+        },
+        binding: InputNameEmailBinding()),
     GetPage(
         name: CommonRoutes.CHOOSE_MODE,
         page: () => ChooseModePage(),
