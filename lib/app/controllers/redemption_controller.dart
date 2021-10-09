@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class RedemptionController extends GetxController {
   final _profileController = Get.find<ProfileController>();
-  RxList<dynamic> _yourVoucherList = [].obs;
+  RxList<dynamic> yourVoucherList = [].obs;
 
   Future<bool> exchangeVoucher(voucherId) {
     Map<String, dynamic> data = <String, dynamic>{
@@ -15,12 +15,8 @@ class RedemptionController extends GetxController {
     return new RedemptionProvider().exchangeVoucher(data);
   }
 
-  List<dynamic> getYourVoucherList() {
-    new RedemptionProvider()
-        // .getYourVoucherList(userId: _profileController.user.userId)
-        .getYourVoucherList(userId: 4)
-        .then((value) => _yourVoucherList.value = value);
-
-    return _yourVoucherList.value;
+  Future<void> getYourVoucherList() async {
+    yourVoucherList.value = await new RedemptionProvider()
+        .getYourVoucherList(userId: 10);
   }
 }

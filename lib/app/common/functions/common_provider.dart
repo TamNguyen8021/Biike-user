@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 class CommonProvider extends GetConnect {
+  final apiUrl = 'https://biike-api.azurewebsites.net/api/biike/v1';
+
   Future<String> _getToken() async {
     final response = await post("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU",
         <String, dynamic> {
