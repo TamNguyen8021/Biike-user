@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/data/models/redemption.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/voucher_details.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -8,13 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class YourVoucherDetailPage extends StatelessWidget {
-  final voucher;
+  var data;
 
-  YourVoucherDetailPage({Key? key, this.voucher}) : super(key: key);
+  YourVoucherDetailPage({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Voucher voucher = Get.arguments;
+    var data = Get.arguments;
+    Voucher voucher = Voucher.fromJson(data);
+    Redemption redemption = Redemption.fromJson(data);
+    voucher.setAmountOfPoint(redemption.voucherPoint);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -59,7 +63,7 @@ class YourVoucherDetailPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: SelectableText(
-                                'sdakk',
+                                redemption.voucherCode,
                                 style: Theme.of(context)
                                      .textTheme
                                      .bodyText1!

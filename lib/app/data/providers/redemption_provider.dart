@@ -1,10 +1,6 @@
-import 'dart:convert';
+import 'package:bikes_user/app/common/functions/common_provider.dart';
 
-import 'package:bikes_user/app/data/models/custom/custom_redemption.dart';
-import 'package:bikes_user/app/data/models/voucher.dart';
-import 'package:get/get.dart';
-
-class RedemptionProvider extends GetConnect {
+class RedemptionProvider extends CommonProvider {
   Future<bool> exchangeVoucher(data) async {
     final response = await post('https://biike-api.azurewebsites.net/api/biike/v1/redemptions', data);
 
@@ -13,13 +9,14 @@ class RedemptionProvider extends GetConnect {
         : Future.value(false);
   }
 
-  Future<List<dynamic>> getYourVoucherList({userId}) async {
+  Future<dynamic> getYourVoucherList({userId}) async {
+    var url = CommonProvider.API_URL + '/redemptions/users/$userId/full?page=1&limit=2';
     //TODO
     final response = await
-      get('https://biike-api.azurewebsites.net/api/biike/v1/redemptions/' + userId +'/full');
+      get(url, headers: await getHeaders());
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.bodyString.toString());
+      return response.body['data'];
     }
     return Future.error(response.statusText!);
   }
