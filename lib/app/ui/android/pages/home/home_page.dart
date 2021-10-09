@@ -8,7 +8,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dar
 import 'package:bikes_user/app/ui/android/pages/home/widgets/activity.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/home.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/main.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +24,7 @@ class HomePage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => CommonFunctions().onBackPressed(),
       child: FutureBuilder(
-          future: _profileController.getProfile(context: context, userId: Biike.userId),
+          future: _profileController.getProfile(context: context),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return DefaultTabController(

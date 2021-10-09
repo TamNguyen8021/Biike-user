@@ -12,7 +12,7 @@ class TripHistoryProvider extends GetConnect {
       return Future.error(response.statusText!);
     } else {
       // print(response.body);
-      return response.body;
+      return response.body['data'];
     }
   }
 }

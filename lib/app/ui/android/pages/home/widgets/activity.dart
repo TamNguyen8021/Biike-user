@@ -18,18 +18,13 @@ class Activity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Role _role = Role.none;
-
     String _roleActivity = CustomStrings.kKeerActivities.tr;
     if (Biike.role.value != Role.keer) {
       _roleActivity = CustomStrings.kBikerActivities.tr;
     }
 
     return FutureBuilder(
-        future: homeController.getUpcomingTrips(
-            context: context,
-            userId: Biike.userId,
-            role: _role.getRoleNum(Biike.role.value)),
+        future: homeController.getUpcomingTrips(context: context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
@@ -67,7 +62,7 @@ class Activity extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 30.0),
                           child: ListUpcomingTrips(
                             listUpcomingTrips: homeController.upcomingTrips,
-                            itemPadding: 10.0,
+                            itemPadding: 10.0, 
                           ),
                         ),
                       ],

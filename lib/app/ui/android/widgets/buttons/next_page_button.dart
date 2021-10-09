@@ -6,27 +6,33 @@ class NextPageButton extends StatelessWidget {
   final Color foregroundColor;
   final Color hoverColor;
   final Function() onPressedFunc;
-
-  const NextPageButton(
-      {Key? key,
-      required this.onPressedFunc,
-      required this.backgroundColor,
-      required this.foregroundColor,
-      required this.hoverColor})
-      : super(key: key);
+  final bool isLoading;
+  const NextPageButton({
+    Key? key,
+    required this.onPressedFunc,
+    required this.backgroundColor,
+    required this.foregroundColor,
+    required this.hoverColor,
+    this.isLoading = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       heroTag: 'nextPageButton',
-      onPressed: onPressedFunc,
+      onPressed: isLoading ? null : onPressedFunc,
       backgroundColor: backgroundColor,
       foregroundColor: foregroundColor,
       hoverColor: hoverColor,
-      child: Icon(
-        Icons.arrow_forward_ios,
-        size: 25,
-      ),
+      child: _content,
     );
   }
+
+  Widget get _content => isLoading
+      ? SizedBox.fromSize(
+          size: Size(25, 25), child: CircularProgressIndicator())
+      : Icon(
+          Icons.arrow_forward_ios,
+          size: 25,
+        );
 }

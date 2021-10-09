@@ -30,6 +30,8 @@ class CustomStrings {
   // '004.3_input_name' screen
   static const String kInputName = 'kInputName';
   static const String kErrorName = 'kErrorName';
+  static const String kInputEmail = 'kInputEmail';
+  static const String kErrorEmail = 'kErrorEmail';
 
   // '004.4_choose_mode' screen
   static const String kChooseMode = 'kChooseMode';
@@ -101,6 +103,7 @@ class CustomStrings {
   static const String kRateApp = 'kRateApp';
   static const String kPhoneNo = 'kPhoneNo';
   static const String kEmail = 'kEmail';
+  static const String kChangeLanguage = 'kChangeLanguage';
   static const String kLogOut = 'kLogOut';
 
   // 'update_profile' screen
@@ -161,15 +164,17 @@ class CustomStrings {
   static const String kListVouchers = 'kListVouchers';
   static const String kTradedVouchers = 'kTradedVouchers';
 
-  // 'trip_detail' screen
+  // 'trip_details' screen
   static const String kTripDetails = 'kTripDetails';
   static const String kSupport = 'kSupport';
   static const String kNewTrip = 'kNewTrip';
-  static const String kTripHasBiker = 'kTripHasBiker';
   static const String kCancelTrip = 'kCancelTrip';
   static const String kConfirmArrival = 'kConfirmArrival';
   static const String kStartTrip = 'kStartTrip';
   static const String kCompleteTrip = 'kCompleteTrip';
+  static const String kTripHasFinished = 'kTripHasFinished';
+  static const String kYourFeedback = 'kYourFeedback';
+  static const String kPartnerFeedback = 'kPartnerFeedback';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';

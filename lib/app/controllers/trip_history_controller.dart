@@ -43,9 +43,9 @@ class TripHistoryController extends GetxController {
           DestinationStation.fromJson(historyTrip);
       // print(destinationStation.toJson());
       TripStatus tripStatus;
-      String date = trip.timeBook.day.toString() +
+      String date = DateTime.parse(trip.timeBook).day.toString() +
           ' Th ' +
-          trip.timeBook.month.toString();
+          DateTime.parse(trip.timeBook).month.toString();
 
       switch (trip.tripStatus) {
         case 1:
@@ -74,7 +74,7 @@ class TripHistoryController extends GetxController {
           userId: user.userId,
           avatarUrl: user.avatar,
           name: user.userFullname,
-          time: DateFormat('HH:mm').format(trip.timeBook),
+          time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
           date: date,
           status: tripStatus,
           sourceStation: startingStation.startingPointName,
