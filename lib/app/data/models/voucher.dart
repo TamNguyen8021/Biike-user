@@ -9,17 +9,17 @@ part 'voucher.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class Voucher {
-  int voucherId;
-  int voucherCategoryId;
-  String voucherName;
-  String brand;
-  DateTime startDate;
-  DateTime endDate;
-  int? quantity;
-  int? remaining;
-  int? amountOfPoint;
-  String description;
-  String termsAndConditions;
+  final int voucherId;
+  final int voucherCategoryId;
+  final String voucherName;
+  final String brand;
+  final DateTime startDate;
+  final DateTime endDate;
+  final int quantity;
+  final int remaining;
+  final int amountOfPoint;
+  final String description;
+  final String termsAndConditions;
 
   Voucher({
       required this.voucherId,
@@ -28,9 +28,9 @@ class Voucher {
       required this.brand,
       required this.startDate,
       required this.endDate,
-      this.quantity,
-      this.remaining,
-      this.amountOfPoint,
+      required this.quantity,
+      required this.remaining,
+      required this.amountOfPoint,
       required this.description,
       required this.termsAndConditions
   });
@@ -45,8 +45,4 @@ class Voucher {
   /// to JSON. The implementation simply calls the private, generated
   /// helper method `_$DestinationStationToJson`.
   Map<String, dynamic> toJson() => _$VoucherToJson(this);
-
-  void setAmountOfPoint(point) {
-    this.amountOfPoint = point;
-  }
 }

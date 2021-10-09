@@ -14,9 +14,9 @@ Voucher _$VoucherFromJson(Map<String, dynamic> json) {
     brand: json['brand'] as String,
     startDate: DateTime.parse(json['startDate'] as String),
     endDate: DateTime.parse(json['endDate'] as String),
-    quantity: json['quantity'] as int? ?? -1,
-    remaining: json['remaining'] as int? ?? -1,
-    amountOfPoint: json['amountOfPoint'] as int? ?? -1,
+    quantity: json['quantity'] as int,
+    remaining: json['remaining'] as int,
+    amountOfPoint: json['amountOfPoint'] as int,
     description: json['description'] as String,
     termsAndConditions: json['termsAndConditions'] as String,
   );

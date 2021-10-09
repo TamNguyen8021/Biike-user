@@ -8,16 +8,15 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class YourVoucherCard extends StatelessWidget {
-  final data;
-  YourVoucherCard({Key? key, required this.data}) : super(key: key);
+  final Voucher voucher;
+  YourVoucherCard({Key? key, required this.voucher}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Voucher voucher = Voucher.fromJson(data);
     return GestureDetector(
         onTap: () => Get.toNamed(
             CommonRoutes.YOUR_VOUCHER_DETAIL,
-            arguments: data),
+            arguments: voucher),
 
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),

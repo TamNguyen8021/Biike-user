@@ -17,7 +17,7 @@ class YourVoucherList extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           return Padding(
             padding: EdgeInsets.only(bottom: 10.0),
-            child: YourVoucherCard(data: listVouchers[i]),
+            child: YourVoucherCard(voucher: Voucher.fromJson(listVouchers[i])),
           );
         });
   }
