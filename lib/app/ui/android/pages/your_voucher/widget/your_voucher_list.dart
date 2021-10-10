@@ -1,4 +1,3 @@
-import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/ui/android/pages/your_voucher/widget/your_voucher_card.dart';
 import 'package:flutter/material.dart';
 

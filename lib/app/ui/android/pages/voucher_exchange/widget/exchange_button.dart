@@ -14,19 +14,6 @@ class ExchangeVoucherButton extends StatelessWidget {
   final int voucherId;
   ExchangeVoucherButton({Key? key, required this.voucherId}) : super(key: key);
 
-  _x() async {
-    FutureBuilder(
-        future: _redemptionController.exchangeVoucher(voucherId),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Loading();
-          } else {
-            return Loading();
-          }
-        }
-    );
-  }
-
   _exchangeVoucher() async {
     bool result = await _redemptionController.exchangeVoucher(voucherId);
     if (result) {

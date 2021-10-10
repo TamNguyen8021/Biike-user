@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class YourVoucherDetailPage extends StatelessWidget {
-  var data;
+  final data;
 
   YourVoucherDetailPage({Key? key, this.data}) : super(key: key);
 
