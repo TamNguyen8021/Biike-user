@@ -1,4 +1,3 @@
-import 'package:bikes_user/app/data/providers/redemption_provider.dart';
 import 'package:bikes_user/app/data/providers/voucher_provider.dart';
 import 'package:get/get.dart';
 
