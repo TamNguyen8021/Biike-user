@@ -10,6 +10,7 @@ import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -39,12 +40,10 @@ class ViewUserController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getHistoryTripsWithPartner(
-      {required BuildContext context,
-      required int userId,
-      required int partnerId}) async {
+      {required BuildContext context, required int partnerId}) async {
     historyTrips.clear();
     List historyTripsWithPartner = await _viewUserProvider.getHistoryPairTrips(
-        userId: userId, partnerId: partnerId);
+        userId: await Biike.localAppData.getUserId(), partnerId: partnerId);
     // print('data: ' + tempHistoryTrips.toString());
     for (var historyTrip in historyTripsWithPartner) {
       // print(item);

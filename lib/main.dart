@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +21,8 @@ Future<void> main() async {
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
   static Rx<Role> role = Role.none.obs;
-  static int userId = -1;
+  // static int userId = -1;
+  static LocalAppData localAppData = LocalAppData();
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/trip_history_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -22,10 +23,10 @@ class TripHistoryController extends GetxController {
   /// Load history trips from API based on [userId] and [role].
   ///
   /// Author: TamNTT
-  Future<void> getHistoryTrips(
-      {required BuildContext context, required int userId}) async {
+  Future<void> getHistoryTrips({required BuildContext context}) async {
     historyTrips.clear();
-    List response = await _tripHistoryProvider.getHistoryTrips(userId: userId);
+    List response = await _tripHistoryProvider.getHistoryTrips(
+        userId: await Biike.localAppData.getUserId());
     // print(response);
 
     for (var historyTrip in response) {

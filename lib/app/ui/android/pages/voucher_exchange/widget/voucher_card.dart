@@ -1,13 +1,23 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/data/models/voucher.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class VoucherCard extends StatelessWidget {
-  const VoucherCard({Key? key}) : super(key: key);
+  final Voucher voucher;
+  VoucherCard({Key? key, required this.voucher}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () => Get.toNamed(
+          CommonRoutes.VOUCHER_DETAILS,
+          arguments: voucher),
+
+      child: Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
       decoration: BoxDecoration(
           color: CustomColors.kLightGray,
@@ -39,7 +49,8 @@ class VoucherCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Voucher Passio\nTrị giá 20.000đ',
+                // 'Voucher Passio\nTrị giá 20.000đ',
+                voucher.voucherName,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!
@@ -48,7 +59,8 @@ class VoucherCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                  'Áp dụng khi mua tại cửa hàng\nvới hóa đơn từ 100k',
+                  // 'Áp dụng khi mua tại cửa hàng\nvới hóa đơn từ 100k',
+                  CustomStrings.kBrand.tr + voucher.brand,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -57,7 +69,8 @@ class VoucherCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 4.0),
                     child: Text(
-                      '200',
+                      // '200',
+                      voucher.amountOfPoint.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
@@ -78,6 +91,7 @@ class VoucherCard extends StatelessWidget {
           )
         ],
       ),
+    )
     );
   }
 }

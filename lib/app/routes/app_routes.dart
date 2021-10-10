@@ -31,4 +31,7 @@ abstract class CommonRoutes {
   static const ADD_SOS_NUMBER = '/addSOSNumber';
   static const EDIT_SOS_NUMBER = '/editSOSNumber';
   static const BAN_LIST = '/banList';
+  static const VOUCHER_DETAILS = '/voucherDetails';
+  static const YOUR_VOUCHERS = '/yourVouchers';
+  static const YOUR_VOUCHER_DETAIL = '/yourVoucherDetail';
 }

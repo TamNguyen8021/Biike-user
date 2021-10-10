@@ -1,25 +1,15 @@
+import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:get/get.dart';
 
-class ProfileProvider extends GetConnect {
-  @override
-  void onInit() {
-    httpClient.addAuthenticator<dynamic>((request) async {
-      // Set the header
-      request.headers['Authorization'] = 'Bearer ${UrlStrings.token}';
-      return request;
-    });
-
-    // Autenticator will be called 1 time if HttpStatus is HttpStatus.unauthorized
-    httpClient.maxAuthRetries = 1;
-  }
-
+class ProfileProvider extends CommonProvider {
   /// Loads profile from API based on [userId]
   ///
   /// Author: TamNTT
   Future getProfile({required int userId}) async {
-    final response = await get(UrlStrings.userUrl + '$userId/profile');
+    final response = await get(UrlStrings.userUrl + '$userId/profile',
+        headers: await getHeaders());
     // print(response.statusText);
     if (response.status.hasError) {
       return Future.error(response.statusText!);

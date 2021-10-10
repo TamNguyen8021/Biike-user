@@ -214,6 +214,20 @@ final Map<String, String> en = {
   'kNumberPlate': 'Number plate',
   'kTakePictureAgain': 'Chụp lại',
 
+  // 'voucher_detail' screen
+  'kGiftDetail' : 'Gift details',
+  'kYourVoucher' : 'Your vouchers',
+  'kVoucherDetail' : 'Voucher detail',
+  'kYourVoucherDetail' : 'Your voucher detail',
+  'kTermsAndConditions' : 'Terms and conditions',
+  'kAvailableUntil' : 'Available until ',
+  'kExchangeNow' : 'Exchange now',
+  'kBrand' : 'Brand: ',
+  'kHsd' : 'Until: ',
+  'kYourCode' : 'Your code',
+  'kExchangeVoucherSuccess' : 'Exchange voucher successful!',
+  'kViewAVoucher' : 'View',
+
   // Error message
   'kError': 'Error!',
   'kErrorMessage':

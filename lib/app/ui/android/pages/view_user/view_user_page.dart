@@ -9,7 +9,6 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -171,9 +170,7 @@ class ViewUserPage extends StatelessWidget {
                             FutureBuilder(
                                 future: viewUserController
                                     .getHistoryTripsWithPartner(
-                                        context: context,
-                                        userId: Biike.userId,
-                                        partnerId: userId),
+                                        context: context, partnerId: userId),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<dynamic> snapshot) {
                                   if (snapshot.connectionState ==

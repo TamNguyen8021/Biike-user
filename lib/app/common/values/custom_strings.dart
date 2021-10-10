@@ -208,6 +208,20 @@ class CustomStrings {
   static const String kNumberPlate = 'kNumberPlate';
   static const String kTakePictureAgain = 'kTakePictureAgain';
 
+  // 'voucher_detail' screen
+  static const String kGiftDetail = 'kGiftDetail';
+  static const String kVoucherDetail = 'kVoucherDetail';
+  static const String kTermsAndConditions = 'kTermsAndConditions';
+  static const String kAvailableUntil = 'kAvailableUntil';
+  static const String kExchangeNow = 'kExchangeNow';
+  static const String kBrand = 'kBrand';
+  static const String kHsd = 'kHsd';
+  static const String kYourVouchers = 'kYourVoucher';
+  static const String kYourVoucherDetail = 'kYourVoucherDetail';
+  static const String kYourCode = 'kYourCode';
+  static const String kExchangeVoucherSuccess = 'kExchangeVoucherSuccess';
+  static const String kViewAVoucher = 'kViewAVoucher';
+
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';
 

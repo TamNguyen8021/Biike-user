@@ -36,7 +36,8 @@ class HomeController extends GetxController {
   /// Author: TamNTT
   Future<void> getUpcomingTrips({required BuildContext context}) async {
     upcomingTrips.clear();
-    List response = await _homeProvider.getUpcomingTrips(userId: Biike.userId);
+    List response = await _homeProvider.getUpcomingTrips(
+        userId: await Biike.localAppData.getUserId());
     // print('response: ' + response.toString());
     // print('response length: ' + response.length.toString());
     for (int i = 0; i < response.length; i++) {

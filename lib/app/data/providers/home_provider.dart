@@ -1,25 +1,14 @@
+import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:get/get.dart';
 
-class HomeProvider extends GetConnect {
-  @override
-  void onInit() {
-    httpClient.addAuthenticator<dynamic>((request) async {
-      // Set the header
-      request.headers['Authorization'] = 'Bearer ${UrlStrings.token}';
-      return request;
-    });
-
-    // Autenticator will be called 3 times if HttpStatus is HttpStatus.unauthorized
-    httpClient.maxAuthRetries = 1;
-  }
-
+class HomeProvider extends CommonProvider {
   /// Loads upcoming trips from API based on [userId] and [role]
   ///
   /// Author: TamNTT
   Future<List> getUpcomingTrips({required int userId}) async {
-    final response =
-        await get(UrlStrings.tripUrl + '$userId/upcoming?page=1&limit=10');
+    final response = await get(
+        UrlStrings.tripUrl + '$userId/upcoming?page=1&limit=10',
+        headers: await getHeaders());
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

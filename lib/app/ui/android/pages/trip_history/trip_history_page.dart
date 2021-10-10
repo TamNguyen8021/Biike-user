@@ -19,8 +19,7 @@ class TripHistoryPage extends StatelessWidget {
     final _tripHistoryController = Get.find<TripHistoryController>();
 
     return FutureBuilder(
-        future: _tripHistoryController.getHistoryTrips(
-            context: context, userId: Biike.userId),
+        future: _tripHistoryController.getHistoryTrips(context: context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return DefaultTabController(
             length: 1,
@@ -75,7 +74,7 @@ class TripHistoryPage extends StatelessWidget {
                         switch (index) {
                           case 0:
                             await _tripHistoryController.getHistoryTrips(
-                                context: context, userId: Biike.userId);
+                                context: context);
                             break;
                           default:
                         }
