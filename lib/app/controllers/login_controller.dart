@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -35,6 +36,10 @@ class LoginController extends GetxController {
         UrlStrings.token = await _firebaseServices.token;
         Biike.userId =
             int.parse(_firebaseServices.firebaseAuth.currentUser!.uid);
+
+        //save user data to local memory
+        new LocalAppData().saveUserInfo(_firebaseServices);
+
         Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;
       }

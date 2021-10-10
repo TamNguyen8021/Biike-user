@@ -1,21 +1,11 @@
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:get/get.dart';
 
 class CommonProvider extends GetConnect {
   final apiUrl = 'https://biike-api.azurewebsites.net/api/biike/v1';
 
-  Future<String> _getToken() async {
-    final response = await post("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCCMLMl1CZBpHU0P97gYFUtpNp2y5wN1RU",
-        <String, dynamic> {
-          "email": "uyennlpse140355@fpt.edu.vn",
-          "password": "190220",
-          "returnSecureToken": true
-        });
-    final token = response.body['idToken'];
-    return token;
-  }
-
   Future<Map<String, String>> getHeaders() async {
-    var token = await _getToken();
+    var token = await new LocalAppData().getToken();
     return <String, String> {
       'Authorization' : 'Bearer $token'
     };

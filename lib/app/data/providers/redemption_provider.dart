@@ -2,7 +2,7 @@ import 'package:bikes_user/app/common/functions/common_provider.dart';
 
 class RedemptionProvider extends CommonProvider {
   Future<bool> exchangeVoucher(data) async {
-    final response = await post('https://biike-api.azurewebsites.net/api/biike/v1/redemptions', data,
+    final response = await post('$apiUrl/redemptions', data,
       headers: await getHeaders());
 
     return response.statusCode == 200
@@ -11,7 +11,7 @@ class RedemptionProvider extends CommonProvider {
   }
 
   Future<dynamic> getYourVoucherList({userId}) async {
-    var url = apiUrl + '/redemptions/users/$userId/full?page=1&limit=2';
+    var url = '$apiUrl/redemptions/users/$userId/full?page=1&limit=10';
     final response = await
     get(url, headers: await getHeaders());
 
