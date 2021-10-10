@@ -216,6 +216,20 @@ final Map<String, String> vi = {
   'kNumberPlate': 'Biển số đăng ký',
   'kTakePictureAgain': 'Chụp lại',
 
+  // 'voucher_detail' screen
+  'kGiftDetail' : 'Chi tiết quà tặng',
+  'kYourVoucher' : 'Quà của bạn',
+  'kVoucherDetail' : 'Thông tin voucher',
+  'kYourVoucherDetail' : 'Chi tiết quà của bạn',
+  'kTermsAndConditions' : 'Điều kiện sử dụng',
+  'kAvailableUntil' : 'Ưu đãi đến ',
+  'kExchangeNow' : 'Đổi ngay',
+  'kBrand' : 'Cửa hàng: ',
+  'kHsd' : 'HSD: ',
+  'kYourCode' : 'Mã của bạn',
+  'kExchangeVoucherSuccess' : 'Đổi voucher thành công!',
+  'kViewAVoucher' : 'Xem',
+
   // Error message
   'kError': 'Thông báo lỗi',
   'kErrorMessage':
