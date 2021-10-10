@@ -237,6 +237,7 @@ final Map<String, String> vi = {
   'kNotRated': 'Hãy đánh giá chuyến đi của bạn.',
   'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
   'kSendFailed': 'Gửi feedback thất bại!',
+  'kExchangeFailed': 'Không thể đổi voucher!',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',

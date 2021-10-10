@@ -1,3 +1,5 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/return_button.dart';
@@ -13,7 +15,7 @@ class ExchangeVoucherButton extends StatelessWidget {
   final int voucherId;
   ExchangeVoucherButton({Key? key, required this.voucherId}) : super(key: key);
 
-  _exchangeVoucher() async {
+  _exchangeVoucher(BuildContext context) async {
     bool result = await _redemptionController.exchangeVoucher(voucherId);
     if (result) {
       Get.defaultDialog(
@@ -36,6 +38,11 @@ class ExchangeVoucherButton extends StatelessWidget {
         ],
       );
     }
+    else {
+      new CommonFunctions().showErrorDialog(
+          context: context,
+          message: CustomErrorsString.kExchangeFailed.tr);
+    }
   }
 
   @override
@@ -43,7 +50,7 @@ class ExchangeVoucherButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity, //match_parent
       child: ElevatedButton(
-        onPressed: () => _exchangeVoucher(),
+        onPressed: () => _exchangeVoucher(context),
         child: Text(
           CustomStrings.kExchangeNow.tr,
         ),

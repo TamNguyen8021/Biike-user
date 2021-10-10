@@ -235,6 +235,7 @@ final Map<String, String> en = {
   'kNotRated': 'Please rate your trip experience',
   'kIncludeBadWords': 'Please don\'t use bad words',
   'kSendFailed': 'Send feedback failed!',
+  'kExchangeFailed': 'Can\'t exchange voucher!',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
