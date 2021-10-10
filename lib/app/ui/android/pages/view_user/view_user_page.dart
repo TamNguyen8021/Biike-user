@@ -1,6 +1,5 @@
 import 'package:bikes_user/app/controllers/view_user_controller.dart';
 import 'package:bikes_user/app/data/enums/gender_enum.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
@@ -30,7 +29,7 @@ class ViewUserPage extends StatelessWidget {
       CustomElevatedIconButton(
         width: 100,
         onPressedFunc: () => CommonFunctions()
-            .makingPhoneCall(phoneNo: viewUserController.user.userPhoneNumber),
+            .makingPhoneCall(phoneNo: viewUserController.user.phoneNumber),
         text: CustomStrings.kCall.tr,
         elevation: 2.0,
         icon: Icons.phone,
@@ -42,7 +41,7 @@ class ViewUserPage extends StatelessWidget {
         child: CustomElevatedIconButton(
           width: 100,
           onPressedFunc: () => CommonFunctions()
-              .makingSms(phoneNo: viewUserController.user.userPhoneNumber),
+              .makingSms(phoneNo: viewUserController.user.phoneNumber),
           text: CustomStrings.kMessage.tr,
           elevation: 2.0,
           icon: Icons.message,
@@ -104,7 +103,7 @@ class ViewUserPage extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 4.0),
                                     child: Text(
-                                        viewUserController.user.userFullname,
+                                        viewUserController.user.fullName,
                                         style: TextStyle(
                                             fontSize: 18.sp,
                                             color: CustomColors.kDarkGray,
@@ -140,8 +139,8 @@ class ViewUserPage extends StatelessWidget {
                                   ProfileTextField(
                                       isReadOnly: true,
                                       isEditProfile: false,
-                                      initialValue: viewUserController
-                                          .user.userPhoneNumber,
+                                      initialValue:
+                                          viewUserController.user.phoneNumber,
                                       labelText: CustomStrings.kPhoneNo.tr),
                                   Padding(
                                     padding:
@@ -201,7 +200,6 @@ class ViewUserPage extends StatelessWidget {
                                             ),
                                           ],
                                           ListHistoryTrips(
-                                              role: Role.none,
                                               listHistoryTrips:
                                                   viewUserController
                                                       .historyTrips

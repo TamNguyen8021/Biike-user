@@ -21,7 +21,7 @@ class ViewUserProvider extends GetConnect {
   Future getHistoryPairTrips(
       {required int userId, required int partnerId}) async {
     final response = await get(UrlStrings.tripUrl +
-        'historyPair?userOneId=$userId&userTwoId=$partnerId');
+        'historyPair?userOneId=$userId&userTwoId=$partnerId&page=1&limit=10');
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

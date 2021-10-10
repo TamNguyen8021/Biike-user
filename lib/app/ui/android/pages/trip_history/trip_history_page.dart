@@ -20,10 +20,10 @@ class TripHistoryPage extends StatelessWidget {
 
     return FutureBuilder(
         future: _tripHistoryController.getHistoryTrips(
-            context: context, userId: Biike.userId, role: 1),
+            context: context, userId: Biike.userId),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return DefaultTabController(
-            length: 2,
+            length: 1,
             child: Scaffold(
               appBar: CustomAppBar(
                 isVisible: true,
@@ -62,36 +62,20 @@ class TripHistoryPage extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 25.0),
                             child: Text(
-                              CustomStrings.kKeerHistory.tr,
+                              Biike.role.value == Role.keer
+                                  ? CustomStrings.kKeerHistory.tr
+                                  : CustomStrings.kBikerHistory.tr,
                               style: TextStyle(
                                   fontSize: 10.sp, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
-                        Tab(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 25.0),
-                            child: Text(
-                              CustomStrings.kBikerHistory.tr,
-                              style: TextStyle(
-                                  fontSize: 10.sp, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        )
                       ],
                       onTap: (int index) async {
                         switch (index) {
                           case 0:
                             await _tripHistoryController.getHistoryTrips(
-                                context: context,
-                                userId: Biike.userId,
-                                role: 1);
-                            break;
-                          case 1:
-                            await _tripHistoryController.getHistoryTrips(
-                                context: context,
-                                userId: Biike.userId,
-                                role: 2);
+                                context: context, userId: Biike.userId);
                             break;
                           default:
                         }
@@ -102,31 +86,18 @@ class TripHistoryPage extends StatelessWidget {
               ),
               body: snapshot.connectionState == ConnectionState.done
                   ? SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            height: MediaQuery.of(context).size.height,
-                            padding: const EdgeInsets.all(22.0),
-                            child: TabBarView(children: <Widget>[
-                              Obx(
-                                () => ListHistoryTrips(
-                                    role: Role.keer,
-                                    listHistoryTrips: _tripHistoryController
-                                        .historyTrips
-                                        .toList(),
-                                    itemPadding: 16.0),
-                              ),
-                              Obx(
-                                () => ListHistoryTrips(
-                                    role: Role.biker,
-                                    listHistoryTrips: _tripHistoryController
-                                        .historyTrips
-                                        .toList(),
-                                    itemPadding: 16.0),
-                              ),
-                            ]),
-                          )
-                        ],
+                      child: Container(
+                        height: MediaQuery.of(context).size.height,
+                        padding: const EdgeInsets.all(22.0),
+                        child: TabBarView(children: <Widget>[
+                          Obx(
+                            () => ListHistoryTrips(
+                                listHistoryTrips: _tripHistoryController
+                                    .historyTrips
+                                    .toList(),
+                                itemPadding: 16.0),
+                          ),
+                        ]),
                       ),
                     )
                   : Loading(),

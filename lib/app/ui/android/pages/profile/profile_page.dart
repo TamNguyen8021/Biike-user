@@ -78,7 +78,7 @@ class ProfilePage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 6.0),
                                 child: Text(
-                                  _profileController.user.userFullname,
+                                  _profileController.user.fullName,
                                   style: Theme.of(context).textTheme.headline2,
                                 ),
                               ),
@@ -91,7 +91,7 @@ class ProfilePage extends StatelessWidget {
                                     isReadOnly: true,
                                     isEditProfile: false,
                                     initialValue:
-                                        _profileController.user.userPhoneNumber,
+                                        _profileController.user.phoneNumber,
                                     labelText: CustomStrings.kPhoneNo.tr),
                               ),
                               Padding(
@@ -99,8 +99,7 @@ class ProfilePage extends StatelessWidget {
                                 child: ProfileTextField(
                                     isReadOnly: true,
                                     isEditProfile: false,
-                                    initialValue:
-                                        _profileController.user.userEmail,
+                                    initialValue: _profileController.user.email,
                                     labelText: CustomStrings.kEmail.tr),
                               ),
                               Padding(

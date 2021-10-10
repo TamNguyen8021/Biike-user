@@ -9,8 +9,6 @@ import 'package:get/get.dart';
 /// This widget contains a history trip's details
 class HistoryTripCard extends StatelessWidget {
   final int userId;
-  final String avatarUrl;
-  final String name;
   final String time;
   final String date;
   final TripStatus status;
@@ -19,8 +17,6 @@ class HistoryTripCard extends StatelessWidget {
 
   const HistoryTripCard(
       {required this.userId,
-      required this.avatarUrl,
-      required this.name,
       required this.time,
       required this.date,
       required this.status,
@@ -58,62 +54,40 @@ class HistoryTripCard extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth >= 400 ? 8.0 : 5.0),
-                        child: CircleAvatar(
-                          radius: screenWidth >= 400 ? 30 : 29,
-                          backgroundImage: NetworkImage(avatarUrl),
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                right: screenWidth >= 400 ? 16.0 : 5.0),
+                            child: Text(
+                              time,
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                          ),
+                          Text(
+                            date,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      right: screenWidth >= 400 ? 16.0 : 5.0),
-                                  child: Text(
-                                    time,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ),
-                                Text(
-                                  date,
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                              ],
-                            ),
-                            Text(
-                              _statusText,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(color: _statusColor),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Text(
+                      _statusText,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: _statusColor),
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(

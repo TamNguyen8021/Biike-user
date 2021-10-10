@@ -17,10 +17,9 @@ class HomeProvider extends GetConnect {
   /// Loads upcoming trips from API based on [userId] and [role]
   ///
   /// Author: TamNTT
-  Future<List> getUpcomingTrips(
-      {required int userId, required int role}) async {
-    final response = await get(
-        UrlStrings.tripUrl + '$userId/upcoming?role=$role&page=1&limit=10');
+  Future<List> getUpcomingTrips({required int userId}) async {
+    final response =
+        await get(UrlStrings.tripUrl + '$userId/upcoming?page=1&limit=10');
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
@@ -32,8 +31,8 @@ class HomeProvider extends GetConnect {
   /// Loads stations from API.
   ///
   /// Author: TamNTT
-  Future<List> getStations({required int page}) async {
-    final response = await get(UrlStrings.stationUrl + '?$page=$page&limit=10');
+  Future<List> getStations() async {
+    final response = await get(UrlStrings.stationUrl + '?page=1&limit=10');
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

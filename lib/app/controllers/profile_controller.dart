@@ -28,7 +28,7 @@ class ProfileController extends GetxController {
   ///
   /// Author: TamNTT
   void changeName(String name) {
-    user.userFullname = name;
+    user.fullName = name;
   }
 
   /// Gets profile based on [userId] and shows it on [context].
@@ -43,7 +43,7 @@ class ProfileController extends GetxController {
     if (user.birthDate.isNotEmpty) {
       birthDate.value = DateTime.parse(user.birthDate);
     }
-    tempName = user.userFullname;
+    tempName = user.fullName;
     tempGender = user.gender;
     tempBirthDate = user.birthDate;
   }
@@ -60,7 +60,7 @@ class ProfileController extends GetxController {
   Future<void> editProfile(
       {required BuildContext context, required User user}) async {
     Map<String, dynamic> newUserProfile = {};
-    newUserProfile.putIfAbsent('userFullname', () => user.userFullname);
+    newUserProfile.putIfAbsent('userFullname', () => user.fullName);
     newUserProfile.putIfAbsent('gender', () => user.gender);
     newUserProfile.putIfAbsent('birthDate',
         () => DateFormat('yyyy-MM-dd').format(DateTime.parse(user.birthDate)));

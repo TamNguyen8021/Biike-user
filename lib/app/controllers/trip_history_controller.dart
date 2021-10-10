@@ -23,12 +23,9 @@ class TripHistoryController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getHistoryTrips(
-      {required BuildContext context,
-      required int userId,
-      required int role}) async {
+      {required BuildContext context, required int userId}) async {
     historyTrips.clear();
-    List response =
-        await _tripHistoryProvider.getHistoryTrips(userId: userId, role: role);
+    List response = await _tripHistoryProvider.getHistoryTrips(userId: userId);
     // print(response);
 
     for (var historyTrip in response) {
@@ -72,8 +69,6 @@ class TripHistoryController extends GetxController {
 
       HistoryTripCard historyTripCard = HistoryTripCard(
           userId: user.userId,
-          avatarUrl: user.avatar,
-          name: user.userFullname,
           time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
           date: date,
           status: tripStatus,

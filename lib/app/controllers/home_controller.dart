@@ -1,5 +1,4 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/starting_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
@@ -24,7 +23,6 @@ class HomeController extends GetxController {
 
   List upcomingTrips = [];
   Map<int?, String> stations = {};
-  final Role _role = Role.none;
 
   /// Show/hide appbar depends on [isVisible]
   ///
@@ -38,8 +36,7 @@ class HomeController extends GetxController {
   /// Author: TamNTT
   Future<void> getUpcomingTrips({required BuildContext context}) async {
     upcomingTrips.clear();
-    List response = await _homeProvider.getUpcomingTrips(
-        userId: Biike.userId, role: _role.getRoleNum(Biike.role.value));
+    List response = await _homeProvider.getUpcomingTrips(userId: Biike.userId);
     // print('response: ' + response.toString());
     // print('response length: ' + response.length.toString());
     for (int i = 0; i < response.length; i++) {
@@ -72,8 +69,8 @@ class HomeController extends GetxController {
           foregroundColor: foregroundColor,
           iconColor: iconColor,
           avatarUrl: user.avatar,
-          name: user.userFullname,
-          phoneNo: user.userPhoneNumber,
+          name: user.fullName,
+          phoneNo: user.phoneNumber,
           time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
           date: date,
           year: DateTime.parse(trip.timeBook).year,
@@ -89,7 +86,7 @@ class HomeController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getStations({required int page}) async {
-    List response = await _homeProvider.getStations(page: page);
+    List response = await _homeProvider.getStations();
     for (var station in response) {
       StartingStation startingStation = StartingStation.fromJson(station);
       stations.putIfAbsent(

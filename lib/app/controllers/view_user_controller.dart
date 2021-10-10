@@ -87,8 +87,6 @@ class ViewUserController extends GetxController {
 
       HistoryTripCard historyTripCard = HistoryTripCard(
           userId: user.userId,
-          avatarUrl: user.avatar,
-          name: user.userFullname,
           time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
           date: date,
           status: tripStatus,

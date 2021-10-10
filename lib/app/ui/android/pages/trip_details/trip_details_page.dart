@@ -356,7 +356,7 @@ class TripDetailsPage extends StatelessWidget {
                                                 bottom: 5.0, top: 10.0),
                                             child: Text(
                                               _tripDetailsController
-                                                  .user.userFullname,
+                                                  .user.fullName,
                                               style: TextStyle(
                                                   color: CustomColors.kBlue,
                                                   fontWeight: FontWeight.bold),
@@ -371,7 +371,7 @@ class TripDetailsPage extends StatelessWidget {
                                                 vertical: 10.0),
                                             child: ContactButtons(
                                               phoneNo: _tripDetailsController
-                                                  .user.userPhoneNumber,
+                                                  .user.phoneNumber,
                                             ),
                                           ),
                                         ],

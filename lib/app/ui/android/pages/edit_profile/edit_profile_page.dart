@@ -19,7 +19,7 @@ class EditProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<bool> isSaveButtonDisable = _profileController
         .isSaveButtonDisable(
-            newName: _profileController.user.userFullname,
+            newName: _profileController.user.fullName,
             newGender: _profileController.user.gender,
             newBirthDate: _profileController.user.birthDate)
         .obs;
@@ -67,13 +67,13 @@ class EditProfilePage extends StatelessWidget {
                     ProfileTextField(
                         isReadOnly: false,
                         isEditProfile: true,
-                        initialValue: _profileController.user.userFullname,
+                        initialValue: _profileController.user.fullName,
                         labelText: CustomStrings.kFullName.tr,
                         onChangedFunc: (String name) {
                           _profileController.changeName(name);
                           isSaveButtonDisable.value =
                               _profileController.isSaveButtonDisable(
-                                  newName: _profileController.user.userFullname,
+                                  newName: _profileController.user.fullName,
                                   newGender: _profileController.user.gender,
                                   newBirthDate:
                                       _profileController.user.birthDate);
@@ -81,12 +81,12 @@ class EditProfilePage extends StatelessWidget {
                     ProfileTextField(
                         isReadOnly: true,
                         isEditProfile: true,
-                        initialValue: _profileController.user.userPhoneNumber,
+                        initialValue: _profileController.user.phoneNumber,
                         labelText: CustomStrings.kPhoneNo.tr),
                     ProfileTextField(
                       isReadOnly: true,
                       isEditProfile: true,
-                      initialValue: _profileController.user.userEmail,
+                      initialValue: _profileController.user.email,
                       labelText: CustomStrings.kEmail.tr,
                     ),
                     DropdownButtonFormField<int>(
@@ -128,7 +128,7 @@ class EditProfilePage extends StatelessWidget {
                         _profileController.changeGender(gender);
                         isSaveButtonDisable.value =
                             _profileController.isSaveButtonDisable(
-                                newName: _profileController.user.userFullname,
+                                newName: _profileController.user.fullName,
                                 newGender: _profileController.user.gender,
                                 newBirthDate:
                                     _profileController.user.birthDate);
@@ -150,8 +150,7 @@ class EditProfilePage extends StatelessWidget {
                                 _profileController.birthDate.value.toString();
                             isSaveButtonDisable.value =
                                 _profileController.isSaveButtonDisable(
-                                    newName:
-                                        _profileController.user.userFullname,
+                                    newName: _profileController.user.fullName,
                                     newGender: _profileController.user.gender,
                                     newBirthDate:
                                         _profileController.user.birthDate);
@@ -165,6 +164,7 @@ class EditProfilePage extends StatelessWidget {
                                 _profileController.editProfile(
                                     context: context,
                                     user: _profileController.user);
+                                isSaveButtonDisable.value = true;
                               },
                         text: CustomStrings.kSave.tr,
                         icon: Icons.save,
