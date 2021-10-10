@@ -3,7 +3,6 @@ import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -15,10 +14,8 @@ class YourVoucherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Voucher voucher = Voucher.fromJson(data);
     return GestureDetector(
-        onTap: () => Get.toNamed(
-            CommonRoutes.YOUR_VOUCHER_DETAIL,
-            arguments: data),
-
+        onTap: () =>
+            Get.toNamed(CommonRoutes.YOUR_VOUCHER_DETAIL, arguments: data),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
           decoration: BoxDecoration(
@@ -53,10 +50,8 @@ class YourVoucherCard extends StatelessWidget {
                   Text(
                     // 'Voucher Passio\nTrị giá 20.000đ',
                     voucher.voucherName,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.black),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -81,7 +76,6 @@ class YourVoucherCard extends StatelessWidget {
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }

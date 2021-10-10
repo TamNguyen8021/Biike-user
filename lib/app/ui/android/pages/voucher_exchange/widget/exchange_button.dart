@@ -2,7 +2,6 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/return_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/view_voucher_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,11 +49,10 @@ class ExchangeVoucherButton extends StatelessWidget {
         ),
         style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsets>(
-                EdgeInsets.symmetric(horizontal: 35.0)
-            ),
-            backgroundColor: MaterialStateProperty.all<Color>(CustomColors.kBlue),
-            elevation: MaterialStateProperty.all<double>(0.0)
-        ),
+                EdgeInsets.symmetric(horizontal: 35.0)),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(CustomColors.kBlue),
+            elevation: MaterialStateProperty.all<double>(0.0)),
       ),
     );
   }
