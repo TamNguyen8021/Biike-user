@@ -11,9 +11,8 @@ class RedemptionProvider extends CommonProvider {
   }
 
   Future<dynamic> getYourVoucherList({userId}) async {
-    var url = '$apiUrl/redemptions/users/$userId/full?page=1&limit=10';
     final response = await
-    get(url, headers: await getHeaders());
+      get('$apiUrl/redemptions/users/$userId/full?page=1&limit=10', headers: await getHeaders());
 
     if (response.statusCode == 200) {
       return response.body['data'];
