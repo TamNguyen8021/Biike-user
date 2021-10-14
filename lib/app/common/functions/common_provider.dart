@@ -7,7 +7,7 @@ class CommonProvider extends GetConnect {
   /// Return header to attach to api request
   ///
   /// Author: UyenNLP
-  Future<Map<String, String>> getHeaders() async {
+  Future<Map<String, String>> get headers async {
     var token = await new LocalAppData().token;
     return <String, String> {
       'Authorization' : 'Bearer $token'

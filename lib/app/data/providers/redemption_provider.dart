@@ -1,11 +1,10 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class RedemptionProvider extends CommonProvider {
   Future<dynamic> exchangeVoucher(data) async {
     final response = await post('$apiUrl/redemptions', data,
-      headers: await getHeaders());
+      headers: await headers);
 
     return response.statusCode == HttpStatus.created
         ? Future.value(response)
@@ -14,7 +13,8 @@ class RedemptionProvider extends CommonProvider {
 
   Future<dynamic> getYourVoucherList({userId}) async {
     final response = await
-      get('$apiUrl/redemptions/users/$userId/full?page=1&limit=10', headers: await getHeaders());
+      get('$apiUrl/redemptions/users/$userId/full?page=1&limit=10',
+          headers: await headers);
 
     if (response.statusCode ==  HttpStatus.ok) {
       return response.body['data'];
@@ -24,7 +24,7 @@ class RedemptionProvider extends CommonProvider {
 
   Future<dynamic> getRedemptionDetailByRedemptionId(redemptionId) async {
     final response = await get('$apiUrl/redemptions/$redemptionId/full',
-      headers: await getHeaders());
+      headers: await headers);
 
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
