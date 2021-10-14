@@ -9,13 +9,13 @@ import 'package:get/get.dart';
 
 class VoucherDetailPage extends StatelessWidget {
   final voucherController = Get.find<VoucherController>();
-  final voucher;
 
-  VoucherDetailPage({Key? key, this.voucher}) : super(key: key);
+  VoucherDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Voucher voucher = Get.arguments;
+    // Voucher voucher = Voucher.fromJson(data);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -39,7 +39,7 @@ class VoucherDetailPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ExchangeVoucherButton(voucherId: voucher.voucherId),
+              child: ExchangeVoucherButton(voucher: voucher),
             ),
           ],
         ),

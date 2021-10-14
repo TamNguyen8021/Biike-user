@@ -2,6 +2,8 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
+import 'package:bikes_user/app/controllers/wallet_controller.dart';
+import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/return_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/view_voucher_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -11,13 +13,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExchangeVoucherButton extends StatelessWidget {
   final _redemptionController = Get.find<RedemptionController>();
+  final _walletController = Get.find<WalletController>();
 
-  final int voucherId;
-  ExchangeVoucherButton({Key? key, required this.voucherId}) : super(key: key);
+  final Voucher voucher;
+  ExchangeVoucherButton({Key? key, required this.voucher}) : super(key: key);
 
   _exchangeVoucher(BuildContext context) async {
-    bool result = await _redemptionController.exchangeVoucher(voucherId);
-    if (result) {
+    if (_walletController.isNotEnoughPoint(voucherPoint: voucher.amountOfPoint!)) {
+      new CommonFunctions().showErrorDialog(
+          context: context,
+          message: CustomErrorsString.kNotEnoughPoint.tr);
+      return;
+    }
+
+    dynamic result = await _redemptionController.exchangeVoucher(voucher.voucherId);
+    if (result is String) {
+      new CommonFunctions().showErrorDialog(
+          context: context,
+          message: result == ''
+              ? CustomErrorsString.kExchangeFailed.tr
+              : result);
+    } else {
+      _walletController.updateWalletPoint();
+      int redemptionId = CommonFunctions.
+          getIdFromUrl(url: result.headers['location'] as String);
+
       Get.defaultDialog(
         title: CustomStrings.kExchangeVoucherSuccess.tr,
         content: Padding(
@@ -31,17 +51,12 @@ class ExchangeVoucherButton extends StatelessWidget {
         actions: [
           Column(
             children: [
-              ViewVoucherButton(),
+              ViewVoucherButton(redemptionId: redemptionId),
               ReturnToVoucherPageButton(),
             ],
           ),
         ],
       );
-    }
-    else {
-      new CommonFunctions().showErrorDialog(
-          context: context,
-          message: CustomErrorsString.kExchangeFailed.tr);
     }
   }
 

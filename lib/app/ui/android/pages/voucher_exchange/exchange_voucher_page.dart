@@ -1,5 +1,5 @@
-import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
+import 'package:bikes_user/app/controllers/wallet_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -16,11 +16,12 @@ class ExchangeVoucherPage extends StatelessWidget {
   ExchangeVoucherPage({Key? key}) : super(key: key);
 
   final _voucherController = Get.find<VoucherController>();
-  final _profileController = Get.find<ProfileController>();
+  final _walletController = Get.find<WalletController>();
 
 
   @override
   Widget build(BuildContext context) {
+    _walletController.getTotalWalletPoint();
     return FutureBuilder(
       future: _voucherController.getVoucherList(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -49,24 +50,27 @@ class ExchangeVoucherPage extends StatelessWidget {
                             offset: Offset(0, 1.5),
                           )
                         ]),
-                    child: Text.rich(TextSpan(children: <InlineSpan>[
-                      TextSpan(
-                          text: _profileController.user.totalPoint.toString(),
-                          style: TextStyle(fontSize: 11.sp, color: Colors.white)),
-                      WidgetSpan(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2.0),
-                          )),
-                      WidgetSpan(
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 2.0),
-                            child: SvgPicture.asset(
-                              'assets/images/crown.svg',
-                              height: 10.sp,
-                              color: Colors.white,
-                            ),
-                          ))
-                    ])),
+                    child: Obx(() =>
+                        Text.rich(TextSpan(children: <InlineSpan>[
+                          TextSpan(
+                              text: _walletController.totalWalletPoint.toString(),
+                              style: TextStyle(fontSize: 11.sp, color: Colors.white)),
+                          WidgetSpan(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 2.0),
+                              )),
+                          WidgetSpan(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 2.0),
+                                child: SvgPicture.asset(
+                                  'assets/images/crown.svg',
+                                  height: 10.sp,
+                                  color: Colors.white,
+                                ),
+                              ))
+                        ]),
+                      ),
+                    ),
                   ),
                 )
               ],
