@@ -21,7 +21,7 @@ class ExchangeVoucherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _walletController.getTotalWalletPoint();
+    _walletController.updateWalletPoint();
     return FutureBuilder(
       future: _voucherController.getVoucherList(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {

@@ -7,23 +7,25 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 class WalletController extends GetxController {
   Rx<int> totalWalletPoint = 0.obs;
 
-  Future<void> getTotalWalletPoint() async {
-    List<Wallet> walletList = (await new WalletProvider()
+  Future<List<Wallet>> getUserWalletsList() async {
+    return (await new WalletProvider()
         .getUserWalletList(userId: await new LocalAppData().userId) as List)
-        .map((e) => Wallet.fromJson(e))
+        .map((w) => Wallet.fromJson(w))
         .toList();
+  }
 
-    for(Wallet wallet in walletList) {
-      totalWalletPoint.value += wallet.point ?? 0;
+  Future<void> updateWalletPoint() async {
+    List<Wallet> walletList = await getUserWalletsList();
+
+    int total = 0;
+    for (Wallet wallet in walletList) {
+      total += wallet.point ?? 0;
     }
+
+    totalWalletPoint.value = total;
   }
 
   bool isNotEnoughPoint({required int voucherPoint}) {
     return voucherPoint > totalWalletPoint.value;
-  }
-
-  void updateWalletPoint() {
-    totalWalletPoint.value = 0;
-    getTotalWalletPoint();
   }
 }
