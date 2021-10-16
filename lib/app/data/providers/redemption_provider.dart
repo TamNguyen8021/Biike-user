@@ -12,7 +12,7 @@ class RedemptionProvider extends CommonProvider {
         : Future.value(response.bodyString ?? '');
   }
 
-  Future<dynamic> getYourVoucherList({userId}) async {
+  Future<dynamic> getYourVoucherList({required int userId}) async {
     final response = await get(
         UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10',
         headers: await headers);
