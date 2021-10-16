@@ -7,7 +7,7 @@ class RedemptionController extends GetxController {
 
   Future<dynamic> exchangeVoucher(voucherId) async {
     Map<String, dynamic> data = <String, dynamic>{
-      'userId': Biike.userId,
+      'userId': Biike.userId.value,
       'voucherId': voucherId
     };
 
