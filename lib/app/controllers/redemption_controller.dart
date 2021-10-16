@@ -1,23 +1,27 @@
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
-import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/data/providers/redemption_provider.dart';
 import 'package:get/get.dart';
 
 class RedemptionController extends GetxController {
-  final _profileController = Get.find<ProfileController>();
   RxList<dynamic> yourVoucherList = [].obs;
 
-  Future<bool> exchangeVoucher(voucherId) {
+  Future<dynamic> exchangeVoucher(voucherId) async {
     Map<String, dynamic> data = <String, dynamic>{
-      'userId' : _profileController.user.userId,
-      'voucherId' : voucherId
+      'userId': await LocalAppData().userId,
+      'voucherId': voucherId
     };
 
-    return new RedemptionProvider().exchangeVoucher(data);
+    return await RedemptionProvider().exchangeVoucher(data);
   }
 
   Future<void> getYourVoucherList() async {
-    yourVoucherList.value = await new RedemptionProvider()
-        .getYourVoucherList(userId: await new LocalAppData().getUserId());
+    yourVoucherList.value = await RedemptionProvider()
+        .getYourVoucherList(userId: await LocalAppData().userId);
+  }
+
+  Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
+      redemptionId) async {
+    return await RedemptionProvider()
+        .getRedemptionDetailByRedemptionId(redemptionId);
   }
 }

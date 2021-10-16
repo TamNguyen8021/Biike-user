@@ -18,7 +18,7 @@ class LocalAppData {
   /// Get user Id
   ///
   /// Author: UyenNLP
-  Future<int> getUserId() async {
+  Future<int> get userId async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getInt('userId') ?? -1;
   }
@@ -26,7 +26,7 @@ class LocalAppData {
   /// Get api idToken saved when login
   ///
   /// Author: UyenNLP
-  Future<String> getToken() async {
+  Future<String> get token async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('token') ?? '';
   }

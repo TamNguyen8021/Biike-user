@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 child: Scaffold(
                   appBar: PreferredSize(
                     preferredSize:
-                        Size.fromHeight(new AppBar().preferredSize.height),
+                        Size.fromHeight(AppBar().preferredSize.height),
                     child: Builder(
                       builder: (context) {
                         switch (DefaultTabController.of(context)!.index) {

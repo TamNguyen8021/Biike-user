@@ -34,7 +34,7 @@ class TripHistoryPage extends StatelessWidget {
                   CustomStrings.kHistory.tr,
                 ),
                 bottomAppBar: PreferredSize(
-                  preferredSize: new Size.fromHeight(0),
+                  preferredSize: Size.fromHeight(0),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
