@@ -17,18 +17,18 @@ class User {
   late String userPhoneNumber;
 
   @JsonKey(defaultValue: '')
-  late String userEmail;
+  late String email;
 
   @JsonKey(defaultValue: CustomStrings.kFinding)
   late String userFullname;
 
-  @JsonKey(defaultValue: 'assets/images/loading.svg')
+  @JsonKey(defaultValue: '')
   late String avatar;
 
   @JsonKey(defaultValue: -1)
   late int gender;
 
-  @JsonKey(defaultValue: '2000-01-01 00:00:00Z')
+  @JsonKey(defaultValue: '')
   late String birthDate;
 
   int? userStatus;
@@ -46,7 +46,7 @@ class User {
 
   User(
       this.userPhoneNumber,
-      this.userEmail,
+      this.email,
       this.userFullname,
       this.avatar,
       this.gender,
@@ -61,7 +61,7 @@ class User {
   User.empty() {
     this.userId = -1;
     this.avatar = '';
-    this.userEmail = '';
+    this.email = '';
     this.userFullname = '';
     this.userPhoneNumber = '';
     this.gender = -1;

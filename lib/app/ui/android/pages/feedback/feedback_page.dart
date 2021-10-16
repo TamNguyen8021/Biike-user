@@ -34,9 +34,7 @@ class FeedbackPage extends StatelessWidget {
       onWillPop: () => CommonFunctions()
           .onBackPressed(errorMessage: CustomErrorsString.kNotRated),
       child: Scaffold(
-        // resizeToAvoidBottomInset: false,
         body: Container(
-          // alignment: Alignment.center,
           child: SafeArea(
             child: SingleChildScrollView(
               child:
@@ -45,7 +43,6 @@ class FeedbackPage extends StatelessWidget {
                 Container(
                   height: 180,
                   child: Stack(
-                    // alignment: Alignment.center,
                     children: <Widget>[
                       CustomPaint(
                         painter: HalfOvalPainter(),
@@ -95,7 +92,7 @@ class FeedbackPage extends StatelessWidget {
                                   children: <Widget>[
                                     Text(
                                       "EXP",
-                                      style: new TextStyle(
+                                      style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),
                                     Padding(
@@ -105,13 +102,13 @@ class FeedbackPage extends StatelessWidget {
                                         size: 20, color: Colors.white),
                                   ],
                                 ),
-                                decoration: new BoxDecoration(
-                                  borderRadius: new BorderRadius.all(
-                                      new Radius.circular(20.0)),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
                                   color: CustomColors.kOrange,
                                 ),
-                                padding: new EdgeInsets.fromLTRB(
-                                    15.0, 5.0, 15.0, 5.0),
+                                padding:
+                                    EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
                               )
                             : Padding(padding: const EdgeInsets.only(top: 2.0)),
                         Padding(
@@ -141,7 +138,6 @@ class FeedbackPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     RatingBar(
-                                      //initialRating: 3,
                                       minRating: 1,
                                       allowHalfRating: false,
                                       itemCount: 5,

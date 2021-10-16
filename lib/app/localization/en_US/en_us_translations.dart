@@ -181,6 +181,13 @@ final Map<String, String> en = {
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
   'kPartnerFeedback': 'Partner\'s feedback',
+  'kOpenStreetMap': 'View Open Street Map',
+  'kCancelTripSuccess': 'Your trip was canceled',
+  'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
+  'kViewCancelTripReminder': 'You can view your canceled trips in history',
+  'kLetUsKnowYourCancelReason':
+      'Please let us know why you want to cancel this trip',
+  'kEnterYourCancelReason': 'Enter your reason here',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -215,18 +222,18 @@ final Map<String, String> en = {
   'kTakePictureAgain': 'Chụp lại',
 
   // 'voucher_detail' screen
-  'kGiftDetail' : 'Gift details',
-  'kYourVoucher' : 'Your vouchers',
-  'kVoucherDetail' : 'Voucher detail',
-  'kYourVoucherDetail' : 'Your voucher detail',
-  'kTermsAndConditions' : 'Terms and conditions',
-  'kAvailableUntil' : 'Available until ',
-  'kExchangeNow' : 'Exchange now',
-  'kBrand' : 'Brand: ',
-  'kHsd' : 'Until: ',
-  'kYourCode' : 'Your code',
-  'kExchangeVoucherSuccess' : 'Exchange voucher successful!',
-  'kViewAVoucher' : 'View',
+  'kGiftDetail': 'Gift details',
+  'kYourVoucher': 'Your vouchers',
+  'kVoucherDetail': 'Voucher detail',
+  'kYourVoucherDetail': 'Your voucher detail',
+  'kTermsAndConditions': 'Terms and conditions',
+  'kAvailableUntil': 'Available until ',
+  'kExchangeNow': 'Exchange now',
+  'kBrand': 'Brand: ',
+  'kHsd': 'Until: ',
+  'kYourCode': 'Your code',
+  'kExchangeVoucherSuccess': 'Exchange voucher successful!',
+  'kViewAVoucher': 'View',
 
   // Error message
   'kError': 'Error!',
@@ -235,6 +242,10 @@ final Map<String, String> en = {
   'kNotRated': 'Please rate your trip experience',
   'kIncludeBadWords': 'Please don\'t use bad words',
   'kSendFailed': 'Send feedback failed!',
+  'kDevelopError':
+      'There are some errors, please contact Biiké development team for support',
+  'kExchangeFailed': 'Can\'t exchange voucher!',
+  'kNotEnoughPoint': 'User doesn\'t have enough point',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',

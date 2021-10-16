@@ -23,7 +23,6 @@ class RegisterController extends GetxController {
       return;
     }
 
-    // dang ky
     signup(name, email, phone, pass);
   }
 
@@ -47,7 +46,6 @@ class RegisterController extends GetxController {
   }
 
   bool validate(String name, String email, String pass, String phone) {
-    //validate
     String error = _validate(name, email, pass, phone);
     if (error.isNotEmpty) {
       errorMessage = error;

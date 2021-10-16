@@ -99,8 +99,7 @@ class ProfilePage extends StatelessWidget {
                                 child: ProfileTextField(
                                     isReadOnly: true,
                                     isEditProfile: false,
-                                    initialValue:
-                                        _profileController.user.userEmail,
+                                    initialValue: _profileController.user.email,
                                     labelText: CustomStrings.kEmail.tr),
                               ),
                               Padding(

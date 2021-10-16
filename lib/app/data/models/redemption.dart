@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-/// This allows the `DestinationStation` class to access private members in
+/// This allows the `Redemption` class to access private members in
 /// the generated file. The value for this is *.g.dart, where
 /// the star denotes the source file name.
 part 'redemption.g.dart';
@@ -27,14 +27,14 @@ class Redemption {
     required this.redemptionDate,
   });
 
-  /// A necessary factory constructor for creating a new DestinationStation instance
-  /// from a map. Pass the map to the generated `_$DestinationStationFromJson()` constructor.
-  /// The constructor is named after the source class, in this case, DestinationStation.
+  /// A necessary factory constructor for creating a new Redemption instance
+  /// from a map. Pass the map to the generated `_$RedemptionFromJson()` constructor.
+  /// The constructor is named after the source class, in this case, Redemption.
   factory Redemption.fromJson(Map<String, dynamic> json) =>
       _$RedemptionFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
   /// to JSON. The implementation simply calls the private, generated
-  /// helper method `_$DestinationStationToJson`.
+  /// helper method `_$RedemptionToJson`.
   Map<String, dynamic> toJson() => _$RedemptionToJson(this);
 }

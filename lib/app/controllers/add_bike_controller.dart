@@ -4,7 +4,6 @@ import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class AddBikeController extends GetxController {
-  Rx<int> userId = Biike.userId.obs;
   Rx<String> plateNumber = ''.obs;
   Rx<String> bikeOwner = ''.obs;
   Rx<String> picture = ''.obs;
@@ -21,12 +20,12 @@ class AddBikeController extends GetxController {
     picture.value = 'pic:url';
 
     Map<String, dynamic> data = <String, dynamic>{
-      'userId' : userId.value,
-      'plateNumber' : plateNumber.value,
-      'bikeOwner' : bikeOwner.value,
-      'picture' : picture.value,
-      'color' : color.value,
-      'brand' : brand.value,
+      'userId': Biike.userId.value,
+      'plateNumber': plateNumber.value,
+      'bikeOwner': bikeOwner.value,
+      'picture': picture.value,
+      'color': color.value,
+      'brand': brand.value,
     };
 
     bool result = await new BikeProvider().addBike(data);
@@ -35,8 +34,7 @@ class AddBikeController extends GetxController {
       SnackBarServices.showSnackbar(
           title: '', message: 'Đã thêm xe.\nVui lòng đợi Admin duyệt!');
     } else {
-      SnackBarServices.showSnackbar(
-          title: '', message: 'Thêm xe thất bại!');
+      SnackBarServices.showSnackbar(title: '', message: 'Thêm xe thất bại!');
     }
   }
 
@@ -54,8 +52,10 @@ class AddBikeController extends GetxController {
   }
 
   String _validate() {
-    if (plateNumber.value.replaceAll(" ", "").isEmpty || bikeOwner.value.replaceAll(" ", "").isEmpty
-        || color.value.replaceAll(" ", "").isEmpty || brand.value.replaceAll(" ", "").isEmpty) {
+    if (plateNumber.value.replaceAll(" ", "").isEmpty ||
+        bikeOwner.value.replaceAll(" ", "").isEmpty ||
+        color.value.replaceAll(" ", "").isEmpty ||
+        brand.value.replaceAll(" ", "").isEmpty) {
       return 'Not null';
     }
 

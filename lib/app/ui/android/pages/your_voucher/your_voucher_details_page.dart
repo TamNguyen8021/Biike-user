@@ -43,15 +43,12 @@ class YourVoucherDetailPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
-                children: [
+                children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(
-                        CustomStrings.kYourCode.tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 16.0),
+                    child: Text(CustomStrings.kYourCode.tr,
+                        style: Theme.of(context).textTheme.bodyText2!),
                   ),
                   Expanded(
                     child: Padding(
@@ -67,7 +64,9 @@ class YourVoucherDetailPage extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
-                                  .copyWith(color: CustomColors.kDarkGray, fontWeight: FontWeight.bold),
+                                  .copyWith(
+                                      color: CustomColors.kDarkGray,
+                                      fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

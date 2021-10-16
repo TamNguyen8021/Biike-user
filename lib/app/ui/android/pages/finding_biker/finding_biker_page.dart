@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-/// The '014-cus-book-now' screen
+/// The 'finding_biker' screen
 class FindingBikerPage extends StatelessWidget {
   const FindingBikerPage({Key? key}) : super(key: key);
 

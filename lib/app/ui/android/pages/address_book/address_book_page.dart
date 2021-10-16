@@ -6,14 +6,12 @@ import 'package:bikes_user/app/ui/android/widgets/lists/list_address_books.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// The address book screen
+/// The 'address_book' screen
 class AddressBookPage extends StatelessWidget {
   const AddressBookPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final addressBookController = Get.find<AddressBookController>();
-
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,

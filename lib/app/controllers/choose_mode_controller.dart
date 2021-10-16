@@ -37,6 +37,7 @@ class ChooseModeController extends GetxController {
       keerTitleAndIconColor.value = CustomColors.kBlue;
       keerTextColor.value = CustomColors.kDarkGray;
     }
+    Biike.localAppData.saveRole(Biike.role.value);
   }
 
   void selectBikerMode() {
@@ -60,5 +61,6 @@ class ChooseModeController extends GetxController {
       bikerTitleAndIconColor.value = CustomColors.kBlue;
       bikerTextColor.value = CustomColors.kDarkGray;
     }
+    Biike.localAppData.saveRole(Biike.role.value);
   }
 }

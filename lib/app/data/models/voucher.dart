@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-/// This allows the `DestinationStation` class to access private members in
+/// This allows the `Voucher` class to access private members in
 /// the generated file. The value for this is *.g.dart, where
 /// the star denotes the source file name.
 part 'voucher.g.dart';
@@ -21,29 +21,28 @@ class Voucher {
   String description;
   String termsAndConditions;
 
-  Voucher({
-    required this.voucherId,
-    required this.voucherCategoryId,
-    required this.voucherName,
-    required this.brand,
-    required this.startDate,
-    required this.endDate,
-    this.quantity,
-    this.remaining,
-    this.amountOfPoint,
-    required this.description,
-    required this.termsAndConditions
-  });
+  Voucher(
+      {required this.voucherId,
+      required this.voucherCategoryId,
+      required this.voucherName,
+      required this.brand,
+      required this.startDate,
+      required this.endDate,
+      this.quantity,
+      this.remaining,
+      this.amountOfPoint,
+      required this.description,
+      required this.termsAndConditions});
 
-  /// A necessary factory constructor for creating a new DestinationStation instance
-  /// from a map. Pass the map to the generated `_$DestinationStationFromJson()` constructor.
-  /// The constructor is named after the source class, in this case, DestinationStation.
+  /// A necessary factory constructor for creating a new Voucher instance
+  /// from a map. Pass the map to the generated `_$VoucherFromJson()` constructor.
+  /// The constructor is named after the source class, in this case, Voucher.
   factory Voucher.fromJson(Map<String, dynamic> json) =>
       _$VoucherFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
   /// to JSON. The implementation simply calls the private, generated
-  /// helper method `_$DestinationStationToJson`.
+  /// helper method `_$VoucherToJson`.
   Map<String, dynamic> toJson() => _$VoucherToJson(this);
 
   void setAmountOfPoint(point) {

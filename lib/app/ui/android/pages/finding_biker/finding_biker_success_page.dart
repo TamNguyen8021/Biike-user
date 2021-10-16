@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-/// The '016-cus-book-now-success' screen
+/// The 'finding_biker_success' screen
 class FindingBikerSuccessPage extends StatelessWidget {
   const FindingBikerSuccessPage({Key? key}) : super(key: key);
 

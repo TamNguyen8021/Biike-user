@@ -183,6 +183,13 @@ final Map<String, String> vi = {
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
   'kPartnerFeedback': 'Feedback từ người đồng hành',
+  'kOpenStreetMap': 'Mở Open Street Map',
+  'kCancelTripSuccess': 'Hủy chuyến thành công',
+  'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
+  'kViewCancelTripReminder':
+      'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
+  'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
+  'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -217,18 +224,18 @@ final Map<String, String> vi = {
   'kTakePictureAgain': 'Chụp lại',
 
   // 'voucher_detail' screen
-  'kGiftDetail' : 'Chi tiết quà tặng',
-  'kYourVoucher' : 'Quà của bạn',
-  'kVoucherDetail' : 'Thông tin voucher',
-  'kYourVoucherDetail' : 'Chi tiết quà của bạn',
-  'kTermsAndConditions' : 'Điều kiện sử dụng',
-  'kAvailableUntil' : 'Ưu đãi đến ',
-  'kExchangeNow' : 'Đổi ngay',
-  'kBrand' : 'Cửa hàng: ',
-  'kHsd' : 'HSD: ',
-  'kYourCode' : 'Mã của bạn',
-  'kExchangeVoucherSuccess' : 'Đổi voucher thành công!',
-  'kViewAVoucher' : 'Xem',
+  'kGiftDetail': 'Chi tiết quà tặng',
+  'kYourVoucher': 'Quà của bạn',
+  'kVoucherDetail': 'Thông tin voucher',
+  'kYourVoucherDetail': 'Chi tiết quà của bạn',
+  'kTermsAndConditions': 'Điều kiện sử dụng',
+  'kAvailableUntil': 'Ưu đãi đến ',
+  'kExchangeNow': 'Đổi ngay',
+  'kBrand': 'Cửa hàng: ',
+  'kHsd': 'HSD: ',
+  'kYourCode': 'Mã của bạn',
+  'kExchangeVoucherSuccess': 'Đổi voucher thành công!',
+  'kViewAVoucher': 'Xem',
 
   // Error message
   'kError': 'Thông báo lỗi',
@@ -237,6 +244,10 @@ final Map<String, String> vi = {
   'kNotRated': 'Hãy đánh giá chuyến đi của bạn.',
   'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
   'kSendFailed': 'Gửi feedback thất bại!',
+  'kDevelopError':
+      'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
+  'kExchangeFailed': 'Không thể đổi voucher!',
+  'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
