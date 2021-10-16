@@ -22,8 +22,9 @@ class HomeProvider extends CommonProvider {
   /// Author: TamNTT
   Future<Map<String, dynamic>> getStations(
       {required int page, required int limit}) async {
-    final response =
-        await get(UrlStrings.stationUrl + '?page=$page&limit=$limit');
+    final response = await get(
+        UrlStrings.stationUrl + '?page=$page&limit=$limit',
+        headers: await headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

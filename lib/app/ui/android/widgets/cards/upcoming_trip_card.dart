@@ -19,8 +19,8 @@ class UpcomingTripCard extends StatelessWidget {
   final String avatarUrl;
   final String name;
   final String phoneNo;
-  final String timeBook;
-  final String sourceStation;
+  final String bookTime;
+  final String departureStation;
   final String destinationStation;
 
   const UpcomingTripCard(
@@ -33,14 +33,14 @@ class UpcomingTripCard extends StatelessWidget {
       required this.avatarUrl,
       required this.name,
       required this.phoneNo,
-      required this.timeBook,
-      required this.sourceStation,
+      required this.bookTime,
+      required this.departureStation,
       required this.destinationStation})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DateTime _dateTime = DateTime.parse(timeBook);
+    DateTime _dateTime = DateTime.parse(bookTime);
     String _date = _dateTime.day.toString() +
         ' Th ' +
         _dateTime.month.toString() +
@@ -81,7 +81,7 @@ class UpcomingTripCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 16.0, horizontal: 24.0),
                           child: SvgPicture.asset(
-                            avatarUrl,
+                            'assets/images/loading.svg',
                             height: 50,
                           ),
                         ),
@@ -152,7 +152,7 @@ class UpcomingTripCard extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          sourceStation,
+                          departureStation,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!

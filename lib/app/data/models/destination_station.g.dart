@@ -13,8 +13,7 @@ DestinationStation _$DestinationStationFromJson(Map<String, dynamic> json) {
     json['destinationName'] as String? ?? '',
     json['stationAddress'] as String?,
     json['isStationDeleted'] as bool?,
-    json['longtitude'] as String?,
-    json['latitude'] as String?,
+    json['destinationCoordinate'] as String? ?? '',
   );
 }
 
@@ -25,6 +24,5 @@ Map<String, dynamic> _$DestinationStationToJson(DestinationStation instance) =>
       'destinationName': instance.destinationName,
       'stationAddress': instance.stationAddress,
       'isStationDeleted': instance.isStationDeleted,
-      'longtitude': instance.longtitude,
-      'latitude': instance.latitude,
+      'destinationCoordinate': instance.destinationCoordinate,
     };

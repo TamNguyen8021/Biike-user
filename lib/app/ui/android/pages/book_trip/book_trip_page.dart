@@ -1,7 +1,6 @@
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -68,7 +67,7 @@ class BookTripPage extends StatelessWidget {
                   ),
                 ),
               ),
-              MapViewer(),
+              // MapViewer(departureCoordinate: departureCoordinate, destinationCoordinate: destinationCoordinate),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

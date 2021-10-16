@@ -17,8 +17,9 @@ class DestinationStation {
 
   String? stationAddress;
   bool? isStationDeleted;
-  String? longtitude;
-  String? latitude;
+
+  @JsonKey(defaultValue: '')
+  late String destinationCoordinate;
 
   DestinationStation(
     this.stationId,
@@ -26,12 +27,12 @@ class DestinationStation {
     this.destinationName,
     this.stationAddress,
     this.isStationDeleted,
-    this.longtitude,
-    this.latitude,
+    this.destinationCoordinate,
   );
 
   DestinationStation.empty() {
     this.destinationName = '';
+    this.destinationCoordinate = '';
   }
 
   /// A necessary factory constructor for creating a new DestinationStation instance

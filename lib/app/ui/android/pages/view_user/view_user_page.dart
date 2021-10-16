@@ -152,8 +152,10 @@ class ViewUserPage extends StatelessWidget {
                                       child: ProfileTextField(
                                           isReadOnly: true,
                                           isEditProfile: false,
+                                          // initialValue:
+                                          //     _viewUserController.area.areaName,
                                           initialValue:
-                                              _viewUserController.area.areaName,
+                                              CustomStrings.fptHCMUni.tr,
                                           labelText: CustomStrings.kSchool.tr),
                                     ),
                                     if (MediaQuery.of(context).size.width >=

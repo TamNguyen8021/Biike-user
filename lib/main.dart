@@ -22,15 +22,17 @@ Future<void> main() async {
 class Biike extends StatelessWidget {
   static final LocalAppData localAppData = LocalAppData();
   static Rx<Role> role = Role.none.obs;
+  static int userId = -1;
 
-  void getRoleFromLocal() async {
+  void getRoleAndIdFromLocal() async {
+    userId = await localAppData.userId;
     String roleString = await localAppData.role;
     role.value = role.value.getRoleEnum(roleString);
   }
 
   @override
   Widget build(BuildContext context) {
-    getRoleFromLocal();
+    getRoleAndIdFromLocal();
     return ScreenUtilInit(
       designSize: Size(360, 780),
       builder: () => GetMaterialApp(

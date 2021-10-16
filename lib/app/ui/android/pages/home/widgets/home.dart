@@ -10,13 +10,13 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/lists/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
 /// The home screen widget
@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
 
                 if (homeController.upcomingTrips.isNotEmpty) {
                   _firstTripTimeBook = DateTime.parse(
-                      homeController.upcomingTrips.toList()[0].timeBook);
+                      homeController.upcomingTrips.toList()[0].bookTime);
                   if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
                     _timeLeft = _timeLeft +
                         (_firstTripTimeBook.hour - _currentTime.hour)
@@ -141,14 +141,14 @@ class Home extends StatelessWidget {
                                                 .upcomingTrips
                                                 .toList()[0]
                                                 .phoneNo,
-                                            timeBook: homeController
+                                            bookTime: homeController
                                                 .upcomingTrips
                                                 .toList()[0]
-                                                .timeBook,
-                                            sourceStation: homeController
+                                                .bookTime,
+                                            departureStation: homeController
                                                 .upcomingTrips
                                                 .toList()[0]
-                                                .sourceStation,
+                                                .departureStation,
                                             destinationStation: homeController
                                                 .upcomingTrips
                                                 .toList()[0]
@@ -199,18 +199,81 @@ class Home extends StatelessWidget {
                                               color: CustomColors.kDarkGray),
                                         ),
                                       ),
-                                      Padding(
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2,
                                         padding: EdgeInsets.only(
                                             bottom: homeController
                                                         .upcomingTrips.length >
                                                     2
                                                 ? 70.0
                                                 : 0.0),
-                                        child: ListUpcomingTrips(
-                                          listUpcomingTrips: homeController
-                                              .upcomingTrips
-                                              .sublist(1),
-                                          itemPadding: 16.0,
+                                        child: RefreshIndicator(
+                                          onRefresh: () => Future.sync(
+                                            () => homeController
+                                                .pagingController
+                                                .refresh(),
+                                          ),
+                                          child: PagedListView<int, dynamic>(
+                                            pagingController:
+                                                homeController.pagingController,
+                                            builderDelegate:
+                                                PagedChildBuilderDelegate<
+                                                        dynamic>(
+                                                    itemBuilder: (context, item,
+                                                            index) =>
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 10.0),
+                                                          child: UpcomingTripCard(
+                                                              tripId: homeController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .tripId,
+                                                              userId: homeController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .userId,
+                                                              avatarUrl:
+                                                                  homeController
+                                                                      .pagingController
+                                                                      .itemList!
+                                                                      .elementAt(
+                                                                          index)
+                                                                      .avatarUrl,
+                                                              name: homeController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .name,
+                                                              phoneNo: homeController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .phoneNo,
+                                                              bookTime: homeController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(index)
+                                                                  .bookTime,
+                                                              departureStation: homeController.pagingController.itemList!.elementAt(index).departureStation,
+                                                              destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
+                                                        ),
+                                                    noItemsFoundIndicatorBuilder:
+                                                        (BuildContext context) {
+                                                      return Text(CustomStrings
+                                                          .kNoUpcomingTrips.tr);
+                                                    }),
+                                          ),
                                         ),
                                       ),
                                     ]
@@ -401,26 +464,42 @@ class Home extends StatelessWidget {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: <Widget>[
-                                                          Text(
-                                                            CustomStrings
-                                                                .kSelectSourceStation
-                                                                .tr,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyText1,
+                                                          GestureDetector(
+                                                            child: Text(
+                                                              CustomStrings
+                                                                  .kSelectSourceStation
+                                                                  .tr,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                            ),
+                                                            onTap: () {
+                                                              homeController
+                                                                  .showStationsDialog(
+                                                                      context:
+                                                                          context);
+                                                            },
                                                           ),
                                                           Expanded(
                                                             child: Divider(),
                                                           ),
-                                                          Text(
-                                                            CustomStrings
-                                                                .kSelectDestinationStation
-                                                                .tr,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyText1,
+                                                          GestureDetector(
+                                                            child: Text(
+                                                              CustomStrings
+                                                                  .kSelectDestinationStation
+                                                                  .tr,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                            ),
+                                                            onTap: () {
+                                                              homeController
+                                                                  .showStationsDialog(
+                                                                      context:
+                                                                          context);
+                                                            },
                                                           ),
                                                         ],
                                                       ),

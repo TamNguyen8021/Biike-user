@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
-import 'package:bikes_user/app/data/models/starting_station.dart';
+import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/trip_history_provider.dart';
@@ -67,15 +67,13 @@ class TripHistoryController extends GetxController {
   Future<List<HistoryTripCard>> getHistoryTrips() async {
     historyTrips.clear();
     Map<String, dynamic> response = await _tripHistoryProvider.getHistoryTrips(
-        userId: await Biike.localAppData.userId,
-        page: _currentPage,
-        limit: _limit);
+        userId: Biike.userId, page: _currentPage, limit: _limit);
     historyTripsPagination = response['_meta'];
 
     for (var historyTrip in response['data']) {
       User user = User.fromJson(historyTrip);
       Trip trip = Trip.fromJson(historyTrip);
-      StartingStation startingStation = StartingStation.fromJson(historyTrip);
+      DepartureStation startingStation = DepartureStation.fromJson(historyTrip);
       DestinationStation destinationStation =
           DestinationStation.fromJson(historyTrip);
       TripStatus tripStatus;
@@ -106,9 +104,9 @@ class TripHistoryController extends GetxController {
       HistoryTripCard historyTripCard = HistoryTripCard(
         tripId: trip.tripId,
         userId: user.userId,
-        dateTime: DateTime.parse(trip.timeBook),
+        dateTime: DateTime.parse(trip.bookTime),
         status: tripStatus,
-        sourceStation: startingStation.startingPointName,
+        sourceStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
         isOnViewUserPage: false,
       );

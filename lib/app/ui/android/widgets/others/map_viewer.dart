@@ -12,7 +12,7 @@ class MapViewer extends StatelessWidget {
   final TripDetailsController? tripDetailsController;
   final MapController _mapController = MapController(
     initMapWithUserPosition: false,
-    initPosition: GeoPoint(latitude: 10.8409091, longitude: 106.8098085),
+    initPosition: GeoPoint(latitude: 10.84165, longitude: 106.80965),
     // areaLimit: BoundingBox(
     //   east: 10.4922941,
     //   north: 47.8084648,
@@ -20,13 +20,28 @@ class MapViewer extends StatelessWidget {
     //   west: 5.9559113,
     // ),
   );
+  final String departureCoordinate;
+  final String destinationCoordinate;
 
-  MapViewer({Key? key, this.tripDetailsController}) : super(key: key);
+  MapViewer(
+      {Key? key,
+      this.tripDetailsController,
+      required this.departureCoordinate,
+      required this.destinationCoordinate})
+      : super(key: key);
 
   Future<void> displayMap() async {
+    double departureLatitude = double.parse(departureCoordinate.split(',')[0]);
+    double departureLongtitude =
+        double.parse(departureCoordinate.split(',')[1]);
+    double destinationLatitude =
+        double.parse(destinationCoordinate.split(',')[0]);
+    double destinationLongtitude =
+        double.parse(destinationCoordinate.split(',')[1]);
+
     RoadInfo roadInfo = await _mapController.drawRoad(
-      GeoPoint(latitude: 10.8409091, longitude: 106.8098085),
-      GeoPoint(latitude: 10.8491275, longitude: 106.7740312),
+      GeoPoint(latitude: departureLatitude, longitude: departureLongtitude),
+      GeoPoint(latitude: destinationLatitude, longitude: destinationLongtitude),
       roadType: RoadType.bike,
       roadOption: RoadOption(
         roadWidth: 10,

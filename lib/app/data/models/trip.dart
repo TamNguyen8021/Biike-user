@@ -17,16 +17,16 @@ class Trip {
   int? routeId;
 
   @JsonKey(defaultValue: '')
-  late String createdTime;
+  late String createdDate;
 
   @JsonKey(defaultValue: '')
-  late String timeBook;
+  late String bookTime;
 
   @JsonKey(defaultValue: '')
   late String timePickUp;
 
   @JsonKey(defaultValue: '')
-  late String timeFinished;
+  late String finishedTime;
 
   int? tripStatus;
   String? numberPlate;
@@ -39,10 +39,10 @@ class Trip {
       this.keerId,
       this.bikerId,
       this.routeId,
-      this.createdTime,
-      this.timeBook,
+      this.createdDate,
+      this.bookTime,
       this.timePickUp,
-      this.timeFinished,
+      this.finishedTime,
       this.tripStatus,
       this.numberPlate,
       this.isSchedule,
@@ -51,10 +51,10 @@ class Trip {
 
   Trip.empty() {
     this.tripId = -1;
-    this.createdTime = '';
-    this.timeBook = '';
+    this.createdDate = '';
+    this.bookTime = '';
     this.timePickUp = '';
-    this.timeFinished = '';
+    this.finishedTime = '';
   }
 
   /// A necessary factory constructor for creating a new Trip instance

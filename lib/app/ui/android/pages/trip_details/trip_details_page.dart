@@ -50,12 +50,12 @@ class TripDetailsPage extends StatelessWidget {
       case 4:
         _statusBarText = CustomStrings.kTripHasFinished.tr;
         _statusBarTime = DateFormat(_timeFormat)
-            .format(DateTime.parse(_tripDetailsController.trip.timeFinished));
+            .format(DateTime.parse(_tripDetailsController.trip.finishedTime));
         break;
       default:
         _statusBarText = CustomStrings.kNewTrip.tr;
         _statusBarTime = DateFormat(_timeFormat)
-            .format(DateTime.parse(_tripDetailsController.trip.createdTime));
+            .format(DateTime.parse(_tripDetailsController.trip.createdDate));
         break;
     }
   }
@@ -186,7 +186,11 @@ class TripDetailsPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            MapViewer(),
+                            MapViewer(
+                                departureCoordinate: _tripDetailsController
+                                    .departureStation.departureCoordinate,
+                                destinationCoordinate: _tripDetailsController
+                                    .destinationStation.destinationCoordinate),
                             IntrinsicHeight(
                               child: Row(
                                 children: <Widget>[
@@ -239,7 +243,7 @@ class TripDetailsPage extends StatelessWidget {
                                                         .format(DateTime.parse(
                                                             _tripDetailsController
                                                                 .trip
-                                                                .timeBook)),
+                                                                .bookTime)),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodyText1,
@@ -261,7 +265,7 @@ class TripDetailsPage extends StatelessWidget {
                                                 DateFormat('HH:mm').format(
                                                     DateTime.parse(
                                                         _tripDetailsController
-                                                            .trip.timeBook)),
+                                                            .trip.bookTime)),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1,
@@ -295,8 +299,8 @@ class TripDetailsPage extends StatelessWidget {
                                                 ),
                                                 Text(
                                                   _tripDetailsController
-                                                      .startingStation
-                                                      .startingPointName,
+                                                      .departureStation
+                                                      .departureName,
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .bodyText1,

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
-import 'package:bikes_user/app/data/models/starting_station.dart';
+import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip_feedback.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
@@ -23,7 +23,7 @@ class TripDetailsController extends GetxController {
   Function onPressedFunc = () {};
   Trip trip = Trip.empty();
   User user = User.empty();
-  StartingStation startingStation = StartingStation.empty();
+  DepartureStation departureStation = DepartureStation.empty();
   DestinationStation destinationStation = DestinationStation.empty();
 
   /// Feedback of user
@@ -53,7 +53,7 @@ class TripDetailsController extends GetxController {
     var data = await _tripDetailsProvider.getTripDetails(tripId: tripId);
     trip = Trip.fromJson(data);
     user = User.fromJson(data);
-    startingStation = StartingStation.fromJson(data);
+    departureStation = DepartureStation.fromJson(data);
     destinationStation = DestinationStation.fromJson(data);
     if (data['feedbacks'].length > 0) {
       feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
@@ -82,9 +82,13 @@ class TripDetailsController extends GetxController {
     bool response = await _tripDetailsProvider.cancelTrip(
         tripId: tripId, body: jsonEncode(body));
     if (response) {
+      Get.back();
+      Get.back();
       CommonFunctions().showSuccessDialog(
           context: context, message: CustomStrings.kCancelTripSuccess);
     } else {
+      Get.back();
+      Get.back();
       CommonFunctions().showErrorDialog(
           context: context, message: CustomErrorsString.kDevelopError);
     }

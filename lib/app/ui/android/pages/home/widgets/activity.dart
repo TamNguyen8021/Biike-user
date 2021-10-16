@@ -86,14 +86,14 @@ class Activity extends StatelessWidget {
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .phoneNo,
-                                      timeBook: homeController
+                                      bookTime: homeController
                                           .pagingController.itemList!
                                           .elementAt(index)
-                                          .timeBook,
-                                      sourceStation: homeController
+                                          .bookTime,
+                                      departureStation: homeController
                                           .pagingController.itemList!
                                           .elementAt(index)
-                                          .sourceStation,
+                                          .departureStation,
                                       destinationStation: homeController
                                           .pagingController.itemList!
                                           .elementAt(index)

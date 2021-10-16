@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
-import 'package:bikes_user/app/data/models/starting_station.dart';
+import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/home_provider.dart';
@@ -95,16 +95,14 @@ class HomeController extends GetxController {
   Future<List<UpcomingTripCard>> getUpcomingTrips() async {
     upcomingTrips.clear();
     Map<String, dynamic> response = await _homeProvider.getUpcomingTrips(
-        userId: await Biike.localAppData.userId,
-        page: _currentPage,
-        limit: _limit);
+        userId: Biike.userId, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
     for (int i = 0; i < response['data'].length; i++) {
       User user = User.fromJson(response['data'][i]);
       Trip trip = Trip.fromJson(response['data'][i]);
-      StartingStation startingStation =
-          StartingStation.fromJson(response['data'][i]);
+      DepartureStation startingStation =
+          DepartureStation.fromJson(response['data'][i]);
       DestinationStation destinationStation =
           DestinationStation.fromJson(response['data'][i]);
 
@@ -126,12 +124,13 @@ class HomeController extends GetxController {
           avatarUrl: user.avatar,
           name: user.userFullname,
           phoneNo: user.userPhoneNumber,
-          timeBook: trip.timeBook,
-          sourceStation: startingStation.startingPointName,
+          bookTime: trip.bookTime,
+          departureStation: startingStation.departureName,
           destinationStation: destinationStation.destinationName);
 
       upcomingTrips.add(upcomingTripCard);
     }
+    print(upcomingTrips.length);
     return upcomingTrips.cast();
   }
 
@@ -139,15 +138,38 @@ class HomeController extends GetxController {
   ///
   /// Author: TamNTT
   Future<Map> getStations() async {
+    stations.clear();
     Map<String, dynamic> response =
         await _homeProvider.getStations(page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
     for (var station in response['data']) {
-      StartingStation startingStation = StartingStation.fromJson(station);
+      DepartureStation startingStation = DepartureStation.fromJson(station);
       stations.putIfAbsent(
-          startingStation.stationId, () => startingStation.startingPointName);
+          startingStation.stationId, () => startingStation.departureName);
     }
     return stations;
+  }
+
+  dynamic showStationsDialog({required BuildContext context}) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: stations.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Text(stations.values.elementAt(index));
+                  }),
+            ),
+          );
+        });
   }
 }

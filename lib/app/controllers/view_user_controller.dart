@@ -4,7 +4,7 @@ import 'package:bikes_user/app/data/providers/view_user_provider.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/data/models/area.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
-import 'package:bikes_user/app/data/models/starting_station.dart';
+import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -27,7 +27,7 @@ class ViewUserController extends GetxController {
   User user = User.empty();
   Area area = Area.empty();
   RxList historyTrips = [].obs;
-  Map<String, dynamic> pagination = {};
+  Map<String, dynamic> historyTripsPagination = {};
   int _currentPage = 1;
   int _limit = 10;
 
@@ -54,7 +54,8 @@ class ViewUserController extends GetxController {
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
-          pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
+          historyTripsPagination['totalRecord'] - previouslyFetchedItemsCount <=
+              _limit;
       if (isLastPage) {
         pagingController.appendLastPage(historyTrips.cast());
         _currentPage = 1;
@@ -75,8 +76,6 @@ class ViewUserController extends GetxController {
     var partnerProfile =
         await _viewUserProvider.getPartnerProfile(partnerId: userId);
     user = User.fromJson(partnerProfile);
-    print(user.userPhoneNumber);
-    print(user.userFullname);
     area = Area.fromJson(partnerProfile);
   }
 
@@ -86,15 +85,16 @@ class ViewUserController extends GetxController {
   Future<List<HistoryTripCard>> getHistoryTripsWithPartner() async {
     historyTrips.clear();
     Map<String, dynamic> response = await _viewUserProvider.getHistoryPairTrips(
-        userId: await Biike.localAppData.userId,
+        userId: Biike.userId,
         partnerId: userId,
         page: _currentPage,
         limit: _limit);
+    historyTripsPagination = response['_meta'];
 
     for (var historyTrip in response['data']) {
       User user = User.fromJson(historyTrip);
       Trip trip = Trip.fromJson(historyTrip);
-      StartingStation startingStation = StartingStation.fromJson(historyTrip);
+      DepartureStation startingStation = DepartureStation.fromJson(historyTrip);
       DestinationStation destinationStation =
           DestinationStation.fromJson(historyTrip);
       TripStatus tripStatus;
@@ -125,9 +125,9 @@ class ViewUserController extends GetxController {
       HistoryTripCard historyTripCard = HistoryTripCard(
         tripId: trip.tripId,
         userId: user.userId,
-        dateTime: DateTime.parse(trip.timeBook),
+        dateTime: DateTime.parse(trip.bookTime),
         status: tripStatus,
-        sourceStation: startingStation.startingPointName,
+        sourceStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
         isOnViewUserPage: true,
       );
