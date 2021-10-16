@@ -1,6 +1,6 @@
-import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/models/wallet.dart';
 import 'package:bikes_user/app/data/providers/wallet_provider.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -8,8 +8,8 @@ class WalletController extends GetxController {
   Rx<int> totalWalletPoint = 0.obs;
 
   Future<List<Wallet>> getUserWalletsList() async {
-    return (await WalletProvider()
-            .getUserWalletList(userId: await LocalAppData().userId) as List)
+    return (await WalletProvider().getUserWalletList(userId: Biike.userId.value)
+            as List)
         .map((w) => Wallet.fromJson(w))
         .toList();
   }

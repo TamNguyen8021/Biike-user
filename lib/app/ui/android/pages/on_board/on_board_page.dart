@@ -103,7 +103,6 @@ class _OnBoardPageState extends State<OnBoardPage> {
                             itemCount: listOnBoard.length,
                           ),
                         ),
-                        // dot
                         DotsWidget(
                             listOnBoard: listOnBoard, indexState: indexState),
                       ],

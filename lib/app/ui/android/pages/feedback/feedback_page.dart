@@ -34,9 +34,7 @@ class FeedbackPage extends StatelessWidget {
       onWillPop: () => CommonFunctions()
           .onBackPressed(errorMessage: CustomErrorsString.kNotRated),
       child: Scaffold(
-        // resizeToAvoidBottomInset: false,
         body: Container(
-          // alignment: Alignment.center,
           child: SafeArea(
             child: SingleChildScrollView(
               child:
@@ -45,7 +43,6 @@ class FeedbackPage extends StatelessWidget {
                 Container(
                   height: 180,
                   child: Stack(
-                    // alignment: Alignment.center,
                     children: <Widget>[
                       CustomPaint(
                         painter: HalfOvalPainter(),
@@ -141,7 +138,6 @@ class FeedbackPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     RatingBar(
-                                      //initialRating: 3,
                                       minRating: 1,
                                       allowHalfRating: false,
                                       itemCount: 5,

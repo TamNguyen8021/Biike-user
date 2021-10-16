@@ -86,7 +86,7 @@ class EditProfilePage extends StatelessWidget {
                     ProfileTextField(
                       isReadOnly: true,
                       isEditProfile: true,
-                      initialValue: _profileController.user.userEmail,
+                      initialValue: _profileController.user.email,
                       labelText: CustomStrings.kEmail.tr,
                     ),
                     DropdownButtonFormField<int>(
@@ -165,6 +165,7 @@ class EditProfilePage extends StatelessWidget {
                                 _profileController.editProfile(
                                     context: context,
                                     user: _profileController.user);
+                                isSaveButtonDisable.value = true;
                               },
                         text: CustomStrings.kSave.tr,
                         icon: Icons.save,

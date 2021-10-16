@@ -5,7 +5,7 @@ import 'package:bikes_user/app/ui/android/widgets/lists/list_ban.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// The address book screen
+/// The 'block_list' screen
 class BanListPage extends StatelessWidget {
   const BanListPage({Key? key}) : super(key: key);
 

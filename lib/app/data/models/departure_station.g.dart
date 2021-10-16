@@ -1,30 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'starting_station.dart';
+part of 'departure_station.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-StartingStation _$StartingStationFromJson(Map<String, dynamic> json) {
-  return StartingStation(
+DepartureStation _$DepartureStationFromJson(Map<String, dynamic> json) {
+  return DepartureStation(
     json['stationId'] as int?,
     json['areaId'] as int?,
-    json['startingPointName'] as String,
+    json['departureName'] as String? ?? '',
     json['stationAddress'] as String?,
     json['isStationDeleted'] as bool?,
-    json['longtitude'] as String?,
-    json['latitude'] as String?,
+    json['departureCoordinate'] as String? ?? '',
   );
 }
 
-Map<String, dynamic> _$StartingStationToJson(StartingStation instance) =>
+Map<String, dynamic> _$DepartureStationToJson(DepartureStation instance) =>
     <String, dynamic>{
       'stationId': instance.stationId,
       'areaId': instance.areaId,
-      'startingPointName': instance.startingPointName,
+      'departureName': instance.departureName,
       'stationAddress': instance.stationAddress,
       'isStationDeleted': instance.isStationDeleted,
-      'longtitude': instance.longtitude,
-      'latitude': instance.latitude,
+      'departureCoordinate': instance.departureCoordinate,
     };

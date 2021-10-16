@@ -10,7 +10,7 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// 'book_schedule_trip' screen
+/// The 'book_schedule_trip' screen
 class BookScheduleTripPage extends StatelessWidget {
   final bookScheduleTripController = Get.find<BookScheduleTripController>();
 

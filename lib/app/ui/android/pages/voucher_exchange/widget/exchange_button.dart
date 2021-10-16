@@ -9,7 +9,6 @@ import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/view_vou
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExchangeVoucherButton extends StatelessWidget {
   final _redemptionController = Get.find<RedemptionController>();
@@ -44,8 +43,7 @@ class ExchangeVoucherButton extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Image(
             image: AssetImage('assets/images/coupon.png'),
-            width: 100.sp,
-            // height: 70,
+            width: 100,
           ),
         ),
         actions: [
@@ -63,7 +61,7 @@ class ExchangeVoucherButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity, //match_parent
+      width: double.infinity,
       child: ElevatedButton(
         onPressed: () => _exchangeVoucher(context),
         child: Text(

@@ -39,7 +39,6 @@ class YourVoucherCard extends StatelessWidget {
                     width: 100,
                     height: 120,
                     fit: BoxFit.fill,
-                    // height: 100,
                   ),
                 ),
               ),
@@ -48,7 +47,6 @@ class YourVoucherCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    // 'Voucher Passio\nTrị giá 20.000đ',
                     voucher.voucherName,
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(
                         fontWeight: FontWeight.bold, color: Colors.black),
@@ -56,7 +54,6 @@ class YourVoucherCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                      // 'Áp dụng khi mua tại cửa hàng\nvới hóa đơn từ 100k',
                       CustomStrings.kBrand.tr + voucher.brand,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),

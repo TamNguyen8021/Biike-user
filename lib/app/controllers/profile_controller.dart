@@ -35,11 +35,9 @@ class ProfileController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getProfile({required BuildContext context}) async {
-    var data = await _profileProvider.getProfile(userId: Biike.userId);
-    // print('data: ' + data.toString());
-    // print('data length: ' + data.length.toString());
+    var data = await _profileProvider.getProfile(userId: Biike.userId.value);
     user = User.fromJson(data);
-    // print(user.toJson());
+
     if (user.birthDate.isNotEmpty) {
       birthDate.value = DateTime.parse(user.birthDate);
     }
@@ -60,13 +58,14 @@ class ProfileController extends GetxController {
   Future<void> editProfile(
       {required BuildContext context, required User user}) async {
     Map<String, dynamic> newUserProfile = {};
+
     newUserProfile.putIfAbsent('userFullname', () => user.userFullname);
     newUserProfile.putIfAbsent('gender', () => user.gender);
     newUserProfile.putIfAbsent('birthDate',
         () => DateFormat('yyyy-MM-dd').format(DateTime.parse(user.birthDate)));
-    // print(newUserProfile);
+
     Future<String> message = _profileProvider.editProfile(
-        userId: Biike.userId, body: jsonEncode(newUserProfile));
+        userId: Biike.userId.value, body: jsonEncode(newUserProfile));
     CommonFunctions()
         .showSuccessDialog(context: context, message: await message);
   }
