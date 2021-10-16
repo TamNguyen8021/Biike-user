@@ -34,4 +34,5 @@ abstract class CommonRoutes {
   static const VOUCHER_DETAILS = '/voucherDetails';
   static const YOUR_VOUCHERS = '/yourVouchers';
   static const YOUR_VOUCHER_DETAIL = '/yourVoucherDetail';
+  static const TAKE_PICTURE = '/takePicture';
 }

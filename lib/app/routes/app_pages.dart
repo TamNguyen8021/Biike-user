@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/bindings/add_bike_binding.dart';
 import 'package:bikes_user/app/bindings/voucher_binding.dart';
 import 'package:bikes_user/app/bindings/add_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/add_sos_number_binding.dart';
@@ -12,6 +13,7 @@ import 'package:bikes_user/app/bindings/open_page_bingding.dart';
 import 'package:bikes_user/app/bindings/sos_number_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
+import 'package:bikes_user/app/ui/android/pages/add_bike_camera/add_bike_camera_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
@@ -149,6 +151,7 @@ class AppPages {
     GetPage(
       name: CommonRoutes.ADD_BIKE,
       page: () => AddBikePage(),
+      binding: AddBikeBinding()
     ),
     GetPage(
       name: CommonRoutes.VOUCHER_DETAILS,
@@ -195,5 +198,9 @@ class AppPages {
         name: CommonRoutes.BAN_LIST,
         page: () => BanListPage(),
         binding: BanListBinding()),
+    GetPage(
+        name: CommonRoutes.TAKE_PICTURE,
+        page: () => AddBikeCameraPage()
+    )
   ];
 }

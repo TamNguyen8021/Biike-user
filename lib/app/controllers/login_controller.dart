@@ -32,7 +32,7 @@ class LoginController extends GetxController {
     if (messageSignin.isEmpty) {
       if (_firebaseServices.isVerifyEmail) {
         // Save user data to local memory
-        Biike.localAppData.saveUserInfo(_firebaseServices);
+        await Biike.localAppData.saveUserInfo(_firebaseServices);
         Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;
       }

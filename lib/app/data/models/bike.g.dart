@@ -10,6 +10,7 @@ Bike _$BikeFromJson(Map<String, dynamic> json) {
   return Bike(
     json['bikeId'] as int?,
     json['userId'] as int?,
+    json['bikeOwner'] as String?,
     json['plateNumber'] as String?,
     json['color'] as String?,
     json['brand'] as String?,
@@ -20,6 +21,7 @@ Bike _$BikeFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$BikeToJson(Bike instance) => <String, dynamic>{
       'bikeId': instance.bikeId,
       'userId': instance.userId,
+      'bikeOwner': instance.bikeOwner,
       'plateNumber': instance.plateNumber,
       'color': instance.color,
       'brand': instance.brand,
