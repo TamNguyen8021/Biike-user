@@ -246,4 +246,13 @@ class CommonFunctions {
           );
         });
   }
+
+  static int getIdFromUrl({required String url}) {
+    int indexOfForwardSlash = url.lastIndexOf('/');
+    int indexOfQuestionMark = url.indexOf('?');
+
+    return indexOfQuestionMark != -1 // not found
+        ? int.parse(url.substring(indexOfForwardSlash + 1, indexOfQuestionMark))
+        : int.parse(url.substring(indexOfForwardSlash + 1));
+  }
 }

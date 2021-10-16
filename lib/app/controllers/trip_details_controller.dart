@@ -152,7 +152,6 @@ class TripDetailsController extends GetxController {
                               text: CustomStrings.kBtnExit.tr,
                               onPressedFunc: () {
                                 Get.back();
-                                Get.back();
                               }),
                         ],
                       ),

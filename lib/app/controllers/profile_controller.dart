@@ -36,7 +36,7 @@ class ProfileController extends GetxController {
   /// Author: TamNTT
   Future<void> getProfile({required BuildContext context}) async {
     var data = await _profileProvider.getProfile(
-        userId: await Biike.localAppData.getUserId());
+        userId: await Biike.localAppData.userId);
     user = User.fromJson(data);
 
     if (user.birthDate.isNotEmpty) {
@@ -66,7 +66,7 @@ class ProfileController extends GetxController {
         () => DateFormat('yyyy-MM-dd').format(DateTime.parse(user.birthDate)));
 
     Future<String> message = _profileProvider.editProfile(
-        userId: await Biike.localAppData.getUserId(),
+        userId: await Biike.localAppData.userId,
         body: jsonEncode(newUserProfile));
     CommonFunctions()
         .showSuccessDialog(context: context, message: await message);

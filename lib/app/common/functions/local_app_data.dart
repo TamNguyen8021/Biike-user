@@ -19,18 +19,18 @@ class LocalAppData {
     _pref.setString('role', 'Role.none');
   }
 
-  /// Get user Id
+  /// Get user's id
   ///
   /// Author: UyenNLP
-  Future<int> getUserId() async {
+  Future<int> get userId async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getInt('userId') ?? -1;
   }
 
-  /// Get api idToken saved when login
+  /// Get idToken saved when login
   ///
   /// Author: UyenNLP
-  Future<String> getToken() async {
+  Future<String> get token async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('token') ?? '';
   }
@@ -38,7 +38,7 @@ class LocalAppData {
   /// Get role
   ///
   /// Author: TamNTT
-  Future<String> getRole() async {
+  Future<String> get role async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('role') ?? 'Role.none';
   }

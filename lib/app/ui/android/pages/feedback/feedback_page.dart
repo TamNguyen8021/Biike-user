@@ -92,7 +92,7 @@ class FeedbackPage extends StatelessWidget {
                                   children: <Widget>[
                                     Text(
                                       "EXP",
-                                      style: new TextStyle(
+                                      style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),
                                     Padding(
@@ -102,13 +102,13 @@ class FeedbackPage extends StatelessWidget {
                                         size: 20, color: Colors.white),
                                   ],
                                 ),
-                                decoration: new BoxDecoration(
-                                  borderRadius: new BorderRadius.all(
-                                      new Radius.circular(20.0)),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
                                   color: CustomColors.kOrange,
                                 ),
-                                padding: new EdgeInsets.fromLTRB(
-                                    15.0, 5.0, 15.0, 5.0),
+                                padding:
+                                    EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
                               )
                             : Padding(padding: const EdgeInsets.only(top: 2.0)),
                         Padding(

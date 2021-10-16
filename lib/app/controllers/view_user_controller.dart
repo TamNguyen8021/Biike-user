@@ -33,7 +33,6 @@ class ViewUserController extends GetxController {
 
   @override
   onInit() {
-    getPartnerProfile();
     pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -87,7 +86,7 @@ class ViewUserController extends GetxController {
   Future<List<HistoryTripCard>> getHistoryTripsWithPartner() async {
     historyTrips.clear();
     Map<String, dynamic> response = await _viewUserProvider.getHistoryPairTrips(
-        userId: await Biike.localAppData.getUserId(),
+        userId: await Biike.localAppData.userId,
         partnerId: userId,
         page: _currentPage,
         limit: _limit);

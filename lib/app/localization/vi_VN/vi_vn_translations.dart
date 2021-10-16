@@ -246,6 +246,8 @@ final Map<String, String> vi = {
   'kSendFailed': 'Gửi feedback thất bại!',
   'kDevelopError':
       'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
+  'kExchangeFailed': 'Không thể đổi voucher!',
+  'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',

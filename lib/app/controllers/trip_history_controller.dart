@@ -67,7 +67,7 @@ class TripHistoryController extends GetxController {
   Future<List<HistoryTripCard>> getHistoryTrips() async {
     historyTrips.clear();
     Map<String, dynamic> response = await _tripHistoryProvider.getHistoryTrips(
-        userId: await Biike.localAppData.getUserId(),
+        userId: await Biike.localAppData.userId,
         page: _currentPage,
         limit: _limit);
     historyTripsPagination = response['_meta'];

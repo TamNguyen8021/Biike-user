@@ -9,7 +9,7 @@ class TripHistoryProvider extends CommonProvider {
       {required int userId, required int page, required int limit}) async {
     final response = await get(
         UrlStrings.tripUrl + '$userId/history?page=$page&limit=$limit',
-        headers: await getHeaders());
+        headers: await headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

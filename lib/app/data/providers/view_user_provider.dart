@@ -6,8 +6,8 @@ class ViewUserProvider extends CommonProvider {
   ///
   /// Author: TamNTT
   Future getPartnerProfile({required int partnerId}) async {
-    final response = await get(UrlStrings.userUrl + '$partnerId',
-        headers: await getHeaders());
+    final response =
+        await get(UrlStrings.userUrl + '$partnerId', headers: await headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
@@ -27,7 +27,7 @@ class ViewUserProvider extends CommonProvider {
     final response = await get(
         UrlStrings.tripUrl +
             'historyPair?userOneId=$userId&userTwoId=$partnerId&page=$page&limit=$limit',
-        headers: await getHeaders());
+        headers: await headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

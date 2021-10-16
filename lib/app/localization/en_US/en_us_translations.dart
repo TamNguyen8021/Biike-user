@@ -244,6 +244,8 @@ final Map<String, String> en = {
   'kSendFailed': 'Send feedback failed!',
   'kDevelopError':
       'There are some errors, please contact Biiké development team for support',
+  'kExchangeFailed': 'Can\'t exchange voucher!',
+  'kNotEnoughPoint': 'User doesn\'t have enough point',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',

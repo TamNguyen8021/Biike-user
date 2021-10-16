@@ -8,7 +8,7 @@ class TripDetailsProvider extends CommonProvider {
   /// Author: TamNTT
   Future<Map<String, dynamic>> getTripDetails({required int tripId}) async {
     final response = await get(UrlStrings.tripUrl + '$tripId/details',
-        headers: await getHeaders());
+        headers: await headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
@@ -37,9 +37,9 @@ class TripDetailsProvider extends CommonProvider {
     final response = await put(
         UrlStrings.tripUrl +
             '$tripId/cancel?userId=' +
-            Biike.localAppData.getUserId().toString(),
+            Biike.localAppData.userId.toString(),
         body,
-        headers: await getHeaders());
+        headers: await headers);
     if (response.status.hasError) {
       return false;
     } else {

@@ -1,8 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:bikes_user/app/common/functions/snackbar.dart';
@@ -32,7 +32,7 @@ class LoginController extends GetxController {
     if (messageSignin.isEmpty) {
       if (_firebaseServices.isVerifyEmail) {
         // Save user data to local memory
-        LocalAppData().saveUserInfo(_firebaseServices);
+        Biike.localAppData.saveUserInfo(_firebaseServices);
         Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;
       }

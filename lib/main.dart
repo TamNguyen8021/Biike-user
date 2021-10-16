@@ -24,7 +24,7 @@ class Biike extends StatelessWidget {
   static Rx<Role> role = Role.none.obs;
 
   void getRoleFromLocal() async {
-    String roleString = await localAppData.getRole();
+    String roleString = await localAppData.role;
     role.value = role.value.getRoleEnum(roleString);
   }
 

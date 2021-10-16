@@ -9,7 +9,7 @@ class ProfileProvider extends CommonProvider {
   /// Author: TamNTT
   Future getProfile({required int userId}) async {
     final response = await get(UrlStrings.userUrl + '$userId/profile',
-        headers: await getHeaders());
+        headers: await headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {

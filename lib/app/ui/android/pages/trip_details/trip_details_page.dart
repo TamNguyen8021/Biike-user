@@ -445,6 +445,7 @@ class TripDetailsPage extends StatelessWidget {
                                                           .kViewCancelTripReminder
                                                           .tr,
                                                       onPressedFunc: () {
+                                                        Get.back();
                                                         _tripDetailsController
                                                             .showCancelReasonDialog(
                                                                 context:
