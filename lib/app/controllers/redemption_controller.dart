@@ -7,19 +7,21 @@ class RedemptionController extends GetxController {
 
   Future<dynamic> exchangeVoucher(voucherId) async {
     Map<String, dynamic> data = <String, dynamic>{
-      'userId' : await new LocalAppData().userId,
-      'voucherId' : voucherId
+      'userId': await LocalAppData().userId,
+      'voucherId': voucherId
     };
 
-    return await new RedemptionProvider().exchangeVoucher(data);
+    return await RedemptionProvider().exchangeVoucher(data);
   }
 
   Future<void> getYourVoucherList() async {
-    yourVoucherList.value = await new RedemptionProvider()
-        .getYourVoucherList(userId: await new LocalAppData().userId);
+    yourVoucherList.value = await RedemptionProvider()
+        .getYourVoucherList(userId: await LocalAppData().userId);
   }
 
-  Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(redemptionId) async {
-    return await new RedemptionProvider().getRedemptionDetailByRedemptionId(redemptionId);
+  Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
+      redemptionId) async {
+    return await RedemptionProvider()
+        .getRedemptionDetailByRedemptionId(redemptionId);
   }
 }

@@ -8,8 +8,8 @@ class WalletController extends GetxController {
   Rx<int> totalWalletPoint = 0.obs;
 
   Future<List<Wallet>> getUserWalletsList() async {
-    return (await new WalletProvider()
-        .getUserWalletList(userId: await new LocalAppData().userId) as List)
+    return (await WalletProvider()
+            .getUserWalletList(userId: await LocalAppData().userId) as List)
         .map((w) => Wallet.fromJson(w))
         .toList();
   }

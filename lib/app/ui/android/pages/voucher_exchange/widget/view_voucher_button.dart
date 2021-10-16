@@ -18,11 +18,10 @@ class ViewVoucherButton extends StatelessWidget {
       width: 120.sp,
       child: ElevatedButton(
         onPressed: () async {
-          dynamic data = await _redemptionController.getRedemptionDetailByRedemptionId(redemptionId);
+          dynamic data = await _redemptionController
+              .getRedemptionDetailByRedemptionId(redemptionId);
 
-          Get.toNamed(
-              CommonRoutes.YOUR_VOUCHER_DETAIL,
-              arguments: data);
+          Get.offAndToNamed(CommonRoutes.YOUR_VOUCHER_DETAIL, arguments: data);
         },
         child: Text(
           CustomStrings.kViewAVoucher.tr,
@@ -31,7 +30,8 @@ class ViewVoucherButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 12.sp),
         ),
-        style: ElevatedButton.styleFrom(primary: CustomColors.kBlue, elevation: 0.0),
+        style: ElevatedButton.styleFrom(
+            primary: CustomColors.kBlue, elevation: 0.0),
       ),
     );
   }

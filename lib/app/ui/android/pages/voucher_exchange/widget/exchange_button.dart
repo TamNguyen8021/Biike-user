@@ -19,24 +19,24 @@ class ExchangeVoucherButton extends StatelessWidget {
   ExchangeVoucherButton({Key? key, required this.voucher}) : super(key: key);
 
   _exchangeVoucher(BuildContext context) async {
-    if (_walletController.isNotEnoughPoint(voucherPoint: voucher.amountOfPoint!)) {
-      new CommonFunctions().showErrorDialog(
-          context: context,
-          message: CustomErrorsString.kNotEnoughPoint.tr);
+    if (_walletController.isNotEnoughPoint(
+        voucherPoint: voucher.amountOfPoint!)) {
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kNotEnoughPoint.tr);
       return;
     }
 
-    dynamic result = await _redemptionController.exchangeVoucher(voucher.voucherId);
+    dynamic result =
+        await _redemptionController.exchangeVoucher(voucher.voucherId);
     if (result is String) {
-      new CommonFunctions().showErrorDialog(
+      CommonFunctions().showErrorDialog(
           context: context,
-          message: result == ''
-              ? CustomErrorsString.kExchangeFailed.tr
-              : result);
+          message:
+              result == '' ? CustomErrorsString.kExchangeFailed.tr : result);
     } else {
       _walletController.updateWalletPoint();
-      int redemptionId = CommonFunctions.
-          getIdFromUrl(url: result.headers['location'] as String);
+      int redemptionId = CommonFunctions.getIdFromUrl(
+          url: result.headers['location'] as String);
 
       Get.defaultDialog(
         title: CustomStrings.kExchangeVoucherSuccess.tr,

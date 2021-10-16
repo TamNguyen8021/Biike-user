@@ -38,7 +38,7 @@ class LoginController extends GetxController {
             int.parse(_firebaseServices.firebaseAuth.currentUser!.uid);
 
         //save user data to local memory
-        new LocalAppData().saveUserInfo(_firebaseServices);
+        LocalAppData().saveUserInfo(_firebaseServices);
 
         Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;

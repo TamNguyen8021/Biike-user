@@ -5,6 +5,6 @@ class VoucherController extends GetxController {
   RxList<dynamic> voucherList = [].obs;
 
   Future<void> getVoucherList() async {
-    voucherList.value = await new VoucherProvider().getVoucherList();
+    voucherList.value = await VoucherProvider().getVoucherList();
   }
 }
