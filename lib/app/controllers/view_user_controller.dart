@@ -85,7 +85,7 @@ class ViewUserController extends GetxController {
   Future<List<HistoryTripCard>> getHistoryTripsWithPartner() async {
     historyTrips.clear();
     Map<String, dynamic> response = await _viewUserProvider.getHistoryPairTrips(
-        userId: Biike.userId,
+        userId: Biike.userId.value,
         partnerId: userId,
         page: _currentPage,
         limit: _limit);

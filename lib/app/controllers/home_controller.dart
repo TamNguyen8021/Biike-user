@@ -95,7 +95,7 @@ class HomeController extends GetxController {
   Future<List<UpcomingTripCard>> getUpcomingTrips() async {
     upcomingTrips.clear();
     Map<String, dynamic> response = await _homeProvider.getUpcomingTrips(
-        userId: Biike.userId, page: _currentPage, limit: _limit);
+        userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
     for (int i = 0; i < response['data'].length; i++) {

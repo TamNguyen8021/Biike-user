@@ -203,7 +203,7 @@ class Home extends StatelessWidget {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 2,
-                                        padding: EdgeInsets.only(
+                                        margin: EdgeInsets.only(
                                             bottom: homeController
                                                         .upcomingTrips.length >
                                                     2

@@ -22,10 +22,10 @@ Future<void> main() async {
 class Biike extends StatelessWidget {
   static final LocalAppData localAppData = LocalAppData();
   static Rx<Role> role = Role.none.obs;
-  static int userId = -1;
+  static Rx<int> userId = (-1).obs;
 
   void getRoleAndIdFromLocal() async {
-    userId = await localAppData.userId;
+    userId.value = await localAppData.userId;
     String roleString = await localAppData.role;
     role.value = role.value.getRoleEnum(roleString);
   }

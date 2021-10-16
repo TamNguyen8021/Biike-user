@@ -67,7 +67,7 @@ class TripHistoryController extends GetxController {
   Future<List<HistoryTripCard>> getHistoryTrips() async {
     historyTrips.clear();
     Map<String, dynamic> response = await _tripHistoryProvider.getHistoryTrips(
-        userId: Biike.userId, page: _currentPage, limit: _limit);
+        userId: Biike.userId.value, page: _currentPage, limit: _limit);
     historyTripsPagination = response['_meta'];
 
     for (var historyTrip in response['data']) {
