@@ -29,7 +29,7 @@ class Trip {
   late String finishedTime;
 
   int? tripStatus;
-  String? numberPlate;
+  String? plateNumber;
   bool? isSchedule;
   int? cancelPersonId;
   String? cancelReason;
@@ -44,7 +44,7 @@ class Trip {
       this.timePickUp,
       this.finishedTime,
       this.tripStatus,
-      this.numberPlate,
+      this.plateNumber,
       this.isSchedule,
       this.cancelPersonId,
       this.cancelReason);

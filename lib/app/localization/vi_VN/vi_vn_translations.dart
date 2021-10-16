@@ -215,6 +215,11 @@ final Map<String, String> vi = {
   'kBikeCategory': 'Loại xe',
   'kBikeBrand': 'Nhãn hiệu',
   'kBikeColor': 'Màu sơn',
+  'kEnterBikeOwner': 'Nhập tên chủ xe',
+  'kEnterBrand': 'Nhập nhãn hiệu',
+  'kEnterCategory': 'Nhập loại xe',
+  'kEnterColor': 'Nhập màu xe',
+  'kEnterNumberPlate': 'Nhập biển số xe',
   'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
 
   // 'add_bike' screen
