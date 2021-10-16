@@ -1,4 +1,7 @@
+import 'package:bikes_user/app/bindings/view_user_binding.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
@@ -41,17 +44,17 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
-  void addStatusBarTextAndTime() {
-    const String timeFormat = 'HH:mm, dd-MM-yyyy';
+  void _addStatusBarTextAndTime() {
+    const String _timeFormat = 'HH:mm, dd-MM-yyyy';
     switch (_tripDetailsController.trip.tripStatus) {
       case 4:
         _statusBarText = CustomStrings.kTripHasFinished.tr;
-        _statusBarTime = DateFormat(timeFormat)
+        _statusBarTime = DateFormat(_timeFormat)
             .format(DateTime.parse(_tripDetailsController.trip.timeFinished));
         break;
       default:
         _statusBarText = CustomStrings.kNewTrip.tr;
-        _statusBarTime = DateFormat(timeFormat)
+        _statusBarTime = DateFormat(_timeFormat)
             .format(DateTime.parse(_tripDetailsController.trip.createdTime));
         break;
     }
@@ -112,10 +115,10 @@ class TripDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _tripDetailsController.getTripDetails(context: context),
+        future: _tripDetailsController.getTripDetails(tripId: tripId),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            addStatusBarTextAndTime();
+            _addStatusBarTextAndTime();
             return Scaffold(
               appBar: CustomAppBar(
                 isVisible: true,
@@ -237,9 +240,9 @@ class TripDetailsPage extends StatelessWidget {
                                                             _tripDetailsController
                                                                 .trip
                                                                 .timeBook)),
-                                                    style: TextStyle(
-                                                        color: CustomColors
-                                                            .kDarkGray),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1,
                                                   ),
                                                 ),
                                               ],
@@ -259,9 +262,9 @@ class TripDetailsPage extends StatelessWidget {
                                                     DateTime.parse(
                                                         _tripDetailsController
                                                             .trip.timeBook)),
-                                                style: TextStyle(
-                                                    color:
-                                                        CustomColors.kDarkGray),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1,
                                               ),
                                             ],
                                           ),
@@ -291,10 +294,12 @@ class TripDetailsPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  'Chung cư SKY9',
-                                                  style: TextStyle(
-                                                      color: CustomColors
-                                                          .kDarkGray),
+                                                  _tripDetailsController
+                                                      .startingStation
+                                                      .startingPointName,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -312,10 +317,12 @@ class TripDetailsPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  'Đại học FPT TP.HCM',
-                                                  style: TextStyle(
-                                                      color: CustomColors
-                                                          .kDarkGray),
+                                                  _tripDetailsController
+                                                      .destinationStation
+                                                      .destinationName,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -325,75 +332,88 @@ class TripDetailsPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              margin:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              decoration: BoxDecoration(
-                                  color: CustomColors.kLightGray,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Row(
-                                children: <Widget>[
-                                  if (_tripDetailsController.trip.tripStatus !=
-                                      1) ...[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: CircleAvatar(
-                                        radius: 45,
-                                        backgroundImage: NetworkImage(
-                                            _tripDetailsController.user.avatar),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 5.0, top: 10.0),
-                                            child: Text(
+                            GestureDetector(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                decoration: BoxDecoration(
+                                    color: CustomColors.kLightGray,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
+                                  children: <Widget>[
+                                    if (_tripDetailsController
+                                            .trip.tripStatus !=
+                                        1) ...[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8.0),
+                                        child: CircleAvatar(
+                                          radius: 45,
+                                          backgroundImage: NetworkImage(
                                               _tripDetailsController
-                                                  .user.fullName,
-                                              style: TextStyle(
-                                                  color: CustomColors.kBlue,
-                                                  fontWeight: FontWeight.bold),
+                                                  .user.avatar),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 5.0, top: 10.0),
+                                              child: Text(
+                                                _tripDetailsController
+                                                    .user.userFullname,
+                                                style: TextStyle(
+                                                    color: CustomColors.kBlue,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
-                                          ),
-                                          UserRating(
-                                              score: _tripDetailsController
-                                                  .user.userStar
-                                                  .toString()),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10.0),
-                                            child: ContactButtons(
-                                              phoneNo: _tripDetailsController
-                                                  .user.phoneNumber,
+                                            UserRating(
+                                                score: _tripDetailsController
+                                                    .user.userStar
+                                                    .toString()),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10.0),
+                                              child: ContactButtons(
+                                                phoneNo: _tripDetailsController
+                                                    .user.userPhoneNumber,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ] else ...[
-                                    Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: SvgPicture.asset(
-                                        'assets/images/loading.svg',
+                                    ] else ...[
+                                      Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: SvgPicture.asset(
+                                          'assets/images/loading.svg',
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      CustomStrings.kFinding.tr,
-                                      style: TextStyle(
-                                        color: CustomColors.kBlue,
-                                        fontWeight: FontWeight.bold,
+                                      Text(
+                                        CustomStrings.kFinding.tr,
+                                        style: TextStyle(
+                                          color: CustomColors.kBlue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                  ]
-                                ],
+                                    ]
+                                  ],
+                                ),
                               ),
+                              onTap: () {
+                                if (_tripDetailsController.trip.tripStatus !=
+                                    1) {
+                                  Get.to(() => ViewUserPage(userId: userId),
+                                      binding: ViewUserBinding());
+                                }
+                              },
                             ),
                             if (_tripDetailsController.trip.tripStatus != 4 &&
                                 _tripDetailsController.trip.tripStatus !=
@@ -414,7 +434,24 @@ class TripDetailsPage extends StatelessWidget {
                                               ? 152
                                               : double.infinity,
                                           child: CustomElevatedIconButton(
-                                            onPressedFunc: () {},
+                                            onPressedFunc: () {
+                                              CommonFunctions()
+                                                  .showConfirmDialog(
+                                                      context: context,
+                                                      title: CustomStrings
+                                                          .kConfirmCancelTrip
+                                                          .tr,
+                                                      message: CustomStrings
+                                                          .kViewCancelTripReminder
+                                                          .tr,
+                                                      onPressedFunc: () {
+                                                        _tripDetailsController
+                                                            .showCancelReasonDialog(
+                                                                context:
+                                                                    context,
+                                                                tripId: tripId);
+                                                      });
+                                            },
                                             text: CustomStrings.kCancelTrip.tr,
                                             backgroundColor:
                                                 CustomColors.kLightGray,

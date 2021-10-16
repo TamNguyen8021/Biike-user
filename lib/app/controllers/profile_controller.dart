@@ -28,7 +28,7 @@ class ProfileController extends GetxController {
   ///
   /// Author: TamNTT
   void changeName(String name) {
-    user.fullName = name;
+    user.userFullname = name;
   }
 
   /// Gets profile based on [userId] and shows it on [context].
@@ -37,14 +37,12 @@ class ProfileController extends GetxController {
   Future<void> getProfile({required BuildContext context}) async {
     var data = await _profileProvider.getProfile(
         userId: await Biike.localAppData.getUserId());
-    // print('data: ' + data.toString());
-    // print('data length: ' + data.length.toString());
     user = User.fromJson(data);
-    // print(user.toJson());
+
     if (user.birthDate.isNotEmpty) {
       birthDate.value = DateTime.parse(user.birthDate);
     }
-    tempName = user.fullName;
+    tempName = user.userFullname;
     tempGender = user.gender;
     tempBirthDate = user.birthDate;
   }
@@ -61,11 +59,12 @@ class ProfileController extends GetxController {
   Future<void> editProfile(
       {required BuildContext context, required User user}) async {
     Map<String, dynamic> newUserProfile = {};
-    newUserProfile.putIfAbsent('userFullname', () => user.fullName);
+
+    newUserProfile.putIfAbsent('userFullname', () => user.userFullname);
     newUserProfile.putIfAbsent('gender', () => user.gender);
     newUserProfile.putIfAbsent('birthDate',
         () => DateFormat('yyyy-MM-dd').format(DateTime.parse(user.birthDate)));
-    // print(newUserProfile);
+
     Future<String> message = _profileProvider.editProfile(
         userId: await Biike.localAppData.getUserId(),
         body: jsonEncode(newUserProfile));

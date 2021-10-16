@@ -10,7 +10,7 @@ StartingStation _$StartingStationFromJson(Map<String, dynamic> json) {
   return StartingStation(
     json['stationId'] as int?,
     json['areaId'] as int?,
-    json['startingPointName'] as String,
+    json['startingPointName'] as String? ?? '',
     json['stationAddress'] as String?,
     json['isStationDeleted'] as bool?,
     json['longtitude'] as String?,

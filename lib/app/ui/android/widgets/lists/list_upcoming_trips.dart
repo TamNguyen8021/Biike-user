@@ -11,7 +11,7 @@ class ListUpcomingTrips extends StatelessWidget {
   const ListUpcomingTrips({
     Key? key,
     required this.listUpcomingTrips,
-    required this.itemPadding, 
+    required this.itemPadding,
   }) : super(key: key);
 
   @override
@@ -35,9 +35,7 @@ class ListUpcomingTrips extends StatelessWidget {
                 avatarUrl: listUpcomingTrips.elementAt(index).avatarUrl,
                 name: listUpcomingTrips.elementAt(index).name,
                 phoneNo: listUpcomingTrips.elementAt(index).phoneNo,
-                time: listUpcomingTrips.elementAt(index).time,
-                date: listUpcomingTrips.elementAt(index).date,
-                year: listUpcomingTrips.elementAt(index).year,
+                timeBook: listUpcomingTrips.elementAt(index).timeBook,
                 sourceStation: listUpcomingTrips.elementAt(index).sourceStation,
                 destinationStation:
                     listUpcomingTrips.elementAt(index).destinationStation),

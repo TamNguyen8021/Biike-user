@@ -16,16 +16,16 @@ class Trip {
   int? bikerId;
   int? routeId;
 
-  @JsonKey(defaultValue: '2000-01-01T00:00:00')
+  @JsonKey(defaultValue: '')
   late String createdTime;
 
-  @JsonKey(defaultValue: '2000-01-01T00:00:00')
+  @JsonKey(defaultValue: '')
   late String timeBook;
 
-  @JsonKey(defaultValue: '2000-01-01T00:00:00')
+  @JsonKey(defaultValue: '')
   late String timePickUp;
 
-  @JsonKey(defaultValue: '2000-01-01T00:00:00')
+  @JsonKey(defaultValue: '')
   late String timeFinished;
 
   int? tripStatus;

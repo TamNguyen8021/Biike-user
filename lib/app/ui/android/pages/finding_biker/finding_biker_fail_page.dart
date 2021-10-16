@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-/// The '015-cus-book-now-failed' screen
+/// The 'finding_biker_failed' screen
 class FindingBikerFailPage extends StatelessWidget {
   const FindingBikerFailPage({Key? key}) : super(key: key);
 

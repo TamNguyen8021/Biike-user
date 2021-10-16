@@ -175,6 +175,12 @@ class CustomStrings {
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
+  static const String kOpenStreetMap = 'kOpenStreetMap';
+  static const String kCancelTripSuccess = 'kCancelTripSuccess';
+  static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
+  static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
+  static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
+  static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';

@@ -8,42 +8,77 @@ import 'package:bikes_user/app/data/providers/trip_history_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Manage states of [TripHistoryPage]
 class TripHistoryController extends GetxController {
   final TripHistoryProvider _tripHistoryProvider =
       Get.put(TripHistoryProvider());
+  final PagingController<int, HistoryTripCard> pagingController =
+      PagingController(firstPageKey: 0);
 
-  RxList<dynamic> historyTrips = [].obs;
-  // Rx<Role> role = Role.keer.obs;
+  RxList historyTrips = [].obs;
+  Map<String, dynamic> historyTripsPagination = {};
+  int _currentPage = 1;
+  int _limit = 10;
 
-  /// Load history trips from API based on [userId] and [role].
+  @override
+  onInit() {
+    pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.onInit();
+  }
+
+  @override
+  dispose() {
+    pagingController.dispose();
+    super.dispose();
+  }
+
+  /// Lazy loading when view history trips.
   ///
   /// Author: TamNTT
-  Future<void> getHistoryTrips({required BuildContext context}) async {
-    historyTrips.clear();
-    List response = await _tripHistoryProvider.getHistoryTrips(
-        userId: await Biike.localAppData.getUserId());
-    // print(response);
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      await getHistoryTrips();
+      final int previouslyFetchedItemsCount =
+          pagingController.itemList?.length ?? 0;
+      final bool isLastPage =
+          historyTripsPagination['totalRecord'] - previouslyFetchedItemsCount <=
+              _limit;
+      if (isLastPage) {
+        pagingController.appendLastPage(historyTrips.cast());
+        _currentPage = 1;
+      } else {
+        _currentPage += 1;
+        final int nextPageKey = pageKey + historyTrips.length;
+        pagingController.appendPage(historyTrips.cast(), nextPageKey);
+      }
+    } catch (error) {
+      pagingController.error = error;
+    }
+  }
 
-    for (var historyTrip in response) {
-      // print(item);
+  /// Load history trips from API.
+  ///
+  /// Author: TamNTT
+  Future<List<HistoryTripCard>> getHistoryTrips() async {
+    historyTrips.clear();
+    Map<String, dynamic> response = await _tripHistoryProvider.getHistoryTrips(
+        userId: await Biike.localAppData.getUserId(),
+        page: _currentPage,
+        limit: _limit);
+    historyTripsPagination = response['_meta'];
+
+    for (var historyTrip in response['data']) {
       User user = User.fromJson(historyTrip);
-      // print(user.toJson());
       Trip trip = Trip.fromJson(historyTrip);
-      // print(trip.toJson());
       StartingStation startingStation = StartingStation.fromJson(historyTrip);
-      // print(startingStation.toJson());
       DestinationStation destinationStation =
           DestinationStation.fromJson(historyTrip);
-      // print(destinationStation.toJson());
       TripStatus tripStatus;
-      String date = DateTime.parse(trip.timeBook).day.toString() +
-          ' Th ' +
-          DateTime.parse(trip.timeBook).month.toString();
 
       switch (trip.tripStatus) {
         case 1:
@@ -69,15 +104,17 @@ class TripHistoryController extends GetxController {
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(
-          userId: user.userId,
-          time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
-          date: date,
-          status: tripStatus,
-          sourceStation: startingStation.startingPointName,
-          destinationStation: destinationStation.destinationName);
+        tripId: trip.tripId,
+        userId: user.userId,
+        dateTime: DateTime.parse(trip.timeBook),
+        status: tripStatus,
+        sourceStation: startingStation.startingPointName,
+        destinationStation: destinationStation.destinationName,
+        isOnViewUserPage: false,
+      );
 
       historyTrips.add(historyTripCard);
-      // print(historyTrips.length);
     }
+    return historyTrips.cast();
   }
 }

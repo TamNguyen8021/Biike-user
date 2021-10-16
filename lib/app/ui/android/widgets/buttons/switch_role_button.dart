@@ -46,6 +46,7 @@ class SwitchRoleButton extends StatelessWidget {
                 _modeButtonForegroundColor.value = CustomColors.kBlue;
               }
             }
+            Biike.localAppData.saveRole(Biike.role.value);
             Get.offAllNamed(route);
           },
           child: Padding(

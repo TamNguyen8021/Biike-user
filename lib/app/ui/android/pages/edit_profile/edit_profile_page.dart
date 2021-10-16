@@ -19,7 +19,7 @@ class EditProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<bool> isSaveButtonDisable = _profileController
         .isSaveButtonDisable(
-            newName: _profileController.user.fullName,
+            newName: _profileController.user.userFullname,
             newGender: _profileController.user.gender,
             newBirthDate: _profileController.user.birthDate)
         .obs;
@@ -67,13 +67,13 @@ class EditProfilePage extends StatelessWidget {
                     ProfileTextField(
                         isReadOnly: false,
                         isEditProfile: true,
-                        initialValue: _profileController.user.fullName,
+                        initialValue: _profileController.user.userFullname,
                         labelText: CustomStrings.kFullName.tr,
                         onChangedFunc: (String name) {
                           _profileController.changeName(name);
                           isSaveButtonDisable.value =
                               _profileController.isSaveButtonDisable(
-                                  newName: _profileController.user.fullName,
+                                  newName: _profileController.user.userFullname,
                                   newGender: _profileController.user.gender,
                                   newBirthDate:
                                       _profileController.user.birthDate);
@@ -81,7 +81,7 @@ class EditProfilePage extends StatelessWidget {
                     ProfileTextField(
                         isReadOnly: true,
                         isEditProfile: true,
-                        initialValue: _profileController.user.phoneNumber,
+                        initialValue: _profileController.user.userPhoneNumber,
                         labelText: CustomStrings.kPhoneNo.tr),
                     ProfileTextField(
                       isReadOnly: true,
@@ -128,7 +128,7 @@ class EditProfilePage extends StatelessWidget {
                         _profileController.changeGender(gender);
                         isSaveButtonDisable.value =
                             _profileController.isSaveButtonDisable(
-                                newName: _profileController.user.fullName,
+                                newName: _profileController.user.userFullname,
                                 newGender: _profileController.user.gender,
                                 newBirthDate:
                                     _profileController.user.birthDate);
@@ -150,7 +150,8 @@ class EditProfilePage extends StatelessWidget {
                                 _profileController.birthDate.value.toString();
                             isSaveButtonDisable.value =
                                 _profileController.isSaveButtonDisable(
-                                    newName: _profileController.user.fullName,
+                                    newName:
+                                        _profileController.user.userFullname,
                                     newGender: _profileController.user.gender,
                                     newBirthDate:
                                         _profileController.user.birthDate);

@@ -14,15 +14,15 @@ class User {
   late int userId;
 
   @JsonKey(defaultValue: '')
-  late String phoneNumber;
+  late String userPhoneNumber;
 
   @JsonKey(defaultValue: '')
   late String email;
 
   @JsonKey(defaultValue: CustomStrings.kFinding)
-  late String fullName;
+  late String userFullname;
 
-  @JsonKey(defaultValue: 'assets/images/loading.svg')
+  @JsonKey(defaultValue: '')
   late String avatar;
 
   @JsonKey(defaultValue: -1)
@@ -45,9 +45,9 @@ class User {
   bool? isBikeVerified;
 
   User(
-      this.phoneNumber,
+      this.userPhoneNumber,
       this.email,
-      this.fullName,
+      this.userFullname,
       this.avatar,
       this.gender,
       this.birthDate,
@@ -62,8 +62,8 @@ class User {
     this.userId = -1;
     this.avatar = '';
     this.email = '';
-    this.fullName = '';
-    this.phoneNumber = '';
+    this.userFullname = '';
+    this.userPhoneNumber = '';
     this.gender = -1;
     this.birthDate = '';
     this.userStar = 0.0;

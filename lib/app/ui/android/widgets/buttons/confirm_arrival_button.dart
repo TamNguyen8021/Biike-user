@@ -104,7 +104,6 @@ class ConfirmArrivalButton extends StatelessWidget {
                 // buttonColor.value = CustomColors.kDarkGray;
                 // buttonText.value = CustomStrings.kArriveAtDestination.tr;
               } else if (!isOnHomeScreen) {
-                // Biike.role.value = Role.keer;
                 Get.offAllNamed(CommonRoutes.FEEDBACK);
               }
             },

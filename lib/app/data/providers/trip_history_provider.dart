@@ -5,15 +5,15 @@ class TripHistoryProvider extends CommonProvider {
   /// Loads history trips from API based on [userId] and [role]
   ///
   /// Author: TamNTT
-  Future<List> getHistoryTrips({required int userId}) async {
+  Future<Map<String, dynamic>> getHistoryTrips(
+      {required int userId, required int page, required int limit}) async {
     final response = await get(
-        UrlStrings.tripUrl + '$userId/history?page=1&limit=10',
+        UrlStrings.tripUrl + '$userId/history?page=$page&limit=$limit',
         headers: await getHeaders());
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      // print(response.body);
-      return response.body['data'];
+      return response.body;
     }
   }
 }

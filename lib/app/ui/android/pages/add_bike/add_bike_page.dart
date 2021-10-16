@@ -8,7 +8,7 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_b
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// 'add_bike' screen
+/// The 'add_bike' screen
 class AddBikePage extends StatelessWidget {
   const AddBikePage({Key? key}) : super(key: key);
 

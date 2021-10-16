@@ -1,5 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -175,6 +177,68 @@ class CommonFunctions {
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  /// Display a confirm dialog on [context].
+  ///
+  /// Author: TamNTT
+  dynamic showConfirmDialog(
+      {required BuildContext context,
+      required String title,
+      required String message,
+      required Function() onPressedFunc}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0, bottom: 30.0),
+                    child: Text(
+                      message,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: 100,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          CustomTextButton(
+                            backgroundColor: CustomColors.kBlue,
+                            foregroundColor: Colors.white,
+                            text: CustomStrings.kSure.tr,
+                            onPressedFunc: onPressedFunc,
+                          ),
+                          CustomTextButton(
+                              backgroundColor: CustomColors.kLightGray,
+                              foregroundColor: CustomColors.kDarkGray,
+                              text: CustomStrings.kBtnExit.tr,
+                              onPressedFunc: () {
+                                Get.back();
+                              }),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

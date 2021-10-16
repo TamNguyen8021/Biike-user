@@ -10,11 +10,9 @@ class ProfileProvider extends CommonProvider {
   Future getProfile({required int userId}) async {
     final response = await get(UrlStrings.userUrl + '$userId/profile',
         headers: await getHeaders());
-    // print(response.statusText);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      // print(response.body);
       return response.body['data'];
     }
   }
@@ -24,7 +22,6 @@ class ProfileProvider extends CommonProvider {
   /// Author: TamNTT
   Future<String> editProfile(
       {required int userId, required dynamic body}) async {
-    print(body);
     final response = await put(UrlStrings.userUrl + '$userId/profile', body);
     if (response.status.hasError) {
       return Future.error(response.statusText!);

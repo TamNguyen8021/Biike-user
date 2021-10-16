@@ -5,28 +5,29 @@ class HomeProvider extends CommonProvider {
   /// Loads upcoming trips from API based on [userId] and [role]
   ///
   /// Author: TamNTT
-  Future<List> getUpcomingTrips({required int userId}) async {
+  Future<Map<String, dynamic>> getUpcomingTrips(
+      {required int userId, required int page, required int limit}) async {
     final response = await get(
-        UrlStrings.tripUrl + '$userId/upcoming?page=1&limit=10',
+        UrlStrings.tripUrl + '$userId/upcoming?page=$page&limit=$limit',
         headers: await getHeaders());
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      // print(response.body['data']);
-      return response.body['data'];
+      return response.body;
     }
   }
 
   /// Loads stations from API.
   ///
   /// Author: TamNTT
-  Future<List> getStations() async {
-    final response = await get(UrlStrings.stationUrl + '?page=1&limit=10');
+  Future<Map<String, dynamic>> getStations(
+      {required int page, required int limit}) async {
+    final response =
+        await get(UrlStrings.stationUrl + '?page=$page&limit=$limit');
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      // print(response.body);
-      return response.body['data'];
+      return response.body;
     }
   }
 }

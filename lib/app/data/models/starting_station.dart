@@ -9,13 +9,16 @@ part 'starting_station.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class StartingStation {
-  final int? stationId;
-  final int? areaId;
-  final String startingPointName;
-  final String? stationAddress;
-  final bool? isStationDeleted;
-  final String? longtitude;
-  final String? latitude;
+  int? stationId;
+  int? areaId;
+
+  @JsonKey(defaultValue: '')
+  late String startingPointName;
+
+  String? stationAddress;
+  bool? isStationDeleted;
+  String? longtitude;
+  String? latitude;
 
   StartingStation(
     this.stationId,
@@ -26,6 +29,10 @@ class StartingStation {
     this.longtitude,
     this.latitude,
   );
+
+  StartingStation.empty() {
+    this.startingPointName = '';
+  }
 
   /// A necessary factory constructor for creating a new StartingStation instance
   /// from a map. Pass the map to the generated `_$StartingStationFromJson()` constructor.

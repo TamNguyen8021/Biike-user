@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-/// '004.4_choose_mode' screen
+/// The '004.4_choose_mode' screen
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({Key? key}) : super(key: key);
 

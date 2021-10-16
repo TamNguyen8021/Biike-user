@@ -1,27 +1,32 @@
-import 'package:bikes_user/app/bindings/view_user_binding.dart';
+import 'dart:io';
+
+import 'package:bikes_user/app/bindings/trip_details_binding.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
-import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
+import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 /// This widget contains a history trip's details
 class HistoryTripCard extends StatelessWidget {
+  final int tripId;
   final int userId;
-  final String time;
-  final String date;
+  final DateTime dateTime;
   final TripStatus status;
   final String sourceStation;
   final String destinationStation;
+  final bool isOnViewUserPage;
 
   const HistoryTripCard(
-      {required this.userId,
-      required this.time,
-      required this.date,
+      {required this.tripId,
+      required this.userId,
+      required this.dateTime,
       required this.status,
       required this.sourceStation,
       required this.destinationStation,
+      required this.isOnViewUserPage,
       Key? key})
       : super(key: key);
 
@@ -29,7 +34,20 @@ class HistoryTripCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Color _statusColor = CustomColors.kBlue;
     String _statusText = '';
-    double screenWidth = MediaQuery.of(context).size.width;
+    double _screenWidth = MediaQuery.of(context).size.width;
+    String _date = dateTime.day.toString() +
+        ' Th ' +
+        dateTime.month.toString() +
+        ', ' +
+        dateTime.year.toString();
+
+    if (Platform.localeName == 'en_US') {
+      _date = DateFormat.MMM().format(dateTime) +
+          ' ' +
+          dateTime.day.toString() +
+          ', ' +
+          dateTime.year.toString();
+    }
 
     if (status != TripStatus.finished) {
       _statusColor = CustomColors.kRed;
@@ -49,111 +67,113 @@ class HistoryTripCard extends StatelessWidget {
     }
 
     return GestureDetector(
-      child: Container(
-        height: 82,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+        child: Container(
+          height: 82,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 18.0),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  right: _screenWidth >= 400 ? 16.0 : 5.0),
+                              child: Text(
+                                DateFormat('HH:mm').format(dateTime),
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ),
+                            Text(
+                              _date,
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        _statusText,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: _statusColor),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18.0),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: screenWidth >= 400 ? 16.0 : 5.0),
-                            child: Text(
-                              time,
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.adjust,
                           ),
-                          Text(
-                            date,
+                        ),
+                        Expanded(
+                          child: Text(
+                            sourceStation,
                             style: Theme.of(context).textTheme.bodyText1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                      child: Icon(
+                        Icons.more_vert_outlined,
                       ),
                     ),
-                    Text(
-                      _statusText,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: _statusColor),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.location_on,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            destinationStation,
+                            style: Theme.of(context).textTheme.bodyText1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Icon(
-                          Icons.adjust,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          sourceStation,
-                          style: Theme.of(context).textTheme.bodyText1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    child: Icon(
-                      Icons.more_vert_outlined,
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Icon(
-                          Icons.location_on,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          destinationStation,
-                          style: Theme.of(context).textTheme.bodyText1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-        decoration: BoxDecoration(
-            color: CustomColors.kLightGray,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: CustomColors.kDarkGray.withOpacity(0.5),
-                // changes position of shadow
-                offset: Offset(0, 1),
               )
-            ]),
-      ),
-      // onTap: () => Get.toNamed(CommonRoutes.VIEW_USER),
-      onTap: () => Get.to(() => ViewUserPage(userId: userId),
-          binding: ViewUserBinding()),
-    );
+            ],
+          ),
+          decoration: BoxDecoration(
+              color: CustomColors.kLightGray,
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: CustomColors.kDarkGray.withOpacity(0.5),
+                  // changes position of shadow
+                  offset: Offset(0, 1),
+                )
+              ]),
+        ),
+        onTap: () {
+          if (!isOnViewUserPage) {
+            Get.to(() => TripDetailsPage(tripId: tripId, userId: userId),
+                binding: TripDetailsBinding());
+          }
+        });
   }
 }

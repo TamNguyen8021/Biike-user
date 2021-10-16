@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-/// The 'get-trip-success' screen
+/// The 'get_trip_success' screen
 class GetTripSuccessPage extends StatelessWidget {
   const GetTripSuccessPage({Key? key}) : super(key: key);
 

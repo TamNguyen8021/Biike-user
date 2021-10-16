@@ -13,53 +13,92 @@ import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ViewUserController extends GetxController {
+  final int userId;
+
+  ViewUserController({required this.userId});
+
   final _viewUserProvider = Get.put(ViewUserProvider());
+  final PagingController<int, HistoryTripCard> pagingController =
+      PagingController(firstPageKey: 0);
 
   User user = User.empty();
   Area area = Area.empty();
-  RxList<dynamic> historyTrips = [].obs;
+  RxList historyTrips = [].obs;
+  Map<String, dynamic> pagination = {};
+  int _currentPage = 1;
+  int _limit = 10;
+
+  @override
+  onInit() {
+    getPartnerProfile();
+    pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.onInit();
+  }
+
+  @override
+  dispose() {
+    pagingController.dispose();
+    super.dispose();
+  }
+
+  /// Lazy loading when view upcoming trips or load stations.
+  ///
+  /// Author: TamNTT
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      await getHistoryTripsWithPartner();
+      final int previouslyFetchedItemsCount =
+          pagingController.itemList?.length ?? 0;
+      final bool isLastPage =
+          pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
+      if (isLastPage) {
+        pagingController.appendLastPage(historyTrips.cast());
+        _currentPage = 1;
+      } else {
+        _currentPage += 1;
+        int nextPageKey = pageKey + historyTrips.length;
+        pagingController.appendPage(historyTrips.cast(), nextPageKey);
+      }
+    } catch (error) {
+      pagingController.error = error;
+    }
+  }
 
   /// Gets partner's profile and shows it on [context] .
   ///
   /// Author: TamNTT
-  Future<void> getPartnerProfile(
-      {required BuildContext context, required int partnerId}) async {
+  Future<void> getPartnerProfile() async {
     var partnerProfile =
-        await _viewUserProvider.getPartnerProfile(partnerId: partnerId);
-    // print('data: ' + data.toString());
-    // print('data length: ' + data.length.toString());
+        await _viewUserProvider.getPartnerProfile(partnerId: userId);
     user = User.fromJson(partnerProfile);
+    print(user.userPhoneNumber);
+    print(user.userFullname);
     area = Area.fromJson(partnerProfile);
-    // print(user.toJson());
   }
 
   /// Gets history trips with partner and shows it on [context].
   ///
   /// Author: TamNTT
-  Future<void> getHistoryTripsWithPartner(
-      {required BuildContext context, required int partnerId}) async {
+  Future<List<HistoryTripCard>> getHistoryTripsWithPartner() async {
     historyTrips.clear();
-    List historyTripsWithPartner = await _viewUserProvider.getHistoryPairTrips(
-        userId: await Biike.localAppData.getUserId(), partnerId: partnerId);
-    // print('data: ' + tempHistoryTrips.toString());
-    for (var historyTrip in historyTripsWithPartner) {
-      // print(item);
+    Map<String, dynamic> response = await _viewUserProvider.getHistoryPairTrips(
+        userId: await Biike.localAppData.getUserId(),
+        partnerId: userId,
+        page: _currentPage,
+        limit: _limit);
+
+    for (var historyTrip in response['data']) {
       User user = User.fromJson(historyTrip);
-      // print(user.toJson());
       Trip trip = Trip.fromJson(historyTrip);
-      // print(trip.toJson());
       StartingStation startingStation = StartingStation.fromJson(historyTrip);
-      // print(startingStation.toJson());
       DestinationStation destinationStation =
           DestinationStation.fromJson(historyTrip);
-      // print(destinationStation.toJson());
       TripStatus tripStatus;
-      String date = DateTime.parse(trip.timeBook).day.toString() +
-          ' Th ' +
-          DateTime.parse(trip.timeBook).month.toString();
 
       switch (trip.tripStatus) {
         case 1:
@@ -85,16 +124,18 @@ class ViewUserController extends GetxController {
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(
-          userId: user.userId,
-          time: DateFormat('HH:mm').format(DateTime.parse(trip.timeBook)),
-          date: date,
-          status: tripStatus,
-          sourceStation: startingStation.startingPointName,
-          destinationStation: destinationStation.destinationName);
+        tripId: trip.tripId,
+        userId: user.userId,
+        dateTime: DateTime.parse(trip.timeBook),
+        status: tripStatus,
+        sourceStation: startingStation.startingPointName,
+        destinationStation: destinationStation.destinationName,
+        isOnViewUserPage: true,
+      );
 
       historyTrips.add(historyTripCard);
-      // print(historyTrips.length);
     }
+    return historyTrips.cast();
   }
 
   /// Display a dialog on [context] to report a user.

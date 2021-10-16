@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bikes_user/app/bindings/trip_details_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -5,6 +7,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 /// This widget contains an upcoming trip's details
 class UpcomingTripCard extends StatelessWidget {
@@ -16,9 +19,7 @@ class UpcomingTripCard extends StatelessWidget {
   final String avatarUrl;
   final String name;
   final String phoneNo;
-  final String time;
-  final String date;
-  final int year;
+  final String timeBook;
   final String sourceStation;
   final String destinationStation;
 
@@ -32,15 +33,28 @@ class UpcomingTripCard extends StatelessWidget {
       required this.avatarUrl,
       required this.name,
       required this.phoneNo,
-      required this.time,
-      required this.date,
-      required this.year,
+      required this.timeBook,
       required this.sourceStation,
       required this.destinationStation})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime _dateTime = DateTime.parse(timeBook);
+    String _date = _dateTime.day.toString() +
+        ' Th ' +
+        _dateTime.month.toString() +
+        ', ' +
+        _dateTime.year.toString();
+
+    if (Platform.localeName == 'en_US') {
+      _date = DateFormat.MMM().format(_dateTime) +
+          ' ' +
+          _dateTime.day.toString() +
+          ', ' +
+          _dateTime.year.toString();
+    }
+
     return GestureDetector(
       onTap: () => Get.to(() => TripDetailsPage(tripId: tripId, userId: userId),
           binding: TripDetailsBinding()),
@@ -92,7 +106,7 @@ class UpcomingTripCard extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
-                                time,
+                                DateFormat('HH:mm').format(_dateTime),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1!
@@ -103,7 +117,7 @@ class UpcomingTripCard extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              date,
+                              _date,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
