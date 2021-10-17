@@ -8,6 +8,7 @@ import 'package:bikes_user/app/data/providers/trip_history_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -58,6 +59,8 @@ class TripHistoryController extends GetxController {
       }
     } catch (error) {
       pagingController.error = error;
+      FlutterLogs.logErrorTrace('Biike', 'TripHistoryController - _fetchPage()',
+          error.toString(), Error());
     }
   }
 

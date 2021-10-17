@@ -358,6 +358,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_logs:
+    dependency: "direct main"
+    description:
+      name: flutter_logs
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.4"
   flutter_multi_formatter:
     dependency: "direct main"
     description:

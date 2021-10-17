@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 
 class FirebaseServices {
   User? get user => firebaseAuth.currentUser;
@@ -47,8 +48,9 @@ class FirebaseServices {
         return true;
       }
       return false;
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      FlutterLogs.logErrorTrace(
+          'Biike', 'FirebaseServices - verifyOtp()', error.toString(), Error());
       return false;
     }
   }
@@ -62,12 +64,19 @@ class FirebaseServices {
       } else {
         throw (FirebaseAuthException);
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+    } on FirebaseAuthException catch (error) {
+      FlutterLogs.logErrorTrace(
+          'Biike',
+          'FirebaseServices - signinWithEmailAndPassword()',
+          error.toString(),
+          Error());
+
+      if (error.code == 'user-not-found') {
         return 'No user found for that email.';
-      } else if (e.code == 'wrong-password') {
+      } else if (error.code == 'wrong-password') {
         return 'Wrong password provided for that user.';
       }
+
       return 'lỗi ngoại lệ';
     }
   }
@@ -75,7 +84,10 @@ class FirebaseServices {
   Future<void> sentVerifyEmail() async {
     try {
       await user?.sendEmailVerification();
-    } on FirebaseAuthException catch (_) {
+    } on FirebaseAuthException catch (error) {
+      FlutterLogs.logErrorTrace('Biike', 'FirebaseServices - sentVerifyEmail()',
+          error.toString(), Error());
+
       SnackBarServices.showSnackbar(
           title: '', message: 'Vui lòng chờ trong giây lát rồi thử lại sau');
     }
