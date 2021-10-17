@@ -40,7 +40,7 @@ class UpcomingTripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime _dateTime = DateTime.parse(bookTime);
+    DateTime _dateTime = DateTime.tryParse(bookTime) ?? DateTime.now();
     String _date = _dateTime.day.toString() +
         ' Th ' +
         _dateTime.month.toString() +

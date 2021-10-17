@@ -10,7 +10,8 @@ class LocalAppData {
   /// Author: UyenNLP
   Future<void> saveUserInfo(FirebaseServices services) async {
     _pref = await SharedPreferences.getInstance();
-    _pref.setInt('userId', int.parse(services.firebaseAuth.currentUser!.uid));
+    _pref.setInt(
+        'userId', int.tryParse(services.firebaseAuth.currentUser!.uid) ?? -1);
     _pref.setString(
         'email', services.firebaseAuth.currentUser!.email.toString());
     _pref.setString('token', await services.token);

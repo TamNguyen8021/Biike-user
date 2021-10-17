@@ -125,12 +125,13 @@ class ViewUserPage extends StatelessWidget {
                                               .bodyText1,
                                         ),
                                         if (_viewUserController
-                                            .user.birthDate.isNotEmpty) ...[
+                                                .user.birthDate !=
+                                            null) ...[
                                           Text(
                                             ' | ' +
-                                                DateTime.parse(
+                                                DateTime.tryParse(
                                                         _viewUserController
-                                                            .user.birthDate)
+                                                            .user.birthDate!)!
                                                     .year
                                                     .toString(),
                                             style: Theme.of(context)

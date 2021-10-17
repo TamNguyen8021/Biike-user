@@ -109,7 +109,7 @@ class TopBikerPage extends StatelessWidget {
                         ),
                         onTap: () {
                           int tempCurrentMonth =
-                              int.parse(currentMonth.value) - 1;
+                              int.tryParse(currentMonth.value)! - 1;
                           if (tempCurrentMonth >= 1) {
                             currentMonth.value = '$tempCurrentMonth';
                           }
@@ -131,7 +131,7 @@ class TopBikerPage extends StatelessWidget {
                         ),
                         onTap: () {
                           int tempCurrentMonth =
-                              int.parse(currentMonth.value) + 1;
+                              int.tryParse(currentMonth.value)! + 1;
                           if (tempCurrentMonth <= 12) {
                             currentMonth.value = '$tempCurrentMonth';
                           }

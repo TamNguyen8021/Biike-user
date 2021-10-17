@@ -49,13 +49,13 @@ class TripDetailsPage extends StatelessWidget {
     switch (_tripDetailsController.trip.tripStatus) {
       case 4:
         _statusBarText = CustomStrings.kTripHasFinished.tr;
-        _statusBarTime = DateFormat(_timeFormat)
-            .format(DateTime.parse(_tripDetailsController.trip.finishedTime));
+        _statusBarTime = DateFormat(_timeFormat).format(
+            DateTime.tryParse(_tripDetailsController.trip.finishedTime)!);
         break;
       default:
         _statusBarText = CustomStrings.kNewTrip.tr;
-        _statusBarTime = DateFormat(_timeFormat)
-            .format(DateTime.parse(_tripDetailsController.trip.createdDate));
+        _statusBarTime = DateFormat(_timeFormat).format(
+            DateTime.tryParse(_tripDetailsController.trip.createdDate)!);
         break;
     }
   }
@@ -240,10 +240,10 @@ class TripDetailsPage extends StatelessWidget {
                                                           right: 8.0),
                                                   child: Text(
                                                     DateFormat('dd/MM/yyyy')
-                                                        .format(DateTime.parse(
+                                                        .format(DateTime.tryParse(
                                                             _tripDetailsController
                                                                 .trip
-                                                                .bookTime)),
+                                                                .bookTime)!),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodyText1,
@@ -263,9 +263,9 @@ class TripDetailsPage extends StatelessWidget {
                                               ),
                                               Text(
                                                 DateFormat('HH:mm').format(
-                                                    DateTime.parse(
+                                                    DateTime.tryParse(
                                                         _tripDetailsController
-                                                            .trip.bookTime)),
+                                                            .trip.bookTime)!),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1,

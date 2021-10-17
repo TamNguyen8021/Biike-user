@@ -12,7 +12,7 @@ class ProfileController extends GetxController {
   final _profileProvider = Get.put(ProfileProvider());
 
   User user = User.empty();
-  Rx<DateTime> birthDate = DateTime.now().obs;
+  Rx<DateTime?> birthDate = null.obs;
   String tempName = '';
   int tempGender = -1;
   String tempBirthDate = '';
@@ -38,12 +38,11 @@ class ProfileController extends GetxController {
     var data = await _profileProvider.getProfile(userId: Biike.userId.value);
     user = User.fromJson(data);
 
-    if (user.birthDate.isNotEmpty) {
-      birthDate.value = DateTime.parse(user.birthDate);
-    }
+    birthDate.value = DateTime.tryParse(user.birthDate!);
+
     tempName = user.userFullname;
     tempGender = user.gender;
-    tempBirthDate = user.birthDate;
+    tempBirthDate = user.birthDate!;
   }
 
   bool isSaveButtonDisable(
@@ -61,8 +60,10 @@ class ProfileController extends GetxController {
 
     newUserProfile.putIfAbsent('userFullname', () => user.userFullname);
     newUserProfile.putIfAbsent('gender', () => user.gender);
-    newUserProfile.putIfAbsent('birthDate',
-        () => DateFormat('yyyy-MM-dd').format(DateTime.parse(user.birthDate)));
+    newUserProfile.putIfAbsent(
+        'birthDate',
+        () => DateFormat('yyyy-MM-dd')
+            .format(DateTime.tryParse(user.birthDate!)!));
 
     Future<String> message = _profileProvider.editProfile(
         userId: Biike.userId.value, body: jsonEncode(newUserProfile));

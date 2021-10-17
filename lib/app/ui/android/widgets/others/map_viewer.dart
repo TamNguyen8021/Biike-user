@@ -31,13 +31,14 @@ class MapViewer extends StatelessWidget {
       : super(key: key);
 
   Future<void> displayMap() async {
-    double departureLatitude = double.parse(departureCoordinate.split(',')[0]);
+    double departureLatitude =
+        double.tryParse(departureCoordinate.split(',')[0]) ?? 10.84165;
     double departureLongtitude =
-        double.parse(departureCoordinate.split(',')[1]);
+        double.tryParse(departureCoordinate.split(',')[1]) ?? 106.80965;
     double destinationLatitude =
-        double.parse(destinationCoordinate.split(',')[0]);
+        double.tryParse(destinationCoordinate.split(',')[0]) ?? 10.84165;
     double destinationLongtitude =
-        double.parse(destinationCoordinate.split(',')[1]);
+        double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
 
     RoadInfo roadInfo = await _mapController.drawRoad(
       GeoPoint(latitude: departureLatitude, longitude: departureLongtitude),

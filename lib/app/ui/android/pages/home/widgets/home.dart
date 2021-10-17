@@ -41,8 +41,9 @@ class Home extends StatelessWidget {
                 String _timeLeft = '';
 
                 if (homeController.upcomingTrips.isNotEmpty) {
-                  _firstTripTimeBook = DateTime.parse(
-                      homeController.upcomingTrips.toList()[0].bookTime);
+                  _firstTripTimeBook = DateTime.tryParse(
+                          homeController.upcomingTrips.toList()[0].bookTime) ??
+                      DateTime.now();
                   if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
                     _timeLeft = _timeLeft +
                         (_firstTripTimeBook.hour - _currentTime.hour)

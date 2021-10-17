@@ -104,7 +104,7 @@ class TripHistoryController extends GetxController {
       HistoryTripCard historyTripCard = HistoryTripCard(
         tripId: trip.tripId,
         userId: user.userId,
-        dateTime: DateTime.parse(trip.bookTime),
+        dateTime: DateTime.tryParse(trip.bookTime)!,
         status: tripStatus,
         sourceStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
