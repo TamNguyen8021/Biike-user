@@ -58,7 +58,7 @@ class TripDetailsProvider extends CommonProvider {
     final response = await put(
         UrlStrings.tripUrl +
             '$tripId/cancel?userId=' +
-            Biike.localAppData.userId.toString(),
+            Biike.userId.value.toString(),
         body,
         headers: await headers);
 

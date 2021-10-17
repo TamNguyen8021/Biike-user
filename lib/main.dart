@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_logs/flutter_logs.dart';
@@ -53,11 +54,17 @@ void main() {
 
 /// This widget is the root of your application.
 class Biike extends StatelessWidget {
+  final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   static final LocalAppData localAppData = LocalAppData();
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
+  static Rx<String> token = ''.obs;
 
-  void getRoleAndUserIdFromLocal() async {
+  /// Load token, role, and userId from local
+  ///
+  /// Author: TamNTT
+  void loadDataFromLocal() async {
+    token.value = await localAppData.token;
     userId.value = await localAppData.userId;
     String roleString = await localAppData.role;
     role.value = role.value.getRoleEnum(roleString);
@@ -65,7 +72,7 @@ class Biike extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getRoleAndUserIdFromLocal();
+    loadDataFromLocal();
     return ScreenUtilInit(
       designSize: Size(360, 780),
       builder: () => GetMaterialApp(

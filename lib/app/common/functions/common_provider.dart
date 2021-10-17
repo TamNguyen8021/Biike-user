@@ -6,7 +6,7 @@ class CommonProvider extends GetConnect {
   ///
   /// Author: UyenNLP
   Future<Map<String, String>> get headers async {
-    var token = await Biike.localAppData.token;
+    String token = Biike.token.value;
     return <String, String>{'Authorization': 'Bearer $token'};
   }
 }
