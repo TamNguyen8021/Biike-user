@@ -1,9 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
-import 'package:get/get.dart';
 
 class ProfileProvider extends CommonProvider {
   /// Loads profile from API based on [userId]
@@ -34,9 +32,9 @@ class ProfileProvider extends CommonProvider {
   /// Edits profile from API based on [userId]
   ///
   /// Author: TamNTT
-  Future<String> editProfile(
-      {required int userId, required dynamic body}) async {
-    final response = await put(UrlStrings.userUrl + '$userId/profile', body);
+  Future<bool> editProfile({required int userId, required dynamic body}) async {
+    final response = await put(UrlStrings.userUrl + '$userId/profile', body,
+        headers: await headers);
 
     FlutterLogs.logToFile(
         logFileName: 'API',
@@ -50,9 +48,9 @@ class ProfileProvider extends CommonProvider {
     if (response.status.hasError) {
       Biike.logger.e('ProfileProvider - editProfile()',
           response.statusCode.toString() + ' ' + response.statusText!);
-      return Future.error(response.statusText!);
+      return false;
     } else {
-      return CustomStrings.kEditProfileSuccess.tr;
+      return true;
     }
   }
 }

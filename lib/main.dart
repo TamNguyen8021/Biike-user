@@ -79,17 +79,7 @@ class _BiikeState extends State<Biike> {
   void initState() {
     super.initState();
     initPlatformState();
-    loadDataFromLocal();
-  }
-
-  /// Load token, role, and userId from local
-  ///
-  /// Author: TamNTT
-  void loadDataFromLocal() async {
-    Biike.token.value = await Biike.localAppData.token;
-    Biike.userId.value = await Biike.localAppData.userId;
-    String roleString = await Biike.localAppData.role;
-    Biike.role.value = Biike.role.value.getRoleEnum(roleString);
+    Biike.localAppData.loadDataFromLocal();
   }
 
   Future<void> initPlatformState() async {

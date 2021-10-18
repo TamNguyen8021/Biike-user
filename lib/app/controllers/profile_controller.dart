@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/profile_provider.dart';
 import 'package:bikes_user/main.dart';
@@ -12,7 +14,7 @@ class ProfileController extends GetxController {
   final _profileProvider = Get.put(ProfileProvider());
 
   User user = User.empty();
-  Rx<DateTime?> birthDate = null.obs;
+  Rxn<DateTime> birthDate = Rxn<DateTime>();
   String tempName = '';
   int tempGender = -1;
   String tempBirthDate = '';
@@ -34,7 +36,7 @@ class ProfileController extends GetxController {
   /// Gets profile based on [userId] and shows it on [context].
   ///
   /// Author: TamNTT
-  Future<void> getProfile({required BuildContext context}) async {
+  Future<void> getProfile() async {
     var data = await _profileProvider.getProfile(userId: Biike.userId.value);
     user = User.fromJson(data);
 
@@ -54,7 +56,7 @@ class ProfileController extends GetxController {
         (tempBirthDate == newBirthDate);
   }
 
-  Future<void> editProfile(
+  Future<bool> editProfile(
       {required BuildContext context, required User user}) async {
     Map<String, dynamic> newUserProfile = {};
 
@@ -65,9 +67,16 @@ class ProfileController extends GetxController {
         () => DateFormat('yyyy-MM-dd')
             .format(DateTime.tryParse(user.birthDate!)!));
 
-    Future<String> message = _profileProvider.editProfile(
+    bool isSuccess = await _profileProvider.editProfile(
         userId: Biike.userId.value, body: jsonEncode(newUserProfile));
-    CommonFunctions()
-        .showSuccessDialog(context: context, message: await message);
+    if (isSuccess) {
+      CommonFunctions().showSuccessDialog(
+          context: context, message: CustomStrings.kEditProfileSuccess.tr);
+      return true;
+    } else {
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kEditProfileFailed.tr);
+      return false;
+    }
   }
 }

@@ -119,7 +119,9 @@ final Map<String, String> vi = {
   'kOthers': 'Khác',
   'kSave': 'Lưu',
   'kBirthDate': 'Ngày sinh',
+  'kChooseBirthDate': 'Chọn ngày sinh',
   'kEditProfileSuccess': 'Chỉnh sửa thông tin thành công',
+  'kEditProfileFailed': 'Chỉnh sửa thông tin thất bại. Vui lòng thử lại sau',
 
   // 'biker_profile' screen
   'kManageBike': 'Quản lí xe',

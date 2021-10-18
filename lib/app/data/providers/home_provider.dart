@@ -10,7 +10,7 @@ class HomeProvider extends CommonProvider {
   Future<Map<String, dynamic>> getUpcomingTrips(
       {required int userId, required int page, required int limit}) async {
     final response = await get(
-        UrlStrings.tripUrl + '$userId/upcoming?page=$page&limit=$limit',
+        UrlStrings.tripUrl + 'upcoming/users/$userId?page=$page&limit=$limit',
         headers: await headers);
 
     FlutterLogs.logToFile(

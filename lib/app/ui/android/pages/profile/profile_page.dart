@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
     final _profileController = Get.find<ProfileController>();
 
     return FutureBuilder(
-        future: _profileController.getProfile(context: context),
+        future: _profileController.getProfile(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(

@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
           init: _profileController,
           builder: (_) {
             return FutureBuilder(
-                future: _profileController.getProfile(context: context),
+                future: _profileController.getProfile(),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {

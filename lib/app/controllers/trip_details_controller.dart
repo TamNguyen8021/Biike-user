@@ -90,7 +90,7 @@ class TripDetailsController extends GetxController {
       Get.back();
       Get.back();
       CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError);
+          context: context, message: CustomErrorsString.kDevelopError.tr);
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,16 @@ class LocalAppData {
     _pref.setString('refreshToken',
         services.firebaseAuth.currentUser!.refreshToken.toString());
     _pref.setString('role', 'Role.none');
+  }
+
+  /// Load token, role, and userId from local
+  ///
+  /// Author: TamNTT
+  Future<void> loadDataFromLocal() async {
+    Biike.token.value = await Biike.localAppData.token;
+    Biike.userId.value = await Biike.localAppData.userId;
+    String roleString = await Biike.localAppData.role;
+    Biike.role.value = Biike.role.value.getRoleEnum(roleString);
   }
 
   /// Get user's id

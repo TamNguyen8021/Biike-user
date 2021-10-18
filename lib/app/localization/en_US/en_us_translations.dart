@@ -117,7 +117,9 @@ final Map<String, String> en = {
   'kOthers': 'Other',
   'kSave': 'Save',
   'kBirthDate': 'Date of birth',
+  'kChooseBirthDate': 'Choose a date',
   'kEditProfileSuccess': 'Your profile was edited',
+  'kEditProfileFailed': 'Your profile was not changed. Please try again later',
 
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',

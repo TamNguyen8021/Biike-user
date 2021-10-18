@@ -10,7 +10,7 @@ class TripHistoryProvider extends CommonProvider {
   Future<Map<String, dynamic>> getHistoryTrips(
       {required int userId, required int page, required int limit}) async {
     final response = await get(
-        UrlStrings.tripUrl + '$userId/history?page=$page&limit=$limit',
+        UrlStrings.tripUrl + 'history/users/$userId?page=$page&limit=$limit',
         headers: await headers);
 
     FlutterLogs.logToFile(

@@ -65,11 +65,7 @@ class CommonFunctions {
       required bool isBirthDatePicker}) async {
     DateTime _currentTime = DateTime.now();
     DateTime _firstDate = DateTime(_currentTime.year - 90);
-    DateTime _lastDate = DateTime(_currentTime.year - 18);
-
-    if (selectedDate.value == null) {
-      selectedDate.value = _currentTime;
-    }
+    DateTime _lastDate = DateTime(_currentTime.year - 18, 12, 31);
 
     if (!isBirthDatePicker) {
       _firstDate = _currentTime;
@@ -79,17 +75,17 @@ class CommonFunctions {
 
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: selectedDate.value!,
+      initialDate: selectedDate.value ?? DateTime(_currentTime.year - 18),
       firstDate: _firstDate,
       lastDate: _lastDate,
       helpText: CustomStrings.kChooseDate.tr,
       cancelText: CustomStrings.kCancel.tr,
-      fieldLabelText: CustomStrings.kBirthDate,
+      fieldLabelText: CustomStrings.kBirthDate.tr,
     );
-    if (pickedDate != null) {
-      selectedDate.value = pickedDate;
-    }
-    return selectedDate.value!;
+    // if (pickedDate != null) {
+    //   selectedDate.value = pickedDate;
+    // }
+    return pickedDate!;
   }
 
   /// Show a time picker on [context].
