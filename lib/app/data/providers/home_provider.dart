@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 
 class HomeProvider extends CommonProvider {
@@ -22,6 +23,8 @@ class HomeProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('HomeProvider - getUpcomingTrips()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body;
@@ -46,6 +49,8 @@ class HomeProvider extends CommonProvider {
             response.statusText!,
         appendTimeStamp: true);
     if (response.status.hasError) {
+      Biike.logger.e('HomeProvider - getStations()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body;

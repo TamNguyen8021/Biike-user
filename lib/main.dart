@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'app/localization/localization_service.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
@@ -58,6 +59,7 @@ void main() {
 //ignore: must_be_immutable
 class Biike extends StatefulWidget {
   static final LocalAppData localAppData = LocalAppData();
+  static final Logger logger = Logger();
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
   static Rx<String> token = ''.obs;
@@ -69,7 +71,7 @@ class Biike extends StatefulWidget {
 }
 
 class _BiikeState extends State<Biike> {
-  final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
 
   RxMap _deviceData = {}.obs;
 
@@ -78,10 +80,6 @@ class _BiikeState extends State<Biike> {
     super.initState();
     initPlatformState();
     loadDataFromLocal();
-    FlutterLogs.logToFile(
-        logFileName: 'Device',
-        overwrite: true,
-        logMessage: _deviceData.entries.toString());
   }
 
   /// Load token, role, and userId from local
@@ -97,13 +95,19 @@ class _BiikeState extends State<Biike> {
   Future<void> initPlatformState() async {
     try {
       if (Platform.isAndroid) {
-        _deviceData.value = _readAndroidBuildData(await deviceInfo.androidInfo);
+        _deviceData.value =
+            _readAndroidBuildData(await _deviceInfo.androidInfo);
       } else {
-        _deviceData.value = _readIosDeviceInfo(await deviceInfo.iosInfo);
+        _deviceData.value = _readIosDeviceInfo(await _deviceInfo.iosInfo);
       }
     } on PlatformException {
       _deviceData.putIfAbsent('Error', () => 'Failed to get platform version.');
     }
+
+    FlutterLogs.logToFile(
+        logFileName: 'Device',
+        overwrite: true,
+        logMessage: _deviceData.toString());
   }
 
   Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {

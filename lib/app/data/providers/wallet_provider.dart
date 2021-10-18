@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
@@ -21,6 +22,8 @@ class WalletProvider extends CommonProvider {
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
+    Biike.logger.e('WalletProvider - getUserWalletList()',
+        response.statusCode.toString() + ' ' + response.statusText!);
     return Future.value(null);
   }
 }

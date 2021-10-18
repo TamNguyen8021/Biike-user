@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 
 class TripHistoryProvider extends CommonProvider {
@@ -22,6 +23,8 @@ class TripHistoryProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('TripHistoryProvider - getHistoryTrips()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body;

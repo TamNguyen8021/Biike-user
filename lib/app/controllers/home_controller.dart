@@ -52,7 +52,6 @@ class HomeController extends GetxController {
     try {
       if (Biike.role.value == Role.keer) {
         await getUpcomingTrips();
-        print(upcomingTrips.length);
       } else {
         await getStations();
       }
@@ -80,6 +79,7 @@ class HomeController extends GetxController {
       }
     } catch (error) {
       pagingController.error = error;
+      Biike.logger.e('HomeController - _fetchPage()', error);
       FlutterLogs.logErrorTrace(
           'Biike', 'HomeController - _fetchPage()', error.toString(), Error());
     }
@@ -133,7 +133,6 @@ class HomeController extends GetxController {
 
       upcomingTrips.add(upcomingTripCard);
     }
-    print(upcomingTrips.length);
     return upcomingTrips.cast();
   }
 

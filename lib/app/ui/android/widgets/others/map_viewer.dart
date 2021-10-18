@@ -3,6 +3,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -50,8 +51,8 @@ class MapViewer extends StatelessWidget {
         showMarkerOfPOI: true,
       ),
     );
-    print("${roadInfo.distance}km");
-    print("${roadInfo.duration}sec");
+    Biike.logger.i('${roadInfo.distance} km');
+    Biike.logger.i('${roadInfo.duration} sec');
   }
 
   @override
@@ -123,7 +124,7 @@ class MapViewer extends StatelessWidget {
                 //         latitude: location.latitude,
                 //         longtitude: location.longitude);
                 // locationDetails.forEach((key, value) {
-                //   print(key + ': ' + value);
+                //   Biike.logger.d(key + ': ' + value);
                 // });
               },
             ),

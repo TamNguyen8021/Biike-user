@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 
 class ViewUserProvider extends CommonProvider {
@@ -20,6 +21,8 @@ class ViewUserProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('ViewUserProvider - getPartnerProfile()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body['data'];
@@ -49,6 +52,8 @@ class ViewUserProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('ViewUserProvider - getHistoryPairTrips()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body;

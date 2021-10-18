@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,8 @@ class ProfileProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('ProfileProvider - getProfile()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body['data'];
@@ -45,6 +48,8 @@ class ProfileProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('ProfileProvider - editProfile()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return CustomStrings.kEditProfileSuccess.tr;

@@ -21,6 +21,8 @@ class TripDetailsProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('TripDetailsProvider - getTripDetails()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body['data'];
@@ -45,6 +47,8 @@ class TripDetailsProvider extends CommonProvider {
         appendTimeStamp: true);
 
     if (response.status.hasError) {
+      Biike.logger.e('TripDetailsProvider - getLocationDetails()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return Future.error(response.statusText!);
     } else {
       return response.body['address'];
@@ -71,6 +75,8 @@ class TripDetailsProvider extends CommonProvider {
             response.statusText!,
         appendTimeStamp: true);
     if (response.status.hasError) {
+      Biike.logger.e('TripDetailsProvider - cancelTrip()',
+          response.statusCode.toString() + ' ' + response.statusText!);
       return false;
     } else {
       return true;

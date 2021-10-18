@@ -66,6 +66,7 @@ class ViewUserController extends GetxController {
         pagingController.appendPage(historyTrips.cast(), nextPageKey);
       }
     } catch (error) {
+      Biike.logger.e('ViewUserController - _fetchPage()', error);
       pagingController.error = error;
       FlutterLogs.logErrorTrace('Biike', 'ViewUserController - _fetchPage()',
           error.toString(), Error());

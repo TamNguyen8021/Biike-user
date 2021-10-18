@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/snackbar.dart';
+import 'package:bikes_user/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 
@@ -24,7 +25,7 @@ class FirebaseServices {
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          print('The provided phone number is not valid.');
+          Biike.logger.e('The provided phone number is not valid.');
         }
       },
       codeSent: (String verificationId, int? resendToken) {
@@ -49,6 +50,7 @@ class FirebaseServices {
       }
       return false;
     } catch (error) {
+      Biike.logger.e('FirebaseServices - verifyOtp()', error);
       FlutterLogs.logErrorTrace(
           'Biike', 'FirebaseServices - verifyOtp()', error.toString(), Error());
       return false;
@@ -65,6 +67,7 @@ class FirebaseServices {
         throw (FirebaseAuthException);
       }
     } on FirebaseAuthException catch (error) {
+      Biike.logger.e('FirebaseServices - signinWithEmailAndPassword()', error);
       FlutterLogs.logErrorTrace(
           'Biike',
           'FirebaseServices - signinWithEmailAndPassword()',
@@ -85,6 +88,7 @@ class FirebaseServices {
     try {
       await user?.sendEmailVerification();
     } on FirebaseAuthException catch (error) {
+      Biike.logger.e('FirebaseServices - sentVerifyEmail()', error);
       FlutterLogs.logErrorTrace('Biike', 'FirebaseServices - sentVerifyEmail()',
           error.toString(), Error());
 

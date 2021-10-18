@@ -32,7 +32,8 @@ class SendFeedbackButton extends StatelessWidget {
 
           // send feedback
           if (feedbackController.isSendFeedbackSuccess()) {
-            print(CustomStrings.kSendSuccess.tr);
+            Biike.logger.i(CustomStrings.kSendSuccess.tr);
+
             switch (Biike.role.value) {
               case Role.biker:
               case Role.keer:

@@ -80,6 +80,7 @@ class LoginController extends GetxController {
         )..show();
       });
     } catch (error) {
+      Biike.logger.e('LoginController - _verifyEmail()', error);
       FlutterLogs.logErrorTrace('Biike', 'LoginController - _verifyEmail()',
           error.toString(), Error());
       CommonFunctions().showErrorDialog(

@@ -659,6 +659,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
+  logger:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "87c4490d37f4321abea0986eff607127a4b13757"
+      url: "git://github.com/leisim/logger.git"
+    source: git
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:

@@ -58,6 +58,7 @@ class TripHistoryController extends GetxController {
         pagingController.appendPage(historyTrips.cast(), nextPageKey);
       }
     } catch (error) {
+      Biike.logger.e('TripHistoryController - _fetchPage()', error);
       pagingController.error = error;
       FlutterLogs.logErrorTrace('Biike', 'TripHistoryController - _fetchPage()',
           error.toString(), Error());

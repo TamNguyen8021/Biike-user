@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/ui/android/pages/home/banner/banner.dart';
+import 'package:bikes_user/main.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -80,6 +81,7 @@ class AdContainer extends HookWidget {
       }
     } catch (error) {
       // loi ngoai le
+      Biike.logger.e('AdContainer - _launchUniversalLinkIos()', error);
       FlutterLogs.logErrorTrace('Biike',
           'AdContainer - _launchUniversalLinkIos()', error.toString(), Error());
     }
