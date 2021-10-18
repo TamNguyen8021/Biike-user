@@ -5,8 +5,6 @@ import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
 class BookTripController extends GetxController {
   Rx<Station> departureStation = Station.empty().obs;
