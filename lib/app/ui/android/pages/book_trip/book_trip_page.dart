@@ -45,8 +45,9 @@ class BookTripPage extends StatelessWidget {
                       child: Obx(() => StationDropdownButton(
                         dropdownValue: _bookTripController.departureStation.value,
                         dropdownArray: _bookTripController.listDepartureStation,
-                        onChangedFunc: (value) =>
-                            _bookTripController.updateDepartureStation(value),
+                        onChangedFunc: (value) {
+                          _bookTripController.updateDepartureStation(value);
+                          }
                         ),
                       ),
                     ),
@@ -57,7 +58,9 @@ class BookTripPage extends StatelessWidget {
                           StationDropdownButton(
                             dropdownValue: _bookTripController.destinationStation.value,
                             dropdownArray: _bookTripController.listDestinationStation,
-                            onChangedFunc: (value) => _bookTripController.updateDestinationStation(value)
+                            onChangedFunc: (value) {
+                              _bookTripController.updateDestinationStation(value);
+                            }
                           ),
                       ),
                     ),
@@ -68,15 +71,19 @@ class BookTripPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
-                          '23 phút',
+                        Obx(() =>
+                            Text(
+                              '0 phút', //TODO
                           style: TextStyle(
                             color: CustomColors.kBlue,
                           ),
                         ),
-                        Text(
-                          '15.8km',
+                        ),
+                        Obx(() =>
+                            Text(
+                              '0 km', //TODO
                           style: Theme.of(context).textTheme.bodyText1,
+                        ),
                         ),
                       ],
                     ),
