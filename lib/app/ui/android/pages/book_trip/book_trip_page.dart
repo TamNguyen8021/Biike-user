@@ -71,20 +71,20 @@ class BookTripPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Obx(() =>
+                        // Obx(() =>
                             Text(
                               '0 phút', //TODO
                           style: TextStyle(
                             color: CustomColors.kBlue,
                           ),
                         ),
-                        ),
-                        Obx(() =>
+                        // ),
+                        // Obx(() =>
                             Text(
                               '0 km', //TODO
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
-                        ),
+                        // ),
                       ],
                     ),
                     Padding(
