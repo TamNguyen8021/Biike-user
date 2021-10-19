@@ -1,7 +1,7 @@
 
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/images.dart';
-import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
+import 'package:bikes_user/app/ui/android/pages/finding_biker/login/login_page.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/models/on_board/on_board.dart';
 import 'package:carousel_slider/carousel_slider.dart';

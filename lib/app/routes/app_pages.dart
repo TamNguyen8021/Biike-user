@@ -27,7 +27,7 @@ import 'package:bikes_user/app/ui/android/pages/voucher_exchange/exchange_vouche
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_fail_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/get_trip/get_trip_success_page.dart';
-import 'package:bikes_user/app/ui/android/pages/login/login_page.dart';
+import 'package:bikes_user/app/ui/android/pages/finding_biker/login/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/open/open_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/profile_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_details_page.dart';
