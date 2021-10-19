@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseServices  {
+class FirebaseServices {
   User? get user => firebaseAuth.currentUser;
   Future<String> get token async => await user?.getIdToken() ?? '';
   Future<bool> get isLogin async => (await token).isEmpty;
@@ -83,5 +83,23 @@ class FirebaseServices  {
 
   Future<void> reloadUser() async {
     await user?.reload();
+  }
+
+  Future<bool> resetPasswordWithEmail(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        SnackBarServices.showSnackbar(title: '', message: 'Email khong hop le');
+        return false;
+      }
+      if (e.code == 'user-not-found') {
+        SnackBarServices.showSnackbar(
+            title: '', message: 'Khong tim thay email nay');
+        return false;
+      }
+      return false;
+    }
   }
 }

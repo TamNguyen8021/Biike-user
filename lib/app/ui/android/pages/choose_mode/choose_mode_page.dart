@@ -39,7 +39,7 @@ class ChooseModePage extends StatelessWidget {
                     CustomStrings.kChooseMode.tr,
                     style: Theme.of(context)
                         .textTheme
-                        .headline1!
+                        .bodyText1!
                         .copyWith(color: Colors.white),
                   ),
                 ),
