@@ -303,5 +303,9 @@ final Map<String, String> en = {
 
   // 'ban_list' screen
   'kBanList': 'Ban List',
-  'kUnBlock': 'Unblock'
+  'kUnBlock': 'Unblock',
+  'kLogin': 'Login',
+  'kRegister': 'Register',
+  'vidu': 'toi ten la %s',
+  'tranlatesion': 'Tranlation',
 };

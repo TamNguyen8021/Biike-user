@@ -100,7 +100,7 @@ class LoginPage extends StatelessWidget {
                             );
                           }
                           return Text(
-                            'Đăng nhập',
+                            'kLogin'.tr,
                             style: TextStyle(
                               color: CustomColors.kDarkBlue,
                               fontSize: 14.sp,
@@ -119,7 +119,7 @@ class LoginPage extends StatelessWidget {
                       child: TextButton(
                         onPressed: () => Get.toNamed(CommonRoutes.REGISTER),
                         child: Text(
-                          'Đăng ký',
+                          'kRegister'.tr,
                           style: TextStyle(
                             color: CustomColors.kDarkBlue,
                             fontSize: 14.sp,
@@ -139,7 +139,8 @@ class LoginPage extends StatelessWidget {
                           Get.dialog(ForgotPasswordDialog());
                         },
                         child: Text(
-                          'Quên mật khẩu',
+                          // forgot password
+                          'vidu'.trArgs(['nguyen the vinh', 'qw', 'we', 'we']),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15.sp,

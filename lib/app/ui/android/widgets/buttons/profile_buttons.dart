@@ -49,8 +49,8 @@ class ProfileButtons extends StatelessWidget {
             height: 35,
             child: ElevatedButton(
               onPressed: () {
-                  Get.toNamed(CommonRoutes.APP_SETTING);
-                },
+                Get.toNamed(CommonRoutes.APP_SETTING);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(
@@ -141,7 +141,14 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                final currentLg = Get.locale ?? Locale('vi', 'VN');
+                if (currentLg == Locale('vi', 'VN')) {
+                  Get.updateLocale(Locale('en', 'US'));
+                } else {
+                  Get.updateLocale(Locale('vi', 'VN'));
+                }
+              },
               child: Row(
                 children: <Widget>[
                   Padding(
@@ -153,7 +160,7 @@ class ProfileButtons extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    CustomStrings.kChangeLanguage,
+                    'tranlatesion'.tr,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],

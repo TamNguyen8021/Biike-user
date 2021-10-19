@@ -305,5 +305,9 @@ final Map<String, String> vi = {
 
   // 'ban_list' screen
   'kBanList': 'Danh sách hạn chế',
-  'kUnBlock': 'Bỏ chặn'
+  'kUnBlock': 'Bỏ chặn',
+  'kLogin': 'Đăng nhập',
+  'kRegister': 'Đăng ký',
+  'vidu' : 'toi %s %s %s ten la %s',
+  'tranlatesion' : 'Đổi ngôn ngữ',
 };
