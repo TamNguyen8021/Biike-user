@@ -1,4 +1,4 @@
-import 'package:bikes_user/models/on_board/on_board.dart';
+import 'package:bikes_user/app/ui/android/pages/on_board/on_board/on_board.dart';
 import 'package:flutter/material.dart';
 
 class DotsWidget extends StatelessWidget {
