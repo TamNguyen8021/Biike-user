@@ -11,8 +11,6 @@ class BanListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final banListController = Get.find<BanListController>();
-
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,

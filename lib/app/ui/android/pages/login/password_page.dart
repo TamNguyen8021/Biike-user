@@ -9,10 +9,10 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 /// The '001.1_open' screen
-class PasswordScreen extends StatelessWidget {
+class PasswordPage extends StatelessWidget {
   static const String routeName = '/passwordScreen';
 
-  const PasswordScreen({Key? key, required this.nameUser}) : super(key: key);
+  const PasswordPage({Key? key, required this.nameUser}) : super(key: key);
 
   final String nameUser;
 

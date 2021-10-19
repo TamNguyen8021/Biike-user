@@ -22,8 +22,12 @@ class WalletProvider extends CommonProvider {
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-    Biike.logger.e('WalletProvider - getUserWalletList()',
-        response.statusCode.toString() + ' ' + response.statusText!);
+    Biike.logger.e(
+        'WalletProvider - getUserWalletList()',
+        response.statusCode.toString() +
+            ' ' +
+            response.statusText! +
+            response.body);
     return Future.value(null);
   }
 }

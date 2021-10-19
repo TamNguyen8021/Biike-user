@@ -67,7 +67,6 @@ class BookTripPage extends StatelessWidget {
                   ),
                 ),
               ),
-              // MapViewer(departureCoordinate: departureCoordinate, destinationCoordinate: destinationCoordinate),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

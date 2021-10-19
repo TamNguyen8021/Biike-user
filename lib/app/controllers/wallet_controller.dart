@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class WalletController extends GetxController {
+  final _walletProvider = Get.find<WalletProvider>();
+
   Rx<int> totalWalletPoint = 0.obs;
 
   Future<List<Wallet>> getUserWalletsList() async {
-    return (await WalletProvider().getUserWalletList(userId: Biike.userId.value)
+    return (await _walletProvider.getUserWalletList(userId: Biike.userId.value)
             as List)
         .map((w) => Wallet.fromJson(w))
         .toList();

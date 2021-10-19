@@ -14,8 +14,6 @@ class SOSNumberPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final sosNumberController = Get.find<SOSNumberController>();
-
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,

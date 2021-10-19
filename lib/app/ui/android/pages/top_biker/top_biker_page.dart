@@ -12,7 +12,6 @@ class TopBikerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final topBikeController = Get.find<TopBikerController>();
     Rx<String> currentMonth = DateTime.now().month.toString().obs;
 
     return DefaultTabController(

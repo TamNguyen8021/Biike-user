@@ -4,7 +4,7 @@ import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
-import 'package:bikes_user/app/data/providers/trip_history_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
@@ -14,8 +14,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Manage states of [TripHistoryPage]
 class TripHistoryController extends GetxController {
-  final TripHistoryProvider _tripHistoryProvider =
-      Get.put(TripHistoryProvider());
+  final _tripProvider = Get.find<TripProvider>();
   final PagingController<int, HistoryTripCard> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -70,7 +69,7 @@ class TripHistoryController extends GetxController {
   /// Author: TamNTT
   Future<List<HistoryTripCard>> getHistoryTrips() async {
     historyTrips.clear();
-    Map<String, dynamic> response = await _tripHistoryProvider.getHistoryTrips(
+    Map<String, dynamic> response = await _tripProvider.getHistoryTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     historyTripsPagination = response['_meta'];
 

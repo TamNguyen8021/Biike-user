@@ -20,8 +20,13 @@ class VoucherProvider extends CommonProvider {
     if (response.statusCode == 200) {
       return response.body['data'];
     }
-    Biike.logger.e('VoucherProvider - getVoucherList()',
-        response.statusCode.toString() + ' ' + response.statusText!);
+    Biike.logger.e(
+        'VoucherProvider - getVoucherList()',
+        response.statusCode.toString() +
+            ' ' +
+            response.statusText! +
+            '\n' +
+            response.body);
     return Future.error(response.statusText!);
   }
 }

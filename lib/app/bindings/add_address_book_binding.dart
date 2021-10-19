@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class AddAddressBookBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(AddAddressBookController());
+    Get.lazyPut<AddAddressBookController>(() => AddAddressBookController());
   }
 }

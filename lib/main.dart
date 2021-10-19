@@ -24,7 +24,7 @@ void main() {
     await Firebase.initializeApp();
     await configureDependencies();
 
-    //Initialize Logging
+    // Initialize Logging
     await FlutterLogs.initLogs(
         logLevelsEnabled: [
           LogLevel.INFO,
@@ -45,7 +45,7 @@ void main() {
 
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterLogs.logErrorTrace(
-          'Biike', 'main()', details.exception.toString(), Error());
+          'Biike', 'main()', details.stack.toString(), Error());
     };
 
     runApp(Biike());

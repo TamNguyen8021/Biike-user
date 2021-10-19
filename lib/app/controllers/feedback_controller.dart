@@ -36,7 +36,6 @@ class FeedbackController extends GetxController {
   }
 
   bool isSendFeedbackSuccess() {
-    //TODO
     Biike.logger.i(_star.toString() + " - " + _feedback.toString());
     _star = null;
     _feedback = null;

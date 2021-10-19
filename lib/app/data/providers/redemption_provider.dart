@@ -18,6 +18,16 @@ class RedemptionProvider extends CommonProvider {
             response.statusText!,
         appendTimeStamp: true);
 
+    if (response.hasError) {
+      Biike.logger.e(
+          'RedemptionProvider - exchangeVoucher()',
+          response.statusCode.toString() +
+              ' ' +
+              response.statusText! +
+              '\n' +
+              response.body);
+    }
+
     return response.statusCode == HttpStatus.created
         ? Future.value(response)
         : Future.value(response.bodyString ?? '');
@@ -40,8 +50,13 @@ class RedemptionProvider extends CommonProvider {
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-    Biike.logger.e('RedemptionProvider - getYourVoucherList()',
-        response.statusCode.toString() + ' ' + response.statusText!);
+    Biike.logger.e(
+        'RedemptionProvider - getYourVoucherList()',
+        response.statusCode.toString() +
+            ' ' +
+            response.statusText! +
+            '\n' +
+            response.body);
     return Future.error(response.statusText!);
   }
 
@@ -62,8 +77,13 @@ class RedemptionProvider extends CommonProvider {
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-    Biike.logger.e('RedemptionProvider - getRedemptionDetailByRedemptionId()',
-        response.statusCode.toString() + ' ' + response.statusText!);
+    Biike.logger.e(
+        'RedemptionProvider - getRedemptionDetailByRedemptionId()',
+        response.statusCode.toString() +
+            ' ' +
+            response.statusText! +
+            '\n' +
+            response.body);
     return Future.error(response.statusText!);
   }
 }

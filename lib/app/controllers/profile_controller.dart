@@ -4,14 +4,14 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/user.dart';
-import 'package:bikes_user/app/data/providers/profile_provider.dart';
+import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ProfileController extends GetxController {
-  final _profileProvider = Get.put(ProfileProvider());
+  final _userProvider = Get.find<UserProvider>();
 
   User user = User.empty();
   Rxn<DateTime> birthDate = Rxn<DateTime>();
@@ -37,7 +37,7 @@ class ProfileController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getProfile() async {
-    var data = await _profileProvider.getProfile(userId: Biike.userId.value);
+    var data = await _userProvider.getProfile(userId: Biike.userId.value);
     user = User.fromJson(data);
 
     birthDate.value = DateTime.tryParse(user.birthDate!);
@@ -67,7 +67,7 @@ class ProfileController extends GetxController {
         () => DateFormat('yyyy-MM-dd')
             .format(DateTime.tryParse(user.birthDate!)!));
 
-    bool isSuccess = await _profileProvider.editProfile(
+    bool isSuccess = await _userProvider.editProfile(
         userId: Biike.userId.value, body: jsonEncode(newUserProfile));
     if (isSuccess) {
       CommonFunctions().showSuccessDialog(

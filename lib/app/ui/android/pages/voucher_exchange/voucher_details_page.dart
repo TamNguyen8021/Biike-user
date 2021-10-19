@@ -15,7 +15,6 @@ class VoucherDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Voucher voucher = Get.arguments;
-    // Voucher voucher = Voucher.fromJson(data);
 
     return Scaffold(
       appBar: CustomAppBar(

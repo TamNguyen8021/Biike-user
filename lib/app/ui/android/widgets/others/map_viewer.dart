@@ -96,13 +96,6 @@ class MapViewer extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                // endIcon: MarkerIcon(
-                //   icon: Icon(
-                //     Icons.radio_button_on,
-                //     size: 64,
-                //     color: CustomColors.kBlue,
-                //   ),
-                // ),
                 roadColor: Colors.yellowAccent,
               ),
               markerOption: MarkerOption(

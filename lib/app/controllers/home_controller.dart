@@ -4,7 +4,8 @@ import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
-import 'package:bikes_user/app/data/providers/home_provider.dart';
+import 'package:bikes_user/app/data/providers/station_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/main.dart';
@@ -15,7 +16,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Manage states of [HomePage]
 class HomeController extends GetxController {
-  final _homeProvider = Get.put(HomeProvider());
+  final _tripProvider = Get.find<TripProvider>();
+  final _stationProvider = Get.find<StationProvider>();
   final PagingController<int, dynamic> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -97,7 +99,7 @@ class HomeController extends GetxController {
   /// Author: TamNTT
   Future<List<UpcomingTripCard>> getUpcomingTrips() async {
     upcomingTrips.clear();
-    Map<String, dynamic> response = await _homeProvider.getUpcomingTrips(
+    Map<String, dynamic> response = await _tripProvider.getUpcomingTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
@@ -142,13 +144,13 @@ class HomeController extends GetxController {
   Future<Map> getStations() async {
     stations.clear();
     Map<String, dynamic> response =
-        await _homeProvider.getStations(page: _currentPage, limit: _limit);
+        await _stationProvider.getStations(page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
     for (var station in response['data']) {
-      DepartureStation startingStation = DepartureStation.fromJson(station);
+      DepartureStation departureStation = DepartureStation.fromJson(station);
       stations.putIfAbsent(
-          startingStation.stationId, () => startingStation.departureName);
+          departureStation.stationId, () => departureStation.departureName);
     }
     return stations;
   }
