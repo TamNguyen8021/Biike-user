@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/services/firebase_services.dart';
-import 'package:bikes_user/untils/snackbar.dart';
+import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:get/get.dart';
 
 class VerifyPhoneController extends GetxController {

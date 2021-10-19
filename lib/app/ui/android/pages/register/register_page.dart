@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
-/// '004.3_input_name' screen
 class RegisterPage extends HookWidget {
-  static const String routeName = '/register';
-
   @override
   Widget build(BuildContext context) {
     final phoneController = useTextEditingController();

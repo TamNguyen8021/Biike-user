@@ -1,7 +1,7 @@
-import 'package:bikes_user/untils/snackbar.dart';
+import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseServices {
+class FirebaseServices  {
   User? get user => firebaseAuth.currentUser;
   Future<String> get token async => await user?.getIdToken() ?? '';
   Future<bool> get isLogin async => (await token).isEmpty;

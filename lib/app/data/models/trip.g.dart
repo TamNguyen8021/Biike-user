@@ -8,19 +8,16 @@ part of 'trip.dart';
 
 Trip _$TripFromJson(Map<String, dynamic> json) {
   return Trip(
-    json['tripId'] as int,
+    json['tripId'] as int? ?? -1,
     json['keerId'] as int?,
     json['bikerId'] as int?,
     json['routeId'] as int?,
-    DateTime.parse(json['timeBook'] as String),
-    json['timePickUp'] == null
-        ? null
-        : DateTime.parse(json['timePickUp'] as String),
-    json['timeFinished'] == null
-        ? null
-        : DateTime.parse(json['timeFinished'] as String),
+    json['createdDate'] as String? ?? '',
+    json['bookTime'] as String? ?? '',
+    json['timePickUp'] as String? ?? '',
+    json['finishedTime'] as String? ?? '',
     json['tripStatus'] as int?,
-    json['numberPlate'] as String?,
+    json['plateNumber'] as String?,
     json['isSchedule'] as bool?,
     json['cancelPersonId'] as int?,
     json['cancelReason'] as String?,
@@ -32,11 +29,12 @@ Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'keerId': instance.keerId,
       'bikerId': instance.bikerId,
       'routeId': instance.routeId,
-      'timeBook': instance.timeBook.toIso8601String(),
-      'timePickUp': instance.timePickUp?.toIso8601String(),
-      'timeFinished': instance.timeFinished?.toIso8601String(),
+      'createdDate': instance.createdDate,
+      'bookTime': instance.bookTime,
+      'timePickUp': instance.timePickUp,
+      'finishedTime': instance.finishedTime,
       'tripStatus': instance.tripStatus,
-      'numberPlate': instance.numberPlate,
+      'plateNumber': instance.plateNumber,
       'isSchedule': instance.isSchedule,
       'cancelPersonId': instance.cancelPersonId,
       'cancelReason': instance.cancelReason,

@@ -6,7 +6,6 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -87,7 +86,7 @@ class EditProfilePage extends StatelessWidget {
                     ProfileTextField(
                       isReadOnly: true,
                       isEditProfile: true,
-                      initialValue: _profileController.user.userEmail,
+                      initialValue: _profileController.user.email,
                       labelText: CustomStrings.kEmail.tr,
                     ),
                     DropdownButtonFormField<int>(
@@ -145,7 +144,8 @@ class EditProfilePage extends StatelessWidget {
                             _profileController.birthDate.value =
                                 await CommonFunctions().selectDate(
                                     context: context,
-                                    selectedDate: _profileController.birthDate);
+                                    selectedDate: _profileController.birthDate,
+                                    isBirthDatePicker: true);
                             _profileController.user.birthDate =
                                 _profileController.birthDate.value.toString();
                             isSaveButtonDisable.value =
@@ -164,8 +164,8 @@ class EditProfilePage extends StatelessWidget {
                             : () {
                                 _profileController.editProfile(
                                     context: context,
-                                    userId: Biike.userId,
                                     user: _profileController.user);
+                                isSaveButtonDisable.value = true;
                               },
                         text: CustomStrings.kSave.tr,
                         icon: Icons.save,

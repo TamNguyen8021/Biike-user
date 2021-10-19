@@ -1,10 +1,10 @@
-import 'package:bikes_user/app/ui/android/widgets/cards/voucher_card.dart';
+import 'package:bikes_user/app/ui/android/pages/your_voucher/widget/your_voucher_card.dart';
 import 'package:flutter/material.dart';
 
-class ListVouchers extends StatelessWidget {
+class YourVoucherList extends StatelessWidget {
   final List listVouchers;
 
-  const ListVouchers({Key? key, required this.listVouchers}) : super(key: key);
+  const YourVoucherList({Key? key, required this.listVouchers}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ListVouchers extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           return Padding(
             padding: EdgeInsets.only(bottom: 10.0),
-            child: VoucherCard(),
+            child: YourVoucherCard(data: listVouchers[i]),
           );
         });
   }

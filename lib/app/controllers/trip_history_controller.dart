@@ -1,51 +1,82 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
-import 'package:bikes_user/app/data/models/starting_station.dart';
+import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/trip_history_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
-import 'package:flutter/material.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Manage states of [TripHistoryPage]
 class TripHistoryController extends GetxController {
   final TripHistoryProvider _tripHistoryProvider =
       Get.put(TripHistoryProvider());
+  final PagingController<int, HistoryTripCard> pagingController =
+      PagingController(firstPageKey: 0);
 
-  RxList<dynamic> historyTrips = [].obs;
-  // Rx<Role> role = Role.keer.obs;
+  RxList historyTrips = [].obs;
+  Map<String, dynamic> historyTripsPagination = {};
+  int _currentPage = 1;
+  int _limit = 10;
 
-  /// Load history trips from API based on [userId] and [role].
+  @override
+  onInit() {
+    pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.onInit();
+  }
+
+  @override
+  dispose() {
+    pagingController.dispose();
+    super.dispose();
+  }
+
+  /// Lazy loading when view history trips.
   ///
   /// Author: TamNTT
-  Future<void> getHistoryTrips(
-      {required BuildContext context,
-      required int userId,
-      required int role}) async {
-    historyTrips.clear();
-    List response =
-        await _tripHistoryProvider.getHistoryTrips(userId: userId, role: role);
-    // print(response);
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      await getHistoryTrips();
+      final int previouslyFetchedItemsCount =
+          pagingController.itemList?.length ?? 0;
+      final bool isLastPage =
+          historyTripsPagination['totalRecord'] - previouslyFetchedItemsCount <=
+              _limit;
+      if (isLastPage) {
+        pagingController.appendLastPage(historyTrips.cast());
+        _currentPage = 1;
+      } else {
+        _currentPage += 1;
+        final int nextPageKey = pageKey + historyTrips.length;
+        pagingController.appendPage(historyTrips.cast(), nextPageKey);
+      }
+    } catch (error) {
+      pagingController.error = error;
+    }
+  }
 
-    for (var historyTrip in response) {
-      // print(item);
+  /// Load history trips from API.
+  ///
+  /// Author: TamNTT
+  Future<List<HistoryTripCard>> getHistoryTrips() async {
+    historyTrips.clear();
+    Map<String, dynamic> response = await _tripHistoryProvider.getHistoryTrips(
+        userId: Biike.userId.value, page: _currentPage, limit: _limit);
+    historyTripsPagination = response['_meta'];
+
+    for (var historyTrip in response['data']) {
       User user = User.fromJson(historyTrip);
-      // print(user.toJson());
       Trip trip = Trip.fromJson(historyTrip);
-      // print(trip.toJson());
-      StartingStation startingStation = StartingStation.fromJson(historyTrip);
-      // print(startingStation.toJson());
+      DepartureStation startingStation = DepartureStation.fromJson(historyTrip);
       DestinationStation destinationStation =
           DestinationStation.fromJson(historyTrip);
-      // print(destinationStation.toJson());
       TripStatus tripStatus;
-      String date = trip.timeBook.day.toString() +
-          ' Th ' +
-          trip.timeBook.month.toString();
 
       switch (trip.tripStatus) {
         case 1:
@@ -71,17 +102,17 @@ class TripHistoryController extends GetxController {
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(
-          userId: user.userId,
-          avatarUrl: user.avatar,
-          name: user.userFullname,
-          time: DateFormat('HH:mm').format(trip.timeBook),
-          date: date,
-          status: tripStatus,
-          sourceStation: startingStation.startingPointName,
-          destinationStation: destinationStation.destinationName);
+        tripId: trip.tripId,
+        userId: user.userId,
+        dateTime: DateTime.parse(trip.bookTime),
+        status: tripStatus,
+        sourceStation: startingStation.departureName,
+        destinationStation: destinationStation.destinationName,
+        isOnViewUserPage: false,
+      );
 
       historyTrips.add(historyTripCard);
-      // print(historyTrips.length);
     }
+    return historyTrips.cast();
   }
 }

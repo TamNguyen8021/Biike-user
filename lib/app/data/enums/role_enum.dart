@@ -1,17 +1,17 @@
 enum Role { none, keer, biker }
 
 extension RoleExtension on Role {
-  /// Convert [role] to integer
+  /// Convert [role] to enum
   ///
   /// Author: TamNTT
-  int getRoleNum(Role role) {
+  Role getRoleEnum(String role) {
     switch (role) {
-      case Role.keer:
-        return 1;
-      case Role.biker:
-        return 2;
+      case 'Role.keer':
+        return Role.keer;
+      case 'Role.biker':
+        return Role.biker;
       default:
-        return -1;
+        return Role.none;
     }
   }
 }

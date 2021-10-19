@@ -15,6 +15,9 @@ dependencies:
   flutter:
     sdk: flutter  
   email_validator: ^2.0.1
+  camera:
+  path_provider:
+  path:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -32,9 +35,11 @@ dependencies:
     git:
       url: git://github.com/ch-muhammad-adil/flutter-plugin-circular_profile_avatar.git
       ref: master
-  get: ^4.3.8
+  get:
+    git:
+      url: git://github.com/jonataslaw/getx.git
+      ref: master
   
-  #
   pin_code_fields: ^7.3.0
 
   json_annotation: ^4.0.1
@@ -65,6 +70,8 @@ dependencies:
 
   # local storage
   shared_preferences: ^2.0.8
+  infinite_scroll_pagination: ^3.1.0
+  flutter_osm_plugin: ^0.22.0
   
 dev_dependencies:
   flutter_test:

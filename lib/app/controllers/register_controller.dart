@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
-import 'package:bikes_user/untils/snackbar.dart';
+import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
@@ -23,7 +23,6 @@ class RegisterController extends GetxController {
       return;
     }
 
-    // dang ky
     signup(name, email, phone, pass);
   }
 
@@ -47,7 +46,6 @@ class RegisterController extends GetxController {
   }
 
   bool validate(String name, String email, String pass, String phone) {
-    //validate
     String error = _validate(name, email, pass, phone);
     if (error.isNotEmpty) {
       errorMessage = error;

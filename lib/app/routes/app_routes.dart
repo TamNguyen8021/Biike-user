@@ -3,12 +3,12 @@ abstract class CommonRoutes {
   static const OPEN = '/open';
   static const WELCOME = '/welcome';
   static const LOGIN = '/login';
-  static const INPUT_PHONE = '/inputPhone';
   static const VERIFY_PHONE = '/verifyPhone';
-  static const REGISTER = '/inputName';
+  static const REGISTER = '/register';
   static const CHOOSE_MODE = '/chooseMode';
   static const TRIP_HISTORY = '/tripHistory';
   static const HOME = '/home';
+  static const TOP_BIKER = '/topBiker';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/editProfile';
   static const VIEW_USER = '/viewUser';
@@ -31,4 +31,8 @@ abstract class CommonRoutes {
   static const ADD_SOS_NUMBER = '/addSOSNumber';
   static const EDIT_SOS_NUMBER = '/editSOSNumber';
   static const BAN_LIST = '/banList';
+  static const VOUCHER_DETAILS = '/voucherDetails';
+  static const YOUR_VOUCHERS = '/yourVouchers';
+  static const YOUR_VOUCHER_DETAIL = '/yourVoucherDetail';
+  static const TAKE_PICTURE = '/takePicture';
 }

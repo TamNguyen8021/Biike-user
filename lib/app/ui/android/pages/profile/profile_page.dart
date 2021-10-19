@@ -26,8 +26,7 @@ class ProfilePage extends StatelessWidget {
     final _profileController = Get.find<ProfileController>();
 
     return FutureBuilder(
-        future: _profileController.getProfile(
-            context: context, userId: Biike.userId),
+        future: _profileController.getProfile(context: context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
@@ -100,8 +99,7 @@ class ProfilePage extends StatelessWidget {
                                 child: ProfileTextField(
                                     isReadOnly: true,
                                     isEditProfile: false,
-                                    initialValue:
-                                        _profileController.user.userEmail,
+                                    initialValue: _profileController.user.email,
                                     labelText: CustomStrings.kEmail.tr),
                               ),
                               Padding(

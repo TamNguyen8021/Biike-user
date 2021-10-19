@@ -9,32 +9,53 @@ part 'trip.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class Trip {
-  final int tripId;
-  final int? keerId;
-  final int? bikerId;
-  final int? routeId;
-  final DateTime timeBook;
-  final DateTime? timePickUp;
-  final DateTime? timeFinished;
-  final int? tripStatus;
-  final String? numberPlate;
-  final bool? isSchedule;
-  final int? cancelPersonId;
-  final String? cancelReason;
+  @JsonKey(defaultValue: -1)
+  late int tripId;
+
+  int? keerId;
+  int? bikerId;
+  int? routeId;
+
+  @JsonKey(defaultValue: '')
+  late String createdDate;
+
+  @JsonKey(defaultValue: '')
+  late String bookTime;
+
+  @JsonKey(defaultValue: '')
+  late String timePickUp;
+
+  @JsonKey(defaultValue: '')
+  late String finishedTime;
+
+  int? tripStatus;
+  String? plateNumber;
+  bool? isSchedule;
+  int? cancelPersonId;
+  String? cancelReason;
 
   Trip(
       this.tripId,
       this.keerId,
       this.bikerId,
       this.routeId,
-      this.timeBook,
+      this.createdDate,
+      this.bookTime,
       this.timePickUp,
-      this.timeFinished,
+      this.finishedTime,
       this.tripStatus,
-      this.numberPlate,
+      this.plateNumber,
       this.isSchedule,
       this.cancelPersonId,
       this.cancelReason);
+
+  Trip.empty() {
+    this.tripId = -1;
+    this.createdDate = '';
+    this.bookTime = '';
+    this.timePickUp = '';
+    this.finishedTime = '';
+  }
 
   /// A necessary factory constructor for creating a new Trip instance
   /// from a map. Pass the map to the generated `_$TripFromJson()` constructor.

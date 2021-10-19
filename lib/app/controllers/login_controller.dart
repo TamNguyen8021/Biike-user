@@ -1,9 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/snackbar.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/services/firebase_services.dart';
-import 'package:bikes_user/untils/snackbar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,9 +31,9 @@ class LoginController extends GetxController {
 
     if (messageSignin.isEmpty) {
       if (_firebaseServices.isVerifyEmail) {
-        Get.toNamed(CommonRoutes.HOME);
-        SnackBarServices.showSnackbar(
-            title: '', message: 'dang nhap thanh cong');
+        // Save user data to local memory
+        await Biike.localAppData.saveUserInfo(_firebaseServices);
+        Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;
       }
       _verifyEmail(context);
@@ -69,14 +71,14 @@ class LoginController extends GetxController {
             }
           },
           btnOkText: 'Đã xác thực',
-          btnCancelText: 'Huỷ',
+          btnCancelText: CustomStrings.kCancel.tr,
           btnCancelOnPress: () {},
           btnOkColor: Colors.redAccent,
         )..show();
       });
     } catch (e) {
       SnackBarServices.showSnackbar(
-          title: '', message: 'da co loi xay ra vui longf thu lai sau');
+          title: '', message: 'da co loi xay ra vui long thu lai sau');
     }
   }
 
@@ -88,9 +90,9 @@ class LoginController extends GetxController {
       return false;
     }
 
-    if (pass.replaceAll(" ", "").length < 6) {
+    if (pass.replaceAll(' ', '').length < 6) {
       SnackBarServices.showSnackbar(
-          title: '', message: 'mat khau phia dat 6 ky tu');
+          title: '', message: 'mat khau phai dat 6 ky tu');
       return false;
     }
     return true;

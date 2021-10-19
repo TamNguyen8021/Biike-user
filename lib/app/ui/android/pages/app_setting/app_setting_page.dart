@@ -6,37 +6,33 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/other_setting_buttons.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// The app setting screen
+/// The 'app_setting' screen
 class AppSettingPage extends StatelessWidget {
   const AppSettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: CustomAppBar(
-        isVisible: true,
-        hasShape: true,
-        appBar: AppBar(),
-        hasLeading: true,
-        title: Text(
-          CustomStrings.kAppSetting.tr,
+        appBar: CustomAppBar(
+          isVisible: true,
+          hasShape: true,
+          appBar: AppBar(),
+          hasLeading: true,
+          title: Text(
+            CustomStrings.kAppSetting.tr,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-            height: MediaQuery.of(context).size.height,
-            padding: const EdgeInsets.all(22.0),
-            child: Column(
-                children: <Widget>[
+        body: SingleChildScrollView(
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                padding: const EdgeInsets.all(22.0),
+                child: Column(children: <Widget>[
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       CustomStrings.kAccountSecurity.tr,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                   AccountSecurityButtons(),
@@ -44,10 +40,8 @@ class AppSettingPage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       CustomStrings.kLanguage.tr,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                   ChangeLanguageButton(),
@@ -55,10 +49,8 @@ class AppSettingPage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       CustomStrings.kOther.tr,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                   OtherSettingButtons(),
@@ -68,7 +60,7 @@ class AppSettingPage extends StatelessWidget {
                       CustomStrings.kDevelopBy.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 11,
+                        fontSize: 11,
                       ),
                     ),
                   ),
@@ -82,10 +74,6 @@ class AppSettingPage extends StatelessWidget {
                       ),
                     ),
                   )
-                ]
-            )
-        )
-      )
-    );
+                ]))));
   }
 }

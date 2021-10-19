@@ -65,10 +65,19 @@ final Map<String, String> en = {
   'kBikerReadyReminder': 'Ready to go!',
   'kFilter': 'Filter trips',
   'kSelectHour': 'Hour',
-  'kSelectSourceStation': 'Select departure',
-  'kSelectDestinationStation': 'Select destination',
+  'kSelectSourceStation': 'Departure station',
+  'kSelectDestinationStation': 'Destination station',
   'kDecline': 'Decline',
   'kAccept': 'Accept',
+
+  // 'top_biker' screen
+  'kBikerRank': 'Bảng xếp hạng Biker',
+  'kMonth': 'Tháng ',
+  'kTopBikerInfoFirstContent': 'Bảng xếp hạng Biker vinh danh'
+      ' những tài xế chở ké có hoạt động nổi bật, đạt được nhiều điểm thưởng.',
+  'kTopBikerInfoSecondContent': 'Các Biker tại Bảng xếp hạng '
+      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké. ',
+  'kGotIt': 'Đã hiểu',
 
   // 'activity' screen
   'kNoUpcomingTrips': 'No upcoming trips',
@@ -161,40 +170,54 @@ final Map<String, String> en = {
   'kListVouchers': 'Danh mục đổi quà',
   'kTradedVouchers': 'Quà đã đổi',
 
-  // 'trip_detail' screen
+  // 'trip_details' screen
   'kTripDetails': 'View trip details',
-  'kSupport': 'Trợ giúp',
-  'kNewTrip': 'Đã tạo',
-  'kTripHasBiker': 'Đã được nhận chở',
-  'kCancelTrip': 'Hủy chuyến',
+  'kSupport': 'Help',
+  'kNewTrip': 'Created',
+  'kCancelTrip': 'Cancel trip',
   'kConfirmArrival': 'Confirm arrival',
-  'kStartTrip': 'Bắt đầu chuyến đi',
-  'kCompleteTrip': 'Hoàn thành',
+  'kStartTrip': 'Start trip',
+  'kCompleteTrip': 'Finish trip',
+  'kTripHasFinished': 'Finished',
+  'kYourFeedback': 'Your feedback',
+  'kPartnerFeedback': 'Partner\'s feedback',
+  'kOpenStreetMap': 'View Open Street Map',
+  'kCancelTripSuccess': 'Your trip was canceled',
+  'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
+  'kViewCancelTripReminder': 'You can view your canceled trips in history',
+  'kLetUsKnowYourCancelReason':
+      'Please let us know why you want to cancel this trip',
+  'kEnterYourCancelReason': 'Enter your reason here',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
-  'kFrom': 'Từ',
-  'kChooseFrom': 'Chọn điểm đi',
-  'kTo': 'Đến',
-  'kChooseTo': 'Chọn điểm đến',
-  'kBookScheduleTrip': 'Đặt lịch ké',
-  'kBookNowTrip': 'Ké now',
+  'kFrom': 'From',
+  'kChooseFrom': 'Departure station',
+  'kTo': 'To',
+  'kChooseTo': 'Destination station',
+  'kBookScheduleTrip': 'Book trip',
+  'kBookNowTrip': 'Ké Now',
 
   // 'book_schedule_trip' screen
   'kTime': 'Time',
-  'kChooseDate': 'Choose Date',
-  'kChooseTime': 'Chọn giờ',
+  'kChooseDate': 'Choose date',
+  'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
-  'kRepeatTo': 'Lặp lại đến',
+  'kRepeatTo': 'Repeat until',
   'kCancel': 'Cancel',
 
   // 'bike_manager' screen
-  'kBikeVerified': 'Đã xác minh',
-  'kWaitingVerified': 'Đang xác minh',
+  'kBikeVerified': 'Verified',
+  'kWaitingVerified': 'Pending verified',
   'kBikeOwner': 'Owner\'s name',
   'kBikeCategory': 'Category',
   'kBikeBrand': 'Brand',
   'kBikeColor': 'Color',
+  'kEnterBikeOwner': 'Enter owner\'s name',
+  'kEnterBrand': 'Enter brand',
+  'kEnterCategory': 'Enter category',
+  'kEnterColor': 'Enter color',
+  'kEnterNumberPlate': 'Enter plate number',
   'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
 
   // 'add_bike' screen
@@ -203,6 +226,20 @@ final Map<String, String> en = {
   'kNumberPlate': 'Number plate',
   'kTakePictureAgain': 'Chụp lại',
 
+  // 'voucher_detail' screen
+  'kGiftDetail': 'Gift details',
+  'kYourVoucher': 'Your vouchers',
+  'kVoucherDetail': 'Voucher detail',
+  'kYourVoucherDetail': 'Your voucher detail',
+  'kTermsAndConditions': 'Terms and conditions',
+  'kAvailableUntil': 'Available until ',
+  'kExchangeNow': 'Exchange now',
+  'kBrand': 'Brand: ',
+  'kHsd': 'Until: ',
+  'kYourCode': 'Your code',
+  'kExchangeVoucherSuccess': 'Exchange voucher successful!',
+  'kViewAVoucher': 'View',
+
   // Error message
   'kError': 'Error!',
   'kErrorMessage':
@@ -210,6 +247,10 @@ final Map<String, String> en = {
   'kNotRated': 'Please rate your trip experience',
   'kIncludeBadWords': 'Please don\'t use bad words',
   'kSendFailed': 'Send feedback failed!',
+  'kDevelopError':
+      'There are some errors, please contact Biiké development team for support',
+  'kExchangeFailed': 'Can\'t exchange voucher!',
+  'kNotEnoughPoint': 'User doesn\'t have enough point',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',

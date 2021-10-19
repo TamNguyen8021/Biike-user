@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/controllers/view_user_controller.dart';
 import 'package:bikes_user/app/data/enums/gender_enum.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
@@ -9,13 +9,12 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/lists/list_history_trips.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-/// 'view_user' page
+/// The 'view_user' page
 class ViewUserPage extends StatelessWidget {
   final userId;
 
@@ -23,14 +22,14 @@ class ViewUserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewUserController = Get.find<ViewUserController>();
+    final _viewUserController = Get.put(ViewUserController(userId: userId));
     Gender gender = Gender.male;
 
     final contactAndReportButtons = <Widget>[
       CustomElevatedIconButton(
-        width: 100,
+        width: 105,
         onPressedFunc: () => CommonFunctions()
-            .makingPhoneCall(phoneNo: viewUserController.user.userPhoneNumber),
+            .makingPhoneCall(phoneNo: _viewUserController.user.userPhoneNumber),
         text: CustomStrings.kCall.tr,
         elevation: 2.0,
         icon: Icons.phone,
@@ -40,9 +39,9 @@ class ViewUserPage extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         child: CustomElevatedIconButton(
-          width: 100,
+          width: 105,
           onPressedFunc: () => CommonFunctions()
-              .makingSms(phoneNo: viewUserController.user.userPhoneNumber),
+              .makingSms(phoneNo: _viewUserController.user.userPhoneNumber),
           text: CustomStrings.kMessage.tr,
           elevation: 2.0,
           icon: Icons.message,
@@ -51,9 +50,9 @@ class ViewUserPage extends StatelessWidget {
         ),
       ),
       CustomElevatedIconButton(
-        width: 100,
+        width: 105,
         onPressedFunc: () =>
-            viewUserController.showReportDialog(context: context),
+            _viewUserController.showReportDialog(context: context),
         text: CustomStrings.kReport.tr,
         elevation: 2.0,
         icon: Icons.warning_amber,
@@ -62,13 +61,10 @@ class ViewUserPage extends StatelessWidget {
       ),
     ];
 
-    return FutureBuilder(
-        future: viewUserController.getPartnerProfile(
-            context: context, partnerId: userId),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            // viewUserController.getUserHistoryTrips(context: context);
-            return Scaffold(
+    return GetBuilder(
+        init: _viewUserController,
+        builder: (_) {
+          return Scaffold(
               appBar: CustomAppBar(
                 isVisible: true,
                 hasShape: true,
@@ -76,153 +72,223 @@ class ViewUserPage extends StatelessWidget {
                 hasLeading: true,
                 title: Text(CustomStrings.kViewUser.tr),
               ),
-              body: snapshot.connectionState == ConnectionState.done
-                  ? SingleChildScrollView(
-                      child: SafeArea(
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 22.0),
-                              child: Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          viewUserController.user.avatar),
-                                      radius: 55,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: UserRating(
-                                        score: viewUserController.user.userStar
-                                            .toString()),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 4.0),
-                                    child: Text(
-                                        viewUserController.user.userFullname,
-                                        style: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: CustomColors.kDarkGray,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                        gender.getGenderText(
-                                            viewUserController.user.gender),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1,
+              body: FutureBuilder(
+                  future: _viewUserController.getPartnerProfile(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return SingleChildScrollView(
+                        child: SafeArea(
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 22.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            _viewUserController.user.avatar),
+                                        radius: 55,
                                       ),
-                                      if (DateTime.parse(viewUserController
-                                                  .user.birthDate)
-                                              .year !=
-                                          DateTime.now().year) ...[
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: UserRating(
+                                          score: _viewUserController
+                                              .user.userStar
+                                              .toString()),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 4.0),
+                                      child: Text(
+                                          _viewUserController.user.userFullname,
+                                          style: TextStyle(
+                                              fontSize: 18.sp,
+                                              color: CustomColors.kDarkGray,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
                                         Text(
-                                          ' | ' +
-                                              DateTime.parse(viewUserController
-                                                      .user.birthDate)
-                                                  .year
-                                                  .toString(),
+                                          gender.getGenderText(
+                                              _viewUserController.user.gender),
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1,
                                         ),
-                                      ]
-                                    ],
-                                  ),
-                                  ProfileTextField(
-                                      isReadOnly: true,
-                                      isEditProfile: false,
-                                      initialValue: viewUserController
-                                          .user.userPhoneNumber,
-                                      labelText: CustomStrings.kPhoneNo.tr),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 30.0),
-                                    child: ProfileTextField(
+                                        if (_viewUserController
+                                            .user.birthDate.isNotEmpty) ...[
+                                          Text(
+                                            ' | ' +
+                                                DateTime.parse(
+                                                        _viewUserController
+                                                            .user.birthDate)
+                                                    .year
+                                                    .toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                          ),
+                                        ]
+                                      ],
+                                    ),
+                                    ProfileTextField(
                                         isReadOnly: true,
                                         isEditProfile: false,
-                                        initialValue:
-                                            viewUserController.area.areaName,
-                                        labelText: CustomStrings.kSchool.tr),
-                                  ),
-                                  if (MediaQuery.of(context).size.width >=
-                                      400) ...[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: contactAndReportButtons,
+                                        initialValue: _viewUserController
+                                            .user.userPhoneNumber,
+                                        labelText: CustomStrings.kPhoneNo.tr),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 30.0),
+                                      child: ProfileTextField(
+                                          isReadOnly: true,
+                                          isEditProfile: false,
+                                          // initialValue:
+                                          //     _viewUserController.area.areaName,
+                                          initialValue:
+                                              CustomStrings.fptHCMUni.tr,
+                                          labelText: CustomStrings.kSchool.tr),
                                     ),
-                                  ] else ...[
-                                    Column(
-                                      children: contactAndReportButtons,
-                                    )
-                                  ]
-                                ],
-                              ),
-                            ),
-                            Divider(),
-                            FutureBuilder(
-                                future: viewUserController
-                                    .getHistoryTripsWithPartner(
-                                        context: context,
-                                        userId: Biike.userId,
-                                        partnerId: userId),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<dynamic> snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 22.0, vertical: 20.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          if (viewUserController
-                                              .historyTrips.isNotEmpty) ...[
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 16.0),
-                                              child: Text(
-                                                CustomStrings
-                                                    .kHasHistoryTrip.tr,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1,
-                                              ),
-                                            ),
-                                          ],
-                                          ListHistoryTrips(
-                                              role: Role.none,
-                                              listHistoryTrips:
-                                                  viewUserController
-                                                      .historyTrips
-                                                      .toList(),
-                                              itemPadding: 16.0),
-                                        ],
+                                    if (MediaQuery.of(context).size.width >=
+                                        400) ...[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: contactAndReportButtons,
                                       ),
-                                    );
-                                  } else {
-                                    return Loading();
-                                  }
-                                }),
-                          ],
+                                    ] else ...[
+                                      Column(
+                                        children: contactAndReportButtons,
+                                      )
+                                    ]
+                                  ],
+                                ),
+                              ),
+                              Divider(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 22.0, vertical: 20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    if (_viewUserController
+                                        .historyTrips.isNotEmpty) ...[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 16.0),
+                                        child: Text(
+                                          CustomStrings.kHasHistoryTrip.tr,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ),
+                                    ],
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              2,
+                                      child: RefreshIndicator(
+                                        onRefresh: () => Future.sync(
+                                          () => _viewUserController
+                                              .pagingController
+                                              .refresh(),
+                                        ),
+                                        child:
+                                            PagedListView<int, HistoryTripCard>(
+                                          pagingController: _viewUserController
+                                              .pagingController,
+                                          builderDelegate:
+                                              PagedChildBuilderDelegate<
+                                                      HistoryTripCard>(
+                                                  itemBuilder: (context, item,
+                                                          index) =>
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 10.0),
+                                                        child: HistoryTripCard(
+                                                          tripId:
+                                                              _viewUserController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .tripId,
+                                                          userId:
+                                                              _viewUserController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .userId,
+                                                          dateTime:
+                                                              _viewUserController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .dateTime,
+                                                          status:
+                                                              _viewUserController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .status,
+                                                          sourceStation:
+                                                              _viewUserController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .sourceStation,
+                                                          destinationStation:
+                                                              _viewUserController
+                                                                  .pagingController
+                                                                  .itemList!
+                                                                  .elementAt(
+                                                                      index)
+                                                                  .destinationStation,
+                                                          isOnViewUserPage:
+                                                              false,
+                                                        ),
+                                                      ),
+                                                  noItemsFoundIndicatorBuilder:
+                                                      (BuildContext context) {
+                                                    return Text(CustomStrings
+                                                        .kNoHistoryTrip);
+                                                  }),
+                                        ),
+                                      ),
+                                    ),
+                                    // ListHistoryTrips(
+                                    //     listHistoryTrips:
+                                    //         viewUserController
+                                    //             .historyTrips
+                                    //             .toList(),
+                                    //     itemPadding: 16.0),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  : Loading(),
-            );
-          } else {
-            return Loading();
-          }
+                      );
+                    } else {
+                      return Loading();
+                    }
+                  }));
         });
   }
 }
