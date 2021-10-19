@@ -3,6 +3,7 @@ import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
@@ -11,6 +12,7 @@ class BookTripController extends GetxController {
   Rx<Station> destinationStation = Station.empty().obs;
   RxList<Station> listDepartureStation = <Station>[].obs;
   RxList<Station> listDestinationStation = <Station>[].obs;
+  Rx<RoadInfo> roadInfo = RoadInfo().obs;
 
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;

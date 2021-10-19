@@ -1,10 +1,9 @@
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/widget/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -67,25 +66,6 @@ class BookTripPage extends StatelessWidget {
                     Obx(() => MapViewer(
                         departureCoordinate: _bookTripController.departureStation.value.coordinate,
                         destinationCoordinate: _bookTripController.destinationStation.value.coordinate),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        // Obx(() =>
-                            Text(
-                              '0 phút', //TODO
-                          style: TextStyle(
-                            color: CustomColors.kBlue,
-                          ),
-                        ),
-                        // ),
-                        // Obx(() =>
-                            Text(
-                              '0 km', //TODO
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        // ),
-                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 30.0),
