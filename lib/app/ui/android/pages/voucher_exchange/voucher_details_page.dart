@@ -21,6 +21,9 @@ class VoucherDetailPage extends StatelessWidget {
         isVisible: true,
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         appBar: AppBar(),
         title: Text(CustomStrings.kVoucherDetail.tr),
       ),

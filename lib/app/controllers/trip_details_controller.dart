@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip_feedback.dart';
@@ -17,6 +18,7 @@ import 'package:get/get.dart';
 
 class TripDetailsController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
+  final _homeController = Get.find<HomeController>();
 
   Rx<String> buttonText = CustomStrings.kStartTrip.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
@@ -84,11 +86,10 @@ class TripDetailsController extends GetxController {
     if (response) {
       Get.back();
       Get.back();
+      _homeController.pagingController.refresh();
       CommonFunctions().showSuccessDialog(
           context: context, message: CustomStrings.kCancelTripSuccess);
     } else {
-      Get.back();
-      Get.back();
       CommonFunctions().showErrorDialog(
           context: context, message: CustomErrorsString.kDevelopError.tr);
     }

@@ -68,6 +68,9 @@ class ViewUserPage extends StatelessWidget {
                 hasShape: true,
                 appBar: AppBar(),
                 hasLeading: true,
+                onPressedFunc: () {
+                  Get.back();
+                },
                 title: Text(CustomStrings.kViewUser.tr),
               ),
               body: FutureBuilder(

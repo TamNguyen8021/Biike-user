@@ -20,6 +20,9 @@ class SOSNumberPage extends StatelessWidget {
         hasShape: true,
         appBar: AppBar(),
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         title: Text(
           CustomStrings.kSOSNumber.tr,
         ),

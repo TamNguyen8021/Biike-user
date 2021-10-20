@@ -1,4 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
+import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
@@ -22,6 +24,8 @@ import 'package:intl/intl.dart';
 //ignore: must_be_immutable
 class TripDetailsPage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
+  final _homeController = Get.find<HomeController>();
+  final _tripHistoryController = Get.find<TripHistoryController>();
 
   String _statusBarTime = '';
   String _statusBarText = '';
@@ -119,6 +123,14 @@ class TripDetailsPage extends StatelessWidget {
                 isVisible: true,
                 hasShape: true,
                 hasLeading: true,
+                onPressedFunc: () async {
+                  if (Get.arguments['route'] == 'home') {
+                    _homeController.pagingController.refresh();
+                  } else {
+                    _tripHistoryController.pagingController.refresh();
+                  }
+                  Get.back();
+                },
                 appBar: AppBar(),
                 title: Text(CustomStrings.kTripDetails.tr),
                 actionWidgets: <Widget>[

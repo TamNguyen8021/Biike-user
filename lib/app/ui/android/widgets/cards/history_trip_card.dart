@@ -170,8 +170,11 @@ class HistoryTripCard extends StatelessWidget {
         ),
         onTap: () {
           if (!isOnViewUserPage) {
-            Get.toNamed(CommonRoutes.TRIP_DETAILS,
-                arguments: {'tripId': tripId, 'userId': userId});
+            Get.toNamed(CommonRoutes.TRIP_DETAILS, arguments: {
+              'tripId': tripId,
+              'userId': userId,
+              'route': 'history'
+            });
           }
         });
   }

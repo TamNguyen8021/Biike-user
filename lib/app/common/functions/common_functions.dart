@@ -1,6 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -55,14 +54,6 @@ class CommonFunctions {
             snackPosition: SnackPosition.BOTTOM);
 
     return Future.value(false);
-  }
-
-  /// Call API to load user's profile when tap back button
-  /// Author: TamNTT
-  Future<bool> reloadProfile(
-      {required ProfileController profileController}) async {
-    await profileController.getProfile();
-    return profileController.user.userId != -1;
   }
 
   /// Show a date picker on [context].

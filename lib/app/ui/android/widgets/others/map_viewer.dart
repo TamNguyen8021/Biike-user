@@ -51,8 +51,8 @@ class MapViewer extends StatelessWidget {
         showMarkerOfPOI: true,
       ),
     );
-    Biike.logger.i('${roadInfo.distance} km');
-    Biike.logger.i('${roadInfo.duration} sec');
+    Biike.logger.d('${roadInfo.distance} km');
+    Biike.logger.d('${roadInfo.duration} sec');
   }
 
   @override

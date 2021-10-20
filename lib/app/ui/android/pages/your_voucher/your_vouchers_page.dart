@@ -24,20 +24,24 @@ class YourVoucherPage extends StatelessWidget {
               isVisible: true,
               hasShape: true,
               hasLeading: true,
+              onPressedFunc: () {
+                Get.back();
+              },
               appBar: AppBar(),
               title: Text(CustomStrings.kYourVouchers.tr),
             ),
             body: SingleChildScrollView(
                 child: SafeArea(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                          padding:
-                          const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
-                          child: YourVoucherList(listVouchers: _redemptionController.yourVoucherList)),
-                    ],
-                  ),
-                )),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                      padding: const EdgeInsets.only(
+                          top: 16.0, left: 22.0, right: 22.0),
+                      child: YourVoucherList(
+                          listVouchers: _redemptionController.yourVoucherList)),
+                ],
+              ),
+            )),
           );
         } else {
           return Loading();

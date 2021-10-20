@@ -19,6 +19,9 @@ class AddAddressBookPage extends StatelessWidget {
         isVisible: true,
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         appBar: AppBar(),
         title: Text(CustomStrings.kAddAddressBook.tr),
       ),
@@ -29,98 +32,89 @@ class AddAddressBookPage extends StatelessWidget {
             children: <Widget>[
               Form(
                   child: Column(
+                children: <Widget>[
+                  Row(
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            '* ',
-                            style: TextStyle(
-                                color: Colors.red
-                            ),
-                          ),
-                          Text(
-                            CustomStrings.kName.tr,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
+                      Text(
+                        '* ',
+                        style: TextStyle(color: Colors.red),
                       ),
-                      Obx(
-                            () => AddressBookTextField(
-                                hintText: CustomStrings.kEnterName.tr,
-                                isReadOnly: false,
-                                isEditAddressBook: true,
-                                initialValue: '${addAddressBookPageController.name}',
-                                labelText: CustomStrings.kName.tr),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            '* ',
-                            style: TextStyle(
-                                color: Colors.red
-                            ),
-                          ),
-                          Text(
-                            CustomStrings.kAddress.tr,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
-                      Obx(
-                            () => AddressBookTextActionField(
-                                hintText: CustomStrings.kSelectAddress.tr,
-                                isReadOnly: true,
-                                isEditAddressBook: true,
-                                initialValue: '${addAddressBookPageController.address}',
-                                labelText: CustomStrings.kAddress.tr),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            '* ',
-                            style: TextStyle(
-                                color: Colors.red
-                            ),
-                          ),
-                          Text(
-                            CustomStrings.kNote.tr,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
-                      Obx(
-                            () => AddressBookTextField(
-                                hintText: CustomStrings.kEnterNote.tr,
-                                isReadOnly: false,
-                                isEditAddressBook: true,
-                                initialValue: '${addAddressBookPageController.note}',
-                                labelText: CustomStrings.kNote.tr),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child:  CustomElevatedIconButton(
-                          onPressedFunc: () => Get.back(),
-                          text: CustomStrings.kSave.tr,
-                          icon: Icons.save,
-                          elevation: 0.0,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
-                        ),
+                      Text(
+                        CustomStrings.kName.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
                       )
                     ],
-                  ))
+                  ),
+                  Obx(
+                    () => AddressBookTextField(
+                        hintText: CustomStrings.kEnterName.tr,
+                        isReadOnly: false,
+                        isEditAddressBook: true,
+                        initialValue: '${addAddressBookPageController.name}',
+                        labelText: CustomStrings.kName.tr),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '* ',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      Text(
+                        CustomStrings.kAddress.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Obx(
+                    () => AddressBookTextActionField(
+                        hintText: CustomStrings.kSelectAddress.tr,
+                        isReadOnly: true,
+                        isEditAddressBook: true,
+                        initialValue: '${addAddressBookPageController.address}',
+                        labelText: CustomStrings.kAddress.tr),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '* ',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      Text(
+                        CustomStrings.kNote.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Obx(
+                    () => AddressBookTextField(
+                        hintText: CustomStrings.kEnterNote.tr,
+                        isReadOnly: false,
+                        isEditAddressBook: true,
+                        initialValue: '${addAddressBookPageController.note}',
+                        labelText: CustomStrings.kNote.tr),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: CustomElevatedIconButton(
+                      onPressedFunc: () => Get.back(),
+                      text: CustomStrings.kSave.tr,
+                      icon: Icons.save,
+                      elevation: 0.0,
+                      backgroundColor: CustomColors.kBlue,
+                      foregroundColor: Colors.white,
+                    ),
+                  )
+                ],
+              ))
             ],
           ),
         ),

@@ -22,6 +22,9 @@ class ManageBikePage extends StatelessWidget {
         appBar: CustomAppBar(
           isVisible: true,
           hasLeading: true,
+          onPressedFunc: () {
+            Get.back();
+          },
           hasShape: true,
           appBar: AppBar(),
           title: Text(

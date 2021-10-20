@@ -18,6 +18,9 @@ class EditSOSNumberPage extends StatelessWidget {
         isVisible: true,
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         appBar: AppBar(),
         title: Text(CustomStrings.kEditSOSNumber.tr),
         actionWidgets: <Widget>[
@@ -37,72 +40,66 @@ class EditSOSNumberPage extends StatelessWidget {
             children: <Widget>[
               Form(
                   child: Column(
+                children: <Widget>[
+                  Row(
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            '* ',
-                            style: TextStyle(
-                                color: Colors.red
-                            ),
-                          ),
-                          Text(
-                            CustomStrings.kName.tr,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
+                      Text(
+                        '* ',
+                        style: TextStyle(color: Colors.red),
                       ),
-                      Obx(
-                            () => SOSNumberTextField(
-                            hintText: CustomStrings.kEnterName.tr,
-                            isReadOnly: false,
-                            isEditSOSNumber: true,
-                            initialValue: '${editSOSNumberController.name}',
-                            labelText: CustomStrings.kName.tr),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            '* ',
-                            style: TextStyle(
-                                color: Colors.red
-                            ),
-                          ),
-                          Text(
-                            CustomStrings.kNumberPhone.tr,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
-                      Obx(
-                            () => SOSNumberTextField(
-                            hintText: CustomStrings.kEnterNumberPhone.tr,
-                            isReadOnly: false,
-                            isEditSOSNumber: true,
-                            initialValue: '${editSOSNumberController.number}',
-                            labelText: CustomStrings.kNote.tr),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child:  CustomElevatedIconButton(
-                          onPressedFunc: () => Get.back(),
-                          text: CustomStrings.kSave.tr,
-                          icon: Icons.save,
-                          elevation: 0.0,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
-                        ),
+                      Text(
+                        CustomStrings.kName.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
                       )
                     ],
-                  ))
+                  ),
+                  Obx(
+                    () => SOSNumberTextField(
+                        hintText: CustomStrings.kEnterName.tr,
+                        isReadOnly: false,
+                        isEditSOSNumber: true,
+                        initialValue: '${editSOSNumberController.name}',
+                        labelText: CustomStrings.kName.tr),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '* ',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      Text(
+                        CustomStrings.kNumberPhone.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Obx(
+                    () => SOSNumberTextField(
+                        hintText: CustomStrings.kEnterNumberPhone.tr,
+                        isReadOnly: false,
+                        isEditSOSNumber: true,
+                        initialValue: '${editSOSNumberController.number}',
+                        labelText: CustomStrings.kNote.tr),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: CustomElevatedIconButton(
+                      onPressedFunc: () => Get.back(),
+                      text: CustomStrings.kSave.tr,
+                      icon: Icons.save,
+                      elevation: 0.0,
+                      backgroundColor: CustomColors.kBlue,
+                      foregroundColor: Colors.white,
+                    ),
+                  )
+                ],
+              ))
             ],
           ),
         ),

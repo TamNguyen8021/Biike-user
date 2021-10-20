@@ -17,6 +17,9 @@ class BanListPage extends StatelessWidget {
         hasShape: true,
         appBar: AppBar(),
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         title: Text(
           CustomStrings.kBanList.tr,
         ),

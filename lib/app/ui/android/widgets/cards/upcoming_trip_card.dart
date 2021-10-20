@@ -56,7 +56,7 @@ class UpcomingTripCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => Get.toNamed(CommonRoutes.TRIP_DETAILS,
-          arguments: {'tripId': tripId, 'userId': userId}),
+          arguments: {'tripId': tripId, 'userId': userId, 'route': 'home'}),
       child: Container(
         height: 82,
         child: Row(

@@ -1,5 +1,4 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
@@ -52,32 +51,31 @@ class HomeController extends GetxController {
   /// Author: TamNTT
   Future<void> _fetchPage(int pageKey) async {
     try {
-      if (Biike.role.value == Role.keer) {
-        await getUpcomingTrips();
-      } else {
-        await getStations();
-      }
+      await getUpcomingTrips();
+      // if (Biike.role.value == Role.biker) {
+      //   await getStations();
+      // }
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
       if (isLastPage) {
-        if (Biike.role.value == Role.keer) {
-          pagingController.appendLastPage(upcomingTrips.toList());
-        } else {
-          pagingController.appendLastPage(stations.values.toList());
-        }
+        // if (Biike.role.value == Role.keer) {
+        pagingController.appendLastPage(upcomingTrips.toList());
+        // } else {
+        //   pagingController.appendLastPage(stations.values.toList());
+        // }
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        if (Biike.role.value == Role.keer) {
-          nextPageKey += upcomingTrips.length;
-          pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
-        } else {
-          nextPageKey += stations.length;
-          pagingController.appendPage(stations.values.toList(), nextPageKey);
-        }
+        // if (Biike.role.value == Role.keer) {
+        nextPageKey += upcomingTrips.length;
+        pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
+        // } else {
+        //   nextPageKey += stations.length;
+        //   pagingController.appendPage(stations.values.toList(), nextPageKey);
+        // }
       }
     } catch (error) {
       pagingController.error = error;

@@ -90,16 +90,13 @@ class PasswordPage extends StatelessWidget {
                   )
                 ],
                 onCompleted: (v) {
-                  Biike.logger.i('Completed');
+                  Biike.logger.d('Completed');
                 },
-                // onTap: () {
-                //   Biike.logger.i('Pressed');
-                // },
                 onChanged: (value) {
                   Biike.logger.d(value);
                 },
                 beforeTextPaste: (text) {
-                  Biike.logger.i('Allowing to paste $text');
+                  Biike.logger.d('Allowing to paste $text');
                   //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                   //but you can show anything you want here, like your pop up saying wrong paste format or etc
                   return true;

@@ -15,6 +15,7 @@ import 'package:bikes_user/app/bindings/register_binding.dart';
 import 'package:bikes_user/app/bindings/login_binding.dart';
 import 'package:bikes_user/app/bindings/open_page_bingding.dart';
 import 'package:bikes_user/app/bindings/sos_number_binding.dart';
+import 'package:bikes_user/app/bindings/wallet_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
@@ -114,7 +115,7 @@ class AppPages {
     GetPage(
       name: CommonRoutes.PROFILE,
       page: () => ProfilePage(),
-      bindings: <Bindings>[ProfileBinding(), UserBinding()],
+      bindings: <Bindings>[ProfileBinding(), UserBinding(), WalletBinding()],
     ),
     GetPage(
         name: CommonRoutes.EDIT_PROFILE,
@@ -139,7 +140,12 @@ class AppPages {
     GetPage(
         name: CommonRoutes.TRIP_DETAILS,
         page: () => TripDetailsPage(),
-        bindings: [TripDetailsBinding(), TripBinding()]),
+        bindings: [
+          TripDetailsBinding(),
+          TripBinding(),
+          HomeBinding(),
+          TripHistoryBinding()
+        ]),
     GetPage(
         name: CommonRoutes.VIEW_USER,
         page: () => ViewUserPage(),

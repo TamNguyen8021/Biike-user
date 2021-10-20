@@ -55,6 +55,7 @@ class HomePage extends StatelessWidget {
                                       _homeController.isAppBarVisible.value,
                                   hasShape: true,
                                   hasLeading: false,
+                                  onPressedFunc: () {},
                                   appBar: AppBar(),
                                   title: Padding(
                                     padding: const EdgeInsets.only(left: 5.0),
