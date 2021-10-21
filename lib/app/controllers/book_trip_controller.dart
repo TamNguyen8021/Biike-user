@@ -36,8 +36,8 @@ class BookTripController extends GetxController {
   }
 
   Future<void> getListStation() async {
-    listDepartureStation.value = (await StationProvider()
-        .getListStation() as List)
+    listDepartureStation.value = ((await StationProvider()
+      .getStations(page: 1, limit: 20))['data'] as List)
         .map((e) => Station.fromJson(e))
         .toList();
 

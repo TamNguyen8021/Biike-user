@@ -32,7 +32,7 @@ class StationProvider extends CommonProvider {
               response.body);
       return Future.error(response.statusText!);
     } else {
-      return response.body['data'];
+      return response.body;
     }
   }
 
