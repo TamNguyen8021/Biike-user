@@ -72,6 +72,8 @@ dependencies:
   shared_preferences: ^2.0.8
   infinite_scroll_pagination: ^3.1.0
   flutter_osm_plugin: ^0.22.0
+  flutter_logs: ^2.1.4
+  device_info_plus: ^3.1.0
   
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,10 @@ dev_dependencies:
   json_serializable: ^4.1.4
   retrofit_generator: any
   injectable_generator: any
+  logger:
+    git:
+      url: git://github.com/leisim/logger.git
+      ref: master
 
   
 

@@ -41,8 +41,9 @@ class Home extends StatelessWidget {
                 String _timeLeft = '';
 
                 if (homeController.upcomingTrips.isNotEmpty) {
-                  _firstTripTimeBook = DateTime.parse(
-                      homeController.upcomingTrips.toList()[0].bookTime);
+                  _firstTripTimeBook = DateTime.tryParse(
+                          homeController.upcomingTrips.toList()[0].bookTime) ??
+                      DateTime.now();
                   if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
                     _timeLeft = _timeLeft +
                         (_firstTripTimeBook.hour - _currentTime.hour)
@@ -189,7 +190,13 @@ class Home extends StatelessWidget {
                                   children: <Widget>[
                                     AdContainer(),
                                     if (homeController.upcomingTrips.length >
-                                        1) ...[
+                                            1 &&
+                                        (_firstTripTimeBook.day ==
+                                                _currentTime.day &&
+                                            _firstTripTimeBook.month ==
+                                                _currentTime.month &&
+                                            _firstTripTimeBook.year ==
+                                                _currentTime.year)) ...[
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             bottom: 8.0, top: 35.0),
@@ -221,62 +228,71 @@ class Home extends StatelessWidget {
                                             builderDelegate:
                                                 PagedChildBuilderDelegate<
                                                         dynamic>(
-                                                    itemBuilder: (context, item,
-                                                            index) =>
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  bottom: 10.0),
-                                                          child: UpcomingTripCard(
-                                                              tripId: homeController
-                                                                  .pagingController
-                                                                  .itemList!
-                                                                  .elementAt(
-                                                                      index)
-                                                                  .tripId,
-                                                              userId: homeController
-                                                                  .pagingController
-                                                                  .itemList!
-                                                                  .elementAt(
-                                                                      index)
-                                                                  .userId,
-                                                              avatarUrl:
-                                                                  homeController
-                                                                      .pagingController
-                                                                      .itemList!
-                                                                      .elementAt(
-                                                                          index)
-                                                                      .avatarUrl,
-                                                              name: homeController
-                                                                  .pagingController
-                                                                  .itemList!
-                                                                  .elementAt(
-                                                                      index)
-                                                                  .name,
-                                                              phoneNo: homeController
-                                                                  .pagingController
-                                                                  .itemList!
-                                                                  .elementAt(
-                                                                      index)
-                                                                  .phoneNo,
-                                                              bookTime: homeController
-                                                                  .pagingController
-                                                                  .itemList!
-                                                                  .elementAt(index)
-                                                                  .bookTime,
-                                                              departureStation: homeController.pagingController.itemList!.elementAt(index).departureStation,
-                                                              destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
-                                                        ),
-                                                    noItemsFoundIndicatorBuilder:
+                                                    itemBuilder:
+                                                        (context, item, index) {
+                                              if (index == 0 &&
+                                                  (_firstTripTimeBook.day ==
+                                                          _currentTime.day &&
+                                                      _firstTripTimeBook
+                                                              .month ==
+                                                          _currentTime.month &&
+                                                      _firstTripTimeBook.year ==
+                                                          _currentTime.year)) {
+                                                return SizedBox.shrink();
+                                              } else {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10.0),
+                                                  child: UpcomingTripCard(
+                                                      tripId: homeController.pagingController.itemList!
+                                                          .elementAt(index)
+                                                          .tripId,
+                                                      userId: homeController
+                                                          .pagingController
+                                                          .itemList!
+                                                          .elementAt(index)
+                                                          .userId,
+                                                      avatarUrl: homeController
+                                                          .pagingController
+                                                          .itemList!
+                                                          .elementAt(index)
+                                                          .avatarUrl,
+                                                      name: homeController.pagingController.itemList!
+                                                          .elementAt(index)
+                                                          .name,
+                                                      phoneNo: homeController
+                                                          .pagingController
+                                                          .itemList!
+                                                          .elementAt(index)
+                                                          .phoneNo,
+                                                      bookTime: homeController
+                                                          .pagingController
+                                                          .itemList!
+                                                          .elementAt(index)
+                                                          .bookTime,
+                                                      departureStation: homeController
+                                                          .pagingController
+                                                          .itemList!
+                                                          .elementAt(index)
+                                                          .departureStation,
+                                                      destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
+                                                );
+                                              }
+                                            }, noItemsFoundIndicatorBuilder:
                                                         (BuildContext context) {
-                                                      return Text(CustomStrings
-                                                          .kNoUpcomingTrips.tr);
-                                                    }),
+                                              if (homeController
+                                                      .upcomingTrips.length ==
+                                                  0) {
+                                                return Text(CustomStrings
+                                                    .kNoUpcomingTrips.tr);
+                                              }
+                                              return SizedBox.shrink();
+                                            }),
                                           ),
                                         ),
                                       ),
-                                    ]
+                                    ],
                                   ],
                                 ),
                               )

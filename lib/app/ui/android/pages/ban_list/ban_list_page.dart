@@ -11,14 +11,15 @@ class BanListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final banListController = Get.find<BanListController>();
-
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,
         hasShape: true,
         appBar: AppBar(),
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         title: Text(
           CustomStrings.kBanList.tr,
         ),

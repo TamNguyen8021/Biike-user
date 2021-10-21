@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class BookTripBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(BookTripController());
+    Get.lazyPut<BookTripController>(() => BookTripController());
   }
 }

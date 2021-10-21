@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class ChooseModeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(ChooseModeController());
+    Get.lazyPut<ChooseModeController>(() => ChooseModeController());
   }
 }

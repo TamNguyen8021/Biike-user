@@ -18,6 +18,9 @@ class AppSettingPage extends StatelessWidget {
           hasShape: true,
           appBar: AppBar(),
           hasLeading: true,
+          onPressedFunc: () {
+            Get.back();
+          },
           title: Text(
             CustomStrings.kAppSetting.tr,
           ),

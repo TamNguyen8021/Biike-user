@@ -25,6 +25,9 @@ class AddBikePage extends StatelessWidget {
           appBar: AppBar(),
           hasShape: true,
           hasLeading: true,
+          onPressedFunc: () {
+            Get.back();
+          },
           title: Text(
             CustomStrings.kAddBike.tr,
           ),

@@ -12,7 +12,6 @@ class TopBikerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final topBikeController = Get.find<TopBikerController>();
     Rx<String> currentMonth = DateTime.now().month.toString().obs;
 
     return DefaultTabController(
@@ -23,6 +22,9 @@ class TopBikerPage extends StatelessWidget {
           hasShape: true,
           appBar: AppBar(),
           hasLeading: true,
+          onPressedFunc: () {
+            Get.back();
+          },
           title: Text(
             CustomStrings.kBikerRank.tr,
           ),
@@ -109,7 +111,7 @@ class TopBikerPage extends StatelessWidget {
                         ),
                         onTap: () {
                           int tempCurrentMonth =
-                              int.parse(currentMonth.value) - 1;
+                              int.tryParse(currentMonth.value)! - 1;
                           if (tempCurrentMonth >= 1) {
                             currentMonth.value = '$tempCurrentMonth';
                           }
@@ -131,7 +133,7 @@ class TopBikerPage extends StatelessWidget {
                         ),
                         onTap: () {
                           int tempCurrentMonth =
-                              int.parse(currentMonth.value) + 1;
+                              int.tryParse(currentMonth.value)! + 1;
                           if (tempCurrentMonth <= 12) {
                             currentMonth.value = '$tempCurrentMonth';
                           }

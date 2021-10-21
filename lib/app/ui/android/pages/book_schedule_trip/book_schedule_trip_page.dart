@@ -20,6 +20,9 @@ class BookScheduleTripPage extends StatelessWidget {
       appBar: CustomAppBar(
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         isVisible: true,
         appBar: AppBar(),
         title: Text(CustomStrings.kBookScheduleTrip.tr),

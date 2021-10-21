@@ -16,13 +16,11 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// The 'view_user' page
 class ViewUserPage extends StatelessWidget {
-  final userId;
-
-  const ViewUserPage({Key? key, required this.userId}) : super(key: key);
+  const ViewUserPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _viewUserController = Get.put(ViewUserController(userId: userId));
+    final _viewUserController = Get.find<ViewUserController>();
     Gender gender = Gender.male;
 
     final contactAndReportButtons = <Widget>[
@@ -70,10 +68,14 @@ class ViewUserPage extends StatelessWidget {
                 hasShape: true,
                 appBar: AppBar(),
                 hasLeading: true,
+                onPressedFunc: () {
+                  Get.back();
+                },
                 title: Text(CustomStrings.kViewUser.tr),
               ),
               body: FutureBuilder(
-                  future: _viewUserController.getPartnerProfile(),
+                  future: _viewUserController.getPartnerProfile(
+                      partnerId: Get.arguments['partnerId']),
                   builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -125,12 +127,13 @@ class ViewUserPage extends StatelessWidget {
                                               .bodyText1,
                                         ),
                                         if (_viewUserController
-                                            .user.birthDate.isNotEmpty) ...[
+                                                .user.birthDate !=
+                                            null) ...[
                                           Text(
                                             ' | ' +
-                                                DateTime.parse(
+                                                DateTime.tryParse(
                                                         _viewUserController
-                                                            .user.birthDate)
+                                                            .user.birthDate!)!
                                                     .year
                                                     .toString(),
                                             style: Theme.of(context)
@@ -272,12 +275,6 @@ class ViewUserPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    // ListHistoryTrips(
-                                    //     listHistoryTrips:
-                                    //         viewUserController
-                                    //             .historyTrips
-                                    //             .toList(),
-                                    //     itemPadding: 16.0),
                                   ],
                                 ),
                               ),

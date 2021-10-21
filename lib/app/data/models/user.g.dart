@@ -13,7 +13,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
     json['userFullname'] as String? ?? 'kFinding',
     json['avatar'] as String? ?? '',
     json['gender'] as int? ?? -1,
-    json['birthDate'] as String? ?? '',
+    json['birthDate'] as String?,
     json['userStatus'] as int?,
     json['lastLoginDevice'] as String?,
     json['lastLoginTime'] == null

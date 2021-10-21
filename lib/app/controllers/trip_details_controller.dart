@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip_feedback.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
-import 'package:bikes_user/app/data/providers/trip_details_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -16,7 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TripDetailsController extends GetxController {
-  final _tripDetailsProvider = Get.put(TripDetailsProvider());
+  final _tripProvider = Get.find<TripProvider>();
+  final _homeController = Get.find<HomeController>();
 
   Rx<String> buttonText = CustomStrings.kStartTrip.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
@@ -50,7 +52,7 @@ class TripDetailsController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getTripDetails({required int tripId}) async {
-    var data = await _tripDetailsProvider.getTripDetails(tripId: tripId);
+    var data = await _tripProvider.getTripDetails(tripId: tripId);
     trip = Trip.fromJson(data);
     user = User.fromJson(data);
     departureStation = DepartureStation.fromJson(data);
@@ -66,7 +68,7 @@ class TripDetailsController extends GetxController {
   /// Author: TamNTT
   Future<Map<String, String>> getLocationDetails(
       {required double latitude, required double longtitude}) async {
-    Map<String, String> data = await _tripDetailsProvider.getLocationDetails(
+    Map<String, String> data = await _tripProvider.getLocationDetails(
         latitude: latitude, longtitude: longtitude);
     return data;
   }
@@ -79,18 +81,17 @@ class TripDetailsController extends GetxController {
       required int tripId,
       required String cancelReason}) async {
     Map<String, String> body = {'cancelReason': cancelReason};
-    bool response = await _tripDetailsProvider.cancelTrip(
-        tripId: tripId, body: jsonEncode(body));
+    bool response =
+        await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
       Get.back();
       Get.back();
+      _homeController.pagingController.refresh();
       CommonFunctions().showSuccessDialog(
           context: context, message: CustomStrings.kCancelTripSuccess);
     } else {
-      Get.back();
-      Get.back();
       CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError);
+          context: context, message: CustomErrorsString.kDevelopError.tr);
     }
   }
 

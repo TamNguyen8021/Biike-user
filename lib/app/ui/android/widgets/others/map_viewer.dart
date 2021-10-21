@@ -3,6 +3,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,13 +32,14 @@ class MapViewer extends StatelessWidget {
       : super(key: key);
 
   Future<void> displayMap() async {
-    double departureLatitude = double.parse(departureCoordinate.split(',')[0]);
+    double departureLatitude =
+        double.tryParse(departureCoordinate.split(',')[0]) ?? 10.84165;
     double departureLongtitude =
-        double.parse(departureCoordinate.split(',')[1]);
+        double.tryParse(departureCoordinate.split(',')[1]) ?? 106.80965;
     double destinationLatitude =
-        double.parse(destinationCoordinate.split(',')[0]);
+        double.tryParse(destinationCoordinate.split(',')[0]) ?? 10.84165;
     double destinationLongtitude =
-        double.parse(destinationCoordinate.split(',')[1]);
+        double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
 
     RoadInfo roadInfo = await _mapController.drawRoad(
       GeoPoint(latitude: departureLatitude, longitude: departureLongtitude),
@@ -49,8 +51,8 @@ class MapViewer extends StatelessWidget {
         showMarkerOfPOI: true,
       ),
     );
-    print("${roadInfo.distance}km");
-    print("${roadInfo.duration}sec");
+    Biike.logger.d('${roadInfo.distance} km');
+    Biike.logger.d('${roadInfo.duration} sec');
   }
 
   @override
@@ -94,13 +96,6 @@ class MapViewer extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                // endIcon: MarkerIcon(
-                //   icon: Icon(
-                //     Icons.radio_button_on,
-                //     size: 64,
-                //     color: CustomColors.kBlue,
-                //   ),
-                // ),
                 roadColor: Colors.yellowAccent,
               ),
               markerOption: MarkerOption(
@@ -122,7 +117,7 @@ class MapViewer extends StatelessWidget {
                 //         latitude: location.latitude,
                 //         longtitude: location.longitude);
                 // locationDetails.forEach((key, value) {
-                //   print(key + ': ' + value);
+                //   Biike.logger.d(key + ': ' + value);
                 // });
               },
             ),

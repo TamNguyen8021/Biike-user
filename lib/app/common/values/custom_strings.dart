@@ -115,6 +115,7 @@ class CustomStrings {
   static const String kOthers = 'kOthers';
   static const String kSave = 'kSave';
   static const String kBirthDate = 'kBirthDate';
+  static const String kChooseBirthDate = 'kChooseBirthDate';
   static const String kEditProfileSuccess = 'kEditProfileSuccess';
 
   // 'biker_profile' screen

@@ -1,18 +1,18 @@
-
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/previous_page_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 /// The '001.1_open' screen
-class PasswordScreen extends StatelessWidget {
+class PasswordPage extends StatelessWidget {
   static const String routeName = '/passwordScreen';
 
-  const PasswordScreen({Key? key, required this.nameUser}) : super(key: key);
+  const PasswordPage({Key? key, required this.nameUser}) : super(key: key);
 
   final String nameUser;
 
@@ -42,8 +42,10 @@ class PasswordScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Text('Xin chao $nameUser', style: TextStyle(color: Colors.white, fontSize: 25)),
-            Text('Hãy nhập mật khẩu của bạn',style: TextStyle(color: Colors.white, fontSize: 20)),
+            Text('Xin chao $nameUser',
+                style: TextStyle(color: Colors.white, fontSize: 25)),
+            Text('Hãy nhập mật khẩu của bạn',
+                style: TextStyle(color: Colors.white, fontSize: 20)),
             SizedBox(
               width: 400,
               child: PinCodeTextField(
@@ -88,16 +90,13 @@ class PasswordScreen extends StatelessWidget {
                   )
                 ],
                 onCompleted: (v) {
-                  print("Completed");
+                  Biike.logger.d('Completed');
                 },
-                // onTap: () {
-                //   print("Pressed");
-                // },
                 onChanged: (value) {
-                  print(value);
+                  Biike.logger.d(value);
                 },
                 beforeTextPaste: (text) {
-                  print("Allowing to paste $text");
+                  Biike.logger.d('Allowing to paste $text');
                   //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                   //but you can show anything you want here, like your pop up saying wrong paste format or etc
                   return true;

@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 class ManageBikeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(ManageBikeController());
+    Get.lazyPut<ManageBikeController>(() => ManageBikeController());
   }
 }

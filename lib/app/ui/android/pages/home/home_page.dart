@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
           init: _profileController,
           builder: (_) {
             return FutureBuilder(
-                future: _profileController.getProfile(context: context),
+                future: _profileController.getProfile(),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -35,8 +35,8 @@ class HomePage extends StatelessWidget {
                       length: 2,
                       child: Scaffold(
                         appBar: PreferredSize(
-                          preferredSize: Size.fromHeight(
-                              new AppBar().preferredSize.height),
+                          preferredSize:
+                              Size.fromHeight(AppBar().preferredSize.height),
                           child: Builder(
                             builder: (context) {
                               switch (DefaultTabController.of(context)!.index) {
@@ -55,6 +55,7 @@ class HomePage extends StatelessWidget {
                                       _homeController.isAppBarVisible.value,
                                   hasShape: true,
                                   hasLeading: false,
+                                  onPressedFunc: () {},
                                   appBar: AppBar(),
                                   title: Padding(
                                     padding: const EdgeInsets.only(left: 5.0),

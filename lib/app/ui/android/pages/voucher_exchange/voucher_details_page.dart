@@ -15,13 +15,15 @@ class VoucherDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Voucher voucher = Get.arguments;
-    // Voucher voucher = Voucher.fromJson(data);
 
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         appBar: AppBar(),
         title: Text(CustomStrings.kVoucherDetail.tr),
       ),

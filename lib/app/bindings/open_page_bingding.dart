@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class OpenPageBingding extends Bindings {
   @override
   void dependencies() {
-    Get.put(OpenPageController());
+    Get.lazyPut<OpenPageController>(() => OpenPageController());
   }
 }

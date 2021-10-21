@@ -1,5 +1,7 @@
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 
 abstract class UserBehavior {
   Future<dynamic> signup(String name, String email, String phone, String pass);
@@ -31,7 +33,10 @@ class UserRepository extends UserBehavior {
     try {
       final results = await _repositories.isVerifyUser(idUser);
       return results['data']['isVerified'];
-    } catch (e) {
+    } catch (error) {
+      Biike.logger.e('UserRepository - isVerifyUser()', error);
+      FlutterLogs.logErrorTrace('Biike', 'UserRepository - isVerifyUser()',
+          error.toString(), Error());
       return false;
     }
   }
@@ -41,6 +46,10 @@ class UserRepository extends UserBehavior {
       String idUser, bool? isPhoneVerified, bool? isEmailVerified) async {
     try {
       await _repositories.verifyUser(idUser, isPhoneVerified, isEmailVerified);
-    } catch (e) {}
+    } catch (error) {
+      Biike.logger.e('UserRepository - verifyUser()', error);
+      FlutterLogs.logErrorTrace(
+          'Biike', 'UserRepository - verifyUser()', error.toString(), Error());
+    }
   }
 }
