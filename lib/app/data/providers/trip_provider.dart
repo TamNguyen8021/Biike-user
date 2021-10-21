@@ -2,6 +2,7 @@ import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class TripProvider extends CommonProvider {
   /// Loads upcoming trips from API based on [userId] and [role]
@@ -196,5 +197,14 @@ class TripProvider extends CommonProvider {
     } else {
       return true;
     }
+  }
+
+  Future<dynamic> createKeNowTrip(Map<String, dynamic> data) async {
+    final response = await post(UrlStrings.tripUrl, data,
+        headers: await headers);
+
+    return response.statusCode == HttpStatus.created
+        ? Future.value(true)
+        : Future.value(response.bodyString ?? '');
   }
 }

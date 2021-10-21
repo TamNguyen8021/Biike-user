@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
@@ -85,28 +85,8 @@ class BookTripPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: CustomTextButton(
-                                  backgroundColor: CustomColors.kOrange,
-                                  foregroundColor: Colors.white,
-                                  text: CustomStrings.kBookScheduleTrip.tr,
-                                  onPressedFunc: () =>
-                                      Get.toNamed(CommonRoutes.BOOK_SCHEDULE_TRIP)),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 4.0),
-                              child: CustomTextButton(
-                                  backgroundColor: CustomColors.kBlue,
-                                  foregroundColor: Colors.white,
-                                  text: CustomStrings.kBookNowTrip.tr,
-                                  onPressedFunc: () =>
-                                      Get.toNamed(CommonRoutes.FIND_BIKER)),
-                            ),
-                          )
+                          ScheduleTripButton(),
+                          KeNowButton(),
                         ],
                       ),
                     ),

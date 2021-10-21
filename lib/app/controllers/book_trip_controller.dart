@@ -1,6 +1,8 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class BookTripController extends GetxController {
@@ -50,5 +52,16 @@ class BookTripController extends GetxController {
     listDestinationStation.insert(0, Station.boilerplate(CustomStrings.kChooseTo.tr));
 
     destinationStation.value = listDestinationStation[0];
+  }
+
+  Future<dynamic> createKeNowTrip() async {
+    Map<String, dynamic> data = <String, dynamic>{
+      'KeerId': Biike.userId.value,
+      'DepartureId': this.departureStation.value.stationId,
+      'DestinationId': this.destinationStation.value.stationId,
+      'BookTime' : DateTime.now().toIso8601String(),
+      'IsScheduled' : true
+    };
+    return await TripProvider().createKeNowTrip(data);
   }
 }
