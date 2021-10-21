@@ -11,6 +11,7 @@ part 'bike.g.dart';
 class Bike {
   final int? bikeId;
   final int? userId;
+  final String? bikeOwner;
   final String? plateNumber;
   final String? color;
   final String? brand;
@@ -19,6 +20,7 @@ class Bike {
   Bike(
     this.bikeId,
     this.userId,
+    this.bikeOwner,
     this.plateNumber,
     this.color,
     this.brand,

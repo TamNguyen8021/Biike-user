@@ -5,6 +5,7 @@ import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,12 +18,15 @@ import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 import 'injectable/injectable.dart';
 
+List<CameraDescription> cameras = [];
+
 /// Runs the application.
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     await configureDependencies();
+    cameras = await availableCameras();
 
     // Initialize Logging
     await FlutterLogs.initLogs(
@@ -63,6 +67,7 @@ class Biike extends StatefulWidget {
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
   static Rx<String> token = ''.obs;
+  static CameraDescription camera = cameras[0];
 
   const Biike({Key? key}) : super(key: key);
 

@@ -214,6 +214,12 @@ class CustomStrings {
   static const String kCheckBikeInfo = 'kCheckBikeInfo';
   static const String kNumberPlate = 'kNumberPlate';
   static const String kTakePictureAgain = 'kTakePictureAgain';
+  static const String kEnterBikeOwner = 'kEnterBikeOwner';
+  static const String kEnterBrand = 'kEnterBrand';
+  static const String kEnterCategory = 'kEnterCategory';
+  static const String kEnterColor = 'kEnterColor';
+  static const String kEnterNumberPlate = 'kEnterNumberPlate';
+  static const String kNumberPlatePicture = 'kNumberPlatePicture';
 
   // 'voucher_detail' screen
   static const String kGiftDetail = 'kGiftDetail';

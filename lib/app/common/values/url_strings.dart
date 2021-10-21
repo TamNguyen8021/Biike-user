@@ -7,4 +7,5 @@ class UrlStrings {
   static const String voucherUrl = _baseUrl + 'vouchers';
   static const String redemptionUrl = _baseUrl + 'redemptions';
   static const String walletUrl = _baseUrl + 'wallets/';
+  static const String bikeUrl = _baseUrl + 'bikes/';
 }

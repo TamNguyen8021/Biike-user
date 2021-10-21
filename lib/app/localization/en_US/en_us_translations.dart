@@ -209,18 +209,24 @@ final Map<String, String> en = {
   'kCancel': 'Cancel',
 
   // 'bike_manager' screen
-  'kBikeVerified': 'Đã xác minh',
-  'kWaitingVerified': 'Đang xác minh',
+  'kBikeVerified': 'Verified',
+  'kWaitingVerified': 'Pending verified',
   'kBikeOwner': 'Owner\'s name',
   'kBikeCategory': 'Category',
   'kBikeBrand': 'Brand',
   'kBikeColor': 'Color',
+  'kEnterBikeOwner': 'Enter owner\'s name',
+  'kEnterBrand': 'Enter brand',
+  'kEnterCategory': 'Enter category',
+  'kEnterColor': 'Enter color',
+  'kEnterNumberPlate': 'Enter plate number',
   'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
 
   // 'add_bike' screen
   'kAddBike': 'Add bike',
   'kCheckBikeInfo': 'Please check your bike information',
   'kNumberPlate': 'Number plate',
+  'kNumberPlatePicture': 'Number plate picture',
   'kTakePictureAgain': 'Chụp lại',
 
   // 'voucher_detail' screen

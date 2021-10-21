@@ -43,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                         appBar: AppBar(),
                         hasLeading: true,
                         onPressedFunc: () {
-                          Get.offAndToNamed(CommonRoutes.HOME);
+                          Get.offAllNamed(CommonRoutes.HOME);
                         },
                         actionWidgets: <Widget>[
                           Padding(
