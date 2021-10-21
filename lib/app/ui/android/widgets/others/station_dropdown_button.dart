@@ -1,16 +1,17 @@
+import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class StationDropdownButton extends StatelessWidget {
-  final String dropdownValue;
-  final List<String> dropdownArray;
-  final Function(String?) onChangedFunc;
+  final Station dropdownValue;
+  final List<Station> dropdownArray;
+  final Function(Station?) onChangedFunc;
 
   const StationDropdownButton(
       {Key? key,
-      required this.dropdownValue,
-      required this.dropdownArray,
-      required this.onChangedFunc})
+        required this.dropdownValue,
+        required this.dropdownArray,
+        required this.onChangedFunc})
       : super(key: key);
 
   @override
@@ -27,18 +28,18 @@ class StationDropdownButton extends StatelessWidget {
           ],
           color: CustomColors.kLightGray,
           borderRadius: BorderRadius.circular(5)),
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField<Station>(
         value: dropdownValue,
         icon: Icon(
           Icons.arrow_drop_down,
           color: CustomColors.kDarkGray,
         ),
         onChanged: onChangedFunc,
-        items: dropdownArray.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
+        items: dropdownArray.map<DropdownMenuItem<Station>>((Station value) {
+          return DropdownMenuItem<Station>(
             value: value,
             child: Text(
-              value,
+              value.name,
               style: Theme.of(context).textTheme.bodyText1,
             ),
           );

@@ -196,9 +196,9 @@ final Map<String, String> vi = {
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
   'kFrom': 'Từ',
-  'kChooseFrom': 'Chọn điểm đi',
+  'kChooseFrom': '-Chọn điểm đi-',
   'kTo': 'Đến',
-  'kChooseTo': 'Chọn điểm đến',
+  'kChooseTo': '-Chọn điểm đến-',
   'kBookScheduleTrip': 'Đặt lịch ké',
   'kBookNowTrip': 'Ké now',
 
