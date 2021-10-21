@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'dart:async';
 
 class BookTripController extends GetxController {
+  final _tripProvider = Get.find<TripProvider>();
+
   Rx<Station> departureStation = Station.empty().obs;
   Rx<Station> destinationStation = Station.empty().obs;
   RxList<Station> listDepartureStation = <Station>[].obs;
@@ -20,7 +22,8 @@ class BookTripController extends GetxController {
     if (departureStation.value.stationId! >= 0) {
       await getListRelatedStation();
     } else {
-      listDestinationStation.value = List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
+      listDestinationStation.value =
+          List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
       destinationStation.value = listDestinationStation[0];
     }
   }
@@ -31,40 +34,47 @@ class BookTripController extends GetxController {
 
   Future<void> initial() async {
     getListStation();
-    listDestinationStation.value = List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
+    listDestinationStation.value =
+        List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
     destinationStation.value = listDestinationStation[0];
   }
 
   Future<void> getListStation() async {
     listDepartureStation.value = ((await StationProvider()
-      .getStations(page: 1, limit: 20))['data'] as List)
+            .getStations(page: 1, limit: 20))['data'] as List)
         .map((e) => Station.fromJson(e))
         .toList();
 
-    listDepartureStation.insert(0, Station.boilerplate(CustomStrings.kChooseFrom.tr));
+    listDepartureStation.insert(
+        0, Station.boilerplate(CustomStrings.kChooseFrom.tr));
 
     departureStation.value = listDepartureStation[0];
   }
 
   Future<void> getListRelatedStation() async {
     listDestinationStation.value = (await StationProvider()
-        .getListRelatedStation(departureId: departureStation.value.stationId ?? -1) as List)
+            .getListRelatedStation(
+                departureId: departureStation.value.stationId ?? -1) as List)
         .map((e) => Station.fromJson(e))
         .toList();
 
-    listDestinationStation.insert(0, Station.boilerplate(CustomStrings.kChooseTo.tr));
+    listDestinationStation.insert(
+        0, Station.boilerplate(CustomStrings.kChooseTo.tr));
 
     destinationStation.value = listDestinationStation[0];
   }
 
   Future<dynamic> createKeNowTrip() async {
+    DateTime _currentTime = DateTime.now();
     Map<String, dynamic> data = <String, dynamic>{
       'KeerId': Biike.userId.value,
-      'DepartureId': this.departureStation.value.stationId,
-      'DestinationId': this.destinationStation.value.stationId,
-      'BookTime' : DateTime.now().toIso8601String(),
-      'IsScheduled' : true
+      'DepartureId': departureStation.value.stationId,
+      'DestinationId': destinationStation.value.stationId,
+      'BookTime': DateTime(_currentTime.year, _currentTime.month,
+              _currentTime.day, _currentTime.hour, _currentTime.minute + 15)
+          .toIso8601String(),
+      'IsScheduled': false
     };
-    return await TripProvider().createKeNowTrip(data);
+    return await _tripProvider.createKeNowTrip(data);
   }
 }
