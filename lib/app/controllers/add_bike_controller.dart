@@ -28,7 +28,7 @@ class AddBikeController extends GetxController {
       'brand': brand.value,
     };
 
-    bool result = await new BikeProvider().addBike(data);
+    bool result = await BikeProvider().addBike(data);
     if (result) {
       Get.back();
       SnackBarServices.showSnackbar(

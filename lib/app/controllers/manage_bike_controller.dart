@@ -22,7 +22,7 @@ class ManageBikeController extends GetxController {
   }
 
   Future<void> removeBike() async {
-    bool result = await new BikeProvider().removeBike(Biike.userId);
+    bool result = await BikeProvider().removeBike(Biike.userId);
     if (result) {
       hasBike.value = false;
       SnackBarServices.showSnackbar(title: '', message: 'Xoá thành công!');
