@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 
 /// Manage states for [ManageBikePage]
 class ManageBikeController extends GetxController {
+  final _bikeProvider = Get.find<BikeProvider>();
+
   Rx<bool> hasBike = false.obs;
   Rx<Bike> bike = Bike(-1, -1, '', '', '', '', false).obs;
 
   Future<void> getBike() async {
-    dynamic response = await BikeProvider().getBike(Biike.userId);
+    dynamic response = await _bikeProvider.getBike(Biike.userId);
     if (response != null) {
       try {
         bike.value = Bike.fromJson(response);
@@ -22,7 +24,7 @@ class ManageBikeController extends GetxController {
   }
 
   Future<void> removeBike() async {
-    bool result = await BikeProvider().removeBike(Biike.userId);
+    bool result = await _bikeProvider.removeBike(Biike.userId);
     if (result) {
       hasBike.value = false;
       SnackBarServices.showSnackbar(title: '', message: 'Xoá thành công!');
