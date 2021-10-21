@@ -57,7 +57,7 @@ import 'package:bikes_user/app/ui/android/pages/edit_profile/edit_profile_page.d
 import 'package:bikes_user/app/bindings/home_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/home/home_page.dart';
 import 'package:bikes_user/app/ui/android/pages/register/register_page.dart';
-import 'package:bikes_user/app/ui/android/pages/book_schedule_trip/book_schedule_trip_page.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/book_schedule_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/book_trip_page.dart';
 import 'package:bikes_user/app/bindings/manage_bike_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/manage_bike_page.dart';

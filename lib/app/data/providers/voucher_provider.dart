@@ -2,6 +2,7 @@ import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter_logs/flutter_logs.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class VoucherProvider extends CommonProvider {
   Future<dynamic> getVoucherList() async {
@@ -17,7 +18,7 @@ class VoucherProvider extends CommonProvider {
             response.statusText!,
         appendTimeStamp: true);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
     Biike.logger.e(

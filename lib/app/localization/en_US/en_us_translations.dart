@@ -194,9 +194,9 @@ final Map<String, String> en = {
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
   'kFrom': 'From',
-  'kChooseFrom': 'Departure station',
+  'kChooseFrom': '-Departure station-',
   'kTo': 'To',
-  'kChooseTo': 'Destination station',
+  'kChooseTo': '-Destination station-',
   'kBookScheduleTrip': 'Book trip',
   'kBookNowTrip': 'Ké Now',
 

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 /// The 'book_schedule_trip' screen
 class BookScheduleTripPage extends StatelessWidget {
-  final bookScheduleTripController = Get.find<BookScheduleTripController>();
+  final _bookScheduleTripController = Get.find<BookScheduleTripController>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,22 +57,22 @@ class BookScheduleTripPage extends StatelessWidget {
                     Obx(
                       () => ChooseDateTimeButton(
                           isOnProfilePage: false,
-                          text: bookScheduleTripController.isDateSelected.value
-                              ? '${bookScheduleTripController.selectedDate.value.toLocal()}'
+                          text: _bookScheduleTripController.isDateSelected.value
+                              ? '${_bookScheduleTripController.selectedDate.value.toLocal()}'
                                   .split(' ')[0]
                               : CustomStrings.kChooseDate.tr,
                           onPressedFunc: () =>
-                              bookScheduleTripController.selectDate(context)),
+                              _bookScheduleTripController.selectDate(context)),
                     ),
                     Obx(
                       () => ChooseDateTimeButton(
                           isOnProfilePage: false,
-                          text: bookScheduleTripController.isTimeSelected.value
-                              ? '${bookScheduleTripController.selectedTime.value.format(context)}'
+                          text: _bookScheduleTripController.isTimeSelected.value
+                              ? '${_bookScheduleTripController.selectedTime.value.format(context)}'
                                   .split(' ')[0]
                               : CustomStrings.kChooseTime.tr,
                           onPressedFunc: () =>
-                              bookScheduleTripController.selectTime(context)),
+                              _bookScheduleTripController.selectTime(context)),
                     ),
                   ],
                 ),
@@ -101,9 +101,9 @@ class BookScheduleTripPage extends StatelessWidget {
                     ),
                     Obx(
                       () => Switch(
-                        value: bookScheduleTripController.isRepeated.value,
+                        value: _bookScheduleTripController.isRepeated.value,
                         onChanged: (bool value) {
-                          bookScheduleTripController.changeRepeat();
+                          _bookScheduleTripController.changeRepeat();
                         },
                       ),
                     ),
@@ -112,7 +112,7 @@ class BookScheduleTripPage extends StatelessWidget {
               ),
               Obx(
                 () => Visibility(
-                  visible: bookScheduleTripController.isRepeated.value,
+                  visible: _bookScheduleTripController.isRepeated.value,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -141,12 +141,12 @@ class BookScheduleTripPage extends StatelessWidget {
                       Obx(
                         () => ChooseDateTimeButton(
                             isOnProfilePage: false,
-                            text: bookScheduleTripController
+                            text: _bookScheduleTripController
                                     .isRepeatedDateSelected.value
-                                ? '${bookScheduleTripController.repeatedDate.value.toLocal()}'
+                                ? '${_bookScheduleTripController.repeatedDate.value.toLocal()}'
                                     .split(' ')[0]
                                 : CustomStrings.kChooseDate.tr,
-                            onPressedFunc: () => bookScheduleTripController
+                            onPressedFunc: () => _bookScheduleTripController
                                 .selectRepeatingDate(context)),
                       ),
                     ],
