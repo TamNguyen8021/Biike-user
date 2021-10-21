@@ -41,6 +41,15 @@ class StationProvider extends CommonProvider {
         UrlStrings.stationUrl + '/relatedStations?page=1&limit=10&departureId=$departureId',
         headers: await headers);
 
+    FlutterLogs.logToFile(
+        logFileName: 'API',
+        overwrite: false,
+        logMessage: '\n\nBiike (StationProvider - getListRelatedStation()): ' +
+            response.statusCode.toString() +
+            ' ' +
+            response.statusText!,
+        appendTimeStamp: true);
+
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }

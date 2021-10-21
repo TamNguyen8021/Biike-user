@@ -203,6 +203,15 @@ class TripProvider extends CommonProvider {
     final response = await post(UrlStrings.tripUrl, data,
         headers: await headers);
 
+    FlutterLogs.logToFile(
+        logFileName: 'API',
+        overwrite: false,
+        logMessage: '\n\nBiike (TripProvider - createKeNowTrip()): ' +
+            response.statusCode.toString() +
+            ' ' +
+            response.statusText!,
+        appendTimeStamp: true);
+
     return response.statusCode == HttpStatus.created
         ? Future.value(true)
         : Future.value(response.bodyString ?? '');
