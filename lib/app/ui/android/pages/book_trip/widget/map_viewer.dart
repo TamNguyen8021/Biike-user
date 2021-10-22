@@ -18,7 +18,8 @@ class MapViewer extends StatelessWidget {
   final String departureCoordinate;
   final String destinationCoordinate;
 
-  static const int MAX_AFTER_POINT = 3; // số chữ số tối đa sau dấu thập phân
+  /// Số chữ số tối đa sau dấu thập phân
+  static const int MAX_AFTER_POINT = 3;
 
   MapViewer(
       {Key? key,

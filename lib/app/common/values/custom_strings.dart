@@ -287,4 +287,13 @@ class CustomStrings {
   // 'ban_list' screen
   static const String kBanList = 'kBanList';
   static const String kUnBlock = 'kUnBlock';
+
+  // date
+  static const String kMonday = 'kMonday';
+  static const String kTuesday = 'kTuesday';
+  static const String kWednesday = 'kWednesday';
+  static const String kThursday = 'kThursday';
+  static const String kFriday = 'kFriday';
+  static const String kSaturday = 'kSaturday';
+  static const String kSunday = 'kSunday';
 }
