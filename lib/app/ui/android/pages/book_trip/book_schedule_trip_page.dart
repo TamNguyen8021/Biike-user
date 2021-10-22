@@ -1,13 +1,9 @@
-import 'package:bikes_user/app/controllers/book_schedule_trip_controller.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/data/enums/date_enum.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/book_scheduled_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/choose_date_time_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/date_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/time_button.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
