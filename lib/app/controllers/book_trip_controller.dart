@@ -155,7 +155,7 @@ class BookTripController extends GetxController {
           .toIso8601String(),
       'IsScheduled' : false
     };
-    return await TripProvider().createKeNowTrip(data);
+    return await _tripProvider.createKeNowTrip(data);
   }
 
   Future<dynamic> createScheduledTrip() async {
@@ -175,7 +175,7 @@ class BookTripController extends GetxController {
       'IsScheduled' : true
     };
 
-    return await TripProvider().createScheduledTrip(data);
+    return await _tripProvider.createScheduledTrip(data);
   }
 
   /// Get list of dates with the same name of date as listDate contains
