@@ -1,7 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:bikes_user/main.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class RedemptionProvider extends CommonProvider {
@@ -9,23 +7,10 @@ class RedemptionProvider extends CommonProvider {
     final response =
         await post(UrlStrings.redemptionUrl, data, headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (RedemptionProvider - exchangeVoucher()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.hasError) {
-      Biike.logger.e(
-          'RedemptionProvider - exchangeVoucher()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
     }
 
     return response.statusCode == HttpStatus.created
@@ -38,25 +23,12 @@ class RedemptionProvider extends CommonProvider {
         UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (RedemptionProvider - getYourVoucherList()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-    Biike.logger.e(
-        'RedemptionProvider - getYourVoucherList()',
-        response.statusCode.toString() +
-            ' ' +
-            response.statusText! +
-            '\n' +
-            response.body);
+    logError(response);
     return Future.error(response.statusText!);
   }
 
@@ -64,26 +36,12 @@ class RedemptionProvider extends CommonProvider {
     final response = await get(UrlStrings.redemptionUrl + '/$redemptionId/full',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage:
-            '\n\nBiike (RedemptionProvider - getRedemptionDetailByRedemptionId()): ' +
-                response.statusCode.toString() +
-                ' ' +
-                response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-    Biike.logger.e(
-        'RedemptionProvider - getRedemptionDetailByRedemptionId()',
-        response.statusCode.toString() +
-            ' ' +
-            response.statusText! +
-            '\n' +
-            response.body);
+    logError(response);
     return Future.error(response.statusText!);
   }
 }

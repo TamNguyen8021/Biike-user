@@ -1,10 +1,9 @@
-import 'package:bikes_user/app/controllers/book_schedule_trip_controller.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/controllers/book_trip_controller.dart';
+import 'package:bikes_user/app/data/enums/date_enum.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/widget/book_scheduled_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/choose_date_time_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/date_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/time_button.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ import 'package:get/get.dart';
 
 /// The 'book_schedule_trip' screen
 class BookScheduleTripPage extends StatelessWidget {
-  final _bookScheduleTripController = Get.find<BookScheduleTripController>();
+  final _bookTripController = Get.find<BookTripController>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,22 +56,22 @@ class BookScheduleTripPage extends StatelessWidget {
                     Obx(
                       () => ChooseDateTimeButton(
                           isOnProfilePage: false,
-                          text: _bookScheduleTripController.isDateSelected.value
-                              ? '${_bookScheduleTripController.selectedDate.value.toLocal()}'
+                          text: _bookTripController.isDateSelected.value
+                              ? '${_bookTripController.selectedDate.value.toLocal()}'
                                   .split(' ')[0]
                               : CustomStrings.kChooseDate.tr,
                           onPressedFunc: () =>
-                              _bookScheduleTripController.selectDate(context)),
+                              _bookTripController.selectDate(context)),
                     ),
                     Obx(
                       () => ChooseDateTimeButton(
                           isOnProfilePage: false,
-                          text: _bookScheduleTripController.isTimeSelected.value
-                              ? '${_bookScheduleTripController.selectedTime.value.format(context)}'
+                          text: _bookTripController.isTimeSelected.value
+                              ? '${_bookTripController.selectedTime.value.format(context)}'
                                   .split(' ')[0]
                               : CustomStrings.kChooseTime.tr,
                           onPressedFunc: () =>
-                              _bookScheduleTripController.selectTime(context)),
+                              _bookTripController.selectTime(context)),
                     ),
                   ],
                 ),
@@ -101,9 +100,9 @@ class BookScheduleTripPage extends StatelessWidget {
                     ),
                     Obx(
                       () => Switch(
-                        value: _bookScheduleTripController.isRepeated.value,
+                        value: _bookTripController.isRepeated.value,
                         onChanged: (bool value) {
-                          _bookScheduleTripController.changeRepeat();
+                          _bookTripController.changeRepeat();
                         },
                       ),
                     ),
@@ -112,21 +111,21 @@ class BookScheduleTripPage extends StatelessWidget {
               ),
               Obx(
                 () => Visibility(
-                  visible: _bookScheduleTripController.isRepeated.value,
+                  visible: _bookTripController.isRepeated.value,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Wrap(
+                        // crossAxisAlignment: const CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          DateButton(date: 'T2'),
-                          DateButton(date: 'T3'),
-                          DateButton(date: 'T4'),
-                          DateButton(date: 'T5'),
-                          DateButton(date: 'T6'),
-                          DateButton(date: 'T7'),
-                          DateButton(date: 'CN'),
-                        ],
+                          DateButton(date: Date.monday),
+                          DateButton(date: Date.tuesday),
+                          DateButton(date: Date.wednesday),
+                          DateButton(date: Date.thursday),
+                          DateButton(date: Date.friday),
+                          DateButton(date: Date.saturday),
+                          DateButton(date: Date.sunday),
+                        ]
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
@@ -141,30 +140,19 @@ class BookScheduleTripPage extends StatelessWidget {
                       Obx(
                         () => ChooseDateTimeButton(
                             isOnProfilePage: false,
-                            text: _bookScheduleTripController
+                            text: _bookTripController
                                     .isRepeatedDateSelected.value
-                                ? '${_bookScheduleTripController.repeatedDate.value.toLocal()}'
+                                ? '${_bookTripController.repeatedDate.value.toLocal()}'
                                     .split(' ')[0]
                                 : CustomStrings.kChooseDate.tr,
-                            onPressedFunc: () => _bookScheduleTripController
+                            onPressedFunc: () => _bookTripController
                                 .selectRepeatingDate(context)),
                       ),
                     ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Center(
-                  child: CustomTextButton(
-                    backgroundColor: CustomColors.kOrange,
-                    foregroundColor: Colors.white,
-                    width: 135,
-                    text: CustomStrings.kBookScheduleTrip.tr,
-                    onPressedFunc: () => Get.offAllNamed(CommonRoutes.HOME),
-                  ),
-                ),
-              ),
+              BookScheduledTripButton(),
             ],
           ),
         ),

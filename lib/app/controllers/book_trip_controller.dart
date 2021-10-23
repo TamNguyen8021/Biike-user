@@ -1,8 +1,11 @@
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/data/enums/date_enum.dart';
 import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -14,13 +17,37 @@ class BookTripController extends GetxController {
   Rx<Station> destinationStation = Station.empty().obs;
   RxList<Station> listDepartureStation = <Station>[].obs;
   RxList<Station> listDestinationStation = <Station>[].obs;
+
+  Rx<DateTime> selectedDate = DateTime.now().obs;
+  Rx<bool> isDateSelected = false.obs;
+  Rx<DateTime> repeatedDate = DateTime.now().obs;
+  Rx<bool> isRepeatedDateSelected = false.obs;
+  Rx<TimeOfDay> selectedTime = TimeOfDay.now().obs;
+  Rx<bool> isTimeSelected = false.obs;
+  Rx<bool> isRepeated = false.obs;
+  
   Rx<RoadInfo> roadInfo = RoadInfo().obs;
 
+  /// Thứ
+  List<Date> _dateList = [];
+
+  /// Initialize BookTrip screen
+  ///
+  /// Author: UyenNLP
+  Future<void> init() async {
+    _getListStation();
+    listDestinationStation.value = List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
+    destinationStation.value = listDestinationStation[0];
+  }
+
+  /// Change data of the departure station
+  ///
+  /// Author: UyenNLP
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
 
     if (departureStation.value.stationId! >= 0) {
-      await getListRelatedStation();
+      await _getListRelatedStation();
     } else {
       listDestinationStation.value =
           List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
@@ -28,18 +55,177 @@ class BookTripController extends GetxController {
     }
   }
 
+  /// Change data of the destination station
+  ///
+  /// Author: UyenNLP
   void updateDestinationStation(value) {
     destinationStation.value = value;
   }
 
-  Future<void> initial() async {
-    getListStation();
-    listDestinationStation.value =
-        List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
-    destinationStation.value = listDestinationStation[0];
+  /// Add to a repeated date list
+  ///
+  /// Author: UyenNLP
+  void addToDateList(Date date) {
+    if (!_dateList.contains(date)) {
+      _dateList.add(date);
+    }
   }
 
-  Future<void> getListStation() async {
+  /// Remove from a repeated date list
+  ///
+  /// Author: UyenNLP
+  void removeFromDateList(Date date) {
+    if (_dateList.contains(date)) {
+      _dateList.remove(date);
+    }
+  }
+
+  /// Select specific date to book a scheduled trip
+  ///
+  /// Author: TamNTT
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate.value,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+      helpText: CustomStrings.kChooseDate.tr,
+      cancelText: CustomStrings.kCancel.tr,
+    );
+    if (picked != null && picked != selectedDate.value) {
+      isDateSelected.value = true;
+      selectedDate.value = picked;
+    }
+  }
+
+  /// Choose a date to repeated up until
+  ///
+  /// Author: TamNTT
+  Future<void> selectRepeatingDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: repeatedDate.value.isBefore(selectedDate.value)
+          ? selectedDate.value
+          : repeatedDate.value,
+      firstDate: selectedDate.value,
+      lastDate: DateTime(2101),
+      helpText: CustomStrings.kChooseDate.tr,
+      cancelText: CustomStrings.kCancel.tr,
+    );
+    if (picked != null && picked != repeatedDate.value) {
+      isRepeatedDateSelected.value = true;
+      repeatedDate.value = picked;
+    }
+  }
+
+  /// Select specific time to book a scheduled trip
+  ///
+  /// Author: TamNTT
+  Future<void> selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime.value,
+      helpText: CustomStrings.kChooseTime.tr,
+      cancelText: CustomStrings.kCancel.tr,
+    );
+    if (picked != null) {
+      isTimeSelected.value = true;
+      selectedTime.value = picked;
+    }
+  }
+
+  /// Change value to repeat that scheduled trip or not
+  ///
+  /// Author: TamNTT
+  void changeRepeat() {
+    isRepeated.value = !isRepeated.value;
+  }
+
+  /// Ké-er book a ké-now trip
+  ///
+  /// Author: UyenNLP
+  Future<dynamic> createKeNowTrip() async {
+    DateTime currentTime = DateTime.now();
+    Map<String, dynamic> data = <String, dynamic>{
+      'KeerId': Biike.userId.value,
+      'DepartureId': this.departureStation.value.stationId,
+      'DestinationId': this.destinationStation.value.stationId,
+      'BookTime' : DateTime(currentTime.year, currentTime.month,
+              currentTime.day, currentTime.hour, currentTime.minute + 15)
+          .toIso8601String(),
+      'IsScheduled' : false
+    };
+    return await _tripProvider.createKeNowTrip(data);
+  }
+
+  Future<dynamic> createScheduledTrip() async {
+    DateTime date = DateTime(selectedDate.value.year, selectedDate.value.month,
+        selectedDate.value.day, selectedTime.value.hour, selectedTime.value.minute);
+
+    String check = _checkValidBeforeScheduleTrip(date);
+    if (check != '') {
+      return check;
+    }
+
+    Map<String, dynamic> data = <String, dynamic> {
+      'KeerId': Biike.userId.value,
+      'DepartureId': this.departureStation.value.stationId,
+      'DestinationId': this.destinationStation.value.stationId,
+      'BookTime' : _getListOfDates(date, repeatedDate.value),
+      'IsScheduled' : true
+    };
+
+    return await _tripProvider.createScheduledTrip(data);
+  }
+
+  /// Get list of dates with the same name of date as listDate contains
+  ///
+  /// Author: UyenNLP
+  List<String>_getListOfDates(DateTime start, DateTime end) {
+    if (!isRepeated.value) {
+      return [start.toIso8601String()];
+    }
+
+    List<String> listOfDays = [];
+    final numberOfDate = end.difference(start).inDays + 1;
+    List.generate(numberOfDate, (i) => _filterDate(listOfDays, start, i));
+
+    return listOfDays;
+  }
+
+  /// Add a date with the same name of date as listDate contains
+  ///
+  /// Author: UyenNLP
+  dynamic _filterDate(List list, DateTime date, int iteration) {
+    DateTime result = DateTime(date.year, date.month, date.day + (iteration));
+
+    if (_dateList.contains(Date.values[result.weekday])) {
+      return list.add(result.toIso8601String());
+    }
+  }
+
+  /// Check if fill all fields
+  ///
+  /// Author: UyenNLP
+  String _checkValidBeforeScheduleTrip(DateTime date) {
+    if (!isDateSelected.value || !isTimeSelected.value)
+      return CustomErrorsString.kNotFillAllFields.tr;
+
+    // Is repeated
+    if (isRepeated.value) {
+      if (_dateList.isEmpty || !isRepeatedDateSelected.value)
+        return CustomErrorsString.kNotFillAllFields.tr;
+    } else {
+      if (date.isBefore(DateTime.now())) return CustomErrorsString.kNotAfterNow.tr;
+    }
+
+    return '';
+  }
+
+  /// Get a full list of station from db
+  ///
+  /// Author: UyenNLP
+  Future<void> _getListStation() async {
     listDepartureStation.value = ((await StationProvider()
             .getStations(page: 1, limit: 20))['data'] as List)
         .map((e) => Station.fromJson(e))
@@ -51,7 +237,10 @@ class BookTripController extends GetxController {
     departureStation.value = listDepartureStation[0];
   }
 
-  Future<void> getListRelatedStation() async {
+  /// Get a list of destination station by departure station
+  ///
+  /// Author: UyenNLP
+  Future<void> _getListRelatedStation() async {
     listDestinationStation.value = (await StationProvider()
             .getListRelatedStation(
                 departureId: departureStation.value.stationId ?? -1) as List)
@@ -62,19 +251,5 @@ class BookTripController extends GetxController {
         0, Station.boilerplate(CustomStrings.kChooseTo.tr));
 
     destinationStation.value = listDestinationStation[0];
-  }
-
-  Future<dynamic> createKeNowTrip() async {
-    DateTime _currentTime = DateTime.now();
-    Map<String, dynamic> data = <String, dynamic>{
-      'KeerId': Biike.userId.value,
-      'DepartureId': departureStation.value.stationId,
-      'DestinationId': destinationStation.value.stationId,
-      'BookTime': DateTime(_currentTime.year, _currentTime.month,
-              _currentTime.day, _currentTime.hour, _currentTime.minute + 15)
-          .toIso8601String(),
-      'IsScheduled': false
-    };
-    return await _tripProvider.createKeNowTrip(data);
   }
 }

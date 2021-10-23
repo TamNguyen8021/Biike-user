@@ -28,10 +28,10 @@ class BookTripPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: FutureBuilder(
-            future: _bookTripController.initial(),
+            future: _bookTripController.init(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return Container();
+                return new Container();
               } else if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
