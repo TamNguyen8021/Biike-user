@@ -254,6 +254,9 @@ final Map<String, String> en = {
       'There are some errors, please contact Biiké development team for support',
   'kExchangeFailed': 'Can\'t exchange voucher!',
   'kNotEnoughPoint': 'User doesn\'t have enough point',
+  'kNotChooseStation': 'You haven\'t choose your route',
+  'kNotFillAllFields': 'Please fill in all fields',
+  'kNotAfterNow': 'You can\'t book a trip from the past',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -306,5 +309,14 @@ final Map<String, String> en = {
 
   // 'ban_list' screen
   'kBanList': 'Ban List',
-  'kUnBlock': 'Unblock'
+  'kUnBlock': 'Unblock',
+
+  // date
+  'kMonday' : 'MON',
+  'kTuesday' : 'TUE',
+  'kWednesday' : 'WED',
+  'kThursday' : 'THU',
+  'kFriday' : 'FRI',
+  'kSaturday' : 'SAT',
+  'kSunday' : 'SUN',
 };

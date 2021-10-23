@@ -8,4 +8,7 @@ class CustomErrorsString {
   static const String kExchangeFailed = 'kExchangeFailed';
   static const String kNotEnoughPoint = 'kNotEnoughPoint';
   static const String kEditProfileFailed = 'kEditProfileFailed';
+  static const String kNotChooseStation = 'kNotChooseStation';
+  static const String kNotFillAllFields = 'kNotFillAllFields';
+  static const String kNotAfterNow = 'kNotAfterNow';
 }

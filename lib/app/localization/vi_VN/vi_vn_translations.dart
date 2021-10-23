@@ -256,6 +256,9 @@ final Map<String, String> vi = {
       'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
   'kExchangeFailed': 'Không thể đổi voucher!',
   'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
+  'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
+  'kNotFillAllFields': 'Xin hãy chọn đủ dữ liệu',
+  'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
@@ -308,5 +311,14 @@ final Map<String, String> vi = {
 
   // 'ban_list' screen
   'kBanList': 'Danh sách hạn chế',
-  'kUnBlock': 'Bỏ chặn'
+  'kUnBlock': 'Bỏ chặn',
+
+  // date
+  'kMonday' : 'T2',
+  'kTuesday' : 'T3',
+  'kWednesday' : 'T4',
+  'kThursday' : 'T5',
+  'kFriday' : 'T6',
+  'kSaturday' : 'T7',
+  'kSunday' : 'CN',
 };
