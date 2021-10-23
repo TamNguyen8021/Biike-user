@@ -192,6 +192,12 @@ final Map<String, String> vi = {
       'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
+  'kHelpCenter': 'Trung tâm trợ giúp',
+  'kShareTripInfo': 'Chia sẻ thông tin chuyến đi',
+  'kSOSCenter': 'Tổng đài S.O.S',
+  'kNeedPolice': 'Tôi cần cảnh sát',
+  'kNeedEmergency': 'Tôi cần xe cấp cứu',
+  'kNearestMechanicShopAndGasStation': 'Tiệm sửa xe, đổ xăng gần nhất',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',

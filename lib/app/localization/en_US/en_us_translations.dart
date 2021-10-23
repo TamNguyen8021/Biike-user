@@ -190,6 +190,12 @@ final Map<String, String> en = {
   'kLetUsKnowYourCancelReason':
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
+  'kHelpCenter': 'Help Center',
+  'kShareTripInfo': 'Share your trip\'s info',
+  'kSOSCenter': 'S.O.S Center',
+  'kNeedPolice': 'I need police',
+  'kNeedEmergency': 'I need emergency care',
+  'kNearestMechanicShopAndGasStation': 'Nearest mechanic shop, gas station',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',

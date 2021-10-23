@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
@@ -109,8 +110,11 @@ class MapViewer extends StatelessWidget {
               onMapIsReady: (bool isReady) async {
                 if (isReady) {
                   await displayMap();
+                } else {
+                  return Loading();
                 }
               },
+              mapIsLoading: Loading(),
               onGeoPointClicked: (GeoPoint location) async {
                 // Map<String, String> locationDetails =
                 //     await tripDetailsController!.getLocationDetails(

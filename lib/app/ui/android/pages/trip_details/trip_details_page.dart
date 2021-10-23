@@ -3,6 +3,8 @@ import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
@@ -42,6 +44,7 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
+  /// Author: TamNTT
   void _addStatusBarTextAndTime() {
     const String _timeFormat = 'HH:mm, dd-MM-yyyy';
     switch (_tripDetailsController.trip.tripStatus) {
@@ -58,6 +61,7 @@ class TripDetailsPage extends StatelessWidget {
     }
   }
 
+  /// Author: TamNTT
   Widget _showFeedbacks(
       {required BuildContext context,
       required String title,
@@ -110,6 +114,71 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
+  /// Author: TamNTT
+  dynamic _showHelpCenter({required BuildContext context}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      CustomStrings.kHelpCenter.tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  HelpCenterRow(
+                      icon: Icons.share_outlined,
+                      text: CustomStrings.kShareTripInfo.tr,
+                      isLastRow: false),
+                  HelpCenterRow(
+                      icon: Icons.dialpad,
+                      text: CustomStrings.kSOSCenter.tr,
+                      isLastRow: false),
+                  HelpCenterRow(
+                      icon: Icons.local_police_outlined,
+                      text: CustomStrings.kNeedPolice.tr,
+                      isLastRow: false),
+                  HelpCenterRow(
+                      icon: Icons.add_box_outlined,
+                      text: CustomStrings.kNeedEmergency.tr,
+                      isLastRow: false),
+                  HelpCenterRow(
+                      icon: Icons.local_gas_station,
+                      text: CustomStrings.kNearestMechanicShopAndGasStation.tr,
+                      isLastRow: true),
+                  Container(
+                    margin: const EdgeInsets.only(top: 30.0),
+                    alignment: Alignment.center,
+                    child: CustomTextButton(
+                      backgroundColor: CustomColors.kLightGray,
+                      foregroundColor: CustomColors.kDarkGray,
+                      text: CustomStrings.kBtnExit.tr,
+                      onPressedFunc: () {
+                        Get.back();
+                      },
+                      elevation: 1.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -138,7 +207,9 @@ class TripDetailsPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 16.0, horizontal: 22.0),
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        _showHelpCenter(context: context);
+                      },
                       icon: Icon(
                         Icons.support,
                         color: CustomColors.kBlue,
