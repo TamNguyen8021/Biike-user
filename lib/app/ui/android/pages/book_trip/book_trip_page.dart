@@ -31,7 +31,7 @@ class BookTripPage extends StatelessWidget {
             future: _bookTripController.init(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return new Container();
+                return Container();
               } else if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
