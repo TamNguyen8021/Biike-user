@@ -125,6 +125,9 @@ class TripProvider extends CommonProvider {
         await post(UrlStrings.tripUrl, data, headers: await headers);
 
     logResponse(response);
+    if (response.hasError) {
+      logError(response);
+    }
 
     return response.statusCode == HttpStatus.created
         ? Future.value(true)
@@ -132,10 +135,13 @@ class TripProvider extends CommonProvider {
   }
 
   Future<dynamic> createScheduledTrip(Map<String, dynamic> data) async {
-    final response = await post(UrlStrings.tripUrl, data,
-        headers: await headers);
+    final response =
+        await post(UrlStrings.tripUrl, data, headers: await headers);
 
     logResponse(response);
+    if (response.hasError) {
+      logError(response);
+    }
 
     return response.statusCode == HttpStatus.created
         ? Future.value(true)

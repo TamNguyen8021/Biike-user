@@ -33,7 +33,7 @@ class StationProvider extends CommonProvider {
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-
+    logError(response);
     return Future.value(null);
   }
 }
