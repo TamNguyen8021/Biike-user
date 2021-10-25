@@ -20,8 +20,6 @@ class BookTripController extends GetxController {
 
   Rx<DateTime> selectedDate = DateTime.now().obs;
   Rx<bool> isDateSelected = false.obs;
-  Rx<DateTime> repeatedDate = DateTime.now().obs;
-  Rx<bool> isRepeatedDateSelected = false.obs;
   Rx<TimeOfDay> selectedTime = TimeOfDay.now().obs;
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
@@ -99,26 +97,6 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Choose a date to repeated up until
-  ///
-  /// Author: TamNTT
-  Future<void> selectRepeatingDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: repeatedDate.value.isBefore(selectedDate.value)
-          ? selectedDate.value
-          : repeatedDate.value,
-      firstDate: selectedDate.value,
-      lastDate: DateTime(2101),
-      helpText: CustomStrings.kChooseDate.tr,
-      cancelText: CustomStrings.kCancel.tr,
-    );
-    if (picked != null && picked != repeatedDate.value) {
-      isRepeatedDateSelected.value = true;
-      repeatedDate.value = picked;
-    }
-  }
-
   /// Select specific time to book a scheduled trip
   ///
   /// Author: TamNTT
@@ -167,17 +145,21 @@ class BookTripController extends GetxController {
         selectedTime.value.hour,
         selectedTime.value.minute);
 
-    String check = _checkValidBeforeScheduleTrip(date);
+    String check = _checkValidBeforeScheduleTrip(startDate);
     if (check != '') {
       return check;
     }
 
-    Map<String, dynamic> data = <String, dynamic>{
+    DateTime endDate = _getEndDate(startDate);
+
+    Map<String, dynamic> data = <String, dynamic> {
       'KeerId': Biike.userId.value,
       'DepartureId': this.departureStation.value.stationId,
       'DestinationId': this.destinationStation.value.stationId,
-      'BookTime': _getListOfDates(date, repeatedDate.value),
-      'IsScheduled': true
+      'BookTime' : _getListOfDates(startDate, endDate)
+          .map((e) => e.toIso8601String())
+          .toList(),
+      'IsScheduled' : true
     };
 
     return await _tripProvider.createScheduledTrip(data);
@@ -186,12 +168,12 @@ class BookTripController extends GetxController {
   /// Get list of dates with the same name of date as listDate contains
   ///
   /// Author: UyenNLP
-  List<String> _getListOfDates(DateTime start, DateTime end) {
+  List<DateTime> _getListOfDates(DateTime start, DateTime end) {
     if (!isRepeated.value) {
-      return [start.toIso8601String()];
+      return [start];
     }
 
-    List<String> listOfDays = [];
+    List<DateTime> listOfDays = [];
     final numberOfDate = end.difference(start).inDays + 1;
     List.generate(numberOfDate, (i) => _filterDate(listOfDays, start, i));
 
@@ -202,10 +184,11 @@ class BookTripController extends GetxController {
   ///
   /// Author: UyenNLP
   dynamic _filterDate(List list, DateTime date, int iteration) {
-    DateTime result = DateTime(date.year, date.month, date.day + (iteration));
+    DateTime result = DateTime(date.year, date.month, date.day + (iteration),
+      date.hour, date.minute);
 
     if (_dateList.contains(Date.values[result.weekday])) {
-      return list.add(result.toIso8601String());
+      return list.add(result);
     }
   }
 
@@ -218,7 +201,7 @@ class BookTripController extends GetxController {
 
     // Is repeated
     if (isRepeated.value) {
-      if (_dateList.isEmpty || !isRepeatedDateSelected.value)
+      if (_dateList.isEmpty)
         return CustomErrorsString.kNotFillAllFields.tr;
     } else {
       if (date.isBefore(DateTime.now()))
@@ -257,5 +240,17 @@ class BookTripController extends GetxController {
         0, Station.boilerplate(CustomStrings.kChooseTo.tr));
 
     destinationStation.value = listDestinationStation[0];
+  }
+
+  /// Get end date when selected repeated
+  ///
+  /// Author: UyenNLP
+  _getEndDate(DateTime startDate) {
+    // get duration from the startDate to end of that week
+    var duration = DateTime.daysPerWeek - startDate.weekday;
+
+    return startDate.add(Duration(days: duration > 1 // not on weekend
+        ? duration + DateTime.daysPerWeek  // add 1 more week
+        : duration + 2*DateTime.daysPerWeek)); // else add 2 more weeks
   }
 }
