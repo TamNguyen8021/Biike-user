@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/date_enum.dart';
@@ -111,6 +112,14 @@ class BookTripController extends GetxController {
       isTimeSelected.value = true;
       selectedTime.value = picked;
     }
+  }
+
+  /// Set time from selected tag
+  ///
+  /// Author: UyenNLP
+  void setTimeFromTag(String time) {
+    isTimeSelected.value = true;
+    selectedTime.value = CommonFunctions.stringToTimeOfDay(time);
   }
 
   /// Change value to repeat that scheduled trip or not

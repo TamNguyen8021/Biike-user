@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Contains functions which are called multiple times in app
@@ -246,6 +247,9 @@ class CommonFunctions {
         });
   }
 
+  /// Get object id from returned [url].
+  ///
+  /// Author: UyenNLP
   static int getIdFromUrl({required String url}) {
     int indexOfForwardSlash = url.lastIndexOf('/');
     int indexOfQuestionMark = url.indexOf('?');
@@ -271,5 +275,12 @@ class CommonFunctions {
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       Biike.logger.e('Could not open map');
     }
+    
+  /// Convert string to timeOfDate
+  ///
+  /// Author: UyenNLP
+  static TimeOfDay stringToTimeOfDay(String time) {
+    final format = DateFormat.Hm(); //"16:00"
+    return TimeOfDay.fromDateTime(format.parse(time));
   }
 }

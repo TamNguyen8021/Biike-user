@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
@@ -161,8 +159,6 @@ class TripProvider extends CommonProvider {
   ///
   /// Author: UyenNLP
   Future<dynamic> createScheduledTrip(Map<String, dynamic> data) async {
-    // var x = jsonEncode(data);
-
     final response = await post(UrlStrings.tripUrl + 'schedule',
         data,
         headers: await headers);
