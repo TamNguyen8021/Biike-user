@@ -48,14 +48,14 @@ class AddBikeController extends GetxController {
 
       print(data);
 
-      // bool result = await new BikeProvider().addBike(data);
-      // if (result) {
-      //   Get.back();
-      //   SnackBarServices.showSnackbar(
-      //       title: '', message: 'Đã thêm xe.\nVui lòng đợi Admin duyệt!');
-      // } else {
-      //   SnackBarServices.showSnackbar(title: '', message: 'Thêm xe thất bại!');
-      // }
+      bool result = await new BikeProvider().addBike(data);
+      if (result) {
+        Get.back();
+        SnackBarServices.showSnackbar(
+            title: '', message: 'Đã thêm xe.\nVui lòng đợi Admin duyệt!');
+      } else {
+        SnackBarServices.showSnackbar(title: '', message: 'Thêm xe thất bại!');
+      }
     } catch (error) {
       SnackBarServices.showSnackbar(title: '', message: 'Thêm xe thất bại!');
     } finally {
