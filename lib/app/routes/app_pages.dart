@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/bindings/bike_binding.dart';
 import 'package:bikes_user/app/bindings/station_binding.dart';
 import 'package:bikes_user/app/bindings/trip_binding.dart';
 import 'package:bikes_user/app/bindings/trip_details_binding.dart';
@@ -165,12 +166,12 @@ class AppPages {
       page: () => ManageBikePage(
         isBikeVerified: false,
       ),
-      binding: ManageBikeBinding(),
+      bindings: <Bindings>[ManageBikeBinding(), BikeBinding()],
     ),
     GetPage(
         name: CommonRoutes.ADD_BIKE,
         page: () => AddBikePage(),
-        binding: AddBikeBinding()),
+        bindings: <Bindings>[AddBikeBinding(), BikeBinding()]),
     GetPage(
       name: CommonRoutes.VOUCHER_DETAILS,
       page: () => VoucherDetailPage(),

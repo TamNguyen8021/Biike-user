@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
@@ -100,6 +102,21 @@ class TripProvider extends CommonProvider {
     }
   }
 
+  Future getRouteData(
+      String startLng, String startLat, String endLng, String endLat) async {
+    final response = await get(
+        'https://api.openrouteservice.org/v2/directions/cycling-road?api_key=5b3ce3597851110001cf6248de4262d7d04449e6a17f0d0473072352&start=$startLng,$startLat&end=$endLng,$endLat');
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return jsonDecode(response.body);
+    }
+  }
+
   /// Cancel a trip based on [tripId].
   ///
   /// Author: TamNTT
@@ -121,10 +138,13 @@ class TripProvider extends CommonProvider {
   }
 
   Future<dynamic> createKeNowTrip(Map<String, dynamic> data) async {
-    final response = await post(UrlStrings.tripUrl, data,
-        headers: await headers);
+    final response =
+        await post(UrlStrings.tripUrl, data, headers: await headers);
 
     logResponse(response);
+    if (response.hasError) {
+      logError(response);
+    }
 
     return response.statusCode == HttpStatus.created
         ? Future.value(true)
@@ -132,10 +152,13 @@ class TripProvider extends CommonProvider {
   }
 
   Future<dynamic> createScheduledTrip(Map<String, dynamic> data) async {
-    final response = await post(UrlStrings.tripUrl, data,
-        headers: await headers);
+    final response =
+        await post(UrlStrings.tripUrl, data, headers: await headers);
 
     logResponse(response);
+    if (response.hasError) {
+      logError(response);
+    }
 
     return response.statusCode == HttpStatus.created
         ? Future.value(true)

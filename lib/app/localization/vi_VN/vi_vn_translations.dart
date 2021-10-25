@@ -185,13 +185,21 @@ final Map<String, String> vi = {
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
   'kPartnerFeedback': 'Feedback từ người đồng hành',
-  'kOpenStreetMap': 'Mở Open Street Map',
+  'kViewRouteInstruction': 'Xem chỉ đường',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
       'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
+  'kHelpCenter': 'Trung tâm trợ giúp',
+  'kShareTripInfo': 'Chia sẻ thông tin chuyến đi',
+  'kSOSCenter': 'Tổng đài S.O.S',
+  'kNeedPolice': 'Tôi cần cảnh sát',
+  'kNeedEmergency': 'Tôi cần xe cấp cứu',
+  'kNearestHospital': 'Bệnh viện gần nhất',
+  'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
+  'kNearestGasStation': 'Trạm xăng gần nhất',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -314,11 +322,11 @@ final Map<String, String> vi = {
   'kUnBlock': 'Bỏ chặn',
 
   // date
-  'kMonday' : 'T2',
-  'kTuesday' : 'T3',
-  'kWednesday' : 'T4',
-  'kThursday' : 'T5',
-  'kFriday' : 'T6',
-  'kSaturday' : 'T7',
-  'kSunday' : 'CN',
+  'kMonday': 'T2',
+  'kTuesday': 'T3',
+  'kWednesday': 'T4',
+  'kThursday': 'T5',
+  'kFriday': 'T6',
+  'kSaturday': 'T7',
+  'kSunday': 'CN',
 };

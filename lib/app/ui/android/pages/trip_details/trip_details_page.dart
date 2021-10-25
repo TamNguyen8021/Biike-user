@@ -3,8 +3,10 @@ import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
+import 'package:bikes_user/app/ui/android/pages/trip_details/widgets/trip_details_map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
@@ -19,6 +21,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:location/location.dart';
 
 /// 'trip_details' screen
 //ignore: must_be_immutable
@@ -42,6 +45,7 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
+  /// Author: TamNTT
   void _addStatusBarTextAndTime() {
     const String _timeFormat = 'HH:mm, dd-MM-yyyy';
     switch (_tripDetailsController.trip.tripStatus) {
@@ -58,6 +62,7 @@ class TripDetailsPage extends StatelessWidget {
     }
   }
 
+  /// Author: TamNTT
   Widget _showFeedbacks(
       {required BuildContext context,
       required String title,
@@ -110,443 +115,596 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _tripDetailsController.getTripDetails(
-            tripId: Get.arguments['tripId']),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            _addStatusBarTextAndTime();
-            return Scaffold(
-              appBar: CustomAppBar(
-                isVisible: true,
-                hasShape: true,
-                hasLeading: true,
-                onPressedFunc: () async {
-                  if (Get.arguments['route'] == 'home') {
-                    _homeController.pagingController.refresh();
-                  } else {
-                    _tripHistoryController.pagingController.refresh();
-                  }
-                  Get.back();
-                },
-                appBar: AppBar(),
-                title: Text(CustomStrings.kTripDetails.tr),
-                actionWidgets: <Widget>[
+  /// Author: TamNTT
+  dynamic _showHelpCenter(
+      {required BuildContext context, required LocationData userLocation}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 22.0),
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.support,
-                        color: CustomColors.kBlue,
-                      ),
-                      label: Text(
-                        CustomStrings.kSupport.tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1!
-                            .copyWith(color: CustomColors.kBlue),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      CustomStrings.kHelpCenter.tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.share_outlined,
+                    text: CustomStrings.kShareTripInfo.tr,
+                    isLastRow: false,
+                    onTapFunc: () {},
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.dialpad,
+                    text: CustomStrings.kSOSCenter.tr,
+                    isLastRow: false,
+                    onTapFunc: () {},
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.local_police_outlined,
+                    text: CustomStrings.kNeedPolice.tr,
+                    isLastRow: false,
+                    onTapFunc: () {
+                      CommonFunctions().makingPhoneCall(phoneNo: '113');
+                    },
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.add_box_outlined,
+                    text: CustomStrings.kNearestHospital.tr,
+                    isLastRow: false,
+                    onTapFunc: () async {
+                      // LocationData _userLocation = await getCurrentLocation();
+                      await CommonFunctions().openMap(
+                          keyword: 'bệnh+viện',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude);
+                    },
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.build_circle_outlined,
+                    text: CustomStrings.kNearestMechanicShop.tr,
+                    isLastRow: false,
+                    onTapFunc: () async {
+                      // LocationData _userLocation = await getCurrentLocation();
+                      await CommonFunctions().openMap(
+                          keyword: 'tiệm+sửa+xe',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude);
+                    },
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.local_gas_station,
+                    text: CustomStrings.kNearestGasStation.tr,
+                    isLastRow: true,
+                    onTapFunc: () async {
+                      // LocationData _userLocation = await getCurrentLocation();
+                      await CommonFunctions().openMap(
+                          keyword: 'trạm+xăng',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude);
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 30.0),
+                    alignment: Alignment.center,
+                    child: CustomTextButton(
+                      backgroundColor: CustomColors.kLightGray,
+                      foregroundColor: CustomColors.kDarkGray,
+                      text: CustomStrings.kBtnExit.tr,
+                      onPressedFunc: () {
+                        Get.back();
+                      },
+                      elevation: 1.0,
                     ),
                   ),
                 ],
               ),
-              body: SingleChildScrollView(
-                child: SafeArea(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(22.0, 16.0, 22.0, 0.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                  color:
-                                      CustomColors.kDarkGray.withOpacity(0.05),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    _statusBarText,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                  Text(
-                                    _statusBarTime,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ],
-                              ),
+            ),
+          );
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder(
+        init: _tripDetailsController,
+        builder: (_) {
+          return FutureBuilder(
+              future: _tripDetailsController.getTripDetails(
+                  tripId: Get.arguments['tripId']),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  _addStatusBarTextAndTime();
+                  return Scaffold(
+                    appBar: CustomAppBar(
+                      isVisible: true,
+                      hasShape: true,
+                      hasLeading: true,
+                      onPressedFunc: () async {
+                        if (Get.arguments['route'] == 'home') {
+                          _homeController.pagingController.refresh();
+                        } else {
+                          _tripHistoryController.pagingController.refresh();
+                        }
+                        Get.back();
+                      },
+                      appBar: AppBar(),
+                      title: Text(CustomStrings.kTripDetails.tr),
+                      actionWidgets: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 22.0),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              _showHelpCenter(
+                                  context: context,
+                                  userLocation:
+                                      _tripDetailsController.userLocation);
+                            },
+                            icon: Icon(
+                              Icons.support,
+                              color: CustomColors.kBlue,
                             ),
-                            MapViewer(
-                                departureCoordinate: _tripDetailsController
-                                    .departureStation.departureCoordinate,
-                                destinationCoordinate: _tripDetailsController
-                                    .destinationStation.destinationCoordinate),
-                            IntrinsicHeight(
-                              child: Row(
+                            label: Text(
+                              CustomStrings.kSupport.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: CustomColors.kBlue),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    body: SingleChildScrollView(
+                      child: SafeArea(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  22.0, 16.0, 22.0, 0.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
+                                    padding: const EdgeInsets.all(8.0),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border(
-                                          right: BorderSide(
-                                              color: CustomColors.kDarkGray
-                                                  .withOpacity(0.1))),
-                                    ),
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Container(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 5.0),
-                                            margin: const EdgeInsets.only(
-                                                bottom: 5.0),
-                                            decoration: BoxDecoration(
-                                              border: Border(
-                                                bottom: BorderSide(
-                                                  color: CustomColors.kDarkGray
-                                                      .withOpacity(0.1),
-                                                ),
-                                              ),
-                                            ),
-                                            child: Row(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 5.0),
-                                                  child: Icon(
-                                                    Icons.event_outlined,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 8.0),
-                                                  child: Text(
-                                                    DateFormat('dd/MM/yyyy')
-                                                        .format(DateTime.tryParse(
-                                                            _tripDetailsController
-                                                                .trip
-                                                                .bookTime)!),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Row(
-                                            children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 5.0),
-                                                child: Icon(
-                                                  Icons.access_time,
-                                                ),
-                                              ),
-                                              Text(
-                                                DateFormat('HH:mm').format(
-                                                    DateTime.tryParse(
-                                                        _tripDetailsController
-                                                            .trip.bookTime)!),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                        color: CustomColors.kDarkGray
+                                            .withOpacity(0.05),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          _statusBarText,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                        Text(
+                                          _statusBarTime,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Row(
+                                  TripDetailsMapViewer(
+                                      tripDetailsController:
+                                          _tripDetailsController,
+                                      departureCoordinate:
+                                          _tripDetailsController
+                                              .departureStation
+                                              .departureCoordinate,
+                                      destinationCoordinate:
+                                          _tripDetailsController
+                                              .destinationStation
+                                              .destinationCoordinate),
+                                  IntrinsicHeight(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border(
+                                                right: BorderSide(
+                                                    color: CustomColors
+                                                        .kDarkGray
+                                                        .withOpacity(0.1))),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Padding(
+                                                Container(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          right: 5.0),
-                                                  child: Icon(
-                                                    Icons.adjust,
+                                                          bottom: 5.0),
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 5.0),
+                                                  decoration: BoxDecoration(
+                                                    border: Border(
+                                                      bottom: BorderSide(
+                                                        color: CustomColors
+                                                            .kDarkGray
+                                                            .withOpacity(0.1),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 5.0),
+                                                        child: Icon(
+                                                          Icons.event_outlined,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 8.0),
+                                                        child: Text(
+                                                          DateFormat(
+                                                                  'dd/MM/yyyy')
+                                                              .format(DateTime.tryParse(
+                                                                  _tripDetailsController
+                                                                      .trip
+                                                                      .bookTime)!),
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                Text(
-                                                  _tripDetailsController
-                                                      .departureStation
-                                                      .departureName,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1,
+                                                Row(
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 5.0),
+                                                      child: Icon(
+                                                        Icons.access_time,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      DateFormat('HH:mm').format(
+                                                          DateTime.tryParse(
+                                                              _tripDetailsController
+                                                                  .trip
+                                                                  .bookTime)!),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1,
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                            Icon(
-                                              Icons.more_vert_outlined,
-                                            ),
-                                            Row(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 5.0),
-                                                  child: Icon(
-                                                    Icons.location_on,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  _tripDetailsController
-                                                      .destinationStation
-                                                      .destinationName,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )),
-                                  )
-                                ],
-                              ),
-                            ),
-                            if (_tripDetailsController.trip.tripStatus == 5 &&
-                                _tripDetailsController.user.userFullname ==
-                                    CustomStrings.kFinding)
-                              ...[]
-                            else ...[
-                              GestureDetector(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0),
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 16.0),
-                                  decoration: BoxDecoration(
-                                      color: CustomColors.kLightGray,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Row(
-                                    children: <Widget>[
-                                      if (_tripDetailsController
-                                              .trip.tripStatus !=
-                                          1) ...[
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: CircleAvatar(
-                                            radius: 45,
-                                            backgroundImage: NetworkImage(
-                                                _tripDetailsController
-                                                    .user.avatar),
                                           ),
                                         ),
                                         Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 5.0, top: 10.0),
-                                                child: Text(
-                                                  _tripDetailsController
-                                                      .user.userFullname,
-                                                  style: TextStyle(
-                                                      color: CustomColors.kBlue,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
+                                          child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
                                               ),
-                                              UserRating(
-                                                  score: _tripDetailsController
-                                                      .user.userStar
-                                                      .toString()),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10.0),
-                                                child: ContactButtons(
-                                                  phoneNo:
-                                                      _tripDetailsController
-                                                          .user.userPhoneNumber,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ] else ...[
-                                        Padding(
-                                          padding: const EdgeInsets.all(20.0),
-                                          child: SvgPicture.asset(
-                                            'assets/images/loading.svg',
-                                          ),
-                                        ),
-                                        Text(
-                                          CustomStrings.kFinding.tr,
-                                          style: TextStyle(
-                                            color: CustomColors.kBlue,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ]
-                                    ],
-                                  ),
-                                ),
-                                onTap: () {
-                                  if (_tripDetailsController.trip.tripStatus !=
-                                      1) {
-                                    Get.toNamed(CommonRoutes.VIEW_USER,
-                                        arguments: {
-                                          'partnerId': Get.arguments['userId']
-                                        });
-                                  }
-                                },
-                              ),
-                            ],
-                            if (_tripDetailsController.trip.tripStatus != 4 &&
-                                _tripDetailsController.trip.tripStatus !=
-                                    5) ...[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 10.0),
-                                      child: Center(
-                                        child: SizedBox(
-                                          width: _tripDetailsController
-                                                      .trip.tripStatus ==
-                                                  1
-                                              ? 152
-                                              : double.infinity,
-                                          child: CustomElevatedIconButton(
-                                            onPressedFunc: () {
-                                              CommonFunctions()
-                                                  .showConfirmDialog(
-                                                      context: context,
-                                                      title: CustomStrings
-                                                          .kConfirmCancelTrip
-                                                          .tr,
-                                                      message: CustomStrings
-                                                          .kViewCancelTripReminder
-                                                          .tr,
-                                                      onPressedFunc: () {
-                                                        Get.back();
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 5.0),
+                                                        child: Icon(
+                                                          Icons.adjust,
+                                                        ),
+                                                      ),
+                                                      Text(
                                                         _tripDetailsController
-                                                            .showCancelReasonDialog(
-                                                                context:
-                                                                    context,
-                                                                tripId: Get
-                                                                        .arguments[
-                                                                    'tripId']);
-                                                      });
-                                            },
-                                            text: CustomStrings.kCancelTrip.tr,
-                                            backgroundColor:
-                                                CustomColors.kLightGray,
-                                            foregroundColor:
-                                                CustomColors.kDarkGray,
-                                            elevation: 0.0,
-                                            icon: Icons.clear,
-                                          ),
-                                        ),
-                                      ),
+                                                            .departureStation
+                                                            .departureName,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Icon(
+                                                    Icons.more_vert_outlined,
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 5.0),
+                                                        child: Icon(
+                                                          Icons.location_on,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        _tripDetailsController
+                                                            .destinationStation
+                                                            .destinationName,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )),
+                                        )
+                                      ],
                                     ),
                                   ),
                                   if (_tripDetailsController.trip.tripStatus ==
-                                      2) ...[
-                                    if (Biike.role.value == Role.biker) ...[
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
-                                          child: Obx(
-                                            () => CustomElevatedIconButton(
-                                              onPressedFunc: () =>
-                                                  _tripDetailsController
-                                                      .changeToFinishTripButton(),
-                                              text: _tripDetailsController
-                                                  .buttonText.value,
-                                              backgroundColor:
-                                                  CustomColors.kBlue,
-                                              foregroundColor: Colors.white,
-                                              elevation: 0.0,
-                                              icon: _tripDetailsController
-                                                  .buttonIcon.value,
+                                          5 &&
+                                      _tripDetailsController
+                                              .user.userFullname ==
+                                          CustomStrings.kFinding)
+                                    ...[]
+                                  else ...[
+                                    GestureDetector(
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10.0),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 16.0),
+                                        decoration: BoxDecoration(
+                                            color: CustomColors.kLightGray,
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Row(
+                                          children: <Widget>[
+                                            if (_tripDetailsController
+                                                    .trip.tripStatus !=
+                                                1) ...[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 8.0),
+                                                child: CircleAvatar(
+                                                  radius: 45,
+                                                  backgroundImage: NetworkImage(
+                                                      _tripDetailsController
+                                                          .user.avatar),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 5.0,
+                                                              top: 10.0),
+                                                      child: Text(
+                                                        _tripDetailsController
+                                                            .user.userFullname,
+                                                        style: TextStyle(
+                                                            color: CustomColors
+                                                                .kBlue,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    UserRating(
+                                                        score:
+                                                            _tripDetailsController
+                                                                .user.userStar
+                                                                .toString()),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 10.0),
+                                                      child: ContactButtons(
+                                                        phoneNo:
+                                                            _tripDetailsController
+                                                                .user
+                                                                .userPhoneNumber,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ] else ...[
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
+                                                child: SvgPicture.asset(
+                                                  'assets/images/loading.svg',
+                                                ),
+                                              ),
+                                              Text(
+                                                CustomStrings.kFinding.tr,
+                                                style: TextStyle(
+                                                  color: CustomColors.kBlue,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ]
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        if (_tripDetailsController
+                                                .trip.tripStatus !=
+                                            1) {
+                                          Get.toNamed(CommonRoutes.VIEW_USER,
+                                              arguments: {
+                                                'partnerId':
+                                                    Get.arguments['userId']
+                                              });
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                  if (_tripDetailsController.trip.tripStatus !=
+                                          4 &&
+                                      _tripDetailsController.trip.tripStatus !=
+                                          5) ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 10.0),
+                                            child: Center(
+                                              child: SizedBox(
+                                                width: _tripDetailsController
+                                                            .trip.tripStatus ==
+                                                        1
+                                                    ? 152
+                                                    : double.infinity,
+                                                child: CustomElevatedIconButton(
+                                                  onPressedFunc: () {
+                                                    CommonFunctions()
+                                                        .showConfirmDialog(
+                                                            context: context,
+                                                            title: CustomStrings
+                                                                .kConfirmCancelTrip
+                                                                .tr,
+                                                            message: CustomStrings
+                                                                .kViewCancelTripReminder
+                                                                .tr,
+                                                            onPressedFunc: () {
+                                                              Get.back();
+                                                              _tripDetailsController
+                                                                  .showCancelReasonDialog(
+                                                                      context:
+                                                                          context,
+                                                                      tripId: Get
+                                                                              .arguments[
+                                                                          'tripId']);
+                                                            });
+                                                  },
+                                                  text: CustomStrings
+                                                      .kCancelTrip.tr,
+                                                  backgroundColor:
+                                                      CustomColors.kLightGray,
+                                                  foregroundColor:
+                                                      CustomColors.kDarkGray,
+                                                  elevation: 0.0,
+                                                  icon: Icons.clear,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ] else ...[
-                                      Expanded(
-                                        child: ConfirmArrivalButton(
-                                          isOnHomeScreen: false,
-                                        ),
-                                      ),
-                                    ]
+                                        if (_tripDetailsController
+                                                .trip.tripStatus ==
+                                            2) ...[
+                                          if (Biike.role.value ==
+                                              Role.biker) ...[
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0),
+                                                child: Obx(
+                                                  () =>
+                                                      CustomElevatedIconButton(
+                                                    onPressedFunc: () =>
+                                                        _tripDetailsController
+                                                            .changeToFinishTripButton(),
+                                                    text: _tripDetailsController
+                                                        .buttonText.value,
+                                                    backgroundColor:
+                                                        CustomColors.kBlue,
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                    elevation: 0.0,
+                                                    icon: _tripDetailsController
+                                                        .buttonIcon.value,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ] else ...[
+                                            Expanded(
+                                              child: ConfirmArrivalButton(
+                                                isOnHomeScreen: false,
+                                              ),
+                                            ),
+                                          ]
+                                        ],
+                                      ],
+                                    ),
                                   ],
                                 ],
                               ),
-                            ],
+                            ),
+                            if (_tripDetailsController.trip.tripStatus ==
+                                4) ...[
+                              _showFeedbacks(
+                                  context: context,
+                                  title: CustomStrings.kYourFeedback.tr,
+                                  star:
+                                      _tripDetailsController.feedback1.tripStar,
+                                  feedbackContent: _tripDetailsController
+                                      .feedback1.feedbackContent),
+                              _showFeedbacks(
+                                  context: context,
+                                  title: CustomStrings.kPartnerFeedback.tr,
+                                  star:
+                                      _tripDetailsController.feedback2.tripStar,
+                                  feedbackContent: _tripDetailsController
+                                      .feedback2.feedbackContent),
+                            ]
                           ],
                         ),
                       ),
-                      if (_tripDetailsController.trip.tripStatus == 4) ...[
-                        _showFeedbacks(
-                            context: context,
-                            title: CustomStrings.kYourFeedback.tr,
-                            star: _tripDetailsController.feedback1.tripStar,
-                            feedbackContent: _tripDetailsController
-                                .feedback1.feedbackContent),
-                        _showFeedbacks(
-                            context: context,
-                            title: CustomStrings.kPartnerFeedback.tr,
-                            star: _tripDetailsController.feedback2.tripStar,
-                            feedbackContent: _tripDetailsController
-                                .feedback2.feedbackContent),
-                      ]
-                    ],
-                  ),
-                ),
-              ),
-            );
-          } else {
-            return Loading();
-          }
+                    ),
+                  );
+                } else {
+                  return Loading();
+                }
+              });
         });
   }
 }

@@ -183,13 +183,21 @@ final Map<String, String> en = {
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
   'kPartnerFeedback': 'Partner\'s feedback',
-  'kOpenStreetMap': 'View Open Street Map',
+  'kViewRouteInstruction': 'View route instruction',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
   'kViewCancelTripReminder': 'You can view your canceled trips in history',
   'kLetUsKnowYourCancelReason':
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
+  'kHelpCenter': 'Help Center',
+  'kShareTripInfo': 'Share your trip\'s info',
+  'kSOSCenter': 'S.O.S Center',
+  'kNeedPolice': 'I need police',
+  'kNeedEmergency': 'I need emergency care',
+  'kNearestHospital': 'Nearest hospital',
+  'kNearestMechanicShop': 'Nearest mechanic shop',
+  'kNearestGasStation': 'Nearest gas station',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -312,11 +320,11 @@ final Map<String, String> en = {
   'kUnBlock': 'Unblock',
 
   // date
-  'kMonday' : 'MON',
-  'kTuesday' : 'TUE',
-  'kWednesday' : 'WED',
-  'kThursday' : 'THU',
-  'kFriday' : 'FRI',
-  'kSaturday' : 'SAT',
-  'kSunday' : 'SUN',
+  'kMonday': 'MON',
+  'kTuesday': 'TUE',
+  'kWednesday': 'WED',
+  'kThursday': 'THU',
+  'kFriday': 'FRI',
+  'kSaturday': 'SAT',
+  'kSunday': 'SUN',
 };

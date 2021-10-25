@@ -15,6 +15,8 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
 
 class TripDetailsController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
@@ -35,6 +37,35 @@ class TripDetailsController extends GetxController {
   TripFeedback feedback2 = TripFeedback.empty();
 
   Rx<String> _cancelReason = ''.obs;
+  List<LatLng> polypoints = [];
+  late LocationData userLocation;
+
+  @override
+  onInit() {
+    super.onInit();
+    getCurrentLocation();
+  }
+
+  Future<void> getCurrentLocation() async {
+    final _location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await _location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await _location.requestService();
+      if (!_serviceEnabled) {}
+    }
+
+    _permissionGranted = await _location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await _location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {}
+    }
+
+    userLocation = await _location.getLocation();
+  }
 
   changeToFinishTripButton() {
     if (buttonText.value != CustomStrings.kCompleteTrip.tr) {
@@ -71,6 +102,17 @@ class TripDetailsController extends GetxController {
     Map<String, String> data = await _tripProvider.getLocationDetails(
         latitude: latitude, longtitude: longtitude);
     return data;
+  }
+
+  Future<void> getRoutePoints(
+      String startLng, String startLat, String endLng, String endLat) async {
+    var data =
+        await _tripProvider.getRouteData(startLng, startLat, endLng, endLat);
+    List coordinates = data['features'][0]['geometry']['coordinates'];
+
+    coordinates.map((pair) {
+      polypoints.add(LatLng(pair[1], pair[0]));
+    }).toList();
   }
 
   /// Cancel a trip based on [tripId].
