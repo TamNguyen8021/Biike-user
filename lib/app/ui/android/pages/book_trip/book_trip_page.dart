@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
-import 'package:bikes_user/app/ui/android/pages/book_trip/widget/map_viewer.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/widget/book_trip_map_viewer.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
@@ -69,13 +69,13 @@ class BookTripPage extends StatelessWidget {
                               }),
                         ),
                       ),
-                      Obx(
-                        () => MapViewer(
-                            departureCoordinate: _bookTripController
-                                .departureStation.value.coordinate,
-                            destinationCoordinate: _bookTripController
-                                .destinationStation.value.coordinate),
-                      ),
+                      // Obx(
+                      //   () => BookTripMapViewer(
+                      //       departureCoordinate: _bookTripController
+                      //           .departureStation.value.coordinate,
+                      //       destinationCoordinate: _bookTripController
+                      //           .destinationStation.value.coordinate),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0),
                         child: Row(

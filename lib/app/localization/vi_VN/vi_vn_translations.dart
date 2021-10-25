@@ -185,7 +185,7 @@ final Map<String, String> vi = {
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
   'kPartnerFeedback': 'Feedback từ người đồng hành',
-  'kOpenStreetMap': 'Mở Open Street Map',
+  'kViewRouteInstruction': 'Xem chỉ đường',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
@@ -197,7 +197,9 @@ final Map<String, String> vi = {
   'kSOSCenter': 'Tổng đài S.O.S',
   'kNeedPolice': 'Tôi cần cảnh sát',
   'kNeedEmergency': 'Tôi cần xe cấp cứu',
-  'kNearestMechanicShopAndGasStation': 'Tiệm sửa xe, đổ xăng gần nhất',
+  'kNearestHospital': 'Bệnh viện gần nhất',
+  'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
+  'kNearestGasStation': 'Trạm xăng gần nhất',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -320,11 +322,11 @@ final Map<String, String> vi = {
   'kUnBlock': 'Bỏ chặn',
 
   // date
-  'kMonday' : 'T2',
-  'kTuesday' : 'T3',
-  'kWednesday' : 'T4',
-  'kThursday' : 'T5',
-  'kFriday' : 'T6',
-  'kSaturday' : 'T7',
-  'kSunday' : 'CN',
+  'kMonday': 'T2',
+  'kTuesday': 'T3',
+  'kWednesday': 'T4',
+  'kThursday': 'T5',
+  'kFriday': 'T6',
+  'kSaturday': 'T7',
+  'kSunday': 'CN',
 };

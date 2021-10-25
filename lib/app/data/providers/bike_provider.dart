@@ -1,6 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:bikes_user/main.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class BikeProvider extends CommonProvider {

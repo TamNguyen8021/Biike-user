@@ -176,7 +176,7 @@ class CustomStrings {
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
-  static const String kOpenStreetMap = 'kOpenStreetMap';
+  static const String kViewRouteInstruction = 'kViewRouteInstruction';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
@@ -187,8 +187,9 @@ class CustomStrings {
   static const String kSOSCenter = 'kSOSCenter';
   static const String kNeedPolice = 'kNeedPolice';
   static const String kNeedEmergency = 'kNeedEmergency';
-  static const String kNearestMechanicShopAndGasStation =
-      'kNearestMechanicShopAndGasStation';
+  static const String kNearestHospital = 'kNearestHospital';
+  static const String kNearestMechanicShop = 'kNearestMechanicShop';
+  static const String kNearestGasStation = 'kNearestGasStation';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';

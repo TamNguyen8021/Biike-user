@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
@@ -97,6 +99,21 @@ class TripProvider extends CommonProvider {
       return Future.error(response.statusText!);
     } else {
       return response.body['address'];
+    }
+  }
+
+  Future getRouteData(
+      String startLng, String startLat, String endLng, String endLat) async {
+    final response = await get(
+        'https://api.openrouteservice.org/v2/directions/cycling-road?api_key=5b3ce3597851110001cf6248de4262d7d04449e6a17f0d0473072352&start=$startLng,$startLat&end=$endLng,$endLat');
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return jsonDecode(response.body);
     }
   }
 

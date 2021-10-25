@@ -6,7 +6,7 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+// import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
@@ -25,8 +25,8 @@ class BookTripController extends GetxController {
   Rx<TimeOfDay> selectedTime = TimeOfDay.now().obs;
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
-  
-  Rx<RoadInfo> roadInfo = RoadInfo().obs;
+
+  // Rx<RoadInfo> roadInfo = RoadInfo().obs;
 
   /// Thứ
   List<Date> _dateList = [];
@@ -36,7 +36,8 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<void> init() async {
     _getListStation();
-    listDestinationStation.value = List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
+    listDestinationStation.value =
+        List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
     destinationStation.value = listDestinationStation[0];
   }
 
@@ -150,29 +151,33 @@ class BookTripController extends GetxController {
       'KeerId': Biike.userId.value,
       'DepartureId': this.departureStation.value.stationId,
       'DestinationId': this.destinationStation.value.stationId,
-      'BookTime' : DateTime(currentTime.year, currentTime.month,
-              currentTime.day, currentTime.hour, currentTime.minute + 15)
+      'BookTime': DateTime(currentTime.year, currentTime.month, currentTime.day,
+              currentTime.hour, currentTime.minute + 15)
           .toIso8601String(),
-      'IsScheduled' : false
+      'IsScheduled': false
     };
     return await _tripProvider.createKeNowTrip(data);
   }
 
   Future<dynamic> createScheduledTrip() async {
-    DateTime date = DateTime(selectedDate.value.year, selectedDate.value.month,
-        selectedDate.value.day, selectedTime.value.hour, selectedTime.value.minute);
+    DateTime date = DateTime(
+        selectedDate.value.year,
+        selectedDate.value.month,
+        selectedDate.value.day,
+        selectedTime.value.hour,
+        selectedTime.value.minute);
 
     String check = _checkValidBeforeScheduleTrip(date);
     if (check != '') {
       return check;
     }
 
-    Map<String, dynamic> data = <String, dynamic> {
+    Map<String, dynamic> data = <String, dynamic>{
       'KeerId': Biike.userId.value,
       'DepartureId': this.departureStation.value.stationId,
       'DestinationId': this.destinationStation.value.stationId,
-      'BookTime' : _getListOfDates(date, repeatedDate.value),
-      'IsScheduled' : true
+      'BookTime': _getListOfDates(date, repeatedDate.value),
+      'IsScheduled': true
     };
 
     return await _tripProvider.createScheduledTrip(data);
@@ -181,7 +186,7 @@ class BookTripController extends GetxController {
   /// Get list of dates with the same name of date as listDate contains
   ///
   /// Author: UyenNLP
-  List<String>_getListOfDates(DateTime start, DateTime end) {
+  List<String> _getListOfDates(DateTime start, DateTime end) {
     if (!isRepeated.value) {
       return [start.toIso8601String()];
     }
@@ -216,7 +221,8 @@ class BookTripController extends GetxController {
       if (_dateList.isEmpty || !isRepeatedDateSelected.value)
         return CustomErrorsString.kNotFillAllFields.tr;
     } else {
-      if (date.isBefore(DateTime.now())) return CustomErrorsString.kNotAfterNow.tr;
+      if (date.isBefore(DateTime.now()))
+        return CustomErrorsString.kNotAfterNow.tr;
     }
 
     return '';

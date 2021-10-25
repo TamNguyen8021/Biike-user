@@ -5,12 +5,14 @@ class HelpCenterRow extends StatelessWidget {
   final IconData icon;
   final String text;
   final bool isLastRow;
+  final Function() onTapFunc;
 
   const HelpCenterRow(
       {Key? key,
       required this.icon,
       required this.text,
-      required this.isLastRow})
+      required this.isLastRow,
+      required this.onTapFunc})
       : super(key: key);
 
   @override
@@ -21,23 +23,26 @@ class HelpCenterRow extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 16.0),
-                  child: Icon(
-                    icon,
-                    size: 25,
-                    color: Colors.black,
+            child: GestureDetector(
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: Icon(
+                      icon,
+                      size: 25,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Text(
-                    text,
-                    overflow: TextOverflow.clip,
-                  ),
-                )
-              ],
+                  Expanded(
+                    child: Text(
+                      text,
+                      overflow: TextOverflow.clip,
+                    ),
+                  )
+                ],
+              ),
+              onTap: onTapFunc,
             ),
           ),
           Visibility(
