@@ -8,4 +8,5 @@ class UrlStrings {
   static const String redemptionUrl = _baseUrl + 'redemptions';
   static const String walletUrl = _baseUrl + 'wallets/';
   static const String bikeUrl = _baseUrl + 'bikes/';
+  static const String imageUrl = _baseUrl + 'images';
 }

@@ -17,7 +17,7 @@ class BikeProvider extends CommonProvider {
     final response =
         await post(UrlStrings.bikeUrl, data, headers: await headers);
 
-    return response.statusCode == 200
+    return response.statusCode == 201
         ? Future.value(true)
         : Future.value(false);
   }
@@ -25,10 +25,6 @@ class BikeProvider extends CommonProvider {
   Future<bool> removeBike(userId) async {
     final response =
         await delete(UrlStrings.bikeUrl + '$userId', headers: await headers);
-
-    print(UrlStrings.bikeUrl + '$userId');
-    print(response.statusCode);
-    print(response.body);
 
     return response.statusCode == 200
         ? Future.value(true)

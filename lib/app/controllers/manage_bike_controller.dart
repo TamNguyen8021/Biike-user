@@ -14,7 +14,7 @@ class ManageBikeController extends GetxController {
     if (response != null) {
       try {
         bike.value = Bike.fromJson(response);
-        hasBike.value = true;
+        // hasBike.value = true;
       } catch (e) {
         print(e);
       }

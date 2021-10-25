@@ -220,6 +220,10 @@ class CustomStrings {
   static const String kEnterColor = 'kEnterColor';
   static const String kEnterNumberPlate = 'kEnterNumberPlate';
   static const String kNumberPlatePicture = 'kNumberPlatePicture';
+  static const String kBikeVolume = 'kBikeVolume';
+  static const String kEnterVolume = 'kEnterVolume';
+  static const String kBikePicture = 'kBikePicture';
+  static const String kBikeLicensePicture = 'kBikeLicensePicture';
 
   // 'voucher_detail' screen
   static const String kGiftDetail = 'kGiftDetail';
