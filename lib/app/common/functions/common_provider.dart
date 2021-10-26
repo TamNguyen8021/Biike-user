@@ -1,5 +1,7 @@
 import 'package:bikes_user/app/common/functions/CustomTrace/custom_trace.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +10,10 @@ class CommonProvider extends GetConnect {
   ///
   /// Author: UyenNLP
   Future<Map<String, String>> get headers async {
-    String token = Biike.token.value;
+    ///chon cai final token: lay token moi, tu dong lay token moi khi het han, test co van de thi report
+   
+    // String token = Biike.token.value; <-- old
+    final token = await getIt<FirebaseServices>().user?.getIdToken(); //this <---- new ( author: vantl)
     return <String, String>{'Authorization': 'Bearer $token'};
   }
 

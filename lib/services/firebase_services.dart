@@ -11,7 +11,7 @@ class FirebaseServices {
   bool get isVerifyEmail => user?.emailVerified ?? false;
   String _verificationId = "";
   late FirebaseAuth firebaseAuth;
-
+ 
   static FirebaseServices init() {
     FirebaseServices firebaseServices = FirebaseServices();
     firebaseServices.firebaseAuth = FirebaseAuth.instance;
