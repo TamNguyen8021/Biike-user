@@ -7,7 +7,8 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'dart:math' show cos, sqrt, asin;
+import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
@@ -25,7 +26,9 @@ class BookTripController extends GetxController {
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
 
-  // Rx<RoadInfo> roadInfo = RoadInfo().obs;
+  Rx<double> roadDistance = 0.0.obs;
+
+  RxList<LatLng> polypoints = <LatLng>[].obs;
 
   /// Thứ
   List<Date> _dateList = [];
@@ -45,6 +48,7 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
+    polypoints.value = [];
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -58,8 +62,18 @@ class BookTripController extends GetxController {
   /// Change data of the destination station
   ///
   /// Author: UyenNLP
-  void updateDestinationStation(value) {
+  void updateDestinationStation(value) async {
+    polypoints.value = [];
+    await _drawLine(value);
+
     destinationStation.value = value;
+
+    double departureLatitude = double.parse(departureStation.value.coordinate.split(',')[0]);
+    double departureLongitude = double.parse(departureStation.value.coordinate.split(',')[1]);
+    double destinationLatitude = double.parse(destinationStation.value.coordinate.split(',')[0]);
+    double destinationLongitude = double.parse(destinationStation.value.coordinate.split(',')[1]);
+
+    roadDistance.value = _calculateDistance(departureLongitude, departureLatitude, destinationLongitude, destinationLatitude);
   }
 
   /// Add to a repeated date list
@@ -146,8 +160,11 @@ class BookTripController extends GetxController {
     return await _tripProvider.createKeNowTrip(data);
   }
 
+  /// Ké-er book a scheduled trip
+  ///
+  /// Author: UyenNLP
   Future<dynamic> createScheduledTrip() async {
-    DateTime date = DateTime(
+    DateTime startDate = DateTime(
         selectedDate.value.year,
         selectedDate.value.month,
         selectedDate.value.day,
@@ -261,5 +278,26 @@ class BookTripController extends GetxController {
     return startDate.add(Duration(days: duration > 1 // not on weekend
         ? duration + DateTime.daysPerWeek  // add 1 more week
         : duration + 2*DateTime.daysPerWeek)); // else add 2 more weeks
+  }
+
+  Future<void> _drawLine(destinationValue) async {
+    String departureLatitude = departureStation.value.coordinate.split(',')[0];
+    String departureLongitude = departureStation.value.coordinate.split(',')[1];
+    String destinationLatitude = destinationValue.coordinate.split(',')[0];
+    String destinationLongitude = destinationValue.coordinate.split(',')[1];
+
+    var data = await _tripProvider.getRouteData(departureLongitude, departureLatitude, destinationLongitude, destinationLatitude);
+
+    List coordinates = data['features'][0]['geometry']['coordinates'];
+    coordinates.map((pair) => polypoints.add(LatLng(pair[1], pair[0]))).toList();
+  }
+
+  double _calculateDistance(double startLng, double startLat, double endLng, double endLat){
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 - c((endLat - startLat) * p)/2 +
+        c(startLat * p) * c(endLat * p) *
+            (1 - c((endLng - startLng) * p))/2;
+    return 12742 * asin(sqrt(a));
   }
 }

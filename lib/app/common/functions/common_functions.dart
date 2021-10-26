@@ -275,6 +275,7 @@ class CommonFunctions {
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       Biike.logger.e('Could not open map');
     }
+  }
     
   /// Convert string to timeOfDate
   ///

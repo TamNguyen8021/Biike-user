@@ -69,13 +69,11 @@ class BookTripPage extends StatelessWidget {
                               }),
                         ),
                       ),
-                      // Obx(
-                      //   () => BookTripMapViewer(
-                      //       departureCoordinate: _bookTripController
-                      //           .departureStation.value.coordinate,
-                      //       destinationCoordinate: _bookTripController
-                      //           .destinationStation.value.coordinate),
-                      // ),
+                      Obx(() =>
+                        BookTripMapViewer(
+                            departureCoordinate: _bookTripController.departureStation.value.coordinate,
+                            destinationCoordinate: _bookTripController.destinationStation.value.coordinate)
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0),
                         child: Row(

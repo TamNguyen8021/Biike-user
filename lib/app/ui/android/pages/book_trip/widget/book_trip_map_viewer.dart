@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class BookTripMapViewer extends StatelessWidget {
-  // final _bookTripController = Get.find<BookTripController>();
+  final _bookTripController = Get.find<BookTripController>();
 
   final String departureCoordinate;
   final String destinationCoordinate;
@@ -24,14 +25,20 @@ class BookTripMapViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _departureLatitude =
-        double.tryParse(departureCoordinate.split(',')[0]) ?? 10.84165;
-    double _departureLongtitude =
-        double.tryParse(departureCoordinate.split(',')[1]) ?? 106.80965;
-    double _destinationLatitude =
-        double.tryParse(destinationCoordinate.split(',')[0]) ?? 10.84165;
-    double _destinationLongtitude =
-        double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
+    double _departureLatitude = departureCoordinate != ''
+        ? double.parse(departureCoordinate.split(',')[0])
+        : 10.84165;
+    double _departureLongitude = departureCoordinate != ''
+        ? double.parse(departureCoordinate.split(',')[1])
+        : 106.80965;
+    double _destinationLatitude = destinationCoordinate != ''
+        ? double.parse(destinationCoordinate.split(',')[0])
+        : 10.84165;
+    double _destinationLongitude = destinationCoordinate != ''
+        ? double.parse(destinationCoordinate.split(',')[1])
+        : 106.80965;
+
+    print('x');
 
     return Column(
       children: <Widget>[
@@ -47,7 +54,7 @@ class BookTripMapViewer extends StatelessWidget {
                         (MapPosition position, bool isChanged) {},
                     center: LatLng(
                         (_departureLatitude + _destinationLatitude) / 2,
-                        (_departureLongtitude + _destinationLongtitude) / 2),
+                        (_departureLongitude + _destinationLongitude) / 2),
                     zoom: 12.0),
                 layers: [
                   TileLayerOptions(
@@ -57,7 +64,7 @@ class BookTripMapViewer extends StatelessWidget {
                   ),
                   MarkerLayerOptions(markers: <Marker>[
                     Marker(
-                        point: LatLng(_departureLatitude, _departureLongtitude),
+                        point: LatLng(_departureLatitude, _departureLongitude),
                         builder: (BuildContext context) {
                           return Icon(
                             Icons.location_on,
@@ -67,7 +74,7 @@ class BookTripMapViewer extends StatelessWidget {
                         }),
                     Marker(
                         point: LatLng(
-                            _destinationLatitude, _destinationLongtitude),
+                            _destinationLatitude, _destinationLongitude),
                         builder: (BuildContext context) {
                           return Icon(
                             Icons.location_on,
@@ -76,8 +83,19 @@ class BookTripMapViewer extends StatelessWidget {
                           );
                         }),
                   ]),
+                  PolylineLayerOptions(
+                      polylineCulling: true,
+                      polylines: <Polyline>[
+                        Polyline(
+                            color: Colors.purpleAccent.withOpacity(0.5),
+                            strokeWidth: 5,
+                            points: _bookTripController.polypoints
+                                .toList()),
+                      ]
+                  ),
                 ],
-              )),
+              )
+          ),
         ),
         CustomTextButton(
             backgroundColor: Colors.white,
@@ -95,26 +113,12 @@ class BookTripMapViewer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            // Obx(
-            //   () => Text(
-            // '',
-            // _bookTripController.roadInfo.value.duration != null
-            //     ? '${(_bookTripController.roadInfo.value.duration! / 60).toStringAsFixed(MAX_AFTER_POINT)}${CustomStrings.kReminderMinute.tr}'
-            //     : '0.0 ${CustomStrings.kReminderMinute.tr}',
-            //     style: TextStyle(
-            //       color: CustomColors.kBlue,
-            //     ),
-            //   ),
-            // ),
-            // Obx(
-            //   () => Text(
-            //     '',
-            // _bookTripController.roadInfo.value.distance != null
-            //     ? '${(_bookTripController.roadInfo.value.distance!).toStringAsFixed(MAX_AFTER_POINT)} km'
-            //     : '0.0 km',
-            //     style: Theme.of(context).textTheme.bodyText1,
-            //   ),
-            // ),
+            Obx(
+              () => Text(
+                '${(_bookTripController.roadDistance.value).toStringAsFixed(MAX_AFTER_POINT)} km',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
           ],
         ),
       ],
