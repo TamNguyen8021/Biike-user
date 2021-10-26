@@ -45,6 +45,10 @@
 		<array>
 			<string>https</string>
 			<string>http</string>
+			<string>googlechromes</string>
+			<string>comgooglemaps</string>
 		</array>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>This app needs access to location when open.</string>
 	</dict>
 </plist>

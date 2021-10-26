@@ -1,5 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/snackbar.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
@@ -8,6 +10,7 @@ import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -33,6 +36,7 @@ class LoginController extends GetxController {
       if (_firebaseServices.isVerifyEmail) {
         // Save user data to local memory
         await Biike.localAppData.saveUserInfo(_firebaseServices);
+        await Biike.localAppData.loadDataFromLocal();
         Get.toNamed(CommonRoutes.CHOOSE_MODE);
         return;
       }
@@ -76,9 +80,12 @@ class LoginController extends GetxController {
           btnOkColor: Colors.redAccent,
         )..show();
       });
-    } catch (e) {
-      SnackBarServices.showSnackbar(
-          title: '', message: 'da co loi xay ra vui long thu lai sau');
+    } catch (error) {
+      Biike.logger.e('LoginController - _verifyEmail()', error);
+      FlutterLogs.logErrorTrace('Biike', 'LoginController - _verifyEmail()',
+          error.toString(), Error());
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
     }
   }
 

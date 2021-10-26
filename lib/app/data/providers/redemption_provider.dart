@@ -7,6 +7,12 @@ class RedemptionProvider extends CommonProvider {
     final response =
         await post(UrlStrings.redemptionUrl, data, headers: await headers);
 
+    logResponse(response);
+
+    if (response.hasError) {
+      logError(response);
+    }
+
     return response.statusCode == HttpStatus.created
         ? Future.value(response)
         : Future.value(response.bodyString ?? '');
@@ -17,9 +23,12 @@ class RedemptionProvider extends CommonProvider {
         UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10',
         headers: await headers);
 
+    logResponse(response);
+
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
+    logError(response);
     return Future.error(response.statusText!);
   }
 
@@ -27,10 +36,12 @@ class RedemptionProvider extends CommonProvider {
     final response = await get(UrlStrings.redemptionUrl + '/$redemptionId/full',
         headers: await headers);
 
+    logResponse(response);
+
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-
+    logError(response);
     return Future.error(response.statusText!);
   }
 }

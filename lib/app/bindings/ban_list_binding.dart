@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class BanListBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(BanListController());
+    Get.lazyPut<BanListController>(() => BanListController());
   }
 }

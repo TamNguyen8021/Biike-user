@@ -28,8 +28,7 @@ class User {
   @JsonKey(defaultValue: -1)
   late int gender;
 
-  @JsonKey(defaultValue: '')
-  late String birthDate;
+  String? birthDate;
 
   int? userStatus;
   String? lastLoginDevice;
@@ -65,7 +64,6 @@ class User {
     this.userFullname = '';
     this.userPhoneNumber = '';
     this.gender = -1;
-    this.birthDate = '';
     this.userStar = 0.0;
     this.totalPoint = 0;
   }

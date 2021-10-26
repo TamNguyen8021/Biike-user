@@ -1,5 +1,5 @@
 /// List of profane English words taken from [LDNOOBW on GitHub](
-///https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words).
+/// https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words).
 List<String> badWordsListEn = [
   '2g1c',
   '2 girls 1 cup',

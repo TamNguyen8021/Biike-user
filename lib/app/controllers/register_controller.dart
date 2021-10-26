@@ -1,7 +1,9 @@
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -34,12 +36,15 @@ class RegisterController extends GetxController {
       Get.toNamed(CommonRoutes.LOGIN);
       SnackBarServices.showSnackbar(
           title: '', message: 'Đăng ký thành công vui lòng đăng nhập');
-    } catch (e) {
-      if (e is DioError && e.response?.statusCode == 400) {
+    } catch (error) {
+      Biike.logger.e('RegisterController - signup()', error);
+      if (error is DioError && error.response?.statusCode == 400) {
         SnackBarServices.showSnackbar(
             title: 'Bikke',
             message: 'Số điiện thoại hoặc mail đã có người đăng ký');
       }
+      FlutterLogs.logErrorTrace(
+          'Biike', 'RegisterController - signup()', error.toString(), Error());
     } finally {
       _enableLoading(false);
     }

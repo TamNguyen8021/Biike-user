@@ -8,10 +8,12 @@ class WalletProvider extends CommonProvider {
         UrlStrings.walletUrl + 'users/$userId?page=1&limit=10',
         headers: await headers);
 
+    logResponse(response);
+
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-
+    logError(response);
     return Future.value(null);
   }
 }

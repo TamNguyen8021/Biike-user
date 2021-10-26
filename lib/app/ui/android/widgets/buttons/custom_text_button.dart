@@ -4,6 +4,7 @@ class CustomTextButton extends StatelessWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final double? width;
+  final double? elevation;
   final String text;
   final Function() onPressedFunc;
 
@@ -12,6 +13,7 @@ class CustomTextButton extends StatelessWidget {
       required this.backgroundColor,
       required this.foregroundColor,
       this.width,
+      this.elevation,
       required this.text,
       required this.onPressedFunc})
       : super(key: key);
@@ -25,6 +27,7 @@ class CustomTextButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 12.0),
           backgroundColor: backgroundColor,
           primary: foregroundColor,
+          elevation: elevation,
         ),
         onPressed: onPressedFunc,
         child: Text(

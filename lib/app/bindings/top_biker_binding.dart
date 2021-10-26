@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 class TopBikerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(TopBikerController());
+    Get.lazyPut<TopBikerController>(() => TopBikerController());
   }
 }

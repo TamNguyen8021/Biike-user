@@ -3,6 +3,7 @@ import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class RedemptionController extends GetxController {
+  final _redemptionProvider = Get.find<RedemptionProvider>();
   RxList<dynamic> yourVoucherList = [].obs;
 
   Future<dynamic> exchangeVoucher(voucherId) async {
@@ -11,17 +12,17 @@ class RedemptionController extends GetxController {
       'voucherId': voucherId
     };
 
-    return await RedemptionProvider().exchangeVoucher(data);
+    return await _redemptionProvider.exchangeVoucher(data);
   }
 
   Future<void> getYourVoucherList() async {
-    yourVoucherList.value =
-        await RedemptionProvider().getYourVoucherList(userId: Biike.userId);
+    yourVoucherList.value = await _redemptionProvider.getYourVoucherList(
+        userId: Biike.userId.value);
   }
 
   Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
       redemptionId) async {
-    return await RedemptionProvider()
+    return await _redemptionProvider
         .getRedemptionDetailByRedemptionId(redemptionId);
   }
 }

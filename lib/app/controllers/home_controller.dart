@@ -1,20 +1,22 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
-import 'package:bikes_user/app/data/providers/home_provider.dart';
+import 'package:bikes_user/app/data/providers/station_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Manage states of [HomePage]
 class HomeController extends GetxController {
-  final _homeProvider = Get.put(HomeProvider());
+  final _tripProvider = Get.find<TripProvider>();
+  final _stationProvider = Get.find<StationProvider>();
   final PagingController<int, dynamic> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -49,36 +51,37 @@ class HomeController extends GetxController {
   /// Author: TamNTT
   Future<void> _fetchPage(int pageKey) async {
     try {
-      if (Biike.role.value == Role.keer) {
-        await getUpcomingTrips();
-        print(upcomingTrips.length);
-      } else {
-        await getStations();
-      }
+      await getUpcomingTrips();
+      // if (Biike.role.value == Role.biker) {
+      //   await getStations();
+      // }
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
       if (isLastPage) {
-        if (Biike.role.value == Role.keer) {
-          pagingController.appendLastPage(upcomingTrips.toList());
-        } else {
-          pagingController.appendLastPage(stations.values.toList());
-        }
+        // if (Biike.role.value == Role.keer) {
+        pagingController.appendLastPage(upcomingTrips.toList());
+        // } else {
+        //   pagingController.appendLastPage(stations.values.toList());
+        // }
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        if (Biike.role.value == Role.keer) {
-          nextPageKey += upcomingTrips.length;
-          pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
-        } else {
-          nextPageKey += stations.length;
-          pagingController.appendPage(stations.values.toList(), nextPageKey);
-        }
+        // if (Biike.role.value == Role.keer) {
+        nextPageKey += upcomingTrips.length;
+        pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
+        // } else {
+        //   nextPageKey += stations.length;
+        //   pagingController.appendPage(stations.values.toList(), nextPageKey);
+        // }
       }
     } catch (error) {
       pagingController.error = error;
+      Biike.logger.e('HomeController - _fetchPage()', error);
+      FlutterLogs.logErrorTrace(
+          'Biike', 'HomeController - _fetchPage()', error.toString(), Error());
     }
   }
 
@@ -94,7 +97,7 @@ class HomeController extends GetxController {
   /// Author: TamNTT
   Future<List<UpcomingTripCard>> getUpcomingTrips() async {
     upcomingTrips.clear();
-    Map<String, dynamic> response = await _homeProvider.getUpcomingTrips(
+    Map<String, dynamic> response = await _tripProvider.getUpcomingTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
@@ -130,7 +133,6 @@ class HomeController extends GetxController {
 
       upcomingTrips.add(upcomingTripCard);
     }
-    print(upcomingTrips.length);
     return upcomingTrips.cast();
   }
 
@@ -140,13 +142,13 @@ class HomeController extends GetxController {
   Future<Map> getStations() async {
     stations.clear();
     Map<String, dynamic> response =
-        await _homeProvider.getStations(page: _currentPage, limit: _limit);
+        await _stationProvider.getStations(page: _currentPage, limit: _limit);
     pagination = response['_meta'];
 
     for (var station in response['data']) {
-      DepartureStation startingStation = DepartureStation.fromJson(station);
+      DepartureStation departureStation = DepartureStation.fromJson(station);
       stations.putIfAbsent(
-          startingStation.stationId, () => startingStation.departureName);
+          departureStation.stationId, () => departureStation.departureName);
     }
     return stations;
   }

@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class AppSettingBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(AppSettingController());
+    Get.lazyPut<AppSettingController>(() => AppSettingController());
   }
 }

@@ -46,9 +46,9 @@ class ExchangeVoucherButton extends StatelessWidget {
             width: 100,
           ),
         ),
-        actions: [
+        actions: <Widget>[
           Column(
-            children: [
+            children: <Widget>[
               ViewVoucherButton(redemptionId: redemptionId),
               ReturnToVoucherPageButton(),
             ],

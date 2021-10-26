@@ -21,8 +21,14 @@ class EditProfilePage extends StatelessWidget {
         .isSaveButtonDisable(
             newName: _profileController.user.userFullname,
             newGender: _profileController.user.gender,
-            newBirthDate: _profileController.user.birthDate)
+            newBirthDate: _profileController.user.birthDate!)
         .obs;
+    Rx<String> _birthDateText = CustomStrings.kChooseBirthDate.tr.obs;
+
+    if (_profileController.birthDate.value != null) {
+      _birthDateText.value =
+          DateFormat('dd-MM-yyyy').format(_profileController.birthDate.value!);
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -30,6 +36,10 @@ class EditProfilePage extends StatelessWidget {
         isVisible: true,
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () async {
+          await _profileController.getProfile();
+          Get.back();
+        },
         appBar: AppBar(),
         title: Text(CustomStrings.kEditProfile.tr),
       ),
@@ -76,7 +86,7 @@ class EditProfilePage extends StatelessWidget {
                                   newName: _profileController.user.userFullname,
                                   newGender: _profileController.user.gender,
                                   newBirthDate:
-                                      _profileController.user.birthDate);
+                                      _profileController.user.birthDate!);
                         }),
                     ProfileTextField(
                         isReadOnly: true,
@@ -131,41 +141,47 @@ class EditProfilePage extends StatelessWidget {
                                 newName: _profileController.user.userFullname,
                                 newGender: _profileController.user.gender,
                                 newBirthDate:
-                                    _profileController.user.birthDate);
+                                    _profileController.user.birthDate!);
                       },
                     ),
                     Obx(
                       () => ChooseDateTimeButton(
                           isOnProfilePage: true,
-                          text: DateFormat('dd-MM-yyyy')
-                              .format(_profileController.birthDate.value),
+                          text: _birthDateText.value,
                           width: double.infinity,
                           onPressedFunc: () async {
-                            _profileController.birthDate.value =
-                                await CommonFunctions().selectDate(
+                            DateTime _tempBirthDate = await CommonFunctions()
+                                .selectDate(
                                     context: context,
                                     selectedDate: _profileController.birthDate,
                                     isBirthDatePicker: true);
+                            _profileController.birthDate.value = _tempBirthDate;
                             _profileController.user.birthDate =
-                                _profileController.birthDate.value.toString();
+                                _tempBirthDate.toString();
+                            _birthDateText.value =
+                                DateFormat('dd-MM-yyyy').format(_tempBirthDate);
                             isSaveButtonDisable.value =
                                 _profileController.isSaveButtonDisable(
                                     newName:
                                         _profileController.user.userFullname,
                                     newGender: _profileController.user.gender,
                                     newBirthDate:
-                                        _profileController.user.birthDate);
+                                        _profileController.user.birthDate!);
                           }),
                     ),
                     Obx(
                       () => CustomElevatedIconButton(
                         onPressedFunc: isSaveButtonDisable.isTrue
                             ? () {}
-                            : () {
-                                _profileController.editProfile(
-                                    context: context,
-                                    user: _profileController.user);
-                                isSaveButtonDisable.value = true;
+                            : () async {
+                                bool isSuccess =
+                                    await _profileController.editProfile(
+                                        context: context,
+                                        user: _profileController.user);
+
+                                if (isSuccess) {
+                                  isSaveButtonDisable.value = true;
+                                }
                               },
                         text: CustomStrings.kSave.tr,
                         icon: Icons.save,

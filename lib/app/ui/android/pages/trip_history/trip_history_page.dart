@@ -28,11 +28,14 @@ class TripHistoryPage extends StatelessWidget {
             hasShape: false,
             appBar: AppBar(),
             hasLeading: true,
+            onPressedFunc: () {
+              Get.back();
+            },
             title: Text(
               CustomStrings.kHistory.tr,
             ),
             bottomAppBar: PreferredSize(
-              preferredSize: new Size.fromHeight(0),
+              preferredSize: Size.fromHeight(0),
               child: Container(
                 decoration:
                     BoxDecoration(color: Colors.white, boxShadow: <BoxShadow>[

@@ -115,6 +115,7 @@ class CustomStrings {
   static const String kOthers = 'kOthers';
   static const String kSave = 'kSave';
   static const String kBirthDate = 'kBirthDate';
+  static const String kChooseBirthDate = 'kChooseBirthDate';
   static const String kEditProfileSuccess = 'kEditProfileSuccess';
 
   // 'biker_profile' screen
@@ -175,12 +176,20 @@ class CustomStrings {
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
-  static const String kOpenStreetMap = 'kOpenStreetMap';
+  static const String kViewRouteInstruction = 'kViewRouteInstruction';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
+  static const String kHelpCenter = 'kHelpCenter';
+  static const String kShareTripInfo = 'kShareTripInfo';
+  static const String kSOSCenter = 'kSOSCenter';
+  static const String kNeedPolice = 'kNeedPolice';
+  static const String kNeedEmergency = 'kNeedEmergency';
+  static const String kNearestHospital = 'kNearestHospital';
+  static const String kNearestMechanicShop = 'kNearestMechanicShop';
+  static const String kNearestGasStation = 'kNearestGasStation';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';
@@ -286,4 +295,13 @@ class CustomStrings {
   // 'ban_list' screen
   static const String kBanList = 'kBanList';
   static const String kUnBlock = 'kUnBlock';
+
+  // date
+  static const String kMonday = 'kMonday';
+  static const String kTuesday = 'kTuesday';
+  static const String kWednesday = 'kWednesday';
+  static const String kThursday = 'kThursday';
+  static const String kFriday = 'kFriday';
+  static const String kSaturday = 'kSaturday';
+  static const String kSunday = 'kSunday';
 }

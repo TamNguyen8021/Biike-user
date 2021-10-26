@@ -18,6 +18,9 @@ class BanListPage extends HookWidget {
         hasShape: true,
         appBar: AppBar(),
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         title: Text(
           CustomStrings.kBanList.tr,
         ),

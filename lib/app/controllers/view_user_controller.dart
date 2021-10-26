@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
-import 'package:bikes_user/app/data/providers/view_user_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
+import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/data/models/area.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
@@ -12,15 +13,13 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ViewUserController extends GetxController {
-  final int userId;
-
-  ViewUserController({required this.userId});
-
-  final _viewUserProvider = Get.put(ViewUserProvider());
+  final _userProvider = Get.find<UserProvider>();
+  final _tripProvider = Get.find<TripProvider>();
   final PagingController<int, HistoryTripCard> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -34,7 +33,7 @@ class ViewUserController extends GetxController {
   @override
   onInit() {
     pagingController.addPageRequestListener((pageKey) {
-      _fetchPage(pageKey);
+      _fetchPage(pageKey, partnerId: Get.arguments['partnerId']);
     });
     super.onInit();
   }
@@ -48,9 +47,9 @@ class ViewUserController extends GetxController {
   /// Lazy loading when view upcoming trips or load stations.
   ///
   /// Author: TamNTT
-  Future<void> _fetchPage(int pageKey) async {
+  Future<void> _fetchPage(int pageKey, {required int partnerId}) async {
     try {
-      await getHistoryTripsWithPartner();
+      await getHistoryTripsWithPartner(partnerId: partnerId);
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
@@ -65,16 +64,19 @@ class ViewUserController extends GetxController {
         pagingController.appendPage(historyTrips.cast(), nextPageKey);
       }
     } catch (error) {
+      Biike.logger.e('ViewUserController - _fetchPage()', error);
       pagingController.error = error;
+      FlutterLogs.logErrorTrace('Biike', 'ViewUserController - _fetchPage()',
+          error.toString(), Error());
     }
   }
 
   /// Gets partner's profile and shows it on [context] .
   ///
   /// Author: TamNTT
-  Future<void> getPartnerProfile() async {
+  Future<void> getPartnerProfile({required int partnerId}) async {
     var partnerProfile =
-        await _viewUserProvider.getPartnerProfile(partnerId: userId);
+        await _userProvider.getPartnerProfile(partnerId: partnerId);
     user = User.fromJson(partnerProfile);
     area = Area.fromJson(partnerProfile);
   }
@@ -82,11 +84,12 @@ class ViewUserController extends GetxController {
   /// Gets history trips with partner and shows it on [context].
   ///
   /// Author: TamNTT
-  Future<List<HistoryTripCard>> getHistoryTripsWithPartner() async {
+  Future<List<HistoryTripCard>> getHistoryTripsWithPartner(
+      {required int partnerId}) async {
     historyTrips.clear();
-    Map<String, dynamic> response = await _viewUserProvider.getHistoryPairTrips(
+    Map<String, dynamic> response = await _tripProvider.getHistoryPairTrips(
         userId: Biike.userId.value,
-        partnerId: userId,
+        partnerId: partnerId,
         page: _currentPage,
         limit: _limit);
     historyTripsPagination = response['_meta'];
@@ -125,7 +128,7 @@ class ViewUserController extends GetxController {
       HistoryTripCard historyTripCard = HistoryTripCard(
         tripId: trip.tripId,
         userId: user.userId,
-        dateTime: DateTime.parse(trip.bookTime),
+        dateTime: DateTime.tryParse(trip.bookTime)!,
         status: tripStatus,
         sourceStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,

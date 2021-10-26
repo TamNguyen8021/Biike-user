@@ -154,35 +154,6 @@ class ProfileButtons extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Icon(
-                      Icons.language,
-                      color: CustomColors.kDarkGray,
-                      size: 20,
-                    ),
-                  ),
-                  Text(
-                    'tranlatesion'.tr,
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(CustomColors.kLightGray),
-                  elevation: MaterialStateProperty.all<double>(2.0)),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: SizedBox(
-            height: 35,
-            child: ElevatedButton(
-              onPressed: () => {},
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Icon(
                       Icons.help,
                       color: CustomColors.kDarkGray,
                       size: 20,

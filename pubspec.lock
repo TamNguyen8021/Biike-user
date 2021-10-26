@@ -140,7 +140,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.4+2"
+    version: "0.9.4+3"
   camera_platform_interface:
     dependency: transitive
     description:
@@ -255,13 +255,55 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  device_info_plus:
+    dependency: "direct main"
+    description:
+      name: device_info_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
+  device_info_plus_linux:
+    dependency: transitive
+    description:
+      name: device_info_plus_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  device_info_plus_macos:
+    dependency: transitive
+    description:
+      name: device_info_plus_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
+  device_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_plus_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
+  device_info_plus_web:
+    dependency: transitive
+    description:
+      name: device_info_plus_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  device_info_plus_windows:
+    dependency: transitive
+    description:
+      name: device_info_plus_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   dio:
     dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   dots_indicator:
     dependency: transitive
     description:
@@ -303,28 +345,28 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.3"
+    version: "3.1.4"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.1"
+    version: "6.1.2"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.2"
+    version: "3.1.3"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.8.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -386,6 +428,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_logs:
+    dependency: "direct main"
+    description:
+      name: flutter_logs
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.4"
+  flutter_map:
+    dependency: "direct main"
+    description:
+      name: flutter_map
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.14.0"
   flutter_multi_formatter:
     dependency: "direct main"
     description:
@@ -393,27 +449,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
-  flutter_osm_interface:
-    dependency: transitive
-    description:
-      name: flutter_osm_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5"
-  flutter_osm_plugin:
-    dependency: "direct main"
-    description:
-      name: flutter_osm_plugin
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.22.2"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.4"
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -475,20 +517,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  google_polyline_algorithm:
-    dependency: transitive
-    description:
-      name: google_polyline_algorithm
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.0"
   google_sign_in:
     dependency: "direct main"
     description:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.1"
+    version: "5.2.0"
   google_sign_in_platform_interface:
     dependency: transitive
     description:
@@ -603,6 +638,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
+  latlong2:
+    dependency: transitive
+    description:
+      name: latlong2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.1"
   lint:
     dependency: "direct main"
     description:
@@ -617,8 +659,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  location:
+  lists:
     dependency: transitive
+    description:
+      name: lists
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  location:
+    dependency: "direct main"
     description:
       name: location
       url: "https://pub.dartlang.org"
@@ -638,6 +687,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
+  logger:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "87c4490d37f4321abea0986eff607127a4b13757"
+      url: "git://github.com/leisim/logger.git"
+    source: git
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:
@@ -659,6 +717,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  mgrs_dart:
+    dependency: transitive
+    description:
+      name: mgrs_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   mime:
     dependency: transitive
     description:
@@ -778,6 +843,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
+  positioned_tap_detector_2:
+    dependency: transitive
+    description:
+      name: positioned_tap_detector_2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   process:
     dependency: transitive
     description:
@@ -785,6 +857,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  proj4dart:
+    dependency: transitive
+    description:
+      name: proj4dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   pub_semver:
     dependency: transitive
     description:
@@ -1000,6 +1079,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  transparent_image:
+    dependency: transitive
+    description:
+      name: transparent_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   tuple:
     dependency: transitive
     description:
@@ -1014,6 +1100,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  unicode:
+    dependency: transitive
+    description:
+      name: unicode
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1"
   url_launcher:
     dependency: "direct main"
     description:
@@ -1090,7 +1183,14 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.9"
+    version: "2.2.10"
+  wkt_parser:
+    dependency: transitive
+    description:
+      name: wkt_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   xdg_directories:
     dependency: transitive
     description:

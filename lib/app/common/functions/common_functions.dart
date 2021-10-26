@@ -2,8 +2,10 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -61,11 +63,11 @@ class CommonFunctions {
   /// Author: TamNTT
   Future<DateTime> selectDate(
       {required BuildContext context,
-      required Rx<DateTime> selectedDate,
+      required Rx<DateTime?> selectedDate,
       required bool isBirthDatePicker}) async {
     DateTime _currentTime = DateTime.now();
     DateTime _firstDate = DateTime(_currentTime.year - 90);
-    DateTime _lastDate = DateTime(_currentTime.year - 18);
+    DateTime _lastDate = DateTime(_currentTime.year - 18, 12, 31);
 
     if (!isBirthDatePicker) {
       _firstDate = _currentTime;
@@ -75,17 +77,14 @@ class CommonFunctions {
 
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: selectedDate.value,
+      initialDate: selectedDate.value ?? DateTime(_currentTime.year - 18),
       firstDate: _firstDate,
       lastDate: _lastDate,
       helpText: CustomStrings.kChooseDate.tr,
       cancelText: CustomStrings.kCancel.tr,
-      fieldLabelText: CustomStrings.kBirthDate,
+      fieldLabelText: CustomStrings.kBirthDate.tr,
     );
-    if (pickedDate != null) {
-      selectedDate.value = pickedDate;
-    }
-    return selectedDate.value;
+    return pickedDate!;
   }
 
   /// Show a time picker on [context].
@@ -252,7 +251,25 @@ class CommonFunctions {
     int indexOfQuestionMark = url.indexOf('?');
 
     return indexOfQuestionMark != -1 // not found
-        ? int.parse(url.substring(indexOfForwardSlash + 1, indexOfQuestionMark))
-        : int.parse(url.substring(indexOfForwardSlash + 1));
+        ? int.tryParse(
+                url.substring(indexOfForwardSlash + 1, indexOfQuestionMark)) ??
+            -1
+        : int.tryParse(url.substring(indexOfForwardSlash + 1)) ?? -1;
+  }
+
+  Future<void> openMap(
+      {required String keyword,
+      required double? latitude,
+      required double? longtitude}) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/$keyword/@$latitude,$longtitude';
+
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      FlutterLogs.logError(
+          'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
+      Biike.logger.e('Could not open map');
+    }
   }
 }

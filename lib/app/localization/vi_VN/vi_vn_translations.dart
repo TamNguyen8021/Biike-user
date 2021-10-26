@@ -119,7 +119,9 @@ final Map<String, String> vi = {
   'kOthers': 'Khác',
   'kSave': 'Lưu',
   'kBirthDate': 'Ngày sinh',
+  'kChooseBirthDate': 'Chọn ngày sinh',
   'kEditProfileSuccess': 'Chỉnh sửa thông tin thành công',
+  'kEditProfileFailed': 'Chỉnh sửa thông tin thất bại. Vui lòng thử lại sau',
 
   // 'biker_profile' screen
   'kManageBike': 'Quản lí xe',
@@ -183,20 +185,28 @@ final Map<String, String> vi = {
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
   'kPartnerFeedback': 'Feedback từ người đồng hành',
-  'kOpenStreetMap': 'Mở Open Street Map',
+  'kViewRouteInstruction': 'Xem chỉ đường',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
       'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
+  'kHelpCenter': 'Trung tâm trợ giúp',
+  'kShareTripInfo': 'Chia sẻ thông tin chuyến đi',
+  'kSOSCenter': 'Tổng đài S.O.S',
+  'kNeedPolice': 'Tôi cần cảnh sát',
+  'kNeedEmergency': 'Tôi cần xe cấp cứu',
+  'kNearestHospital': 'Bệnh viện gần nhất',
+  'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
+  'kNearestGasStation': 'Trạm xăng gần nhất',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
   'kFrom': 'Từ',
-  'kChooseFrom': 'Chọn điểm đi',
+  'kChooseFrom': '-Chọn điểm đi-',
   'kTo': 'Đến',
-  'kChooseTo': 'Chọn điểm đến',
+  'kChooseTo': '-Chọn điểm đến-',
   'kBookScheduleTrip': 'Đặt lịch ké',
   'kBookNowTrip': 'Ké now',
 
@@ -226,6 +236,7 @@ final Map<String, String> vi = {
   'kAddBike': 'Thêm xe mới',
   'kCheckBikeInfo': 'Vui lòng kiểm tra thông tin xe',
   'kNumberPlate': 'Biển số đăng ký',
+  'kNumberPlatePicture': 'Hình biển số xe',
   'kTakePictureAgain': 'Chụp lại',
 
   // 'voucher_detail' screen
@@ -253,6 +264,9 @@ final Map<String, String> vi = {
       'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
   'kExchangeFailed': 'Không thể đổi voucher!',
   'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
+  'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
+  'kNotFillAllFields': 'Xin hãy chọn đủ dữ liệu',
+  'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
@@ -310,4 +324,13 @@ final Map<String, String> vi = {
   'kRegister': 'Đăng ký',
   'vidu' : 'toi %s %s %s ten la %s',
   'tranlatesion' : 'Đổi ngôn ngữ',
+
+  // date
+  'kMonday': 'T2',
+  'kTuesday': 'T3',
+  'kWednesday': 'T4',
+  'kThursday': 'T5',
+  'kFriday': 'T6',
+  'kSaturday': 'T7',
+  'kSunday': 'CN',
 };

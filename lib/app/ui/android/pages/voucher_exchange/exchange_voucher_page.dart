@@ -18,64 +18,70 @@ class ExchangeVoucherPage extends StatelessWidget {
   final _voucherController = Get.find<VoucherController>();
   final _walletController = Get.find<WalletController>();
 
-
   @override
   Widget build(BuildContext context) {
     _walletController.updateWalletPoint();
     return FutureBuilder(
-      future: _voucherController.getVoucherList(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Scaffold(
-            appBar: CustomAppBar(
-              isVisible: true,
-              hasShape: true,
-              hasLeading: true,
-              appBar: AppBar(),
-              title: Text(CustomStrings.kListVouchers.tr),
-              actionWidgets: <Widget>[
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 17.0, horizontal: 22.0),
-                  child: Container(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
-                    decoration: BoxDecoration(
-                        color: CustomColors.kOrange,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: CustomColors.kDarkGray.withOpacity(0.3),
-                            // changes position of shadow
-                            offset: Offset(0, 1.5),
-                          )
-                        ]),
-                    child: Obx(() =>
-                        Text.rich(TextSpan(children: <InlineSpan>[
-                          TextSpan(
-                              text: _walletController.totalWalletPoint.toString(),
-                              style: TextStyle(fontSize: 11.sp, color: Colors.white)),
-                          WidgetSpan(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 2.0),
-                              )),
-                          WidgetSpan(
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: SvgPicture.asset(
-                                  'assets/images/crown.svg',
-                                  height: 10.sp,
-                                  color: Colors.white,
-                                ),
-                              ))
-                        ]),
+        future: _voucherController.getVoucherList(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Scaffold(
+              appBar: CustomAppBar(
+                isVisible: true,
+                hasShape: true,
+                hasLeading: true,
+                onPressedFunc: () async {
+                  await _walletController.updateWalletPoint();
+                  Get.back();
+                },
+                appBar: AppBar(),
+                title: Text(CustomStrings.kListVouchers.tr),
+                actionWidgets: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 17.0, horizontal: 22.0),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 4.0),
+                      decoration: BoxDecoration(
+                          color: CustomColors.kOrange,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: CustomColors.kDarkGray.withOpacity(0.3),
+                              // changes position of shadow
+                              offset: Offset(0, 1.5),
+                            )
+                          ]),
+                      child: Obx(
+                        () => Text.rich(
+                          TextSpan(children: <InlineSpan>[
+                            TextSpan(
+                                text: _walletController.totalWalletPoint
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 11.sp, color: Colors.white)),
+                            WidgetSpan(
+                                child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 2.0),
+                            )),
+                            WidgetSpan(
+                                child: Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: SvgPicture.asset(
+                                'assets/images/crown.svg',
+                                height: 10.sp,
+                                color: Colors.white,
+                              ),
+                            ))
+                          ]),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
-            body: SingleChildScrollView(
+                  )
+                ],
+              ),
+              body: SingleChildScrollView(
                 child: SafeArea(
                   child: Column(
                     children: <Widget>[
@@ -85,7 +91,8 @@ class ExchangeVoucherPage extends StatelessWidget {
                         },
                         child: Container(
                           padding: const EdgeInsets.all(10.0),
-                          margin: const EdgeInsets.fromLTRB(22.0, 16.0, 22.0, 10.0),
+                          margin:
+                              const EdgeInsets.fromLTRB(22.0, 16.0, 22.0, 10.0),
                           decoration: BoxDecoration(
                             color: CustomColors.kBlue,
                             borderRadius: BorderRadius.circular(5),
@@ -108,20 +115,19 @@ class ExchangeVoucherPage extends StatelessWidget {
                       ),
                       Divider(),
                       Padding(
-                        padding:
-                        const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
-                        child:
-                        ListVouchers(listVouchers: _voucherController.voucherList),
+                        padding: const EdgeInsets.only(
+                            top: 16.0, left: 22.0, right: 22.0),
+                        child: ListVouchers(
+                            listVouchers: _voucherController.voucherList),
                       ),
                     ],
                   ),
                 ),
-            ),
-          );
-        } else {
-          return Loading();
-        }
-      }
-    );
+              ),
+            );
+          } else {
+            return Loading();
+          }
+        });
   }
 }

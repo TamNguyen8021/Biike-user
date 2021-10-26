@@ -117,7 +117,9 @@ final Map<String, String> en = {
   'kOthers': 'Other',
   'kSave': 'Save',
   'kBirthDate': 'Date of birth',
+  'kChooseBirthDate': 'Choose a date',
   'kEditProfileSuccess': 'Your profile was edited',
+  'kEditProfileFailed': 'Your profile was not changed. Please try again later',
 
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',
@@ -181,20 +183,28 @@ final Map<String, String> en = {
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
   'kPartnerFeedback': 'Partner\'s feedback',
-  'kOpenStreetMap': 'View Open Street Map',
+  'kViewRouteInstruction': 'View route instruction',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
   'kViewCancelTripReminder': 'You can view your canceled trips in history',
   'kLetUsKnowYourCancelReason':
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
+  'kHelpCenter': 'Help Center',
+  'kShareTripInfo': 'Share your trip\'s info',
+  'kSOSCenter': 'S.O.S Center',
+  'kNeedPolice': 'I need police',
+  'kNeedEmergency': 'I need emergency care',
+  'kNearestHospital': 'Nearest hospital',
+  'kNearestMechanicShop': 'Nearest mechanic shop',
+  'kNearestGasStation': 'Nearest gas station',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
   'kFrom': 'From',
-  'kChooseFrom': 'Departure station',
+  'kChooseFrom': '-Departure station-',
   'kTo': 'To',
-  'kChooseTo': 'Destination station',
+  'kChooseTo': '-Destination station-',
   'kBookScheduleTrip': 'Book trip',
   'kBookNowTrip': 'Ké Now',
 
@@ -224,6 +234,7 @@ final Map<String, String> en = {
   'kAddBike': 'Add bike',
   'kCheckBikeInfo': 'Please check your bike information',
   'kNumberPlate': 'Number plate',
+  'kNumberPlatePicture': 'Number plate picture',
   'kTakePictureAgain': 'Chụp lại',
 
   // 'voucher_detail' screen
@@ -251,6 +262,9 @@ final Map<String, String> en = {
       'There are some errors, please contact Biiké development team for support',
   'kExchangeFailed': 'Can\'t exchange voucher!',
   'kNotEnoughPoint': 'User doesn\'t have enough point',
+  'kNotChooseStation': 'You haven\'t choose your route',
+  'kNotFillAllFields': 'Please fill in all fields',
+  'kNotAfterNow': 'You can\'t book a trip from the past',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -308,4 +322,13 @@ final Map<String, String> en = {
   'kRegister': 'Register',
   'vidu': 'toi ten la %s',
   'tranlatesion': 'Tranlation',
+
+  // date
+  'kMonday': 'MON',
+  'kTuesday': 'TUE',
+  'kWednesday': 'WED',
+  'kThursday': 'THU',
+  'kFriday': 'FRI',
+  'kSaturday': 'SAT',
+  'kSunday': 'SUN',
 };

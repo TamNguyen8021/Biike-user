@@ -3,11 +3,11 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 /// This widget is the top appbar on [HomePage]
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool hasLeading;
+  final Function() onPressedFunc;
   final Widget? title;
   final AppBar appBar;
   final bool isVisible;
@@ -22,6 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       required this.isVisible,
       required this.hasShape,
       required this.hasLeading,
+      required this.onPressedFunc,
       this.title,
       required this.appBar,
       this.actionWidgets,
@@ -49,14 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     if (hasLeading) {
       _leadingWidget = IconButton(
-        onPressed: () {
-          if (ModalRoute.of(context)!.settings.name.toString() ==
-              CommonRoutes.PROFILE) {
-            Get.offAllNamed(CommonRoutes.HOME);
-          } else {
-            Get.back();
-          }
-        },
+        onPressed: onPressedFunc,
         icon: Icon(
           Icons.arrow_back,
         ),

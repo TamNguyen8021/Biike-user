@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:bikes_user/app/bindings/trip_details_binding.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
@@ -171,8 +170,11 @@ class HistoryTripCard extends StatelessWidget {
         ),
         onTap: () {
           if (!isOnViewUserPage) {
-            Get.to(() => TripDetailsPage(tripId: tripId, userId: userId),
-                binding: TripDetailsBinding());
+            Get.toNamed(CommonRoutes.TRIP_DETAILS, arguments: {
+              'tripId': tripId,
+              'userId': userId,
+              'route': 'history'
+            });
           }
         });
   }

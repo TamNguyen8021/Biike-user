@@ -41,6 +41,9 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
         appBar: AppBar(),
         hasShape: true,
         hasLeading: true,
+        onPressedFunc: () {
+          Get.back();
+        },
         title: Text(
           CustomStrings.kAddBike.tr,
         ),
@@ -64,18 +67,19 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                      child: AspectRatio(
-                        aspectRatio: 1 / 0.7,
-                        child: ClipRect(
-                          child: Transform.scale(
-                            scale: _controller.value.aspectRatio / 0.7,
-                            child: Center(
-                              child: CameraPreview(_controller),
-                            ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 30),
+                    child: AspectRatio(
+                      aspectRatio: 1 / 0.7,
+                      child: ClipRect(
+                        child: Transform.scale(
+                          scale: _controller.value.aspectRatio / 0.7,
+                          child: Center(
+                            child: CameraPreview(_controller),
                           ),
                         ),
                       ),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -91,9 +95,7 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
 
                               final image = await _controller.takePicture();
 
-                              Navigator.of(context).pop(
-                                image.path
-                              );
+                              Navigator.of(context).pop(image.path);
                             } catch (e) {
                               print(e);
                             }
@@ -102,9 +104,7 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
                   )
                 ],
               ),
-              decoration: BoxDecoration(
-                color: Colors.grey
-              ),
+              decoration: BoxDecoration(color: Colors.grey),
             );
           } else {
             return const Center(child: CircularProgressIndicator());

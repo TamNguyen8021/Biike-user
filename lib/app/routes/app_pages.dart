@@ -4,6 +4,7 @@ import 'package:bikes_user/app/bindings/add_sos_number_binding.dart';
 import 'package:bikes_user/app/bindings/address_book_binding.dart';
 import 'package:bikes_user/app/bindings/app_setting_binding.dart';
 import 'package:bikes_user/app/bindings/ban_list_binding.dart';
+import 'package:bikes_user/app/bindings/bike_binding.dart';
 import 'package:bikes_user/app/bindings/book_schedule_trip_binding.dart';
 import 'package:bikes_user/app/bindings/book_trip_binding.dart';
 import 'package:bikes_user/app/bindings/choose_mode_binding.dart';
@@ -11,16 +12,22 @@ import 'package:bikes_user/app/bindings/edit_address_book_binding.dart';
 import 'package:bikes_user/app/bindings/edit_sos_number_binding.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
 import 'package:bikes_user/app/bindings/home_binding.dart';
-import 'package:bikes_user/app/bindings/input_name_email_binding/input_name_email_binding.dart';
 import 'package:bikes_user/app/bindings/login/login_binding.dart';
 import 'package:bikes_user/app/bindings/manage_bike_binding.dart';
 import 'package:bikes_user/app/bindings/open_page/open_page_bingding.dart';
 import 'package:bikes_user/app/bindings/profile_binding.dart';
+import 'package:bikes_user/app/bindings/register_binding.dart';
 import 'package:bikes_user/app/bindings/sos_number_binding.dart';
+import 'package:bikes_user/app/bindings/station_binding.dart';
 import 'package:bikes_user/app/bindings/top_biker_binding.dart';
+import 'package:bikes_user/app/bindings/trip_binding.dart';
+import 'package:bikes_user/app/bindings/trip_details_binding.dart';
 import 'package:bikes_user/app/bindings/trip_history_binding.dart';
+import 'package:bikes_user/app/bindings/user_binding.dart';
 import 'package:bikes_user/app/bindings/verify_phone_binding.dart';
+import 'package:bikes_user/app/bindings/view_user_binding.dart';
 import 'package:bikes_user/app/bindings/voucher_binding.dart';
+import 'package:bikes_user/app/bindings/wallet_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
@@ -29,7 +36,7 @@ import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_pa
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
-import 'package:bikes_user/app/ui/android/pages/book_schedule_trip/book_schedule_trip_page.dart';
+import 'package:bikes_user/app/ui/android/pages/book_trip/book_schedule_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/book_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/choose_mode/choose_mode_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
@@ -50,7 +57,9 @@ import 'package:bikes_user/app/ui/android/pages/register/register_page.dart';
 import 'package:bikes_user/app/ui/android/pages/register/verify_phone_page.dart';
 import 'package:bikes_user/app/ui/android/pages/sos_number/sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/top_biker/top_biker_page.dart';
+import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
+import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/exchange_voucher_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
@@ -81,10 +90,8 @@ class AppPages {
         binding: VerifyPhoneBinding()),
     GetPage(
         name: CommonRoutes.REGISTER,
-        page: () {
-          return RegisterPage();
-        },
-        binding: InputNameEmailBinding()),
+        page: () => RegisterPage(),
+        binding: RegisterBinding()),
     GetPage(
         name: CommonRoutes.CHOOSE_MODE,
         page: () => ChooseModePage(),
@@ -92,13 +99,16 @@ class AppPages {
     GetPage(
         name: CommonRoutes.TRIP_HISTORY,
         page: () => TripHistoryPage(),
-        binding: TripHistoryBinding()),
+        bindings: <Bindings>[TripHistoryBinding(), TripBinding()]),
     GetPage(
         name: CommonRoutes.HOME,
         page: () => HomePage(),
         bindings: <Bindings>[
           HomeBinding(),
           ProfileBinding(),
+          UserBinding(),
+          TripBinding(),
+          StationBinding()
         ]),
     GetPage(
       name: CommonRoutes.TOP_BIKER,
@@ -108,31 +118,41 @@ class AppPages {
     GetPage(
       name: CommonRoutes.PROFILE,
       page: () => ProfilePage(),
-      binding: ProfileBinding(),
+      bindings: <Bindings>[ProfileBinding(), UserBinding(), WalletBinding()],
     ),
     GetPage(
         name: CommonRoutes.EDIT_PROFILE,
         page: () => EditProfilePage(),
-        binding: ProfileBinding()),
+        bindings: <Bindings>[ProfileBinding(), UserBinding()]),
     GetPage(
         name: CommonRoutes.FEEDBACK,
         page: () => FeedbackPage(),
         binding: FeedbackBinding()),
     GetPage(name: CommonRoutes.FIND_BIKER, page: () => FindingBikerPage()),
     GetPage(
-        name: CommonRoutes.FIND_BIKER_SUCCESS, page: () => FindingBikerSuccessPage()),
-    GetPage(name: CommonRoutes.FIND_BIKER_FAIL, page: () => FindingBikerFailPage()),
-    GetPage(name: CommonRoutes.GET_TRIP_SUCCESS, page: () => GetTripSuccessPage()),
+        name: CommonRoutes.FIND_BIKER_SUCCESS,
+        page: () => FindingBikerSuccessPage()),
+    GetPage(
+        name: CommonRoutes.FIND_BIKER_FAIL, page: () => FindingBikerFailPage()),
+    GetPage(
+        name: CommonRoutes.GET_TRIP_SUCCESS, page: () => GetTripSuccessPage()),
     GetPage(
         name: CommonRoutes.EXCHANGE_VOUCHER,
         page: () => ExchangeVoucherPage(),
         binding: VoucherBinding()),
-    // GetPage(
-    //     name: CommonRoutes.TRIP_DETAILS,
-    //     page: () => TripDetailsPage(
-    //           isWaitingForBiker: false,
-    //         ),
-    //     binding: TripDetailsBinding()),
+    GetPage(
+        name: CommonRoutes.TRIP_DETAILS,
+        page: () => TripDetailsPage(),
+        bindings: [
+          TripDetailsBinding(),
+          TripBinding(),
+          HomeBinding(),
+          TripHistoryBinding()
+        ]),
+    GetPage(
+        name: CommonRoutes.VIEW_USER,
+        page: () => ViewUserPage(),
+        bindings: [ViewUserBinding(), UserBinding(), TripBinding()]),
     GetPage(
         name: CommonRoutes.BOOK_TRIP,
         page: () => BookTripPage(),
@@ -146,13 +166,12 @@ class AppPages {
       page: () => ManageBikePage(
         isBikeVerified: false,
       ),
-      binding: ManageBikeBinding(),
+      bindings: <Bindings>[ManageBikeBinding(), BikeBinding()],
     ),
     GetPage(
-      name: CommonRoutes.ADD_BIKE,
-      page: () => AddBikePage(),
-      binding: AddBikeBinding()
-    ),
+        name: CommonRoutes.ADD_BIKE,
+        page: () => AddBikePage(),
+        bindings: <Bindings>[AddBikeBinding(), BikeBinding()]),
     GetPage(
       name: CommonRoutes.VOUCHER_DETAILS,
       page: () => VoucherDetailPage(),
@@ -198,9 +217,6 @@ class AppPages {
         name: CommonRoutes.BAN_LIST,
         page: () => BanListPage(),
         binding: BanListBinding()),
-    GetPage(
-        name: CommonRoutes.TAKE_PICTURE,
-        page: () => AddBikeCameraPage()
-    )
+    GetPage(name: CommonRoutes.TAKE_PICTURE, page: () => AddBikeCameraPage())
   ];
 }

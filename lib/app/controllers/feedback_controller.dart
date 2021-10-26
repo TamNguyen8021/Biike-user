@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/BadWordsFilter/bad_words_filter.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
@@ -35,8 +36,7 @@ class FeedbackController extends GetxController {
   }
 
   bool isSendFeedbackSuccess() {
-    //TODO
-    print(_star.toString() + " - " + _feedback.toString());
+    Biike.logger.d(_star.toString() + " - " + _feedback.toString());
     _star = null;
     _feedback = null;
     return true;
