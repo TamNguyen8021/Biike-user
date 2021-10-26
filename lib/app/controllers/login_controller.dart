@@ -97,7 +97,7 @@ class LoginController extends GetxController {
       return false;
     }
 
-    if (pass.replaceAll(' ', '').length < 6) {
+    if (pass.trim().length < 6) {
       SnackBarServices.showSnackbar(
           title: '', message: 'mat khau phai dat 6 ky tu');
       return false;

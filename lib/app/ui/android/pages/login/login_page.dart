@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 padding: const EdgeInsets.symmetric(horizontal: 35.0),
                 child: SvgPicture.asset(
-                  "assets/images/biike-two-person.svg",
+                  'assets/images/biike-two-person.svg',
                   fit: BoxFit.fill,
                 ),
               ),

@@ -42,8 +42,8 @@ void main() {
         logFileExtension: LogFileExtension.TXT,
         logSystemCrashes: true,
         singleLogFileSize: 5,
-        logsWriteDirectoryName: "Logs",
-        logsExportDirectoryName: "Logs/Exported",
+        logsWriteDirectoryName: 'Logs',
+        logsExportDirectoryName: 'Logs/Exported',
         debugFileOperations: true,
         isDebuggable: true);
 
@@ -52,6 +52,10 @@ void main() {
           'Biike', 'main()', details.stack.toString(), Error());
     };
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     runApp(Biike());
   }, (Object error, StackTrace stack) {
     FlutterLogs.logErrorTrace('Biike', 'main()',

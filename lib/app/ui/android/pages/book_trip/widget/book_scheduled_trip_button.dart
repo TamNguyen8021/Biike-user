@@ -16,8 +16,7 @@ class BookScheduledTripButton extends StatelessWidget {
     if (result is bool) {
       Get.offAllNamed(CommonRoutes.HOME);
     } else {
-      CommonFunctions().showErrorDialog(context: context,
-          message: result);
+      CommonFunctions().showErrorDialog(context: context, message: result);
     }
   }
 
@@ -27,12 +26,12 @@ class BookScheduledTripButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20.0),
       child: Center(
         child: CustomTextButton(
-          backgroundColor: CustomColors.kOrange,
-          foregroundColor: Colors.white,
-          width: 135,
-          text: CustomStrings.kBookScheduleTrip.tr,
-          onPressedFunc: () => _bookScheduledTrip(context)
-        ),
+            hasBorder: false,
+            backgroundColor: CustomColors.kOrange,
+            foregroundColor: Colors.white,
+            width: 135,
+            text: CustomStrings.kBookScheduleTrip.tr,
+            onPressedFunc: () => _bookScheduledTrip(context)),
       ),
     );
   }

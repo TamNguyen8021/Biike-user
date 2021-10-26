@@ -80,6 +80,7 @@ class BookTripMapViewer extends StatelessWidget {
               )),
         ),
         CustomTextButton(
+            hasBorder: true,
             backgroundColor: Colors.white,
             foregroundColor: CustomColors.kBlue,
             text: CustomStrings.kViewRouteInstruction.tr,

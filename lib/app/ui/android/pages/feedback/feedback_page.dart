@@ -91,7 +91,7 @@ class FeedbackPage extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     Text(
-                                      "EXP",
+                                      'EXP',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),

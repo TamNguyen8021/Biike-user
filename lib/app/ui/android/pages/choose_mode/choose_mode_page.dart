@@ -23,7 +23,7 @@ class ChooseModePage extends StatelessWidget {
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/line-map.png"),
+                  image: AssetImage('assets/images/line-map.png'),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                       CustomColors.kLightGray.withOpacity(0.5),

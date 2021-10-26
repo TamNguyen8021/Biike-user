@@ -19,7 +19,7 @@ final Map<String, String> vi = {
   // '003.1_login'
   'kLoginButton': 'Xác thực bằng email FPT',
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': "Điều khoản dịch vụ và Chính sách bảo mật",
+  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
@@ -185,6 +185,8 @@ final Map<String, String> vi = {
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
   'kPartnerFeedback': 'Feedback từ người đồng hành',
+  'kExpandMap': 'Mở rộng bản đồ',
+  'kMinimizeMap': 'Thu nhỏ bản đồ',
   'kViewRouteInstruction': 'Xem chỉ đường',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',

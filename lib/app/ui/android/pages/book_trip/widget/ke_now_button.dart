@@ -29,13 +29,12 @@ class KeNowButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 4.0),
         child: CustomTextButton(
+            hasBorder: false,
             backgroundColor: CustomColors.kBlue,
             foregroundColor: Colors.white,
             text: CustomStrings.kBookNowTrip.tr,
-            onPressedFunc: () => _bookKeNowTrip(context)
-        ),
+            onPressedFunc: () => _bookKeNowTrip(context)),
       ),
     );
   }
-
 }

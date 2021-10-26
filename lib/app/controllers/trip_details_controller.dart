@@ -12,6 +12,7 @@ import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -106,6 +107,7 @@ class TripDetailsController extends GetxController {
 
   Future<void> getRoutePoints(
       String startLng, String startLat, String endLng, String endLat) async {
+    polypoints.clear();
     var data =
         await _tripProvider.getRouteData(startLng, startLat, endLng, endLat);
     List coordinates = data['features'][0]['geometry']['coordinates'];
@@ -184,6 +186,7 @@ class TripDetailsController extends GetxController {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kRed,
                               foregroundColor: Colors.white,
                               text: CustomStrings.kCancel.tr,
@@ -194,6 +197,7 @@ class TripDetailsController extends GetxController {
                                     cancelReason: _cancelReason.value);
                               }),
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kLightGray,
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
@@ -202,6 +206,108 @@ class TripDetailsController extends GetxController {
                               }),
                         ],
                       ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  /// Author: TamNTT
+  dynamic showHelpCenter({required BuildContext context}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      CustomStrings.kHelpCenter.tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.share_outlined,
+                    text: CustomStrings.kShareTripInfo.tr,
+                    isLastRow: false,
+                    onTapFunc: () {},
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.dialpad,
+                    text: CustomStrings.kSOSCenter.tr,
+                    isLastRow: false,
+                    onTapFunc: () {},
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.local_police_outlined,
+                    text: CustomStrings.kNeedPolice.tr,
+                    isLastRow: false,
+                    onTapFunc: () {
+                      CommonFunctions().makingPhoneCall(phoneNo: '113');
+                    },
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.add_box_outlined,
+                    text: CustomStrings.kNearestHospital.tr,
+                    isLastRow: false,
+                    onTapFunc: () async {
+                      await CommonFunctions().openMap(
+                          keyword: 'bệnh+viện',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude,
+                          context: context);
+                    },
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.build_circle_outlined,
+                    text: CustomStrings.kNearestMechanicShop.tr,
+                    isLastRow: false,
+                    onTapFunc: () async {
+                      await CommonFunctions().openMap(
+                          keyword: 'tiệm+sửa+xe',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude,
+                          context: context);
+                    },
+                  ),
+                  HelpCenterRow(
+                    icon: Icons.local_gas_station,
+                    text: CustomStrings.kNearestGasStation.tr,
+                    isLastRow: true,
+                    onTapFunc: () async {
+                      await CommonFunctions().openMap(
+                          keyword: 'trạm+xăng',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude,
+                          context: context);
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 30.0),
+                    alignment: Alignment.center,
+                    child: CustomTextButton(
+                      hasBorder: false,
+                      backgroundColor: CustomColors.kLightGray,
+                      foregroundColor: CustomColors.kDarkGray,
+                      text: CustomStrings.kBtnExit.tr,
+                      onPressedFunc: () {
+                        Get.back();
+                      },
+                      elevation: 1.0,
                     ),
                   ),
                 ],

@@ -85,6 +85,7 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CustomTextButton(
+                          hasBorder: false,
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
                           width: 100,

@@ -64,10 +64,10 @@ class RegisterController extends GetxController {
   }
 
   String _validate(String name, String email, String pass, String phone) {
-    if (name.replaceAll(" ", "").isEmpty) {
+    if (name.trim().isEmpty) {
       return 'not null';
     }
-    if (email.replaceAll(" ", "").isEmpty) {
+    if (email.trim().isEmpty) {
       return 'email must not be null';
     }
 
@@ -76,11 +76,10 @@ class RegisterController extends GetxController {
       return 'must login with FPT email';
     }
 
-    if (pass.replaceAll(" ", "").length < 6) {
+    if (pass.trim().length < 6) {
       return 'mat khau phia dat 6 ky tu';
     }
-    if (phone.replaceAll(" ", "").length < 9 ||
-        phone.replaceAll(" ", "").length > 11) {
+    if (phone.trim().length < 9 || phone.trim().length > 11) {
       return 'vui long nhap so dien thoai đúng';
     }
     return '';

@@ -9,7 +9,7 @@ class FirebaseServices {
   Future<bool> get isLogin async => (await token).isEmpty;
   String get uid => user?.uid ?? '';
   bool get isVerifyEmail => user?.emailVerified ?? false;
-  String _verificationId = "";
+  String _verificationId = '';
   late FirebaseAuth firebaseAuth;
 
   static FirebaseServices init() {

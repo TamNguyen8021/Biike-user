@@ -8,14 +8,17 @@ import 'package:flutter_map/plugin_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TripDetailsMapViewer extends StatelessWidget {
   final TripDetailsController tripDetailsController;
   final String departureCoordinate;
   final String destinationCoordinate;
+  final bool isFullMap;
 
   TripDetailsMapViewer(
       {Key? key,
+      required this.isFullMap,
       required this.tripDetailsController,
       required this.departureCoordinate,
       required this.destinationCoordinate})
@@ -32,14 +35,24 @@ class TripDetailsMapViewer extends StatelessWidget {
     double _destinationLongtitude =
         double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
 
+    Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
+
+    if (isFullMap) {
+      isViewRouteInstructionButtonVisible.value = false;
+    }
+
     return Column(
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: 150.0,
-          margin: const EdgeInsets.only(top: 16.0),
+          height: isFullMap
+              ? MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  88.0
+              : 150.0,
+          margin: EdgeInsets.only(top: isFullMap ? 0.0 : 16.0),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
                 future: tripDetailsController.getRoutePoints(
                     _departureLongtitude.toString(),
@@ -57,15 +70,42 @@ class TripDetailsMapViewer extends StatelessWidget {
                               (_departureLatitude + _destinationLatitude) / 2,
                               (_departureLongtitude + _destinationLongtitude) /
                                   2),
-                          zoom: 12.0),
-                      layers: [
+                          zoom: isFullMap ? 14.0 : 12.0),
+                      layers: <LayerOptions>[
                         TileLayerOptions(
                           urlTemplate:
                               'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                           subdomains: ['a', 'b', 'c'],
+                          retinaMode: true &&
+                              MediaQuery.of(context).devicePixelRatio > 1.0,
+                          attributionBuilder: (BuildContext context) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Stack(
+                                children: <Widget>[
+                                  Text(
+                                    '© OpenStreetMap contributors',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 3
+                                        ..color = Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    '© OpenStreetMap contributors',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
                         MarkerLayerOptions(markers: <Marker>[
                           Marker(
+                              rotate: true,
                               point: LatLng(
                                   _departureLatitude, _departureLongtitude),
                               builder: (BuildContext context) {
@@ -76,6 +116,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                                 );
                               }),
                           Marker(
+                              rotate: true,
                               point: LatLng(
                                   _destinationLatitude, _destinationLongtitude),
                               builder: (BuildContext context) {
@@ -90,7 +131,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                             polylineCulling: true,
                             polylines: <Polyline>[
                               Polyline(
-                                  color: Colors.purpleAccent.withOpacity(0.5),
+                                  color: Colors.purple.withOpacity(0.5),
                                   strokeWidth: 5,
                                   points: tripDetailsController.polypoints
                                       .toList()),
@@ -103,19 +144,29 @@ class TripDetailsMapViewer extends StatelessWidget {
                 }),
           ),
         ),
-        CustomTextButton(
-            backgroundColor: Colors.white,
-            foregroundColor: CustomColors.kBlue,
-            text: CustomStrings.kViewRouteInstruction.tr,
-            onPressedFunc: () async {
-              String url =
-                  'https://www.openstreetmap.org/directions?engine=fossgis_osrm_bike&route=10.8414%2C106.8100%3B10.8491%2C106.7740';
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw 'Could not launch $url';
-              }
-            }),
+        Obx(
+          () => Visibility(
+            visible: isViewRouteInstructionButtonVisible.value,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: CustomTextButton(
+                  hasBorder: true,
+                  width: double.infinity,
+                  backgroundColor: Colors.white,
+                  foregroundColor: CustomColors.kBlue,
+                  text: CustomStrings.kViewRouteInstruction.tr,
+                  onPressedFunc: () async {
+                    String url =
+                        'https://www.openstreetmap.org/directions?engine=fossgis_osrm_bike&route=10.8414%2C106.8100%3B10.8491%2C106.7740';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  }),
+            ),
+          ),
+        ),
       ],
     );
   }

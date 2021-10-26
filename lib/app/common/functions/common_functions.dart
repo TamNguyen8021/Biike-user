@@ -223,12 +223,14 @@ class CommonFunctions {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           CustomTextButton(
+                            hasBorder: false,
                             backgroundColor: CustomColors.kBlue,
                             foregroundColor: Colors.white,
                             text: CustomStrings.kSure.tr,
                             onPressedFunc: onPressedFunc,
                           ),
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kLightGray,
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
@@ -260,13 +262,16 @@ class CommonFunctions {
   Future<void> openMap(
       {required String keyword,
       required double? latitude,
-      required double? longtitude}) async {
+      required double? longtitude,
+      required BuildContext context}) async {
     String googleUrl =
         'https://www.google.com/maps/search/$keyword/@$latitude,$longtitude';
 
     if (await canLaunch(googleUrl)) {
       await launch(googleUrl);
     } else {
+      showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
       FlutterLogs.logError(
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       Biike.logger.e('Could not open map');

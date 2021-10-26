@@ -4,7 +4,6 @@ import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/widgets/trip_details_map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
@@ -21,7 +20,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:location/location.dart';
 
 /// 'trip_details' screen
 //ignore: must_be_immutable
@@ -115,108 +113,6 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
-  /// Author: TamNTT
-  dynamic _showHelpCenter(
-      {required BuildContext context, required LocationData userLocation}) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      CustomStrings.kHelpCenter.tr,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  HelpCenterRow(
-                    icon: Icons.share_outlined,
-                    text: CustomStrings.kShareTripInfo.tr,
-                    isLastRow: false,
-                    onTapFunc: () {},
-                  ),
-                  HelpCenterRow(
-                    icon: Icons.dialpad,
-                    text: CustomStrings.kSOSCenter.tr,
-                    isLastRow: false,
-                    onTapFunc: () {},
-                  ),
-                  HelpCenterRow(
-                    icon: Icons.local_police_outlined,
-                    text: CustomStrings.kNeedPolice.tr,
-                    isLastRow: false,
-                    onTapFunc: () {
-                      CommonFunctions().makingPhoneCall(phoneNo: '113');
-                    },
-                  ),
-                  HelpCenterRow(
-                    icon: Icons.add_box_outlined,
-                    text: CustomStrings.kNearestHospital.tr,
-                    isLastRow: false,
-                    onTapFunc: () async {
-                      // LocationData _userLocation = await getCurrentLocation();
-                      await CommonFunctions().openMap(
-                          keyword: 'bệnh+viện',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude);
-                    },
-                  ),
-                  HelpCenterRow(
-                    icon: Icons.build_circle_outlined,
-                    text: CustomStrings.kNearestMechanicShop.tr,
-                    isLastRow: false,
-                    onTapFunc: () async {
-                      // LocationData _userLocation = await getCurrentLocation();
-                      await CommonFunctions().openMap(
-                          keyword: 'tiệm+sửa+xe',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude);
-                    },
-                  ),
-                  HelpCenterRow(
-                    icon: Icons.local_gas_station,
-                    text: CustomStrings.kNearestGasStation.tr,
-                    isLastRow: true,
-                    onTapFunc: () async {
-                      // LocationData _userLocation = await getCurrentLocation();
-                      await CommonFunctions().openMap(
-                          keyword: 'trạm+xăng',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude);
-                    },
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 30.0),
-                    alignment: Alignment.center,
-                    child: CustomTextButton(
-                      backgroundColor: CustomColors.kLightGray,
-                      foregroundColor: CustomColors.kDarkGray,
-                      text: CustomStrings.kBtnExit.tr,
-                      onPressedFunc: () {
-                        Get.back();
-                      },
-                      elevation: 1.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
@@ -249,10 +145,8 @@ class TripDetailsPage extends StatelessWidget {
                               vertical: 16.0, horizontal: 22.0),
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              _showHelpCenter(
-                                  context: context,
-                                  userLocation:
-                                      _tripDetailsController.userLocation);
+                              _tripDetailsController.showHelpCenter(
+                                  context: context);
                             },
                             icon: Icon(
                               Icons.support,
@@ -312,6 +206,7 @@ class TripDetailsPage extends StatelessWidget {
                                     ),
                                   ),
                                   TripDetailsMapViewer(
+                                      isFullMap: false,
                                       tripDetailsController:
                                           _tripDetailsController,
                                       departureCoordinate:
@@ -322,6 +217,25 @@ class TripDetailsPage extends StatelessWidget {
                                           _tripDetailsController
                                               .destinationStation
                                               .destinationCoordinate),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    margin: const EdgeInsets.only(bottom: 8.0),
+                                    child: CustomTextButton(
+                                        hasBorder: true,
+                                        width: double.infinity,
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: CustomColors.kBlue,
+                                        text: CustomStrings.kExpandMap.tr,
+                                        onPressedFunc: () {
+                                          Get.toNamed(
+                                              CommonRoutes
+                                                  .TRIP_DETAILS_FULL_MAP,
+                                              arguments: {
+                                                'tripId': _tripDetailsController
+                                                    .trip.tripId
+                                              });
+                                        }),
+                                  ),
                                   IntrinsicHeight(
                                     child: Row(
                                       children: <Widget>[

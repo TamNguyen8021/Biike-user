@@ -29,12 +29,12 @@ class VerifyPhoneController extends GetxController {
   }
 
   bool _validate(String otp) {
-    if (otp.replaceAll(' ', "").isEmpty) {
+    if (otp.trim().isEmpty) {
       SnackBarServices.showSnackbar(
           title: '', message: 'vui long nhap ma xac minh');
       return false;
     }
-    if (otp.replaceAll(' ', "").length != 6) {
+    if (otp.trim().length != 6) {
       SnackBarServices.showSnackbar(
           title: '', message: 'vui long nhap dung 6 so OPT');
       return false;

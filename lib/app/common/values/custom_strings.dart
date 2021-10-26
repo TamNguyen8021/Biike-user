@@ -176,6 +176,8 @@ class CustomStrings {
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
+  static const String kExpandMap = 'kExpandMap';
+  static const String kMinimizeMap = 'kMinimizeMap';
   static const String kViewRouteInstruction = 'kViewRouteInstruction';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';

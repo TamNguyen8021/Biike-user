@@ -30,6 +30,7 @@ import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
+import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_full_map_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/exchange_voucher_page.dart';
@@ -148,6 +149,13 @@ class AppPages {
           TripBinding(),
           HomeBinding(),
           TripHistoryBinding()
+        ]),
+    GetPage(
+        name: CommonRoutes.TRIP_DETAILS_FULL_MAP,
+        page: () => TripDetailsFullMapPage(),
+        bindings: <Bindings>[
+          TripDetailsBinding(),
+          TripBinding(),
         ]),
     GetPage(
         name: CommonRoutes.VIEW_USER,
