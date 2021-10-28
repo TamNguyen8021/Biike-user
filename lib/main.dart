@@ -54,7 +54,6 @@ void main() {
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
     ]);
     runApp(Biike());
   }, (Object error, StackTrace stack) {
