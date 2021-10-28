@@ -187,24 +187,32 @@ class HomeController extends GetxController {
   /// Load stations from API.
   ///
   /// Author: TamNTT
-  Future<Map> getStations() async {
+  Future<Map> getStations({required bool isDepartureSelected}) async {
     stations.clear();
     Map<String, dynamic> response;
 
-    if (departureStation.value.stationId! > 0) {
-      response = await _stationProvider.getListRelatedStation(
-          page: _currentPage,
-          limit: _limit,
-          departureId: departureStation.value.stationId!);
-    } else if (destinationStation.value.stationId! > 0) {
-      response = await _stationProvider.getListRelatedStation(
-          page: _currentPage,
-          limit: _limit,
-          departureId: destinationStation.value.stationId!);
+    if (isDepartureSelected) {
+      if (destinationStation.value.stationId! > 0) {
+        response = await _stationProvider.getListRelatedStation(
+            page: _currentPage,
+            limit: _limit,
+            departureId: destinationStation.value.stationId!);
+      } else {
+        response = await _stationProvider.getStations(
+            page: _currentPage, limit: _limit);
+      }
     } else {
-      response =
-          await _stationProvider.getStations(page: _currentPage, limit: _limit);
+      if (departureStation.value.stationId! > 0) {
+        response = await _stationProvider.getListRelatedStation(
+            page: _currentPage,
+            limit: _limit,
+            departureId: departureStation.value.stationId!);
+      } else {
+        response = await _stationProvider.getStations(
+            page: _currentPage, limit: _limit);
+      }
     }
+
     pagination = response['_meta'];
 
     for (var station in response['data']) {
@@ -226,7 +234,7 @@ class HomeController extends GetxController {
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(
-              future: getStations(),
+              future: getStations(isDepartureSelected: isDepartureStation),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Dialog(
