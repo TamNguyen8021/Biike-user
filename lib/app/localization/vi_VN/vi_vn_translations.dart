@@ -71,6 +71,8 @@ final Map<String, String> vi = {
   'kSelectDestinationStation': 'Chọn điểm đến',
   'kDecline': 'Từ chối',
   'kAccept': 'Chấp nhận',
+  'kSearchAgain': 'Đặt lại',
+  'kSearch': 'Lọc chuyến',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',

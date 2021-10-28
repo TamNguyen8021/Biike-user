@@ -69,6 +69,8 @@ final Map<String, String> en = {
   'kSelectDestinationStation': 'Destination station',
   'kDecline': 'Decline',
   'kAccept': 'Accept',
+  'kSearchAgain': 'Clear',
+  'kSearch': 'Search',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class TripProvider extends CommonProvider {
@@ -163,5 +164,41 @@ class TripProvider extends CommonProvider {
     return response.statusCode == HttpStatus.created
         ? Future.value(true)
         : Future.value(response.bodyString ?? '');
+  }
+
+  /// Search upcoming trips for biker
+  ///
+  /// Author: TamNTT
+  Future<Map<String, dynamic>> searchTrips(
+      {required int page,
+      required int limit,
+      DateTime? date,
+      TimeOfDay? time,
+      int? departureId,
+      int? destinationId}) async {
+    String _dateString = '';
+    String _timeString = '';
+
+    if (date != null) {
+      _dateString = date.toIso8601String();
+    }
+
+    if (time != null) {
+      _timeString = time.hour.toString() + ':' + time.minute.toString();
+    }
+
+    final response = await get(
+        UrlStrings.tripUrl +
+            'newlyCreatedTrip?page=$page&limit=$limit&date=$_dateString&time=$_timeString&departureId=$departureId&destinationId=$destinationId',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body;
+    }
   }
 }

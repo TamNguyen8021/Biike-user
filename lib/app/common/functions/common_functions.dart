@@ -71,8 +71,11 @@ class CommonFunctions {
 
     if (!isBirthDatePicker) {
       _firstDate = _currentTime;
-      _lastDate = DateTime(
-          _currentTime.year, _currentTime.month, _currentTime.day + 15);
+      _lastDate = DateTime(_currentTime.year + 1, DateTime.december, 31);
+    }
+
+    if (selectedDate.value == null) {
+      selectedDate.value = _currentTime;
     }
 
     final DateTime? pickedDate = await showDatePicker(
@@ -90,20 +93,17 @@ class CommonFunctions {
   /// Show a time picker on [context].
   ///
   /// Author: TamNTT
-  Future<String> selectTime(
+  Future<TimeOfDay> selectTime(
       {required BuildContext context,
-      required Rx<TimeOfDay> selectedTime}) async {
+      required Rx<TimeOfDay?> selectedTime}) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: selectedTime.value,
+      initialTime: selectedTime.value ?? TimeOfDay.now(),
       helpText: CustomStrings.kChooseTime.tr,
       cancelText: CustomStrings.kCancel.tr,
     );
-    if (pickedTime != null) {
-      selectedTime.value = pickedTime;
-    }
-    return MaterialLocalizations.of(context)
-        .formatTimeOfDay(selectedTime.value, alwaysUse24HourFormat: true);
+
+    return pickedTime!;
   }
 
   /// Display a dialog on [context] for success message.
