@@ -19,7 +19,8 @@ final Map<String, String> en = {
   // '003.1_login'
   'kLoginButton': 'Xác thực bằng email FPT',
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': "Điều khoản dịch vụ và Chính sách bảo mật",
+  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
+  'kForgotPassword': 'Forgot password',
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
@@ -320,7 +321,6 @@ final Map<String, String> en = {
   'kUnBlock': 'Unblock',
   'kLogin': 'Login',
   'kRegister': 'Register',
-  'vidu': 'toi ten la %s',
   'tranlatesion': 'Tranlation',
 
   // date

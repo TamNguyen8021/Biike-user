@@ -139,8 +139,7 @@ class LoginPage extends StatelessWidget {
                           Get.dialog(ForgotPasswordDialog());
                         },
                         child: Text(
-                          // forgot password
-                          'vidu'.trArgs(['nguyen the vinh', 'qw', 'we', 'we']),
+                          CustomStrings.kForgotPassword.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15.sp,

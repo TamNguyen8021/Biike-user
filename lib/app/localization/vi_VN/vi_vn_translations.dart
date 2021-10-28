@@ -19,7 +19,8 @@ final Map<String, String> vi = {
   // '003.1_login'
   'kLoginButton': 'Xác thực bằng email FPT',
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': "Điều khoản dịch vụ và Chính sách bảo mật",
+  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
+  'kForgotPassword': 'Quên mật khẩu',
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
@@ -322,8 +323,7 @@ final Map<String, String> vi = {
   'kUnBlock': 'Bỏ chặn',
   'kLogin': 'Đăng nhập',
   'kRegister': 'Đăng ký',
-  'vidu' : 'toi %s %s %s ten la %s',
-  'tranlatesion' : 'Đổi ngôn ngữ',
+  'tranlatesion': 'Đổi ngôn ngữ',
 
   // date
   'kMonday': 'T2',

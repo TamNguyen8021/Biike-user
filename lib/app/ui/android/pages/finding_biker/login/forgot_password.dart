@@ -30,12 +30,13 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             TextFormField(
               controller: emailController,
               decoration: InputDecoration(
-                hintText: 'email',
+                labelText: 'email',
               ),
+              style: Theme.of(context).textTheme.bodyText1,
               validator: (val) {
                 return _validate(val ?? '');
               },

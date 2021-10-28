@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/theme/app_theme.dart';
 import 'package:camera/camera.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -67,7 +68,7 @@ class Biike extends StatefulWidget {
   static final Logger logger = Logger();
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
-  static Rx<String> token = ''.obs;
+  // static Rx<String> token = ''.obs;
   static CameraDescription camera = cameras[0];
 
   const Biike({Key? key}) : super(key: key);
@@ -154,8 +155,6 @@ class _BiikeState extends State<Biike> {
       'utsname.machine:': data.utsname.machine,
     };
   }
-
-  get appThemeData => null;
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ class CustomStrings {
   static const String kLoginButton = 'kLoginButton';
   static const String kConfirmTerm = 'kConfirmTerm';
   static const String kTerm = 'kTerm';
+  static const String kForgotPassword = 'kForgotPassword';
 
   // '004.1_input_phone_no' screen
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
