@@ -76,6 +76,7 @@ dependencies:
   device_info_plus: ^3.1.0
   flutter_map: ^0.14.0
   location: ^4.3.0
+  flutter_localized_locales: ^2.0.3
   
 dev_dependencies:
   flutter_test:
