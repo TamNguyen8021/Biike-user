@@ -15,17 +15,13 @@ class LocalAppData {
         'userId', int.tryParse(services.firebaseAuth.currentUser!.uid) ?? -1);
     _pref.setString(
         'email', services.firebaseAuth.currentUser!.email.toString());
-    // _pref.setString('token', await services.token);
-    // _pref.setString('refreshToken',
-    //     services.firebaseAuth.currentUser!.refreshToken.toString());
     _pref.setString('role', 'Role.none');
   }
 
-  /// Load token, role, and userId from local
+  /// Load role, and userId from local
   ///
   /// Author: TamNTT
   Future<void> loadDataFromLocal() async {
-    // Biike.token.value = await Biike.localAppData.token;
     Biike.userId.value = await Biike.localAppData.userId;
     String roleString = await Biike.localAppData.role;
     Biike.role.value = Biike.role.value.getRoleEnum(roleString);
@@ -38,14 +34,6 @@ class LocalAppData {
     _pref = await SharedPreferences.getInstance();
     return _pref.getInt('userId') ?? -1;
   }
-
-  /// Get idToken saved when login
-  ///
-  /// Author: UyenNLP
-  // Future<String> get token async {
-  //   _pref = await SharedPreferences.getInstance();
-  //   return _pref.getString('token') ?? '';
-  // }
 
   /// Get role
   ///

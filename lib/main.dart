@@ -69,7 +69,6 @@ class Biike extends StatefulWidget {
   static final Logger logger = Logger();
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
-  // static Rx<String> token = ''.obs;
   static CameraDescription camera = cameras[0];
 
   const Biike({Key? key}) : super(key: key);

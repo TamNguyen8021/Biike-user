@@ -10,10 +10,7 @@ class CommonProvider extends GetConnect {
   ///
   /// Author: UyenNLP
   Future<Map<String, String>> get headers async {
-    ///chon cai final token: lay token moi, tu dong lay token moi khi het han, test co van de thi report
-   
-    // String token = Biike.token.value; <-- old
-    final token = await getIt<FirebaseServices>().user?.getIdToken(); //this <---- new ( author: vantl)
+    final token = await getIt<FirebaseServices>().user?.getIdToken(true);
     return <String, String>{'Authorization': 'Bearer $token'};
   }
 

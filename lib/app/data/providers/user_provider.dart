@@ -52,4 +52,21 @@ class UserProvider extends CommonProvider {
       return response.body['data'];
     }
   }
+
+  /// Change user's role.
+  ///
+  /// Author: TamNTT
+  Future<bool> changeRole() async {
+    final response =
+        await put(UrlStrings.userUrl + 'role', {}, headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
