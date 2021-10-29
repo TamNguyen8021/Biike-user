@@ -3,12 +3,14 @@ import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 
 class TripDetailsMapViewer extends StatelessWidget {
   final TripDetailsController tripDetailsController;
@@ -70,7 +72,14 @@ class TripDetailsMapViewer extends StatelessWidget {
                               (_departureLatitude + _destinationLatitude) / 2,
                               (_departureLongtitude + _destinationLongtitude) /
                                   2),
-                          zoom: isFullMap ? 14.0 : 12.0),
+                          zoom: isFullMap ? 14.0 : 12.0,
+                          onTap:
+                              (TapPosition tapPosition, LatLng latLng) async {
+                            tripDetailsController.showLocationDetails(
+                                context: context,
+                                latitude: latLng.latitude,
+                                longtitude: latLng.longitude);
+                          }),
                       layers: <LayerOptions>[
                         TileLayerOptions(
                           urlTemplate:

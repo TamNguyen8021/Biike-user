@@ -203,6 +203,10 @@ final Map<String, String> en = {
   'kNearestHospital': 'Nearest hospital',
   'kNearestMechanicShop': 'Nearest mechanic shop',
   'kNearestGasStation': 'Nearest gas station',
+  'kRoad': 'Road',
+  'kSuburb': 'Suburb',
+  'kCity': 'City',
+  'kCountry': 'Country',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',

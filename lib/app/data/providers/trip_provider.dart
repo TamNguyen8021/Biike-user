@@ -88,7 +88,7 @@ class TripProvider extends CommonProvider {
   /// Loads location data from API based on [latitude] and [longtitude].
   ///
   /// Author: TamNTT
-  Future<Map<String, String>> getLocationDetails(
+  Future<Map<String, dynamic>> getLocationDetails(
       {required double latitude, required double longtitude}) async {
     final response = await get(
         'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=$latitude&lon=$longtitude');
@@ -99,7 +99,7 @@ class TripProvider extends CommonProvider {
       logError(response);
       return Future.error(response.statusText!);
     } else {
-      return response.body['address'];
+      return response.body;
     }
   }
 

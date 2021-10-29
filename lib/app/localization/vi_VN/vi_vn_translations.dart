@@ -205,6 +205,10 @@ final Map<String, String> vi = {
   'kNearestHospital': 'Bệnh viện gần nhất',
   'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
   'kNearestGasStation': 'Trạm xăng gần nhất',
+  'kRoad': 'Đường',
+  'kSuburb': 'Phường',
+  'kCity': 'Thành phố',
+  'kCountry': 'Quốc gia',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',

@@ -195,6 +195,10 @@ class CustomStrings {
   static const String kNearestHospital = 'kNearestHospital';
   static const String kNearestMechanicShop = 'kNearestMechanicShop';
   static const String kNearestGasStation = 'kNearestGasStation';
+  static const String kRoad = 'kRoad';
+  static const String kSuburb = 'kSuburb';
+  static const String kCity = 'kCity';
+  static const String kCountry = 'kCountry';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';

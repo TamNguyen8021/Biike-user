@@ -13,7 +13,9 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
@@ -95,14 +97,83 @@ class TripDetailsController extends GetxController {
     }
   }
 
-  /// Loads location details.
-  ///
-  /// Author: TamNTT
-  Future<Map<String, String>> getLocationDetails(
+  Future<Map<String, dynamic>> getLocationDetails(
       {required double latitude, required double longtitude}) async {
-    Map<String, String> data = await _tripProvider.getLocationDetails(
+    Map<String, dynamic> data = await _tripProvider.getLocationDetails(
         latitude: latitude, longtitude: longtitude);
     return data;
+  }
+
+  /// Displays a dialog which shows location details when user tap on map.
+  ///
+  /// Author: TamNTT
+  void showLocationDetails(
+      {required BuildContext context,
+      required double latitude,
+      required double longtitude}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return FutureBuilder(
+              future: getLocationDetails(
+                  latitude: latitude, longtitude: longtitude),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  Biike.logger.d(snapshot.data);
+                  return Dialog(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            snapshot.data['name'],
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              CustomStrings.kRoad.tr +
+                                  ': ' +
+                                  snapshot.data['address']['road'],
+                              style: TextStyle(color: CustomColors.kDarkGray),
+                            ),
+                          ),
+                          Text(
+                            CustomStrings.kSuburb.tr +
+                                ': ' +
+                                snapshot.data['address']['suburb'],
+                            style: TextStyle(color: CustomColors.kDarkGray),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              CustomStrings.kCity.tr +
+                                  ': ' +
+                                  snapshot.data['address']['city'],
+                              style: TextStyle(color: CustomColors.kDarkGray),
+                            ),
+                          ),
+                          Text(
+                            CustomStrings.kCountry.tr +
+                                ': ' +
+                                snapshot.data['address']['country'],
+                            style: TextStyle(color: CustomColors.kDarkGray),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return Loading();
+                }
+              });
+        });
   }
 
   Future<void> getRoutePoints(
