@@ -74,6 +74,8 @@ final Map<String, String> vi = {
   'kAccept': 'Chấp nhận',
   'kSearchAgain': 'Đặt lại',
   'kSearch': 'Lọc chuyến',
+  'kTripCanOnlySearchFrom5AMTo9PM':
+      'Chỉ có thể tìm chuyến trong khoảng thời gian 5AM - 9PM',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',

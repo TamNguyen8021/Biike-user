@@ -109,7 +109,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for success message.
   ///
   /// Author: TamNTT
-  dynamic showSuccessDialog(
+  void showSuccessDialog(
       {required BuildContext context, required String message}) {
     showDialog(
         context: context,
@@ -148,7 +148,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for error message.
   ///
   /// Author: TamNTT
-  dynamic showErrorDialog(
+  void showErrorDialog(
       {required BuildContext context, required String message}) {
     showDialog(
         context: context,
@@ -187,7 +187,7 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  dynamic showConfirmDialog(
+  void showConfirmDialog(
       {required BuildContext context,
       required String title,
       required String message,

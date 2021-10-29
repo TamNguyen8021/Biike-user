@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -376,8 +377,7 @@ class Home extends StatelessWidget {
                                                     ],
                                                   ),
                                                   onTap: () async {
-                                                    homeController
-                                                            .searchTime.value =
+                                                    TimeOfDay tempTime =
                                                         await CommonFunctions()
                                                             .selectTime(
                                                                 context:
@@ -385,17 +385,34 @@ class Home extends StatelessWidget {
                                                                 selectedTime:
                                                                     homeController
                                                                         .searchTime);
-                                                    homeController
-                                                            .searchTimeString
-                                                            .value =
-                                                        MaterialLocalizations
-                                                                .of(context)
-                                                            .formatTimeOfDay(
-                                                                homeController
-                                                                    .searchTime
-                                                                    .value!,
-                                                                alwaysUse24HourFormat:
-                                                                    true);
+                                                    int tempTimeNum =
+                                                        tempTime.hour * 60 +
+                                                            tempTime.minute;
+                                                    int lowestBoundTimeNum =
+                                                        5 * 60;
+                                                    int highestBoundTimeNum =
+                                                        21 * 60;
+                                                    if (tempTimeNum >=
+                                                            lowestBoundTimeNum &&
+                                                        tempTimeNum <=
+                                                            highestBoundTimeNum) {
+                                                      homeController
+                                                              .searchTimeString
+                                                              .value =
+                                                          MaterialLocalizations
+                                                                  .of(context)
+                                                              .formatTimeOfDay(
+                                                                  tempTime,
+                                                                  alwaysUse24HourFormat:
+                                                                      true);
+                                                    } else {
+                                                      CommonFunctions().showErrorDialog(
+                                                          context: context,
+                                                          message:
+                                                              CustomErrorsString
+                                                                  .kTripCanOnlySearchFrom5AMTo9PM
+                                                                  .tr);
+                                                    }
                                                   },
                                                 ),
                                               ),

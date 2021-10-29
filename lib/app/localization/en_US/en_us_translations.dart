@@ -72,6 +72,7 @@ final Map<String, String> en = {
   'kAccept': 'Accept',
   'kSearchAgain': 'Clear',
   'kSearch': 'Search',
+  'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
