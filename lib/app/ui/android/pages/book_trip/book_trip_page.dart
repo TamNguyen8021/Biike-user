@@ -1,10 +1,10 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

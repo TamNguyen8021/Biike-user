@@ -1,10 +1,10 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
-import 'package:bikes_user/main.dart';
-import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

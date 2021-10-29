@@ -141,7 +141,14 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                final currentLg = Get.locale ?? Locale('vi', 'VN');
+                if (currentLg == Locale('vi', 'VN')) {
+                  Get.updateLocale(Locale('en', 'US'));
+                } else {
+                  Get.updateLocale(Locale('vi', 'VN'));
+                }
+              },
               child: Row(
                 children: <Widget>[
                   Padding(
