@@ -69,6 +69,7 @@ class CustomStrings {
   static const String kSelectDestinationStation = 'kSelectDestinationStation';
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
+  static const String kAcceptSuccessful = 'kAcceptSuccessful';
   static const String kSearchAgain = 'kSearchAgain';
   static const String kSearch = 'kSearch';
 

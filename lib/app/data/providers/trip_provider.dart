@@ -201,4 +201,23 @@ class TripProvider extends CommonProvider {
       return response.body;
     }
   }
+
+  /// Accept a trip based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> acceptTrip({required int tripId}) async {
+    final response = await put(
+        UrlStrings.tripUrl + '$tripId?bikerId=${Biike.userId.value.toString()}',
+        {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

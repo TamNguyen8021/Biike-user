@@ -71,7 +71,8 @@ final Map<String, String> vi = {
   'kSelectSourceStation': 'Chọn điểm đi',
   'kSelectDestinationStation': 'Chọn điểm đến',
   'kDecline': 'Từ chối',
-  'kAccept': 'Chấp nhận',
+  'kAccept': 'Nhận chuyến',
+  'kAcceptSuccessful': 'Nhận chuyến thành công',
   'kSearchAgain': 'Đặt lại',
   'kSearch': 'Lọc chuyến',
   'kTripCanOnlySearchFrom5AMTo9PM':
@@ -272,7 +273,7 @@ final Map<String, String> vi = {
   'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
   'kSendFailed': 'Gửi feedback thất bại!',
   'kDevelopError':
-      'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
+      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
   'kExchangeFailed': 'Không thể đổi voucher!',
   'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
   'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',

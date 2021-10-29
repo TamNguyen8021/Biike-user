@@ -270,7 +270,7 @@ class ViewUserPage extends StatelessWidget {
                                                   noItemsFoundIndicatorBuilder:
                                                       (BuildContext context) {
                                                     return Text(CustomStrings
-                                                        .kNoHistoryTrip);
+                                                        .kNoHistoryTrip.tr);
                                                   }),
                                         ),
                                       ),

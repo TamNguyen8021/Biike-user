@@ -70,6 +70,7 @@ final Map<String, String> en = {
   'kSelectDestinationStation': 'Destination station',
   'kDecline': 'Decline',
   'kAccept': 'Accept',
+  'kAcceptSuccessful': 'You have accepted this trip',
   'kSearchAgain': 'Clear',
   'kSearch': 'Search',
   'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
@@ -269,7 +270,7 @@ final Map<String, String> en = {
   'kIncludeBadWords': 'Please don\'t use bad words',
   'kSendFailed': 'Send feedback failed!',
   'kDevelopError':
-      'There are some errors, please contact Biiké development team for support',
+      'There are some errors, please try again later or contact Biiké development team for support',
   'kExchangeFailed': 'Can\'t exchange voucher!',
   'kNotEnoughPoint': 'User doesn\'t have enough point',
   'kNotChooseStation': 'You haven\'t choose your route',

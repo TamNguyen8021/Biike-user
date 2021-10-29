@@ -1,6 +1,11 @@
 import 'dart:io';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +15,10 @@ import 'package:intl/intl.dart';
 
 /// This widget contains an upcoming trip's details
 class UpcomingTripCard extends StatelessWidget {
+  final _tripProvider = Get.find<TripProvider>();
+  final _homeController = Get.find<HomeController>();
+
+  final bool isSearchedTrip;
   final int tripId;
   final int userId;
   final Color? backgroundColor;
@@ -22,8 +31,9 @@ class UpcomingTripCard extends StatelessWidget {
   final String departureStation;
   final String destinationStation;
 
-  const UpcomingTripCard(
+  UpcomingTripCard(
       {Key? key,
+      required this.isSearchedTrip,
       required this.tripId,
       required this.userId,
       this.backgroundColor,
@@ -45,6 +55,7 @@ class UpcomingTripCard extends StatelessWidget {
         _dateTime.month.toString() +
         ', ' +
         _dateTime.year.toString();
+    Rx<bool> _isStationVisible = true.obs;
 
     if (Platform.localeName == 'en_US') {
       _date = DateFormat.MMM().format(_dateTime) +
@@ -55,8 +66,14 @@ class UpcomingTripCard extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () => Get.toNamed(CommonRoutes.TRIP_DETAILS,
-          arguments: {'tripId': tripId, 'userId': userId, 'route': 'home'}),
+      onTap: () {
+        if (!isSearchedTrip) {
+          Get.toNamed(CommonRoutes.TRIP_DETAILS,
+              arguments: {'tripId': tripId, 'userId': userId, 'route': 'home'});
+        } else {
+          _isStationVisible.value = !_isStationVisible.value;
+        }
+      },
       child: Container(
         height: 82,
         child: Row(
@@ -134,70 +151,105 @@ class UpcomingTripCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Icon(
-                          Icons.adjust,
-                          color: iconColor != null
-                              ? iconColor
-                              : CustomColors.kBlue,
-                        ),
+              child: Obx(
+                () => _isStationVisible.value
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Icon(
+                                  Icons.adjust,
+                                  color: iconColor != null
+                                      ? iconColor
+                                      : CustomColors.kBlue,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  departureStation,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                          color: foregroundColor != null
+                                              ? foregroundColor
+                                              : CustomColors.kDarkGray),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2.0),
+                            child: Icon(
+                              Icons.more_vert_outlined,
+                              color: iconColor != null
+                                  ? iconColor
+                                  : CustomColors.kBlue,
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: iconColor != null
+                                      ? iconColor
+                                      : CustomColors.kBlue,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  destinationStation,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                          color: foregroundColor != null
+                                              ? foregroundColor
+                                              : CustomColors.kDarkGray),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: CustomTextButton(
+                            backgroundColor: CustomColors.kBlue,
+                            foregroundColor: Colors.white,
+                            text: CustomStrings.kAccept.tr,
+                            onPressedFunc: () async {
+                              bool isSuccess = await _tripProvider.acceptTrip(
+                                  tripId: tripId);
+                              if (isSuccess) {
+                                CommonFunctions().showSuccessDialog(
+                                    context: context,
+                                    message:
+                                        CustomStrings.kAcceptSuccessful.tr);
+                              } else {
+                                CommonFunctions().showErrorDialog(
+                                    context: context,
+                                    message:
+                                        CustomErrorsString.kDevelopError.tr);
+                              }
+                              await _homeController.searchTrips(
+                                  date: _homeController.searchDate.value,
+                                  time: _homeController.searchTime.value,
+                                  departureId: _homeController
+                                      .departureStation.value.stationId,
+                                  destinationId: _homeController
+                                      .destinationStation.value.stationId);
+                            },
+                            hasBorder: false),
                       ),
-                      Expanded(
-                        child: Text(
-                          departureStation,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(
-                                  color: foregroundColor != null
-                                      ? foregroundColor
-                                      : CustomColors.kDarkGray),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    child: Icon(
-                      Icons.more_vert_outlined,
-                      color: iconColor != null ? iconColor : CustomColors.kBlue,
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Icon(
-                          Icons.location_on,
-                          color: iconColor != null
-                              ? iconColor
-                              : CustomColors.kBlue,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          destinationStation,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(
-                                  color: foregroundColor != null
-                                      ? foregroundColor
-                                      : CustomColors.kDarkGray),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
               ),
             )
           ],

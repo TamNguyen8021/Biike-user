@@ -32,6 +32,8 @@ class ListUpcomingTrips extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(bottom: itemPadding),
             child: UpcomingTripCard(
+                isSearchedTrip:
+                    listUpcomingTrips.elementAt(index).isSearchedTrip,
                 tripId: listUpcomingTrips.elementAt(index).tripId,
                 userId: listUpcomingTrips.elementAt(index).userId,
                 avatarUrl: listUpcomingTrips.elementAt(index).avatarUrl,

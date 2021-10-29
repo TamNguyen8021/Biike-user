@@ -125,6 +125,7 @@ class HomeController extends GetxController {
       }
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
+          isSearchedTrip: false,
           tripId: trip.tripId,
           userId: user.userId,
           backgroundColor: backgroundColor,
@@ -169,6 +170,7 @@ class HomeController extends GetxController {
       DestinationStation destinationStation = DestinationStation.fromJson(item);
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
+          isSearchedTrip: true,
           tripId: trip.tripId,
           userId: user.userId,
           avatarUrl: user.avatar,

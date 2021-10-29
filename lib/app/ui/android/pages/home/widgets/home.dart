@@ -109,6 +109,7 @@ class Home extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10.0),
                                   child: UpcomingTripCard(
+                                      isSearchedTrip: false,
                                       tripId: homeController.upcomingTrips
                                           .toList()[0]
                                           .tripId,
@@ -219,6 +220,7 @@ class Home extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 bottom: 10.0),
                                             child: UpcomingTripCard(
+                                                isSearchedTrip: false,
                                                 tripId: homeController
                                                     .pagingController.itemList!
                                                     .elementAt(index)
