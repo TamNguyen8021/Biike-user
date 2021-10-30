@@ -69,17 +69,17 @@ class BookTripMapViewer extends StatelessWidget {
                           return Icon(
                             Icons.location_on,
                             color: Colors.green,
-                            size: 20,
+                            size: 25,
                           );
                         }),
                     Marker(
-                        point: LatLng(
-                            _destinationLatitude, _destinationLongitude),
+                        point:
+                            LatLng(_destinationLatitude, _destinationLongitude),
                         builder: (BuildContext context) {
                           return Icon(
                             Icons.location_on,
                             color: CustomColors.kRed,
-                            size: 20,
+                            size: 25,
                           );
                         }),
                   ]),
@@ -87,15 +87,12 @@ class BookTripMapViewer extends StatelessWidget {
                       polylineCulling: true,
                       polylines: <Polyline>[
                         Polyline(
-                            color: Colors.purpleAccent.withOpacity(0.5),
+                            color: Colors.purple.withOpacity(0.5),
                             strokeWidth: 5,
-                            points: _bookTripController.polypoints
-                                .toList()),
-                      ]
-                  ),
+                            points: _bookTripController.polypoints.toList()),
+                      ]),
                 ],
-              )
-          ),
+              )),
         ),
         CustomTextButton(
             backgroundColor: Colors.white,
