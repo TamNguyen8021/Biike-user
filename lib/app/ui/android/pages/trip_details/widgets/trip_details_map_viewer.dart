@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -23,14 +24,13 @@ class TripDetailsMapViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _departureLatitude =
-        double.tryParse(departureCoordinate.split(',')[0]) ?? 10.84165;
-    double _departureLongtitude =
-        double.tryParse(departureCoordinate.split(',')[1]) ?? 106.80965;
-    double _destinationLatitude =
-        double.tryParse(destinationCoordinate.split(',')[0]) ?? 10.84165;
-    double _destinationLongtitude =
-        double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
+    CustomLocation departure = CustomLocation(coordinate: departureCoordinate);
+    CustomLocation destination = CustomLocation(coordinate: destinationCoordinate);
+
+    double departureLatitude = departure.latitude;
+    double departureLongitude = departure.longitude;
+    double destinationLatitude = destination.latitude;
+    double destinationLongitude = destination.longitude;
 
     return Column(
       children: <Widget>[
@@ -42,10 +42,10 @@ class TripDetailsMapViewer extends StatelessWidget {
             borderRadius: BorderRadius.circular(5.0),
             child: FutureBuilder(
                 future: tripDetailsController.getRoutePoints(
-                    _departureLongtitude.toString(),
-                    _departureLatitude.toString(),
-                    _destinationLongtitude.toString(),
-                    _destinationLatitude.toString()),
+                    departureLongitude.toString(),
+                    departureLatitude.toString(),
+                    destinationLongitude.toString(),
+                    destinationLatitude.toString()),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -54,8 +54,8 @@ class TripDetailsMapViewer extends StatelessWidget {
                           onPositionChanged:
                               (MapPosition position, bool isChanged) {},
                           center: LatLng(
-                              (_departureLatitude + _destinationLatitude) / 2,
-                              (_departureLongtitude + _destinationLongtitude) /
+                              (departureLatitude + destinationLatitude) / 2,
+                              (departureLongitude + destinationLongitude) /
                                   2),
                           zoom: 12.0),
                       layers: [
@@ -67,7 +67,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         MarkerLayerOptions(markers: <Marker>[
                           Marker(
                               point: LatLng(
-                                  _departureLatitude, _departureLongtitude),
+                                  departureLatitude, departureLongitude),
                               builder: (BuildContext context) {
                                 return Icon(
                                   Icons.location_on,
@@ -77,7 +77,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                               }),
                           Marker(
                               point: LatLng(
-                                  _destinationLatitude, _destinationLongtitude),
+                                  destinationLatitude, destinationLongitude),
                               builder: (BuildContext context) {
                                 return Icon(
                                   Icons.location_on,

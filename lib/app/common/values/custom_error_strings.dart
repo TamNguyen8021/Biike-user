@@ -11,4 +11,5 @@ class CustomErrorsString {
   static const String kNotChooseStation = 'kNotChooseStation';
   static const String kNotFillAllFields = 'kNotFillAllFields';
   static const String kNotAfterNow = 'kNotAfterNow';
+  static const String kNotAvailableTimeRange = 'kNotAvailableTimeRange';
 }

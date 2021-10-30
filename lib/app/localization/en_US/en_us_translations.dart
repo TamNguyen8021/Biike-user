@@ -324,6 +324,7 @@ final Map<String, String> en = {
     'kNotChooseStation': 'You haven\'t choose your route',
     'kNotFillAllFields': 'Please fill in all fields',
     'kNotAfterNow': 'You can\'t book a trip from the past',
+    'kNotAvailableTimeRange': 'Available time is between 6 AM and 9 PM',
     'kErrorName': 'Tên của bạn không hợp lệ',
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
   });

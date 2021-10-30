@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/date_enum.dart';
 import 'package:bikes_user/app/data/models/station.dart';
@@ -7,7 +8,6 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' show cos, sqrt, asin;
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -49,6 +49,7 @@ class BookTripController extends GetxController {
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
     polypoints.value = [];
+    roadDistance.value = 0;
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -62,23 +63,16 @@ class BookTripController extends GetxController {
   /// Change data of the destination station
   ///
   /// Author: UyenNLP
-  void updateDestinationStation(value) async {
+  void updateDestinationStation(destinationValue) async {
     polypoints.value = [];
-    await _drawLine(value);
 
-    destinationStation.value = value;
+    CustomLocation departure = CustomLocation(coordinate: departureStation.value.coordinate);
+    CustomLocation destination = CustomLocation(coordinate: destinationValue.coordinate);
 
-    double departureLatitude =
-        double.parse(departureStation.value.coordinate.split(',')[0]);
-    double departureLongitude =
-        double.parse(departureStation.value.coordinate.split(',')[1]);
-    double destinationLatitude =
-        double.parse(destinationStation.value.coordinate.split(',')[0]);
-    double destinationLongitude =
-        double.parse(destinationStation.value.coordinate.split(',')[1]);
+    await _drawLine(departure: departure, destination: destination);
 
-    roadDistance.value = _calculateDistance(departureLongitude,
-        departureLatitude, destinationLongitude, destinationLatitude);
+    destinationStation.value = destinationValue;
+    roadDistance.value = departure.distanceFrom(destination);
   }
 
   /// Add to a repeated date list
@@ -117,13 +111,14 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Select specific time to book a scheduled trip
+  /// Select specific date to book a scheduled trip
   ///
   /// Author: TamNTT
   Future<void> selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime.value,
+
       helpText: CustomStrings.kChooseTime.tr,
       cancelText: CustomStrings.kCancel.tr,
     );
@@ -133,12 +128,12 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Set time from selected tag
+  /// Set date from selected tag
   ///
   /// Author: UyenNLP
-  void setTimeFromTag(String time) {
+  void setTimeFromTag(String date) {
     isTimeSelected.value = true;
-    selectedTime.value = CommonFunctions.stringToTimeOfDay(time);
+    selectedTime.value = CommonFunctions.stringToTimeOfDay(date);
   }
 
   /// Change value to repeat that scheduled trip or not
@@ -153,15 +148,19 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<dynamic> createKeNowTrip() async {
     DateTime currentTime = DateTime.now();
-    Map<String, dynamic> data = <String, dynamic>{
-      'KeerId': Biike.userId.value,
-      'DepartureId': this.departureStation.value.stationId,
-      'DestinationId': this.destinationStation.value.stationId,
-      'BookTime': DateTime(currentTime.year, currentTime.month, currentTime.day,
-              currentTime.hour, currentTime.minute + 15)
-          .toIso8601String(),
-      'IsScheduled': false
-    };
+    DateTime bookTime = DateTime(currentTime.year, currentTime.month,
+        currentTime.day, currentTime.hour, currentTime.minute + 15);
+
+    String check = _checkValidBeforeKeNow(bookTime);
+    if (check != '') {
+      return check;
+    }
+
+    var data = _getJsonData(
+        isScheduled: false,
+        bookTime: bookTime.toIso8601String()
+    );
+
     return await _tripProvider.createKeNowTrip(data);
   }
 
@@ -183,15 +182,12 @@ class BookTripController extends GetxController {
 
     DateTime endDate = _getEndDate(startDate);
 
-    Map<String, dynamic> data = <String, dynamic>{
-      'KeerId': Biike.userId.value,
-      'DepartureId': this.departureStation.value.stationId,
-      'DestinationId': this.destinationStation.value.stationId,
-      'BookTime': _getListOfDates(startDate, endDate)
-          .map((e) => e.toIso8601String())
-          .toList(),
-      'IsScheduled': true
-    };
+    var data = _getJsonData(
+        isScheduled: true,
+        bookTime: _getListOfDates(startDate, endDate)
+            .map((e) => e.toIso8601String())
+            .toList()
+    );
 
     return await _tripProvider.createScheduledTrip(data);
   }
@@ -223,12 +219,15 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Check if fill all fields
+  /// Check if valid
   ///
   /// Author: UyenNLP
   String _checkValidBeforeScheduleTrip(DateTime date) {
     if (!isDateSelected.value || !isTimeSelected.value)
       return CustomErrorsString.kNotFillAllFields.tr;
+
+    if (!_isAvailable(date))
+      return CustomErrorsString.kNotAvailableTimeRange.tr;
 
     // Is repeated
     if (isRepeated.value) {
@@ -239,6 +238,33 @@ class BookTripController extends GetxController {
     }
 
     return '';
+  }
+
+  /// Check if valid
+  ///
+  /// Author: UyenNLP
+  String _checkValidBeforeKeNow(DateTime date) {
+    if (!_isAvailable(date)) {
+      return CustomErrorsString.kNotAvailableTimeRange.tr;
+    }
+
+    if (departureStation.value.stationId == -1
+        || destinationStation.value.stationId == -1) {
+      return CustomErrorsString.kNotChooseStation.tr;
+    }
+
+    return '';
+  }
+
+  /// If selected time in the available time range
+  ///
+  /// Author: UyenNLP
+  bool _isAvailable(DateTime date) {
+    TimeOfDay startTime = TimeOfDay(hour: 6, minute: 00);
+    TimeOfDay endTime = TimeOfDay(hour: 21, minute: 00);
+
+    return ((date.hour > startTime.hour) || (date.hour == startTime.hour && date.minute >= startTime.minute))
+        && ((date.hour < endTime.hour) || (date.hour == endTime.hour && date.minute <= endTime.minute));
   }
 
   /// Get a full list of station from db
@@ -285,14 +311,11 @@ class BookTripController extends GetxController {
             : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
   }
 
-  Future<void> _drawLine(destinationValue) async {
-    String departureLatitude = departureStation.value.coordinate.split(',')[0];
-    String departureLongitude = departureStation.value.coordinate.split(',')[1];
-    String destinationLatitude = destinationValue.coordinate.split(',')[0];
-    String destinationLongitude = destinationValue.coordinate.split(',')[1];
-
-    var data = await _tripProvider.getRouteData(departureLongitude,
-        departureLatitude, destinationLongitude, destinationLatitude);
+  Future<void> _drawLine({required CustomLocation departure, required CustomLocation destination}) async {
+    var data = await _tripProvider.getRouteData(departure.longitude.toString(),
+        departure.latitude.toString(),
+        destination.longitude.toString(),
+        destination.latitude.toString());
 
     List coordinates = data['features'][0]['geometry']['coordinates'];
     coordinates
@@ -300,13 +323,16 @@ class BookTripController extends GetxController {
         .toList();
   }
 
-  double _calculateDistance(
-      double startLng, double startLat, double endLng, double endLat) {
-    var p = 0.017453292519943295;
-    var c = cos;
-    var a = 0.5 -
-        c((endLat - startLat) * p) / 2 +
-        c(startLat * p) * c(endLat * p) * (1 - c((endLng - startLng) * p)) / 2;
-    return 12742 * asin(sqrt(a));
+  /// Get data to attach to body of api
+  ///
+  /// Author: UyenNLP
+  Map<String, dynamic> _getJsonData({required bool isScheduled, required dynamic bookTime}) {
+    return <String, dynamic>{
+      'KeerId': Biike.userId.value,
+      'DepartureId': this.departureStation.value.stationId,
+      'DestinationId': this.destinationStation.value.stationId,
+      'BookTime' : bookTime,
+      'IsScheduled' : isScheduled
+    };
   }
 }
