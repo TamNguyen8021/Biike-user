@@ -325,10 +325,14 @@ class TripDetailsController extends GetxController {
                   ),
                   HelpCenterRow(
                     icon: Icons.local_police_outlined,
-                    text: CustomStrings.kNeedPolice.tr,
+                    text: CustomStrings.kNearestPoliceStation.tr,
                     isLastRow: false,
-                    onTapFunc: () {
-                      CommonFunctions().makingPhoneCall(phoneNo: '113');
+                    onTapFunc: () async {
+                      await CommonFunctions().openMap(
+                          keyword: 'công+an',
+                          latitude: userLocation.latitude,
+                          longtitude: userLocation.longitude,
+                          context: context);
                     },
                   ),
                   HelpCenterRow(

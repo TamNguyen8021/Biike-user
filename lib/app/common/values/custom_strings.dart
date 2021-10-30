@@ -191,8 +191,7 @@ class CustomStrings {
   static const String kHelpCenter = 'kHelpCenter';
   static const String kShareTripInfo = 'kShareTripInfo';
   static const String kSOSCenter = 'kSOSCenter';
-  static const String kNeedPolice = 'kNeedPolice';
-  static const String kNeedEmergency = 'kNeedEmergency';
+  static const String kNearestPoliceStation = 'kNearestPoliceStation';
   static const String kNearestHospital = 'kNearestHospital';
   static const String kNearestMechanicShop = 'kNearestMechanicShop';
   static const String kNearestGasStation = 'kNearestGasStation';
