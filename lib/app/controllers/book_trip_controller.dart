@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/date_enum.dart';
 import 'package:bikes_user/app/data/models/station.dart';
@@ -7,7 +8,6 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' show cos, sqrt, asin;
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -49,6 +49,7 @@ class BookTripController extends GetxController {
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
     polypoints.value = [];
+    roadDistance.value = 0;
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -62,23 +63,16 @@ class BookTripController extends GetxController {
   /// Change data of the destination station
   ///
   /// Author: UyenNLP
-  void updateDestinationStation(value) async {
+  void updateDestinationStation(destinationValue) async {
     polypoints.value = [];
-    await _drawLine(value);
 
-    destinationStation.value = value;
+    CustomLocation departure = CustomLocation(coordinate: departureStation.value.coordinate);
+    CustomLocation destination = CustomLocation(coordinate: destinationValue.coordinate);
 
-    double departureLatitude =
-        double.parse(departureStation.value.coordinate.split(',')[0]);
-    double departureLongitude =
-        double.parse(departureStation.value.coordinate.split(',')[1]);
-    double destinationLatitude =
-        double.parse(destinationStation.value.coordinate.split(',')[0]);
-    double destinationLongitude =
-        double.parse(destinationStation.value.coordinate.split(',')[1]);
+    await _drawLine(departure: departure, destination: destination);
 
-    roadDistance.value = _calculateDistance(departureLongitude,
-        departureLatitude, destinationLongitude, destinationLatitude);
+    destinationStation.value = destinationValue;
+    roadDistance.value = departure.distanceFrom(destination);
   }
 
   /// Add to a repeated date list
@@ -285,28 +279,15 @@ class BookTripController extends GetxController {
             : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
   }
 
-  Future<void> _drawLine(destinationValue) async {
-    String departureLatitude = departureStation.value.coordinate.split(',')[0];
-    String departureLongitude = departureStation.value.coordinate.split(',')[1];
-    String destinationLatitude = destinationValue.coordinate.split(',')[0];
-    String destinationLongitude = destinationValue.coordinate.split(',')[1];
-
-    var data = await _tripProvider.getRouteData(departureLongitude,
-        departureLatitude, destinationLongitude, destinationLatitude);
+  Future<void> _drawLine({required CustomLocation departure, required CustomLocation destination}) async {
+    var data = await _tripProvider.getRouteData(departure.longitude.toString(),
+        departure.latitude.toString(),
+        destination.longitude.toString(),
+        destination.latitude.toString());
 
     List coordinates = data['features'][0]['geometry']['coordinates'];
     coordinates
         .map((pair) => polypoints.add(LatLng(pair[1], pair[0])))
         .toList();
-  }
-
-  double _calculateDistance(
-      double startLng, double startLat, double endLng, double endLat) {
-    var p = 0.017453292519943295;
-    var c = cos;
-    var a = 0.5 -
-        c((endLat - startLat) * p) / 2 +
-        c(startLat * p) * c(endLat * p) * (1 - c((endLng - startLng) * p)) / 2;
-    return 12742 * asin(sqrt(a));
   }
 }
