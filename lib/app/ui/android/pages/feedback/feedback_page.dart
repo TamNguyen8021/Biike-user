@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 
 /// The 'feedback' screen
 class FeedbackPage extends StatelessWidget {
-  final feedbackController = Get.find<FeedbackController>();
+  final _feedbackController = Get.find<FeedbackController>();
 
   FeedbackPage({Key? key}) : super(key: key);
 
@@ -151,7 +151,7 @@ class FeedbackPage extends StatelessWidget {
                                       itemPadding:
                                           EdgeInsets.symmetric(horizontal: 4.0),
                                       onRatingUpdate: (star) {
-                                        feedbackController
+                                        _feedbackController
                                             .updateStarRating(star.toInt());
                                       },
                                     ),
@@ -183,7 +183,7 @@ class FeedbackPage extends StatelessWidget {
                                           vertical: 10.0, horizontal: 15.0),
                                     ),
                                     onChanged: (feedback) {
-                                      feedbackController
+                                      _feedbackController
                                           .updateFeedback(feedback);
                                     },
                                   ),

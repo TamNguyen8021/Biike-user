@@ -1,25 +1,20 @@
+import 'package:bikes_user/app/common/functions/common_provider.dart';
+import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/data/models/feedback.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
-class FeedbackProvider extends GetConnect {
-  static const url = "https://localhost:44342/api/biike/v1";
+class FeedbackProvider extends CommonProvider {
+  Future<dynamic> sendFeedback(Feedback feedback) async {
+    final response = await post(UrlStrings.feedbackUrl,
+        feedback.toJson(),
+        headers: await headers);
 
-  Future<String> sendFeedback(Feedback feedback) async {
-    final response = await post("https://biike-api.azurewebsites.net/api/biike/v1/Feedbacks", feedback.toJson());
-    if (response.statusCode != 200) {
-      return Future.error(response.statusText!);
-      // return Future<bool>.value(false);
+    logResponse(response);
+
+    if (response.statusCode != HttpStatus.created) {
+      logError(response);
+      return Future.value(response.bodyString ?? '');
     }
-    return response.body;
-    // return Future<bool>.value(true);
-  }
-
-  Future<List<Feedback>> getFeedback() async {
-    final response = await get("https://biike-api.azurewebsites.net/api/biike/v1/Feedbacks/1");
-    if (response.statusCode == 200) {
-      // return Future.error(response.statusText!);
-    }
-    return response.body;
+    return Future.value(true);
   }
 }

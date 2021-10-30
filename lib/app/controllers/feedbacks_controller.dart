@@ -1,21 +1,20 @@
 import 'package:bikes_user/app/common/functions/BadWordsFilter/bad_words_filter.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/data/models/feedback.dart';
 import 'package:bikes_user/app/data/providers/feedback_provider.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
   var _star, _feedback;
-  final filter = BadWordsFilter();
+  var _criteria;
 
   bool _isStarRated() {
     return _star != null ? true : false;
   }
 
   bool _isFeedbackContainsBadWords() {
-    return _feedback != null && filter.hasBadWords(_feedback);
+    return _feedback != null && BadWordsFilter().hasBadWords(_feedback);
   }
 
   void updateStarRating(int star) {
@@ -38,24 +37,20 @@ class FeedbackController extends GetxController {
     return '';
   }
 
-  bool isSendFeedbackSuccess() {
-    //TODO
+  Future<dynamic> sendFeedback() async {
+    //TODO tripId
     Feedback feedback = new Feedback(
         feedbackId: -1,
-        userId: 2,
+        userId: Biike.userId.value,
         tripId: 1,
         feedbackContent: _feedback ?? '',
         tripStar: _star.toInt(),
-        criteria: "criteria");
+        criteria: _criteria ?? '');
 
-    FeedbackProvider fp = new FeedbackProvider();
-    var x= fp.sendFeedback(feedback);
-    print(">>>>>>>>>>>>" +  x.toString());
-
-    // var y = fp.getFeedback();
+    dynamic result = await FeedbackProvider().sendFeedback(feedback);
 
     _star = null;
     _feedback = null;
-    return true;
+    return result;
   }
 }
