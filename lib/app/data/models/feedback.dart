@@ -8,7 +8,7 @@ class Feedback {
   final int userId;
   final int tripId;
   final String feedbackContent;
-  final double tripStar;
+  final int tripStar;
   final String criteria;
 
   Feedback({required this.feedbackId, required this.userId, required this.tripId, required this.feedbackContent,

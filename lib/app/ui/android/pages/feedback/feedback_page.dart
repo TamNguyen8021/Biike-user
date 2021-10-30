@@ -152,7 +152,7 @@ class FeedbackPage extends StatelessWidget {
                                           EdgeInsets.symmetric(horizontal: 4.0),
                                       onRatingUpdate: (star) {
                                         feedbackController
-                                            .updateStarRating(star);
+                                            .updateStarRating(star.toInt());
                                       },
                                     ),
                                   ]),

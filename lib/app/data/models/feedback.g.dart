@@ -12,7 +12,7 @@ Feedback _$FeedbackFromJson(Map<String, dynamic> json) {
     userId: json['userId'] as int,
     tripId: json['tripId'] as int,
     feedbackContent: json['feedbackContent'] as String,
-    tripStar: (json['tripStar'] as num).toDouble(),
+    tripStar: (json['tripStar'] as num).toInt(),
     criteria: json['criteria'] as String,
   );
 }

@@ -3,7 +3,7 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/data/models/feedback.dart';
 import 'package:bikes_user/app/data/providers/feedback_provider.dart';
-import 'package:bikes_user/app/data/services/feedback_service.dart';
+import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
@@ -18,11 +18,11 @@ class FeedbackController extends GetxController {
     return _feedback != null && filter.hasBadWords(_feedback);
   }
 
-  void updateStarRating(star) {
+  void updateStarRating(int star) {
     _star = star;
   }
 
-  void updateFeedback(feedback) {
+  void updateFeedback(String feedback) {
     _feedback = feedback;
   }
 
@@ -39,14 +39,20 @@ class FeedbackController extends GetxController {
   }
 
   bool isSendFeedbackSuccess() {
-    // Feedback feedback = new Feedback(-1, 1, 5, _feedback, _star, "Chạy ghê");
-    Feedback feedback = new Feedback(feedbackId: -1,
-        userId: 1,
-        tripId: 5,
-        feedbackContent: 'sdbc', tripStar: 4, criteria: "njvns");
+    //TODO
+    Feedback feedback = new Feedback(
+        feedbackId: -1,
+        userId: 2,
+        tripId: 1,
+        feedbackContent: _feedback ?? '',
+        tripStar: _star.toInt(),
+        criteria: "criteria");
+
     FeedbackProvider fp = new FeedbackProvider();
-    fp.sendFeedback(feedback);
-    // fp.getFeedback();
+    var x= fp.sendFeedback(feedback);
+    print(">>>>>>>>>>>>" +  x.toString());
+
+    // var y = fp.getFeedback();
 
     _star = null;
     _feedback = null;

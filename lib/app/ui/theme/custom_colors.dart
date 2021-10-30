@@ -9,4 +9,5 @@ class CustomColors {
   static const kDarkGray = Color(0xFF707070);
   static const kOrange = Color(0xFFFF7E1D);
   static const kRed = Color(0xFFFF0000);
+  static const kWhite = Color(0xFFFFFFFF);
 }

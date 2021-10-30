@@ -5,14 +5,14 @@ import 'package:http/http.dart' as http;
 class FeedbackProvider extends GetConnect {
   static const url = "https://localhost:44342/api/biike/v1";
 
-  Future<bool> sendFeedback(Feedback feedback) async {
+  Future<String> sendFeedback(Feedback feedback) async {
     final response = await post("https://biike-api.azurewebsites.net/api/biike/v1/Feedbacks", feedback.toJson());
     if (response.statusCode != 200) {
-      // return Future.error(response.statusText!);
-      return false;
+      return Future.error(response.statusText!);
+      // return Future<bool>.value(false);
     }
-    // return response.body;
-    return true;
+    return response.body;
+    // return Future<bool>.value(true);
   }
 
   Future<List<Feedback>> getFeedback() async {
