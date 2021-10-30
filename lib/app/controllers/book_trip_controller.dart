@@ -149,8 +149,9 @@ class BookTripController extends GetxController {
   Future<dynamic> createKeNowTrip() async {
     DateTime currentTime = DateTime.now();
 
-    if (!_isAvailable(currentTime)) {
-      return CustomErrorsString.kNotAvailableTimeRange.tr;
+    String check = _checkValidBeforeKeNow(currentTime);
+    if (check != '') {
+      return check;
     }
 
     var data = _getJsonData(
@@ -218,7 +219,7 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Check if fill all fields
+  /// Check if valid
   ///
   /// Author: UyenNLP
   String _checkValidBeforeScheduleTrip(DateTime date) {
@@ -234,6 +235,22 @@ class BookTripController extends GetxController {
     } else {
       if (date.isBefore(DateTime.now()))
         return CustomErrorsString.kNotAfterNow.tr;
+    }
+
+    return '';
+  }
+
+  /// Check if valid
+  ///
+  /// Author: UyenNLP
+  String _checkValidBeforeKeNow(DateTime date) {
+    if (!_isAvailable(date)) {
+      return CustomErrorsString.kNotAvailableTimeRange.tr;
+    }
+
+    if (departureStation.value.stationId == -1
+        || destinationStation.value.stationId == -1) {
+      return CustomErrorsString.kNotChooseStation.tr;
     }
 
     return '';
