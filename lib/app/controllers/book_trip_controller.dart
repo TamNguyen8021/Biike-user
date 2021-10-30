@@ -148,15 +148,14 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<dynamic> createKeNowTrip() async {
     DateTime currentTime = DateTime.now();
-    Map<String, dynamic> data = <String, dynamic>{
-      'KeerId': Biike.userId.value,
-      'DepartureId': this.departureStation.value.stationId,
-      'DestinationId': this.destinationStation.value.stationId,
-      'BookTime': DateTime(currentTime.year, currentTime.month, currentTime.day,
-              currentTime.hour, currentTime.minute + 15)
-          .toIso8601String(),
-      'IsScheduled': false
-    };
+
+    var data = _getJsonData(
+        isScheduled: false,
+        bookTime: DateTime(currentTime.year, currentTime.month,
+            currentTime.day, currentTime.hour, currentTime.minute + 15)
+            .toIso8601String()
+    );
+
     return await _tripProvider.createKeNowTrip(data);
   }
 
@@ -178,15 +177,12 @@ class BookTripController extends GetxController {
 
     DateTime endDate = _getEndDate(startDate);
 
-    Map<String, dynamic> data = <String, dynamic>{
-      'KeerId': Biike.userId.value,
-      'DepartureId': this.departureStation.value.stationId,
-      'DestinationId': this.destinationStation.value.stationId,
-      'BookTime': _getListOfDates(startDate, endDate)
-          .map((e) => e.toIso8601String())
-          .toList(),
-      'IsScheduled': true
-    };
+    var data = _getJsonData(
+        isScheduled: true,
+        bookTime: _getListOfDates(startDate, endDate)
+            .map((e) => e.toIso8601String())
+            .toList()
+    );
 
     return await _tripProvider.createScheduledTrip(data);
   }
@@ -304,5 +300,18 @@ class BookTripController extends GetxController {
     coordinates
         .map((pair) => polypoints.add(LatLng(pair[1], pair[0])))
         .toList();
+  }
+
+  /// Get data to attach to body of api
+  ///
+  /// Author: UyenNLP
+  Map<String, dynamic> _getJsonData({required bool isScheduled, required dynamic bookTime}) {
+    return <String, dynamic>{
+      'KeerId': Biike.userId.value,
+      'DepartureId': this.departureStation.value.stationId,
+      'DestinationId': this.destinationStation.value.stationId,
+      'BookTime' : bookTime,
+      'IsScheduled' : isScheduled
+    };
   }
 }
