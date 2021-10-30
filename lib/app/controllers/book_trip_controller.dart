@@ -111,13 +111,14 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Select specific time to book a scheduled trip
+  /// Select specific date to book a scheduled trip
   ///
   /// Author: TamNTT
   Future<void> selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime.value,
+
       helpText: CustomStrings.kChooseTime.tr,
       cancelText: CustomStrings.kCancel.tr,
     );
@@ -127,12 +128,12 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Set time from selected tag
+  /// Set date from selected tag
   ///
   /// Author: UyenNLP
-  void setTimeFromTag(String time) {
+  void setTimeFromTag(String date) {
     isTimeSelected.value = true;
-    selectedTime.value = CommonFunctions.stringToTimeOfDay(time);
+    selectedTime.value = CommonFunctions.stringToTimeOfDay(date);
   }
 
   /// Change value to repeat that scheduled trip or not
@@ -224,6 +225,9 @@ class BookTripController extends GetxController {
     if (!isDateSelected.value || !isTimeSelected.value)
       return CustomErrorsString.kNotFillAllFields.tr;
 
+    if (!_isAvailable(date))
+      return CustomErrorsString.kNotAvailableTimeRange.tr;
+
     // Is repeated
     if (isRepeated.value) {
       if (_dateList.isEmpty) return CustomErrorsString.kNotFillAllFields.tr;
@@ -233,6 +237,17 @@ class BookTripController extends GetxController {
     }
 
     return '';
+  }
+
+  /// If selected time in the available time range
+  ///
+  /// Author: UyenNLP
+  bool _isAvailable(DateTime date) {
+    TimeOfDay startTime = TimeOfDay(hour: 6, minute: 00);
+    TimeOfDay endTime = TimeOfDay(hour: 21, minute: 00);
+
+    return ((date.hour > startTime.hour) || (date.hour == startTime.hour && date.minute >= startTime.minute))
+        && ((date.hour < endTime.hour) || (date.hour == endTime.hour && date.minute <= endTime.minute));
   }
 
   /// Get a full list of station from db
