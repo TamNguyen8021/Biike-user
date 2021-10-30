@@ -24,7 +24,6 @@ final Map<String, String> en = {
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
-  'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -33,7 +32,6 @@ final Map<String, String> en = {
 
   // '004.3_input_name' screen
   'kInputName': 'Nhập tên của bạn',
-  'kErrorName': 'Tên của bạn không hợp lệ',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
@@ -124,7 +122,6 @@ final Map<String, String> en = {
   'kBirthDate': 'Date of birth',
   'kChooseBirthDate': 'Choose a date',
   'kEditProfileSuccess': 'Your profile was edited',
-  'kEditProfileFailed': 'Your profile was not changed. Please try again later',
 
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',
@@ -223,7 +220,6 @@ final Map<String, String> en = {
   'kChooseDate': 'Choose date',
   'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
-  'kRepeatTo': 'Repeat until',
   'kCancel': 'Cancel',
 
   // 'bike_manager' screen
@@ -260,21 +256,6 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
-
-  // Error message
-  'kError': 'Error!',
-  'kErrorMessage':
-      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
-  'kNotRated': 'Please rate your trip experience',
-  'kIncludeBadWords': 'Please don\'t use bad words',
-  'kSendFailed': 'Send feedback failed!',
-  'kDevelopError':
-      'There are some errors, please try again later or contact Biiké development team for support',
-  'kExchangeFailed': 'Can\'t exchange voucher!',
-  'kNotEnoughPoint': 'User doesn\'t have enough point',
-  'kNotChooseStation': 'You haven\'t choose your route',
-  'kNotFillAllFields': 'Please fill in all fields',
-  'kNotAfterNow': 'You can\'t book a trip from the past',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -333,11 +314,30 @@ final Map<String, String> en = {
   'tranlatesion': 'Tranlation',
 
   // date
-  'kMonday': 'MON',
-  'kTuesday': 'TUE',
-  'kWednesday': 'WED',
-  'kThursday': 'THU',
-  'kFriday': 'FRI',
-  'kSaturday': 'SAT',
-  'kSunday': 'SUN',
-};
+  'kMonday': 'Mon',
+  'kTuesday': 'Tue',
+  'kWednesday': 'Wed',
+  'kThursday': 'Thu',
+  'kFriday': 'Fri',
+  'kSaturday': 'Sat',
+  'kSunday': 'Sun',
+}..addAll(<String, String>{
+    // Error message
+    'kError': 'Error!',
+    'kErrorMessage':
+        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
+    'kNotRated': 'Please rate your trip experience',
+    'kIncludeBadWords': 'Please don\'t use bad words',
+    'kSendFailed': 'Send feedback failed!',
+    'kDevelopError':
+        'There are some errors, please contact Biiké development team for support',
+    'kExchangeFailed': 'Can\'t exchange voucher!',
+    'kNotEnoughPoint': 'User doesn\'t have enough point',
+    'kNotChooseStation': 'You haven\'t choose your route',
+    'kNotFillAllFields': 'Please fill in all fields',
+    'kNotAfterNow': 'You can\'t book a trip from the past',
+    'kErrorName': 'Tên của bạn không hợp lệ',
+    'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
+    'kEditProfileFailed':
+        'Your profile was not changed. Please try again later',
+  });

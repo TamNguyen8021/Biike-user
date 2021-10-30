@@ -18,7 +18,9 @@ class DateButton extends StatelessWidget {
     return Obx(
       () => GestureDetector(
         child: Container(
-          padding: const EdgeInsets.all(10.0),
+          width: 35,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          margin: const EdgeInsets.only(right: 8.0),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: buttonColor.value,
@@ -35,6 +37,7 @@ class DateButton extends StatelessWidget {
                 .textTheme
                 .bodyText1!
                 .copyWith(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
           ),
         ),
         onTap: () {

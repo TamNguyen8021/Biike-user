@@ -138,6 +138,9 @@ class TripProvider extends CommonProvider {
     }
   }
 
+  /// Create a ke-now trip
+  ///
+  /// Author: UyenNLP
   Future<dynamic> createKeNowTrip(Map<String, dynamic> data) async {
     final response =
         await post(UrlStrings.tripUrl, data, headers: await headers);
@@ -147,23 +150,32 @@ class TripProvider extends CommonProvider {
       logError(response);
     }
 
-    return response.statusCode == HttpStatus.created
-        ? Future.value(true)
-        : Future.value(response.bodyString ?? '');
+    if (response.statusCode == HttpStatus.created) {
+      return true;
+    }
+
+    logError(response);
+    return response.bodyString ?? '';
   }
 
+  /// Create a scheduled trip
+  ///
+  /// Author: UyenNLP
   Future<dynamic> createScheduledTrip(Map<String, dynamic> data) async {
-    final response =
-        await post(UrlStrings.tripUrl, data, headers: await headers);
+    final response = await post(UrlStrings.tripUrl + 'schedule', data,
+        headers: await headers);
 
     logResponse(response);
     if (response.hasError) {
       logError(response);
     }
 
-    return response.statusCode == HttpStatus.created
-        ? Future.value(true)
-        : Future.value(response.bodyString ?? '');
+    if (response.statusCode == HttpStatus.created) {
+      return true;
+    }
+
+    logError(response);
+    return response.bodyString ?? '';
   }
 
   /// Search upcoming trips for biker

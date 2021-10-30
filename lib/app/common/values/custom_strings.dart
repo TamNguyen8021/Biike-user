@@ -214,7 +214,6 @@ class CustomStrings {
   static const String kChooseDate = 'kChooseDate';
   static const String kChooseTime = 'kChooseTime';
   static const String kRepeat = 'kRepeat';
-  static const String kRepeatTo = 'kRepeatTo';
   static const String kCancel = 'kCancel';
 
   // 'bike_manager' screen
