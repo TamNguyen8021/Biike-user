@@ -116,38 +116,16 @@ class BookScheduleTripPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Wrap(
-                        // crossAxisAlignment: const CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          DateButton(date: Date.monday),
-                          DateButton(date: Date.tuesday),
-                          DateButton(date: Date.wednesday),
-                          DateButton(date: Date.thursday),
-                          DateButton(date: Date.friday),
-                          DateButton(date: Date.saturday),
-                          DateButton(date: Date.sunday),
-                        ]
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
-                        child: Text(
-                          CustomStrings.kRepeatTo.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .copyWith(fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                      Obx(
-                        () => ChooseDateTimeButton(
-                            isOnProfilePage: false,
-                            text: _bookTripController
-                                    .isRepeatedDateSelected.value
-                                ? '${_bookTripController.repeatedDate.value.toLocal()}'
-                                    .split(' ')[0]
-                                : CustomStrings.kChooseDate.tr,
-                            onPressedFunc: () => _bookTripController
-                                .selectRepeatingDate(context)),
-                      ),
+                          // crossAxisAlignment: const CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            DateButton(date: Date.monday),
+                            DateButton(date: Date.tuesday),
+                            DateButton(date: Date.wednesday),
+                            DateButton(date: Date.thursday),
+                            DateButton(date: Date.friday),
+                            DateButton(date: Date.saturday),
+                            DateButton(date: Date.sunday),
+                          ]),
                     ],
                   ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/date_enum.dart';
@@ -6,7 +7,8 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'dart:math' show cos, sqrt, asin;
+import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
@@ -20,13 +22,13 @@ class BookTripController extends GetxController {
 
   Rx<DateTime> selectedDate = DateTime.now().obs;
   Rx<bool> isDateSelected = false.obs;
-  Rx<DateTime> repeatedDate = DateTime.now().obs;
-  Rx<bool> isRepeatedDateSelected = false.obs;
   Rx<TimeOfDay> selectedTime = TimeOfDay.now().obs;
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
-  
-  Rx<RoadInfo> roadInfo = RoadInfo().obs;
+
+  Rx<double> roadDistance = 0.0.obs;
+
+  RxList<LatLng> polypoints = <LatLng>[].obs;
 
   /// Thứ
   List<Date> _dateList = [];
@@ -36,7 +38,8 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<void> init() async {
     _getListStation();
-    listDestinationStation.value = List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
+    listDestinationStation.value =
+        List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
     destinationStation.value = listDestinationStation[0];
   }
 
@@ -45,6 +48,7 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
+    polypoints.value = [];
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -58,8 +62,23 @@ class BookTripController extends GetxController {
   /// Change data of the destination station
   ///
   /// Author: UyenNLP
-  void updateDestinationStation(value) {
+  void updateDestinationStation(value) async {
+    polypoints.value = [];
+    await _drawLine(value);
+
     destinationStation.value = value;
+
+    double departureLatitude =
+        double.parse(departureStation.value.coordinate.split(',')[0]);
+    double departureLongitude =
+        double.parse(departureStation.value.coordinate.split(',')[1]);
+    double destinationLatitude =
+        double.parse(destinationStation.value.coordinate.split(',')[0]);
+    double destinationLongitude =
+        double.parse(destinationStation.value.coordinate.split(',')[1]);
+
+    roadDistance.value = _calculateDistance(departureLongitude,
+        departureLatitude, destinationLongitude, destinationLatitude);
   }
 
   /// Add to a repeated date list
@@ -98,26 +117,6 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Choose a date to repeated up until
-  ///
-  /// Author: TamNTT
-  Future<void> selectRepeatingDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: repeatedDate.value.isBefore(selectedDate.value)
-          ? selectedDate.value
-          : repeatedDate.value,
-      firstDate: selectedDate.value,
-      lastDate: DateTime(2101),
-      helpText: CustomStrings.kChooseDate.tr,
-      cancelText: CustomStrings.kCancel.tr,
-    );
-    if (picked != null && picked != repeatedDate.value) {
-      isRepeatedDateSelected.value = true;
-      repeatedDate.value = picked;
-    }
-  }
-
   /// Select specific time to book a scheduled trip
   ///
   /// Author: TamNTT
@@ -132,6 +131,14 @@ class BookTripController extends GetxController {
       isTimeSelected.value = true;
       selectedTime.value = picked;
     }
+  }
+
+  /// Set time from selected tag
+  ///
+  /// Author: UyenNLP
+  void setTimeFromTag(String time) {
+    isTimeSelected.value = true;
+    selectedTime.value = CommonFunctions.stringToTimeOfDay(time);
   }
 
   /// Change value to repeat that scheduled trip or not
@@ -150,29 +157,40 @@ class BookTripController extends GetxController {
       'KeerId': Biike.userId.value,
       'DepartureId': this.departureStation.value.stationId,
       'DestinationId': this.destinationStation.value.stationId,
-      'BookTime' : DateTime(currentTime.year, currentTime.month,
-              currentTime.day, currentTime.hour, currentTime.minute + 15)
+      'BookTime': DateTime(currentTime.year, currentTime.month, currentTime.day,
+              currentTime.hour, currentTime.minute + 15)
           .toIso8601String(),
-      'IsScheduled' : false
+      'IsScheduled': false
     };
     return await _tripProvider.createKeNowTrip(data);
   }
 
+  /// Ké-er book a scheduled trip
+  ///
+  /// Author: UyenNLP
   Future<dynamic> createScheduledTrip() async {
-    DateTime date = DateTime(selectedDate.value.year, selectedDate.value.month,
-        selectedDate.value.day, selectedTime.value.hour, selectedTime.value.minute);
+    DateTime startDate = DateTime(
+        selectedDate.value.year,
+        selectedDate.value.month,
+        selectedDate.value.day,
+        selectedTime.value.hour,
+        selectedTime.value.minute);
 
-    String check = _checkValidBeforeScheduleTrip(date);
+    String check = _checkValidBeforeScheduleTrip(startDate);
     if (check != '') {
       return check;
     }
 
-    Map<String, dynamic> data = <String, dynamic> {
+    DateTime endDate = _getEndDate(startDate);
+
+    Map<String, dynamic> data = <String, dynamic>{
       'KeerId': Biike.userId.value,
       'DepartureId': this.departureStation.value.stationId,
       'DestinationId': this.destinationStation.value.stationId,
-      'BookTime' : _getListOfDates(date, repeatedDate.value),
-      'IsScheduled' : true
+      'BookTime': _getListOfDates(startDate, endDate)
+          .map((e) => e.toIso8601String())
+          .toList(),
+      'IsScheduled': true
     };
 
     return await _tripProvider.createScheduledTrip(data);
@@ -181,12 +199,12 @@ class BookTripController extends GetxController {
   /// Get list of dates with the same name of date as listDate contains
   ///
   /// Author: UyenNLP
-  List<String>_getListOfDates(DateTime start, DateTime end) {
+  List<DateTime> _getListOfDates(DateTime start, DateTime end) {
     if (!isRepeated.value) {
-      return [start.toIso8601String()];
+      return [start];
     }
 
-    List<String> listOfDays = [];
+    List<DateTime> listOfDays = [];
     final numberOfDate = end.difference(start).inDays + 1;
     List.generate(numberOfDate, (i) => _filterDate(listOfDays, start, i));
 
@@ -197,10 +215,11 @@ class BookTripController extends GetxController {
   ///
   /// Author: UyenNLP
   dynamic _filterDate(List list, DateTime date, int iteration) {
-    DateTime result = DateTime(date.year, date.month, date.day + (iteration));
+    DateTime result = DateTime(
+        date.year, date.month, date.day + (iteration), date.hour, date.minute);
 
     if (_dateList.contains(Date.values[result.weekday])) {
-      return list.add(result.toIso8601String());
+      return list.add(result);
     }
   }
 
@@ -213,10 +232,10 @@ class BookTripController extends GetxController {
 
     // Is repeated
     if (isRepeated.value) {
-      if (_dateList.isEmpty || !isRepeatedDateSelected.value)
-        return CustomErrorsString.kNotFillAllFields.tr;
+      if (_dateList.isEmpty) return CustomErrorsString.kNotFillAllFields.tr;
     } else {
-      if (date.isBefore(DateTime.now())) return CustomErrorsString.kNotAfterNow.tr;
+      if (date.isBefore(DateTime.now()))
+        return CustomErrorsString.kNotAfterNow.tr;
     }
 
     return '';
@@ -251,5 +270,43 @@ class BookTripController extends GetxController {
         0, Station.boilerplate(CustomStrings.kChooseTo.tr));
 
     destinationStation.value = listDestinationStation[0];
+  }
+
+  /// Get end date when selected repeated
+  ///
+  /// Author: UyenNLP
+  _getEndDate(DateTime startDate) {
+    // get duration from the startDate to end of that week
+    var duration = DateTime.daysPerWeek - startDate.weekday;
+
+    return startDate.add(Duration(
+        days: duration > 1 // not on weekend
+            ? duration + DateTime.daysPerWeek // add 1 more week
+            : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
+  }
+
+  Future<void> _drawLine(destinationValue) async {
+    String departureLatitude = departureStation.value.coordinate.split(',')[0];
+    String departureLongitude = departureStation.value.coordinate.split(',')[1];
+    String destinationLatitude = destinationValue.coordinate.split(',')[0];
+    String destinationLongitude = destinationValue.coordinate.split(',')[1];
+
+    var data = await _tripProvider.getRouteData(departureLongitude,
+        departureLatitude, destinationLongitude, destinationLatitude);
+
+    List coordinates = data['features'][0]['geometry']['coordinates'];
+    coordinates
+        .map((pair) => polypoints.add(LatLng(pair[1], pair[0])))
+        .toList();
+  }
+
+  double _calculateDistance(
+      double startLng, double startLat, double endLng, double endLat) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((endLat - startLat) * p) / 2 +
+        c(startLat * p) * c(endLat * p) * (1 - c((endLng - startLng) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 }

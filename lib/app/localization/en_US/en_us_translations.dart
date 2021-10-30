@@ -23,7 +23,6 @@ final Map<String, String> en = {
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
-  'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -32,7 +31,6 @@ final Map<String, String> en = {
 
   // '004.3_input_name' screen
   'kInputName': 'Nhập tên của bạn',
-  'kErrorName': 'Tên của bạn không hợp lệ',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
@@ -183,13 +181,21 @@ final Map<String, String> en = {
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
   'kPartnerFeedback': 'Partner\'s feedback',
-  'kOpenStreetMap': 'View Open Street Map',
+  'kViewRouteInstruction': 'View route instruction',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
   'kViewCancelTripReminder': 'You can view your canceled trips in history',
   'kLetUsKnowYourCancelReason':
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
+  'kHelpCenter': 'Help Center',
+  'kShareTripInfo': 'Share your trip\'s info',
+  'kSOSCenter': 'S.O.S Center',
+  'kNeedPolice': 'I need police',
+  'kNeedEmergency': 'I need emergency care',
+  'kNearestHospital': 'Nearest hospital',
+  'kNearestMechanicShop': 'Nearest mechanic shop',
+  'kNearestGasStation': 'Nearest gas station',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -205,7 +211,6 @@ final Map<String, String> en = {
   'kChooseDate': 'Choose date',
   'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
-  'kRepeatTo': 'Repeat until',
   'kCancel': 'Cancel',
 
   // 'bike_manager' screen
@@ -242,21 +247,6 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
-
-  // Error message
-  'kError': 'Error!',
-  'kErrorMessage':
-      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
-  'kNotRated': 'Please rate your trip experience',
-  'kIncludeBadWords': 'Please don\'t use bad words',
-  'kSendFailed': 'Send feedback failed!',
-  'kDevelopError':
-      'There are some errors, please contact Biiké development team for support',
-  'kExchangeFailed': 'Can\'t exchange voucher!',
-  'kNotEnoughPoint': 'User doesn\'t have enough point',
-  'kNotChooseStation': 'You haven\'t choose your route',
-  'kNotFillAllFields': 'Please fill in all fields',
-  'kNotAfterNow': 'You can\'t book a trip from the past',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -312,11 +302,28 @@ final Map<String, String> en = {
   'kUnBlock': 'Unblock',
 
   // date
-  'kMonday' : 'MON',
-  'kTuesday' : 'TUE',
-  'kWednesday' : 'WED',
-  'kThursday' : 'THU',
-  'kFriday' : 'FRI',
-  'kSaturday' : 'SAT',
-  'kSunday' : 'SUN',
-};
+  'kMonday': 'MON',
+  'kTuesday': 'TUE',
+  'kWednesday': 'WED',
+  'kThursday': 'THU',
+  'kFriday': 'FRI',
+  'kSaturday': 'SAT',
+  'kSunday': 'SUN',
+}..addAll(<String, String>{
+    // Error message
+    'kError': 'Error!',
+    'kErrorMessage':
+        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
+    'kNotRated': 'Please rate your trip experience',
+    'kIncludeBadWords': 'Please don\'t use bad words',
+    'kSendFailed': 'Send feedback failed!',
+    'kDevelopError':
+        'There are some errors, please contact Biiké development team for support',
+    'kExchangeFailed': 'Can\'t exchange voucher!',
+    'kNotEnoughPoint': 'User doesn\'t have enough point',
+    'kNotChooseStation': 'You haven\'t choose your route',
+    'kNotFillAllFields': 'Please fill in all fields',
+    'kNotAfterNow': 'You can\'t book a trip from the past',
+    'kErrorName': 'Tên của bạn không hợp lệ',
+    'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
+  });

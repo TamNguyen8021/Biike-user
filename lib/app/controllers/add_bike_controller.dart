@@ -4,6 +4,8 @@ import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class AddBikeController extends GetxController {
+  final _bikeProvider = Get.find<BikeProvider>();
+
   Rx<String> plateNumber = ''.obs;
   Rx<String> bikeOwner = ''.obs;
   Rx<String> picture = ''.obs;
@@ -28,7 +30,7 @@ class AddBikeController extends GetxController {
       'brand': brand.value,
     };
 
-    bool result = await new BikeProvider().addBike(data);
+    bool result = await _bikeProvider.addBike(data);
     if (result) {
       Get.back();
       SnackBarServices.showSnackbar(

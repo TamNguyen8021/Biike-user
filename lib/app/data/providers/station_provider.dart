@@ -13,7 +13,7 @@ class StationProvider extends CommonProvider {
         headers: await headers);
 
     logResponse(response);
-        
+
     if (response.status.hasError) {
       logError(response);
       return Future.error(response.statusText!);
@@ -24,7 +24,8 @@ class StationProvider extends CommonProvider {
 
   Future<dynamic> getListRelatedStation({required int departureId}) async {
     final response = await get(
-        UrlStrings.stationUrl + '/relatedStations?page=1&limit=10&departureId=$departureId',
+        UrlStrings.stationUrl +
+            '/relatedStations?page=1&limit=10&departureId=$departureId',
         headers: await headers);
 
     logResponse(response);
@@ -32,7 +33,7 @@ class StationProvider extends CommonProvider {
     if (response.statusCode == HttpStatus.ok) {
       return response.body['data'];
     }
-
+    logError(response);
     return Future.value(null);
   }
 }

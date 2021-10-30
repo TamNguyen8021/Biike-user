@@ -2,10 +2,13 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Contains functions which are called multiple times in app
@@ -244,6 +247,9 @@ class CommonFunctions {
         });
   }
 
+  /// Get object id from returned [url].
+  ///
+  /// Author: UyenNLP
   static int getIdFromUrl({required String url}) {
     int indexOfForwardSlash = url.lastIndexOf('/');
     int indexOfQuestionMark = url.indexOf('?');
@@ -253,5 +259,29 @@ class CommonFunctions {
                 url.substring(indexOfForwardSlash + 1, indexOfQuestionMark)) ??
             -1
         : int.tryParse(url.substring(indexOfForwardSlash + 1)) ?? -1;
+  }
+
+  Future<void> openMap(
+      {required String keyword,
+      required double? latitude,
+      required double? longtitude}) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/$keyword/@$latitude,$longtitude';
+
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      FlutterLogs.logError(
+          'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
+      Biike.logger.e('Could not open map');
+    }
+  }
+    
+  /// Convert string to timeOfDate
+  ///
+  /// Author: UyenNLP
+  static TimeOfDay stringToTimeOfDay(String time) {
+    final format = DateFormat.Hm(); //"16:00"
+    return TimeOfDay.fromDateTime(format.parse(time));
   }
 }

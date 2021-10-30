@@ -23,7 +23,6 @@ final Map<String, String> vi = {
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
-  'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -32,7 +31,6 @@ final Map<String, String> vi = {
 
   // '004.3_input_name' screen
   'kInputName': 'Nhập tên của bạn',
-  'kErrorName': 'Tên của bạn không hợp lệ',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
@@ -185,13 +183,21 @@ final Map<String, String> vi = {
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
   'kPartnerFeedback': 'Feedback từ người đồng hành',
-  'kOpenStreetMap': 'Mở Open Street Map',
+  'kViewRouteInstruction': 'Xem chỉ đường',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
       'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
+  'kHelpCenter': 'Trung tâm trợ giúp',
+  'kShareTripInfo': 'Chia sẻ thông tin chuyến đi',
+  'kSOSCenter': 'Tổng đài S.O.S',
+  'kNeedPolice': 'Tôi cần cảnh sát',
+  'kNeedEmergency': 'Tôi cần xe cấp cứu',
+  'kNearestHospital': 'Bệnh viện gần nhất',
+  'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
+  'kNearestGasStation': 'Trạm xăng gần nhất',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -207,7 +213,6 @@ final Map<String, String> vi = {
   'kChooseDate': 'Chọn ngày',
   'kChooseTime': 'Chọn giờ',
   'kRepeat': 'Lặp lại',
-  'kRepeatTo': 'Lặp lại đến',
   'kCancel': 'Hủy',
 
   // 'bike_manager' screen
@@ -244,21 +249,6 @@ final Map<String, String> vi = {
   'kYourCode': 'Mã của bạn',
   'kExchangeVoucherSuccess': 'Đổi voucher thành công!',
   'kViewAVoucher': 'Xem',
-
-  // Error message
-  'kError': 'Thông báo lỗi',
-  'kErrorMessage':
-      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
-  'kNotRated': 'Hãy đánh giá chuyến đi của bạn.',
-  'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
-  'kSendFailed': 'Gửi feedback thất bại!',
-  'kDevelopError':
-      'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
-  'kExchangeFailed': 'Không thể đổi voucher!',
-  'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
-  'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
-  'kNotFillAllFields': 'Xin hãy chọn đủ dữ liệu',
-  'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
@@ -314,11 +304,28 @@ final Map<String, String> vi = {
   'kUnBlock': 'Bỏ chặn',
 
   // date
-  'kMonday' : 'T2',
-  'kTuesday' : 'T3',
-  'kWednesday' : 'T4',
-  'kThursday' : 'T5',
-  'kFriday' : 'T6',
-  'kSaturday' : 'T7',
-  'kSunday' : 'CN',
-};
+  'kMonday': 'T2',
+  'kTuesday': 'T3',
+  'kWednesday': 'T4',
+  'kThursday': 'T5',
+  'kFriday': 'T6',
+  'kSaturday': 'T7',
+  'kSunday': 'CN',
+}..addAll(<String, String>{
+    // Error message
+    'kError': 'Thông báo lỗi',
+    'kErrorMessage':
+        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
+    'kNotRated': 'Hãy đánh giá chuyến đi của bạn.',
+    'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
+    'kSendFailed': 'Gửi feedback thất bại!',
+    'kDevelopError':
+        'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
+    'kExchangeFailed': 'Không thể đổi voucher!',
+    'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
+    'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
+    'kNotFillAllFields': 'Xin hãy chọn đủ dữ liệu',
+    'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
+    'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
+    'kErrorName': 'Tên của bạn không hợp lệ',
+  });

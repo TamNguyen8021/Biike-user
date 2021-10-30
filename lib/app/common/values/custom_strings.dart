@@ -176,12 +176,20 @@ class CustomStrings {
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
-  static const String kOpenStreetMap = 'kOpenStreetMap';
+  static const String kViewRouteInstruction = 'kViewRouteInstruction';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
+  static const String kHelpCenter = 'kHelpCenter';
+  static const String kShareTripInfo = 'kShareTripInfo';
+  static const String kSOSCenter = 'kSOSCenter';
+  static const String kNeedPolice = 'kNeedPolice';
+  static const String kNeedEmergency = 'kNeedEmergency';
+  static const String kNearestHospital = 'kNearestHospital';
+  static const String kNearestMechanicShop = 'kNearestMechanicShop';
+  static const String kNearestGasStation = 'kNearestGasStation';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';
@@ -197,7 +205,6 @@ class CustomStrings {
   static const String kChooseDate = 'kChooseDate';
   static const String kChooseTime = 'kChooseTime';
   static const String kRepeat = 'kRepeat';
-  static const String kRepeatTo = 'kRepeatTo';
   static const String kCancel = 'kCancel';
 
   // 'bike_manager' screen
