@@ -588,7 +588,7 @@ packages:
     source: hosted
     version: "1.5.0"
   injectable_generator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: injectable_generator
       url: "https://pub.dartlang.org"
@@ -900,7 +900,7 @@ packages:
     source: hosted
     version: "2.0.1"
   retrofit_generator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: retrofit_generator
       url: "https://pub.dartlang.org"
