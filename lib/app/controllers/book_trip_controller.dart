@@ -149,6 +149,10 @@ class BookTripController extends GetxController {
   Future<dynamic> createKeNowTrip() async {
     DateTime currentTime = DateTime.now();
 
+    if (!_isAvailable(currentTime)) {
+      return CustomErrorsString.kNotAvailableTimeRange.tr;
+    }
+
     var data = _getJsonData(
         isScheduled: false,
         bookTime: DateTime(currentTime.year, currentTime.month,
