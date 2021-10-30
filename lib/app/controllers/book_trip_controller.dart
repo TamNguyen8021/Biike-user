@@ -148,17 +148,17 @@ class BookTripController extends GetxController {
   /// Author: UyenNLP
   Future<dynamic> createKeNowTrip() async {
     DateTime currentTime = DateTime.now();
+    DateTime bookTime = DateTime(currentTime.year, currentTime.month,
+        currentTime.day, currentTime.hour, currentTime.minute + 15);
 
-    String check = _checkValidBeforeKeNow(currentTime);
+    String check = _checkValidBeforeKeNow(bookTime);
     if (check != '') {
       return check;
     }
 
     var data = _getJsonData(
         isScheduled: false,
-        bookTime: DateTime(currentTime.year, currentTime.month,
-            currentTime.day, currentTime.hour, currentTime.minute + 15)
-            .toIso8601String()
+        bookTime: bookTime.toIso8601String()
     );
 
     return await _tripProvider.createKeNowTrip(data);
