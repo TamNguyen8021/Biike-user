@@ -15,7 +15,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
@@ -27,6 +26,9 @@ class TripDetailsController extends GetxController {
 
   Rx<String> buttonText = CustomStrings.kStartTrip.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
+  Rx<String> _cancelReason = ''.obs;
+  Rx<bool> isTripStarted = false.obs;
+
   Function onPressedFunc = () {};
   Trip trip = Trip.empty();
   User user = User.empty();
@@ -39,7 +41,6 @@ class TripDetailsController extends GetxController {
   /// Feedback of trip partner
   TripFeedback feedback2 = TripFeedback.empty();
 
-  Rx<String> _cancelReason = ''.obs;
   List<LatLng> polypoints = [];
   late LocationData userLocation;
 
@@ -91,9 +92,14 @@ class TripDetailsController extends GetxController {
     user = User.fromJson(data);
     departureStation = DepartureStation.fromJson(data);
     destinationStation = DestinationStation.fromJson(data);
+
     if (data['feedbacks'].length > 0) {
       feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
       feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
+    }
+
+    if (trip.tripStatus == 3) {
+      isTripStarted.value = true;
     }
   }
 
@@ -119,7 +125,6 @@ class TripDetailsController extends GetxController {
                   latitude: latitude, longtitude: longtitude),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  Biike.logger.d(snapshot.data);
                   return Dialog(
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -131,40 +136,71 @@ class TripDetailsController extends GetxController {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            snapshot.data['name'],
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text(
-                              CustomStrings.kRoad.tr +
+                          if ((snapshot.data as Map).containsKey('name') &&
+                              snapshot.data['name'] != null) ...[
+                            Text(
+                              snapshot.data['name'],
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                          ],
+                          if ((snapshot.data['address'] as Map)
+                                  .containsKey('road') &&
+                              snapshot.data['address']['road'] != null) ...[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                CustomStrings.kRoad.tr +
+                                    ': ' +
+                                    snapshot.data['address']['road'],
+                                style: TextStyle(color: CustomColors.kDarkGray),
+                              ),
+                            ),
+                          ],
+                          if ((snapshot.data['address'] as Map)
+                                  .containsKey('suburb') &&
+                              snapshot.data['address']['suburb'] != null) ...[
+                            Text(
+                              CustomStrings.kSuburb.tr +
                                   ': ' +
-                                  snapshot.data['address']['road'],
+                                  snapshot.data['address']['suburb'],
                               style: TextStyle(color: CustomColors.kDarkGray),
                             ),
-                          ),
-                          Text(
-                            CustomStrings.kSuburb.tr +
-                                ': ' +
-                                snapshot.data['address']['suburb'],
-                            style: TextStyle(color: CustomColors.kDarkGray),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text(
-                              CustomStrings.kCity.tr +
+                          ],
+                          if ((snapshot.data['address'] as Map)
+                                  .containsKey('town') &&
+                              snapshot.data['address']['town'] != null) ...[
+                            Text(
+                              CustomStrings.kTown.tr +
                                   ': ' +
-                                  snapshot.data['address']['city'],
+                                  snapshot.data['address']['town'],
                               style: TextStyle(color: CustomColors.kDarkGray),
                             ),
-                          ),
-                          Text(
-                            CustomStrings.kCountry.tr +
-                                ': ' +
-                                snapshot.data['address']['country'],
-                            style: TextStyle(color: CustomColors.kDarkGray),
-                          ),
+                          ],
+                          if ((snapshot.data['address'] as Map)
+                                  .containsKey('city') &&
+                              snapshot.data['address']['city'] != null) ...[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                CustomStrings.kCity.tr +
+                                    ': ' +
+                                    snapshot.data['address']['city'],
+                                style: TextStyle(color: CustomColors.kDarkGray),
+                              ),
+                            ),
+                          ],
+                          if ((snapshot.data['address'] as Map)
+                                  .containsKey('country') &&
+                              snapshot.data['address']['country'] != null) ...[
+                            Text(
+                              CustomStrings.kCountry.tr +
+                                  ': ' +
+                                  snapshot.data['address']['country'],
+                              style: TextStyle(color: CustomColors.kDarkGray),
+                            ),
+                          ],
                         ],
                       ),
                     ),

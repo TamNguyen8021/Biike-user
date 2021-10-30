@@ -232,4 +232,24 @@ class TripProvider extends CommonProvider {
       return true;
     }
   }
+
+  /// Mark a trip as started or completed based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> startTripOrCompleteTrip({required int tripId}) async {
+    final response = await put(
+        UrlStrings.tripUrl +
+            '$tripId/progressTime?bikerId=${Biike.userId.value.toString()}&time=${DateTime.now()}',
+        {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

@@ -1,7 +1,9 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
@@ -12,7 +14,6 @@ import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/confirm_arrival_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ import 'package:intl/intl.dart';
 /// 'trip_details' screen
 //ignore: must_be_immutable
 class TripDetailsPage extends StatelessWidget {
+  final _tripProvider = Get.find<TripProvider>();
   final _tripDetailsController = Get.find<TripDetailsController>();
   final _homeController = Get.find<HomeController>();
   final _tripHistoryController = Get.find<TripHistoryController>();
@@ -123,7 +125,17 @@ class TripDetailsPage extends StatelessWidget {
                   tripId: Get.arguments['tripId']),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
+                  Rx<bool> isStartTripButtonVisible = false.obs;
+
                   _addStatusBarTextAndTime();
+
+                  if (Biike.role.value == Role.biker &&
+                      DateTime.now().compareTo(DateTime.tryParse(
+                              _tripDetailsController.trip.bookTime)!) >=
+                          0) {
+                    isStartTripButtonVisible.value = true;
+                  }
+
                   return Scaffold(
                     appBar: CustomAppBar(
                       isVisible: true,
@@ -505,47 +517,53 @@ class TripDetailsPage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10.0),
-                                            child: Center(
-                                              child: SizedBox(
-                                                width: _tripDetailsController
-                                                            .trip.tripStatus ==
-                                                        1
-                                                    ? 152
-                                                    : double.infinity,
-                                                child: CustomElevatedIconButton(
-                                                  onPressedFunc: () {
-                                                    CommonFunctions()
-                                                        .showConfirmDialog(
-                                                            context: context,
-                                                            title: CustomStrings
-                                                                .kConfirmCancelTrip
-                                                                .tr,
-                                                            message: CustomStrings
-                                                                .kViewCancelTripReminder
-                                                                .tr,
-                                                            onPressedFunc: () {
-                                                              Get.back();
-                                                              _tripDetailsController
-                                                                  .showCancelReasonDialog(
-                                                                      context:
-                                                                          context,
-                                                                      tripId: Get
-                                                                              .arguments[
-                                                                          'tripId']);
-                                                            });
-                                                  },
-                                                  text: CustomStrings
-                                                      .kCancelTrip.tr,
-                                                  backgroundColor:
-                                                      CustomColors.kLightGray,
-                                                  foregroundColor:
-                                                      CustomColors.kDarkGray,
-                                                  elevation: 0.0,
-                                                  icon: Icons.clear,
+                                        Obx(
+                                          () => Visibility(
+                                            visible: !_tripDetailsController
+                                                .isTripStarted.value,
+                                            child: Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10.0),
+                                                child: Center(
+                                                  child:
+                                                      CustomElevatedIconButton(
+                                                    width: _tripDetailsController
+                                                                .trip
+                                                                .tripStatus ==
+                                                            1
+                                                        ? 152
+                                                        : double.infinity,
+                                                    onPressedFunc: () {
+                                                      CommonFunctions()
+                                                          .showConfirmDialog(
+                                                              context: context,
+                                                              title: CustomStrings
+                                                                  .kConfirmCancelTrip
+                                                                  .tr,
+                                                              message: CustomStrings
+                                                                  .kViewCancelTripReminder
+                                                                  .tr,
+                                                              onPressedFunc:
+                                                                  () {
+                                                                Get.back();
+                                                                _tripDetailsController.showCancelReasonDialog(
+                                                                    context:
+                                                                        context,
+                                                                    tripId: Get
+                                                                            .arguments[
+                                                                        'tripId']);
+                                                              });
+                                                    },
+                                                    text: CustomStrings
+                                                        .kCancelTrip.tr,
+                                                    backgroundColor:
+                                                        CustomColors.kLightGray,
+                                                    foregroundColor:
+                                                        CustomColors.kDarkGray,
+                                                    elevation: 0.0,
+                                                    icon: Icons.clear,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -554,18 +572,50 @@ class TripDetailsPage extends StatelessWidget {
                                         if (_tripDetailsController
                                                 .trip.tripStatus ==
                                             2) ...[
-                                          if (Biike.role.value ==
-                                              Role.biker) ...[
-                                            Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10.0),
-                                                child: Obx(
-                                                  () =>
+                                          // if (Biike.role.value == Role.biker &&
+                                          //     currentTime.compareTo(
+                                          //             DateTime.tryParse(
+                                          //                 _tripDetailsController
+                                          //                     .trip
+                                          //                     .bookTime)!) >=
+                                          //         0) ...[
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10.0),
+                                              child: Obx(
+                                                () => Visibility(
+                                                  visible:
+                                                      isStartTripButtonVisible
+                                                          .value,
+                                                  child:
                                                       CustomElevatedIconButton(
-                                                    onPressedFunc: () =>
+                                                    onPressedFunc: () async {
+                                                      final isTripStarted =
+                                                          await _tripProvider
+                                                              .startTripOrCompleteTrip(
+                                                                  tripId: Get
+                                                                          .arguments[
+                                                                      'tripId']);
+                                                      if (isTripStarted) {
+                                                        isStartTripButtonVisible
+                                                            .value = false;
                                                         _tripDetailsController
-                                                            .changeToFinishTripButton(),
+                                                            .isTripStarted
+                                                            .value = true;
+                                                      } else {
+                                                        CommonFunctions()
+                                                            .showErrorDialog(
+                                                                context:
+                                                                    context,
+                                                                message:
+                                                                    CustomErrorsString
+                                                                        .kDevelopError
+                                                                        .tr);
+                                                      }
+                                                      // _tripDetailsController
+                                                      //     .changeToFinishTripButton();
+                                                    },
                                                     text: _tripDetailsController
                                                         .buttonText.value,
                                                     backgroundColor:
@@ -579,13 +629,14 @@ class TripDetailsPage extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                          ] else ...[
-                                            Expanded(
-                                              child: ConfirmArrivalButton(
-                                                isOnHomeScreen: false,
-                                              ),
-                                            ),
-                                          ]
+                                          ),
+                                          // ] else ...[
+                                          //   Expanded(
+                                          //     child: ConfirmArrivalButton(
+                                          //       isOnHomeScreen: false,
+                                          //     ),
+                                          //   ),
+                                          // ]
                                         ],
                                       ],
                                     ),

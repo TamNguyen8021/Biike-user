@@ -206,6 +206,7 @@ final Map<String, String> vi = {
   'kNearestGasStation': 'Trạm xăng gần nhất',
   'kRoad': 'Đường',
   'kSuburb': 'Phường',
+  'kTown': 'Quận',
   'kCity': 'Thành phố',
   'kCountry': 'Quốc gia',
 

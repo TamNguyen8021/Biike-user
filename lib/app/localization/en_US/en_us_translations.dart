@@ -203,6 +203,7 @@ final Map<String, String> en = {
   'kNearestGasStation': 'Nearest gas station',
   'kRoad': 'Road',
   'kSuburb': 'Suburb',
+  'kTown': 'Town',
   'kCity': 'City',
   'kCountry': 'Country',
 

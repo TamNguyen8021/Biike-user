@@ -27,13 +27,13 @@ class TripDetailsMapViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _departureLatitude =
+    double departureLatitude =
         double.tryParse(departureCoordinate.split(',')[0]) ?? 10.84165;
-    double _departureLongtitude =
+    double departureLongtitude =
         double.tryParse(departureCoordinate.split(',')[1]) ?? 106.80965;
-    double _destinationLatitude =
+    double destinationLatitude =
         double.tryParse(destinationCoordinate.split(',')[0]) ?? 10.84165;
-    double _destinationLongtitude =
+    double destinationLongtitude =
         double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
 
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
@@ -56,95 +56,119 @@ class TripDetailsMapViewer extends StatelessWidget {
             borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
                 future: tripDetailsController.getRoutePoints(
-                    _departureLongtitude.toString(),
-                    _departureLatitude.toString(),
-                    _destinationLongtitude.toString(),
-                    _destinationLatitude.toString()),
+                    departureLongtitude.toString(),
+                    departureLatitude.toString(),
+                    destinationLongtitude.toString(),
+                    destinationLatitude.toString()),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return FlutterMap(
-                      options: MapOptions(
-                          onPositionChanged:
-                              (MapPosition position, bool isChanged) {},
-                          center: LatLng(
-                              (_departureLatitude + _destinationLatitude) / 2,
-                              (_departureLongtitude + _destinationLongtitude) /
-                                  2),
-                          zoom: isFullMap ? 14.0 : 12.0,
-                          onTap:
-                              (TapPosition tapPosition, LatLng latLng) async {
-                            tripDetailsController.showLocationDetails(
-                                context: context,
-                                latitude: latLng.latitude,
-                                longtitude: latLng.longitude);
-                          }),
-                      layers: <LayerOptions>[
-                        TileLayerOptions(
-                          urlTemplate:
-                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                          subdomains: ['a', 'b', 'c'],
-                          retinaMode: true &&
-                              MediaQuery.of(context).devicePixelRatio > 1.0,
-                          attributionBuilder: (BuildContext context) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                children: <Widget>[
-                                  Text(
-                                    '© OpenStreetMap contributors',
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      foreground: Paint()
-                                        ..style = PaintingStyle.stroke
-                                        ..strokeWidth = 3
-                                        ..color = Colors.white,
+                    return Obx(
+                      () => FlutterMap(
+                        options: MapOptions(
+                            onPositionChanged:
+                                (MapPosition position, bool isChanged) {},
+                            center: tripDetailsController.isTripStarted.value
+                                ? LatLng(
+                                    tripDetailsController
+                                        .userLocation.latitude!,
+                                    tripDetailsController
+                                        .userLocation.longitude!)
+                                : LatLng(
+                                    (departureLatitude + destinationLatitude) /
+                                        2,
+                                    (departureLongtitude +
+                                            destinationLongtitude) /
+                                        2),
+                            zoom: isFullMap ? 14.0 : 12.0,
+                            onTap:
+                                (TapPosition tapPosition, LatLng latLng) async {
+                              tripDetailsController.showLocationDetails(
+                                  context: context,
+                                  latitude: latLng.latitude,
+                                  longtitude: latLng.longitude);
+                            }),
+                        layers: <LayerOptions>[
+                          TileLayerOptions(
+                            urlTemplate:
+                                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            subdomains: ['a', 'b', 'c'],
+                            retinaMode: true &&
+                                MediaQuery.of(context).devicePixelRatio > 1.0,
+                            attributionBuilder: (BuildContext context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Stack(
+                                  children: <Widget>[
+                                    Text(
+                                      '© OpenStreetMap contributors',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        foreground: Paint()
+                                          ..style = PaintingStyle.stroke
+                                          ..strokeWidth = 3
+                                          ..color = Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '© OpenStreetMap contributors',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                        MarkerLayerOptions(markers: <Marker>[
-                          Marker(
-                              rotate: true,
-                              point: LatLng(
-                                  _departureLatitude, _departureLongtitude),
-                              builder: (BuildContext context) {
-                                return Icon(
-                                  Icons.location_on,
-                                  color: Colors.green,
-                                  size: 25,
-                                );
-                              }),
-                          Marker(
-                              rotate: true,
-                              point: LatLng(
-                                  _destinationLatitude, _destinationLongtitude),
-                              builder: (BuildContext context) {
-                                return Icon(
-                                  Icons.location_on,
-                                  color: CustomColors.kRed,
-                                  size: 25,
-                                );
-                              }),
-                        ]),
-                        PolylineLayerOptions(
-                            polylineCulling: true,
-                            polylines: <Polyline>[
-                              Polyline(
-                                  color: Colors.purple.withOpacity(0.5),
-                                  strokeWidth: 5,
-                                  points: tripDetailsController.polypoints
-                                      .toList()),
-                            ])
-                      ],
+                                    Text(
+                                      '© OpenStreetMap contributors',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                          MarkerLayerOptions(markers: <Marker>[
+                            Marker(
+                                rotate: true,
+                                point: LatLng(
+                                    departureLatitude, departureLongtitude),
+                                builder: (BuildContext context) {
+                                  return Icon(
+                                    Icons.location_on,
+                                    color: Colors.green,
+                                    size: 25,
+                                  );
+                                }),
+                            Marker(
+                                rotate: true,
+                                point: LatLng(
+                                    destinationLatitude, destinationLongtitude),
+                                builder: (BuildContext context) {
+                                  return Icon(
+                                    Icons.location_on,
+                                    color: CustomColors.kRed,
+                                    size: 25,
+                                  );
+                                }),
+                            Marker(
+                                rotate: true,
+                                point: LatLng(
+                                    tripDetailsController
+                                        .userLocation.latitude!,
+                                    tripDetailsController
+                                        .userLocation.longitude!),
+                                builder: (BuildContext context) {
+                                  return Icon(
+                                    Icons.directions_bike,
+                                    color: CustomColors.kBlue,
+                                    size: 25,
+                                  );
+                                }),
+                          ]),
+                          PolylineLayerOptions(
+                              polylineCulling: true,
+                              polylines: <Polyline>[
+                                Polyline(
+                                    color: Colors.purple.withOpacity(0.5),
+                                    strokeWidth: 5,
+                                    points: tripDetailsController.polypoints
+                                        .toList()),
+                              ])
+                        ],
+                      ),
                     );
                   } else {
                     return Loading();
