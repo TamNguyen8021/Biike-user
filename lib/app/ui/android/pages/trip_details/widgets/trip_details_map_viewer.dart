@@ -70,10 +70,15 @@ class TripDetailsMapViewer extends StatelessWidget {
                       options: MapOptions(
                           onPositionChanged:
                               (MapPosition position, bool isChanged) {},
-                          center: LatLng(
-                              (departureLatitude + destinationLatitude) / 2,
-                              (departureLongtitude + destinationLongtitude) /
-                                  2),
+                          center: tripDetailsController.isTripStarted.value
+                              ? LatLng(
+                                  tripDetailsController.userLocation.latitude!,
+                                  tripDetailsController.userLocation.longitude!)
+                              : LatLng(
+                                  (departureLatitude + destinationLatitude) / 2,
+                                  (departureLongtitude +
+                                          destinationLongtitude) /
+                                      2),
                           zoom: isFullMap ? 14.0 : 12.0,
                           onTap:
                               (TapPosition tapPosition, LatLng latLng) async {
