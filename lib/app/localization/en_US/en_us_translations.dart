@@ -302,13 +302,13 @@ final Map<String, String> en = {
   'kUnBlock': 'Unblock',
 
   // date
-  'kMonday': 'MON',
-  'kTuesday': 'TUE',
-  'kWednesday': 'WED',
-  'kThursday': 'THU',
-  'kFriday': 'FRI',
-  'kSaturday': 'SAT',
-  'kSunday': 'SUN',
+  'kMonday': 'Mon',
+  'kTuesday': 'Tue',
+  'kWednesday': 'Wed',
+  'kThursday': 'Thu',
+  'kFriday': 'Fri',
+  'kSaturday': 'Sat',
+  'kSunday': 'Sun',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',

@@ -3,7 +3,6 @@ import 'package:bikes_user/app/data/enums/date_enum.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/book_scheduled_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/choose_date_time_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/date_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/time_button.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -76,16 +75,16 @@ class BookScheduleTripPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  TimeButton(time: '06:30'),
-                  TimeButton(time: '07:15'),
-                  TimeButton(time: '10:00'),
-                  TimeButton(time: '12:00'),
-                  TimeButton(time: '13:45'),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: <Widget>[
+              //     TimeButton(time: '06:30'),
+              //     TimeButton(time: '07:15'),
+              //     TimeButton(time: '10:00'),
+              //     TimeButton(time: '12:00'),
+              //     TimeButton(time: '13:45'),
+              //   ],
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: Row(
@@ -112,20 +111,16 @@ class BookScheduleTripPage extends StatelessWidget {
               Obx(
                 () => Visibility(
                   visible: _bookTripController.isRepeated.value,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Wrap(
-                          // crossAxisAlignment: const CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            DateButton(date: Date.monday),
-                            DateButton(date: Date.tuesday),
-                            DateButton(date: Date.wednesday),
-                            DateButton(date: Date.thursday),
-                            DateButton(date: Date.friday),
-                            DateButton(date: Date.saturday),
-                            DateButton(date: Date.sunday),
-                          ]),
+                      DateButton(date: Date.monday),
+                      DateButton(date: Date.tuesday),
+                      DateButton(date: Date.wednesday),
+                      DateButton(date: Date.thursday),
+                      DateButton(date: Date.friday),
+                      DateButton(date: Date.saturday),
+                      DateButton(date: Date.sunday),
                     ],
                   ),
                 ),
