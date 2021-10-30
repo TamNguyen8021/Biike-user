@@ -1,5 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/controllers/feedback_controller.dart';
+import 'package:bikes_user/app/controllers/feedbacks_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';

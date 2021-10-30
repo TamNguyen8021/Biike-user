@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/controllers/feedback_controller.dart';
+import 'package:bikes_user/app/controllers/feedbacks_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/main.dart';
