@@ -96,7 +96,7 @@ class AppPages {
     GetPage(
         name: CommonRoutes.CHOOSE_MODE,
         page: () => ChooseModePage(),
-        binding: ChooseModeBinding()),
+        bindings: <Bindings>[ChooseModeBinding(), UserBinding()]),
     GetPage(
         name: CommonRoutes.TRIP_HISTORY,
         page: () => TripHistoryPage(),

@@ -39,7 +39,14 @@ class SwitchRoleButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           onPressed: () async {
-            final hasRoleChanged = await _userProvider.changeRole();
+            int role = 2;
+
+            if (Biike.role.value == Role.biker) {
+              role = 1;
+            }
+
+            final hasRoleChanged = await _userProvider.changeRole(role: role);
+
             if (hasRoleChanged) {
               if (Biike.role.value == Role.keer) {
                 Biike.role.value = Role.biker;

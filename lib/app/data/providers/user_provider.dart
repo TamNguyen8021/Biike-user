@@ -56,9 +56,10 @@ class UserProvider extends CommonProvider {
   /// Change user's role.
   ///
   /// Author: TamNTT
-  Future<bool> changeRole() async {
-    final response =
-        await put(UrlStrings.userUrl + 'role', {}, headers: await headers);
+  Future<bool> changeRole({required int role}) async {
+    final response = await put(
+        UrlStrings.userUrl + 'role?startupRole=$role', {},
+        headers: await headers);
 
     logResponse(response);
 

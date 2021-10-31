@@ -97,7 +97,7 @@ class ChooseModePage extends StatelessWidget {
                           ],
                         )),
                     onTap: () {
-                      chooseModeController.selectBikerMode();
+                      chooseModeController.selectBikerMode(context: context);
                     },
                   ),
                 ),
@@ -155,7 +155,7 @@ class ChooseModePage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      chooseModeController.selectKeerMode();
+                      chooseModeController.selectKeerMode(context: context);
                     },
                   ),
                 ),
