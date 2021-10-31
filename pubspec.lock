@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  back_pressed:
+    dependency: "direct main"
+    description:
+      name: back_pressed
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   base58check:
     dependency: transitive
     description:
@@ -588,7 +595,7 @@ packages:
     source: hosted
     version: "1.5.0"
   injectable_generator:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: injectable_generator
       url: "https://pub.dartlang.org"
@@ -900,7 +907,7 @@ packages:
     source: hosted
     version: "2.0.1"
   retrofit_generator:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: retrofit_generator
       url: "https://pub.dartlang.org"

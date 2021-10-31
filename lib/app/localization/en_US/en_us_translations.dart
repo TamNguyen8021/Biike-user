@@ -342,4 +342,6 @@ final Map<String, String> en = {
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
     'kEditProfileFailed':
         'Your profile was not changed. Please try again later',
+    'kCannotGoBackWhenTripStarted':
+        'You cannot go back when the trip has started',
   });

@@ -9,7 +9,6 @@ import 'package:bikes_user/app/data/models/trip_feedback.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
@@ -78,9 +77,9 @@ class TripDetailsController extends GetxController {
 
     if (buttonIcon.value != Icons.done_all) {
       buttonIcon.value = Icons.done_all;
-    } else {
+    } /* else {
       Get.offAllNamed(CommonRoutes.FEEDBACK);
-    }
+    }*/
   }
 
   /// Loads trip details.

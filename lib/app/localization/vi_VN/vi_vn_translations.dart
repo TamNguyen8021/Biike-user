@@ -344,4 +344,6 @@ final Map<String, String> vi = {
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
     'kErrorName': 'Tên của bạn không hợp lệ',
     'kEditProfileFailed': 'Chỉnh sửa thông tin thất bại. Vui lòng thử lại sau',
+    'kCannotGoBackWhenTripStarted':
+        'Không thể quay lại khi chuyến đi đã bắt đầu',
   });
