@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -25,20 +26,13 @@ class BookTripMapViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _departureLatitude = departureCoordinate != ''
-        ? double.parse(departureCoordinate.split(',')[0])
-        : 10.84165;
-    double _departureLongitude = departureCoordinate != ''
-        ? double.parse(departureCoordinate.split(',')[1])
-        : 106.80965;
-    double _destinationLatitude = destinationCoordinate != ''
-        ? double.parse(destinationCoordinate.split(',')[0])
-        : 10.84165;
-    double _destinationLongitude = destinationCoordinate != ''
-        ? double.parse(destinationCoordinate.split(',')[1])
-        : 106.80965;
+    CustomLocation departure = CustomLocation(coordinate: departureCoordinate);
+    CustomLocation destination = CustomLocation(coordinate: destinationCoordinate);
 
-    print('x');
+    double departureLatitude = departure.latitude;
+    double departureLongitude = departure.longitude;
+    double destinationLatitude = destination.latitude;
+    double destinationLongitude = destination.longitude;
 
     return Column(
       children: <Widget>[
@@ -53,8 +47,8 @@ class BookTripMapViewer extends StatelessWidget {
                     onPositionChanged:
                         (MapPosition position, bool isChanged) {},
                     center: LatLng(
-                        (_departureLatitude + _destinationLatitude) / 2,
-                        (_departureLongitude + _destinationLongitude) / 2),
+                        (departureLatitude + destinationLatitude) / 2,
+                        (departureLongitude + destinationLongitude) / 2),
                     zoom: 12.0),
                 layers: [
                   TileLayerOptions(
@@ -64,7 +58,7 @@ class BookTripMapViewer extends StatelessWidget {
                   ),
                   MarkerLayerOptions(markers: <Marker>[
                     Marker(
-                        point: LatLng(_departureLatitude, _departureLongitude),
+                        point: LatLng(departureLatitude, departureLongitude),
                         builder: (BuildContext context) {
                           return Icon(
                             Icons.location_on,
@@ -73,8 +67,7 @@ class BookTripMapViewer extends StatelessWidget {
                           );
                         }),
                     Marker(
-                        point:
-                            LatLng(_destinationLatitude, _destinationLongitude),
+                        point: LatLng(destinationLatitude, destinationLongitude),
                         builder: (BuildContext context) {
                           return Icon(
                             Icons.location_on,

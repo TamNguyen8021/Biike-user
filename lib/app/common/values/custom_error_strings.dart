@@ -13,4 +13,5 @@ class CustomErrorsString {
   static const String kNotAfterNow = 'kNotAfterNow';
   static const String kTripCanOnlySearchFrom5AMTo9PM =
       'kTripCanOnlySearchFrom5AMTo9PM';
+  static const String kNotAvailableTimeRange = 'kNotAvailableTimeRange';
 }

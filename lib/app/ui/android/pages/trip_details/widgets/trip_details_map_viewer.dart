@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -29,14 +30,14 @@ class TripDetailsMapViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double departureLatitude =
-        double.tryParse(departureCoordinate.split(',')[0]) ?? 10.84165;
-    double departureLongtitude =
-        double.tryParse(departureCoordinate.split(',')[1]) ?? 106.80965;
-    double destinationLatitude =
-        double.tryParse(destinationCoordinate.split(',')[0]) ?? 10.84165;
-    double destinationLongtitude =
-        double.tryParse(destinationCoordinate.split(',')[1]) ?? 106.80965;
+    CustomLocation departure = CustomLocation(coordinate: departureCoordinate);
+    CustomLocation destination =
+        CustomLocation(coordinate: destinationCoordinate);
+
+    double departureLatitude = departure.latitude;
+    double departureLongtitude = departure.longitude;
+    double destinationLatitude = destination.latitude;
+    double destinationLongtitude = destination.longitude;
 
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
 
