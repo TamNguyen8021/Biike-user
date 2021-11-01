@@ -326,7 +326,7 @@ final Map<String, String> vi = {
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
     'kNotFillAllFields': 'Xin hãy chọn đủ dữ liệu',
     'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
-    'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 6h đến 21h',
+    'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 5h đến 21h',
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
     'kErrorName': 'Tên của bạn không hợp lệ',
   });
