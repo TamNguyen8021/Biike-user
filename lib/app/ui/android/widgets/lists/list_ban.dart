@@ -1,15 +1,17 @@
+import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/ban_list_card.dart';
 import 'package:flutter/material.dart';
 
 /// A list of ban
 class ListBan extends StatelessWidget {
-  final List<dynamic> banList;
+  final List<BlackListItem> data;
   final double itemPadding;
-
+  final Function(BlackListItem) onTapItem;
   const ListBan({
     Key? key,
-    required this.banList,
+    required this.data,
     required this.itemPadding,
+    required this.onTapItem,
   }) : super(key: key);
 
   @override
@@ -18,14 +20,16 @@ class ListBan extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: banList.length,
+        itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
               padding: EdgeInsets.only(bottom: itemPadding),
               child: BanListCard(
-                name: banList.elementAt(index).name,
-              )
-          );
+                name: data[index].userName,
+                onTapUnBlock: () {
+                  onTapItem(data[index]);
+                },
+              ));
         });
   }
 }

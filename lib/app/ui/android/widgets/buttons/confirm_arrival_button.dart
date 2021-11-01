@@ -60,6 +60,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: CustomTextButton(
+                            hasBorder: false,
                             backgroundColor: CustomColors.kLightGray,
                             foregroundColor: CustomColors.kDarkGray,
                             text: CustomStrings.kCancel.tr,
@@ -70,6 +71,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: CustomTextButton(
+                            hasBorder: false,
                             backgroundColor: CustomColors.kBlue,
                             foregroundColor: Colors.white,
                             text: CustomStrings.kSure.tr,

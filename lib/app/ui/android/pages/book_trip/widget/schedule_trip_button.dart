@@ -12,10 +12,10 @@ class ScheduleTripButton extends StatelessWidget {
   final _bookTripController = Get.find<BookTripController>();
 
   _toNextScreen(BuildContext context) {
-    if (_bookTripController.departureStation.value.stationId == -1
-      || _bookTripController.destinationStation.value.stationId == -1) {
-      CommonFunctions().showErrorDialog(context: context,
-          message: CustomErrorsString.kNotChooseStation.tr);
+    if (_bookTripController.departureStation.value.stationId == -1 ||
+        _bookTripController.destinationStation.value.stationId == -1) {
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kNotChooseStation.tr);
       return;
     }
 
@@ -28,11 +28,11 @@ class ScheduleTripButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 4.0),
         child: CustomTextButton(
+            hasBorder: false,
             backgroundColor: CustomColors.kOrange,
             foregroundColor: Colors.white,
             text: CustomStrings.kBookScheduleTrip.tr,
-            onPressedFunc: () => _toNextScreen(context)
-        ),
+            onPressedFunc: () => _toNextScreen(context)),
       ),
     );
   }

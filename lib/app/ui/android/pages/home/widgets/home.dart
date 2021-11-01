@@ -1,5 +1,8 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/android/pages/home/widgets/list_upcoming_trips.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/main.dart';
@@ -106,6 +109,7 @@ class Home extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10.0),
                                   child: UpcomingTripCard(
+                                      isSearchedTrip: false,
                                       tripId: homeController.upcomingTrips
                                           .toList()[0]
                                           .tripId,
@@ -216,6 +220,7 @@ class Home extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 bottom: 10.0),
                                             child: UpcomingTripCard(
+                                                isSearchedTrip: false,
                                                 tripId: homeController
                                                     .pagingController.itemList!
                                                     .elementAt(index)
@@ -277,118 +282,15 @@ class Home extends StatelessWidget {
                                     style:
                                         Theme.of(context).textTheme.bodyText2),
                               ),
-                              IntrinsicHeight(
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: Container(
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: IntrinsicHeight(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
                                           width: 110,
-                                          decoration: BoxDecoration(
-                                              color: CustomColors.kLightGray,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              boxShadow: <BoxShadow>[
-                                                BoxShadow(
-                                                  color: CustomColors.kDarkGray
-                                                      .withOpacity(0.4),
-                                                  // changes position of shadow
-                                                  offset: Offset(0, 1),
-                                                )
-                                              ]),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Obx(
-                                                  () => GestureDetector(
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons
-                                                                .event_outlined,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          homeController
-                                                              .searchDateString
-                                                              .value,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .bodyText1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    onTap: () async {
-                                                      homeController
-                                                          .searchDateString
-                                                          .value = DateFormat(
-                                                              'dd-MM-yyyy')
-                                                          .format(await CommonFunctions().selectDate(
-                                                              context: context,
-                                                              selectedDate:
-                                                                  homeController
-                                                                      .searchDate,
-                                                              isBirthDatePicker:
-                                                                  false));
-                                                    },
-                                                  ),
-                                                ),
-                                                Divider(),
-                                                Obx(
-                                                  () => GestureDetector(
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons.access_time,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          homeController
-                                                              .searchTimeString
-                                                              .value,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .bodyText1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    onTap: () async {
-                                                      homeController
-                                                              .searchTimeString
-                                                              .value =
-                                                          await CommonFunctions()
-                                                              .selectTime(
-                                                                  context:
-                                                                      context,
-                                                                  selectedTime:
-                                                                      homeController
-                                                                          .searchTime);
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                    Expanded(
-                                      child: Container(
+                                          margin:
+                                              const EdgeInsets.only(right: 8.0),
                                           padding: const EdgeInsets.all(8.0),
                                           decoration: BoxDecoration(
                                               color: CustomColors.kLightGray,
@@ -402,84 +304,303 @@ class Home extends StatelessWidget {
                                                   offset: Offset(0, 1),
                                                 )
                                               ]),
-                                          child: Row(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 10.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.adjust,
-                                                    ),
-                                                    Icon(
-                                                      Icons.more_vert_outlined,
-                                                    ),
-                                                    Icon(
-                                                      Icons.location_on,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    GestureDetector(
-                                                      child: Text(
-                                                        CustomStrings
-                                                            .kSelectSourceStation
-                                                            .tr,
+                                              Obx(
+                                                () => GestureDetector(
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 5.0),
+                                                        child: Icon(
+                                                          Icons.event_outlined,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        homeController
+                                                            .searchDateString
+                                                            .value,
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .bodyText1,
                                                       ),
-                                                      onTap: () {
-                                                        homeController
-                                                            .showStationsDialog(
+                                                    ],
+                                                  ),
+                                                  onTap: () async {
+                                                    homeController
+                                                            .searchDate.value =
+                                                        await CommonFunctions()
+                                                            .selectDate(
                                                                 context:
-                                                                    context);
-                                                      },
-                                                    ),
-                                                    Expanded(
-                                                      child: Divider(),
-                                                    ),
-                                                    GestureDetector(
-                                                      child: Text(
-                                                        CustomStrings
-                                                            .kSelectDestinationStation
-                                                            .tr,
+                                                                    context,
+                                                                selectedDate:
+                                                                    homeController
+                                                                        .searchDate,
+                                                                isBirthDatePicker:
+                                                                    false);
+                                                    homeController
+                                                            .searchDateString
+                                                            .value =
+                                                        DateFormat('dd-MM-yyyy')
+                                                            .format(
+                                                                homeController
+                                                                    .searchDate
+                                                                    .value!);
+                                                  },
+                                                ),
+                                              ),
+                                              Divider(),
+                                              Obx(
+                                                () => GestureDetector(
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 5.0),
+                                                        child: Icon(
+                                                          Icons.access_time,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        homeController
+                                                            .searchTimeString
+                                                            .value,
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .bodyText1,
                                                       ),
-                                                      onTap: () {
-                                                        homeController
-                                                            .showStationsDialog(
+                                                    ],
+                                                  ),
+                                                  onTap: () async {
+                                                    TimeOfDay tempTime =
+                                                        await CommonFunctions()
+                                                            .selectTime(
                                                                 context:
-                                                                    context);
-                                                      },
-                                                    ),
-                                                  ],
+                                                                    context,
+                                                                selectedTime:
+                                                                    homeController
+                                                                        .searchTime);
+                                                    int tempTimeNum =
+                                                        tempTime.hour * 60 +
+                                                            tempTime.minute;
+                                                    int lowestBoundTimeNum =
+                                                        5 * 60;
+                                                    int highestBoundTimeNum =
+                                                        21 * 60;
+                                                    if (tempTimeNum >=
+                                                            lowestBoundTimeNum &&
+                                                        tempTimeNum <=
+                                                            highestBoundTimeNum) {
+                                                      homeController
+                                                              .searchTimeString
+                                                              .value =
+                                                          MaterialLocalizations
+                                                                  .of(context)
+                                                              .formatTimeOfDay(
+                                                                  tempTime,
+                                                                  alwaysUse24HourFormat:
+                                                                      true);
+                                                    } else {
+                                                      CommonFunctions().showErrorDialog(
+                                                          context: context,
+                                                          message:
+                                                              CustomErrorsString
+                                                                  .kTripCanOnlySearchFrom5AMTo9PM
+                                                                  .tr);
+                                                    }
+                                                  },
                                                 ),
-                                              ),
-                                              Icon(
-                                                Icons.swap_vert_sharp,
-                                                size: 30,
                                               ),
                                             ],
                                           )),
-                                    )
-                                  ],
+                                      Expanded(
+                                        child: Container(
+                                            padding: const EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                                color: CustomColors.kLightGray,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                boxShadow: <BoxShadow>[
+                                                  BoxShadow(
+                                                    color: CustomColors
+                                                        .kDarkGray
+                                                        .withOpacity(0.4),
+                                                    // changes position of shadow
+                                                    offset: Offset(0, 1),
+                                                  )
+                                                ]),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 10.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons.adjust,
+                                                      ),
+                                                      Icon(
+                                                        Icons
+                                                            .more_vert_outlined,
+                                                      ),
+                                                      Icon(
+                                                        Icons.location_on,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Obx(
+                                                        () => GestureDetector(
+                                                          child: Text(
+                                                            homeController
+                                                                .departureStationName
+                                                                .value,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1,
+                                                          ),
+                                                          onTap: () async {
+                                                            await homeController
+                                                                .showStationsDialog(
+                                                                    context:
+                                                                        context,
+                                                                    isDepartureStation:
+                                                                        true);
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(),
+                                                      ),
+                                                      Obx(
+                                                        () => GestureDetector(
+                                                          child: Text(
+                                                            homeController
+                                                                .destinationStationName
+                                                                .value,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1,
+                                                          ),
+                                                          onTap: () async {
+                                                            await homeController
+                                                                .showStationsDialog(
+                                                                    context:
+                                                                        context,
+                                                                    isDepartureStation:
+                                                                        false);
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  child: Icon(
+                                                    Icons.swap_vert_sharp,
+                                                    size: 30,
+                                                  ),
+                                                  onTap: () {
+                                                    homeController
+                                                        .swapStations();
+                                                  },
+                                                ),
+                                              ],
+                                            )),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: CustomTextButton(
+                                        width: 120,
+                                        backgroundColor:
+                                            CustomColors.kLightGray,
+                                        foregroundColor: CustomColors.kDarkGray,
+                                        text: CustomStrings.kSearchAgain.tr,
+                                        onPressedFunc: () {
+                                          homeController.upcomingTripsForBiker
+                                              .clear();
+                                          homeController.hasSearchedTrips =
+                                              false;
+                                          homeController
+                                                  .searchDateString.value =
+                                              CustomStrings.kChooseDate.tr;
+                                          homeController
+                                                  .searchTimeString.value =
+                                              CustomStrings.kChooseTime.tr;
+                                          homeController.departureStation.value
+                                              .stationId = -1;
+                                          homeController.departureStationName
+                                              .value = homeController
+                                                  .departureStation.value.name =
+                                              CustomStrings
+                                                  .kSelectSourceStation.tr;
+                                          homeController.destinationStation
+                                              .value.stationId = -1;
+                                          homeController.destinationStationName
+                                              .value = homeController
+                                                  .destinationStation
+                                                  .value
+                                                  .name =
+                                              CustomStrings
+                                                  .kSelectDestinationStation.tr;
+                                        },
+                                        hasBorder: false),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: CustomTextButton(
+                                        width: 120,
+                                        backgroundColor: CustomColors.kBlue,
+                                        foregroundColor: Colors.white,
+                                        text: CustomStrings.kSearch.tr,
+                                        onPressedFunc: () async {
+                                          await homeController.searchTrips(
+                                              date: homeController
+                                                  .searchDate.value,
+                                              time: homeController
+                                                  .searchTime.value,
+                                              departureId: homeController
+                                                  .departureStation
+                                                  .value
+                                                  .stationId,
+                                              destinationId: homeController
+                                                  .destinationStation
+                                                  .value
+                                                  .stationId);
+                                        },
+                                        hasBorder: false),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -492,16 +613,14 @@ class Home extends StatelessWidget {
                               homeController.upcomingTrips.length > 2
                                   ? 35.0
                                   : 8.0),
-                          child: Column(
-                            children: <Widget>[
-                              // if (homeController.upcomingTrips.isNotEmpty) ...[
-                              //   ListUpcomingTrips(
-                              //     listUpcomingTrips:
-                              //         homeController.upcomingTrips.toList(),
-                              //     itemPadding: 12.0,
-                              //   ),
-                              // ],
-                            ],
+                          child: Obx(
+                            () => ListUpcomingTrips(
+                                listUpcomingTrips: homeController
+                                    .upcomingTripsForBiker
+                                    .toList(),
+                                itemPadding: 10.0,
+                                hasSearchTrips:
+                                    homeController.hasSearchedTrips),
                           ),
                         ),
                       ]

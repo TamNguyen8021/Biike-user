@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Contains functions which are called multiple times in app
@@ -71,8 +72,11 @@ class CommonFunctions {
 
     if (!isBirthDatePicker) {
       _firstDate = _currentTime;
-      _lastDate = DateTime(
-          _currentTime.year, _currentTime.month, _currentTime.day + 15);
+      _lastDate = DateTime(_currentTime.year + 1, DateTime.december, 31);
+    }
+
+    if (selectedDate.value == null) {
+      selectedDate.value = _currentTime;
     }
 
     final DateTime? pickedDate = await showDatePicker(
@@ -90,26 +94,23 @@ class CommonFunctions {
   /// Show a time picker on [context].
   ///
   /// Author: TamNTT
-  Future<String> selectTime(
+  Future<TimeOfDay> selectTime(
       {required BuildContext context,
-      required Rx<TimeOfDay> selectedTime}) async {
+      required Rx<TimeOfDay?> selectedTime}) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: selectedTime.value,
+      initialTime: selectedTime.value ?? TimeOfDay.now(),
       helpText: CustomStrings.kChooseTime.tr,
       cancelText: CustomStrings.kCancel.tr,
     );
-    if (pickedTime != null) {
-      selectedTime.value = pickedTime;
-    }
-    return MaterialLocalizations.of(context)
-        .formatTimeOfDay(selectedTime.value, alwaysUse24HourFormat: true);
+
+    return pickedTime!;
   }
 
   /// Display a dialog on [context] for success message.
   ///
   /// Author: TamNTT
-  dynamic showSuccessDialog(
+  void showSuccessDialog(
       {required BuildContext context, required String message}) {
     showDialog(
         context: context,
@@ -148,7 +149,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for error message.
   ///
   /// Author: TamNTT
-  dynamic showErrorDialog(
+  void showErrorDialog(
       {required BuildContext context, required String message}) {
     showDialog(
         context: context,
@@ -187,7 +188,7 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  dynamic showConfirmDialog(
+  void showConfirmDialog(
       {required BuildContext context,
       required String title,
       required String message,
@@ -223,12 +224,14 @@ class CommonFunctions {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           CustomTextButton(
+                            hasBorder: false,
                             backgroundColor: CustomColors.kBlue,
                             foregroundColor: Colors.white,
                             text: CustomStrings.kSure.tr,
                             onPressedFunc: onPressedFunc,
                           ),
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kLightGray,
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
@@ -246,6 +249,9 @@ class CommonFunctions {
         });
   }
 
+  /// Get object id from returned [url].
+  ///
+  /// Author: UyenNLP
   static int getIdFromUrl({required String url}) {
     int indexOfForwardSlash = url.lastIndexOf('/');
     int indexOfQuestionMark = url.indexOf('?');
@@ -260,16 +266,27 @@ class CommonFunctions {
   Future<void> openMap(
       {required String keyword,
       required double? latitude,
-      required double? longtitude}) async {
+      required double? longtitude,
+      required BuildContext context}) async {
     String googleUrl =
         'https://www.google.com/maps/search/$keyword/@$latitude,$longtitude';
 
     if (await canLaunch(googleUrl)) {
       await launch(googleUrl);
     } else {
+      showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
       FlutterLogs.logError(
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       Biike.logger.e('Could not open map');
     }
+  }
+    
+  /// Convert string to timeOfDate
+  ///
+  /// Author: UyenNLP
+  static TimeOfDay stringToTimeOfDay(String time) {
+    final format = DateFormat.Hm(); //"16:00"
+    return TimeOfDay.fromDateTime(format.parse(time));
   }
 }

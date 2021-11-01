@@ -19,11 +19,11 @@ final Map<String, String> en = {
   // '003.1_login'
   'kLoginButton': 'Xác thực bằng email FPT',
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': "Điều khoản dịch vụ và Chính sách bảo mật",
+  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
+  'kForgotPassword': 'Forgot password',
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
-  'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -32,7 +32,6 @@ final Map<String, String> en = {
 
   // '004.3_input_name' screen
   'kInputName': 'Nhập tên của bạn',
-  'kErrorName': 'Tên của bạn không hợp lệ',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
@@ -69,6 +68,10 @@ final Map<String, String> en = {
   'kSelectDestinationStation': 'Destination station',
   'kDecline': 'Decline',
   'kAccept': 'Accept',
+  'kAcceptSuccessful': 'You have accepted this trip',
+  'kSearchAgain': 'Clear',
+  'kSearch': 'Search',
+  'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
@@ -119,7 +122,6 @@ final Map<String, String> en = {
   'kBirthDate': 'Date of birth',
   'kChooseBirthDate': 'Choose a date',
   'kEditProfileSuccess': 'Your profile was edited',
-  'kEditProfileFailed': 'Your profile was not changed. Please try again later',
 
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',
@@ -183,6 +185,8 @@ final Map<String, String> en = {
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
   'kPartnerFeedback': 'Partner\'s feedback',
+  'kExpandMap': 'Expand map',
+  'kMinimizeMap': 'Minimize map',
   'kViewRouteInstruction': 'View route instruction',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
@@ -193,11 +197,15 @@ final Map<String, String> en = {
   'kHelpCenter': 'Help Center',
   'kShareTripInfo': 'Share your trip\'s info',
   'kSOSCenter': 'S.O.S Center',
-  'kNeedPolice': 'I need police',
-  'kNeedEmergency': 'I need emergency care',
+  'kNearestPoliceStation': 'Nearest police station',
   'kNearestHospital': 'Nearest hospital',
   'kNearestMechanicShop': 'Nearest mechanic shop',
   'kNearestGasStation': 'Nearest gas station',
+  'kRoad': 'Road',
+  'kSuburb': 'Suburb',
+  'kTown': 'Town',
+  'kCity': 'City',
+  'kCountry': 'Country',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -213,7 +221,6 @@ final Map<String, String> en = {
   'kChooseDate': 'Choose date',
   'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
-  'kRepeatTo': 'Repeat until',
   'kCancel': 'Cancel',
 
   // 'bike_manager' screen
@@ -250,21 +257,6 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
-
-  // Error message
-  'kError': 'Error!',
-  'kErrorMessage':
-      'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
-  'kNotRated': 'Please rate your trip experience',
-  'kIncludeBadWords': 'Please don\'t use bad words',
-  'kSendFailed': 'Send feedback failed!',
-  'kDevelopError':
-      'There are some errors, please contact Biiké development team for support',
-  'kExchangeFailed': 'Can\'t exchange voucher!',
-  'kNotEnoughPoint': 'User doesn\'t have enough point',
-  'kNotChooseStation': 'You haven\'t choose your route',
-  'kNotFillAllFields': 'Please fill in all fields',
-  'kNotAfterNow': 'You can\'t book a trip from the past',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -318,13 +310,38 @@ final Map<String, String> en = {
   // 'ban_list' screen
   'kBanList': 'Ban List',
   'kUnBlock': 'Unblock',
+  'kLogin': 'Login',
+  'kRegister': 'Register',
+  'tranlatesion': 'Tranlation',
 
   // date
-  'kMonday': 'MON',
-  'kTuesday': 'TUE',
-  'kWednesday': 'WED',
-  'kThursday': 'THU',
-  'kFriday': 'FRI',
-  'kSaturday': 'SAT',
-  'kSunday': 'SUN',
-};
+  'kMonday': 'Mon',
+  'kTuesday': 'Tue',
+  'kWednesday': 'Wed',
+  'kThursday': 'Thu',
+  'kFriday': 'Fri',
+  'kSaturday': 'Sat',
+  'kSunday': 'Sun',
+}..addAll(<String, String>{
+    // Error message
+    'kError': 'Error!',
+    'kErrorMessage':
+        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
+    'kNotRated': 'Please rate your trip experience',
+    'kIncludeBadWords': 'Please don\'t use bad words',
+    'kSendFailed': 'Send feedback failed!',
+    'kDevelopError':
+        'There are some errors, please contact Biiké development team for support',
+    'kExchangeFailed': 'Can\'t exchange voucher!',
+    'kNotEnoughPoint': 'User doesn\'t have enough point',
+    'kNotChooseStation': 'You haven\'t choose your route',
+    'kNotFillAllFields': 'Please fill in all fields',
+    'kNotAfterNow': 'You can\'t book a trip from the past',
+    'kNotAvailableTimeRange': 'Available time is between 6 AM and 9 PM',
+    'kErrorName': 'Tên của bạn không hợp lệ',
+    'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
+    'kEditProfileFailed':
+        'Your profile was not changed. Please try again later',
+    'kCannotGoBackWhenTripStarted':
+        'You cannot go back when the trip has started',
+  });

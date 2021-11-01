@@ -22,16 +22,18 @@ class StationProvider extends CommonProvider {
     }
   }
 
-  Future<dynamic> getListRelatedStation({required int departureId}) async {
+  /// Author: UyenNLP
+  Future<dynamic> getListRelatedStation(
+      {required int page, required int limit, required int departureId}) async {
     final response = await get(
         UrlStrings.stationUrl +
-            '/relatedStations?page=1&limit=10&departureId=$departureId',
+            '/relatedStations?page=$page&limit=$limit&departureId=$departureId',
         headers: await headers);
 
     logResponse(response);
 
     if (response.statusCode == HttpStatus.ok) {
-      return response.body['data'];
+      return response.body;
     }
     logError(response);
     return Future.value(null);

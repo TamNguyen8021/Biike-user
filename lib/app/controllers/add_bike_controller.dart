@@ -54,10 +54,10 @@ class AddBikeController extends GetxController {
   }
 
   String _validate() {
-    if (plateNumber.value.replaceAll(" ", "").isEmpty ||
-        bikeOwner.value.replaceAll(" ", "").isEmpty ||
-        color.value.replaceAll(" ", "").isEmpty ||
-        brand.value.replaceAll(" ", "").isEmpty) {
+    if (plateNumber.value.trim().isEmpty ||
+        bikeOwner.value.trim().isEmpty ||
+        color.value.trim().isEmpty ||
+        brand.value.trim().isEmpty) {
       return 'Not null';
     }
 

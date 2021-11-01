@@ -23,7 +23,7 @@ class ChooseModePage extends StatelessWidget {
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/line-map.png"),
+                  image: AssetImage('assets/images/line-map.png'),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                       CustomColors.kLightGray.withOpacity(0.5),
@@ -97,7 +97,7 @@ class ChooseModePage extends StatelessWidget {
                           ],
                         )),
                     onTap: () {
-                      chooseModeController.selectBikerMode();
+                      chooseModeController.selectBikerMode(context: context);
                     },
                   ),
                 ),
@@ -155,7 +155,7 @@ class ChooseModePage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      chooseModeController.selectKeerMode();
+                      chooseModeController.selectKeerMode(context: context);
                     },
                   ),
                 ),
