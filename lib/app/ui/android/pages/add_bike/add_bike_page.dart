@@ -23,16 +23,8 @@ class AddBikePage extends StatelessWidget {
       'Yamaha',
       'Toyota',
     ].obs;
-    RxList categories = [
-      'Xe số',
-      'Tay ga',
-      'Tay côn'
-    ].obs;
-    RxList volumes = [
-      '50cc',
-      '100cc',
-      '120cc'
-    ].obs;
+    RxList categories = ['Xe số', 'Tay ga', 'Tay côn'].obs;
+    RxList volumes = ['50cc', '100cc', '120cc'].obs;
 
     return Scaffold(
         appBar: CustomAppBar(
@@ -85,7 +77,7 @@ class AddBikePage extends StatelessWidget {
                       Obx(
                         () => BikeDropdownField(
                           hintText: CustomStrings.kEnterBrand.tr,
-                          items: brands.value,
+                          items: brands.toList(),
                           onChangedFunc: (value) {
                             addBikeController.brand.value = value;
                           },
@@ -105,9 +97,9 @@ class AddBikePage extends StatelessWidget {
                       ),
                       Text(CustomStrings.kBikeCategory.tr),
                       Obx(
-                            () => BikeDropdownField(
+                        () => BikeDropdownField(
                           hintText: CustomStrings.kEnterCategory.tr,
-                          items: categories.value,
+                          items: categories.toList(),
                           onChangedFunc: (value) {
                             addBikeController.category.value = value;
                           },
@@ -115,9 +107,9 @@ class AddBikePage extends StatelessWidget {
                       ),
                       Text(CustomStrings.kBikeVolume.tr),
                       Obx(
-                            () => BikeDropdownField(
+                        () => BikeDropdownField(
                           hintText: CustomStrings.kEnterVolume.tr,
-                          items: volumes.value,
+                          items: volumes.toList(),
                           onChangedFunc: (value) {
                             addBikeController.volume.value = value;
                           },
@@ -140,42 +132,43 @@ class AddBikePage extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 5, bottom: 15),
                           child: addBikeController.bikePicture.value == ''
                               ? GestureDetector(
-                                onTap: () async {
-                                  addBikeController.bikePicture.value = await Navigator.of(context)
-                                      .push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddBikeCameraPage()));
-                                },
-                                child: Container(
-                                  height: 250,
-                                  child: Icon(
+                                  onTap: () async {
+                                    addBikeController.bikePicture.value =
+                                        await Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddBikeCameraPage()));
+                                  },
+                                  child: Container(
+                                    height: 250,
+                                    child: Icon(
                                       Icons.camera_alt_outlined,
                                       size: 60,
                                       color: CustomColors.kDarkGray,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: CustomColors.kLightGray,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                )
-                              )
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: CustomColors.kLightGray,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                  ))
                               : Container(
                                   height: 250,
-                                  child: Image.file(File(addBikeController.bikePicture.value),
+                                  child: Image.file(
+                                      File(addBikeController.bikePicture.value),
                                       fit: BoxFit.cover),
-                              )
-                          )
-                      ),
+                                ))),
                       Text(CustomStrings.kBikeLicensePicture.tr),
                       Obx(() => Padding(
                           padding: const EdgeInsets.only(top: 5, bottom: 15),
-                          child: addBikeController.bikeLicensePicture.value == ''
+                          child: addBikeController.bikeLicensePicture.value ==
+                                  ''
                               ? GestureDetector(
                                   onTap: () async {
-                                    addBikeController.bikeLicensePicture.value = await Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddBikeCameraPage()));
+                                    addBikeController.bikeLicensePicture.value =
+                                        await Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddBikeCameraPage()));
                                   },
                                   child: Container(
                                     height: 250,
@@ -188,25 +181,26 @@ class AddBikePage extends StatelessWidget {
                                       color: CustomColors.kLightGray,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                  )
-                              )
+                                  ))
                               : Container(
-                                height: 250,
-                                child: Image.file(File(addBikeController.bikeLicensePicture.value),
-                                    fit: BoxFit.cover),
-                              )
-                          )
-                      ),
+                                  height: 250,
+                                  child: Image.file(
+                                      File(addBikeController
+                                          .bikeLicensePicture.value),
+                                      fit: BoxFit.cover),
+                                ))),
                       Text(CustomStrings.kNumberPlatePicture.tr),
                       Obx(() => Padding(
                           padding: const EdgeInsets.only(top: 5, bottom: 15),
-                          child: addBikeController.plateNumberPicture.value == ''
+                          child: addBikeController.plateNumberPicture.value ==
+                                  ''
                               ? GestureDetector(
                                   onTap: () async {
-                                    addBikeController.plateNumberPicture.value = await Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddBikeCameraPage()));
+                                    addBikeController.plateNumberPicture.value =
+                                        await Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddBikeCameraPage()));
                                   },
                                   child: Container(
                                     height: 250,
@@ -219,22 +213,23 @@ class AddBikePage extends StatelessWidget {
                                       color: CustomColors.kLightGray,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                  )
-                              )
+                                  ))
                               : Container(
-                                height: 250,
-                                child: Image.file(File(addBikeController.plateNumberPicture.value),
-                                    fit: BoxFit.cover),
-                              )
-                          )
-                      ),
+                                  height: 250,
+                                  child: Image.file(
+                                      File(addBikeController
+                                          .plateNumberPicture.value),
+                                      fit: BoxFit.cover),
+                                ))),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 100),
-                              child: GetBuilder<AddBikeController>(builder: (controller) {
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 100),
+                              child: GetBuilder<AddBikeController>(
+                                  builder: (controller) {
                                 return CustomElevatedIconHasLoadingButton(
                                   onPressedFunc: () {
                                     addBikeController.addBike();

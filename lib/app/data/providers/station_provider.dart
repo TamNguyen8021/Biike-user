@@ -1,7 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:bikes_user/main.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class StationProvider extends CommonProvider {
@@ -14,46 +12,30 @@ class StationProvider extends CommonProvider {
         UrlStrings.stationUrl + '?page=$page&limit=$limit',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (StationProvider - getStations()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
-        
+    logResponse(response);
+
     if (response.status.hasError) {
-      Biike.logger.e(
-          'StationProvider - getStations()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              response.body);
+      logError(response);
       return Future.error(response.statusText!);
     } else {
       return response.body;
     }
   }
 
-  Future<dynamic> getListRelatedStation({required int departureId}) async {
+  /// Author: UyenNLP
+  Future<dynamic> getListRelatedStation(
+      {required int page, required int limit, required int departureId}) async {
     final response = await get(
-        UrlStrings.stationUrl + '/relatedStations?page=1&limit=10&departureId=$departureId',
+        UrlStrings.stationUrl +
+            '/relatedStations?page=$page&limit=$limit&departureId=$departureId',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (StationProvider - getListRelatedStation()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.statusCode == HttpStatus.ok) {
-      return response.body['data'];
+      return response.body;
     }
-
+    logError(response);
     return Future.value(null);
   }
 }

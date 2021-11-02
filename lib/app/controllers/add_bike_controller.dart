@@ -31,9 +31,12 @@ class AddBikeController extends GetxController {
     try {
       _enableLoading(true);
 
-      dynamic bikePictureUrl = await ImageProvider().postImage('bikePicture', bikePicture.value);
-      dynamic bikeLicensePictureUrl = await ImageProvider().postImage('bikeLicensePicture', bikeLicensePicture.value);
-      dynamic plateNumberPictureUrl = await ImageProvider().postImage('plateNumberPicture', plateNumberPicture.value);
+      dynamic bikePictureUrl =
+          await ImageProvider().postImage('bikePicture', bikePicture.value);
+      dynamic bikeLicensePictureUrl = await ImageProvider()
+          .postImage('bikeLicensePicture', bikeLicensePicture.value);
+      dynamic plateNumberPictureUrl = await ImageProvider()
+          .postImage('plateNumberPicture', plateNumberPicture.value);
 
       Map<String, dynamic> data = <String, dynamic>{
         'userId': Biike.userId.value,
@@ -77,10 +80,10 @@ class AddBikeController extends GetxController {
   }
 
   String _validate() {
-    if (plateNumber.value.replaceAll(" ", "").isEmpty ||
-        bikeOwner.value.replaceAll(" ", "").isEmpty ||
-        color.value.replaceAll(" ", "").isEmpty ||
-        brand.value.replaceAll(" ", "").isEmpty) {
+    if (plateNumber.value.trim().isEmpty ||
+        bikeOwner.value.trim().isEmpty ||
+        color.value.trim().isEmpty ||
+        brand.value.trim().isEmpty) {
       return 'Not null';
     }
 

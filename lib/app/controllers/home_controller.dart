@@ -1,10 +1,12 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
+import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/main.dart';
@@ -21,14 +23,20 @@ class HomeController extends GetxController {
       PagingController(firstPageKey: 0);
 
   Rx<bool> isAppBarVisible = true.obs;
-  Rx<DateTime> searchDate = DateTime.now().obs;
-  Rx<TimeOfDay> searchTime = TimeOfDay.now().obs;
+  Rxn<DateTime> searchDate = Rxn<DateTime>();
+  Rxn<TimeOfDay> searchTime = Rxn<TimeOfDay>();
   Rx<String> searchDateString = CustomStrings.kChooseDate.tr.obs;
   Rx<String> searchTimeString = CustomStrings.kChooseTime.tr.obs;
-
+  Rx<Station> departureStation = Station.empty().obs;
+  Rx<Station> destinationStation = Station.empty().obs;
+  Rx<String> departureStationName = CustomStrings.kSelectSourceStation.tr.obs;
+  Rx<String> destinationStationName =
+      CustomStrings.kSelectDestinationStation.tr.obs;
   RxList upcomingTrips = [].obs;
+  RxList upcomingTripsForBiker = [].obs;
   Map<int?, String> stations = {};
   Map<String, dynamic> pagination = {};
+  bool hasSearchedTrips = false;
   int _currentPage = 1;
   int _limit = 10;
 
@@ -52,9 +60,7 @@ class HomeController extends GetxController {
   Future<void> _fetchPage(int pageKey) async {
     try {
       await getUpcomingTrips();
-      // if (Biike.role.value == Role.biker) {
-      //   await getStations();
-      // }
+
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
@@ -119,6 +125,7 @@ class HomeController extends GetxController {
       }
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
+          isSearchedTrip: false,
           tripId: trip.tripId,
           userId: user.userId,
           backgroundColor: backgroundColor,
@@ -136,42 +143,175 @@ class HomeController extends GetxController {
     return upcomingTrips.cast();
   }
 
+  /// Load upcoming trips for biker from API.
+  ///
+  /// Author: TamNTT
+  Future<List<UpcomingTripCard>> searchTrips(
+      {DateTime? date,
+      TimeOfDay? time,
+      int? departureId,
+      int? destinationId}) async {
+    upcomingTripsForBiker.clear();
+    hasSearchedTrips = true;
+
+    Map<String, dynamic> response = await _tripProvider.searchTrips(
+        page: _currentPage,
+        limit: _limit,
+        date: date,
+        time: time,
+        departureId: departureId,
+        destinationId: destinationId);
+    pagination = response['_meta'];
+
+    for (var item in response['data']) {
+      User user = User.fromJson(item);
+      Trip trip = Trip.fromJson(item);
+      DepartureStation startingStation = DepartureStation.fromJson(item);
+      DestinationStation destinationStation = DestinationStation.fromJson(item);
+
+      UpcomingTripCard upcomingTripCard = UpcomingTripCard(
+          isSearchedTrip: true,
+          tripId: trip.tripId,
+          userId: user.userId,
+          avatarUrl: user.avatar,
+          name: user.userFullname,
+          phoneNo: user.userPhoneNumber,
+          bookTime: trip.bookTime,
+          departureStation: startingStation.departureName,
+          destinationStation: destinationStation.destinationName);
+
+      upcomingTripsForBiker.add(upcomingTripCard);
+    }
+
+    return upcomingTripsForBiker.cast();
+  }
+
   /// Load stations from API.
   ///
   /// Author: TamNTT
-  Future<Map> getStations() async {
+  Future<Map> getStations({required bool isDepartureSelected}) async {
     stations.clear();
-    Map<String, dynamic> response =
-        await _stationProvider.getStations(page: _currentPage, limit: _limit);
+    Map<String, dynamic> response;
+
+    if (isDepartureSelected) {
+      if (destinationStation.value.stationId! > 0) {
+        response = await _stationProvider.getListRelatedStation(
+            page: _currentPage,
+            limit: _limit,
+            departureId: destinationStation.value.stationId!);
+      } else {
+        response = await _stationProvider.getStations(
+            page: _currentPage, limit: _limit);
+      }
+    } else {
+      if (departureStation.value.stationId! > 0) {
+        response = await _stationProvider.getListRelatedStation(
+            page: _currentPage,
+            limit: _limit,
+            departureId: departureStation.value.stationId!);
+      } else {
+        response = await _stationProvider.getStations(
+            page: _currentPage, limit: _limit);
+      }
+    }
+
     pagination = response['_meta'];
 
     for (var station in response['data']) {
-      DepartureStation departureStation = DepartureStation.fromJson(station);
+      Station departureStation = Station.fromJson(station);
       stations.putIfAbsent(
-          departureStation.stationId, () => departureStation.departureName);
+          departureStation.stationId, () => departureStation.name);
     }
     return stations;
   }
 
-  dynamic showStationsDialog({required BuildContext context}) async {
+  /// Display a dialog which contains stations for user to choose.
+  ///
+  /// Author: TamNTT
+  Future showStationsDialog(
+      {required BuildContext context, required bool isDepartureStation}) async {
+    Rx<int?> _tempStationId = (-1).obs;
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: stations.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Text(stations.values.elementAt(index));
-                  }),
-            ),
-          );
+          return FutureBuilder(
+              future: getStations(isDepartureSelected: isDepartureStation),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Dialog(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: stations.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Obx(
+                              () => RadioListTile<int?>(
+                                title: Text(
+                                  stations.values.elementAt(index),
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                                value: stations.keys.elementAt(index),
+                                groupValue: _tempStationId.value,
+                                onChanged: (int? stationId) {
+                                  _tempStationId.value = stationId;
+                                  if (isDepartureStation) {
+                                    departureStation.value.stationId =
+                                        _tempStationId.value;
+                                    departureStationName.value =
+                                        departureStation.value.name =
+                                            stations.values.elementAt(index);
+                                    Biike.logger
+                                        .d(departureStation.value.stationId);
+                                    Biike.logger.d(departureStation.value.name);
+                                  } else {
+                                    destinationStation.value.stationId =
+                                        _tempStationId.value;
+                                    destinationStationName.value =
+                                        destinationStation.value.name =
+                                            stations.values.elementAt(index);
+                                    Biike.logger
+                                        .d(destinationStation.value.stationId);
+                                    Biike.logger
+                                        .d(destinationStation.value.name);
+                                  }
+                                  Get.back();
+                                },
+                              ),
+                            );
+                          }),
+                    ),
+                  );
+                } else {
+                  return Loading();
+                }
+              });
         });
+  }
+
+  void swapStations() {
+    // Swap name on UI
+    String tempStationName = departureStationName.value;
+    departureStationName.value = destinationStationName.value;
+    destinationStationName.value = tempStationName;
+
+    if (departureStationName.value ==
+        CustomStrings.kSelectDestinationStation.tr) {
+      departureStationName.value = CustomStrings.kSelectSourceStation.tr;
+    }
+
+    if (destinationStationName.value == CustomStrings.kSelectSourceStation.tr) {
+      destinationStationName.value = CustomStrings.kSelectDestinationStation.tr;
+    }
+
+    // Swap id on back-end
+    int tempStationId = departureStation.value.stationId!;
+    departureStation.value.stationId = destinationStation.value.stationId;
+    destinationStation.value.stationId = tempStationId;
   }
 }

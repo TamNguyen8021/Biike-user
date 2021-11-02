@@ -1,4 +1,7 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -7,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SwitchRoleButton extends StatelessWidget {
+  final _userProvider = Get.find<UserProvider>();
   final String route;
   final bool isOnProfilePage;
 
@@ -34,20 +38,34 @@ class SwitchRoleButton extends StatelessWidget {
       height: 20,
       child: Obx(
         () => ElevatedButton(
-          onPressed: () {
-            if (Biike.role.value == Role.keer) {
-              Biike.role.value = Role.biker;
-              if (!isOnProfilePage) {
-                _modeButtonForegroundColor.value = CustomColors.kOrange;
-              }
-            } else if (Biike.role.value == Role.biker) {
-              Biike.role.value = Role.keer;
-              if (!isOnProfilePage) {
-                _modeButtonForegroundColor.value = CustomColors.kBlue;
-              }
+          onPressed: () async {
+            int role = 2;
+
+            if (Biike.role.value == Role.biker) {
+              role = 1;
             }
-            Biike.localAppData.saveRole(Biike.role.value);
-            Get.offAllNamed(route);
+
+            final hasRoleChanged = await _userProvider.changeRole(role: role);
+
+            if (hasRoleChanged) {
+              if (Biike.role.value == Role.keer) {
+                Biike.role.value = Role.biker;
+                if (!isOnProfilePage) {
+                  _modeButtonForegroundColor.value = CustomColors.kOrange;
+                }
+              } else if (Biike.role.value == Role.biker) {
+                Biike.role.value = Role.keer;
+                if (!isOnProfilePage) {
+                  _modeButtonForegroundColor.value = CustomColors.kBlue;
+                }
+              }
+              Biike.localAppData.saveRole(Biike.role.value);
+              Get.offAllNamed(route);
+            } else {
+              CommonFunctions().showErrorDialog(
+                  context: context,
+                  message: CustomErrorsString.kDevelopError.tr);
+            }
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 1.0),

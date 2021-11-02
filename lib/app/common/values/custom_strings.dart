@@ -17,6 +17,7 @@ class CustomStrings {
   static const String kLoginButton = 'kLoginButton';
   static const String kConfirmTerm = 'kConfirmTerm';
   static const String kTerm = 'kTerm';
+  static const String kForgotPassword = 'kForgotPassword';
 
   // '004.1_input_phone_no' screen
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
@@ -68,6 +69,9 @@ class CustomStrings {
   static const String kSelectDestinationStation = 'kSelectDestinationStation';
   static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
+  static const String kAcceptSuccessful = 'kAcceptSuccessful';
+  static const String kSearchAgain = 'kSearchAgain';
+  static const String kSearch = 'kSearch';
 
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
@@ -176,12 +180,26 @@ class CustomStrings {
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
-  static const String kOpenStreetMap = 'kOpenStreetMap';
+  static const String kExpandMap = 'kExpandMap';
+  static const String kMinimizeMap = 'kMinimizeMap';
+  static const String kViewRouteInstruction = 'kViewRouteInstruction';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
+  static const String kHelpCenter = 'kHelpCenter';
+  static const String kShareTripInfo = 'kShareTripInfo';
+  static const String kSOSCenter = 'kSOSCenter';
+  static const String kNearestPoliceStation = 'kNearestPoliceStation';
+  static const String kNearestHospital = 'kNearestHospital';
+  static const String kNearestMechanicShop = 'kNearestMechanicShop';
+  static const String kNearestGasStation = 'kNearestGasStation';
+  static const String kRoad = 'kRoad';
+  static const String kSuburb = 'kSuburb';
+  static const String kTown = 'kTown';
+  static const String kCity = 'kCity';
+  static const String kCountry = 'kCountry';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';
@@ -197,7 +215,6 @@ class CustomStrings {
   static const String kChooseDate = 'kChooseDate';
   static const String kChooseTime = 'kChooseTime';
   static const String kRepeat = 'kRepeat';
-  static const String kRepeatTo = 'kRepeatTo';
   static const String kCancel = 'kCancel';
 
   // 'bike_manager' screen
@@ -291,4 +308,13 @@ class CustomStrings {
   // 'ban_list' screen
   static const String kBanList = 'kBanList';
   static const String kUnBlock = 'kUnBlock';
+
+  // date
+  static const String kMonday = 'kMonday';
+  static const String kTuesday = 'kTuesday';
+  static const String kWednesday = 'kWednesday';
+  static const String kThursday = 'kThursday';
+  static const String kFriday = 'kFriday';
+  static const String kSaturday = 'kSaturday';
+  static const String kSunday = 'kSunday';
 }

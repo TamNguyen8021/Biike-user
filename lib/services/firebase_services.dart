@@ -9,9 +9,9 @@ class FirebaseServices {
   Future<bool> get isLogin async => (await token).isEmpty;
   String get uid => user?.uid ?? '';
   bool get isVerifyEmail => user?.emailVerified ?? false;
-  String _verificationId = "";
+  String _verificationId = '';
   late FirebaseAuth firebaseAuth;
-
+ 
   static FirebaseServices init() {
     FirebaseServices firebaseServices = FirebaseServices();
     firebaseServices.firebaseAuth = FirebaseAuth.instance;
@@ -99,5 +99,23 @@ class FirebaseServices {
 
   Future<void> reloadUser() async {
     await user?.reload();
+  }
+
+  Future<bool> resetPasswordWithEmail(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        SnackBarServices.showSnackbar(title: '', message: 'Email khong hop le');
+        return false;
+      }
+      if (e.code == 'user-not-found') {
+        SnackBarServices.showSnackbar(
+            title: '', message: 'Khong tim thay email nay');
+        return false;
+      }
+      return false;
+    }
   }
 }

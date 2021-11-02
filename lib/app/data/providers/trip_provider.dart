@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
-import 'package:flutter_logs/flutter_logs.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class TripProvider extends CommonProvider {
@@ -14,23 +16,10 @@ class TripProvider extends CommonProvider {
         UrlStrings.tripUrl + 'upcoming/users/$userId?page=$page&limit=$limit',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - getUpcomingTrips()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.status.hasError) {
-      Biike.logger.e(
-          'TripProvider - getUpcomingTrips()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
       return Future.error(response.statusText!);
     } else {
       return response.body;
@@ -46,23 +35,10 @@ class TripProvider extends CommonProvider {
         UrlStrings.tripUrl + 'history/users/$userId?page=$page&limit=$limit',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - getHistoryTrips()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.status.hasError) {
-      Biike.logger.e(
-          'TripProvider - getHistoryTrips()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
       return Future.error(response.statusText!);
     } else {
       return response.body;
@@ -82,23 +58,10 @@ class TripProvider extends CommonProvider {
             'historyPair?userOneId=$userId&userTwoId=$partnerId&page=$page&limit=$limit',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - getHistoryPairTrips()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.status.hasError) {
-      Biike.logger.e(
-          'TripProvider - getHistoryPairTrips()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
       return Future.error(response.statusText!);
     } else {
       return response.body;
@@ -112,23 +75,10 @@ class TripProvider extends CommonProvider {
     final response = await get(UrlStrings.tripUrl + '$tripId/details',
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - getTripDetails()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.status.hasError) {
-      Biike.logger.e(
-          'TripProvider - getTripDetails()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
       return Future.error(response.statusText!);
     } else {
       return response.body['data'];
@@ -138,31 +88,33 @@ class TripProvider extends CommonProvider {
   /// Loads location data from API based on [latitude] and [longtitude].
   ///
   /// Author: TamNTT
-  Future<Map<String, String>> getLocationDetails(
+  Future<Map<String, dynamic>> getLocationDetails(
       {required double latitude, required double longtitude}) async {
     final response = await get(
         'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=$latitude&lon=$longtitude');
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - getLocationDetails()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
 
     if (response.status.hasError) {
-      Biike.logger.e(
-          'TripProvider - getLocationDetails()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
       return Future.error(response.statusText!);
     } else {
-      return response.body['address'];
+      return response.body;
+    }
+  }
+
+  Future getRouteData(
+      String startLng, String startLat, String endLng, String endLat) async {
+    final response = await get(
+        'https://api.openrouteservice.org/v2/directions/cycling-road?api_key=5b3ce3597851110001cf6248de4262d7d04449e6a17f0d0473072352&start=$startLng,$startLat&end=$endLng,$endLat');
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return jsonDecode(response.body);
     }
   }
 
@@ -172,48 +124,132 @@ class TripProvider extends CommonProvider {
   Future<bool> cancelTrip({required int tripId, required dynamic body}) async {
     final response = await put(
         UrlStrings.tripUrl +
-            '$tripId/cancel?userId=' +
-            Biike.userId.value.toString(),
+            '$tripId/cancel?userId=${Biike.userId.value.toString()}',
         body,
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - cancelTrip()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
+
     if (response.status.hasError) {
-      Biike.logger.e(
-          'TripProvider - cancelTrip()',
-          response.statusCode.toString() +
-              ' ' +
-              response.statusText! +
-              '\n' +
-              response.body);
+      logError(response);
       return false;
     } else {
       return true;
     }
   }
 
+  /// Create a ke-now trip
+  ///
+  /// Author: UyenNLP
   Future<dynamic> createKeNowTrip(Map<String, dynamic> data) async {
-    final response = await post(UrlStrings.tripUrl, data,
+    final response =
+        await post(UrlStrings.tripUrl, data, headers: await headers);
+
+    logResponse(response);
+    if (response.hasError) {
+      logError(response);
+    }
+
+    if (response.statusCode == HttpStatus.created) {
+      return true;
+    }
+
+    logError(response);
+    return response.bodyString ?? '';
+  }
+
+  /// Create a scheduled trip
+  ///
+  /// Author: UyenNLP
+  Future<dynamic> createScheduledTrip(Map<String, dynamic> data) async {
+    final response = await post(UrlStrings.tripUrl + 'schedule', data,
         headers: await headers);
 
-    FlutterLogs.logToFile(
-        logFileName: 'API',
-        overwrite: false,
-        logMessage: '\n\nBiike (TripProvider - createKeNowTrip()): ' +
-            response.statusCode.toString() +
-            ' ' +
-            response.statusText!,
-        appendTimeStamp: true);
+    logResponse(response);
+    if (response.hasError) {
+      logError(response);
+    }
 
-    return response.statusCode == HttpStatus.created
-        ? Future.value(true)
-        : Future.value(response.bodyString ?? '');
+    if (response.statusCode == HttpStatus.created) {
+      return true;
+    }
+
+    logError(response);
+    return response.bodyString ?? '';
+  }
+
+  /// Search upcoming trips for biker
+  ///
+  /// Author: TamNTT
+  Future<Map<String, dynamic>> searchTrips(
+      {required int page,
+      required int limit,
+      DateTime? date,
+      TimeOfDay? time,
+      int? departureId,
+      int? destinationId}) async {
+    String _dateString = '';
+    String _timeString = '';
+
+    if (date != null) {
+      _dateString = date.toIso8601String();
+    }
+
+    if (time != null) {
+      _timeString = time.hour.toString() + ':' + time.minute.toString();
+    }
+
+    final response = await get(
+        UrlStrings.tripUrl +
+            'newlyCreatedTrip?page=$page&limit=$limit&date=$_dateString&time=$_timeString&departureId=$departureId&destinationId=$destinationId',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body;
+    }
+  }
+
+  /// Accept a trip based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> acceptTrip({required int tripId}) async {
+    final response = await put(
+        UrlStrings.tripUrl + '$tripId?bikerId=${Biike.userId.value.toString()}',
+        {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /// Mark a trip as started or completed based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> startTripOrCompleteTrip({required int tripId}) async {
+    final response = await put(
+        UrlStrings.tripUrl +
+            '$tripId/progressTime?bikerId=${Biike.userId.value.toString()}&time=${DateTime.now()}',
+        {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
   }
 }

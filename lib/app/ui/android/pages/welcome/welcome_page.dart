@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-
 /// The '002.1_welcome_1' screen
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -65,7 +64,7 @@ class WelcomePage extends StatelessWidget {
                       height: MediaQuery.of(context).size.height / 3,
                       padding: const EdgeInsets.symmetric(horizontal: 35.0),
                       child: SvgPicture.asset(
-                        "assets/images/biike-two-person.svg",
+                        'assets/images/biike-two-person.svg',
                         fit: BoxFit.fill,
                       ),
                     ),

@@ -19,6 +19,7 @@ abstract class CommonRoutes {
   static const GET_TRIP_SUCCESS = '/getTripSuccess';
   static const EXCHANGE_VOUCHER = '/exchangeVoucher';
   static const TRIP_DETAILS = '/tripDetails';
+  static const TRIP_DETAILS_FULL_MAP = '/tripDetailsFullMap';
   static const BOOK_TRIP = '/bookTrip';
   static const BOOK_SCHEDULE_TRIP = '/bookScheduleTrip';
   static const MANAGE_BIKE = '/manageBike';

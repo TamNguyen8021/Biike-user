@@ -61,7 +61,7 @@ class PasswordPage extends StatelessWidget {
                 animationType: AnimationType.fade,
                 validator: (v) {
                   if (v!.length < 6) {
-                    return "I'm from validator";
+                    return 'I\'m from validator';
                   } else {
                     return null;
                   }

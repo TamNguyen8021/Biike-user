@@ -183,6 +183,7 @@ class ViewUserController extends GetxController {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kBlue,
                               foregroundColor: Colors.white,
                               text: CustomStrings.kReport.tr,
@@ -191,6 +192,7 @@ class ViewUserController extends GetxController {
                                 _showThankYouForReportDialog(context: context);
                               }),
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kRed,
                               foregroundColor: Colors.white,
                               text: CustomStrings.kReportAndBlock.tr,
@@ -199,6 +201,7 @@ class ViewUserController extends GetxController {
                                 _showConfirmBlockDialog(context: context);
                               }),
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kLightGray,
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
@@ -251,6 +254,7 @@ class ViewUserController extends GetxController {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kBlue,
                               foregroundColor: Colors.white,
                               text: CustomStrings.kSure.tr,
@@ -259,6 +263,7 @@ class ViewUserController extends GetxController {
                                 _showThankYouForReportDialog(context: context);
                               }),
                           CustomTextButton(
+                              hasBorder: false,
                               backgroundColor: CustomColors.kLightGray,
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
@@ -308,6 +313,7 @@ class ViewUserController extends GetxController {
                   ),
                   Center(
                     child: CustomTextButton(
+                        hasBorder: false,
                         width: 100,
                         backgroundColor: CustomColors.kLightGray,
                         foregroundColor: CustomColors.kDarkGray,

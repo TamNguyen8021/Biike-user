@@ -1,4 +1,7 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +9,8 @@ import 'package:get/get.dart';
 
 /// Manage states of [ChooseModePage]
 class ChooseModeController extends GetxController {
+  final _userProvider = Get.find<UserProvider>();
+
   Rx<bool> isKeerModeSelected = false.obs;
   Rx<Color> keerBackgroundColor = CustomColors.kLightGray.obs;
   Rx<Color> keerTitleAndIconColor = CustomColors.kBlue.obs;
@@ -16,7 +21,7 @@ class ChooseModeController extends GetxController {
   Rx<Color> bikerTitleAndIconColor = CustomColors.kBlue.obs;
   Rx<Color> bikerTextColor = CustomColors.kDarkGray.obs;
 
-  void selectKeerMode() {
+  void selectKeerMode({required BuildContext context}) async {
     if (isKeerModeSelected.isFalse) {
       if (isBikerModeSelected.isTrue) {
         Biike.role.value = Role.none;
@@ -37,10 +42,16 @@ class ChooseModeController extends GetxController {
       keerTitleAndIconColor.value = CustomColors.kBlue;
       keerTextColor.value = CustomColors.kDarkGray;
     }
-    Biike.localAppData.saveRole(Biike.role.value);
+
+    if (await _userProvider.changeRole(role: 1)) {
+      Biike.localAppData.saveRole(Biike.role.value);
+    } else {
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
+    }
   }
 
-  void selectBikerMode() {
+  void selectBikerMode({required BuildContext context}) async {
     if (isBikerModeSelected.isFalse) {
       if (isKeerModeSelected.isTrue) {
         Biike.role.value = Role.none;
@@ -61,6 +72,12 @@ class ChooseModeController extends GetxController {
       bikerTitleAndIconColor.value = CustomColors.kBlue;
       bikerTextColor.value = CustomColors.kDarkGray;
     }
-    Biike.localAppData.saveRole(Biike.role.value);
+
+    if (await _userProvider.changeRole(role: 2)) {
+      Biike.localAppData.saveRole(Biike.role.value);
+    } else {
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
+    }
   }
 }
