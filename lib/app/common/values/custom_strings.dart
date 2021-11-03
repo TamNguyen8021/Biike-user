@@ -348,4 +348,12 @@ class CustomStrings {
   static const String kFriday = 'kFriday';
   static const String kSaturday = 'kSaturday';
   static const String kSunday = 'kSunday';
+
+  // point
+  static const String kPoint = 'kPoint';
+  static const String kExchangeVoucher = 'kExchangeVoucher';
+  static const String kBuyPoint = 'kBuyPoint';
+  static const String kYouHave = 'kYouHave';
+  static const String kExpired = 'kExpired';
+  static const String kFindMore = 'kFindMore';
 }

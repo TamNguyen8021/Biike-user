@@ -361,6 +361,14 @@ final Map<String, String> vi = {
   'kFriday': 'T6',
   'kSaturday': 'T7',
   'kSunday': 'CN',
+
+  // point
+  'kPoint' : 'Điểm',
+  'kExchangeVoucher' : 'Đổi quà',
+  'kBuyPoint' : 'Nạp điểm',
+  'kYouHave' : 'Bạn có',
+  'kExpired' : ' điểm sẽ hết hạn vào ngày ',
+  'kFindMore' : 'Tìm hiểu thêm',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',

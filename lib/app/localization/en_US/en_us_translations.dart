@@ -356,6 +356,14 @@ final Map<String, String> en = {
   'kFriday': 'Fri',
   'kSaturday': 'Sat',
   'kSunday': 'Sun',
+
+  // point
+  'kPoint' : 'Point',
+  'kExchangeVoucher' : 'Voucher',
+  'kBuyPoint' : 'Buy point',
+  'kYouHave' : 'You have',
+  'kExpired' : ' points will be expired in ',
+  'kFindMore' : 'Find more',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
