@@ -23,7 +23,7 @@ class BuyPointButton extends StatelessWidget {
               CustomStrings.kBuyPoint.tr,
               style: TextStyle(
                   color: CustomColors.kBlue,
-                  fontSize: 8.sp),
+                  fontSize: 10.sp),
             ),
           ],
         ),

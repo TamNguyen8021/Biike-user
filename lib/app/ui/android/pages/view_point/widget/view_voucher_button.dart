@@ -24,7 +24,7 @@ class ViewVoucherButton extends StatelessWidget {
               CustomStrings.kExchangeVoucher.tr,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 8.sp),
+                  fontSize: 10.sp),
             ),
           ],
         ),
