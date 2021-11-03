@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
 import 'package:camera/camera.dart';
@@ -21,7 +22,7 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
     super.initState();
     _controller = CameraController(
       Biike.camera,
-      ResolutionPreset.medium,
+      ResolutionPreset.max,
     );
 
     _initializeControllerFuture = _controller.initialize();
@@ -35,6 +36,20 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
 
   @override
   Widget build(BuildContext context) {
+    String text = '';
+    switch (Get.arguments['type']) {
+      case 'bike':
+        text = CustomStrings.kPleaseTakeBikePicture.tr;
+        break;
+      case 'bike license':
+        text = CustomStrings.kPleaseTakeRegistrationPicture.tr;
+        break;
+      case 'number plate':
+        text = CustomStrings.kPleaseTakeNumberPlatePicture.tr;
+        break;
+      default:
+    }
+
     return Scaffold(
       appBar: CustomAppBar(
         isVisible: true,
@@ -53,12 +68,13 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Container(
+              decoration: BoxDecoration(color: Colors.grey),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Center(
                     child: Text(
-                      'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
+                      text,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
@@ -68,7 +84,7 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 30),
+                        vertical: 25.0, horizontal: 30.0),
                     child: AspectRatio(
                       aspectRatio: 1 / 0.7,
                       child: ClipRect(
@@ -81,34 +97,28 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CustomTextButton(
-                          hasBorder: false,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
-                          width: 100,
-                          text: 'Chụp',
-                          onPressedFunc: () async {
-                            try {
-                              await _initializeControllerFuture;
+                  CustomTextButton(
+                      width: 100,
+                      hasBorder: false,
+                      backgroundColor: CustomColors.kBlue,
+                      foregroundColor: Colors.white,
+                      text: CustomStrings.kTakePicture.tr,
+                      onPressedFunc: () async {
+                        try {
+                          await _initializeControllerFuture;
 
-                              final image = await _controller.takePicture();
+                          final image = await _controller.takePicture();
 
-                              Navigator.of(context).pop(image.path);
-                            } catch (e) {
-                              print(e);
-                            }
-                          }),
-                    ],
-                  )
+                          Get.back(result: image.path);
+                        } catch (e) {
+                          Biike.logger.e('AddBikeCameraPage: ' + e.toString());
+                        }
+                      })
                 ],
               ),
-              decoration: BoxDecoration(color: Colors.grey),
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return Loading();
           }
         },
       ),

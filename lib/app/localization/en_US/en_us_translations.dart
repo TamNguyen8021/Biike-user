@@ -66,7 +66,6 @@ final Map<String, String> en = {
   'kSelectHour': 'Hour',
   'kSelectSourceStation': 'Departure station',
   'kSelectDestinationStation': 'Destination station',
-  'kDecline': 'Decline',
   'kAccept': 'Accept',
   'kAcceptSuccessful': 'You have accepted this trip',
   'kSearchAgain': 'Clear',
@@ -230,19 +229,30 @@ final Map<String, String> en = {
   'kBikeCategory': 'Category',
   'kBikeBrand': 'Brand',
   'kBikeColor': 'Color',
+  'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
+  'kBecomeKeerDueToDeleteBike': 'You became a Ké-er because you have no bike',
+
+  // 'add_bike' screen
+  'kAddBike': 'Add bike',
+  'kPleaseEnterCorrectBikeInfo': 'Please enter correct info',
+  'kChangeBike': 'Change bike',
   'kEnterBikeOwner': 'Enter owner\'s name',
   'kEnterBrand': 'Enter brand',
   'kEnterCategory': 'Enter category',
   'kEnterColor': 'Enter color',
   'kEnterNumberPlate': 'Enter plate number',
-  'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
-
-  // 'add_bike' screen
-  'kAddBike': 'Add bike',
-  'kCheckBikeInfo': 'Please check your bike information',
+  'kBikeVolume': 'Volume',
+  'kEnterVolume': 'Enter volume',
   'kNumberPlate': 'Number plate',
   'kNumberPlatePicture': 'Number plate picture',
-  'kTakePictureAgain': 'Chụp lại',
+  'kPleaseTakeNumberPlatePicture': 'Please take a picture of your number plate',
+  'kBikePicture': 'Bike picture',
+  'kPleaseTakeBikePicture': 'Please take a picture of your bike',
+  'kRegistrationPicture': 'Registration picture',
+  'kPleaseTakeRegistrationPicture':
+      'Please take a picture of your registration',
+  'kTakePicture': 'Take picture',
+  'kFillInAllField': 'Please fill in all fields',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Gift details',
@@ -272,7 +282,7 @@ final Map<String, String> en = {
   'kWebsite': 'Website',
   'kTermOfUse': 'Terms of Use',
   'kPrivacyPolicy': 'Privacy Policy',
-  'kDevelopBy': 'Develop by Biké Team,\nFPT HCM City University',
+  'kDevelopBy': 'Develop by Biké Team,\nFPT University in HCM',
   'kDevelopAt': 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
 
   // 'address_book' screen
@@ -312,7 +322,6 @@ final Map<String, String> en = {
   'kUnBlock': 'Unblock',
   'kLogin': 'Login',
   'kRegister': 'Register',
-  'tranlatesion': 'Tranlation',
 
   // date
   'kMonday': 'Mon',

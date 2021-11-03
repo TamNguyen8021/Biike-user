@@ -40,7 +40,8 @@ class ManageBikePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: IconButton(
-                          onPressed: () => manageBikeController.removeBike(),
+                          onPressed: () =>
+                              manageBikeController.removeBike(context: context),
                           icon: Icon(Icons.delete),
                         ),
                       ),
@@ -48,7 +49,8 @@ class ManageBikePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: IconButton(
-                          onPressed: () => Get.toNamed(CommonRoutes.ADD_BIKE),
+                          onPressed: () => Get.toNamed(CommonRoutes.ADD_BIKE,
+                              arguments: {'isAddBike': true}),
                           icon: Icon(Icons.add),
                         ),
                       ),
@@ -56,115 +58,123 @@ class ManageBikePage extends StatelessWidget {
                   ],
                 ),
                 body: manageBikeController.hasBike.isTrue
-                    ? Container(
-                        margin: const EdgeInsets.all(22.0),
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        decoration: BoxDecoration(
-                            color: CustomColors.kLightGray,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: CustomColors.kDarkGray.withOpacity(0.3),
-                                // changes position of shadow
-                                offset: Offset(0, 1.5),
-                              )
-                            ]),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Row(children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
-                                  child: Icon(
-                                    Icons.two_wheeler,
-                                    size: 25,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    manageBikeController.bike.value.plateNumber
-                                        .toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6!
-                                        .copyWith(fontSize: 20.sp),
-                                  ),
-                                ),
-                                if (isBikeVerified) ...[
-                                  Text(
-                                    CustomStrings.kBikeVerified.tr,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(color: CustomColors.kBlue),
-                                  ),
-                                ] else ...[
-                                  Text(
-                                    CustomStrings.kWaitingVerified.tr,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(color: CustomColors.kOrange),
-                                  ),
-                                ]
+                    ? GestureDetector(
+                        child: Container(
+                          margin: const EdgeInsets.all(22.0),
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          decoration: BoxDecoration(
+                              color: CustomColors.kLightGray,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color:
+                                      CustomColors.kDarkGray.withOpacity(0.3),
+                                  // changes position of shadow
+                                  offset: Offset(0, 1.5),
+                                )
                               ]),
-                            ),
-                            Divider(),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    CustomStrings.kBikeOwner.tr,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Row(children: <Widget>[
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: Text(
-                                      manageBikeController.bike.value.bikeOwner
-                                          .toString(),
-                                      style:
-                                          Theme.of(context).textTheme.headline6,
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Icon(
+                                      Icons.two_wheeler,
+                                      size: 25,
                                     ),
                                   ),
-                                  Text(
-                                    CustomStrings.kBikeBrand.tr,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
+                                  Expanded(
                                     child: Text(
-                                      manageBikeController.bike.value.brand
-                                          .toString(),
-                                      style:
-                                          Theme.of(context).textTheme.headline6,
+                                      manageBikeController.bike.plateNumber ??
+                                          '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6!
+                                          .copyWith(fontSize: 20.sp),
                                     ),
                                   ),
-                                  Text(
-                                    CustomStrings.kBikeColor.tr,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                  Text(
-                                    manageBikeController.bike.value.color
-                                        .toString(),
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  ),
-                                ],
+                                  if (isBikeVerified) ...[
+                                    Text(
+                                      CustomStrings.kBikeVerified.tr,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(color: CustomColors.kBlue),
+                                    ),
+                                  ] else ...[
+                                    Text(
+                                      CustomStrings.kWaitingVerified.tr,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
+                                              color: CustomColors.kOrange),
+                                    ),
+                                  ]
+                                ]),
                               ),
-                            ),
-                          ],
+                              Divider(),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      CustomStrings.kBikeOwner.tr,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(
+                                        manageBikeController.bike.bikeOwner ??
+                                            '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      ),
+                                    ),
+                                    Text(
+                                      CustomStrings.kBikeBrand.tr,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(
+                                        manageBikeController.bike.brand ?? '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      ),
+                                    ),
+                                    Text(
+                                      CustomStrings.kBikeColor.tr,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    Text(
+                                      manageBikeController.bike.color ?? '',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+                        onTap: () {
+                          Get.toNamed(CommonRoutes.ADD_BIKE,
+                              arguments: {'isAddBike': false});
+                        },
                       )
                     : Container(
                         alignment: Alignment.topCenter,

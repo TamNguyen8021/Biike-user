@@ -67,7 +67,7 @@ class TopBikerPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
+                              onPressed: () => Get.back(),
                               child: Text(
                                 CustomStrings.kGotIt.tr,
                                 style: TextStyle(

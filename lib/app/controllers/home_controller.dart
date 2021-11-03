@@ -268,7 +268,6 @@ class HomeController extends GetxController {
                                             stations.values.elementAt(index);
                                     Biike.logger
                                         .d(departureStation.value.stationId);
-                                    Biike.logger.d(departureStation.value.name);
                                   } else {
                                     destinationStation.value.stationId =
                                         _tempStationId.value;

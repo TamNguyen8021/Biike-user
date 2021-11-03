@@ -26,8 +26,8 @@ import 'package:bikes_user/app/bindings/verify_phone_binding.dart';
 import 'package:bikes_user/app/bindings/wallet_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
-import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
-import 'package:bikes_user/app/ui/android/pages/add_bike_camera/add_bike_camera_page.dart';
+import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_page.dart';
+import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_camera_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
@@ -179,7 +179,11 @@ class AppPages {
     GetPage(
         name: CommonRoutes.ADD_BIKE,
         page: () => AddBikePage(),
-        bindings: <Bindings>[AddBikeBinding(), BikeBinding()]),
+        bindings: <Bindings>[
+          AddBikeBinding(),
+          ManageBikeBinding(),
+          BikeBinding()
+        ]),
     GetPage(
       name: CommonRoutes.VOUCHER_DETAILS,
       page: () => VoucherDetailPage(),

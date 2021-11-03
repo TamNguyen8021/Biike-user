@@ -12,17 +12,15 @@ class CustomElevatedIconHasLoadingButton extends StatelessWidget {
   final bool isLoading;
 
   const CustomElevatedIconHasLoadingButton(
-      {
-        Key? key,
-        required this.onPressedFunc,
-        this.width,
-        this.icon,
-        required this.text,
-        required this.backgroundColor,
-        required this.foregroundColor,
-        required this.elevation,
-        this.isLoading = false
-      })
+      {Key? key,
+      required this.onPressedFunc,
+      this.width,
+      this.icon,
+      required this.text,
+      required this.backgroundColor,
+      required this.foregroundColor,
+      required this.elevation,
+      this.isLoading = false})
       : super(key: key);
 
   @override
@@ -37,24 +35,25 @@ class CustomElevatedIconHasLoadingButton extends StatelessWidget {
             text,
             style: MediaQuery.of(context).size.width >= 400
                 ? Theme.of(context)
-                .textTheme
-                .button!
-                .copyWith(color: foregroundColor)
+                    .textTheme
+                    .button!
+                    .copyWith(color: foregroundColor)
                 : Theme.of(context)
-                .textTheme
-                .subtitle1!
-                .copyWith(color: foregroundColor),
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: foregroundColor),
           ),
           style: ElevatedButton.styleFrom(
             elevation: elevation,
             primary:
-            backgroundColor == CustomColors.kBlue ? null : backgroundColor,
+                backgroundColor == CustomColors.kBlue ? null : backgroundColor,
             onPrimary: foregroundColor == Colors.white ? null : foregroundColor,
           )),
     );
   }
 
   Widget get _content => isLoading
-      ? SizedBox.fromSize( size: Size(22, 22), child: CircularProgressIndicator() )
-      : Icon( icon, size: 22 );
+      ? SizedBox.fromSize(
+          size: Size(22, 22), child: CircularProgressIndicator())
+      : Icon(icon, size: 22);
 }

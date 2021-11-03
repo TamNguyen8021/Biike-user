@@ -16,4 +16,5 @@ class CustomErrorsString {
   static const String kNotAvailableTimeRange = 'kNotAvailableTimeRange';
   static const String kCannotGoBackWhenTripStarted =
       'kCannotGoBackWhenTripStarted';
+  static const String kFillInAllField = 'kFillInAllField';
 }

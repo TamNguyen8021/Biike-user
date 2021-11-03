@@ -1,18 +1,18 @@
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BikeDropdownField extends StatelessWidget {
   final String hintText;
   final Function(dynamic)? onChangedFunc;
   final List items;
 
-  const BikeDropdownField(
-      {Key? key,
-        required this.items,
-        required this.hintText,
-        this.onChangedFunc,
-      })
-      : super(key: key);
+  const BikeDropdownField({
+    Key? key,
+    required this.items,
+    required this.hintText,
+    this.onChangedFunc,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,29 +29,15 @@ class BikeDropdownField extends StatelessWidget {
             ),
           );
         }).toList(),
-        style: TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 14.0,
-            color: CustomColors.kDarkGray
-        ),
+        style: TextStyle(color: CustomColors.kDarkGray),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
-              color: CustomColors.kDarkGray.withOpacity(0.3)
-          ),
+              color: CustomColors.kDarkGray.withOpacity(0.3), fontSize: 14.sp),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
-            borderRadius: BorderRadius.all(
-                const Radius.circular(5.0)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(5.0),
-            ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: CustomColors.kLightGray),
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),
           filled: true,
           fillColor: CustomColors.kLightGray,
