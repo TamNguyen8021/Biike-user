@@ -480,8 +480,8 @@ class Home extends StatelessWidget {
                                                                 .textTheme
                                                                 .bodyText1,
                                                           ),
-                                                          onTap: () async {
-                                                            await homeController
+                                                          onTap: () {
+                                                            homeController
                                                                 .showStationsDialog(
                                                                     context:
                                                                         context,
@@ -504,8 +504,8 @@ class Home extends StatelessWidget {
                                                                 .textTheme
                                                                 .bodyText1,
                                                           ),
-                                                          onTap: () async {
-                                                            await homeController
+                                                          onTap: () {
+                                                            homeController
                                                                 .showStationsDialog(
                                                                     context:
                                                                         context,

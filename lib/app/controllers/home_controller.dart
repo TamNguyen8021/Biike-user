@@ -228,11 +228,11 @@ class HomeController extends GetxController {
   /// Display a dialog which contains stations for user to choose.
   ///
   /// Author: TamNTT
-  Future showStationsDialog(
+  void showStationsDialog(
       {required BuildContext context, required bool isDepartureStation}) async {
     Rx<int?> _tempStationId = (-1).obs;
 
-    showDialog(
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(

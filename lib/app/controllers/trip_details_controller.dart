@@ -113,8 +113,8 @@ class TripDetailsController extends GetxController {
   void showLocationDetails(
       {required BuildContext context,
       required double latitude,
-      required double longtitude}) {
-    showDialog(
+      required double longtitude}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(
@@ -246,9 +246,9 @@ class TripDetailsController extends GetxController {
   /// Display a dialog on [context] to enter cancel reason.
   ///
   /// Author: TamNTT
-  dynamic showCancelReasonDialog(
-      {required BuildContext context, required int tripId}) {
-    showDialog(
+  void showCancelReasonDialog(
+      {required BuildContext context, required int tripId}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -320,8 +320,8 @@ class TripDetailsController extends GetxController {
   }
 
   /// Author: TamNTT
-  dynamic showHelpCenter({required BuildContext context}) {
-    showDialog(
+  void showHelpCenter({required BuildContext context}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(

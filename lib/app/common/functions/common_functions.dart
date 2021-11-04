@@ -111,8 +111,8 @@ class CommonFunctions {
   ///
   /// Author: TamNTT
   void showSuccessDialog(
-      {required BuildContext context, required String message}) {
-    showDialog(
+      {required BuildContext context, required String message}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -151,8 +151,8 @@ class CommonFunctions {
   ///
   /// Author: TamNTT
   void showErrorDialog(
-      {required BuildContext context, required String message}) {
-    showDialog(
+      {required BuildContext context, required String message}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -191,8 +191,8 @@ class CommonFunctions {
   ///
   /// Author: TamNTT
   void showInfoDialog(
-      {required BuildContext context, required String message}) {
-    showDialog(
+      {required BuildContext context, required String message}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -234,8 +234,8 @@ class CommonFunctions {
       {required BuildContext context,
       required String title,
       required String message,
-      required Function() onPressedFunc}) {
-    showDialog(
+      required Function() onPressedFunc}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
