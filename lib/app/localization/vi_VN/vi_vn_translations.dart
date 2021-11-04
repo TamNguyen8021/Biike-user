@@ -211,6 +211,8 @@ final Map<String, String> vi = {
   'kTown': 'Quận',
   'kCity': 'Thành phố',
   'kCountry': 'Quốc gia',
+  'kNeedLocationPermission':
+      'Bạn cần cấp quyền truy cập vị trí để sử dụng tính năng này',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',

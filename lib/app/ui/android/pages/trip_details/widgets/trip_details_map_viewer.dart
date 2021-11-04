@@ -73,8 +73,9 @@ class TripDetailsMapViewer extends StatelessWidget {
                               (MapPosition position, bool isChanged) {},
                           center: tripDetailsController.isTripStarted.value
                               ? LatLng(
-                                  tripDetailsController.userLocation.latitude!,
-                                  tripDetailsController.userLocation.longitude!)
+                                  tripDetailsController.userLocation!.latitude!,
+                                  tripDetailsController
+                                      .userLocation!.longitude!)
                               : LatLng(
                                   (departureLatitude + destinationLatitude) / 2,
                                   (departureLongtitude +
@@ -143,19 +144,22 @@ class TripDetailsMapViewer extends StatelessWidget {
                                   size: 25,
                                 );
                               }),
-                          Marker(
-                              rotate: true,
-                              point: LatLng(
-                                  tripDetailsController.userLocation.latitude!,
-                                  tripDetailsController
-                                      .userLocation.longitude!),
-                              builder: (BuildContext context) {
-                                return Icon(
-                                  Icons.directions_bike,
-                                  color: CustomColors.kBlue,
-                                  size: 25,
-                                );
-                              }),
+                          if (tripDetailsController.userLocation != null) ...[
+                            Marker(
+                                rotate: true,
+                                point: LatLng(
+                                    tripDetailsController
+                                        .userLocation!.latitude!,
+                                    tripDetailsController
+                                        .userLocation!.longitude!),
+                                builder: (BuildContext context) {
+                                  return Icon(
+                                    Icons.directions_bike,
+                                    color: CustomColors.kBlue,
+                                    size: 25,
+                                  );
+                                }),
+                          ],
                         ]),
                         PolylineLayerOptions(
                             polylineCulling: true,

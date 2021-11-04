@@ -202,6 +202,7 @@ class CustomStrings {
   static const String kTown = 'kTown';
   static const String kCity = 'kCity';
   static const String kCountry = 'kCountry';
+  static const String kNeedLocationPermission = 'kNeedLocationPermission';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';

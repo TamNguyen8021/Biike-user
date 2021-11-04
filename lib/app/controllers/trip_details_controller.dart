@@ -41,7 +41,7 @@ class TripDetailsController extends GetxController {
   TripFeedback feedback2 = TripFeedback.empty();
 
   List<LatLng> polypoints = [];
-  late LocationData userLocation;
+  LocationData? userLocation;
 
   @override
   onInit() {
@@ -56,15 +56,13 @@ class TripDetailsController extends GetxController {
     PermissionStatus _permissionGranted;
 
     _serviceEnabled = await _location.serviceEnabled();
-    if (!_serviceEnabled) {
+    while (!_serviceEnabled) {
       _serviceEnabled = await _location.requestService();
-      if (!_serviceEnabled) {}
     }
 
     _permissionGranted = await _location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
+    while (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await _location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {}
     }
 
     userLocation = await _location.getLocation();
@@ -365,8 +363,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'công+an',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longtitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -377,8 +375,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'bệnh+viện',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longtitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -389,8 +387,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'tiệm+sửa+xe',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longtitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -401,8 +399,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'trạm+xăng',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longtitude: userLocation!.longitude,
                           context: context);
                     },
                   ),

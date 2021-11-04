@@ -186,8 +186,16 @@ class TripDetailsPage extends StatelessWidget {
                                 vertical: 16.0, horizontal: 22.0),
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                _tripDetailsController.showHelpCenter(
-                                    context: context);
+                                if (_tripDetailsController.userLocation !=
+                                    null) {
+                                  _tripDetailsController.showHelpCenter(
+                                      context: context);
+                                } else {
+                                  CommonFunctions().showInfoDialog(
+                                      context: context,
+                                      message: CustomStrings
+                                          .kNeedLocationPermission.tr);
+                                }
                               },
                               icon: Icon(
                                 Icons.support,
@@ -626,35 +634,45 @@ class TripDetailsPage extends StatelessWidget {
                                                       if (_tripDetailsController
                                                           .isTripStarted
                                                           .isFalse) {
-                                                        final isTripStarted =
-                                                            await _tripProvider
-                                                                .startTripOrCompleteTrip(
-                                                                    tripId: Get
-                                                                            .arguments[
-                                                                        'tripId']);
-                                                        if (isTripStarted) {
-                                                          _tripDetailsController
-                                                              .isTripStarted
-                                                              .value = true;
-                                                          mapController.move(
-                                                              LatLng(
-                                                                  _tripDetailsController
-                                                                      .userLocation
-                                                                      .latitude!,
-                                                                  _tripDetailsController
-                                                                      .userLocation
-                                                                      .longitude!),
-                                                              12);
-                                                          _tripDetailsController
-                                                              .changeToFinishTripButton();
+                                                        if (_tripDetailsController
+                                                                .userLocation !=
+                                                            null) {
+                                                          if (await _tripProvider
+                                                              .startTripOrCompleteTrip(
+                                                                  tripId: Get
+                                                                          .arguments[
+                                                                      'tripId'])) {
+                                                            _tripDetailsController
+                                                                .isTripStarted
+                                                                .value = true;
+                                                            mapController.move(
+                                                                LatLng(
+                                                                    _tripDetailsController
+                                                                        .userLocation!
+                                                                        .latitude!,
+                                                                    _tripDetailsController
+                                                                        .userLocation!
+                                                                        .longitude!),
+                                                                12);
+                                                            _tripDetailsController
+                                                                .changeToFinishTripButton();
+                                                          } else {
+                                                            CommonFunctions()
+                                                                .showErrorDialog(
+                                                                    context:
+                                                                        context,
+                                                                    message: CustomErrorsString
+                                                                        .kDevelopError
+                                                                        .tr);
+                                                          }
                                                         } else {
                                                           CommonFunctions()
-                                                              .showErrorDialog(
+                                                              .showInfoDialog(
                                                                   context:
                                                                       context,
                                                                   message:
-                                                                      CustomErrorsString
-                                                                          .kDevelopError
+                                                                      CustomStrings
+                                                                          .kNeedLocationPermission
                                                                           .tr);
                                                         }
                                                       } else {

@@ -208,6 +208,8 @@ final Map<String, String> en = {
   'kTown': 'Town',
   'kCity': 'City',
   'kCountry': 'Country',
+  'kNeedLocationPermission':
+      'You need to grant location permission to use this feature',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
