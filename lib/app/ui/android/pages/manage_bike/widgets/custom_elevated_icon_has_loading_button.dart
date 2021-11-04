@@ -1,45 +1,47 @@
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomElevatedIconButton extends StatelessWidget {
+class CustomElevatedIconHasLoadingButton extends StatelessWidget {
   final Function()? onPressedFunc;
   final double? width;
-  final double? height;
   final IconData? icon;
   final String text;
   final Color backgroundColor;
   final Color foregroundColor;
   final double elevation;
+  final bool isLoading;
 
-  const CustomElevatedIconButton(
+  const CustomElevatedIconHasLoadingButton(
       {Key? key,
       required this.onPressedFunc,
       this.width,
-      this.height,
       this.icon,
       required this.text,
       required this.backgroundColor,
       required this.foregroundColor,
-      required this.elevation})
+      required this.elevation,
+      this.isLoading = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height != null ? height : 40,
+      height: 35,
       width: width,
       child: ElevatedButton.icon(
-          onPressed: onPressedFunc,
-          icon: Icon(
-            icon,
-            size: 25,
-          ),
+          onPressed: isLoading ? null : onPressedFunc,
+          icon: _content,
           label: Text(
             text,
-            style: Theme.of(context)
-                .textTheme
-                .button!
-                .copyWith(color: foregroundColor),
+            style: MediaQuery.of(context).size.width >= 400
+                ? Theme.of(context)
+                    .textTheme
+                    .button!
+                    .copyWith(color: foregroundColor)
+                : Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: foregroundColor),
           ),
           style: ElevatedButton.styleFrom(
             elevation: elevation,
@@ -49,4 +51,9 @@ class CustomElevatedIconButton extends StatelessWidget {
           )),
     );
   }
+
+  Widget get _content => isLoading
+      ? SizedBox.fromSize(
+          size: Size(22, 22), child: CircularProgressIndicator())
+      : Icon(icon, size: 22);
 }

@@ -67,11 +67,13 @@ class CustomStrings {
   static const String kSelectHour = 'kSelectHour';
   static const String kSelectSourceStation = 'kSelectSourceStation';
   static const String kSelectDestinationStation = 'kSelectDestinationStation';
-  static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
   static const String kAcceptSuccessful = 'kAcceptSuccessful';
   static const String kSearchAgain = 'kSearchAgain';
   static const String kSearch = 'kSearch';
+
+  // 'require_add_bike' screen
+  static const String kNeedAddBikeToBecomeBiker = 'kNeedAddBikeToBecomeBiker';
 
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
@@ -225,18 +227,30 @@ class CustomStrings {
   static const String kBikeBrand = 'kBikeBrand';
   static const String kBikeColor = 'kBikeColor';
   static const String kSuggestAddBike = 'kSuggestAddBike';
+  static const String kBecomeKeerDueToDeleteBike = 'kBecomeKeerDueToDeleteBike';
 
   // 'add_bike' screen
   static const String kAddBike = 'kAddBike';
-  static const String kCheckBikeInfo = 'kCheckBikeInfo';
+  static const String kPleaseEnterCorrectBikeInfo =
+      'kPleaseEnterCorrectBikeInfo';
+  static const String kChangeBike = 'kChangeBike';
   static const String kNumberPlate = 'kNumberPlate';
-  static const String kTakePictureAgain = 'kTakePictureAgain';
+  static const String kTakePicture = 'kTakePicture';
   static const String kEnterBikeOwner = 'kEnterBikeOwner';
   static const String kEnterBrand = 'kEnterBrand';
   static const String kEnterCategory = 'kEnterCategory';
   static const String kEnterColor = 'kEnterColor';
   static const String kEnterNumberPlate = 'kEnterNumberPlate';
   static const String kNumberPlatePicture = 'kNumberPlatePicture';
+  static const String kPleaseTakeNumberPlatePicture =
+      'kPleaseTakeNumberPlatePicture';
+  static const String kBikeVolume = 'kBikeVolume';
+  static const String kEnterVolume = 'kEnterVolume';
+  static const String kBikePicture = 'kBikePicture';
+  static const String kPleaseTakeBikePicture = 'kPleaseTakeBikePicture';
+  static const String kRegistrationPicture = 'kRegistrationPicture';
+  static const String kPleaseTakeRegistrationPicture =
+      'kPleaseTakeRegistrationPicture';
 
   // 'voucher_detail' screen
   static const String kGiftDetail = 'kGiftDetail';
