@@ -59,6 +59,7 @@ final Map<String, String> en = {
   'kConfirmArrivalTitle': 'Are you sure you are at your pick up point?',
   'kConfirmArrivalMessageForKeer': 'We\'ll send a notification to your biker',
   'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your ké-er',
+  'kConfirmExitApp': 'Are you sure you want to exit?',
 
   // 'biker_home' screen
   'kBikerReadyReminder': 'Ready to go!',

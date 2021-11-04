@@ -2,6 +2,7 @@
 class CustomStrings {
   // '002.1_welcome_1' screen
   static const String kIntroduction = 'kIntroduction';
+  static const String kConfirm = 'kConfirm';
 
   //'002.,.2,.3' screen
   static const String kSkip = 'kSkip';
@@ -60,6 +61,7 @@ class CustomStrings {
       'kConfirmArrivalMessageForKeer';
   static const String kConfirmArrivalMessageForBiker =
       'kConfirmArrivalMessageForBiker';
+  static const String kConfirmExitApp = 'kConfirmExitApp';
 
   // 'biker_home' screen
   static const String kBikerReadyReminder = 'kBikerReadyReminder';

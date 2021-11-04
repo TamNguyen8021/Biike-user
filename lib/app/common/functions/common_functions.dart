@@ -246,42 +246,41 @@ class CommonFunctions {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     title,
                     style: Theme.of(context).textTheme.headline6,
+                    textAlign: TextAlign.center,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0, bottom: 30.0),
                     child: Text(
                       message,
                       style: Theme.of(context).textTheme.bodyText1,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Center(
-                    child: Container(
-                      width: 100,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          CustomTextButton(
+                  Container(
+                    width: 100,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        CustomTextButton(
+                          hasBorder: false,
+                          backgroundColor: CustomColors.kBlue,
+                          foregroundColor: Colors.white,
+                          text: CustomStrings.kSure.tr,
+                          onPressedFunc: onPressedFunc,
+                        ),
+                        CustomTextButton(
                             hasBorder: false,
-                            backgroundColor: CustomColors.kBlue,
-                            foregroundColor: Colors.white,
-                            text: CustomStrings.kSure.tr,
-                            onPressedFunc: onPressedFunc,
-                          ),
-                          CustomTextButton(
-                              hasBorder: false,
-                              backgroundColor: CustomColors.kLightGray,
-                              foregroundColor: CustomColors.kDarkGray,
-                              text: CustomStrings.kBtnExit.tr,
-                              onPressedFunc: () {
-                                Get.back();
-                              }),
-                        ],
-                      ),
+                            backgroundColor: CustomColors.kLightGray,
+                            foregroundColor: CustomColors.kDarkGray,
+                            text: CustomStrings.kBtnExit.tr,
+                            onPressedFunc: () {
+                              Get.back();
+                            }),
+                      ],
                     ),
                   ),
                 ],

@@ -61,6 +61,7 @@ final Map<String, String> vi = {
       'Chúng tôi sẽ gửi thông báo cho tài xế của bạn',
   'kConfirmArrivalMessageForBiker':
       'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
+  'kConfirmExitApp': 'Bạn có chắc muốn thoát ứng dụng?',
 
   // 'biker_home' screen
   'kBikerReadyReminder': 'Chuyến sắp chở',
