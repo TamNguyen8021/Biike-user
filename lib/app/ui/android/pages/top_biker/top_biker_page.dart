@@ -167,9 +167,9 @@ class TopBikerPage extends StatelessWidget {
                     ),
                     child: TopBikerBottomSheet(
                         index: 1,
-                        avatarUrl: topBikerController.topBiker[0].avatarUrl,
-                        name: topBikerController.topBiker[0].name,
-                        point: topBikerController.topBiker[0].point
+                        avatarUrl: topBikerController.userAvatar.value,
+                        name: topBikerController.userFullName.value,
+                        point: topBikerController.userPoint.value
                     ),
                   ),
                 )
