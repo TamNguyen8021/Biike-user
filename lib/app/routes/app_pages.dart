@@ -26,8 +26,9 @@ import 'package:bikes_user/app/bindings/verify_phone_binding.dart';
 import 'package:bikes_user/app/bindings/wallet_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
-import 'package:bikes_user/app/ui/android/pages/add_bike/add_bike_page.dart';
-import 'package:bikes_user/app/ui/android/pages/add_bike_camera/add_bike_camera_page.dart';
+import 'package:bikes_user/app/ui/android/pages/home/require_add_bike_page.dart';
+import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_page.dart';
+import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_camera_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/address_book/address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/app_setting/app_setting_page.dart';
@@ -109,8 +110,13 @@ class AppPages {
           ProfileBinding(),
           UserBinding(),
           TripBinding(),
-          StationBinding()
+          StationBinding(),
+          BikeBinding(),
         ]),
+    GetPage(
+      name: CommonRoutes.REQUIRE_ADD_BIKE,
+      page: () => RequireAddBikePage(),
+    ),
     GetPage(
       name: CommonRoutes.TOP_BIKER,
       page: () => TopBikerPage(),
@@ -119,7 +125,12 @@ class AppPages {
     GetPage(
       name: CommonRoutes.PROFILE,
       page: () => ProfilePage(),
-      bindings: <Bindings>[ProfileBinding(), UserBinding(), WalletBinding()],
+      bindings: <Bindings>[
+        ProfileBinding(),
+        UserBinding(),
+        WalletBinding(),
+        BikeBinding()
+      ],
     ),
     GetPage(
         name: CommonRoutes.EDIT_PROFILE,
@@ -179,14 +190,20 @@ class AppPages {
     GetPage(
         name: CommonRoutes.ADD_BIKE,
         page: () => AddBikePage(),
-        bindings: <Bindings>[AddBikeBinding(), BikeBinding()]),
+        bindings: <Bindings>[
+          AddBikeBinding(),
+          ManageBikeBinding(),
+          BikeBinding()
+        ]),
     GetPage(
       name: CommonRoutes.VOUCHER_DETAILS,
       page: () => VoucherDetailPage(),
+      binding: VoucherBinding(),
     ),
     GetPage(
       name: CommonRoutes.YOUR_VOUCHER_DETAIL,
       page: () => YourVoucherDetailPage(),
+      binding: VoucherBinding(),
     ),
     GetPage(
         name: CommonRoutes.APP_SETTING,

@@ -1,7 +1,9 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -11,6 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final _userProvider = Get.find<UserProvider>();
+  final _bikeProvider = Get.find<BikeProvider>();
+
   final String route;
   final bool isOnProfilePage;
 
@@ -62,9 +66,13 @@ class SwitchRoleButton extends StatelessWidget {
               Biike.localAppData.saveRole(Biike.role.value);
               Get.offAllNamed(route);
             } else {
-              CommonFunctions().showErrorDialog(
-                  context: context,
-                  message: CustomErrorsString.kDevelopError.tr);
+              if (await _bikeProvider.getBike() == null) {
+                Get.toNamed(CommonRoutes.REQUIRE_ADD_BIKE);
+              } else {
+                CommonFunctions().showErrorDialog(
+                    context: context,
+                    message: CustomErrorsString.kDevelopError.tr);
+              }
             }
           },
           child: Padding(

@@ -68,13 +68,15 @@ final Map<String, String> vi = {
   'kSelectHour': 'Chọn giờ',
   'kSelectSourceStation': 'Chọn điểm đi',
   'kSelectDestinationStation': 'Chọn điểm đến',
-  'kDecline': 'Từ chối',
   'kAccept': 'Nhận chuyến',
   'kAcceptSuccessful': 'Nhận chuyến thành công',
   'kSearchAgain': 'Đặt lại',
   'kSearch': 'Lọc chuyến',
   'kTripCanOnlySearchFrom5AMTo9PM':
       'Chỉ có thể tìm chuyến trong khoảng thời gian 5AM - 9PM',
+
+  // 'require_add_bike' screen
+  'kNeedAddBikeToBecomeBiker': 'Bạn cần thêm xe để sử dụng Chở Mode',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
@@ -233,19 +235,31 @@ final Map<String, String> vi = {
   'kBikeCategory': 'Loại xe',
   'kBikeBrand': 'Nhãn hiệu',
   'kBikeColor': 'Màu sơn',
+  'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
+  'kBecomeKeerDueToDeleteBike': 'Bạn không có xe nên đã trở thành Ké-er',
+
+  // 'add_bike' screen
+  'kAddBike': 'Thêm xe mới',
+  'kPleaseEnterCorrectBikeInfo':
+      'Vui lòng điền thông tin xe khớp với cà vẹt xe',
+  'kChangeBike': 'Đổi xe',
   'kEnterBikeOwner': 'Nhập tên chủ xe',
   'kEnterBrand': 'Nhập nhãn hiệu',
   'kEnterCategory': 'Nhập loại xe',
   'kEnterColor': 'Nhập màu xe',
   'kEnterNumberPlate': 'Nhập biển số xe',
-  'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
-
-  // 'add_bike' screen
-  'kAddBike': 'Thêm xe mới',
-  'kCheckBikeInfo': 'Vui lòng kiểm tra thông tin xe',
+  'kBikeVolume': 'Phân khối',
+  'kEnterVolume': 'Chọn phân khối',
   'kNumberPlate': 'Biển số đăng ký',
-  'kNumberPlatePicture': 'Hình biển số xe',
-  'kTakePictureAgain': 'Chụp lại',
+  'kNumberPlatePicture': 'Ảnh chụp biển số xe',
+  'kPleaseTakeNumberPlatePicture': 'Vui lòng chụp biển số xe',
+  'kBikePicture': 'Hình xe',
+  'kPleaseTakeBikePicture': 'Ảnh chụp toàn thân xe',
+  'kRegistrationPicture': 'Ảnh chụp cà vẹt xe',
+  'kPleaseTakeRegistrationPicture':
+      'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
+  'kTakePicture': 'Chụp',
+  'kFillInAllField': 'Vui lòng điền đầy đủ thông tin',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
@@ -315,7 +329,6 @@ final Map<String, String> vi = {
   'kUnBlock': 'Bỏ chặn',
   'kLogin': 'Đăng nhập',
   'kRegister': 'Đăng ký',
-  'tranlatesion': 'Đổi ngôn ngữ',
 
   // date
   'kMonday': 'T2',

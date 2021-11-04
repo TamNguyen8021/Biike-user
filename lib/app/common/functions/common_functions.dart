@@ -138,6 +138,7 @@ class CommonFunctions {
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -177,6 +178,47 @@ class CommonFunctions {
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  /// Display a dialog on [context] for info message.
+  ///
+  /// Author: TamNTT
+  void showInfoDialog(
+      {required BuildContext context, required String message}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: SvgPicture.asset(
+                      'assets/images/info.svg',
+                      height: 50,
+                    ),
+                  ),
+                  Text(
+                    message.tr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(fontWeight: FontWeight.normal),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -281,7 +323,7 @@ class CommonFunctions {
       Biike.logger.e('Could not open map');
     }
   }
-    
+
   /// Convert string to timeOfDate
   ///
   /// Author: UyenNLP

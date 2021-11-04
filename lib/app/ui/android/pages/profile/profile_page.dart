@@ -135,8 +135,9 @@ class ProfilePage extends StatelessWidget {
                                                 Role.biker) ...[
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 4.0),
+                                                    right: 8.0),
                                                 child: CustomElevatedIconButton(
+                                                  width: 135,
                                                   onPressedFunc: () =>
                                                       Get.toNamed(CommonRoutes
                                                           .MANAGE_BIKE),
@@ -151,6 +152,7 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ],
                                             CustomElevatedIconButton(
+                                              width: 135,
                                               onPressedFunc: () => Get.toNamed(
                                                   CommonRoutes.EDIT_PROFILE),
                                               text: CustomStrings.kEdit.tr,

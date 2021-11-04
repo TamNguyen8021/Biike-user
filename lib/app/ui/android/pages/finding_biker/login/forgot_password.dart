@@ -67,7 +67,7 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
   }
 
   String? _validate(String email) {
-    if (email.replaceAll(" ", "").isEmpty) {
+    if (email.trim().isEmpty) {
       return 'email must not be null';
     }
 
