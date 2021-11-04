@@ -1,12 +1,12 @@
 import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
-import 'package:bikes_user/app/data/providers/image_provider.dart';
+// import 'package:bikes_user/app/data/providers/image_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class AddBikeController extends GetxController {
   final _bikeProvider = Get.find<BikeProvider>();
-  final _imageProvider = Get.find<ImageProvider>();
+  // final _imageProvider = Get.find<ImageProvider>();
   final _manageBikeController = Get.find<ManageBikeController>();
 
   Rx<String> plateNumber = ''.obs;
@@ -20,7 +20,6 @@ class AddBikeController extends GetxController {
   Rx<String> numberPlatePicture = ''.obs;
 
   bool isLoading = false;
-  // String errorMessage = '';
 
   @override
   void onInit() {
@@ -41,24 +40,20 @@ class AddBikeController extends GetxController {
     update();
   }
 
-  Future<bool> addBike() async {
-    // if (!validate()) {
-    //   return false;
-    // }
-
+  Future<bool> addBikeOrReplaceBike({required bool isAddBike}) async {
     // try {
     _enableLoading(true);
 
-    String bikePictureUrl = await _imageProvider.postImage(
-        imageType: 1, imageName: 'bikePicture', imagePath: bikePicture.value);
-    String bikeLicensePictureUrl = await _imageProvider.postImage(
-        imageType: 1,
-        imageName: 'registrationPicture',
-        imagePath: registrationPicture.value);
-    String plateNumberPictureUrl = await _imageProvider.postImage(
-        imageType: 1,
-        imageName: 'numberPlatePicture',
-        imagePath: numberPlatePicture.value);
+    // String bikePictureUrl = await _imageProvider.postImage(
+    //     imageType: 1, imageName: 'bikePicture', imagePath: bikePicture.value);
+    // String bikeLicensePictureUrl = await _imageProvider.postImage(
+    //     imageType: 1,
+    //     imageName: 'registrationPicture',
+    //     imagePath: registrationPicture.value);
+    // String plateNumberPictureUrl = await _imageProvider.postImage(
+    //     imageType: 1,
+    //     imageName: 'numberPlatePicture',
+    //     imagePath: numberPlatePicture.value);
 
     Map<String, dynamic> body = {
       'userId': Biike.userId.value,
@@ -66,12 +61,21 @@ class AddBikeController extends GetxController {
       'bikeOwner': bikeOwner.value,
       'color': color.value,
       'brand': brand.value,
-      'bikePicture': bikePictureUrl,
-      'bikeLicensePicture': bikeLicensePictureUrl,
-      'plateNumberPicture': plateNumberPictureUrl,
+      'bikePicture': 'bikePictureUrl',
+      'bikeLicensePicture': 'bikeLicensePictureUrl',
+      'plateNumberPicture': 'plateNumberPictureUrl',
     };
 
-    return await _bikeProvider.addBike(body: body);
+    if (isAddBike) {
+      return await _bikeProvider.addBike(body: body);
+    } else {
+      return await _bikeProvider.replaceBike(body: body);
+    }
+    // } catch (e) {
+    //   _enableLoading(false);
+    //   Biike.logger.e('AddBikeController - addBikeOrReplaceBike(): ' + e.toString());
+    // }
+
     // if (result) {
     //   Get.back();
     //   SnackBarServices.showSnackbar(
@@ -89,48 +93,35 @@ class AddBikeController extends GetxController {
   /// Edit bike's info
   ///
   /// Author: TamNTT
-  Future<bool> replaceBike() async {
-    // _enableLoading(true);
+  // Future<bool> replaceBike() async {
+  //   // _enableLoading(true);
 
-    // String bikePictureUrl = await _imageProvider.postImage(
-    //     imageType: 1, imageName: 'bikePicture', imagePath: bikePicture.value);
-    // Biike.logger.d(bikePictureUrl);
-    // String bikeLicensePictureUrl = await _imageProvider.postImage(
-    //     imageType: 1,
-    //     imageName: 'bikeLicensePicture',
-    //     imagePath: registrationPicture.value);
-    // Biike.logger.d(bikeLicensePictureUrl);
-    // String plateNumberPictureUrl = await _imageProvider.postImage(
-    //     imageType: 1,
-    //     imageName: 'plateNumberPicture',
-    //     imagePath: numberPlatePicture.value);
-    // Biike.logger.d(plateNumberPictureUrl);
+  //   // String bikePictureUrl = await _imageProvider.postImage(
+  //   //     imageType: 1, imageName: 'bikePicture', imagePath: bikePicture.value);
+  //   // Biike.logger.d(bikePictureUrl);
+  //   // String bikeLicensePictureUrl = await _imageProvider.postImage(
+  //   //     imageType: 1,
+  //   //     imageName: 'bikeLicensePicture',
+  //   //     imagePath: registrationPicture.value);
+  //   // Biike.logger.d(bikeLicensePictureUrl);
+  //   // String plateNumberPictureUrl = await _imageProvider.postImage(
+  //   //     imageType: 1,
+  //   //     imageName: 'plateNumberPicture',
+  //   //     imagePath: numberPlatePicture.value);
+  //   // Biike.logger.d(plateNumberPictureUrl);
 
-    Map<String, dynamic> body = {
-      'userId': Biike.userId.value,
-      'bikeOwner': bikeOwner.value,
-      'brand': brand.value,
-      'color': color.value,
-      'plateNumber': plateNumber.value,
-      'bikeLicensePicture': 'link',
-      'bikePicture': 'link',
-      'plateNumberPicture': 'link',
-    };
+  //   Map<String, dynamic> body = {
+  //     'userId': Biike.userId.value,
+  //     'bikeOwner': bikeOwner.value,
+  //     'brand': brand.value,
+  //     'color': color.value,
+  //     'plateNumber': plateNumber.value,
+  //     'bikeLicensePicture': 'link',
+  //     'bikePicture': 'link',
+  //     'plateNumberPicture': 'link',
+  //   };
 
-    return await _bikeProvider.replaceBike(body: body);
-  }
-
-  // bool validate() {
-  //   String error = _validate();
-  //   if (error.isNotEmpty) {
-  //     errorMessage = error;
-  //     update();
-  //     return false;
-  //   } else {
-  //     errorMessage = '';
-  //     update();
-  //     return true;
-  //   }
+  //   return await _bikeProvider.replaceBike(body: body);
   // }
 
   bool validate() {

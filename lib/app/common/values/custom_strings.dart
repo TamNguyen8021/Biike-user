@@ -72,6 +72,9 @@ class CustomStrings {
   static const String kSearchAgain = 'kSearchAgain';
   static const String kSearch = 'kSearch';
 
+  // 'require_add_bike' screen
+  static const String kNeedAddBikeToBecomeBiker = 'kNeedAddBikeToBecomeBiker';
+
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
   static const String kMonth = 'kMonth';

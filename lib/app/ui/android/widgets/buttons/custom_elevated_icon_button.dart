@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomElevatedIconButton extends StatelessWidget {
   final Function()? onPressedFunc;
   final double? width;
+  final double? height;
   final IconData? icon;
   final String text;
   final Color backgroundColor;
@@ -14,6 +15,7 @@ class CustomElevatedIconButton extends StatelessWidget {
       {Key? key,
       required this.onPressedFunc,
       this.width,
+      this.height,
       this.icon,
       required this.text,
       required this.backgroundColor,
@@ -24,25 +26,20 @@ class CustomElevatedIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35,
+      height: height != null ? height : 40,
       width: width,
       child: ElevatedButton.icon(
           onPressed: onPressedFunc,
           icon: Icon(
             icon,
-            size: 22,
+            size: 25,
           ),
           label: Text(
             text,
-            style: MediaQuery.of(context).size.width >= 400
-                ? Theme.of(context)
-                    .textTheme
-                    .button!
-                    .copyWith(color: foregroundColor)
-                : Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: foregroundColor),
+            style: Theme.of(context)
+                .textTheme
+                .button!
+                .copyWith(color: foregroundColor),
           ),
           style: ElevatedButton.styleFrom(
             elevation: elevation,

@@ -72,6 +72,9 @@ final Map<String, String> en = {
   'kSearch': 'Search',
   'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
 
+  // 'require_add_bike' screen
+  'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker Mode',
+
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
   'kMonth': 'Tháng ',
@@ -99,7 +102,7 @@ final Map<String, String> en = {
   'kBikerActivities': 'Activity',
 
   //'profile' screen
-  'kEdit': 'Edit',
+  'kEdit': 'Edit profile',
   'kSavedAddress': 'Address book',
   'kSettings': 'Settings',
   'kBlockList': 'Blacklist',

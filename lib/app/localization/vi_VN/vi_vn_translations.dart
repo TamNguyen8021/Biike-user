@@ -75,6 +75,9 @@ final Map<String, String> vi = {
   'kTripCanOnlySearchFrom5AMTo9PM':
       'Chỉ có thể tìm chuyến trong khoảng thời gian 5AM - 9PM',
 
+  // 'require_add_bike' screen
+  'kNeedAddBikeToBecomeBiker': 'Bạn cần thêm xe để sử dụng Chở Mode',
+
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
   'kMonth': 'Tháng ',

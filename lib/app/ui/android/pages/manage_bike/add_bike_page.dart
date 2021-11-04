@@ -3,6 +3,7 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/add_bike_controller.dart';
 import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
+import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/camera_button.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
@@ -12,33 +13,42 @@ import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/image_file_c
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// The 'add_bike' screen
+//ignore: must_be_immutable
 class AddBikePage extends StatelessWidget {
   final _addBikeController = Get.find<AddBikeController>();
   final _manageBikeController = Get.find<ManageBikeController>();
+
+  RxList<String> brands = [
+    'Honda',
+    'Yamaha',
+    'Toyota',
+  ].obs;
+  RxList<String> categories = ['Xe số', 'Tay ga', 'Tay côn'].obs;
+  RxList<String> volumes = ['50cc', '100cc', '120cc'].obs;
+
+  bool isAddBike = Get.arguments['isAddBike'];
+  String fromPage = Get.arguments['from'];
 
   AddBikePage({Key? key}) : super(key: key);
 
   Future<void> _onBackPressed() async {
     await _manageBikeController.getBike();
-    Get.back();
+    if (fromPage == 'requireAddBike') {
+      Biike.role.value = Role.keer;
+      Biike.localAppData.saveRole(Biike.role.value);
+      Get.offAllNamed(CommonRoutes.HOME);
+    } else {
+      Get.back();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    RxList<String> brands = [
-      'Honda',
-      'Yamaha',
-      'Toyota',
-    ].obs;
-    RxList<String> categories = ['Xe số', 'Tay ga', 'Tay côn'].obs;
-    RxList<String> volumes = ['50cc', '100cc', '120cc'].obs;
-
-    bool isAddBike = Get.arguments['isAddBike'];
-
     return OnBackPressed(
       perform: () {
         _onBackPressed();
@@ -223,32 +233,15 @@ class AddBikePage extends StatelessWidget {
                                       child: CustomElevatedIconHasLoadingButton(
                                         onPressedFunc: () async {
                                           if (_addBikeController.validate()) {
-                                            if (isAddBike) {
-                                              if (await _addBikeController
-                                                  .addBike()) {
-                                                _onBackPressed();
-                                              } else {
-                                                CommonFunctions()
-                                                    .showErrorDialog(
-                                                        context: context,
-                                                        message:
-                                                            CustomErrorsString
-                                                                .kDevelopError
-                                                                .tr);
-                                              }
+                                            if (await _addBikeController
+                                                .addBikeOrReplaceBike(
+                                                    isAddBike: isAddBike)) {
+                                              _onBackPressed();
                                             } else {
-                                              if (await _addBikeController
-                                                  .replaceBike()) {
-                                                _onBackPressed();
-                                              } else {
-                                                CommonFunctions()
-                                                    .showErrorDialog(
-                                                        context: context,
-                                                        message:
-                                                            CustomErrorsString
-                                                                .kDevelopError
-                                                                .tr);
-                                              }
+                                              CommonFunctions().showErrorDialog(
+                                                  context: context,
+                                                  message: CustomErrorsString
+                                                      .kDevelopError.tr);
                                             }
                                           } else {
                                             CommonFunctions().showErrorDialog(
