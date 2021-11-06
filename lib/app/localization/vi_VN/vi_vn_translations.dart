@@ -199,6 +199,7 @@ final Map<String, String> vi = {
   'kCanExchange': 'Có thể đổi',
   'kExchanged': 'Đã đổi',
   'kUsedOrExpired': 'Đã dùng/Hết hạn',
+  'kNearMe': 'Gần tôi',
 
   // 'trip_details' screen
   'kTripDetails': 'Chi tiết chuyến đi',

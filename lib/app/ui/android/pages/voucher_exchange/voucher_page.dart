@@ -16,6 +16,42 @@ class VoucherPage extends StatelessWidget {
 
   final _walletController = Get.find<WalletController>();
 
+  TabBar _getTabBar(context) => TabBar(
+      indicator: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: CustomColors.kLightGray
+      ),
+      indicatorPadding: const EdgeInsets.symmetric(vertical: 5.0),
+      tabs: [
+        Container(
+          width: MediaQuery.of(context).size.width/3,
+          child: Text(
+            CustomStrings.kCanExchange.tr,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 10.0.sp),
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width/3,
+          child: Text(
+            CustomStrings.kExchanged.tr,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 10.0.sp),
+          ),
+        ),
+
+        Container(
+          width: MediaQuery.of(context).size.width/3,
+          child: Text(
+            CustomStrings.kUsedOrExpired.tr,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 10.0.sp),
+          ),
+        ),
+
+      ]
+  );
+  
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -80,22 +116,19 @@ class VoucherPage extends StatelessWidget {
                       ),
                     )
                   ],
-                  bottomAppBar: TabBar(
-                    tabs: [
-                      Text(
-                        CustomStrings.kCanExchange.tr,
-                        style: Theme.of(context).textTheme.bodyText1,
+                  bottomAppBar: PreferredSize(
+                    preferredSize: _getTabBar(context).preferredSize,
+                    child: Container(
+                      // height: 50.0.sp,
+                      child: _getTabBar(context),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          bottom: BorderSide(width: 1.0, color: CustomColors.kLightGray),
+                        ),
                       ),
-                      Text(
-                        CustomStrings.kExchanged.tr,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      Text(
-                        CustomStrings.kUsedOrExpired.tr,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ]
-                  ),
+                    ),
+                  )
                 ),
                 body: SafeArea(
                   child: TabBarView(

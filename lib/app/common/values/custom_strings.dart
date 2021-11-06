@@ -189,6 +189,7 @@ class CustomStrings {
   static const String kCanExchange = 'kCanExchange';
   static const String kExchanged = 'kExchanged';
   static const String kUsedOrExpired = 'kUsedOrExpired';
+  static const String kNearMe = 'kNearMe';
 
   // 'trip_details' screen
   static const String kTripDetails = 'kTripDetails';

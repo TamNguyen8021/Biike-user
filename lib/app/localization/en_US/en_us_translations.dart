@@ -195,6 +195,7 @@ final Map<String, String> en = {
   'kCanExchange': 'Can be exchange',
   'kExchanged': 'Exchanged',
   'kUsedOrExpired': 'Used/Expired',
+  'kNearMe': 'Near me',
 
   // 'trip_details' screen
   'kTripDetails': 'View trip details',
