@@ -22,10 +22,7 @@ class ListAddressBooks extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: EdgeInsets.only(bottom: itemPadding),
-            child: AddressBookCard(
-                name: listAddressBooks.elementAt(index).name,
-                address: listAddressBooks.elementAt(index).address,
-            )
+            child: listAddressBooks.elementAt(index)
           );
         });
   }

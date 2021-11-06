@@ -1,10 +1,12 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/add_address_book_controller.dart';
+import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/address_book_text_action_field.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/address_book_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,7 +56,11 @@ class AddAddressBookPage extends StatelessWidget {
                         isReadOnly: false,
                         isEditAddressBook: true,
                         initialValue: '${addAddressBookPageController.name}',
-                        labelText: CustomStrings.kName.tr),
+                        labelText: CustomStrings.kName.tr,
+                        onChangedFunc: (value) {
+                          addAddressBookPageController.name.value = value;
+                        },
+                    ),
                   ),
                   Row(
                     children: <Widget>[
@@ -82,10 +88,6 @@ class AddAddressBookPage extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Text(
-                        '* ',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      Text(
                         CustomStrings.kNote.tr,
                         style: TextStyle(
                             color: Colors.black,
@@ -100,17 +102,38 @@ class AddAddressBookPage extends StatelessWidget {
                         isReadOnly: false,
                         isEditAddressBook: true,
                         initialValue: '${addAddressBookPageController.note}',
-                        labelText: CustomStrings.kNote.tr),
+                        labelText: CustomStrings.kNote.tr,
+                        onChangedFunc: (value) {
+                          addAddressBookPageController.note.value = value;
+                        },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0),
-                    child: CustomElevatedIconButton(
-                      onPressedFunc: () => Get.back(),
+                    child: CustomElevatedIconHasLoadingButton(
+                      onPressedFunc: () async {
+                        if (addAddressBookPageController.validate()) {
+                          if (await addAddressBookPageController
+                              .addAddress()) {
+                            Get.back();
+                          } else {
+                            CommonFunctions().showErrorDialog(
+                                context: context,
+                                message: CustomErrorsString.kDevelopError.tr);
+                          }
+                        } else {
+                          CommonFunctions().showErrorDialog(
+                              context: context,
+                              message: CustomErrorsString
+                                  .kFillInAllField.tr);
+                        }
+                      },
                       text: CustomStrings.kSave.tr,
-                      icon: Icons.save,
-                      elevation: 0.0,
                       backgroundColor: CustomColors.kBlue,
                       foregroundColor: Colors.white,
+                      elevation: 2.0,
+                      icon: Icons.save,
+                      isLoading: addAddressBookPageController.isLoading,
                     ),
                   )
                 ],
