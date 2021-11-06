@@ -29,7 +29,7 @@ class ExchangeVoucherPage extends StatelessWidget {
       builder: (_) {
         return Padding(
           padding: const EdgeInsets.only(
-              top: 5.0, left: 22.0, right: 22.0),
+              top: 16.0, left: 22.0, right: 22.0),
           child: Container(
             height: MediaQuery.of(context).size.height - 230,
             child: RefreshIndicator(

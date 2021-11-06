@@ -6,18 +6,24 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class RedemptionController extends GetxController {
   final _redemptionProvider = Get.find<RedemptionProvider>();
-  final PagingController<int, dynamic> pagingController =
-  PagingController(firstPageKey: 0);
-  List<dynamic> _yourVoucherList = [];
+  final PagingController<int, dynamic> yourVoucherPagingController = 
+            PagingController(firstPageKey: 0);
+  final PagingController<int, dynamic> usedVoucherPagingController =
+            PagingController(firstPageKey: 0);
 
-  Map<String, dynamic> pagination = {};
-  int _currentPage = 1;
+  Map<String, dynamic> _yourVoucherPagination = {};
+  Map<String, dynamic> _usedVoucherPagination = {};
+  int _yourVoucherCurrentPage = 1;
+  int _usedVoucherCurrentPage = 1;
   int _limit = 20;
 
   @override
   onInit() {
-    pagingController.addPageRequestListener((pageKey) {
-      _fetchPage(pageKey);
+    yourVoucherPagingController.addPageRequestListener((pageKey) {
+      _fetchYourVoucherPage(pageKey);
+    });
+    usedVoucherPagingController.addPageRequestListener((pageKey) {
+      _fetchUsedVoucherPage(pageKey);
     });
 
     super.onInit();
@@ -25,7 +31,8 @@ class RedemptionController extends GetxController {
 
   @override
   dispose() {
-    pagingController.dispose();
+    yourVoucherPagingController.dispose();
+    usedVoucherPagingController.dispose();
     super.dispose();
   }
 
@@ -38,48 +45,74 @@ class RedemptionController extends GetxController {
     return await _redemptionProvider.exchangeVoucher(data);
   }
 
-  Future<void> getYourVoucherList() async {
-    _yourVoucherList.clear();
-    Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
-        userId: Biike.userId.value, page: _currentPage, limit: _limit);
-  }
-
-  Future<void> _getYourVoucherList() async {
-    _yourVoucherList.clear();
-    Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
-        userId: Biike.userId.value, page: _currentPage, limit: _limit);
-
-    _yourVoucherList = response['data'];
-    pagination = response['_meta'];
-  }
-
   Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
       redemptionId) async {
     return await _redemptionProvider
         .getRedemptionDetailByRedemptionId(redemptionId);
   }
 
-  Future<void> _fetchPage(int pageKey) async {
+  Future<dynamic> _getYourVoucherList() async {
+    Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
+        userId: Biike.userId.value, page: _yourVoucherCurrentPage, limit: _limit);
+
+    _yourVoucherPagination = response['_meta'];
+    return response['data'];
+  }
+
+  Future<dynamic> _getUsedVoucherList() async {
+    Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
+        userId: Biike.userId.value, page: _usedVoucherCurrentPage, limit: _limit);
+
+    _usedVoucherPagination = response['_meta'];
+    return response['data'];
+  }
+
+  Future<void> _fetchYourVoucherPage(int pageKey) async {
     try {
-      await _getYourVoucherList();
+      List voucherList = await _getYourVoucherList();
 
       final int previouslyFetchedItemsCount =
-          pagingController.itemList?.length ?? 0;
+          yourVoucherPagingController.itemList?.length ?? 0;
 
       final bool isLastPage =
-          pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
+          _yourVoucherPagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
 
       if (isLastPage) {
-        pagingController.appendLastPage(_yourVoucherList);
-        _currentPage = 1;
+        yourVoucherPagingController.appendLastPage(voucherList);
+        _yourVoucherCurrentPage = 1;
       } else {
-        _currentPage += 1;
+        _yourVoucherCurrentPage += 1;
         int nextPageKey = pageKey;
-        nextPageKey += _yourVoucherList.length;
-        pagingController.appendPage(_yourVoucherList, nextPageKey);
+        nextPageKey += voucherList.length;
+        yourVoucherPagingController.appendPage(voucherList, nextPageKey);
       }
     } catch (error) {
-      pagingController.error = error;
+      yourVoucherPagingController.error = error;
+      CommonFunctions.catchExceptionError(error);
+    }
+  }
+
+  Future<void> _fetchUsedVoucherPage(int pageKey) async {
+    try {
+      List voucherList = await _getUsedVoucherList();
+
+      final int previouslyFetchedItemsCount =
+          usedVoucherPagingController.itemList?.length ?? 0;
+
+      final bool isLastPage =
+          _usedVoucherPagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
+
+      if (isLastPage) {
+        usedVoucherPagingController.appendLastPage(voucherList);
+        _usedVoucherCurrentPage = 1;
+      } else {
+        _usedVoucherCurrentPage += 1;
+        int nextPageKey = pageKey;
+        nextPageKey += voucherList.length;
+        usedVoucherPagingController.appendPage(voucherList, nextPageKey);
+      }
+    } catch (error) {
+      usedVoucherPagingController.error = error;
       CommonFunctions.catchExceptionError(error);
     }
   }

@@ -48,7 +48,6 @@ import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_full_m
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/view_point/view_point_page.dart';
 import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_one/exchange_voucher_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_fail_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/login/login_page.dart';
@@ -62,11 +61,11 @@ import 'package:bikes_user/app/ui/android/pages/register/verify_phone_page.dart'
 import 'package:bikes_user/app/ui/android/pages/sos_number/sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/top_biker/top_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/your_voucher_details_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/your_vouchers_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_two/your_voucher_details_page.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_two/your_vouchers_page.dart';
 import 'package:get/get.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/feedback/feedback_page.dart';

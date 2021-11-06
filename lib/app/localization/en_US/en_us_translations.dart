@@ -192,7 +192,9 @@ final Map<String, String> en = {
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
-  'kTradedVouchers': 'Exchanged vouchers',
+  'kCanExchange': 'Can be exchange',
+  'kExchanged': 'Exchanged',
+  'kUsedOrExpired': 'Used/Expired',
 
   // 'trip_details' screen
   'kTripDetails': 'View trip details',

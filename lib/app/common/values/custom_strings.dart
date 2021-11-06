@@ -186,7 +186,9 @@ class CustomStrings {
 
   // 'biker_point' screen
   static const String kListVouchers = 'kListVouchers';
-  static const String kTradedVouchers = 'kTradedVouchers';
+  static const String kCanExchange = 'kCanExchange';
+  static const String kExchanged = 'kExchanged';
+  static const String kUsedOrExpired = 'kUsedOrExpired';
 
   // 'trip_details' screen
   static const String kTripDetails = 'kTripDetails';

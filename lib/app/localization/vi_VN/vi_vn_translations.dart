@@ -196,7 +196,9 @@ final Map<String, String> vi = {
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
-  'kTradedVouchers': 'Quà đã đổi',
+  'kCanExchange': 'Có thể đổi',
+  'kExchanged': 'Đã đổi',
+  'kUsedOrExpired': 'Đã dùng/Hết hạn',
 
   // 'trip_details' screen
   'kTripDetails': 'Chi tiết chuyến đi',

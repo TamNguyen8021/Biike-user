@@ -1,8 +1,8 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_one/exchange_voucher_page.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_two/your_vouchers_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/used_voucher_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/exchange_voucher_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/your_vouchers_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -82,9 +82,18 @@ class VoucherPage extends StatelessWidget {
                   ],
                   bottomAppBar: TabBar(
                     tabs: [
-                      Text('Có thể đổi'),
-                      Text('Đã đổi'),
-                      Text('Đã dùng/Hết hạn'),
+                      Text(
+                        CustomStrings.kCanExchange.tr,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      Text(
+                        CustomStrings.kExchanged.tr,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      Text(
+                        CustomStrings.kUsedOrExpired.tr,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
                     ]
                   ),
                 ),
@@ -94,7 +103,7 @@ class VoucherPage extends StatelessWidget {
                     children: <Widget>[
                       ExchangeVoucherPage(),
                       YourVoucherPage(),
-                      Text('csal'),
+                      UsedVoucherPage(),
                     ],
                   )
                 ),
