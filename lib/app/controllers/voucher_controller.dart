@@ -1,6 +1,5 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/providers/voucher_provider.dart';
-import 'package:bikes_user/main.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -61,9 +60,7 @@ class VoucherController extends GetxController {
       }
     } catch (error) {
       pagingController.error = error;
-      Biike.logger.e('VoucherController - _fetchPage()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike', 'VoucherController - _fetchPage()', error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -11,7 +12,6 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -85,9 +85,7 @@ class HomeController extends GetxController {
       }
     } catch (error) {
       pagingController.error = error;
-      Biike.logger.e('HomeController - _fetchPage()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike', 'HomeController - _fetchPage()', error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
     }
   }
 

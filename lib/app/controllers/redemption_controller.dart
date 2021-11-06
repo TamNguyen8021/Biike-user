@@ -19,6 +19,7 @@ class RedemptionController extends GetxController {
     pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
+
     super.onInit();
   }
 
@@ -79,8 +80,7 @@ class RedemptionController extends GetxController {
       }
     } catch (error) {
       pagingController.error = error;
-      CommonFunctions.logBiike(error: error);
-      CommonFunctions.logErrorTraceFlutter(error: error);
+      CommonFunctions.catchExceptionError(error);
     }
   }
 }
