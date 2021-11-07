@@ -213,7 +213,7 @@ final Map<String, String> vi = {
   'kCity': 'Thành phố',
   'kCountry': 'Quốc gia',
   'kNeedLocationPermission':
-      'Bạn cần cấp quyền truy cập vị trí để sử dụng tính năng này',
+      'Bạn cần cấp quyền truy cập vị trí và bật định vị để sử dụng tính năng này',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -350,7 +350,7 @@ final Map<String, String> vi = {
     'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
     'kSendFailed': 'Gửi feedback thất bại!',
     'kDevelopError':
-        'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
+        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
     'kExchangeFailed': 'Không thể đổi voucher!',
     'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',

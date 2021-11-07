@@ -23,20 +23,20 @@ final Map<String, String> en = {
   'kForgotPassword': 'Forgot password',
 
   // '004.1_input_phone_no' screen
-  'kInputPhoneNumber': 'Nhập số điện thoại',
+  'kInputPhoneNumber': 'Input phone number',
 
   // '004.2_verify_phone' screen
-  'kInputVerifyCode': 'Nhập mã xác minh',
+  'kInputVerifyCode': 'Input verification code',
   'kResendVerifyCode': 'Yêu cầu gửi lại mã sau 59 giây',
-  'kInvalidPin': 'Mã xác nhận không chính xác',
+  'kInvalidPin': 'Invalid code',
 
   // '004.3_input_name' screen
-  'kInputName': 'Nhập tên của bạn',
+  'kInputName': 'Input name',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
-  'kBikerRole': 'Người chở',
-  'kKeerRole': 'Người đi ké',
+  'kBikerRole': 'Biker',
+  'kKeerRole': 'Ké-er',
   'kBikerDescription':
       'Lựa chọn người bạn muốn chở, bắt đầu hành trình, nhận điểm thưởng và đổi lấy những voucher giá trị',
   'kKeerDescription': 'Tạo chuyến đi của bạn và lên xe đi ké!',
@@ -77,13 +77,13 @@ final Map<String, String> en = {
   'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker Mode',
 
   // 'top_biker' screen
-  'kBikerRank': 'Bảng xếp hạng Biker',
-  'kMonth': 'Tháng ',
+  'kBikerRank': 'Biker Rank',
+  'kMonth': 'Month ',
   'kTopBikerInfoFirstContent': 'Bảng xếp hạng Biker vinh danh'
       ' những tài xế chở ké có hoạt động nổi bật, đạt được nhiều điểm thưởng.',
   'kTopBikerInfoSecondContent': 'Các Biker tại Bảng xếp hạng '
       'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké. ',
-  'kGotIt': 'Đã hiểu',
+  'kGotIt': 'Got it',
 
   // 'activity' screen
   'kNoUpcomingTrips': 'No upcoming trips',
@@ -140,7 +140,7 @@ final Map<String, String> en = {
   'kEnterYourReport': 'Type your feedback about this person...',
   'kReportAndBlock': 'Report and block',
   'kConfirmBlock': 'Are you sure you\nwant to block this person?',
-  'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn\ntại trang hồ sơ cá nhân',
+  'kSeeBlacklist': 'You can view your blacklist in profile page',
   'kSure': 'Sure',
   'kThankYouForReport': 'Thank you for your report',
   'kSorryMessage':
@@ -148,7 +148,7 @@ final Map<String, String> en = {
 
   // 'finding_biker_success' screen
   'kFoundBiker': 'Đã tìm được người chở bạn!',
-  'kViewTrip': 'Xem chuyến đi',
+  'kViewTrip': 'View trip details',
 
   // 'get_trip_success' screen
   'kGetTripSuccess': 'Nhận chở thành công!',
@@ -210,7 +210,7 @@ final Map<String, String> en = {
   'kCity': 'City',
   'kCountry': 'Country',
   'kNeedLocationPermission':
-      'You need to grant location permission to use this feature',
+      'You need to grant location permission and turn on GPS to use this feature',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -346,15 +346,15 @@ final Map<String, String> en = {
     'kIncludeBadWords': 'Please don\'t use bad words',
     'kSendFailed': 'Send feedback failed!',
     'kDevelopError':
-        'There are some errors, please contact Biiké development team for support',
+        'There are some errors, please try again later or contact Biiké development team for support',
     'kExchangeFailed': 'Can\'t exchange voucher!',
     'kNotEnoughPoint': 'User doesn\'t have enough point',
     'kNotChooseStation': 'You haven\'t choose your route',
     'kNotFillAllFields': 'Please fill in all fields',
     'kNotAfterNow': 'You can\'t book a trip from the past',
     'kNotAvailableTimeRange': 'Available time is between 6 AM and 9 PM',
-    'kErrorName': 'Tên của bạn không hợp lệ',
-    'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
+    'kErrorName': 'Invalid name',
+    'kErrorInputPhoneNumber': 'Invalid phone number',
     'kEditProfileFailed':
         'Your profile was not changed. Please try again later',
     'kCannotGoBackWhenTripStarted':
