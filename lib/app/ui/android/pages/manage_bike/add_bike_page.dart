@@ -247,7 +247,7 @@ class AddBikePage extends StatelessWidget {
                                             CommonFunctions().showErrorDialog(
                                                 context: context,
                                                 message: CustomErrorsString
-                                                    .kFillInAllField.tr);
+                                                    .kNotFillAllFields.tr);
                                           }
                                         },
                                         text: CustomStrings.kSave.tr,

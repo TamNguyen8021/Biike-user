@@ -64,6 +64,7 @@ class CustomStrings {
   static const String kConfirmExitApp = 'kConfirmExitApp';
 
   // 'biker_home' screen
+  static const String kNoKeNowTrip = 'kNoKeNowTrip';
   static const String kBikerReadyReminder = 'kBikerReadyReminder';
   static const String kFilter = 'kFilter';
   static const String kSelectHour = 'kSelectHour';
@@ -76,6 +77,20 @@ class CustomStrings {
 
   // 'require_add_bike' screen
   static const String kNeedAddBikeToBecomeBiker = 'kNeedAddBikeToBecomeBiker';
+
+  // 'cho_now' screen
+  static const String kChoNow = 'kChoNow';
+  static const String kChoNowDescription1 = 'kChoNowDescription1';
+  static const String kChoNowDescription2 = 'kChoNowDescription2';
+  static const String kChoNowDescription3 = 'kChoNowDescription3';
+  static const String kChoNowSettings = 'kChoNowSettings';
+  static const String kTurnOnChoNow = 'kTurnOnChoNow';
+  static const String kChoNowStation = 'kChoNowStation';
+  static const String kAddPickUpStation = 'kAddPickUpStation';
+  static const String kAddChoNowStation = 'kAddChoNowStation';
+  static const String kAdd = 'kAdd';
+  static const String kDelete = 'kDelete';
+  static const String kChooseStation = 'kChooseStation';
 
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
