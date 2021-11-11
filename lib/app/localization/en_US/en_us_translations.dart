@@ -14,7 +14,7 @@ final Map<String, String> en = {
       'Biiké helps prevent the traffic volume, smog and helps saving the enviroment',
   'kConnectSociety': 'Connects with everyone',
   'kProtectEnvironment': 'Protects the environment',
-  'kStartOnBoard': 'Start',
+  'kStart': 'Start',
 
   // '003.1_login'
   'kLoginButton': 'Verify with FPT email',
@@ -200,7 +200,6 @@ final Map<String, String> en = {
   'kNewTrip': 'Created',
   'kCancelTrip': 'Cancel trip',
   'kConfirmArrival': 'Confirm arrival',
-  'kStartTrip': 'Start trip',
   'kCompleteTrip': 'Finish trip',
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',

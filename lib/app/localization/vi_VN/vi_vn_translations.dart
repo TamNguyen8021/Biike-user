@@ -14,7 +14,7 @@ final Map<String, String> vi = {
       'Biiké giúp giảm thiểu lượng xe lưu thông, giảm kẹt xe, khói bụi và bảo vệ môi trường',
   'kConnectSociety': 'Kết nối cộng đồng',
   'kProtectEnvironment': 'Bảo vệ môi trường',
-  'kStartOnBoard': 'Bắt đầu',
+  'kStart': 'Bắt đầu',
 
   // '003.1_login'
   'kLoginButton': 'Xác thực bằng email FPT',
@@ -204,7 +204,6 @@ final Map<String, String> vi = {
   'kNewTrip': 'Đã tạo',
   'kCancelTrip': 'Hủy chuyến',
   'kConfirmArrival': 'Đánh dấu đã đến',
-  'kStartTrip': 'Bắt đầu chuyến đi',
   'kCompleteTrip': 'Hoàn thành',
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',

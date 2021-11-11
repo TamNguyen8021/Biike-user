@@ -12,7 +12,7 @@ class CustomStrings {
   static const String kThirdDescription = 'kThirdDescription';
   static const String kConnectSociety = 'kConnectSociety';
   static const String kProtectEnvironment = 'kProtectEnvironment';
-  static const String kStartOnBoard = 'kStartOnBoard';
+  static const String kStart = 'kStart';
 
   // '003.1_login'
   static const String kLoginButton = 'kLoginButton';
@@ -194,7 +194,6 @@ class CustomStrings {
   static const String kNewTrip = 'kNewTrip';
   static const String kCancelTrip = 'kCancelTrip';
   static const String kConfirmArrival = 'kConfirmArrival';
-  static const String kStartTrip = 'kStartTrip';
   static const String kCompleteTrip = 'kCompleteTrip';
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';

@@ -23,7 +23,7 @@ class TripDetailsController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
   final _homeController = Get.find<HomeController>();
 
-  Rx<String> buttonText = CustomStrings.kStartTrip.tr.obs;
+  Rx<String> buttonText = CustomStrings.kStart.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
   Rx<String> _cancelReason = ''.obs;
   Rx<bool> isTripStarted = false.obs;
