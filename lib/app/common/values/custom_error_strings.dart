@@ -19,4 +19,5 @@ class CustomErrorsString {
   static const String kFromTimeMustBeBeforeToTime =
       'kFromTimeMustBeBeforeToTime';
   static const String kSameStationWereAdded = 'kSameStationWereAdded';
+  static const String kNoRoleWereChosen = 'kNoRoleWereChosen';
 }

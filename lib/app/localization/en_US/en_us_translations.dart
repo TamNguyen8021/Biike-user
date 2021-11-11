@@ -377,4 +377,5 @@ final Map<String, String> en = {
         'You cannot go back when the trip has started',
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
     'kSameStationWereAdded': 'A station with the same information were added',
+    'kNoRoleWereChosen': 'You must choose a role to use our service',
   });
