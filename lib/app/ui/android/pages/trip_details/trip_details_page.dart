@@ -18,19 +18,16 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:latlong2/latlong.dart';
 
 /// 'trip_details' screen
 //ignore: must_be_immutable
 class TripDetailsPage extends StatelessWidget {
   final _tripProvider = Get.find<TripProvider>();
   final _tripDetailsController = Get.find<TripDetailsController>();
-  final MapController mapController = MapController();
   final _homeController = Get.find<HomeController>();
   final _tripHistoryController = Get.find<TripHistoryController>();
 
@@ -186,8 +183,16 @@ class TripDetailsPage extends StatelessWidget {
                                 vertical: 16.0, horizontal: 22.0),
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                _tripDetailsController.showHelpCenter(
-                                    context: context);
+                                if (_tripDetailsController.userLocation !=
+                                    null) {
+                                  _tripDetailsController.showHelpCenter(
+                                      context: context);
+                                } else {
+                                  CommonFunctions().showInfoDialog(
+                                      context: context,
+                                      message: CustomStrings
+                                          .kNeedLocationPermission.tr);
+                                }
                               },
                               icon: Icon(
                                 Icons.support,
@@ -249,7 +254,6 @@ class TripDetailsPage extends StatelessWidget {
                                     ),
                                     TripDetailsMapViewer(
                                         isFullMap: false,
-                                        mapController: mapController,
                                         tripDetailsController:
                                             _tripDetailsController,
                                         departureCoordinate:
@@ -563,7 +567,7 @@ class TripDetailsPage extends StatelessWidget {
                                             5) ...[
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.center,
                                         children: <Widget>[
                                           Obx(
                                             () => Visibility(
@@ -571,6 +575,14 @@ class TripDetailsPage extends StatelessWidget {
                                                   .isTripStarted.value,
                                               child: CustomElevatedIconButton(
                                                 width: 150,
+                                                text: CustomStrings
+                                                    .kCancelTrip.tr,
+                                                backgroundColor:
+                                                    CustomColors.kLightGray,
+                                                foregroundColor:
+                                                    CustomColors.kDarkGray,
+                                                elevation: 0.0,
+                                                icon: Icons.clear,
                                                 onPressedFunc: () {
                                                   CommonFunctions()
                                                       .showConfirmDialog(
@@ -592,14 +604,6 @@ class TripDetailsPage extends StatelessWidget {
                                                                         'tripId']);
                                                           });
                                                 },
-                                                text: CustomStrings
-                                                    .kCancelTrip.tr,
-                                                backgroundColor:
-                                                    CustomColors.kLightGray,
-                                                foregroundColor:
-                                                    CustomColors.kDarkGray,
-                                                elevation: 0.0,
-                                                icon: Icons.clear,
                                               ),
                                             ),
                                           ),
@@ -619,78 +623,84 @@ class TripDetailsPage extends StatelessWidget {
                                                   visible:
                                                       isStartTripButtonVisible
                                                           .value,
-                                                  child:
-                                                      CustomElevatedIconButton(
-                                                    width: 150,
-                                                    onPressedFunc: () async {
-                                                      if (_tripDetailsController
-                                                          .isTripStarted
-                                                          .isFalse) {
-                                                        final isTripStarted =
-                                                            await _tripProvider
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 16.0),
+                                                    child:
+                                                        CustomElevatedIconButton(
+                                                      width: 150,
+                                                      onPressedFunc: () async {
+                                                        if (_tripDetailsController
+                                                            .isTripStarted
+                                                            .isFalse) {
+                                                          if (_tripDetailsController
+                                                                  .userLocation !=
+                                                              null) {
+                                                            if (await _tripProvider
                                                                 .startTripOrCompleteTrip(
                                                                     tripId: Get
                                                                             .arguments[
-                                                                        'tripId']);
-                                                        if (isTripStarted) {
-                                                          _tripDetailsController
-                                                              .isTripStarted
-                                                              .value = true;
-                                                          mapController.move(
-                                                              LatLng(
-                                                                  _tripDetailsController
-                                                                      .userLocation
-                                                                      .latitude!,
-                                                                  _tripDetailsController
-                                                                      .userLocation
-                                                                      .longitude!),
-                                                              12);
-                                                          _tripDetailsController
-                                                              .changeToFinishTripButton();
-                                                        } else {
-                                                          CommonFunctions()
-                                                              .showErrorDialog(
-                                                                  context:
-                                                                      context,
-                                                                  message:
-                                                                      CustomErrorsString
+                                                                        'tripId'])) {
+                                                              _tripDetailsController
+                                                                  .isTripStarted
+                                                                  .value = true;
+                                                              _tripDetailsController
+                                                                  .changeToFinishTripButton();
+                                                            } else {
+                                                              CommonFunctions()
+                                                                  .showErrorDialog(
+                                                                      context:
+                                                                          context,
+                                                                      message: CustomErrorsString
                                                                           .kDevelopError
                                                                           .tr);
-                                                        }
-                                                      } else {
-                                                        final isTripCompleted =
-                                                            await _tripProvider
-                                                                .startTripOrCompleteTrip(
-                                                                    tripId: Get
-                                                                            .arguments[
-                                                                        'tripId']);
-                                                        if (isTripCompleted) {
-                                                          isStartTripButtonVisible
-                                                              .value = false;
-                                                          Get.offAllNamed(
-                                                              CommonRoutes
-                                                                  .FEEDBACK);
+                                                            }
+                                                          } else {
+                                                            CommonFunctions()
+                                                                .showInfoDialog(
+                                                                    context:
+                                                                        context,
+                                                                    message: CustomStrings
+                                                                        .kNeedLocationPermission
+                                                                        .tr);
+                                                          }
                                                         } else {
-                                                          CommonFunctions()
-                                                              .showErrorDialog(
-                                                                  context:
-                                                                      context,
-                                                                  message:
-                                                                      CustomErrorsString
-                                                                          .kDevelopError
-                                                                          .tr);
+                                                          final isTripCompleted =
+                                                              await _tripProvider
+                                                                  .startTripOrCompleteTrip(
+                                                                      tripId: Get
+                                                                              .arguments[
+                                                                          'tripId']);
+                                                          if (isTripCompleted) {
+                                                            isStartTripButtonVisible
+                                                                .value = false;
+                                                            Get.offAllNamed(
+                                                                CommonRoutes
+                                                                    .FEEDBACK);
+                                                          } else {
+                                                            CommonFunctions()
+                                                                .showErrorDialog(
+                                                                    context:
+                                                                        context,
+                                                                    message: CustomErrorsString
+                                                                        .kDevelopError
+                                                                        .tr);
+                                                          }
                                                         }
-                                                      }
-                                                    },
-                                                    text: _tripDetailsController
-                                                        .buttonText.value,
-                                                    backgroundColor:
-                                                        CustomColors.kBlue,
-                                                    foregroundColor:
-                                                        Colors.white,
-                                                    elevation: 0.0,
-                                                    icon: _tripDetailsController
-                                                        .buttonIcon.value,
+                                                      },
+                                                      text:
+                                                          _tripDetailsController
+                                                              .buttonText.value,
+                                                      backgroundColor:
+                                                          CustomColors.kBlue,
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                      elevation: 0.0,
+                                                      icon:
+                                                          _tripDetailsController
+                                                              .buttonIcon.value,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

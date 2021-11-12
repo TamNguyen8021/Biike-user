@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/bindings/bike_binding.dart';
+import 'package:bikes_user/app/bindings/cho_now_settings_binding.dart';
 import 'package:bikes_user/app/bindings/login_binding.dart';
 import 'package:bikes_user/app/bindings/open_page_bingding.dart';
 import 'package:bikes_user/app/bindings/station_binding.dart';
@@ -26,6 +27,7 @@ import 'package:bikes_user/app/bindings/verify_phone_binding.dart';
 import 'package:bikes_user/app/bindings/wallet_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
+import 'package:bikes_user/app/ui/android/pages/cho_now_settings/cho_now_settings_page.dart';
 import 'package:bikes_user/app/ui/android/pages/home/require_add_bike_page.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_page.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_camera_page.dart';
@@ -116,6 +118,14 @@ class AppPages {
     GetPage(
       name: CommonRoutes.REQUIRE_ADD_BIKE,
       page: () => RequireAddBikePage(),
+    ),
+    GetPage(
+      name: CommonRoutes.CHO_NOW,
+      page: () => ChoNowSettingsPage(),
+      bindings: <Bindings>[
+        ChoNowSettingsBinding(),
+        StationBinding(),
+      ],
     ),
     GetPage(
       name: CommonRoutes.TOP_BIKER,

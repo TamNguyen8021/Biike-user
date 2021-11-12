@@ -25,7 +25,7 @@ class ViewUserPage extends StatelessWidget {
 
     final contactAndReportButtons = <Widget>[
       CustomElevatedIconButton(
-        width: 105,
+        width: 115,
         onPressedFunc: () => CommonFunctions()
             .makingPhoneCall(phoneNo: _viewUserController.user.userPhoneNumber),
         text: CustomStrings.kCall.tr,
@@ -37,7 +37,7 @@ class ViewUserPage extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         child: CustomElevatedIconButton(
-          width: 105,
+          width: 115,
           onPressedFunc: () => CommonFunctions()
               .makingSms(phoneNo: _viewUserController.user.userPhoneNumber),
           text: CustomStrings.kMessage.tr,
@@ -48,7 +48,7 @@ class ViewUserPage extends StatelessWidget {
         ),
       ),
       CustomElevatedIconButton(
-        width: 105,
+        width: 115,
         onPressedFunc: () =>
             _viewUserController.showReportDialog(context: context),
         text: CustomStrings.kReport.tr,

@@ -143,8 +143,8 @@ class ViewUserController extends GetxController {
   /// Display a dialog on [context] to report a user.
   ///
   /// Author: TamNTT
-  dynamic showReportDialog({required BuildContext context}) {
-    showDialog(
+  void showReportDialog({required BuildContext context}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -222,8 +222,8 @@ class ViewUserController extends GetxController {
   /// Display a dialog on [context] to confirm if user wants to block another user.
   ///
   /// Author: TamNTT
-  dynamic _showConfirmBlockDialog({required BuildContext context}) {
-    showDialog(
+  void _showConfirmBlockDialog({required BuildContext context}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -284,8 +284,8 @@ class ViewUserController extends GetxController {
   /// Display a dialog on [context] to thank you user for their report.
   ///
   /// Author: TamNTT
-  dynamic _showThankYouForReportDialog({required BuildContext context}) {
-    showDialog(
+  void _showThankYouForReportDialog({required BuildContext context}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(

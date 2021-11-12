@@ -5,13 +5,11 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class TripDetailsFullMapPage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
-  final MapController mapController = MapController();
 
   TripDetailsFullMapPage({Key? key}) : super(key: key);
 
@@ -70,7 +68,7 @@ class TripDetailsFullMapPage extends StatelessWidget {
               children: <Widget>[
                 TripDetailsMapViewer(
                     isFullMap: true,
-                    mapController: mapController,
+                    // mapController: mapController,
                     tripDetailsController: _tripDetailsController,
                     departureCoordinate: _departureCoordinate,
                     destinationCoordinate: _destinationCoordinate),

@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
@@ -71,6 +72,43 @@ class Home extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            if (Biike.role.value == Role.biker) ...[
+                              GestureDetector(
+                                child: Container(
+                                    margin: const EdgeInsets.only(bottom: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    decoration: BoxDecoration(
+                                        color: CustomColors.kLightBlue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: Image.asset(
+                                            'assets/images/fire.png',
+                                            height: 20,
+                                          ),
+                                        ),
+                                        Expanded(
+                                            child: Text(
+                                          CustomStrings.kNoKeNowTrip.tr,
+                                        )),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 8.0),
+                                          child: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        )
+                                      ],
+                                    )),
+                                onTap: () => Get.toNamed(CommonRoutes.CHO_NOW),
+                              )
+                            ],
                             Padding(
                               padding: const EdgeInsets.only(bottom: 20.0),
                               child: TopBiker(),
@@ -480,8 +518,8 @@ class Home extends StatelessWidget {
                                                                 .textTheme
                                                                 .bodyText1,
                                                           ),
-                                                          onTap: () async {
-                                                            await homeController
+                                                          onTap: () {
+                                                            homeController
                                                                 .showStationsDialog(
                                                                     context:
                                                                         context,
@@ -504,8 +542,8 @@ class Home extends StatelessWidget {
                                                                 .textTheme
                                                                 .bodyText1,
                                                           ),
-                                                          onTap: () async {
-                                                            await homeController
+                                                          onTap: () {
+                                                            homeController
                                                                 .showStationsDialog(
                                                                     context:
                                                                         context,

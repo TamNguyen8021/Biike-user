@@ -9,6 +9,7 @@ abstract class CommonRoutes {
   static const TRIP_HISTORY = '/tripHistory';
   static const HOME = '/home';
   static const REQUIRE_ADD_BIKE = '/requireAddBike';
+  static const CHO_NOW = '/choNow';
   static const TOP_BIKER = '/topBiker';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/editProfile';

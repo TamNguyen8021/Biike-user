@@ -23,8 +23,8 @@ class ConfirmArrivalButton extends StatelessWidget {
       : super(key: key);
 
   void _showConfirmArrivalDialog(
-      {required BuildContext context, required Role role}) {
-    showDialog(
+      {required BuildContext context, required Role role}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(

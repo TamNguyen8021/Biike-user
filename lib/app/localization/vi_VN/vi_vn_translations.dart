@@ -7,14 +7,14 @@ final Map<String, String> vi = {
   'kSkip': 'Bỏ qua>>',
   'kFree': 'Hoàn toàn miễn phí',
   'kFirstDescription':
-      'Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì khi sử dụng app',
+      'Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì để sử dụng app',
   'kSecondDescription':
       'Biiké kết nối những người có chung hành trình, giúp tận dụng những chiếc yên xe vốn lãng phí',
   'kThirdDescription':
       'Biiké giúp giảm thiểu lượng xe lưu thông, giảm kẹt xe, khói bụi và bảo vệ môi trường',
   'kConnectSociety': 'Kết nối cộng đồng',
   'kProtectEnvironment': 'Bảo vệ môi trường',
-  'kStartOnBoard': 'Bắt đầu',
+  'kStart': 'Bắt đầu',
 
   // '003.1_login'
   'kLoginButton': 'Xác thực bằng email FPT',
@@ -61,8 +61,10 @@ final Map<String, String> vi = {
       'Chúng tôi sẽ gửi thông báo cho tài xế của bạn',
   'kConfirmArrivalMessageForBiker':
       'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
+  'kConfirmExitApp': 'Bạn có chắc muốn thoát ứng dụng?',
 
   // 'biker_home' screen
+  'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
   'kBikerReadyReminder': 'Chuyến sắp chở',
   'kFilter': 'Lọc chuyến đi đang cần chở',
   'kSelectHour': 'Chọn giờ',
@@ -77,6 +79,23 @@ final Map<String, String> vi = {
 
   // 'require_add_bike' screen
   'kNeedAddBikeToBecomeBiker': 'Bạn cần thêm xe để sử dụng Chở Mode',
+
+  // 'cho_now' screen
+  'kChoNow': 'Chở Now',
+  'kChoNowDescription1':
+      'Chở Now hiển thị chuyến đi do người ké cần đi ngay (tính năng Ké Now của Ké Mode)',
+  'kChoNowDescription2':
+      'Chuyến đi cần Chở Now được gửi tới bạn dựa vào phần cài đặt Chở Now của bạn',
+  'kChoNowDescription3':
+      'Chuyến đi sẽ tự động hủy sau 3 phút nếu bạn không nhận chuyến',
+  'kChoNowSettings': 'Cài đặt Chở Now',
+  'kTurnOnChoNow': 'Bật Chở Now',
+  'kChoNowStation': 'Địa điểm nhận chuyến',
+  'kAddPickUpStation': '+ Thêm điểm nhận chuyến',
+  'kAddChoNowStation': 'Thêm điểm nhận chuyến Now',
+  'kAdd': 'Thêm',
+  'kDelete': 'Xóa',
+  'kChooseStation': 'Chọn địa điểm',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
@@ -185,7 +204,6 @@ final Map<String, String> vi = {
   'kNewTrip': 'Đã tạo',
   'kCancelTrip': 'Hủy chuyến',
   'kConfirmArrival': 'Đánh dấu đã đến',
-  'kStartTrip': 'Bắt đầu chuyến đi',
   'kCompleteTrip': 'Hoàn thành',
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
@@ -193,6 +211,9 @@ final Map<String, String> vi = {
   'kExpandMap': 'Mở rộng bản đồ',
   'kMinimizeMap': 'Thu nhỏ bản đồ',
   'kViewRouteInstruction': 'Xem chỉ đường',
+  'kStartLocation': 'Điểm đi',
+  'kEndLocation': 'Điểm đến',
+  'kYourLocation': 'Vị trí của bạn',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
@@ -211,6 +232,8 @@ final Map<String, String> vi = {
   'kTown': 'Quận',
   'kCity': 'Thành phố',
   'kCountry': 'Quốc gia',
+  'kNeedLocationPermission':
+      'Bạn cần cấp quyền truy cập vị trí và bật định vị để sử dụng tính năng này',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -259,7 +282,6 @@ final Map<String, String> vi = {
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
   'kTakePicture': 'Chụp',
-  'kFillInAllField': 'Vui lòng điền đầy đủ thông tin',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
@@ -284,6 +306,7 @@ final Map<String, String> vi = {
   'kChangePassword': 'Đổi mật khẩu',
   'kLoginByFingerprint': 'Đăng nhập bằng vân tay',
   'kLanguage': 'Ngôn ngữ',
+  'kCurrentLanguage': 'Tiếng Việt',
   'kOther': 'Khác',
   'kFollowOnFacebook': 'Theo dõi Biké trên Facebook',
   'kWebsite': 'Website',
@@ -347,11 +370,11 @@ final Map<String, String> vi = {
     'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
     'kSendFailed': 'Gửi feedback thất bại!',
     'kDevelopError':
-        'Có lỗi xảy ra, vui lòng liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
+        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
     'kExchangeFailed': 'Không thể đổi voucher!',
     'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
-    'kNotFillAllFields': 'Xin hãy chọn đủ dữ liệu',
+    'kNotFillAllFields': 'Vui lòng điền đầy đủ thông tin',
     'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
     'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 6h đến 21h',
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
@@ -359,4 +382,9 @@ final Map<String, String> vi = {
     'kEditProfileFailed': 'Chỉnh sửa thông tin thất bại. Vui lòng thử lại sau',
     'kCannotGoBackWhenTripStarted':
         'Không thể quay lại khi chuyến đi đã bắt đầu',
+    'kFromTimeMustBeBeforeToTime':
+        'Thời gian bắt đầu phải trước thời gian kết thúc',
+    'kSameStationWereAdded': 'Đã có trạm trùng khớp thông tin được thêm vào',
+    'kNoRoleWereChosen':
+        'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
   });

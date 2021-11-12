@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
@@ -5,15 +7,12 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 
 class TripDetailsMapViewer extends StatelessWidget {
-  final MapController mapController;
+  final Completer<GoogleMapController> _controller = Completer();
   final TripDetailsController tripDetailsController;
   final String departureCoordinate;
   final String destinationCoordinate;
@@ -22,7 +21,6 @@ class TripDetailsMapViewer extends StatelessWidget {
   TripDetailsMapViewer(
       {Key? key,
       required this.isFullMap,
-      required this.mapController,
       required this.tripDetailsController,
       required this.departureCoordinate,
       required this.destinationCoordinate})
@@ -53,120 +51,69 @@ class TripDetailsMapViewer extends StatelessWidget {
               ? MediaQuery.of(context).size.height -
                   MediaQuery.of(context).padding.top -
                   88.0
-              : 150.0,
+              : 200.0,
           margin: EdgeInsets.only(top: isFullMap ? 0.0 : 16.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
                 future: tripDetailsController.getRoutePoints(
-                    departureLongtitude.toString(),
-                    departureLatitude.toString(),
-                    destinationLongtitude.toString(),
-                    destinationLatitude.toString()),
+                    departureLongtitude,
+                    departureLatitude,
+                    destinationLongtitude,
+                    destinationLatitude),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return FlutterMap(
-                      mapController: mapController,
-                      options: MapOptions(
-                          onPositionChanged:
-                              (MapPosition position, bool isChanged) {},
-                          center: tripDetailsController.isTripStarted.value
-                              ? LatLng(
-                                  tripDetailsController.userLocation.latitude!,
-                                  tripDetailsController.userLocation.longitude!)
-                              : LatLng(
-                                  (departureLatitude + destinationLatitude) / 2,
-                                  (departureLongtitude +
-                                          destinationLongtitude) /
-                                      2),
-                          zoom: isFullMap ? 14.0 : 12.0,
-                          onTap:
-                              (TapPosition tapPosition, LatLng latLng) async {
-                            tripDetailsController.showLocationDetails(
-                                context: context,
-                                latitude: latLng.latitude,
-                                longtitude: latLng.longitude);
-                          }),
-                      layers: <LayerOptions>[
-                        TileLayerOptions(
-                          urlTemplate:
-                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                          subdomains: ['a', 'b', 'c'],
-                          retinaMode: true &&
-                              MediaQuery.of(context).devicePixelRatio > 1.0,
-                          attributionBuilder: (BuildContext context) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                children: <Widget>[
-                                  Text(
-                                    '© OpenStreetMap contributors',
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      foreground: Paint()
-                                        ..style = PaintingStyle.stroke
-                                        ..strokeWidth = 3
-                                        ..color = Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    '© OpenStreetMap contributors',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  )
-                                ],
-                              ),
-                            );
-                          },
+                    return GoogleMap(
+                      mapType: MapType.normal,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                            (departureLatitude + destinationLatitude) / 2,
+                            (departureLongtitude + destinationLongtitude) / 2),
+                        zoom: 12,
+                      ),
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
+                      markers: <Marker>{
+                        Marker(
+                          markerId: MarkerId('departure'),
+                          position:
+                              LatLng(departureLatitude, departureLongtitude),
+                          infoWindow: InfoWindow(
+                              title: CustomStrings.kStartLocation.tr,
+                              snippet: 'Info'),
                         ),
-                        MarkerLayerOptions(markers: <Marker>[
+                        Marker(
+                            markerId: MarkerId('destination'),
+                            position: LatLng(
+                                destinationLatitude, destinationLongtitude),
+                            infoWindow: InfoWindow(
+                                title: CustomStrings.kEndLocation.tr,
+                                snippet: 'Info'),
+                            icon: BitmapDescriptor.defaultMarkerWithHue(
+                                BitmapDescriptor.hueGreen)),
+                        if (tripDetailsController.userLocation != null) ...[
                           Marker(
-                              rotate: true,
-                              point: LatLng(
-                                  departureLatitude, departureLongtitude),
-                              builder: (BuildContext context) {
-                                return Icon(
-                                  Icons.location_on,
-                                  color: Colors.green,
-                                  size: 25,
-                                );
-                              }),
-                          Marker(
-                              rotate: true,
-                              point: LatLng(
-                                  destinationLatitude, destinationLongtitude),
-                              builder: (BuildContext context) {
-                                return Icon(
-                                  Icons.location_on,
-                                  color: CustomColors.kRed,
-                                  size: 25,
-                                );
-                              }),
-                          Marker(
-                              rotate: true,
-                              point: LatLng(
-                                  tripDetailsController.userLocation.latitude!,
+                              markerId: MarkerId('user'),
+                              position: LatLng(
+                                  tripDetailsController.userLocation!.latitude!,
                                   tripDetailsController
-                                      .userLocation.longitude!),
-                              builder: (BuildContext context) {
-                                return Icon(
-                                  Icons.directions_bike,
-                                  color: CustomColors.kBlue,
-                                  size: 25,
-                                );
-                              }),
-                        ]),
-                        PolylineLayerOptions(
-                            polylineCulling: true,
-                            polylines: <Polyline>[
-                              Polyline(
-                                  color: Colors.purple.withOpacity(0.5),
-                                  strokeWidth: 5,
-                                  points: tripDetailsController.polypoints
-                                      .toList()),
-                            ])
-                      ],
+                                      .userLocation!.longitude!),
+                              infoWindow: InfoWindow(
+                                  title: CustomStrings.kYourLocation.tr,
+                                  snippet: 'Info'),
+                              icon: BitmapDescriptor.defaultMarkerWithHue(
+                                  BitmapDescriptor.hueAzure)),
+                        ]
+                      },
+                      polylines: <Polyline>{
+                        Polyline(
+                            polylineId: PolylineId('route'),
+                            color: CustomColors.kBlue,
+                            width: 5,
+                            points: tripDetailsController.polypoints)
+                      },
                     );
                   } else {
                     return Loading();

@@ -228,11 +228,11 @@ class HomeController extends GetxController {
   /// Display a dialog which contains stations for user to choose.
   ///
   /// Author: TamNTT
-  Future showStationsDialog(
+  void showStationsDialog(
       {required BuildContext context, required bool isDepartureStation}) async {
     Rx<int?> _tempStationId = (-1).obs;
 
-    showDialog(
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(
@@ -266,18 +266,12 @@ class HomeController extends GetxController {
                                     departureStationName.value =
                                         departureStation.value.name =
                                             stations.values.elementAt(index);
-                                    Biike.logger
-                                        .d(departureStation.value.stationId);
                                   } else {
                                     destinationStation.value.stationId =
                                         _tempStationId.value;
                                     destinationStationName.value =
                                         destinationStation.value.name =
                                             stations.values.elementAt(index);
-                                    Biike.logger
-                                        .d(destinationStation.value.stationId);
-                                    Biike.logger
-                                        .d(destinationStation.value.name);
                                   }
                                   Get.back();
                                 },

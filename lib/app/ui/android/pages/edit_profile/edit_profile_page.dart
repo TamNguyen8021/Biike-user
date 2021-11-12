@@ -21,12 +21,12 @@ class EditProfilePage extends StatelessWidget {
         .isSaveButtonDisable(
             newName: _profileController.user.userFullname,
             newGender: _profileController.user.gender,
-            newBirthDate: _profileController.user.birthDate!)
+            newBirthDate: _profileController.user.birthDate)
         .obs;
-    Rx<String> _birthDateText = CustomStrings.kChooseBirthDate.tr.obs;
+    Rx<String> birthDateText = CustomStrings.kChooseBirthDate.tr.obs;
 
     if (_profileController.birthDate.value != null) {
-      _birthDateText.value =
+      birthDateText.value =
           DateFormat('dd-MM-yyyy').format(_profileController.birthDate.value!);
     }
 
@@ -86,7 +86,7 @@ class EditProfilePage extends StatelessWidget {
                                   newName: _profileController.user.userFullname,
                                   newGender: _profileController.user.gender,
                                   newBirthDate:
-                                      _profileController.user.birthDate!);
+                                      _profileController.user.birthDate);
                         }),
                     ProfileTextField(
                         isReadOnly: true,
@@ -141,13 +141,13 @@ class EditProfilePage extends StatelessWidget {
                                 newName: _profileController.user.userFullname,
                                 newGender: _profileController.user.gender,
                                 newBirthDate:
-                                    _profileController.user.birthDate!);
+                                    _profileController.user.birthDate);
                       },
                     ),
                     Obx(
                       () => ChooseDateTimeButton(
                           isOnProfilePage: true,
-                          text: _birthDateText.value,
+                          text: birthDateText.value,
                           width: double.infinity,
                           onPressedFunc: () async {
                             DateTime _tempBirthDate = await CommonFunctions()
@@ -158,7 +158,7 @@ class EditProfilePage extends StatelessWidget {
                             _profileController.birthDate.value = _tempBirthDate;
                             _profileController.user.birthDate =
                                 _tempBirthDate.toString();
-                            _birthDateText.value =
+                            birthDateText.value =
                                 DateFormat('dd-MM-yyyy').format(_tempBirthDate);
                             isSaveButtonDisable.value =
                                 _profileController.isSaveButtonDisable(
@@ -166,7 +166,7 @@ class EditProfilePage extends StatelessWidget {
                                         _profileController.user.userFullname,
                                     newGender: _profileController.user.gender,
                                     newBirthDate:
-                                        _profileController.user.birthDate!);
+                                        _profileController.user.birthDate);
                           }),
                     ),
                     Obx(
