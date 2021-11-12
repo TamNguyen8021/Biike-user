@@ -201,6 +201,9 @@ class CustomStrings {
   static const String kExpandMap = 'kExpandMap';
   static const String kMinimizeMap = 'kMinimizeMap';
   static const String kViewRouteInstruction = 'kViewRouteInstruction';
+  static const String kStartLocation = 'kStartLocation';
+  static const String kEndLocation = 'kEndLocation';
+  static const String kYourLocation = 'kYourLocation';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';

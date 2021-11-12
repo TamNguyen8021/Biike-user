@@ -1,15 +1,17 @@
+import 'dart:async';
+
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
 
 class BookTripMapViewer extends StatelessWidget {
+  final Completer<GoogleMapController> _controller = Completer();
   final _bookTripController = Get.find<BookTripController>();
 
   final String departureCoordinate;
@@ -27,12 +29,13 @@ class BookTripMapViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CustomLocation departure = CustomLocation(coordinate: departureCoordinate);
-    CustomLocation destination = CustomLocation(coordinate: destinationCoordinate);
+    CustomLocation destination =
+        CustomLocation(coordinate: destinationCoordinate);
 
     double departureLatitude = departure.latitude;
-    double departureLongitude = departure.longitude;
+    double departureLongtitude = departure.longitude;
     double destinationLatitude = destination.latitude;
-    double destinationLongitude = destination.longitude;
+    double destinationLongtitude = destination.longitude;
 
     return Column(
       children: <Widget>[
@@ -41,51 +44,42 @@ class BookTripMapViewer extends StatelessWidget {
           height: 150.0,
           margin: const EdgeInsets.only(top: 16.0),
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(5.0),
-              child: FlutterMap(
-                options: MapOptions(
-                    onPositionChanged:
-                        (MapPosition position, bool isChanged) {},
-                    center: LatLng(
-                        (departureLatitude + destinationLatitude) / 2,
-                        (departureLongitude + destinationLongitude) / 2),
-                    zoom: 12.0),
-                layers: [
-                  TileLayerOptions(
-                    urlTemplate:
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    subdomains: ['a', 'b', 'c'],
-                  ),
-                  MarkerLayerOptions(markers: <Marker>[
-                    Marker(
-                        point: LatLng(departureLatitude, departureLongitude),
-                        builder: (BuildContext context) {
-                          return Icon(
-                            Icons.location_on,
-                            color: Colors.green,
-                            size: 25,
-                          );
-                        }),
-                    Marker(
-                        point: LatLng(destinationLatitude, destinationLongitude),
-                        builder: (BuildContext context) {
-                          return Icon(
-                            Icons.location_on,
-                            color: CustomColors.kRed,
-                            size: 25,
-                          );
-                        }),
-                  ]),
-                  PolylineLayerOptions(
-                      polylineCulling: true,
-                      polylines: <Polyline>[
-                        Polyline(
-                            color: Colors.purple.withOpacity(0.5),
-                            strokeWidth: 5,
-                            points: _bookTripController.polypoints.toList()),
-                      ]),
-                ],
-              )),
+            borderRadius: BorderRadius.circular(5.0),
+            child: GoogleMap(
+              mapType: MapType.normal,
+              initialCameraPosition: CameraPosition(
+                target: LatLng((departureLatitude + destinationLatitude) / 2,
+                    (departureLongtitude + destinationLongtitude) / 2),
+                zoom: 12,
+              ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              markers: <Marker>{
+                Marker(
+                  markerId: MarkerId('departure'),
+                  position: LatLng(departureLatitude, departureLongtitude),
+                  infoWindow: InfoWindow(
+                      title: CustomStrings.kStartLocation.tr, snippet: 'Info'),
+                ),
+                Marker(
+                    markerId: MarkerId('destination'),
+                    position:
+                        LatLng(destinationLatitude, destinationLongtitude),
+                    infoWindow: InfoWindow(
+                        title: CustomStrings.kEndLocation.tr, snippet: 'Info'),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueGreen)),
+              },
+              polylines: <Polyline>{
+                Polyline(
+                    polylineId: PolylineId('route'),
+                    color: CustomColors.kBlue,
+                    width: 5,
+                    points: _bookTripController.polypoints.toList())
+              },
+            ),
+          ),
         ),
         CustomTextButton(
             hasBorder: true,

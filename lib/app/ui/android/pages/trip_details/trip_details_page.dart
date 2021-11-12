@@ -18,19 +18,16 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:latlong2/latlong.dart';
 
 /// 'trip_details' screen
 //ignore: must_be_immutable
 class TripDetailsPage extends StatelessWidget {
   final _tripProvider = Get.find<TripProvider>();
   final _tripDetailsController = Get.find<TripDetailsController>();
-  final MapController mapController = MapController();
   final _homeController = Get.find<HomeController>();
   final _tripHistoryController = Get.find<TripHistoryController>();
 
@@ -257,7 +254,6 @@ class TripDetailsPage extends StatelessWidget {
                                     ),
                                     TripDetailsMapViewer(
                                         isFullMap: false,
-                                        mapController: mapController,
                                         tripDetailsController:
                                             _tripDetailsController,
                                         departureCoordinate:
@@ -649,15 +645,6 @@ class TripDetailsPage extends StatelessWidget {
                                                               _tripDetailsController
                                                                   .isTripStarted
                                                                   .value = true;
-                                                              mapController.move(
-                                                                  LatLng(
-                                                                      _tripDetailsController
-                                                                          .userLocation!
-                                                                          .latitude!,
-                                                                      _tripDetailsController
-                                                                          .userLocation!
-                                                                          .longitude!),
-                                                                  12);
                                                               _tripDetailsController
                                                                   .changeToFinishTripButton();
                                                             } else {

@@ -8,9 +8,10 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'dart:async';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BookTripController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
@@ -315,16 +316,14 @@ class BookTripController extends GetxController {
   Future<void> _drawLine(
       {required CustomLocation departure,
       required CustomLocation destination}) async {
-    var data = await _tripProvider.getRouteData(
-        departure.longitude.toString(),
-        departure.latitude.toString(),
-        destination.longitude.toString(),
-        destination.latitude.toString());
+    var data = await _tripProvider.getRouteData(departure.longitude,
+        departure.latitude, destination.longitude, destination.latitude);
+    List coordinates = data['routes'][0]['legs'][0]['steps'];
 
-    List coordinates = data['features'][0]['geometry']['coordinates'];
-    coordinates
-        .map((pair) => polypoints.add(LatLng(pair[1], pair[0])))
-        .toList();
+    for (Map<String, dynamic> object in coordinates) {
+      polypoints.add(
+          LatLng(object['end_location']['lat'], object['end_location']['lng']));
+    }
   }
 
   /// Get data to attach to body of api

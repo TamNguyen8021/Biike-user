@@ -16,7 +16,7 @@ import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class TripDetailsController extends GetxController {
@@ -101,9 +101,9 @@ class TripDetailsController extends GetxController {
   }
 
   Future<Map<String, dynamic>> getLocationDetails(
-      {required double latitude, required double longtitude}) async {
-    Map<String, dynamic> data = await _tripProvider.getLocationDetails(
-        latitude: latitude, longtitude: longtitude);
+      {required String placeId}) async {
+    Map<String, dynamic> data =
+        await _tripProvider.getLocationDetails(placeId: placeId);
     return data;
   }
 
@@ -111,15 +111,12 @@ class TripDetailsController extends GetxController {
   ///
   /// Author: TamNTT
   void showLocationDetails(
-      {required BuildContext context,
-      required double latitude,
-      required double longtitude}) async {
+      {required BuildContext context, required String placeId}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(
-              future: getLocationDetails(
-                  latitude: latitude, longtitude: longtitude),
+              future: getLocationDetails(placeId: placeId),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Dialog(
@@ -210,15 +207,16 @@ class TripDetailsController extends GetxController {
   }
 
   Future<void> getRoutePoints(
-      String startLng, String startLat, String endLng, String endLat) async {
+      double startLng, double startLat, double endLng, double endLat) async {
     polypoints.clear();
     var data =
         await _tripProvider.getRouteData(startLng, startLat, endLng, endLat);
-    List coordinates = data['features'][0]['geometry']['coordinates'];
+    List coordinates = data['routes'][0]['legs'][0]['steps'];
 
-    coordinates.map((pair) {
-      polypoints.add(LatLng(pair[1], pair[0]));
-    }).toList();
+    for (Map<String, dynamic> object in coordinates) {
+      polypoints.add(
+          LatLng(object['end_location']['lat'], object['end_location']['lng']));
+    }
   }
 
   /// Cancel a trip based on [tripId].

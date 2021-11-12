@@ -211,6 +211,9 @@ final Map<String, String> vi = {
   'kExpandMap': 'Mở rộng bản đồ',
   'kMinimizeMap': 'Thu nhỏ bản đồ',
   'kViewRouteInstruction': 'Xem chỉ đường',
+  'kStartLocation': 'Điểm đi',
+  'kEndLocation': 'Điểm đến',
+  'kYourLocation': 'Vị trí của bạn',
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
