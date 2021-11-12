@@ -316,7 +316,7 @@ class BookTripController extends GetxController {
   Future<void> _drawLine(
       {required CustomLocation departure,
       required CustomLocation destination}) async {
-    var data = await _tripProvider.getRouteData(departure.longitude,
+    var data = await _tripProvider.getDirection(departure.longitude,
         departure.latitude, destination.longitude, destination.latitude);
     List coordinates = data['routes'][0]['legs'][0]['steps'];
 

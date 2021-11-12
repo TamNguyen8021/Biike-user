@@ -307,10 +307,10 @@ class CommonFunctions {
   Future<void> openMap(
       {required String keyword,
       required double? latitude,
-      required double? longtitude,
+      required double? longitude,
       required BuildContext context}) async {
     String googleUrl =
-        'https://www.google.com/maps/search/$keyword/@$latitude,$longtitude';
+        'https://www.google.com/maps/search/$keyword/@$latitude,$longitude';
 
     if (await canLaunch(googleUrl)) {
       await launch(googleUrl);

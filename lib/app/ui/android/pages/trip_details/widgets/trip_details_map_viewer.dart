@@ -33,9 +33,9 @@ class TripDetailsMapViewer extends StatelessWidget {
         CustomLocation(coordinate: destinationCoordinate);
 
     double departureLatitude = departure.latitude;
-    double departureLongtitude = departure.longitude;
+    double departureLongitude = departure.longitude;
     double destinationLatitude = destination.latitude;
-    double destinationLongtitude = destination.longitude;
+    double destinationLongitude = destination.longitude;
 
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
 
@@ -57,9 +57,9 @@ class TripDetailsMapViewer extends StatelessWidget {
             borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
                 future: tripDetailsController.getRoutePoints(
-                    departureLongtitude,
+                    departureLongitude,
                     departureLatitude,
-                    destinationLongtitude,
+                    destinationLongitude,
                     destinationLatitude),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -69,8 +69,8 @@ class TripDetailsMapViewer extends StatelessWidget {
                       initialCameraPosition: CameraPosition(
                         target: LatLng(
                             (departureLatitude + destinationLatitude) / 2,
-                            (departureLongtitude + destinationLongtitude) / 2),
-                        zoom: 12,
+                            (departureLongitude + destinationLongitude) / 2),
+                        zoom: isFullMap ? 14 : 12,
                       ),
                       onMapCreated: (GoogleMapController controller) {
                         _controller.complete(controller);
@@ -79,7 +79,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         Marker(
                           markerId: MarkerId('departure'),
                           position:
-                              LatLng(departureLatitude, departureLongtitude),
+                              LatLng(departureLatitude, departureLongitude),
                           infoWindow: InfoWindow(
                               title: CustomStrings.kStartLocation.tr,
                               snippet: 'Info'),
@@ -87,7 +87,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         Marker(
                             markerId: MarkerId('destination'),
                             position: LatLng(
-                                destinationLatitude, destinationLongtitude),
+                                destinationLatitude, destinationLongitude),
                             infoWindow: InfoWindow(
                                 title: CustomStrings.kEndLocation.tr,
                                 snippet: 'Info'),

@@ -33,9 +33,9 @@ class BookTripMapViewer extends StatelessWidget {
         CustomLocation(coordinate: destinationCoordinate);
 
     double departureLatitude = departure.latitude;
-    double departureLongtitude = departure.longitude;
+    double departureLongitude = departure.longitude;
     double destinationLatitude = destination.latitude;
-    double destinationLongtitude = destination.longitude;
+    double destinationLongitude = destination.longitude;
 
     return Column(
       children: <Widget>[
@@ -49,7 +49,7 @@ class BookTripMapViewer extends StatelessWidget {
               mapType: MapType.normal,
               initialCameraPosition: CameraPosition(
                 target: LatLng((departureLatitude + destinationLatitude) / 2,
-                    (departureLongtitude + destinationLongtitude) / 2),
+                    (departureLongitude + destinationLongitude) / 2),
                 zoom: 12,
               ),
               onMapCreated: (GoogleMapController controller) {
@@ -58,14 +58,13 @@ class BookTripMapViewer extends StatelessWidget {
               markers: <Marker>{
                 Marker(
                   markerId: MarkerId('departure'),
-                  position: LatLng(departureLatitude, departureLongtitude),
+                  position: LatLng(departureLatitude, departureLongitude),
                   infoWindow: InfoWindow(
                       title: CustomStrings.kStartLocation.tr, snippet: 'Info'),
                 ),
                 Marker(
                     markerId: MarkerId('destination'),
-                    position:
-                        LatLng(destinationLatitude, destinationLongtitude),
+                    position: LatLng(destinationLatitude, destinationLongitude),
                     infoWindow: InfoWindow(
                         title: CustomStrings.kEndLocation.tr, snippet: 'Info'),
                     icon: BitmapDescriptor.defaultMarkerWithHue(

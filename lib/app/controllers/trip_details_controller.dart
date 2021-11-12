@@ -209,13 +209,21 @@ class TripDetailsController extends GetxController {
   Future<void> getRoutePoints(
       double startLng, double startLat, double endLng, double endLat) async {
     polypoints.clear();
-    var data =
-        await _tripProvider.getRouteData(startLng, startLat, endLng, endLat);
-    List coordinates = data['routes'][0]['legs'][0]['steps'];
+    Map<String, dynamic> data =
+        await _tripProvider.getDirection(startLng, startLat, endLng, endLat);
+    List directions = data['routes'][0]['legs'][0]['steps'];
+    List<LatLng> paths = [];
+    Map<String, dynamic> points = {};
 
-    for (Map<String, dynamic> object in coordinates) {
-      polypoints.add(
+    for (Map<String, dynamic> object in directions) {
+      paths.add(
           LatLng(object['end_location']['lat'], object['end_location']['lng']));
+    }
+
+    points = await _tripProvider.getRoads(paths: paths);
+    for (Map<String, dynamic> point in points['snappedPoints']) {
+      polypoints.add(LatLng(
+          point['location']['latitude'], point['location']['longitude']));
     }
   }
 
@@ -362,7 +370,7 @@ class TripDetailsController extends GetxController {
                       await CommonFunctions().openMap(
                           keyword: 'công+an',
                           latitude: userLocation!.latitude,
-                          longtitude: userLocation!.longitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -374,7 +382,7 @@ class TripDetailsController extends GetxController {
                       await CommonFunctions().openMap(
                           keyword: 'bệnh+viện',
                           latitude: userLocation!.latitude,
-                          longtitude: userLocation!.longitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -386,7 +394,7 @@ class TripDetailsController extends GetxController {
                       await CommonFunctions().openMap(
                           keyword: 'tiệm+sửa+xe',
                           latitude: userLocation!.latitude,
-                          longtitude: userLocation!.longitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -398,7 +406,7 @@ class TripDetailsController extends GetxController {
                       await CommonFunctions().openMap(
                           keyword: 'trạm+xăng',
                           latitude: userLocation!.latitude,
-                          longtitude: userLocation!.longitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
