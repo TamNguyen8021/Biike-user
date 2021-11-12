@@ -1,7 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/redemption.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/voucher_details.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_details.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/cupertino.dart';

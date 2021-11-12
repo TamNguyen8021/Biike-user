@@ -191,7 +191,7 @@ final Map<String, String> en = {
   'kSendSuccess': 'Feedback was sent successfully',
 
   // 'biker_point' screen
-  'kListVouchers': 'List vouchers',
+  'kListVouchers': 'Voucher list',
   'kTradedVouchers': 'Exchanged vouchers',
 
   // 'trip_details' screen
@@ -389,4 +389,5 @@ final Map<String, String> en = {
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
     'kSameStationWereAdded': 'A station with the same information were added',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
+    'kNoVoucher' : 'There\'s no voucher currently'
   });

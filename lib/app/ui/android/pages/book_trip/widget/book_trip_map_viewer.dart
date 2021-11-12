@@ -32,11 +32,6 @@ class BookTripMapViewer extends StatelessWidget {
     CustomLocation destination =
         CustomLocation(coordinate: destinationCoordinate);
 
-    double departureLatitude = departure.latitude;
-    double departureLongtitude = departure.longitude;
-    double destinationLatitude = destination.latitude;
-    double destinationLongtitude = destination.longitude;
-
     return Column(
       children: <Widget>[
         Container(
@@ -44,42 +39,51 @@ class BookTripMapViewer extends StatelessWidget {
           height: 150.0,
           margin: const EdgeInsets.only(top: 16.0),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
-            child: GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: CameraPosition(
-                target: LatLng((departureLatitude + destinationLatitude) / 2,
-                    (departureLongtitude + destinationLongtitude) / 2),
-                zoom: 12,
-              ),
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              markers: <Marker>{
-                Marker(
-                  markerId: MarkerId('departure'),
-                  position: LatLng(departureLatitude, departureLongtitude),
-                  infoWindow: InfoWindow(
-                      title: CustomStrings.kStartLocation.tr, snippet: 'Info'),
-                ),
-                Marker(
-                    markerId: MarkerId('destination'),
-                    position:
-                        LatLng(destinationLatitude, destinationLongtitude),
-                    infoWindow: InfoWindow(
-                        title: CustomStrings.kEndLocation.tr, snippet: 'Info'),
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueGreen)),
-              },
-              polylines: <Polyline>{
-                Polyline(
-                    polylineId: PolylineId('route'),
-                    color: CustomColors.kBlue,
-                    width: 5,
-                    points: _bookTripController.polypoints.toList())
-              },
-            ),
-          ),
+              borderRadius: BorderRadius.circular(5.0),
+              child: FlutterMap(
+                options: MapOptions(
+                    onPositionChanged:
+                        (MapPosition position, bool isChanged) {},
+                    center: LatLng(
+                        (departure.latitude + destination.latitude) / 2,
+                        (departure.longitude + destination.longitude) / 2),
+                    zoom: 12.0),
+                layers: [
+                  TileLayerOptions(
+                    urlTemplate:
+                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    subdomains: ['a', 'b', 'c'],
+                  ),
+                  MarkerLayerOptions(markers: <Marker>[
+                    Marker(
+                        point: LatLng(departure.latitude, departure.longitude),
+                        builder: (BuildContext context) {
+                          return Icon(
+                            Icons.location_on,
+                            color: Colors.green,
+                            size: 25,
+                          );
+                        }),
+                    Marker(
+                        point: LatLng(destination.latitude, destination.longitude),
+                        builder: (BuildContext context) {
+                          return Icon(
+                            Icons.location_on,
+                            color: CustomColors.kRed,
+                            size: 25,
+                          );
+                        }),
+                  ]),
+                  PolylineLayerOptions(
+                      polylineCulling: true,
+                      polylines: <Polyline>[
+                        Polyline(
+                            color: Colors.purple.withOpacity(0.5),
+                            strokeWidth: 5,
+                            points: _bookTripController.polypoints.toList()),
+                      ]),
+                ],
+              )),
         ),
         CustomTextButton(
             hasBorder: true,

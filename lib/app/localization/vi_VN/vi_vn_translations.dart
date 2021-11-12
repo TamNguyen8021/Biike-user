@@ -395,4 +395,5 @@ final Map<String, String> vi = {
     'kSameStationWereAdded': 'Đã có trạm trùng khớp thông tin được thêm vào',
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
+    'kNoVoucher' : 'Hiện tại chưa có voucher'
   });

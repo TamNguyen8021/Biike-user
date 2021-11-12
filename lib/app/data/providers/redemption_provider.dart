@@ -18,7 +18,9 @@ class RedemptionProvider extends CommonProvider {
         : Future.value(response.bodyString ?? '');
   }
 
-  Future<dynamic> getYourVoucherList({userId}) async {
+  Future<dynamic> getYourVoucherList({required int userId,
+                                      required int page,
+                                      required int limit}) async {
     final response = await get(
         UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10',
         headers: await headers);
@@ -26,7 +28,7 @@ class RedemptionProvider extends CommonProvider {
     logResponse(response);
 
     if (response.statusCode == HttpStatus.ok) {
-      return response.body['data'];
+      return response.body;
     }
     logError(response);
     return Future.error(response.statusText!);

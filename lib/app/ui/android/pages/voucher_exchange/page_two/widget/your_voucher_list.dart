@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/ui/android/pages/your_voucher/widget/your_voucher_card.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_two/widget/your_voucher_card.dart';
 import 'package:flutter/material.dart';
 
 class YourVoucherList extends StatelessWidget {

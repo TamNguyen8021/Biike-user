@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
-import 'package:bikes_user/app/ui/android/pages/your_voucher/widget/your_voucher_list.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/page_two/widget/your_voucher_list.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -34,11 +34,11 @@ class YourVoucherPage extends StatelessWidget {
                 child: SafeArea(
               child: Column(
                 children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.only(
-                          top: 16.0, left: 22.0, right: 22.0),
-                      child: YourVoucherList(
-                          listVouchers: _redemptionController.yourVoucherList)),
+                  // Padding(
+                  //     padding: const EdgeInsets.only(
+                  //         top: 16.0, left: 22.0, right: 22.0),
+                  //     child: YourVoucherList(
+                  //         listVouchers: _redemptionController.yourVoucherList)),
                 ],
               ),
             )),

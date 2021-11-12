@@ -32,11 +32,6 @@ class TripDetailsMapViewer extends StatelessWidget {
     CustomLocation destination =
         CustomLocation(coordinate: destinationCoordinate);
 
-    double departureLatitude = departure.latitude;
-    double departureLongtitude = departure.longitude;
-    double destinationLatitude = destination.latitude;
-    double destinationLongtitude = destination.longitude;
-
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
 
     if (isFullMap) {

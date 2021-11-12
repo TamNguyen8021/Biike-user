@@ -4,12 +4,12 @@ import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class VoucherController extends GetxController {
+class YourVoucherController extends GetxController {
   final _voucherProvider = Get.find<VoucherProvider>();
   final PagingController<int, dynamic> pagingController =
-      PagingController(firstPageKey: 0);
+  PagingController(firstPageKey: 0);
 
-  RxList<dynamic> _voucherList = [].obs;
+  List<dynamic> _voucherList = [];
 
   Map<String, dynamic> pagination = {};
   int _currentPage = 1;
@@ -29,20 +29,20 @@ class VoucherController extends GetxController {
     super.dispose();
   }
 
-  Future<void> _getVoucherList() async {
+  Future<void> _getYourVoucherList() async {
     _voucherList.clear();
     Map<String, dynamic> response = await _voucherProvider
         .getVoucherList(page: _currentPage, limit: _limit);
-    _voucherList.value = response['data'];
+    _voucherList = response['data'];
     pagination = response['_meta'];
   }
 
-  /// Lazy loading when list of available vouchers
+  /// Lazy loading when view upcoming trips or load stations.
   ///
-  /// Author: UyenNLP
+  /// Author: TamNTT
   Future<void> _fetchPage(int pageKey) async {
     try {
-      await _getVoucherList();
+      await _getYourVoucherList();
 
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
@@ -61,9 +61,9 @@ class VoucherController extends GetxController {
       }
     } catch (error) {
       pagingController.error = error;
-      Biike.logger.e('VoucherController - _fetchPage()', error);
+      Biike.logger.e('YourVoucherController - _fetchPage()', error);
       FlutterLogs.logErrorTrace(
-          'Biike', 'VoucherController - _fetchPage()', error.toString(), Error());
+          'Biike', 'YourVoucherController - _fetchPage()', error.toString(), Error());
     }
   }
 }

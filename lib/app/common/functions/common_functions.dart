@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -329,5 +330,18 @@ class CommonFunctions {
   static TimeOfDay stringToTimeOfDay(String time) {
     final format = DateFormat.Hm(); //"16:00"
     return TimeOfDay.fromDateTime(format.parse(time));
+  }
+
+  static void logBiike({required error}) {
+    CustomTrace info = CustomTrace(StackTrace.current);
+
+    Biike.logger.e('${info.callerFunctionName}()', error);
+  }
+
+  static void logErrorTraceFlutter({required error}) {
+    CustomTrace info = CustomTrace(StackTrace.current);
+
+    FlutterLogs.logErrorTrace(
+        'Biike', '${info.callerFunctionName}', error.toString(), Error());
   }
 }
