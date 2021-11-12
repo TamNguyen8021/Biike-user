@@ -294,6 +294,9 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
+  'kShowVoucherCode' : 'Show code',
+  'kMarkAsUsed' : 'Mark as used',
+  'kMarkAsUnused' : 'Mark as unused',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',

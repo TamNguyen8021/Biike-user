@@ -1,9 +1,10 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/redemption.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/widget/mark_used_button.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/widget/show_voucher_code_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_details.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,35 +48,8 @@ class YourVoucherDetailPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 16.0),
-                    child: Text(CustomStrings.kYourCode.tr,
-                        style: Theme.of(context).textTheme.bodyText2!),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        color: CustomColors.kLightGray,
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: SelectableText(
-                              redemption.voucherCode,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                      color: CustomColors.kDarkGray,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  ShowVoucherCodeButton(voucherCode: redemption.voucherCode),
+                  MarkUsedButton(redemption: redemption),
                 ],
               ),
             ),

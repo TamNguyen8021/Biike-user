@@ -299,6 +299,9 @@ final Map<String, String> vi = {
   'kYourCode': 'Mã của bạn',
   'kExchangeVoucherSuccess': 'Đổi voucher thành công!',
   'kViewAVoucher': 'Xem',
+  'kShowVoucherCode' : 'Hiện mã',
+  'kMarkAsUsed' : 'Đánh dấu đã dùng',
+  'kMarkAsUnused' : 'Đánh dấu chưa dùng',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',

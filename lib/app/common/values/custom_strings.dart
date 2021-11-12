@@ -288,6 +288,9 @@ class CustomStrings {
   static const String kYourCode = 'kYourCode';
   static const String kExchangeVoucherSuccess = 'kExchangeVoucherSuccess';
   static const String kViewAVoucher = 'kViewAVoucher';
+  static const String kShowVoucherCode = 'kShowVoucherCode';
+  static const String kMarkAsUsed = 'kMarkAsUsed';
+  static const String kMarkAsUnused = 'kMarkAsUnused';
 
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';

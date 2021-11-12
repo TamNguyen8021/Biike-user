@@ -36,21 +36,6 @@ class RedemptionController extends GetxController {
     super.dispose();
   }
 
-  Future<dynamic> exchangeVoucher(voucherId) async {
-    Map<String, dynamic> data = <String, dynamic>{
-      'userId': Biike.userId.value,
-      'voucherId': voucherId
-    };
-
-    return await _redemptionProvider.exchangeVoucher(data);
-  }
-
-  Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
-      redemptionId) async {
-    return await _redemptionProvider
-        .getRedemptionDetailByRedemptionId(redemptionId);
-  }
-
   Future<dynamic> _getYourVoucherList() async {
     Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
         userId: Biike.userId.value, page: _yourVoucherCurrentPage, limit: _limit);
@@ -115,5 +100,30 @@ class RedemptionController extends GetxController {
       usedVoucherPagingController.error = error;
       CommonFunctions.catchExceptionError(error);
     }
+  }
+
+  Future<dynamic> exchangeVoucher(voucherId) async {
+    Map<String, dynamic> data = <String, dynamic>{
+      'userId': Biike.userId.value,
+      'voucherId': voucherId
+    };
+
+    return await _redemptionProvider.exchangeVoucher(data);
+  }
+
+  Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
+      redemptionId) async {
+    return await _redemptionProvider
+        .getRedemptionDetailByRedemptionId(redemptionId);
+  }
+
+  Future<dynamic> editVoucherUsage(redemptionId) async {
+    dynamic result = await _redemptionProvider.editVoucherUsage(redemptionId);
+    if (result is String) {
+      return result;
+    }
+
+    return await _redemptionProvider
+        .getRedemptionDetailByRedemptionId(redemptionId);
   }
 }

@@ -14,7 +14,9 @@ class ExchangeVoucherPage extends StatelessWidget {
 
   final _voucherController = Get.find<VoucherController>();
 
-  _tmpFunc() {}
+  _tmpFunc() {
+    return '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +36,10 @@ class ExchangeVoucherPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            // AreaDropdownButton(
-                            //     dropdownValue: 'All',
-                            //     dropdownArray: ['All'],
-                            //     onChangedFunc: _tmpFunc()),
+                            AreaDropdownButton(
+                                dropdownValue: 'All',
+                                dropdownArray: <String>['All'],
+                                onChangedFunc: (value) => _tmpFunc()),
                           ],
                         ),
                       ),

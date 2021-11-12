@@ -335,7 +335,7 @@ class CommonFunctions {
   /// Log to Biike logger
   ///
   /// Author: UyenNLP
-  static void logBiike({info, required error}) {
+  static void logBiike({CustomTrace? info, required error}) {
     if (info == null) info = CustomTrace(StackTrace.current);
 
     Biike.logger.e('${info.callerFunctionName}()', error);
@@ -344,7 +344,7 @@ class CommonFunctions {
   /// Log trace to Flutter logger
   ///
   /// Author: UyenNLP
-  static void logErrorTraceFlutter({info, required error}) {
+  static void logErrorTraceFlutter({CustomTrace? info, required error}) {
     if (info == null) info = CustomTrace(StackTrace.current);
 
     FlutterLogs.logErrorTrace(
