@@ -295,6 +295,7 @@ class CustomStrings {
   static const String kChangePassword = 'kChangePassword';
   static const String kLoginByFingerprint = 'kLoginByFingerprint';
   static const String kLanguage = 'kLanguage';
+  static const String kCurrentLanguage = 'kCurrentLanguage';
   static const String kOther = 'kOther';
   static const String kFollowOnFacebook = 'kFollowOnFacebook';
   static const String kWebsite = 'kWebsite';

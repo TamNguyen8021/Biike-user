@@ -301,6 +301,7 @@ final Map<String, String> en = {
   'kChangePassword': 'Change Password',
   'kLoginByFingerprint': 'Login by Fingerprint',
   'kLanguage': 'Language',
+  'kCurrentLanguage': 'English',
   'kOther': 'Other',
   'kFollowOnFacebook': 'Follow Biké on Facebook',
   'kWebsite': 'Website',

@@ -306,6 +306,7 @@ final Map<String, String> vi = {
   'kChangePassword': 'Đổi mật khẩu',
   'kLoginByFingerprint': 'Đăng nhập bằng vân tay',
   'kLanguage': 'Ngôn ngữ',
+  'kCurrentLanguage': 'Tiếng Việt',
   'kOther': 'Khác',
   'kFollowOnFacebook': 'Theo dõi Biké trên Facebook',
   'kWebsite': 'Website',
