@@ -1,13 +1,16 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -320,6 +323,27 @@ class CommonFunctions {
       FlutterLogs.logError(
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       Biike.logger.e('Could not open map');
+    }
+  }
+
+  /// Get polypoints to draw route on map
+  ///
+  /// Author: TamNTT
+  Future<void> getRoutePoints(
+      {required List<LatLng> polypoints,
+      required double startLat,
+      required double startLng,
+      required double endLat,
+      required double endLng}) async {
+    polypoints.clear();
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        UrlStrings.googleMapApiKey,
+        PointLatLng(startLat, startLng),
+        PointLatLng(endLat, endLng));
+
+    for (PointLatLng point in result.points) {
+      polypoints.add(LatLng(point.latitude, point.longitude));
     }
   }
 

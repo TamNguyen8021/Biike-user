@@ -8,7 +8,7 @@ import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_details/widgets/trip_details_map_viewer.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
@@ -252,10 +252,10 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    TripDetailsMapViewer(
+                                    MapViewer(
                                         isFullMap: false,
-                                        tripDetailsController:
-                                            _tripDetailsController,
+                                        polypoints:
+                                            _tripDetailsController.polypoints,
                                         departureCoordinate:
                                             _tripDetailsController
                                                 .departureStation
@@ -281,7 +281,10 @@ class TripDetailsPage extends StatelessWidget {
                                                 arguments: {
                                                   'tripId':
                                                       _tripDetailsController
-                                                          .trip.tripId
+                                                          .trip.tripId,
+                                                  'polypoints':
+                                                      _tripDetailsController
+                                                          .polypoints
                                                 });
                                           }),
                                     ),

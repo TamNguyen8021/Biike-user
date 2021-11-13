@@ -206,27 +206,6 @@ class TripDetailsController extends GetxController {
         });
   }
 
-  Future<void> getRoutePoints(
-      double startLng, double startLat, double endLng, double endLat) async {
-    polypoints.clear();
-    Map<String, dynamic> data =
-        await _tripProvider.getDirection(startLng, startLat, endLng, endLat);
-    List directions = data['routes'][0]['legs'][0]['steps'];
-    List<LatLng> paths = [];
-    Map<String, dynamic> points = {};
-
-    for (Map<String, dynamic> object in directions) {
-      paths.add(
-          LatLng(object['end_location']['lat'], object['end_location']['lng']));
-    }
-
-    points = await _tripProvider.getRoads(paths: paths);
-    for (Map<String, dynamic> point in points['snappedPoints']) {
-      polypoints.add(LatLng(
-          point['location']['latitude'], point['location']['longitude']));
-    }
-  }
-
   /// Cancel a trip based on [tripId].
   ///
   /// Author: TamNTT

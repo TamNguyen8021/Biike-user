@@ -1,27 +1,31 @@
 import 'dart:async';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
-class TripDetailsMapViewer extends StatelessWidget {
+class MapViewer extends StatelessWidget {
   final Completer<GoogleMapController> _controller = Completer();
-  final TripDetailsController tripDetailsController;
+
+  final List<LatLng> polypoints;
+  final LocationData? userLocation;
   final String departureCoordinate;
   final String destinationCoordinate;
   final bool isFullMap;
 
-  TripDetailsMapViewer(
+  MapViewer(
       {Key? key,
       required this.isFullMap,
-      required this.tripDetailsController,
+      required this.polypoints,
+      this.userLocation,
       required this.departureCoordinate,
       required this.destinationCoordinate})
       : super(key: key);
@@ -31,11 +35,6 @@ class TripDetailsMapViewer extends StatelessWidget {
     CustomLocation departure = CustomLocation(coordinate: departureCoordinate);
     CustomLocation destination =
         CustomLocation(coordinate: destinationCoordinate);
-
-    double departureLatitude = departure.latitude;
-    double departureLongitude = departure.longitude;
-    double destinationLatitude = destination.latitude;
-    double destinationLongitude = destination.longitude;
 
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
 
@@ -56,11 +55,12 @@ class TripDetailsMapViewer extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
-                future: tripDetailsController.getRoutePoints(
-                    departureLongitude,
-                    departureLatitude,
-                    destinationLongitude,
-                    destinationLatitude),
+                future: CommonFunctions().getRoutePoints(
+                    polypoints: polypoints,
+                    startLat: departure.latitude,
+                    startLng: departure.longitude,
+                    endLat: destination.latitude,
+                    endLng: destination.longitude),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -68,8 +68,8 @@ class TripDetailsMapViewer extends StatelessWidget {
                       mapType: MapType.normal,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(
-                            (departureLatitude + destinationLatitude) / 2,
-                            (departureLongitude + destinationLongitude) / 2),
+                            (departure.latitude + destination.latitude) / 2,
+                            (departure.longitude + destination.longitude) / 2),
                         zoom: isFullMap ? 14 : 12,
                       ),
                       onMapCreated: (GoogleMapController controller) {
@@ -79,7 +79,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         Marker(
                           markerId: MarkerId('departure'),
                           position:
-                              LatLng(departureLatitude, departureLongitude),
+                              LatLng(departure.latitude, departure.longitude),
                           infoWindow: InfoWindow(
                               title: CustomStrings.kStartLocation.tr,
                               snippet: 'Info'),
@@ -87,19 +87,17 @@ class TripDetailsMapViewer extends StatelessWidget {
                         Marker(
                             markerId: MarkerId('destination'),
                             position: LatLng(
-                                destinationLatitude, destinationLongitude),
+                                destination.latitude, destination.longitude),
                             infoWindow: InfoWindow(
                                 title: CustomStrings.kEndLocation.tr,
                                 snippet: 'Info'),
                             icon: BitmapDescriptor.defaultMarkerWithHue(
                                 BitmapDescriptor.hueGreen)),
-                        if (tripDetailsController.userLocation != null) ...[
+                        if (userLocation != null) ...[
                           Marker(
                               markerId: MarkerId('user'),
-                              position: LatLng(
-                                  tripDetailsController.userLocation!.latitude!,
-                                  tripDetailsController
-                                      .userLocation!.longitude!),
+                              position: LatLng(userLocation!.latitude!,
+                                  userLocation!.longitude!),
                               infoWindow: InfoWindow(
                                   title: CustomStrings.kYourLocation.tr,
                                   snippet: 'Info'),
@@ -110,9 +108,9 @@ class TripDetailsMapViewer extends StatelessWidget {
                       polylines: <Polyline>{
                         Polyline(
                             polylineId: PolylineId('route'),
-                            color: CustomColors.kBlue,
+                            color: CustomColors.kBlue.withOpacity(0.5),
                             width: 5,
-                            points: tripDetailsController.polypoints)
+                            points: polypoints)
                       },
                     );
                   } else {

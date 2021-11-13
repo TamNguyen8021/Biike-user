@@ -72,7 +72,12 @@ class BookTripController extends GetxController {
     CustomLocation destination =
         CustomLocation(coordinate: destinationValue.coordinate);
 
-    await _drawLine(departure: departure, destination: destination);
+    await CommonFunctions().getRoutePoints(
+        polypoints: polypoints.toList(),
+        startLat: departure.latitude,
+        startLng: departure.longitude,
+        endLat: destination.latitude,
+        endLng: destination.longitude);
 
     destinationStation.value = destinationValue;
     roadDistance.value = departure.distanceFrom(destination);
@@ -311,19 +316,6 @@ class BookTripController extends GetxController {
         days: duration > 1 // not on weekend
             ? duration + DateTime.daysPerWeek // add 1 more week
             : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
-  }
-
-  Future<void> _drawLine(
-      {required CustomLocation departure,
-      required CustomLocation destination}) async {
-    var data = await _tripProvider.getDirection(departure.longitude,
-        departure.latitude, destination.longitude, destination.latitude);
-    List coordinates = data['routes'][0]['legs'][0]['steps'];
-
-    for (Map<String, dynamic> object in coordinates) {
-      polypoints.add(
-          LatLng(object['end_location']['lat'], object['end_location']['lng']));
-    }
   }
 
   /// Get data to attach to body of api

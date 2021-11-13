@@ -3,7 +3,6 @@ import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class TripProvider extends CommonProvider {
   /// Loads upcoming trips from API based on [userId] and [role]
@@ -93,52 +92,6 @@ class TripProvider extends CommonProvider {
     //     'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=$latitude&lon=$longtitude');
     final response = await get(UrlStrings.placeDetailsUrl +
         '?fields=formatted_address,name,geometry,photo&place_id=$placeId&key=${UrlStrings.googleMapApiKey}');
-
-    logResponse(response);
-
-    if (response.status.hasError) {
-      logError(response);
-      return Future.error(response.statusText!);
-    } else {
-      return response.body;
-    }
-  }
-
-  /// Get direction for two locations
-  ///
-  /// Author: TamNTT
-  Future<Map<String, dynamic>> getDirection(
-      double startLng, double startLat, double endLng, double endLat) async {
-    final response = await get(UrlStrings.directionUrl +
-        '?origin=$startLat,$startLng&destination=$endLat,$endLng&key=${UrlStrings.googleMapApiKey}');
-
-    logResponse(response);
-
-    if (response.status.hasError) {
-      logError(response);
-      return Future.error(response.statusText!);
-    } else {
-      return response.body;
-    }
-  }
-
-  /// Get roads based on direction
-  ///
-  /// Author: TamNTT
-  Future<Map<String, dynamic>> getRoads({required List<LatLng> paths}) async {
-    String pathsString = '';
-    for (int i = 0; i < paths.length; i++) {
-      pathsString = pathsString +
-          paths[i].latitude.toString() +
-          ',' +
-          paths[i].longitude.toString();
-      if (i != paths.length - 1) {
-        pathsString += '|';
-      }
-    }
-
-    final response = await get(
-        'https://roads.googleapis.com/v1/nearestRoads?points=$pathsString&key=${UrlStrings.googleMapApiKey}');
 
     logResponse(response);
 
