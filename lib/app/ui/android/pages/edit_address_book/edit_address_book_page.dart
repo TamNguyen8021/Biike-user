@@ -41,7 +41,9 @@ class EditAddressBookPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () => {
+                _addressBookController.removeAddressBook(context: context, id: id)
+              },
               icon: Icon(Icons.delete),
             ),
           ),

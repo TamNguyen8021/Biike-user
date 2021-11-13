@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/data/providers/address_book_provider.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class AddAddressBookController extends GetxController {
@@ -19,10 +20,11 @@ class AddAddressBookController extends GetxController {
     _enableLoading(true);
 
     Map<String, dynamic> body = {
-      'addressName': name.value,
-      'addressDetail': address.value,
-      'addressCoordinate': '123,123',
-      'note': note.value
+      'userId' : Biike.userId.value,
+      'userAddressName': name.value,
+      'userAddressDetail': address.value,
+      'userAddressCoordinate': '123,123',
+      'userAddressNote': note.value
     };
 
     return await _addressBookProvider.addAddressBook(body: body);

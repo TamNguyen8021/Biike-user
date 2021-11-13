@@ -27,4 +27,18 @@ class AddressBookProvider extends CommonProvider {
       return true;
     }
   }
+
+  Future<bool> removeAddressBook({ required int id }) async {
+    final response = await delete(UrlStrings.userUrl + "addresses" + '/${id}',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
