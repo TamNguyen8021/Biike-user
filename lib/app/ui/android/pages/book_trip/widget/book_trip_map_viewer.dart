@@ -1,7 +1,8 @@
 import 'dart:async';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -32,11 +33,6 @@ class BookTripMapViewer extends StatelessWidget {
     CustomLocation destination =
         CustomLocation(coordinate: destinationCoordinate);
 
-    double departureLatitude = departure.latitude;
-    double departureLongtitude = departure.longitude;
-    double destinationLatitude = destination.latitude;
-    double destinationLongtitude = destination.longitude;
-
     return Column(
       children: <Widget>[
         Container(
@@ -48,24 +44,23 @@ class BookTripMapViewer extends StatelessWidget {
             child: GoogleMap(
               mapType: MapType.normal,
               initialCameraPosition: CameraPosition(
-                target: LatLng((departureLatitude + destinationLatitude) / 2,
-                    (departureLongtitude + destinationLongtitude) / 2),
+                target: LatLng((departure.latitude + destination.latitude) / 2,
+                    (departure.longitude + destination.longitude) / 2),
                 zoom: 12,
               ),
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
+              onMapCreated: (GoogleMapController controller) =>
+                  _controller.complete(controller),
               markers: <Marker>{
                 Marker(
                   markerId: MarkerId('departure'),
-                  position: LatLng(departureLatitude, departureLongtitude),
+                  position: LatLng(departure.latitude, departure.longitude),
                   infoWindow: InfoWindow(
                       title: CustomStrings.kStartLocation.tr, snippet: 'Info'),
                 ),
                 Marker(
                     markerId: MarkerId('destination'),
                     position:
-                        LatLng(destinationLatitude, destinationLongtitude),
+                        LatLng(destination.latitude, destination.longitude),
                     infoWindow: InfoWindow(
                         title: CustomStrings.kEndLocation.tr, snippet: 'Info'),
                     icon: BitmapDescriptor.defaultMarkerWithHue(
@@ -76,7 +71,7 @@ class BookTripMapViewer extends StatelessWidget {
                     polylineId: PolylineId('route'),
                     color: CustomColors.kBlue,
                     width: 5,
-                    points: _bookTripController.polypoints.toList())
+                    points: _bookTripController.polypoints),
               },
             ),
           ),
@@ -87,8 +82,7 @@ class BookTripMapViewer extends StatelessWidget {
             foregroundColor: CustomColors.kBlue,
             text: CustomStrings.kViewRouteInstruction.tr,
             onPressedFunc: () async {
-              String url =
-                  'https://www.openstreetmap.org/directions?engine=fossgis_osrm_bike&route=10.8414%2C106.8100%3B10.8491%2C106.7740';
+              String url = UrlStrings.getGoogleMapUrl(departure, destination);
               if (await canLaunch(url)) {
                 await launch(url);
               } else {
@@ -98,6 +92,15 @@ class BookTripMapViewer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            Obx(
+              () => Text(
+                '${(_bookTripController.roadDuration.value).toStringAsFixed(MAX_AFTER_POINT)} ${CustomStrings.kMins.tr}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(color: CustomColors.kBlue, fontSize: 12.sp),
+              ),
+            ),
             Obx(
               () => Text(
                 '${(_bookTripController.roadDistance.value).toStringAsFixed(MAX_AFTER_POINT)} km',

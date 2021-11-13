@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -319,7 +320,7 @@ class CommonFunctions {
           context: context, message: CustomErrorsString.kDevelopError.tr);
       FlutterLogs.logError(
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
-      Biike.logger.e('Could not open map');
+      logBiike(error: 'Could not open map');
     }
   }
 
@@ -329,5 +330,34 @@ class CommonFunctions {
   static TimeOfDay stringToTimeOfDay(String time) {
     final format = DateFormat.Hm(); //"16:00"
     return TimeOfDay.fromDateTime(format.parse(time));
+  }
+
+  /// Log to Biike logger
+  ///
+  /// Author: UyenNLP
+  static void logBiike({CustomTrace? info, required error}) {
+    if (info == null) info = CustomTrace(StackTrace.current);
+
+    Biike.logger.e('${info.callerFunctionName}()', error);
+  }
+
+  /// Log trace to Flutter logger
+  ///
+  /// Author: UyenNLP
+  static void logErrorTraceFlutter({CustomTrace? info, required error}) {
+    if (info == null) info = CustomTrace(StackTrace.current);
+
+    FlutterLogs.logErrorTrace(
+        'Biike', '${info.callerFunctionName}', error.toString(), Error());
+  }
+
+  /// Log exception error
+  ///
+  /// Author: UyenNLP
+  static void catchExceptionError(error) {
+    CustomTrace info = CustomTrace(StackTrace.current);
+
+    logBiike(info: info, error: error);
+    logErrorTraceFlutter(info: info, error: error);
   }
 }

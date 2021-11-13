@@ -18,15 +18,16 @@ class RedemptionProvider extends CommonProvider {
         : Future.value(response.bodyString ?? '');
   }
 
-  Future<dynamic> getYourVoucherList({userId}) async {
+  Future<dynamic> getYourVoucherList(
+      {required int userId, required bool expiredStatus, required int page, required int limit}) async {
     final response = await get(
-        UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10',
+        UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10&isExpired=$expiredStatus',
         headers: await headers);
 
     logResponse(response);
 
     if (response.statusCode == HttpStatus.ok) {
-      return response.body['data'];
+      return response.body;
     }
     logError(response);
     return Future.error(response.statusText!);
@@ -43,5 +44,19 @@ class RedemptionProvider extends CommonProvider {
     }
     logError(response);
     return Future.error(response.statusText!);
+  }
+
+  Future<dynamic> editVoucherUsage(redemptionId) async {
+    final response = await put(
+        UrlStrings.redemptionUrl + '/$redemptionId', null,
+        headers: await headers);
+    logResponse(response);
+
+    if (response.statusCode == HttpStatus.ok) {
+      return response;
+    }
+
+    logError(response);
+    return Future.value(response.bodyString ?? '');
   }
 }

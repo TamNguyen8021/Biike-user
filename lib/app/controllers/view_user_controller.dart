@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
@@ -13,7 +14,6 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -64,10 +64,8 @@ class ViewUserController extends GetxController {
         pagingController.appendPage(historyTrips.cast(), nextPageKey);
       }
     } catch (error) {
-      Biike.logger.e('ViewUserController - _fetchPage()', error);
       pagingController.error = error;
-      FlutterLogs.logErrorTrace('Biike', 'ViewUserController - _fetchPage()',
-          error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
     }
   }
 

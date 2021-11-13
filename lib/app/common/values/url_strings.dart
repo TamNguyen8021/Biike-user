@@ -1,3 +1,5 @@
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
+
 class UrlStrings {
   static const String _baseUrl =
       'https://biike-api.azurewebsites.net/api/biike/v1/';
@@ -15,4 +17,9 @@ class UrlStrings {
   static const String _googleMapUrl = 'https://maps.googleapis.com/maps/api/';
   static const String directionUrl = _googleMapUrl + 'directions/json';
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
+
+  static String getGoogleMapUrl(
+      CustomLocation departure, CustomLocation destination) {
+    return 'http://maps.google.com/maps?saddr=${departure.latitude},${departure.longitude}&daddr=${destination.latitude},${destination.longitude}&travelmode=driving';
+  }
 }

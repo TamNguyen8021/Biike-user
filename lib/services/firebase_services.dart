@@ -1,7 +1,7 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:bikes_user/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 
 class FirebaseServices {
   User? get user => firebaseAuth.currentUser;
@@ -25,7 +25,7 @@ class FirebaseServices {
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          Biike.logger.e('The provided phone number is not valid.');
+          CommonFunctions.logBiike(error: 'The provided phone number is not valid.');
         }
       },
       codeSent: (String verificationId, int? resendToken) {
@@ -50,9 +50,7 @@ class FirebaseServices {
       }
       return false;
     } catch (error) {
-      Biike.logger.e('FirebaseServices - verifyOtp()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike', 'FirebaseServices - verifyOtp()', error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
       return false;
     }
   }
@@ -67,12 +65,7 @@ class FirebaseServices {
         throw (FirebaseAuthException);
       }
     } on FirebaseAuthException catch (error) {
-      Biike.logger.e('FirebaseServices - signinWithEmailAndPassword()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike',
-          'FirebaseServices - signinWithEmailAndPassword()',
-          error.toString(),
-          Error());
+      CommonFunctions.catchExceptionError(error);
 
       if (error.code == 'user-not-found') {
         return 'No user found for that email.';
@@ -88,9 +81,7 @@ class FirebaseServices {
     try {
       await user?.sendEmailVerification();
     } on FirebaseAuthException catch (error) {
-      Biike.logger.e('FirebaseServices - sentVerifyEmail()', error);
-      FlutterLogs.logErrorTrace('Biike', 'FirebaseServices - sentVerifyEmail()',
-          error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
 
       SnackBarServices.showSnackbar(
           title: '', message: 'Vui lòng chờ trong giây lát rồi thử lại sau');

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
@@ -48,8 +49,7 @@ void main() {
         isDebuggable: true);
 
     FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterLogs.logErrorTrace(
-          'Biike', 'main()', details.stack.toString(), Error());
+      CommonFunctions.logErrorTraceFlutter(error: details.stack.toString());
     };
 
     SystemChrome.setPreferredOrientations([
@@ -57,8 +57,7 @@ void main() {
     ]);
     runApp(Biike());
   }, (Object error, StackTrace stack) {
-    FlutterLogs.logErrorTrace('Biike', 'main()',
-        error.toString() + ' - stack: ' + stack.toString(), Error());
+    CommonFunctions.logErrorTraceFlutter(error: error.toString() + ' - stack: ' + stack.toString());
   });
 }
 

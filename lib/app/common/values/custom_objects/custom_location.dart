@@ -1,45 +1,68 @@
 import 'dart:math' show cos, sqrt, asin;
 
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
+import 'package:get/get.dart';
+
 class CustomLocation {
   final String coordinate;
+  double longitude = 0;
+  double latitude = 0;
 
-  CustomLocation({required this.coordinate});
-
-  /// Get longitude of a location
-  ///
-  /// Author: UyenNLP
-  double get longitude {
-    double defaultLng = 106.80965;
-
-    return coordinate == ''
-        ? defaultLng
-        : double.parse(coordinate.split(',')[1]);
+  CustomLocation({required this.coordinate}) {
+    _parseLocation();
   }
 
-  /// Get latitude of a location
+  /// Get longitude and latitude of a location
   ///
   /// Author: UyenNLP
-  double get latitude {
-    double defaultLat = 10.84165;
+  _parseLocation() {
+    double defaultLng = 106.80965;
+    longitude = coordinate == ''
+        ? defaultLng
+        : double.parse(coordinate.split(',')[1]);
 
-    return coordinate == ''
+    double defaultLat = 10.84165;
+    latitude = coordinate == ''
         ? defaultLat
         : double.parse(coordinate.split(',')[0]);
+  }
+
+  /// Get the duration between 2 location
+  ///
+  /// Author: UyenNLP
+  Future<double> calculateDurationFrom(CustomLocation other) async {
+    var duration = (await _getRouteData(other))['duration']['text'];
+
+    return _getDoubleValue(duration); // min
   }
 
   /// Get the distance between 2 location
   ///
   /// Author: UyenNLP
-  double distanceFrom(CustomLocation other) {
-    var startLat = this.latitude;
-    var startLng = this.longitude;
-    var endLat = other.latitude;
-    var endLng = other.longitude;
+  Future<double> calculateDistanceFrom(CustomLocation other) async {
+    var milesConvertValue = 1.60934;
 
-    var p = 0.017453292519943295;
-    var a = 0.5 - cos((endLat - startLat) * p)/2 +
-        cos(startLat * p) * cos(endLat * p) *
-            (1 - cos((endLng - startLng) * p))/2;
-    return 12742 * asin(sqrt(a));
+    var distanceInMiles = (await _getRouteData(other))['distance']['text'];
+    var miles = _getDoubleValue(distanceInMiles);
+
+    return miles * milesConvertValue; //km
+  }
+
+  Future<dynamic> _getRouteData(CustomLocation other) async {
+    var  _tripProvider = Get.find<TripProvider>();
+    var response = await _tripProvider.calculateDistanceAndDuration(departure: this, destination: other);
+
+    if (response is bool) {
+      return response;
+    }
+
+    return response.body['rows'][0]['elements'][0];
+  }
+
+  double _getDoubleValue(String s) {
+    var index = s.indexOf(' ');
+    var numberOnly = s.substring(0, index);
+
+    return double.parse(numberOnly);
   }
 }

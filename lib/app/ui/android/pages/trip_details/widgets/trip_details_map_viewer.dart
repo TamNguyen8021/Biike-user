@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
@@ -32,11 +33,6 @@ class TripDetailsMapViewer extends StatelessWidget {
     CustomLocation destination =
         CustomLocation(coordinate: destinationCoordinate);
 
-    double departureLatitude = departure.latitude;
-    double departureLongtitude = departure.longitude;
-    double destinationLatitude = destination.latitude;
-    double destinationLongtitude = destination.longitude;
-
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
 
     if (isFullMap) {
@@ -57,10 +53,10 @@ class TripDetailsMapViewer extends StatelessWidget {
             borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
                 future: tripDetailsController.getRoutePoints(
-                    departureLongtitude,
-                    departureLatitude,
-                    destinationLongtitude,
-                    destinationLatitude),
+                    departure.longitude,
+                    departure.latitude,
+                    destination.longitude,
+                    destination.latitude),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -68,8 +64,8 @@ class TripDetailsMapViewer extends StatelessWidget {
                       mapType: MapType.normal,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(
-                            (departureLatitude + destinationLatitude) / 2,
-                            (departureLongtitude + destinationLongtitude) / 2),
+                            (departure.latitude + destination.latitude) / 2,
+                            (departure.longitude + destination.longitude) / 2),
                         zoom: 12,
                       ),
                       onMapCreated: (GoogleMapController controller) {
@@ -79,7 +75,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         Marker(
                           markerId: MarkerId('departure'),
                           position:
-                              LatLng(departureLatitude, departureLongtitude),
+                              LatLng(departure.latitude, departure.longitude),
                           infoWindow: InfoWindow(
                               title: CustomStrings.kStartLocation.tr,
                               snippet: 'Info'),
@@ -87,7 +83,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         Marker(
                             markerId: MarkerId('destination'),
                             position: LatLng(
-                                destinationLatitude, destinationLongtitude),
+                                destination.latitude, destination.longitude),
                             infoWindow: InfoWindow(
                                 title: CustomStrings.kEndLocation.tr,
                                 snippet: 'Info'),
@@ -133,8 +129,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                   foregroundColor: CustomColors.kBlue,
                   text: CustomStrings.kViewRouteInstruction.tr,
                   onPressedFunc: () async {
-                    String url =
-                        'https://www.openstreetmap.org/directions?engine=fossgis_osrm_bike&route=10.8414%2C106.8100%3B10.8491%2C106.7740';
+                    String url = UrlStrings.getGoogleMapUrl(departure, destination);
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {

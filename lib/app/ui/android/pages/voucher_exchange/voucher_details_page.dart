@@ -1,8 +1,8 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/exchange_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/voucher_details.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/exchange_button.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_details.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

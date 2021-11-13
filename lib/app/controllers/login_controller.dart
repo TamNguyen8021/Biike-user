@@ -10,7 +10,6 @@ import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -81,9 +80,8 @@ class LoginController extends GetxController {
         )..show();
       });
     } catch (error) {
-      Biike.logger.e('LoginController - _verifyEmail()', error);
-      FlutterLogs.logErrorTrace('Biike', 'LoginController - _verifyEmail()',
-          error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
+
       CommonFunctions().showErrorDialog(
           context: context, message: CustomErrorsString.kDevelopError.tr);
     }

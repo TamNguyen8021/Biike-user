@@ -191,8 +191,11 @@ final Map<String, String> en = {
   'kSendSuccess': 'Feedback was sent successfully',
 
   // 'biker_point' screen
-  'kListVouchers': 'List vouchers',
-  'kTradedVouchers': 'Exchanged vouchers',
+  'kListVouchers': 'Voucher list',
+  'kCanExchange': 'Can be exchange',
+  'kExchanged': 'Exchanged',
+  'kUsedOrExpired': 'Used/Expired',
+  'kNearMe': 'Near me',
 
   // 'trip_details' screen
   'kTripDetails': 'View trip details',
@@ -239,6 +242,7 @@ final Map<String, String> en = {
   'kChooseTo': '-Destination station-',
   'kBookScheduleTrip': 'Book trip',
   'kBookNowTrip': 'Ké Now',
+  'kMins': 'mins',
 
   // 'book_schedule_trip' screen
   'kTime': 'Time',
@@ -291,6 +295,9 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
+  'kShowVoucherCode' : 'Show code',
+  'kMarkAsUsed' : 'Mark as used',
+  'kMarkAsUnused' : 'Mark as unused',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -356,6 +363,14 @@ final Map<String, String> en = {
   'kFriday': 'Fri',
   'kSaturday': 'Sat',
   'kSunday': 'Sun',
+
+  // point
+  'kPoint' : 'Point',
+  'kExchangeVoucher' : 'Voucher',
+  'kBuyPoint' : 'Buy point',
+  'kYouHave' : 'You have',
+  'kExpired' : ' points will be expired in ',
+  'kFindMore' : 'Learn more',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
@@ -381,4 +396,5 @@ final Map<String, String> en = {
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
     'kSameStationWereAdded': 'A station with the same information were added',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
+    'kNoVoucher' : 'There\'s no voucher currently'
   });

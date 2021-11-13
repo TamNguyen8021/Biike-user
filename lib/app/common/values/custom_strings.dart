@@ -186,7 +186,10 @@ class CustomStrings {
 
   // 'biker_point' screen
   static const String kListVouchers = 'kListVouchers';
-  static const String kTradedVouchers = 'kTradedVouchers';
+  static const String kCanExchange = 'kCanExchange';
+  static const String kExchanged = 'kExchanged';
+  static const String kUsedOrExpired = 'kUsedOrExpired';
+  static const String kNearMe = 'kNearMe';
 
   // 'trip_details' screen
   static const String kTripDetails = 'kTripDetails';
@@ -231,6 +234,7 @@ class CustomStrings {
   static const String kChooseTo = 'kChooseTo';
   static const String kBookScheduleTrip = 'kBookScheduleTrip';
   static const String kBookNowTrip = 'kBookNowTrip';
+  static const String kMins = 'kMins';
 
   // 'book_schedule_trip' screen
   static const String kTime = 'kTime';
@@ -285,6 +289,9 @@ class CustomStrings {
   static const String kYourCode = 'kYourCode';
   static const String kExchangeVoucherSuccess = 'kExchangeVoucherSuccess';
   static const String kViewAVoucher = 'kViewAVoucher';
+  static const String kShowVoucherCode = 'kShowVoucherCode';
+  static const String kMarkAsUsed = 'kMarkAsUsed';
+  static const String kMarkAsUnused = 'kMarkAsUnused';
 
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';
@@ -348,4 +355,12 @@ class CustomStrings {
   static const String kFriday = 'kFriday';
   static const String kSaturday = 'kSaturday';
   static const String kSunday = 'kSunday';
+
+  // point
+  static const String kPoint = 'kPoint';
+  static const String kExchangeVoucher = 'kExchangeVoucher';
+  static const String kBuyPoint = 'kBuyPoint';
+  static const String kYouHave = 'kYouHave';
+  static const String kExpired = 'kExpired';
+  static const String kFindMore = 'kFindMore';
 }
