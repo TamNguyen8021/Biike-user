@@ -246,6 +246,7 @@ final Map<String, String> vi = {
   'kChooseTo': '-Chọn điểm đến-',
   'kBookScheduleTrip': 'Đặt lịch ké',
   'kBookNowTrip': 'Ké now',
+  'kMins': 'phút',
 
   // 'book_schedule_trip' screen
   'kTime': 'Thời gian',

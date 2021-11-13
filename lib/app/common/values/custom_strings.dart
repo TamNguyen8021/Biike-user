@@ -234,6 +234,7 @@ class CustomStrings {
   static const String kChooseTo = 'kChooseTo';
   static const String kBookScheduleTrip = 'kBookScheduleTrip';
   static const String kBookNowTrip = 'kBookNowTrip';
+  static const String kMins = 'kMins';
 
   // 'book_schedule_trip' screen
   static const String kTime = 'kTime';

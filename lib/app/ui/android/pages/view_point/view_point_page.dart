@@ -35,71 +35,87 @@ class ViewPointPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    child: Row(
-                        children: <Widget> [
-                          Expanded(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 10.0),
+                    child: Row(children: <Widget>[
+                      Expanded(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                CustomStrings.kYouHave.tr,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2!
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                              ),
+                              Row(
                                 children: <Widget>[
                                   Text(
-                                    CustomStrings.kYouHave.tr,
+                                    '${_walletController.totalWalletPoint.value} ',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headline2!
-                                        .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                                        .headline3!
+                                        .copyWith(color: CustomColors.kOrange),
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        '${_walletController
-                                            .totalWalletPoint.value} ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3!
-                                            .copyWith(color: CustomColors.kOrange),
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/images/crown.svg',
-                                        color: CustomColors.kOrange,
-                                        height: 18.sp,
-                                      ),
-                                    ],
+                                  SvgPicture.asset(
+                                    'assets/images/crown.svg',
+                                    color: CustomColors.kOrange,
+                                    height: 18.sp,
                                   ),
-                                  Text(
-                                    '222${CustomStrings.kExpired.tr}12/12/2020',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!,
-                                    overflow: TextOverflow.clip,
-                                  ),
-                                  Text(
-                                    CustomStrings.kFindMore.tr,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(color: CustomColors.kBlue),
-                                  ),
-                                ]
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              BuyPointButton(),
-                              ViewVoucherButton(),
-                            ],
-                          ),
-                        ]
-                    ),
+                                ],
+                              ),
+                              FutureBuilder(
+                                  future: _walletController
+                                      .updateUpcomingExpiredWallet(),
+                                  builder: (BuildContext context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      var wallet = _walletController
+                                          .expiringWallet.value;
+                                      if (wallet.walletId == -1) {
+                                        return Container();
+                                      } else {
+                                        return Text(
+                                          '${wallet.point}${CustomStrings.kExpired.tr}${wallet.toDate}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!,
+                                          overflow: TextOverflow.clip,
+                                        );
+                                      }
+                                    } else {
+                                      return Loading();
+                                    }
+                                  }),
+                              Text(
+                                CustomStrings.kFindMore.tr,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(color: CustomColors.kBlue),
+                              ),
+                            ]),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          BuyPointButton(),
+                          ViewVoucherButton(),
+                        ],
+                      ),
+                    ]),
                   ),
                   Divider(),
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 16.0, left: 22.0, right: 22.0),
-                    child: PointList(pointList: List.generate(20, (index) => index)),
+                    child: PointList(
+                        pointList: List.generate(20, (index) => index)),
                   ),
                 ],
               ),
@@ -111,5 +127,4 @@ class ViewPointPage extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -6,10 +6,10 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class RedemptionController extends GetxController {
   final _redemptionProvider = Get.find<RedemptionProvider>();
-  final PagingController<int, dynamic> yourVoucherPagingController = 
-            PagingController(firstPageKey: 0);
+  final PagingController<int, dynamic> yourVoucherPagingController =
+      PagingController(firstPageKey: 0);
   final PagingController<int, dynamic> usedVoucherPagingController =
-            PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
 
   Map<String, dynamic> _yourVoucherPagination = {};
   Map<String, dynamic> _usedVoucherPagination = {};
@@ -37,16 +37,24 @@ class RedemptionController extends GetxController {
   }
 
   Future<dynamic> _getYourVoucherList() async {
-    Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
-        userId: Biike.userId.value, page: _yourVoucherCurrentPage, limit: _limit);
+    Map<String, dynamic> response =
+        await _redemptionProvider.getYourVoucherList(
+            userId: Biike.userId.value,
+            expiredStatus: false,
+            page: _yourVoucherCurrentPage,
+            limit: _limit);
 
     _yourVoucherPagination = response['_meta'];
     return response['data'];
   }
 
   Future<dynamic> _getUsedVoucherList() async {
-    Map<String, dynamic> response = await _redemptionProvider.getYourVoucherList(
-        userId: Biike.userId.value, page: _usedVoucherCurrentPage, limit: _limit);
+    Map<String, dynamic> response =
+        await _redemptionProvider.getYourVoucherList(
+            userId: Biike.userId.value,
+            expiredStatus: true,
+            page: _usedVoucherCurrentPage,
+            limit: _limit);
 
     _usedVoucherPagination = response['_meta'];
     return response['data'];
@@ -60,7 +68,8 @@ class RedemptionController extends GetxController {
           yourVoucherPagingController.itemList?.length ?? 0;
 
       final bool isLastPage =
-          _yourVoucherPagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
+          _yourVoucherPagination['totalRecord'] - previouslyFetchedItemsCount <=
+              _limit;
 
       if (isLastPage) {
         yourVoucherPagingController.appendLastPage(voucherList);
@@ -85,7 +94,8 @@ class RedemptionController extends GetxController {
           usedVoucherPagingController.itemList?.length ?? 0;
 
       final bool isLastPage =
-          _usedVoucherPagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
+          _usedVoucherPagination['totalRecord'] - previouslyFetchedItemsCount <=
+              _limit;
 
       if (isLastPage) {
         usedVoucherPagingController.appendLastPage(voucherList);
@@ -125,5 +135,10 @@ class RedemptionController extends GetxController {
 
     return await _redemptionProvider
         .getRedemptionDetailByRedemptionId(redemptionId);
+  }
+
+  void refreshList() {
+    yourVoucherPagingController.refresh();
+    usedVoucherPagingController.refresh();
   }
 }

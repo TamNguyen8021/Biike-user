@@ -28,6 +28,7 @@ class BookTripController extends GetxController {
   Rx<bool> isRepeated = false.obs;
 
   Rx<double> roadDistance = 0.0.obs;
+  Rx<double> roadDuration = 0.0.obs;
 
   RxList<LatLng> polypoints = <LatLng>[].obs;
 
@@ -51,6 +52,7 @@ class BookTripController extends GetxController {
     departureStation.value = value;
     polypoints.value = [];
     roadDistance.value = 0;
+    roadDuration.value = 0;
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -75,7 +77,8 @@ class BookTripController extends GetxController {
     await _drawLine(departure: departure, destination: destination);
 
     destinationStation.value = destinationValue;
-    roadDistance.value = departure.distanceFrom(destination);
+    roadDistance.value = await departure.calculateDistanceFrom(destination);
+    roadDuration.value = await departure.calculateDurationFrom(destination);
   }
 
   /// Add to a repeated date list

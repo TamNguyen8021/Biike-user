@@ -19,9 +19,9 @@ class RedemptionProvider extends CommonProvider {
   }
 
   Future<dynamic> getYourVoucherList(
-      {required int userId, required int page, required int limit}) async {
+      {required int userId, required bool expiredStatus, required int page, required int limit}) async {
     final response = await get(
-        UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10',
+        UrlStrings.redemptionUrl + '/users/$userId/full?page=1&limit=10&isExpired=$expiredStatus',
         headers: await headers);
 
     logResponse(response);
@@ -48,7 +48,7 @@ class RedemptionProvider extends CommonProvider {
 
   Future<dynamic> editVoucherUsage(redemptionId) async {
     final response = await put(
-        UrlStrings.redemptionUrl + redemptionId, redemptionId,
+        UrlStrings.redemptionUrl + '/$redemptionId', null,
         headers: await headers);
     logResponse(response);
 

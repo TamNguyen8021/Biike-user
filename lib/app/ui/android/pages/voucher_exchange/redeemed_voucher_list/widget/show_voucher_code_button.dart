@@ -13,28 +13,27 @@ class ShowVoucherCodeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<bool> isSelected = false.obs;
-    return Obx(() => Expanded(
-          child: SizedBox(
-            child: ElevatedButton(
-              onPressed: () => isSelected.value = !isSelected.value,
-              child: isSelected.value
-                  ? SelectableText(
-                      voucherCode,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    )
-                  : Text(
-                      CustomStrings.kShowVoucherCode.tr,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-              style: ElevatedButton.styleFrom(
-                  primary: isSelected.value
-                      ? CustomColors.kLightGray
-                      : CustomColors.kBlue,
-                  elevation: 0.0),
-            ),
-          ),
-        ));
+    return Obx(() => SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+        onPressed: () => isSelected.value = !isSelected.value,
+        child: isSelected.value
+            ? SelectableText(
+          voucherCode,
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              color: Colors.black, fontWeight: FontWeight.bold),
+        )
+            : Text(
+          CustomStrings.kShowVoucherCode.tr,
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        style: ElevatedButton.styleFrom(
+            primary: isSelected.value
+                ? CustomColors.kLightGray
+                : CustomColors.kBlue,
+            elevation: 0.0),
+      ),
+    ));
   }
 }

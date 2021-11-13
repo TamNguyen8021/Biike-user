@@ -5,32 +5,30 @@ import 'package:bikes_user/app/data/models/redemption.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// ignore: must_be_immutable
 class MarkUsedButton extends StatelessWidget {
   final _redemptionController = Get.find<RedemptionController>();
-  Redemption redemption;
+  final Redemption redemption;
 
   MarkUsedButton({Key? key, required this.redemption}) : super(key: key);
 
-  _editUsage(context, redemptionId) {
-    dynamic result = _redemptionController.editVoucherUsage(redemptionId);
-
-    if (result is Redemption) {
-      redemption = result;
-    } else {
-      CommonFunctions().showErrorDialog(context: context, message: result);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Expanded(
-            child: SizedBox(
+    Rx<bool> status = redemption.isUsed.obs;
+    
+    return Obx(() => SizedBox(
+          width: MediaQuery.of(context).size.width,
           child: ElevatedButton(
-            onPressed: () => _editUsage(context, redemption.redemptionId),
-            child: redemption.isUsed
+            onPressed: () async {
+              dynamic result = await _redemptionController.editVoucherUsage(redemption.redemptionId);
+              if (result is String) {
+                CommonFunctions().showErrorDialog(context: context, message: result);
+              } else {
+                // redemption = Redemption.fromJson(result);
+                status.value = !status.value;
+              }
+            },
+            child: status.value
                 ? Text(
                     CustomStrings.kMarkAsUnused.tr,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -39,12 +37,14 @@ class MarkUsedButton extends StatelessWidget {
                 : Text(
                     CustomStrings.kMarkAsUsed.tr,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: CustomColors.kDarkGray,
-                        fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
             style: ElevatedButton.styleFrom(
-                primary: CustomColors.kBlue, elevation: 0.0),
+                primary: status.value
+                    ? CustomColors.kLightGray
+                    : CustomColors.kBlue,
+                elevation: 0.0),
           ),
-        )));
+        ));
   }
 }

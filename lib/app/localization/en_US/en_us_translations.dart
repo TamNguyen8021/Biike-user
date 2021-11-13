@@ -242,6 +242,7 @@ final Map<String, String> en = {
   'kChooseTo': '-Destination station-',
   'kBookScheduleTrip': 'Book trip',
   'kBookNowTrip': 'Ké Now',
+  'kMins': 'mins',
 
   // 'book_schedule_trip' screen
   'kTime': 'Time',
@@ -369,7 +370,7 @@ final Map<String, String> en = {
   'kBuyPoint' : 'Buy point',
   'kYouHave' : 'You have',
   'kExpired' : ' points will be expired in ',
-  'kFindMore' : 'Find more',
+  'kFindMore' : 'Learn more',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',

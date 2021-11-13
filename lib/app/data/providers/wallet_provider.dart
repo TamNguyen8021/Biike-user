@@ -16,4 +16,18 @@ class WalletProvider extends CommonProvider {
     logError(response);
     return Future.value(null);
   }
+
+  Future<dynamic> getUpcomingExpiredWallet({required int userId}) async {
+    final response = await get(
+        UrlStrings.walletUrl + '/users/$userId/expiration',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.statusCode == HttpStatus.ok) {
+      return response.body['data'];
+    }
+    logError(response);
+    return false;
+  }
 }
