@@ -27,7 +27,8 @@ class BookTripController extends GetxController {
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
 
-  Rx<double> roadDistance = 0.0.obs;
+  Rx<String> roadDistance = ''.obs;
+  Rx<String> roadDuration = ''.obs;
 
   RxList<LatLng> polypoints = <LatLng>[].obs;
 
@@ -50,7 +51,8 @@ class BookTripController extends GetxController {
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
     polypoints.value = [];
-    roadDistance.value = 0;
+    roadDistance.value = '';
+    roadDuration.value = '';
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -65,12 +67,17 @@ class BookTripController extends GetxController {
   ///
   /// Author: UyenNLP
   void updateDestinationStation(destinationValue) async {
-    polypoints.value = [];
+    polypoints.clear();
 
     CustomLocation departure =
         CustomLocation(coordinate: departureStation.value.coordinate);
     CustomLocation destination =
         CustomLocation(coordinate: destinationValue.coordinate);
+    Map<String, dynamic> response = await _tripProvider.getDurationAndDistance(
+        startLat: departure.latitude,
+        startLng: departure.longitude,
+        endLat: destination.latitude,
+        endLng: destination.longitude);
 
     await CommonFunctions().getRoutePoints(
         polypoints: polypoints.toList(),
@@ -80,7 +87,8 @@ class BookTripController extends GetxController {
         endLng: destination.longitude);
 
     destinationStation.value = destinationValue;
-    roadDistance.value = departure.distanceFrom(destination);
+    roadDistance.value = response['rows'][0]['elements'][0]['distance']['text'];
+    roadDuration.value = response['rows'][0]['elements'][0]['duration']['text'];
   }
 
   /// Add to a repeated date list

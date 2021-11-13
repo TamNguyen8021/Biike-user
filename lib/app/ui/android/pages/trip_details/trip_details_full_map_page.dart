@@ -7,7 +7,6 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class TripDetailsFullMapPage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
@@ -20,7 +19,6 @@ class TripDetailsFullMapPage extends StatelessWidget {
         _tripDetailsController.departureStation.departureCoordinate;
     final String _destinationCoordinate =
         _tripDetailsController.destinationStation.destinationCoordinate;
-    final List<LatLng> polypoints = Get.arguments['polypoints'];
 
     return GetBuilder(
         init: _tripDetailsController,
@@ -70,7 +68,7 @@ class TripDetailsFullMapPage extends StatelessWidget {
               children: <Widget>[
                 MapViewer(
                     isFullMap: true,
-                    polypoints: polypoints,
+                    polypoints: _tripDetailsController.polypoints,
                     departureCoordinate: _departureCoordinate,
                     destinationCoordinate: _destinationCoordinate),
                 Container(

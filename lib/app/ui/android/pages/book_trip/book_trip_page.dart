@@ -6,6 +6,7 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
+import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,15 +78,31 @@ class BookTripPage extends StatelessWidget {
                                 .destinationStation.value.coordinate,
                             polypoints: _bookTripController.polypoints.toList(),
                           )),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            ScheduleTripButton(),
-                            KeNowButton(),
-                          ],
+                      Obx(
+                        () => Padding(
+                          padding:
+                              const EdgeInsets.only(top: 16.0, bottom: 30.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                _bookTripController.roadDuration.value,
+                                style: TextStyle(color: CustomColors.kBlue),
+                              ),
+                              Text(
+                                _bookTripController.roadDistance.value,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          ScheduleTripButton(),
+                          KeNowButton(),
+                        ],
                       ),
                     ],
                   ),

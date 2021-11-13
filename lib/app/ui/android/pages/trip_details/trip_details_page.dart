@@ -281,10 +281,7 @@ class TripDetailsPage extends StatelessWidget {
                                                 arguments: {
                                                   'tripId':
                                                       _tripDetailsController
-                                                          .trip.tripId,
-                                                  'polypoints':
-                                                      _tripDetailsController
-                                                          .polypoints
+                                                          .trip.tripId
                                                 });
                                           }),
                                     ),

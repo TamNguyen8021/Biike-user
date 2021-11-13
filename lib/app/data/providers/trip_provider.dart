@@ -2,6 +2,7 @@ import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class TripProvider extends CommonProvider {
@@ -80,6 +81,32 @@ class TripProvider extends CommonProvider {
       return Future.error(response.statusText!);
     } else {
       return response.body['data'];
+    }
+  }
+
+  /// Get duration and distance for two locations
+  ///
+  /// Author: TamNTT
+  Future<Map<String, dynamic>> getDurationAndDistance(
+      {required double startLat,
+      required double startLng,
+      required double endLat,
+      required double endLng}) async {
+    String language = 'vi-VN';
+    if (Get.locale == Locale('en', 'US')) {
+      language = 'en_US';
+    }
+
+    final response = await get(UrlStrings.distancematrixUrl +
+        '?language=$language&origins=$startLat,$startLng&destinations=$endLat,$endLng&key=${UrlStrings.googleMapApiKey}');
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body;
     }
   }
 
