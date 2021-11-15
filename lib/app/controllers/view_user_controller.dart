@@ -257,7 +257,7 @@ class ViewUserController extends GetxController {
                               hasBorder: false,
                               backgroundColor: CustomColors.kBlue,
                               foregroundColor: Colors.white,
-                              text: CustomStrings.kSure.tr,
+                              text: CustomStrings.kYes.tr,
                               onPressedFunc: () {
                                 Get.back();
                                 _showThankYouForReportDialog(context: context);

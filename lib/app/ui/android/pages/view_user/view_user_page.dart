@@ -39,7 +39,7 @@ class ViewUserPage extends StatelessWidget {
         child: CustomElevatedIconButton(
           width: 115,
           onPressedFunc: () => CommonFunctions()
-              .makingSms(phoneNo: _viewUserController.user.userPhoneNumber),
+              .makingSms(phoneNo: [_viewUserController.user.userPhoneNumber]),
           text: CustomStrings.kMessage.tr,
           elevation: 2.0,
           icon: Icons.message,

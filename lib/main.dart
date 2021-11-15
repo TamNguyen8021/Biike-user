@@ -70,6 +70,8 @@ class Biike extends StatefulWidget {
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
   static CameraDescription camera = cameras[0];
+  static String pathshareUserToken = '';
+  static String pathshareUserIdentifier = '';
 
   const Biike({Key? key}) : super(key: key);
 
@@ -79,7 +81,6 @@ class Biike extends StatefulWidget {
 
 class _BiikeState extends State<Biike> {
   final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
-
   RxMap _deviceData = {}.obs;
 
   @override

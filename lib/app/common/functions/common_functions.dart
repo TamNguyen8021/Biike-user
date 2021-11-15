@@ -31,8 +31,15 @@ class CommonFunctions {
   /// Use device default message app to send a message to [phoneNo].
   ///
   /// Author: TamNTT
-  makingSms({required String phoneNo}) async {
-    String url = 'sms:$phoneNo';
+  makingSms({required List<String> phoneNo, String? body}) async {
+    String recipients = '';
+    for (int i = 0; i < phoneNo.length; i++) {
+      recipients += phoneNo[i];
+      if (i != phoneNo.length - 1) {
+        recipients += ',';
+      }
+    }
+    String url = 'sms:$recipients?body=$body';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -113,7 +120,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for success message.
   ///
   /// Author: TamNTT
-  void showSuccessDialog(
+  Future<void> showSuccessDialog(
       {required BuildContext context, required String message}) async {
     await showDialog(
         context: context,
@@ -153,7 +160,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for error message.
   ///
   /// Author: TamNTT
-  void showErrorDialog(
+  Future<void> showErrorDialog(
       {required BuildContext context, required String message}) async {
     await showDialog(
         context: context,
@@ -193,7 +200,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for info message.
   ///
   /// Author: TamNTT
-  void showInfoDialog(
+  Future<void> showInfoDialog(
       {required BuildContext context, required String message}) async {
     await showDialog(
         context: context,
@@ -233,7 +240,7 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  void showConfirmDialog(
+  Future<void> showConfirmDialog(
       {required BuildContext context,
       required String title,
       required String message,
@@ -265,24 +272,24 @@ class CommonFunctions {
                   ),
                   Container(
                     width: 100,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        CustomTextButton(
-                          hasBorder: false,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
-                          text: CustomStrings.kSure.tr,
-                          onPressedFunc: onPressedFunc,
-                        ),
                         CustomTextButton(
                             hasBorder: false,
                             backgroundColor: CustomColors.kLightGray,
                             foregroundColor: CustomColors.kDarkGray,
-                            text: CustomStrings.kBtnExit.tr,
+                            text: CustomStrings.kNo.tr,
                             onPressedFunc: () {
                               Get.back();
                             }),
+                        CustomTextButton(
+                          hasBorder: false,
+                          backgroundColor: CustomColors.kBlue,
+                          foregroundColor: Colors.white,
+                          text: CustomStrings.kYes.tr,
+                          onPressedFunc: onPressedFunc,
+                        ),
                       ],
                     ),
                   ),

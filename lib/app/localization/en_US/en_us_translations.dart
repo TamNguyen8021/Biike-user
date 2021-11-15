@@ -21,6 +21,8 @@ final Map<String, String> en = {
   'kConfirmTerm': 'By sign up, you aggre with',
   'kTerm': 'our Terms of Service and Privacy Policy',
   'kForgotPassword': 'Forgot password',
+  'kSendResetPasswordEmail':
+      'Your password has been reset, please check your email',
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Input phone number',
@@ -59,7 +61,8 @@ final Map<String, String> en = {
   'kConfirmArrivalTitle': 'Are you sure you are at your pick up point?',
   'kConfirmArrivalMessageForKeer': 'We\'ll send a notification to your biker',
   'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your ké-er',
-  'kConfirmExitApp': 'Are you sure you want to exit?',
+  'kConfirmExitApp':
+      'Are you sure you want to exit? (If you are sharing your location, when you exit the application will stop sharing)',
 
   // 'biker_home' screen
   'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
@@ -159,7 +162,8 @@ final Map<String, String> en = {
   'kReportAndBlock': 'Report and block',
   'kConfirmBlock': 'Are you sure you\nwant to block this person?',
   'kSeeBlacklist': 'You can view your blacklist in profile page',
-  'kSure': 'Sure',
+  'kYes': 'Yes',
+  'kNo': 'No',
   'kThankYouForReport': 'Thank you for your report',
   'kSorryMessage':
       'Biiké Team apologize for imperfect user experience. We have received your report and will handle it as soon as possible.',
@@ -217,8 +221,14 @@ final Map<String, String> en = {
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
   'kHelpCenter': 'Help Center',
-  'kShareTripInfo': 'Share your trip\'s info',
+  'kShareLocation': 'Share your location',
+  'kMyLocation': 'Your location',
+  'kStopSharingLocation': 'Stop sharing location',
   'kSOSCenter': 'S.O.S Center',
+  'kMessageWereSent':
+      'A messsage which contains your real-time location link were sent to your S.O.S numbers',
+  'kNeedSharingLocationToUseSOS':
+      'You need to share your location to use this feature',
   'kNearestPoliceStation': 'Nearest police station',
   'kNearestHospital': 'Nearest hospital',
   'kNearestMechanicShop': 'Nearest mechanic shop',
@@ -381,4 +391,8 @@ final Map<String, String> en = {
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
     'kSameStationWereAdded': 'A station with the same information were added',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
+    'kEmailMustNotBeEmpty': 'Email must not be empty',
+    'kMustLoginWithFPTEmail': 'Please use FPT email',
+    'kErrorWhenStopSharingLocation':
+        'There are some errors, we can\'t stop sharing your location. Your share link will be expired after 30 minutes',
   });

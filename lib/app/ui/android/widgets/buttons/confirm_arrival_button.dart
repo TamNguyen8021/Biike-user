@@ -74,7 +74,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                             hasBorder: false,
                             backgroundColor: CustomColors.kBlue,
                             foregroundColor: Colors.white,
-                            text: CustomStrings.kSure.tr,
+                            text: CustomStrings.kYes.tr,
                             onPressedFunc: () {
                               isAtDestination.value = true;
                               buttonColor.value = CustomColors.kDarkGray;

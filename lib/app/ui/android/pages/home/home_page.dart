@@ -1,8 +1,11 @@
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/controllers/trip_details_controller.dart';
+import 'package:bikes_user/app/data/providers/pathshare_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -21,27 +24,38 @@ class HomePage extends StatelessWidget {
 
   final _homeController = Get.find<HomeController>();
   final _profileController = Get.find<ProfileController>();
-
-  // void _onBackPressed() async {
-  //   await Get.defaultDialog(
-  //       title: 'Confirm',
-  //       middleText: 'Do you want to exit the app?',
-  //       middleTextStyle: TextStyle(color: Colors.black),
-  //       textCancel: CustomStrings.kCancel.tr,
-  //       textConfirm: 'Yes',
-  //       onConfirm: () => SystemChannels.platform
-  //           .invokeMethod<void>('SystemNavigator.pop')); //exit the app
-  // }
+  final _tripDetailsController = Get.find<TripDetailsController>();
+  final _pathshareProvider = Get.find<PathshareProvider>();
 
   @override
   Widget build(BuildContext context) {
     return OnBackPressed(
       perform: () => CommonFunctions().showConfirmDialog(
-          context: context,
-          title: CustomStrings.kConfirm.tr,
-          message: CustomStrings.kConfirmExitApp.tr,
-          onPressedFunc: () => SystemChannels.platform
-              .invokeMethod<void>('SystemNavigator.pop')),
+        context: context,
+        title: CustomStrings.kConfirm.tr,
+        message: CustomStrings.kConfirmExitApp.tr,
+        onPressedFunc: () async {
+          if (_tripDetailsController.isLocationShared.isTrue) {
+            if (await _pathshareProvider.leaveSession(
+                sessionIdentifier: _tripDetailsController.sessionIdentifier)) {
+              SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+            } else {
+              await CommonFunctions().showErrorDialog(
+                  context: context,
+                  message: CustomErrorsString.kErrorWhenStopSharingLocation.tr);
+            }
+            //   if (!await _hypertrackProvider.endTrackingLocation()) {
+            //     CommonFunctions().showErrorDialog(
+            //         context: context,
+            //         message: CustomErrorsString.kDevelopError.tr);
+            //   } else {
+            //     SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+            //   }
+          } else {
+            SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+          }
+        },
+      ),
       child: GetBuilder(
           init: _profileController,
           builder: (_) {

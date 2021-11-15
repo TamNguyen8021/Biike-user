@@ -19,6 +19,7 @@ class CustomStrings {
   static const String kConfirmTerm = 'kConfirmTerm';
   static const String kTerm = 'kTerm';
   static const String kForgotPassword = 'kForgotPassword';
+  static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
 
   // '004.1_input_phone_no' screen
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
@@ -156,7 +157,8 @@ class CustomStrings {
   static const String kReportAndBlock = 'kReportAndBlock';
   static const String kConfirmBlock = 'kConfirmBlock';
   static const String kSeeBlacklist = 'kSeeBlacklist';
-  static const String kSure = 'kSure';
+  static const String kYes = 'kYes';
+  static const String kNo = 'kNo';
   static const String kThankYouForReport = 'kThankYouForReport';
   static const String kSorryMessage = 'kSorryMessage';
 
@@ -210,8 +212,13 @@ class CustomStrings {
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
   static const String kHelpCenter = 'kHelpCenter';
-  static const String kShareTripInfo = 'kShareTripInfo';
+  static const String kShareLocation = 'kShareLocation';
+  static const String kMyLocation = 'kMyLocation';
+  static const String kStopSharingLocation = 'kStopSharingLocation';
   static const String kSOSCenter = 'kSOSCenter';
+  static const String kMessageWereSent = 'kMessageWereSent';
+  static const String kNeedSharingLocationToUseSOS =
+      'kNeedSharingLocationToUseSOS';
   static const String kNearestPoliceStation = 'kNearestPoliceStation';
   static const String kNearestHospital = 'kNearestHospital';
   static const String kNearestMechanicShop = 'kNearestMechanicShop';
