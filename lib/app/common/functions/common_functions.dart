@@ -271,12 +271,13 @@ class CommonFunctions {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    width: 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        CustomTextButton(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: CustomTextButton(
+                            width: 100,
                             hasBorder: false,
                             backgroundColor: CustomColors.kLightGray,
                             foregroundColor: CustomColors.kDarkGray,
@@ -284,15 +285,19 @@ class CommonFunctions {
                             onPressedFunc: () {
                               Get.back();
                             }),
-                        CustomTextButton(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: CustomTextButton(
+                          width: 100,
                           hasBorder: false,
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
                           text: CustomStrings.kYes.tr,
                           onPressedFunc: onPressedFunc,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
