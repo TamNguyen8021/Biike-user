@@ -195,8 +195,11 @@ final Map<String, String> en = {
   'kSendSuccess': 'Feedback was sent successfully',
 
   // 'biker_point' screen
-  'kListVouchers': 'List vouchers',
-  'kTradedVouchers': 'Exchanged vouchers',
+  'kListVouchers': 'Voucher list',
+  'kCanExchange': 'Can be exchange',
+  'kExchanged': 'Exchanged',
+  'kUsedOrExpired': 'Used/Expired',
+  'kNearMe': 'Near me',
 
   // 'trip_details' screen
   'kTripDetails': 'View trip details',
@@ -301,6 +304,9 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
+  'kShowVoucherCode': 'Show code',
+  'kMarkAsUsed': 'Mark as used',
+  'kMarkAsUnused': 'Mark as unused',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -366,6 +372,14 @@ final Map<String, String> en = {
   'kFriday': 'Fri',
   'kSaturday': 'Sat',
   'kSunday': 'Sun',
+
+  // point
+  'kPoint': 'Point',
+  'kExchangeVoucher': 'Voucher',
+  'kBuyPoint': 'Buy point',
+  'kYouHave': 'You have',
+  'kExpired': ' points will be expired in ',
+  'kFindMore': 'Learn more',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
@@ -395,4 +409,5 @@ final Map<String, String> en = {
     'kMustLoginWithFPTEmail': 'Please use FPT email',
     'kErrorWhenStopSharingLocation':
         'There are some errors, we can\'t stop sharing your location. Your share link will be expired after 30 minutes',
+    'kNoVoucher': 'There\'s no voucher currently'
   });

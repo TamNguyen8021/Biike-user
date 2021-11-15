@@ -32,6 +32,7 @@ class TripDetailsController extends GetxController {
 
   Rx<String> buttonText = CustomStrings.kStart.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
+  Rx<String> _cancelReason = ''.obs;
   Rx<bool> isTripStarted = false.obs;
   Rx<bool> isLocationShared = false.obs;
 
@@ -286,8 +287,81 @@ class TripDetailsController extends GetxController {
     Share.share(_shareUrl, subject: CustomStrings.kMyLocation.tr);
   }
 
+  void showCancelReasonDialog(
+      {required BuildContext context, required int tripId}) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    CustomStrings.kLetUsKnowYourCancelReason.tr,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: TextFormField(
+                      maxLines: 10,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      onChanged: (String text) {
+                        _cancelReason.value = text;
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
+                        hintText: CustomStrings.kEnterYourCancelReason.tr,
+                        filled: true,
+                        fillColor: CustomColors.kLightGray,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: 150,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          CustomTextButton(
+                              hasBorder: false,
+                              backgroundColor: CustomColors.kRed,
+                              foregroundColor: Colors.white,
+                              text: CustomStrings.kCancel.tr,
+                              onPressedFunc: () {
+                                cancelTrip(
+                                    context: context,
+                                    tripId: tripId,
+                                    cancelReason: _cancelReason.value);
+                              }),
+                          CustomTextButton(
+                              hasBorder: false,
+                              backgroundColor: CustomColors.kLightGray,
+                              foregroundColor: CustomColors.kDarkGray,
+                              text: CustomStrings.kBtnExit.tr,
+                              onPressedFunc: () {
+                                Get.back();
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   /// Author: TamNTT
-  Future<void> showHelpCenter({required BuildContext context}) async {
+  void showHelpCenter({required BuildContext context}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {

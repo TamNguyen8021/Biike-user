@@ -46,7 +46,7 @@ class UserRatingAndScore extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.toNamed(CommonRoutes.EXCHANGE_VOUCHER),
+            onTap: () => Get.toNamed(CommonRoutes.POINT),
             child: Row(
               children: <Widget>[
                 Padding(

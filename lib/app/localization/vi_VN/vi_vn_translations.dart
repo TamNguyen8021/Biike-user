@@ -200,7 +200,10 @@ final Map<String, String> vi = {
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
-  'kTradedVouchers': 'Quà đã đổi',
+  'kCanExchange': 'Có thể đổi',
+  'kExchanged': 'Đã đổi',
+  'kUsedOrExpired': 'Đã dùng/Hết hạn',
+  'kNearMe': 'Gần tôi',
 
   // 'trip_details' screen
   'kTripDetails': 'Chi tiết chuyến đi',
@@ -306,6 +309,9 @@ final Map<String, String> vi = {
   'kYourCode': 'Mã của bạn',
   'kExchangeVoucherSuccess': 'Đổi voucher thành công!',
   'kViewAVoucher': 'Xem',
+  'kShowVoucherCode': 'Hiện mã',
+  'kMarkAsUsed': 'Đánh dấu đã dùng',
+  'kMarkAsUnused': 'Đánh dấu chưa dùng',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
@@ -371,6 +377,14 @@ final Map<String, String> vi = {
   'kFriday': 'T6',
   'kSaturday': 'T7',
   'kSunday': 'CN',
+
+  // point
+  'kPoint': 'Điểm',
+  'kExchangeVoucher': 'Đổi quà',
+  'kBuyPoint': 'Nạp điểm',
+  'kYouHave': 'Bạn có',
+  'kExpired': ' điểm sẽ hết hạn vào ngày ',
+  'kFindMore': 'Tìm hiểu thêm',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',
@@ -401,4 +415,5 @@ final Map<String, String> vi = {
     'kMustLoginWithFPTEmail': 'Bắt buộc dùng mail FPT',
     'kErrorWhenStopSharingLocation':
         'Có lỗi xảy ra, chúng tôi không thể dừng việc chia sẻ vị trí của bạn. Link chia sẻ sẽ tự động hết hạn sau 30 phút',
+    'kNoVoucher': 'Hiện tại chưa có voucher'
   });

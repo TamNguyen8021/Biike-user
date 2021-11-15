@@ -16,11 +16,9 @@ class UrlStrings {
   static const String distancematrixUrl = _googleMapUrl + 'distancematrix/json';
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
 
-  static const String _hypertrackBaseUrl = 'https://v3.api.hypertrack.com/';
-  static const String hypertrackDeviceUrl = _hypertrackBaseUrl + 'devices/';
-
   static const String _pathshareBaseUrl =
       'https://pathsha.re/api/professional/v1/';
   static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';
   static const String pathshareUserUrl = _pathshareBaseUrl + 'users';
+  static const String directionUrl = _googleMapUrl + 'directions/json';
 }

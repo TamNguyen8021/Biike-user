@@ -1,10 +1,10 @@
-import 'package:bikes_user/app/ui/android/pages/your_voucher/widget/your_voucher_card.dart';
+import 'package:bikes_user/app/ui/android/pages/view_point/widget/point_card.dart';
 import 'package:flutter/material.dart';
 
-class YourVoucherList extends StatelessWidget {
-  final List listVouchers;
+class PointList extends StatelessWidget {
+  final List pointList;
 
-  const YourVoucherList({Key? key, required this.listVouchers}) : super(key: key);
+  const PointList({Key? key, required this.pointList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +12,11 @@ class YourVoucherList extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: listVouchers.length,
+        itemCount: pointList.length,
         itemBuilder: (BuildContext context, int i) {
           return Padding(
             padding: EdgeInsets.only(bottom: 10.0),
-            child: YourVoucherCard(data: listVouchers[i]),
+            child: PointCard(time: 'time', title: 'title', point: 'point'),
           );
         });
   }

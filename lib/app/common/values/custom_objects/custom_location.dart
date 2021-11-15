@@ -1,27 +1,22 @@
 class CustomLocation {
   final String coordinate;
+  double longitude = 0;
+  double latitude = 0;
 
-  CustomLocation({required this.coordinate});
-
-  /// Get longitude of a location
-  ///
-  /// Author: UyenNLP
-  double get longitude {
-    double defaultLng = 106.80965;
-
-    return coordinate == ''
-        ? defaultLng
-        : double.parse(coordinate.split(',')[1]);
+  CustomLocation({required this.coordinate}) {
+    _parseLocation();
   }
 
-  /// Get latitude of a location
+  /// Get longitude and latitude of a location
   ///
   /// Author: UyenNLP
-  double get latitude {
-    double defaultLat = 10.84165;
+  _parseLocation() {
+    double defaultLng = 106.80965;
+    longitude =
+        coordinate == '' ? defaultLng : double.parse(coordinate.split(',')[1]);
 
-    return coordinate == ''
-        ? defaultLat
-        : double.parse(coordinate.split(',')[0]);
+    double defaultLat = 10.84165;
+    latitude =
+        coordinate == '' ? defaultLat : double.parse(coordinate.split(',')[0]);
   }
 }

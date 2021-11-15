@@ -8,6 +8,7 @@ class WalletController extends GetxController {
   final _walletProvider = Get.find<WalletProvider>();
 
   Rx<int> totalWalletPoint = 0.obs;
+  Rx<Wallet> expiringWallet = Wallet.empty().obs;
 
   Future<List<Wallet>> getUserWalletsList() async {
     return (await _walletProvider.getUserWalletList(userId: Biike.userId.value)
@@ -25,6 +26,14 @@ class WalletController extends GetxController {
     }
 
     totalWalletPoint.value = total;
+  }
+
+  Future<void> updateUpcomingExpiredWallet() async {
+    dynamic data = await _walletProvider.getUpcomingExpiredWallet(
+        userId: Biike.userId.value);
+    if (!(data is bool)) {
+      expiringWallet.value = Wallet.fromJson(data);
+    }
   }
 
   bool isNotEnoughPoint({required int voucherPoint}) {

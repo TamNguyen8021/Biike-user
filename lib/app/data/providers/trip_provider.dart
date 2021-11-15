@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
@@ -128,6 +129,25 @@ class TripProvider extends CommonProvider {
     } else {
       return response.body;
     }
+  }
+
+  Future<dynamic> calculateDistanceAndDuration(
+      {required CustomLocation departure,
+      required CustomLocation destination}) async {
+    final response = await get(
+        'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial' +
+            '&origins=${departure.latitude},${departure.longitude}' +
+            '&destinations=${destination.latitude},${destination.longitude}' +
+            '&key=${UrlStrings.googleMapApiKey}');
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    }
+
+    return response;
   }
 
   /// Cancel a trip based on [tripId].

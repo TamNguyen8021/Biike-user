@@ -27,6 +27,17 @@ class HomePage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
   final _pathshareProvider = Get.find<PathshareProvider>();
 
+  // void _onBackPressed() async {
+  //   await Get.defaultDialog(
+  //       title: 'Confirm',
+  //       middleText: 'Do you want to exit the app?',
+  //       middleTextStyle: TextStyle(color: Colors.black),
+  //       textCancel: CustomStrings.kCancel.tr,
+  //       textConfirm: 'Yes',
+  //       onConfirm: () => SystemChannels.platform
+  //           .invokeMethod<void>('SystemNavigator.pop')); //exit the app
+  // }
+
   @override
   Widget build(BuildContext context) {
     return OnBackPressed(
@@ -44,13 +55,6 @@ class HomePage extends StatelessWidget {
                   context: context,
                   message: CustomErrorsString.kErrorWhenStopSharingLocation.tr);
             }
-            //   if (!await _hypertrackProvider.endTrackingLocation()) {
-            //     CommonFunctions().showErrorDialog(
-            //         context: context,
-            //         message: CustomErrorsString.kDevelopError.tr);
-            //   } else {
-            //     SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
-            //   }
           } else {
             SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
           }
