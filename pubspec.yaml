@@ -76,6 +76,8 @@ dependencies:
   location: ^4.3.0
   back_pressed: ^0.0.2
   google_maps_flutter: ^2.1.0
+  flutter_polyline_points: ^1.0.0
+  share_plus: ^3.0.4
   
 dev_dependencies:
   flutter_test:
@@ -103,10 +105,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    # use everything in assets folder
     - assets/images/
     - assets/fonts/
-    - assets/files/
     - assets/gifs/
 
 

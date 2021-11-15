@@ -21,6 +21,8 @@ final Map<String, String> vi = {
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
   'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
   'kForgotPassword': 'Quên mật khẩu',
+  'kSendResetPasswordEmail':
+      'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
 
   // '004.1_input_phone_no' screen
   'kInputPhoneNumber': 'Nhập số điện thoại',
@@ -61,7 +63,8 @@ final Map<String, String> vi = {
       'Chúng tôi sẽ gửi thông báo cho tài xế của bạn',
   'kConfirmArrivalMessageForBiker':
       'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
-  'kConfirmExitApp': 'Bạn có chắc muốn thoát ứng dụng?',
+  'kConfirmExitApp':
+      'Bạn có chắc muốn thoát ứng dụng? (Nếu bạn đang chia sẻ vị trí, khi thoát ứng dụng sẽ ngừng việc chia sẻ)',
 
   // 'biker_home' screen
   'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
@@ -162,7 +165,8 @@ final Map<String, String> vi = {
   'kReportAndBlock': 'Báo cáo và chặn',
   'kConfirmBlock': 'Bạn có chắc chắn\nmuốn chặn người này?',
   'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn\ntại trang hồ sơ cá nhân',
-  'kSure': 'Chắc chắn',
+  'kYes': 'Có',
+  'kNo': 'Không',
   'kThankYouForReport': 'Cảm ơn bạn đã báo cáo',
   'kSorryMessage':
       'Biiké rất tiếc vì những trải nghiệm chưa được hoàn hảo. Biiké đã nhận được thông tin báo cáo và sẽ xử lý trong thời gian sớm nhất.',
@@ -224,8 +228,14 @@ final Map<String, String> vi = {
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
   'kHelpCenter': 'Trung tâm trợ giúp',
-  'kShareTripInfo': 'Chia sẻ thông tin chuyến đi',
+  'kShareLocation': 'Chia sẻ vị trí',
+  'kMyLocation': 'Vị trí của bạn',
+  'kStopSharingLocation': 'Dừng chia sẻ vị trí',
   'kSOSCenter': 'Tổng đài S.O.S',
+  'kMessageWereSent':
+      'Tin nhắn có đường link chứa vị trí của bạn đã được gửi đến các số điện thoại trong danh sách S.O.S',
+  'kNeedSharingLocationToUseSOS':
+      'Bạn cần chia sẻ vị trí để sử dụng tính năng này',
   'kNearestPoliceStation': 'Đồn công an gần nhất',
   'kNearestHospital': 'Bệnh viện gần nhất',
   'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
@@ -246,7 +256,6 @@ final Map<String, String> vi = {
   'kChooseTo': '-Chọn điểm đến-',
   'kBookScheduleTrip': 'Đặt lịch ké',
   'kBookNowTrip': 'Ké now',
-  'kMins': 'phút',
 
   // 'book_schedule_trip' screen
   'kTime': 'Thời gian',
@@ -300,9 +309,9 @@ final Map<String, String> vi = {
   'kYourCode': 'Mã của bạn',
   'kExchangeVoucherSuccess': 'Đổi voucher thành công!',
   'kViewAVoucher': 'Xem',
-  'kShowVoucherCode' : 'Hiện mã',
-  'kMarkAsUsed' : 'Đánh dấu đã dùng',
-  'kMarkAsUnused' : 'Đánh dấu chưa dùng',
+  'kShowVoucherCode': 'Hiện mã',
+  'kMarkAsUsed': 'Đánh dấu đã dùng',
+  'kMarkAsUnused': 'Đánh dấu chưa dùng',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
@@ -370,12 +379,12 @@ final Map<String, String> vi = {
   'kSunday': 'CN',
 
   // point
-  'kPoint' : 'Điểm',
-  'kExchangeVoucher' : 'Đổi quà',
-  'kBuyPoint' : 'Nạp điểm',
-  'kYouHave' : 'Bạn có',
-  'kExpired' : ' điểm sẽ hết hạn vào ngày ',
-  'kFindMore' : 'Tìm hiểu thêm',
+  'kPoint': 'Điểm',
+  'kExchangeVoucher': 'Đổi quà',
+  'kBuyPoint': 'Nạp điểm',
+  'kYouHave': 'Bạn có',
+  'kExpired': ' điểm sẽ hết hạn vào ngày ',
+  'kFindMore': 'Tìm hiểu thêm',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',
@@ -402,5 +411,9 @@ final Map<String, String> vi = {
     'kSameStationWereAdded': 'Đã có trạm trùng khớp thông tin được thêm vào',
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
-    'kNoVoucher' : 'Hiện tại chưa có voucher'
+    'kEmailMustNotBeEmpty': 'Vui lòng điền email',
+    'kMustLoginWithFPTEmail': 'Bắt buộc dùng mail FPT',
+    'kErrorWhenStopSharingLocation':
+        'Có lỗi xảy ra, chúng tôi không thể dừng việc chia sẻ vị trí của bạn. Link chia sẻ sẽ tự động hết hạn sau 30 phút',
+    'kNoVoucher': 'Hiện tại chưa có voucher'
   });

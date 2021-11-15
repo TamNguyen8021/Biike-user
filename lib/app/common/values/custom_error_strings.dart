@@ -20,6 +20,10 @@ class CustomErrorsString {
       'kFromTimeMustBeBeforeToTime';
   static const String kSameStationWereAdded = 'kSameStationWereAdded';
   static const String kNoRoleWereChosen = 'kNoRoleWereChosen';
+  static const String kEmailMustNotBeEmpty = 'kEmailMustNotBeEmpty';
+  static const String kMustLoginWithFPTEmail = 'kMustLoginWithFPTEmail';
+  static const String kErrorWhenStopSharingLocation =
+      'kErrorWhenStopSharingLocation';
   static const String kFillInAllField = 'kFillInAllField';
   static const String kNoVoucher = 'kNoVoucher';
 }

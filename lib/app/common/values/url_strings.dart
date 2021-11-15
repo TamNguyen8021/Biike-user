@@ -1,5 +1,3 @@
-import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
-
 class UrlStrings {
   static const String _baseUrl =
       'https://biike-api.azurewebsites.net/api/biike/v1/';
@@ -15,11 +13,12 @@ class UrlStrings {
   static const String googleMapApiKey =
       'AIzaSyATchI6wf0LyaEBcSB9xZz86iYuPm9Je-k';
   static const String _googleMapUrl = 'https://maps.googleapis.com/maps/api/';
-  static const String directionUrl = _googleMapUrl + 'directions/json';
+  static const String distancematrixUrl = _googleMapUrl + 'distancematrix/json';
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
 
-  static String getGoogleMapUrl(
-      CustomLocation departure, CustomLocation destination) {
-    return 'http://maps.google.com/maps?saddr=${departure.latitude},${departure.longitude}&daddr=${destination.latitude},${destination.longitude}&travelmode=driving';
-  }
+  static const String _pathshareBaseUrl =
+      'https://pathsha.re/api/professional/v1/';
+  static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';
+  static const String pathshareUserUrl = _pathshareBaseUrl + 'users';
+  static const String directionUrl = _googleMapUrl + 'directions/json';
 }

@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_details/widgets/trip_details_map_viewer.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -66,10 +66,9 @@ class TripDetailsFullMapPage extends StatelessWidget {
             ),
             body: Stack(
               children: <Widget>[
-                TripDetailsMapViewer(
+                MapViewer(
                     isFullMap: true,
-                    // mapController: mapController,
-                    tripDetailsController: _tripDetailsController,
+                    polypoints: _tripDetailsController.polypoints,
                     departureCoordinate: _departureCoordinate,
                     destinationCoordinate: _destinationCoordinate),
                 Container(

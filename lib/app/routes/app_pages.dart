@@ -2,6 +2,7 @@ import 'package:bikes_user/app/bindings/bike_binding.dart';
 import 'package:bikes_user/app/bindings/cho_now_settings_binding.dart';
 import 'package:bikes_user/app/bindings/login_binding.dart';
 import 'package:bikes_user/app/bindings/open_page_bingding.dart';
+import 'package:bikes_user/app/bindings/pathshare_binding.dart';
 import 'package:bikes_user/app/bindings/station_binding.dart';
 import 'package:bikes_user/app/bindings/trip_binding.dart';
 import 'package:bikes_user/app/bindings/trip_details_binding.dart';
@@ -116,6 +117,8 @@ class AppPages {
           TripBinding(),
           StationBinding(),
           BikeBinding(),
+          TripDetailsBinding(),
+          PathshareBinding(),
         ]),
     GetPage(
       name: CommonRoutes.REQUIRE_ADD_BIKE,
@@ -171,7 +174,9 @@ class AppPages {
           TripDetailsBinding(),
           TripBinding(),
           HomeBinding(),
-          TripHistoryBinding()
+          TripHistoryBinding(),
+          ProfileBinding(),
+          PathshareBinding(),
         ]),
     GetPage(
         name: CommonRoutes.TRIP_DETAILS_FULL_MAP,

@@ -3,6 +3,7 @@ import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class TripProvider extends CommonProvider {
@@ -84,7 +85,33 @@ class TripProvider extends CommonProvider {
     }
   }
 
-  /// Loads location data from API based on [latitude] and [longtitude].
+  /// Get duration and distance for two locations
+  ///
+  /// Author: TamNTT
+  Future<Map<String, dynamic>> getDurationAndDistance(
+      {required double startLat,
+      required double startLng,
+      required double endLat,
+      required double endLng}) async {
+    String language = 'vi-VN';
+    if (Get.locale == Locale('en', 'US')) {
+      language = 'en_US';
+    }
+
+    final response = await get(UrlStrings.distancematrixUrl +
+        '?language=$language&origins=$startLat,$startLng&destinations=$endLat,$endLng&key=${UrlStrings.googleMapApiKey}');
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body;
+    }
+  }
+
+  /// Get location details from API.
   ///
   /// Author: TamNTT
   Future<Map<String, dynamic>> getLocationDetails(
@@ -104,24 +131,9 @@ class TripProvider extends CommonProvider {
     }
   }
 
-  Future getRouteData(
-      double startLng, double startLat, double endLng, double endLat) async {
-    final response = await get(UrlStrings.directionUrl +
-        '?origin=$startLat,$startLng&destination=$endLat,$endLng&key=${UrlStrings.googleMapApiKey}');
-
-    logResponse(response);
-
-    if (response.status.hasError) {
-      logError(response);
-      return Future.error(response.statusText!);
-    } else {
-      return response.body;
-    }
-  }
-
   Future<dynamic> calculateDistanceAndDuration(
       {required CustomLocation departure,
-        required CustomLocation destination}) async {
+      required CustomLocation destination}) async {
     final response = await get(
         'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial' +
             '&origins=${departure.latitude},${departure.longitude}' +

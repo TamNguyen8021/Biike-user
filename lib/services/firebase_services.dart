@@ -1,6 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/snackbar.dart';
-import 'package:bikes_user/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseServices {
@@ -11,7 +10,7 @@ class FirebaseServices {
   bool get isVerifyEmail => user?.emailVerified ?? false;
   String _verificationId = '';
   late FirebaseAuth firebaseAuth;
- 
+
   static FirebaseServices init() {
     FirebaseServices firebaseServices = FirebaseServices();
     firebaseServices.firebaseAuth = FirebaseAuth.instance;
@@ -25,7 +24,8 @@ class FirebaseServices {
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          CommonFunctions.logBiike(error: 'The provided phone number is not valid.');
+          CommonFunctions.logBiike(
+              error: 'The provided phone number is not valid.');
         }
       },
       codeSent: (String verificationId, int? resendToken) {

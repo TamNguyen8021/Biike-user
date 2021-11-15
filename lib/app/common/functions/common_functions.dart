@@ -1,14 +1,17 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,8 +32,15 @@ class CommonFunctions {
   /// Use device default message app to send a message to [phoneNo].
   ///
   /// Author: TamNTT
-  makingSms({required String phoneNo}) async {
-    String url = 'sms:$phoneNo';
+  makingSms({required List<String> phoneNo, String? body}) async {
+    String recipients = '';
+    for (int i = 0; i < phoneNo.length; i++) {
+      recipients += phoneNo[i];
+      if (i != phoneNo.length - 1) {
+        recipients += ',';
+      }
+    }
+    String url = 'sms:$recipients?body=$body';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -111,7 +121,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for success message.
   ///
   /// Author: TamNTT
-  void showSuccessDialog(
+  Future<void> showSuccessDialog(
       {required BuildContext context, required String message}) async {
     await showDialog(
         context: context,
@@ -151,7 +161,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for error message.
   ///
   /// Author: TamNTT
-  void showErrorDialog(
+  Future<void> showErrorDialog(
       {required BuildContext context, required String message}) async {
     await showDialog(
         context: context,
@@ -191,7 +201,7 @@ class CommonFunctions {
   /// Display a dialog on [context] for info message.
   ///
   /// Author: TamNTT
-  void showInfoDialog(
+  Future<void> showInfoDialog(
       {required BuildContext context, required String message}) async {
     await showDialog(
         context: context,
@@ -231,7 +241,7 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  void showConfirmDialog(
+  Future<void> showConfirmDialog(
       {required BuildContext context,
       required String title,
       required String message,
@@ -261,28 +271,33 @@ class CommonFunctions {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    width: 100,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        CustomTextButton(
-                          hasBorder: false,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
-                          text: CustomStrings.kSure.tr,
-                          onPressedFunc: onPressedFunc,
-                        ),
-                        CustomTextButton(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: CustomTextButton(
+                            width: 100,
                             hasBorder: false,
                             backgroundColor: CustomColors.kLightGray,
                             foregroundColor: CustomColors.kDarkGray,
-                            text: CustomStrings.kBtnExit.tr,
+                            text: CustomStrings.kNo.tr,
                             onPressedFunc: () {
                               Get.back();
                             }),
-                      ],
-                    ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: CustomTextButton(
+                          width: 100,
+                          hasBorder: false,
+                          backgroundColor: CustomColors.kBlue,
+                          foregroundColor: Colors.white,
+                          text: CustomStrings.kYes.tr,
+                          onPressedFunc: onPressedFunc,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -308,10 +323,10 @@ class CommonFunctions {
   Future<void> openMap(
       {required String keyword,
       required double? latitude,
-      required double? longtitude,
+      required double? longitude,
       required BuildContext context}) async {
     String googleUrl =
-        'https://www.google.com/maps/search/$keyword/@$latitude,$longtitude';
+        'https://www.google.com/maps/search/$keyword/@$latitude,$longitude';
 
     if (await canLaunch(googleUrl)) {
       await launch(googleUrl);
@@ -321,6 +336,27 @@ class CommonFunctions {
       FlutterLogs.logError(
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       logBiike(error: 'Could not open map');
+    }
+  }
+
+  /// Get polypoints to draw route on map
+  ///
+  /// Author: TamNTT
+  Future<void> getRoutePoints(
+      {required List<LatLng> polypoints,
+      required double startLat,
+      required double startLng,
+      required double endLat,
+      required double endLng}) async {
+    polypoints.clear();
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        UrlStrings.googleMapApiKey,
+        PointLatLng(startLat, startLng),
+        PointLatLng(endLat, endLng));
+
+    for (PointLatLng point in result.points) {
+      polypoints.add(LatLng(point.latitude, point.longitude));
     }
   }
 

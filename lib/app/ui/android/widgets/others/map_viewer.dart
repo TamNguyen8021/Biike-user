@@ -1,28 +1,31 @@
 import 'dart:async';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
-class TripDetailsMapViewer extends StatelessWidget {
+class MapViewer extends StatelessWidget {
   final Completer<GoogleMapController> _controller = Completer();
-  final TripDetailsController tripDetailsController;
+
+  final List<LatLng> polypoints;
+  final LocationData? userLocation;
   final String departureCoordinate;
   final String destinationCoordinate;
   final bool isFullMap;
 
-  TripDetailsMapViewer(
+  MapViewer(
       {Key? key,
       required this.isFullMap,
-      required this.tripDetailsController,
+      required this.polypoints,
+      this.userLocation,
       required this.departureCoordinate,
       required this.destinationCoordinate})
       : super(key: key);
@@ -52,11 +55,12 @@ class TripDetailsMapViewer extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
             child: FutureBuilder(
-                future: tripDetailsController.getRoutePoints(
-                    departure.longitude,
-                    departure.latitude,
-                    destination.longitude,
-                    destination.latitude),
+                future: CommonFunctions().getRoutePoints(
+                    polypoints: polypoints,
+                    startLat: departure.latitude,
+                    startLng: departure.longitude,
+                    endLat: destination.latitude,
+                    endLng: destination.longitude),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -66,7 +70,7 @@ class TripDetailsMapViewer extends StatelessWidget {
                         target: LatLng(
                             (departure.latitude + destination.latitude) / 2,
                             (departure.longitude + destination.longitude) / 2),
-                        zoom: 12,
+                        zoom: isFullMap ? 14 : 12,
                       ),
                       onMapCreated: (GoogleMapController controller) {
                         _controller.complete(controller);
@@ -89,13 +93,11 @@ class TripDetailsMapViewer extends StatelessWidget {
                                 snippet: 'Info'),
                             icon: BitmapDescriptor.defaultMarkerWithHue(
                                 BitmapDescriptor.hueGreen)),
-                        if (tripDetailsController.userLocation != null) ...[
+                        if (userLocation != null) ...[
                           Marker(
                               markerId: MarkerId('user'),
-                              position: LatLng(
-                                  tripDetailsController.userLocation!.latitude!,
-                                  tripDetailsController
-                                      .userLocation!.longitude!),
+                              position: LatLng(userLocation!.latitude!,
+                                  userLocation!.longitude!),
                               infoWindow: InfoWindow(
                                   title: CustomStrings.kYourLocation.tr,
                                   snippet: 'Info'),
@@ -106,9 +108,9 @@ class TripDetailsMapViewer extends StatelessWidget {
                       polylines: <Polyline>{
                         Polyline(
                             polylineId: PolylineId('route'),
-                            color: CustomColors.kBlue,
+                            color: CustomColors.kBlue.withOpacity(0.5),
                             width: 5,
-                            points: tripDetailsController.polypoints)
+                            points: polypoints)
                       },
                     );
                   } else {
@@ -129,7 +131,8 @@ class TripDetailsMapViewer extends StatelessWidget {
                   foregroundColor: CustomColors.kBlue,
                   text: CustomStrings.kViewRouteInstruction.tr,
                   onPressedFunc: () async {
-                    String url = UrlStrings.getGoogleMapUrl(departure, destination);
+                    String url =
+                        'https://www.openstreetmap.org/directions?engine=fossgis_osrm_bike&route=10.8414%2C106.8100%3B10.8491%2C106.7740';
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {

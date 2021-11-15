@@ -27,8 +27,8 @@ class BookTripController extends GetxController {
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
 
-  Rx<double> roadDistance = 0.0.obs;
-  Rx<double> roadDuration = 0.0.obs;
+  Rx<String> roadDistance = ''.obs;
+  Rx<String> roadDuration = ''.obs;
 
   RxList<LatLng> polypoints = <LatLng>[].obs;
 
@@ -51,8 +51,8 @@ class BookTripController extends GetxController {
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
     polypoints.value = [];
-    roadDistance.value = 0;
-    roadDuration.value = 0;
+    roadDistance.value = '';
+    roadDuration.value = '';
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -67,18 +67,28 @@ class BookTripController extends GetxController {
   ///
   /// Author: UyenNLP
   void updateDestinationStation(destinationValue) async {
-    polypoints.value = [];
+    polypoints.clear();
 
     CustomLocation departure =
         CustomLocation(coordinate: departureStation.value.coordinate);
     CustomLocation destination =
         CustomLocation(coordinate: destinationValue.coordinate);
+    Map<String, dynamic> response = await _tripProvider.getDurationAndDistance(
+        startLat: departure.latitude,
+        startLng: departure.longitude,
+        endLat: destination.latitude,
+        endLng: destination.longitude);
 
-    await _drawLine(departure: departure, destination: destination);
+    await CommonFunctions().getRoutePoints(
+        polypoints: polypoints.toList(),
+        startLat: departure.latitude,
+        startLng: departure.longitude,
+        endLat: destination.latitude,
+        endLng: destination.longitude);
 
     destinationStation.value = destinationValue;
-    roadDistance.value = await departure.calculateDistanceFrom(destination);
-    roadDuration.value = await departure.calculateDurationFrom(destination);
+    roadDistance.value = response['rows'][0]['elements'][0]['distance']['text'];
+    roadDuration.value = response['rows'][0]['elements'][0]['duration']['text'];
   }
 
   /// Add to a repeated date list
@@ -314,19 +324,6 @@ class BookTripController extends GetxController {
         days: duration > 1 // not on weekend
             ? duration + DateTime.daysPerWeek // add 1 more week
             : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
-  }
-
-  Future<void> _drawLine(
-      {required CustomLocation departure,
-      required CustomLocation destination}) async {
-    var data = await _tripProvider.getRouteData(departure.longitude,
-        departure.latitude, destination.longitude, destination.latitude);
-    List coordinates = data['routes'][0]['legs'][0]['steps'];
-
-    for (Map<String, dynamic> object in coordinates) {
-      polypoints.add(
-          LatLng(object['end_location']['lat'], object['end_location']['lng']));
-    }
   }
 
   /// Get data to attach to body of api

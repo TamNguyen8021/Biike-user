@@ -8,7 +8,7 @@ import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_details/widgets/trip_details_map_viewer.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
@@ -33,6 +33,7 @@ class TripDetailsPage extends StatelessWidget {
 
   String _statusBarTime = '';
   String _statusBarText = '';
+  Rx<String> _cancelReason = ''.obs;
 
   TripDetailsPage({
     Key? key,
@@ -116,24 +117,104 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
+  /// Display a dialog on [context] to enter cancel reason.
+  ///
+  /// Author: TamNTT
+  Future<void> _showCancelReasonDialog(
+      {required BuildContext context, required int tripId}) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    CustomStrings.kLetUsKnowYourCancelReason.tr,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: TextFormField(
+                      maxLines: 10,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      onChanged: (String text) {
+                        _cancelReason.value = text;
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
+                        hintText: CustomStrings.kEnterYourCancelReason.tr,
+                        filled: true,
+                        fillColor: CustomColors.kLightGray,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: 150,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          CustomTextButton(
+                              hasBorder: false,
+                              backgroundColor: CustomColors.kRed,
+                              foregroundColor: Colors.white,
+                              text: CustomStrings.kCancel.tr,
+                              onPressedFunc: () {
+                                _tripDetailsController.cancelTrip(
+                                    context: context,
+                                    tripId: tripId,
+                                    cancelReason: _cancelReason.value);
+                              }),
+                          CustomTextButton(
+                              hasBorder: false,
+                              backgroundColor: CustomColors.kLightGray,
+                              foregroundColor: CustomColors.kDarkGray,
+                              text: CustomStrings.kBtnExit.tr,
+                              onPressedFunc: () {
+                                Get.back();
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  void _onBackPressed({required BuildContext context}) {
+    if (_tripDetailsController.isTripStarted.isFalse) {
+      if (Get.arguments['route'] == 'home') {
+        _homeController.pagingController.refresh();
+      } else {
+        _tripHistoryController.pagingController.refresh();
+      }
+      Get.back();
+    } else {
+      CommonFunctions().showErrorDialog(
+          context: context,
+          message: CustomErrorsString.kCannotGoBackWhenTripStarted.tr);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime currentTime = DateTime.now();
 
     return OnBackPressed(
       perform: () {
-        if (_tripDetailsController.isTripStarted.isFalse) {
-          if (Get.arguments['route'] == 'home') {
-            _homeController.pagingController.refresh();
-          } else {
-            _tripHistoryController.pagingController.refresh();
-          }
-          Get.back();
-        } else {
-          CommonFunctions().showErrorDialog(
-              context: context,
-              message: CustomErrorsString.kCannotGoBackWhenTripStarted.tr);
-        }
+        _onBackPressed(context: context);
       },
       child: GetBuilder(
           init: _tripDetailsController,
@@ -161,19 +242,7 @@ class TripDetailsPage extends StatelessWidget {
                         hasShape: true,
                         hasLeading: true,
                         onPressedFunc: () {
-                          if (_tripDetailsController.isTripStarted.isFalse) {
-                            if (Get.arguments['route'] == 'home') {
-                              _homeController.pagingController.refresh();
-                            } else {
-                              _tripHistoryController.pagingController.refresh();
-                            }
-                            Get.back();
-                          } else {
-                            CommonFunctions().showErrorDialog(
-                                context: context,
-                                message: CustomErrorsString
-                                    .kCannotGoBackWhenTripStarted.tr);
-                          }
+                          _onBackPressed(context: context);
                         },
                         appBar: AppBar(),
                         title: Text(CustomStrings.kTripDetails.tr),
@@ -182,7 +251,9 @@ class TripDetailsPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 16.0, horizontal: 22.0),
                             child: ElevatedButton.icon(
-                              onPressed: () {
+                              onPressed: () async {
+                                await _tripDetailsController
+                                    .getCurrentLocation();
                                 if (_tripDetailsController.userLocation !=
                                     null) {
                                   _tripDetailsController.showHelpCenter(
@@ -252,10 +323,10 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    TripDetailsMapViewer(
+                                    MapViewer(
                                         isFullMap: false,
-                                        tripDetailsController:
-                                            _tripDetailsController,
+                                        polypoints:
+                                            _tripDetailsController.polypoints,
                                         departureCoordinate:
                                             _tripDetailsController
                                                 .departureStation
@@ -595,13 +666,12 @@ class TripDetailsPage extends StatelessWidget {
                                                               .tr,
                                                           onPressedFunc: () {
                                                             Get.back();
-                                                            _tripDetailsController
-                                                                .showCancelReasonDialog(
-                                                                    context:
-                                                                        context,
-                                                                    tripId: Get
-                                                                            .arguments[
-                                                                        'tripId']);
+                                                            _showCancelReasonDialog(
+                                                                context:
+                                                                    context,
+                                                                tripId: Get
+                                                                        .arguments[
+                                                                    'tripId']);
                                                           });
                                                 },
                                               ),
@@ -634,6 +704,8 @@ class TripDetailsPage extends StatelessWidget {
                                                         if (_tripDetailsController
                                                             .isTripStarted
                                                             .isFalse) {
+                                                          await _tripDetailsController
+                                                              .getCurrentLocation();
                                                           if (_tripDetailsController
                                                                   .userLocation !=
                                                               null) {

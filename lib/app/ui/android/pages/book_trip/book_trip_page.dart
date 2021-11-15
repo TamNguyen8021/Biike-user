@@ -1,11 +1,12 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
-import 'package:bikes_user/app/ui/android/pages/book_trip/widget/book_trip_map_viewer.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button.dart';
+import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -69,20 +70,39 @@ class BookTripPage extends StatelessWidget {
                               }),
                         ),
                       ),
-                      Obx(() => BookTripMapViewer(
-                          departureCoordinate: _bookTripController
-                              .departureStation.value.coordinate,
-                          destinationCoordinate: _bookTripController
-                              .destinationStation.value.coordinate)),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            ScheduleTripButton(),
-                            KeNowButton(),
-                          ],
+                      Obx(() => MapViewer(
+                            isFullMap: false,
+                            departureCoordinate: _bookTripController
+                                .departureStation.value.coordinate,
+                            destinationCoordinate: _bookTripController
+                                .destinationStation.value.coordinate,
+                            polypoints: _bookTripController.polypoints.toList(),
+                          )),
+                      Obx(
+                        () => Padding(
+                          padding:
+                              const EdgeInsets.only(top: 16.0, bottom: 30.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                _bookTripController.roadDuration.value,
+                                style: TextStyle(color: CustomColors.kBlue),
+                              ),
+                              Text(
+                                _bookTripController.roadDistance.value,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          ScheduleTripButton(),
+                          KeNowButton(),
+                        ],
                       ),
                     ],
                   ),

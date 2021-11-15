@@ -1,4 +1,6 @@
-import 'package:bikes_user/app/common/functions/snackbar.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:email_validator/email_validator.dart';
@@ -34,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
             TextFormField(
               controller: emailController,
               decoration: InputDecoration(
-                labelText: 'email',
+                labelText: CustomStrings.kEmail.tr,
               ),
               style: Theme.of(context).textTheme.bodyText1,
               validator: (val) {
@@ -44,7 +46,7 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
           ],
         ),
       ),
-      actions: [
+      actions: <Widget>[
         TextButton(
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
@@ -53,14 +55,13 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
               final result = await firbaseService
                   .resetPasswordWithEmail(emailController.text);
               if (result) {
-                SnackBarServices.showSnackbar(
-                    title: 'Bike',
-                    message:
-                        'chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email');
+                CommonFunctions().showInfoDialog(
+                    context: context,
+                    message: CustomStrings.kSendResetPasswordEmail.tr);
               }
             }
           },
-          child: Text('Gửi'),
+          child: Text(CustomStrings.kBtnSend.tr),
         ),
       ],
     );
@@ -68,12 +69,12 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
 
   String? _validate(String email) {
     if (email.trim().isEmpty) {
-      return 'email must not be null';
+      return CustomErrorsString.kEmailMustNotBeEmpty.tr;
     }
 
     if (!(EmailValidator.validate(email) &&
         email.toUpperCase().contains('@FPT.EDU.VN'))) {
-      return 'must login with FPT email';
+      return CustomErrorsString.kMustLoginWithFPTEmail.tr;
     }
 
     return null;
