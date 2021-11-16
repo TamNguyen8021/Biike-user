@@ -15,6 +15,8 @@ class Bike {
   String? plateNumber;
   String? color;
   String? brand;
+  String? bikeType;
+  String? bikeVolume;
   String? plateNumberPicture;
   String? bikeLicensePicture;
   String? bikePicture;
@@ -27,6 +29,8 @@ class Bike {
       this.plateNumber,
       this.color,
       this.brand,
+      this.bikeType,
+      this.bikeVolume,
       this.isBikeDeleted,
       this.plateNumberPicture,
       this.bikeLicensePicture,
@@ -39,6 +43,8 @@ class Bike {
     this.plateNumber = '';
     this.color = '';
     this.brand = '';
+    this.bikeType = '';
+    this.bikeVolume = '';
     this.isBikeDeleted = false;
     this.plateNumberPicture = '';
     this.bikeLicensePicture = '';

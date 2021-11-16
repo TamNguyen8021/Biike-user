@@ -27,8 +27,8 @@ class AddBikeController extends GetxController {
     bikeOwner = _manageBikeController.bike.bikeOwner!.obs;
     color = _manageBikeController.bike.color!.obs;
     brand = _manageBikeController.bike.brand!.obs;
-    category = ''.obs;
-    volume = ''.obs;
+    category = _manageBikeController.bike.bikeType!.obs;
+    volume = _manageBikeController.bike.bikeVolume!.obs;
     bikePicture = _manageBikeController.bike.bikePicture!.obs;
     registrationPicture = _manageBikeController.bike.bikeLicensePicture!.obs;
     numberPlatePicture = _manageBikeController.bike.plateNumberPicture!.obs;
@@ -61,6 +61,8 @@ class AddBikeController extends GetxController {
       'bikeOwner': bikeOwner.value,
       'color': color.value,
       'brand': brand.value,
+      'bikeType': category.value,
+      'bikeVolume': volume.value,
       'bikePicture': 'bikePictureUrl',
       'bikeLicensePicture': 'bikeLicensePictureUrl',
       'plateNumberPicture': 'plateNumberPictureUrl',

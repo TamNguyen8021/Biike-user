@@ -49,6 +49,12 @@ class AddBikePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (isAddBike) {
+      _addBikeController.brand.value = brands.first;
+      _addBikeController.volume.value = volumes.first;
+      _addBikeController.category.value = categories.first;
+    }
+
     return OnBackPressed(
       perform: () {
         _onBackPressed();
@@ -104,6 +110,7 @@ class AddBikePage extends StatelessWidget {
                                 () => BikeDropdownField(
                                   hintText: CustomStrings.kEnterBrand.tr,
                                   items: brands.toList(),
+                                  defaultValue: _addBikeController.brand.value,
                                   onChangedFunc: (value) {
                                     _addBikeController.brand.value = value;
                                   },
@@ -126,6 +133,7 @@ class AddBikePage extends StatelessWidget {
                                 () => BikeDropdownField(
                                   hintText: CustomStrings.kEnterCategory.tr,
                                   items: categories.toList(),
+                                  defaultValue: _addBikeController.category.value,
                                   onChangedFunc: (value) {
                                     _addBikeController.category.value = value;
                                   },
@@ -136,6 +144,7 @@ class AddBikePage extends StatelessWidget {
                                 () => BikeDropdownField(
                                   hintText: CustomStrings.kEnterVolume.tr,
                                   items: volumes.toList(),
+                                  defaultValue: _addBikeController.volume.value,
                                   onChangedFunc: (value) {
                                     _addBikeController.volume.value = value;
                                   },

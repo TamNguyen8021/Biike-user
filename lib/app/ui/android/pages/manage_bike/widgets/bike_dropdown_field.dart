@@ -6,11 +6,13 @@ class BikeDropdownField extends StatelessWidget {
   final String hintText;
   final Function(dynamic)? onChangedFunc;
   final List items;
+  final String defaultValue;
 
   const BikeDropdownField({
     Key? key,
     required this.items,
     required this.hintText,
+    required this.defaultValue,
     this.onChangedFunc,
   }) : super(key: key);
 
@@ -19,6 +21,7 @@ class BikeDropdownField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0, top: 5.0),
       child: DropdownButtonFormField(
+        value: defaultValue,
         onChanged: onChangedFunc,
         items: items.map<DropdownMenuItem<String>>((value) {
           return DropdownMenuItem<String>(
