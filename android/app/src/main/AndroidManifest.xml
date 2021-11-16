@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.bikes_user">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.bikes_user" xmlns:tools="http://schemas.android.com/tools">
 
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -23,7 +23,7 @@
     </intent>
   </queries>
 
-  <application android:label="Biiké" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
+  <application android:label="Biiké" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true" tools:replace="android:label">
     <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyATchI6wf0LyaEBcSB9xZz86iYuPm9Je-k" />
     <activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
       <!-- Specifies an Android theme to apply to this Activity as soon as
