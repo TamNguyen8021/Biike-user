@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
@@ -7,9 +9,11 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class TripDetailsFullMapPage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
+  final Completer<GoogleMapController> controller = Completer();
 
   TripDetailsFullMapPage({Key? key}) : super(key: key);
 
@@ -68,6 +72,7 @@ class TripDetailsFullMapPage extends StatelessWidget {
               children: <Widget>[
                 MapViewer(
                     isFullMap: true,
+                    completerController: controller,
                     polypoints: _tripDetailsController.polypoints,
                     departureCoordinate: _departureCoordinate,
                     destinationCoordinate: _destinationCoordinate),

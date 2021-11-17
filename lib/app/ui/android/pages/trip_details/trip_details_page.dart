@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
@@ -21,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
 /// 'trip_details' screen
@@ -30,6 +33,7 @@ class TripDetailsPage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
   final _homeController = Get.find<HomeController>();
   final _tripHistoryController = Get.find<TripHistoryController>();
+  final Completer<GoogleMapController> controller = Completer();
 
   String _statusBarTime = '';
   String _statusBarText = '';
@@ -325,6 +329,7 @@ class TripDetailsPage extends StatelessWidget {
                                     ),
                                     MapViewer(
                                         isFullMap: false,
+                                        completerController: controller,
                                         polypoints:
                                             _tripDetailsController.polypoints,
                                         departureCoordinate:
@@ -709,6 +714,24 @@ class TripDetailsPage extends StatelessWidget {
                                                           if (_tripDetailsController
                                                                   .userLocation !=
                                                               null) {
+                                                            GoogleMapController
+                                                                googleMapController =
+                                                                await controller
+                                                                    .future;
+                                                            await googleMapController
+                                                                .animateCamera(
+                                                                    CameraUpdate
+                                                                        .newCameraPosition(
+                                                                            CameraPosition(
+                                                              target: LatLng(
+                                                                  _tripDetailsController
+                                                                      .userLocation!
+                                                                      .latitude!,
+                                                                  _tripDetailsController
+                                                                      .userLocation!
+                                                                      .longitude!),
+                                                              zoom: 12,
+                                                            )));
                                                             if (await _tripProvider
                                                                 .startTripOrCompleteTrip(
                                                                     tripId: Get

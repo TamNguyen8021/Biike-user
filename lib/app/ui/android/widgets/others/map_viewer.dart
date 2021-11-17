@@ -13,8 +13,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
 class MapViewer extends StatelessWidget {
-  final Completer<GoogleMapController> _controller = Completer();
+  // final Completer<GoogleMapController> _controller = Completer();
 
+  final Completer<GoogleMapController> completerController;
   final List<LatLng> polypoints;
   final LocationData? userLocation;
   final String departureCoordinate;
@@ -24,6 +25,7 @@ class MapViewer extends StatelessWidget {
   MapViewer(
       {Key? key,
       required this.isFullMap,
+      required this.completerController,
       required this.polypoints,
       this.userLocation,
       required this.departureCoordinate,
@@ -65,6 +67,7 @@ class MapViewer extends StatelessWidget {
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return GoogleMap(
+                      myLocationEnabled: true,
                       mapType: MapType.normal,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(
@@ -73,7 +76,7 @@ class MapViewer extends StatelessWidget {
                         zoom: isFullMap ? 14 : 12,
                       ),
                       onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
+                        completerController.complete(controller);
                       },
                       markers: <Marker>{
                         Marker(
