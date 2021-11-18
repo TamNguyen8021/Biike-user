@@ -96,17 +96,6 @@ class MapViewer extends StatelessWidget {
                                 snippet: 'Info'),
                             icon: BitmapDescriptor.defaultMarkerWithHue(
                                 BitmapDescriptor.hueGreen)),
-                        if (userLocation != null) ...[
-                          Marker(
-                              markerId: MarkerId('user'),
-                              position: LatLng(userLocation!.latitude!,
-                                  userLocation!.longitude!),
-                              infoWindow: InfoWindow(
-                                  title: CustomStrings.kYourLocation.tr,
-                                  snippet: 'Info'),
-                              icon: BitmapDescriptor.defaultMarkerWithHue(
-                                  BitmapDescriptor.hueAzure)),
-                        ]
                       },
                       polylines: <Polyline>{
                         Polyline(
