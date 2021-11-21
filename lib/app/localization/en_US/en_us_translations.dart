@@ -17,23 +17,25 @@ final Map<String, String> en = {
   'kStart': 'Start',
 
   // '003.1_login'
-  'kLoginButton': 'Verify with FPT email',
   'kConfirmTerm': 'By sign up, you aggre with',
-  'kTerm': 'our Terms of Service and Privacy Policy',
+  'kAnd': ' and ',
   'kForgotPassword': 'Forgot password',
   'kSendResetPasswordEmail':
       'Your password has been reset, please check your email',
-
-  // '004.1_input_phone_no' screen
-  'kInputPhoneNumber': 'Input phone number',
+  'kInputEmail': 'Enter email',
+  'kPassword': 'Password',
+  'kInputPassword': 'Enter password',
+  'kLogin': 'Sign in',
+  'kNoAccount': 'No account yet? ',
+  'kRegister': 'Sign up now!',
+  'kHasAccount': 'Has an account? ',
+  'kInputName': 'Enter full name',
+  'kInputPhoneNumber': 'Enter phone number',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
   'kResendVerifyCode': 'Resend the code after 59 seconds',
   'kInvalidPin': 'Invalid code',
-
-  // '004.3_input_name' screen
-  'kInputName': 'Input name',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Start using app\nwith the role',
@@ -361,8 +363,6 @@ final Map<String, String> en = {
   // 'ban_list' screen
   'kBanList': 'Ban List',
   'kUnBlock': 'Unblock',
-  'kLogin': 'Login',
-  'kRegister': 'Register',
 
   // date
   'kMonday': 'Mon',

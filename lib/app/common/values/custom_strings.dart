@@ -15,13 +15,18 @@ class CustomStrings {
   static const String kStart = 'kStart';
 
   // '003.1_login'
-  static const String kLoginButton = 'kLoginButton';
   static const String kConfirmTerm = 'kConfirmTerm';
-  static const String kTerm = 'kTerm';
+  static const String kAnd = 'kAnd';
   static const String kForgotPassword = 'kForgotPassword';
   static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
-
-  // '004.1_input_phone_no' screen
+  static const String kInputEmail = 'kInputEmail';
+  static const String kPassword = 'kPassword';
+  static const String kInputPassword = 'kInputPassword';
+  static const String kLogin = 'kLogin';
+  static const String kRegister = 'kRegister';
+  static const String kNoAccount = 'kNoAccount';
+  static const String kHasAccount = 'kHasAccount';
+  static const String kInputName = 'kInputName';
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
   static const String kErrorInputPhoneNumber = 'kErrorInputPhoneNumber';
 
@@ -31,9 +36,7 @@ class CustomStrings {
   static const String kInvalidPin = 'kInvalidPin';
 
   // '004.3_input_name' screen
-  static const String kInputName = 'kInputName';
   static const String kErrorName = 'kErrorName';
-  static const String kInputEmail = 'kInputEmail';
   static const String kErrorEmail = 'kErrorEmail';
 
   // '004.4_choose_mode' screen

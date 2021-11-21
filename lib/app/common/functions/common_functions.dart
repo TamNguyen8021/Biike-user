@@ -339,6 +339,19 @@ class CommonFunctions {
     }
   }
 
+  Future<void> openLink(
+      {required String url, required BuildContext context}) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
+      FlutterLogs.logError(
+          'Biiké', 'CommonFunctions - openLink()', 'Could not open link');
+      logBiike(error: 'Could not open link');
+    }
+  }
+
   /// Get polypoints to draw route on map
   ///
   /// Author: TamNTT

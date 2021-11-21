@@ -19,7 +19,10 @@ class RegisterController extends GetxController {
   }
 
   Future<void> next(
-      String name, String email, String pass, String phone) async {
+      {required String name,
+      required String email,
+      required String pass,
+      required String phone}) async {
     if (!validate(name, email, pass, phone)) {
       return;
     }
@@ -42,7 +45,6 @@ class RegisterController extends GetxController {
             message: 'Số điiện thoại hoặc mail đã có người đăng ký');
       }
       CommonFunctions.catchExceptionError(error);
-
     } finally {
       _enableLoading(false);
     }

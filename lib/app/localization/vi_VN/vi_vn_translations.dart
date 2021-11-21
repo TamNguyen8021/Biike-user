@@ -17,23 +17,25 @@ final Map<String, String> vi = {
   'kStart': 'Bắt đầu',
 
   // '003.1_login'
-  'kLoginButton': 'Xác thực bằng email FPT',
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
+  'kAnd': ' và ',
   'kForgotPassword': 'Quên mật khẩu',
   'kSendResetPasswordEmail':
       'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
-
-  // '004.1_input_phone_no' screen
+  'kInputEmail': 'Nhập email',
+  'kPassword': 'Mật khẩu',
+  'kInputPassword': 'Nhập mật khẩu',
+  'kLogin': 'Đăng nhập',
+  'kNoAccount': 'Chưa có tài khoản? ',
+  'kRegister': 'Đăng ký ngay!',
+  'kHasAccount': 'Đã có tài khoản? ',
+  'kInputName': 'Nhập họ tên',
   'kInputPhoneNumber': 'Nhập số điện thoại',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
   'kResendVerifyCode': 'Yêu cầu gửi lại mã sau 59 giây',
   'kInvalidPin': 'Mã xác nhận không chính xác',
-
-  // '004.3_input_name' screen
-  'kInputName': 'Nhập tên của bạn',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
@@ -366,8 +368,6 @@ final Map<String, String> vi = {
   // 'ban_list' screen
   'kBanList': 'Danh sách hạn chế',
   'kUnBlock': 'Bỏ chặn',
-  'kLogin': 'Đăng nhập',
-  'kRegister': 'Đăng ký',
 
   // date
   'kMonday': 'T2',
