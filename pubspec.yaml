@@ -59,6 +59,8 @@ dependencies:
   firebase_auth: ^3.1.2
   firebase_core: ^1.7.0
   google_sign_in: ^5.1.1
+  firebase_messaging: ^11.1.0
+  firebase_analytics: ^8.3.4
 
   # api 
   retrofit: ^2.0.1
