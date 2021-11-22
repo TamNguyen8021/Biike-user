@@ -26,4 +26,5 @@ class CustomErrorsString {
       'kErrorWhenStopSharingLocation';
   static const String kFillInAllField = 'kFillInAllField';
   static const String kNoVoucher = 'kNoVoucher';
+  static const String kNoHistory = 'kNoHistory';
 }

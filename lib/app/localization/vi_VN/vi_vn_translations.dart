@@ -417,5 +417,6 @@ final Map<String, String> vi = {
     'kMustLoginWithFPTEmail': 'Bắt buộc dùng mail FPT',
     'kErrorWhenStopSharingLocation':
         'Có lỗi xảy ra, chúng tôi không thể dừng việc chia sẻ vị trí của bạn. Link chia sẻ sẽ tự động hết hạn sau 30 phút',
-    'kNoVoucher': 'Hiện tại chưa có voucher'
+    'kNoVoucher': 'Hiện tại chưa có voucher',
+    'kNoHistory': 'Không có lịch sử'
   });
