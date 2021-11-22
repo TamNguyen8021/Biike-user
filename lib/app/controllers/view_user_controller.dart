@@ -135,6 +135,7 @@ class ViewUserController extends GetxController {
 
       historyTrips.add(historyTripCard);
     }
+    update();
     return historyTrips.cast();
   }
 

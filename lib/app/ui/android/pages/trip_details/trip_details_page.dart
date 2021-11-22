@@ -172,11 +172,18 @@ class TripDetailsPage extends StatelessWidget {
                               backgroundColor: CustomColors.kRed,
                               foregroundColor: Colors.white,
                               text: CustomStrings.kCancel.tr,
-                              onPressedFunc: () {
-                                _tripDetailsController.cancelTrip(
-                                    context: context,
-                                    tripId: tripId,
-                                    cancelReason: _cancelReason.value);
+                              onPressedFunc: () async {
+                                if (_cancelReason.isNotEmpty) {
+                                  await _tripDetailsController.cancelTrip(
+                                      context: context,
+                                      tripId: tripId,
+                                      cancelReason: _cancelReason.value);
+                                } else {
+                                  await CommonFunctions().showErrorDialog(
+                                      context: context,
+                                      message: CustomStrings
+                                          .kLetUsKnowYourCancelReason.tr);
+                                }
                               }),
                           CustomTextButton(
                               hasBorder: false,

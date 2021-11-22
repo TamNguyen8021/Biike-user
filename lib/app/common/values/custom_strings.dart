@@ -15,20 +15,24 @@ class CustomStrings {
   static const String kStart = 'kStart';
 
   // '003.1_login'
-  static const String kConfirmTerm = 'kConfirmTerm';
-  static const String kAnd = 'kAnd';
   static const String kForgotPassword = 'kForgotPassword';
   static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
   static const String kInputEmail = 'kInputEmail';
   static const String kPassword = 'kPassword';
   static const String kInputPassword = 'kInputPassword';
   static const String kLogin = 'kLogin';
-  static const String kRegister = 'kRegister';
   static const String kNoAccount = 'kNoAccount';
+
+  // 'register' screen
+  static const String kConfirmTerm = 'kConfirmTerm';
+  static const String kAnd = 'kAnd';
+  static const String kRegister = 'kRegister';
   static const String kHasAccount = 'kHasAccount';
   static const String kInputName = 'kInputName';
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
   static const String kErrorInputPhoneNumber = 'kErrorInputPhoneNumber';
+  static const String kSentVerifiedEmail = 'kSentVerifiedEmail';
+  static const String kRegisterSuccess = 'kRegisterSuccess';
 
   // '004.2_verify_phone' screen
   static const String kInputVerifyCode = 'kInputVerifyCode';

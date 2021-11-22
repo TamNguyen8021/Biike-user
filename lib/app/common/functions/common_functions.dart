@@ -51,7 +51,8 @@ class CommonFunctions {
   /// Avoid force shutdown when user press backbutton with the message: [errorMessage].
   ///
   /// Author: UyenNLP
-  Future<bool> onBackPressed({String? errorMessage}) {
+  Future<bool> onBackPressed(
+      {required BuildContext context, String? errorMessage}) {
     errorMessage == null
         ? Get.defaultDialog(
             title: 'Confirm',
@@ -62,10 +63,8 @@ class CommonFunctions {
             onConfirm: () => SystemChannels.platform
                 .invokeMethod<void>('SystemNavigator.pop')) //exit the app
 
-        : Get.snackbar(CustomErrorsString.kError.tr, errorMessage.tr,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            snackPosition: SnackPosition.BOTTOM);
+        : CommonFunctions()
+            .showErrorDialog(context: context, message: errorMessage);
 
     return Future.value(false);
   }

@@ -101,8 +101,10 @@ class VerifyPhonePage extends StatelessWidget {
             ),
             GetBuilder<VerifyPhoneController>(builder: (controller) {
               return NextPageButton(
-                onPressedFunc: () => VerifyPhoneController.to
-                    .verifyOtp(controllerOtp.text, fullPhone),
+                onPressedFunc: () => VerifyPhoneController.to.verifyOtp(
+                    context: context,
+                    otp: controllerOtp.text,
+                    fullPhone: fullPhone),
                 backgroundColor: CustomColors.kBlue,
                 foregroundColor: Colors.white,
                 hoverColor: CustomColors.kDarkGray,

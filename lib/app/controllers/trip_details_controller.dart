@@ -228,7 +228,7 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
-      Get.back();
+      Get.back(closeOverlays: true);
       Get.back();
       _homeController.pagingController.refresh();
       CommonFunctions().showSuccessDialog(

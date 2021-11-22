@@ -100,9 +100,10 @@ class RegisterPage extends HookWidget {
                             width: 135,
                             backgroundColor: Colors.white,
                             foregroundColor: CustomColors.kDarkBlue,
-                            text: CustomStrings.kLogin.tr,
-                            onPressedFunc: () {
-                              RegisterController.to.next(
+                            text: CustomStrings.kRegister.tr,
+                            onPressedFunc: () async {
+                              await RegisterController.to.next(
+                                  context: context,
                                   name: nameController.text,
                                   email: emailController.text,
                                   pass: passwordController.text,

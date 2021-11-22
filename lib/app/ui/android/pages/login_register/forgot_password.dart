@@ -52,8 +52,8 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
             if (_formKey.currentState!.validate()) {
               Get.back(closeOverlays: true);
 
-              final result = await firbaseService
-                  .resetPasswordWithEmail(emailController.text);
+              final result = await firbaseService.resetPasswordWithEmail(
+                  context: context, email: emailController.text);
               if (result) {
                 CommonFunctions().showInfoDialog(
                     context: context,

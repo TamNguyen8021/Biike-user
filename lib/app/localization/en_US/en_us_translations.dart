@@ -17,8 +17,6 @@ final Map<String, String> en = {
   'kStart': 'Start',
 
   // '003.1_login'
-  'kConfirmTerm': 'By sign up, you aggre with',
-  'kAnd': ' and ',
   'kForgotPassword': 'Forgot password',
   'kSendResetPasswordEmail':
       'Your password has been reset, please check your email',
@@ -28,9 +26,16 @@ final Map<String, String> en = {
   'kLogin': 'Sign in',
   'kNoAccount': 'No account yet? ',
   'kRegister': 'Sign up now!',
+
+  // 'register' screen
+  'kConfirmTerm': 'By sign up, you aggre with',
+  'kAnd': ' and ',
   'kHasAccount': 'Has an account? ',
   'kInputName': 'Enter full name',
   'kInputPhoneNumber': 'Enter phone number',
+  'kSentVerifiedEmail':
+      'We sent a verified email to your mailbox. Please verify your account before login',
+  'kRegisterSuccess': 'Your account was created',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
@@ -395,7 +400,7 @@ final Map<String, String> en = {
     'kNotChooseStation': 'You haven\'t choose your route',
     'kNotFillAllFields': 'Please fill in all fields',
     'kNotAfterNow': 'You can\'t book a trip from the past',
-    'kNotAvailableTimeRange': 'Available time is between 6 AM and 9 PM',
+    'kNotAvailableTimeRange': 'Available time is between 5AM and 9PM',
     'kErrorName': 'Invalid name',
     'kErrorInputPhoneNumber': 'Invalid phone number',
     'kEditProfileFailed':
@@ -406,8 +411,17 @@ final Map<String, String> en = {
     'kSameStationWereAdded': 'A station with the same information were added',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
     'kEmailMustNotBeEmpty': 'Email must not be empty',
-    'kMustLoginWithFPTEmail': 'Please use FPT email',
+    'kMustLoginWithFPTEmail': 'Please sign in with FPT email',
     'kErrorWhenStopSharingLocation':
         'There are some errors, we can\'t stop sharing your location. Your share link will be expired after 30 minutes',
-    'kNoVoucher': 'There\'s no voucher currently'
+    'kNoVoucher': 'There\'s no voucher currently',
+    'kWrongEmailOrPassword': 'Wrong email or password',
+    'kNoPasswordEnter': 'Please enter your password to sign in',
+    'kInvalidEmail': 'Invalid email',
+    'kWrongEmail': 'Wrong email, please try again',
+    'kPasswordMustAtLeast6': 'Password must be at least 6 characters',
+    'kInvalidPhoneNo': 'Invalid phone number',
+    'kDuplicateEmailOrPhone': 'The email or phone number was used to sign up',
+    'kWrongOtp': 'Wrong OTP code',
+    'kEmptyOtp': 'Please enter your OTP code',
   });

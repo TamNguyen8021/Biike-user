@@ -17,8 +17,6 @@ final Map<String, String> vi = {
   'kStart': 'Bắt đầu',
 
   // '003.1_login'
-  'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kAnd': ' và ',
   'kForgotPassword': 'Quên mật khẩu',
   'kSendResetPasswordEmail':
       'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
@@ -27,10 +25,17 @@ final Map<String, String> vi = {
   'kInputPassword': 'Nhập mật khẩu',
   'kLogin': 'Đăng nhập',
   'kNoAccount': 'Chưa có tài khoản? ',
+
+  // 'register' screen
+  'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
+  'kAnd': ' và ',
   'kRegister': 'Đăng ký ngay!',
   'kHasAccount': 'Đã có tài khoản? ',
   'kInputName': 'Nhập họ tên',
   'kInputPhoneNumber': 'Nhập số điện thoại',
+  'kSentVerifiedEmail':
+      'Chúng tôi đã gửi email xác thực đến email đăng ký tài khoản của bạn. vui lòng xác thực trước khi đăng nhập',
+  'kRegisterSuccess': 'Đăng ký tài khoản thành công',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -400,7 +405,7 @@ final Map<String, String> vi = {
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
     'kNotFillAllFields': 'Vui lòng điền đầy đủ thông tin',
     'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
-    'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 6h đến 21h',
+    'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 5h đến 21h',
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
     'kErrorName': 'Tên của bạn không hợp lệ',
     'kEditProfileFailed': 'Chỉnh sửa thông tin thất bại. Vui lòng thử lại sau',
@@ -412,8 +417,17 @@ final Map<String, String> vi = {
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
     'kEmailMustNotBeEmpty': 'Vui lòng điền email',
-    'kMustLoginWithFPTEmail': 'Bắt buộc dùng mail FPT',
+    'kMustLoginWithFPTEmail': 'Vui lòng đăng nhập bằng mail FPT',
     'kErrorWhenStopSharingLocation':
         'Có lỗi xảy ra, chúng tôi không thể dừng việc chia sẻ vị trí của bạn. Link chia sẻ sẽ tự động hết hạn sau 30 phút',
-    'kNoVoucher': 'Hiện tại chưa có voucher'
+    'kNoVoucher': 'Hiện tại chưa có voucher',
+    'kWrongEmailOrPassword': 'Email hoặc mật khẩu không chính xác',
+    'kNoPasswordEnter': 'Vui lòng nhập mật khẩu để đăng nhập',
+    'kInvalidEmail': 'Email không hợp lệ',
+    'kWrongEmail': 'Email sai, vui lòng kiểm tra lại',
+    'kPasswordMustAtLeast6': 'Yêu cầu mật khẩu ít nhất 6 kí tự',
+    'kInvalidPhoneNo': 'Số điện thoại không hợp lệ',
+    'kDuplicateEmailOrPhone': 'Số điện thoại hoặc email đã có người đăng ký',
+    'kWrongOtp': 'Sai mã OTP',
+    'kEmptyOtp': 'Vui lòng nhập mã OTP',
   });

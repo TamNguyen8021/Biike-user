@@ -25,11 +25,11 @@ class FeedbackController extends GetxController {
 
   String validateFeedback() {
     if (!_isStarRated()) {
-      return CustomErrorsString.kNotRated;
+      return CustomErrorsString.kNotRated.tr;
     }
 
     if (_isFeedbackContainsBadWords()) {
-      return CustomErrorsString.kIncludeBadWords;
+      return CustomErrorsString.kIncludeBadWords.tr;
     }
 
     return '';
