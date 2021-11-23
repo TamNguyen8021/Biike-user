@@ -380,6 +380,8 @@ final Map<String, String> en = {
   'kYouHave': 'You have',
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
+
+  'kAll': 'All',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
@@ -409,5 +411,6 @@ final Map<String, String> en = {
     'kMustLoginWithFPTEmail': 'Please use FPT email',
     'kErrorWhenStopSharingLocation':
         'There are some errors, we can\'t stop sharing your location. Your share link will be expired after 30 minutes',
-    'kNoVoucher': 'There\'s no voucher currently'
+    'kNoVoucher': 'There\'s no voucher currently',
+    'kNoHistory': 'History empty',
   });

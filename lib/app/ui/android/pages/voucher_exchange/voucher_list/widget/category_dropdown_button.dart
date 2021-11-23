@@ -1,12 +1,13 @@
+import 'package:bikes_user/app/data/models/voucher_category.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-class AreaDropdownButton extends StatelessWidget {
-  final String dropdownValue;
-  final List<String> dropdownArray;
-  final Function(String?) onChangedFunc;
+class CategoryDropdownButton extends StatelessWidget {
+  final VoucherCategory dropdownValue;
+  final List<VoucherCategory> dropdownArray;
+  final Function(VoucherCategory?) onChangedFunc;
 
-  const AreaDropdownButton(
+  const CategoryDropdownButton(
       {Key? key,
       required this.dropdownValue,
       required this.dropdownArray,
@@ -27,7 +28,7 @@ class AreaDropdownButton extends StatelessWidget {
           ],
           color: CustomColors.kLightGray,
           borderRadius: BorderRadius.circular(5)),
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField<VoucherCategory>(
         value: dropdownValue,
         icon: Icon(
           Icons.arrow_drop_down,
@@ -35,15 +36,15 @@ class AreaDropdownButton extends StatelessWidget {
         ),
         onChanged: onChangedFunc,
         items: dropdownArray
-            .map<DropdownMenuItem<String>>(
-                (String value) => DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ))
-            .toList(),
+            .map<DropdownMenuItem<VoucherCategory>>((VoucherCategory value) {
+          return DropdownMenuItem<VoucherCategory>(
+            value: value,
+            child: Text(
+              value.categoryName.toString(),
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          );
+        }).toList(),
         decoration: InputDecoration(
             fillColor: CustomColors.kLightGray,
             filled: true,
