@@ -80,6 +80,7 @@ dependencies:
   google_maps_flutter: ^2.1.0
   flutter_polyline_points: ^1.0.0
   share_plus: ^3.0.4
+  firebase_database: ^8.1.0
   
 dev_dependencies:
   flutter_test:
