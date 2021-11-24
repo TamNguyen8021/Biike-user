@@ -43,12 +43,9 @@ class ExchangeVoucherPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          NearMeButton(),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: NearMeButton(),
                       ),
                     ],
                   ),
