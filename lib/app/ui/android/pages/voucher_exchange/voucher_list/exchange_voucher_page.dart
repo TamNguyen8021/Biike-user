@@ -1,10 +1,11 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/area_dropdown_button.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/category_dropdown_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/near_me_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -14,10 +15,6 @@ class ExchangeVoucherPage extends StatelessWidget {
   ExchangeVoucherPage({Key? key}) : super(key: key);
 
   final _voucherController = Get.find<VoucherController>();
-
-  _tmpFunc() {
-    return '';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +31,39 @@ class ExchangeVoucherPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      AreaDropdownButton(
-                          dropdownValue: 'All',
-                          dropdownArray: <String>['All'],
-                          onChangedFunc: (value) => _tmpFunc()),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            FutureBuilder(
+                              future:
+                                  _voucherController.getVoucherCategoryList(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return CategoryDropdownButton(
+                                      dropdownValue:
+                                          _voucherController.category.value,
+                                      dropdownArray: _voucherController
+                                          .voucherCategoryList,
+                                      onChangedFunc: (value) =>
+                                          _voucherController
+                                              .updateCategory(value));
+                                } else {
+                                  return Loading();
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: NearMeButton(),
+                      ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: NearMeButton(),
                 ),
               ],
             ),

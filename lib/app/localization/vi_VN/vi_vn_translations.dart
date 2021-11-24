@@ -390,6 +390,8 @@ final Map<String, String> vi = {
   'kYouHave': 'Bạn có',
   'kExpired': ' điểm sẽ hết hạn vào ngày ',
   'kFindMore': 'Tìm hiểu thêm',
+
+  'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',
@@ -429,4 +431,5 @@ final Map<String, String> vi = {
     'kWrongOtp': 'Sai mã OTP',
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
+    'kNoHistory': 'Không có lịch sử'
   });

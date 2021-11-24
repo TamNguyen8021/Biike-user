@@ -385,6 +385,8 @@ final Map<String, String> en = {
   'kYouHave': 'You have',
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
+
+  'kAll': 'All',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
@@ -423,4 +425,5 @@ final Map<String, String> en = {
     'kWrongOtp': 'Wrong OTP code',
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
+    'kNoHistory': 'History empty',
   });

@@ -35,4 +35,5 @@ class CustomErrorsString {
   static const String kWrongOtp = 'kWrongOtp';
   static const String kEmptyOtp = 'kEmptyOtp';
   static const String kTryAgain = 'kTryAgain';
+  static const String kNoHistory = 'kNoHistory';
 }

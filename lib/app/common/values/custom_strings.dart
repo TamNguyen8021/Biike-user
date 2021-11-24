@@ -376,4 +376,6 @@ class CustomStrings {
   static const String kYouHave = 'kYouHave';
   static const String kExpired = 'kExpired';
   static const String kFindMore = 'kFindMore';
+
+  static const String kAll = 'kAll';
 }
