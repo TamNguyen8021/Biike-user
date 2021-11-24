@@ -393,8 +393,6 @@ final Map<String, String> vi = {
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',
-    'kErrorMessage':
-        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
     'kNotRated': 'Hãy đánh giá chuyến đi của bạn.',
     'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
     'kSendFailed': 'Gửi feedback thất bại!',
@@ -430,4 +428,5 @@ final Map<String, String> vi = {
     'kDuplicateEmailOrPhone': 'Số điện thoại hoặc email đã có người đăng ký',
     'kWrongOtp': 'Sai mã OTP',
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
+    'kTryAgain': 'Thử lại',
   });

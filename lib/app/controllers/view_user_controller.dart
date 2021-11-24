@@ -1,5 +1,4 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
@@ -118,9 +117,6 @@ class ViewUserController extends GetxController {
           break;
         default:
           tripStatus = TripStatus.none;
-          Get.defaultDialog(
-              title: CustomErrorsString.kError.tr,
-              middleText: CustomErrorsString.kErrorMessage.tr);
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(

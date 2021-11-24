@@ -1,6 +1,5 @@
 class CustomErrorsString {
   static const String kError = 'kError';
-  static const String kErrorMessage = 'kErrorMessage';
   static const String kNotRated = 'kNotRated';
   static const String kIncludeBadWords = 'kIncludeBadWords';
   static const String kSendFailed = 'kSendFailed';
@@ -35,4 +34,5 @@ class CustomErrorsString {
   static const String kDuplicateEmailOrPhone = 'kDuplicateEmailOrPhone';
   static const String kWrongOtp = 'kWrongOtp';
   static const String kEmptyOtp = 'kEmptyOtp';
+  static const String kTryAgain = 'kTryAgain';
 }

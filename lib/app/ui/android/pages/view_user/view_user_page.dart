@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/controllers/view_user_controller.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -118,7 +119,7 @@ class ViewUserPage extends StatelessWidget {
                           ),
                         ),
                         Divider(),
-                        GetBuilder(
+                        GetBuilder<ViewUserController>(
                             init: _viewUserController,
                             builder: (ViewUserController controller) {
                               return Padding(
@@ -202,6 +203,14 @@ class ViewUserPage extends StatelessWidget {
                                                         .kNoHistoryTrip.tr,
                                                     textAlign: TextAlign.center,
                                                   );
+                                                },
+                                                firstPageErrorIndicatorBuilder:
+                                                    (BuildContext context) {
+                                                  return LazyLoadingListErrorBuilder(
+                                                      onPressed: () {
+                                                    controller.pagingController
+                                                        .refresh();
+                                                  });
                                                 }),
                                       ),
                                     ),

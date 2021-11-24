@@ -388,8 +388,6 @@ final Map<String, String> en = {
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
-    'kErrorMessage':
-        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
     'kNotRated': 'Please rate your trip experience',
     'kIncludeBadWords': 'Please don\'t use bad words',
     'kSendFailed': 'Send feedback failed!',
@@ -424,4 +422,5 @@ final Map<String, String> en = {
     'kDuplicateEmailOrPhone': 'The email or phone number was used to sign up',
     'kWrongOtp': 'Wrong OTP code',
     'kEmptyOtp': 'Please enter your OTP code',
+    'kTryAgain': 'Try again',
   });
