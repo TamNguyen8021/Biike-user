@@ -66,22 +66,13 @@ class HomeController extends GetxController {
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
       if (isLastPage) {
-        // if (Biike.role.value == Role.keer) {
         pagingController.appendLastPage(upcomingTrips.toList());
-        // } else {
-        //   pagingController.appendLastPage(stations.values.toList());
-        // }
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        // if (Biike.role.value == Role.keer) {
         nextPageKey += upcomingTrips.length;
         pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
-        // } else {
-        //   nextPageKey += stations.length;
-        //   pagingController.appendPage(stations.values.toList(), nextPageKey);
-        // }
       }
     } catch (error) {
       pagingController.error = error;
@@ -138,6 +129,7 @@ class HomeController extends GetxController {
 
       upcomingTrips.add(upcomingTripCard);
     }
+    update();
     return upcomingTrips.cast();
   }
 
@@ -180,7 +172,6 @@ class HomeController extends GetxController {
 
       upcomingTripsForBiker.add(upcomingTripCard);
     }
-
     return upcomingTripsForBiker.cast();
   }
 

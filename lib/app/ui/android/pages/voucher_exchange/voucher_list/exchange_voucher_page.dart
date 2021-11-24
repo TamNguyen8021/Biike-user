@@ -4,6 +4,7 @@ import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/category_dropdown_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/near_me_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_card.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,16 +18,18 @@ class ExchangeVoucherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-        init: _voucherController,
-        builder: (_) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
-            child: Column(
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, left: 22.0, right: 22.0),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Row(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Row(
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                         child: Column(
@@ -34,18 +37,19 @@ class ExchangeVoucherPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             FutureBuilder(
-                              future: _voucherController.getVoucherCategoryList(),
+                              future:
+                                  _voucherController.getVoucherCategoryList(),
                               builder: (context, snapshot) {
-                                if (snapshot.hasError) {
-                                  return Container();
-                                } else if (snapshot.connectionState == ConnectionState.done) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
                                   return CategoryDropdownButton(
                                       dropdownValue:
-                                      _voucherController.category.value,
-                                      dropdownArray:
-                                      _voucherController.voucherCategoryList,
+                                          _voucherController.category.value,
+                                      dropdownArray: _voucherController
+                                          .voucherCategoryList,
                                       onChangedFunc: (value) =>
-                                          _voucherController.updateCategory(value));
+                                          _voucherController
+                                              .updateCategory(value));
                                 } else {
                                   return Loading();
                                 }
@@ -54,41 +58,48 @@ class ExchangeVoucherPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          NearMeButton(),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: NearMeButton(),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height - 230,
-                  child: RefreshIndicator(
-                    onRefresh: () => Future.sync(
-                      () => _voucherController.pagingController.refresh(),
-                    ),
-                    child: PagedListView<int, dynamic>(
-                      pagingController: _voucherController.pagingController,
-                      builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                          itemBuilder: (context, item, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 10.0),
-                                child: VoucherCard(
-                                    voucher: Voucher.fromJson(_voucherController
-                                        .pagingController.itemList!
-                                        .elementAt(index))),
-                              ),
-                          noItemsFoundIndicatorBuilder: (BuildContext context) {
-                            return Text(CustomErrorsString.kNoVoucher.tr);
-                          }),
-                    ),
-                  ),
-                ),
               ],
             ),
-          );
-        });
+          ),
+          GetBuilder<VoucherController>(
+              init: _voucherController,
+              builder: (VoucherController controller) {
+                return RefreshIndicator(
+                  onRefresh: () => Future.sync(
+                    () => controller.pagingController.refresh(),
+                  ),
+                  child: PagedListView<int, dynamic>(
+                    pagingController: controller.pagingController,
+                    shrinkWrap: true,
+                    builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                        animateTransitions: true,
+                        itemBuilder: (context, item, index) => Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: VoucherCard(
+                                  voucher: Voucher.fromJson(controller
+                                      .pagingController.itemList!
+                                      .elementAt(index))),
+                            ),
+                        noItemsFoundIndicatorBuilder: (BuildContext context) {
+                          return Text(CustomErrorsString.kNoVoucher.tr);
+                        },
+                        firstPageErrorIndicatorBuilder: (BuildContext context) {
+                          return LazyLoadingListErrorBuilder(onPressed: () {
+                            controller.pagingController.refresh();
+                          });
+                        }),
+                  ),
+                );
+              }),
+        ],
+      ),
+    );
   }
 }

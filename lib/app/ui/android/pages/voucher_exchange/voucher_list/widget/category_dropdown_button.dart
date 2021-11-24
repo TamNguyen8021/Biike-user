@@ -17,13 +17,14 @@ class CategoryDropdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 35,
       padding: const EdgeInsets.only(left: 16.0),
       decoration: BoxDecoration(
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: CustomColors.kDarkGray.withOpacity(0.3),
               // changes position of shadow
-              offset: Offset(0, 1),
+              offset: Offset(0, 1.5),
             )
           ],
           color: CustomColors.kLightGray,
@@ -31,8 +32,8 @@ class CategoryDropdownButton extends StatelessWidget {
       child: DropdownButtonFormField<VoucherCategory>(
         value: dropdownValue,
         icon: Icon(
-          Icons.arrow_drop_down,
-          color: CustomColors.kDarkGray,
+          Icons.keyboard_arrow_down,
+          color: Colors.black,
         ),
         onChanged: onChangedFunc,
         items: dropdownArray
