@@ -10,11 +10,13 @@ class TopBikerCard extends StatelessWidget {
   final int point;
 
   TopBikerCard(
-      {required this.index,
-      required this.avatarUrl,
-      required this.name,
-      required this.point,
-      Key? key})
+      {
+        required this.index,
+        required this.avatarUrl,
+        required this.name,
+        required this.point,
+        Key? key
+      })
       : super(key: key);
 
   @override
@@ -90,8 +92,9 @@ class TopBikerCard extends StatelessWidget {
                                   .textTheme
                                   .bodyText1!
                                   .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                      fontSize: 10,
+                                      color: Colors.white,
+                              ),
                             )),
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0),

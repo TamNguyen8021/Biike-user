@@ -28,7 +28,9 @@ class TopBikerBottomSheet extends StatelessWidget {
                 flex: 2,
                 child: Padding(
                     padding: const EdgeInsets.only(left: 9.0, right: 0.0),
-                    child: Center(child: Text('1')))),
+                    child: Image.asset('assets/images/top-rated.png', height: 35),
+                ),
+            ),
             Expanded(
               flex: 4,
               child: Padding(
