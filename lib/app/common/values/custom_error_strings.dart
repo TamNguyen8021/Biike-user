@@ -1,6 +1,5 @@
 class CustomErrorsString {
   static const String kError = 'kError';
-  static const String kErrorMessage = 'kErrorMessage';
   static const String kNotRated = 'kNotRated';
   static const String kIncludeBadWords = 'kIncludeBadWords';
   static const String kSendFailed = 'kSendFailed';
@@ -26,4 +25,15 @@ class CustomErrorsString {
       'kErrorWhenStopSharingLocation';
   static const String kFillInAllField = 'kFillInAllField';
   static const String kNoVoucher = 'kNoVoucher';
+  static const String kWrongEmailOrPassword = 'kWrongEmailOrPassword';
+  static const String kNoPasswordEnter = 'kNoPasswordEnter';
+  static const String kInvalidEmail = 'kInvalidEmail';
+  static const String kWrongEmail = 'kWrongEmail';
+  static const String kPasswordMustAtLeast6 = 'kPasswordMustAtLeast6';
+  static const String kInvalidPhoneNo = 'kInvalidPhoneNo';
+  static const String kDuplicateEmailOrPhone = 'kDuplicateEmailOrPhone';
+  static const String kWrongOtp = 'kWrongOtp';
+  static const String kEmptyOtp = 'kEmptyOtp';
+  static const String kTryAgain = 'kTryAgain';
+  static const String kNoHistory = 'kNoHistory';
 }

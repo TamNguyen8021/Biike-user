@@ -114,8 +114,7 @@ class ViewPointPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 16.0, left: 22.0, right: 22.0),
-                    child: PointList(
-                        pointList: List.generate(20, (index) => index)),
+                    child: PointList(),
                   ),
                 ],
               ),

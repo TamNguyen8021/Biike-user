@@ -16,20 +16,24 @@ class ListBan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: data.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-              padding: EdgeInsets.only(bottom: itemPadding),
-              child: BanListCard(
-                name: data[index].userName,
-                onTapUnBlock: () {
-                  onTapItem(data[index]);
-                },
-              ));
-        });
+    if (data.isEmpty) {
+      return Text('chua co ai xui xeo bi block');
+    } else {
+      return ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+                padding: EdgeInsets.only(bottom: itemPadding),
+                child: BanListCard(
+                  name: data[index].userName,
+                  onTapUnBlock: () {
+                    onTapItem(data[index]);
+                  },
+                ));
+          });
+    }
   }
 }
