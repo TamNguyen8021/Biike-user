@@ -6,7 +6,26 @@ class IntimaciesProvider extends CommonProvider {
   /// Check two users intimacies based on userId and [partnerId]
   ///
   /// Author: TamNTT
-  Future<bool> checkIntimacies({required int partnerId}) async {
+  Future<bool> checkIfHasIntimacies({required int partnerId}) async {
+    final response = await get(
+        UrlStrings.intimaciesUrl +
+            '/existence?userOneId=${Biike.userId.value}&userTwoId=$partnerId',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body['data'];
+    }
+  }
+
+  /// Check user block their partner based on userId and [partnerId]
+  ///
+  /// Author: TamNTT
+  Future<bool> checkIfBlock({required int partnerId}) async {
     final response = await get(
         UrlStrings.intimaciesUrl +
             '?userOneId=${Biike.userId.value}&userTwoId=$partnerId',

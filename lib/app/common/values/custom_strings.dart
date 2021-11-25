@@ -158,6 +158,7 @@ class CustomStrings {
   static const String kCall = 'kCall';
   static const String kMessage = 'kMessage';
   static const String kReport = 'kReport';
+  static const String kReportAndBlock = 'kReportAndBlock';
   static const String kNoHistoryTrip = 'kNoHistoryTrip';
   static const String kHasHistoryTrip = 'kHasHistoryTrip';
   static const String kEnterYourReport = 'kEnterYourReport';

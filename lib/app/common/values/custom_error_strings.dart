@@ -36,4 +36,6 @@ class CustomErrorsString {
   static const String kEmptyOtp = 'kEmptyOtp';
   static const String kTryAgain = 'kTryAgain';
   static const String kNoHistory = 'kNoHistory';
+  static const String kEmptyReportReasonOrContainsBadWords =
+      'kEmptyReportReasonOrContainsBadWords';
 }

@@ -163,6 +163,7 @@ final Map<String, String> en = {
   'kCall': 'Call',
   'kMessage': 'Message',
   'kReport': 'Report',
+  'kReportAndBlock': 'Report and block',
   'kNoHistoryTrip': 'No history trips with this person',
   'kHasHistoryTrip': 'History trips with this person',
   'kEnterYourReport': 'Type your feedback about this person...',
@@ -430,4 +431,6 @@ final Map<String, String> en = {
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',
+    'kEmptyReportReasonOrContainsBadWords':
+        'Report reason must not be empty or contains inappropriate words',
   });

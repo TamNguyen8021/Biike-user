@@ -169,6 +169,7 @@ final Map<String, String> vi = {
   'kCall': 'Gọi điện',
   'kMessage': 'Nhắn tin',
   'kReport': 'Báo cáo',
+  'kReportAndBlock': 'Báo cáo và chặn',
   'kNoHistoryTrip': 'Không có lịch sử đi chung',
   'kHasHistoryTrip': 'Lịch sử đi chung',
   'kEnterYourReport': 'Nhập phản ánh của bạn về người này...',
@@ -435,5 +436,7 @@ final Map<String, String> vi = {
     'kWrongOtp': 'Sai mã OTP',
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
-    'kNoHistory': 'Không có lịch sử'
+    'kNoHistory': 'Không có lịch sử',
+    'kEmptyReportReasonOrContainsBadWords':
+        'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
   });
