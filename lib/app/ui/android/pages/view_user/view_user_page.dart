@@ -55,6 +55,24 @@ class ViewUserPage extends StatelessWidget {
         backgroundColor: CustomColors.kLightGray,
         foregroundColor: CustomColors.kDarkGray,
       ),
+      Obx(
+        () => Visibility(
+          visible: !_viewUserController.isUserBlocked.value,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: CustomElevatedIconButton(
+                width: 115,
+                backgroundColor: CustomColors.kRed,
+                foregroundColor: Colors.white,
+                text: CustomStrings.kBlock.tr,
+                elevation: 2.0,
+                icon: Icons.remove_circle,
+                onPressedFunc: () {
+                  _viewUserController.showConfirmBlockDialog(context: context);
+                }),
+          ),
+        ),
+      ),
     ];
 
     return Scaffold(
@@ -193,7 +211,7 @@ class ViewUserPage extends StatelessWidget {
                                                                 .elementAt(
                                                                     index)
                                                                 .destinationStation,
-                                                        isOnViewUserPage: false,
+                                                        isOnViewUserPage: true,
                                                       ),
                                                     ),
                                                 noItemsFoundIndicatorBuilder:
