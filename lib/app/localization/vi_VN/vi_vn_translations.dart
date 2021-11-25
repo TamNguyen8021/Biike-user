@@ -133,7 +133,7 @@ final Map<String, String> vi = {
   'kKeerActivities': 'Lịch ké',
   'kBikerActivities': 'Lịch chở',
 
-  //'profile' screen
+  // 'profile' screen
   'kEdit': 'Chỉnh sửa',
   'kSavedAddress': 'Sổ địa chỉ',
   'kSettings': 'Cài đặt',
@@ -144,6 +144,9 @@ final Map<String, String> vi = {
   'kPhoneNo': 'Số điện thoại',
   'kEmail': 'Email',
   'kLogOut': 'Đăng xuất',
+
+  // 'block_list' screen
+  'kEmptyBlockList': 'Chưa có ai xui xẻo bị block',
 
   // 'update_profile' screen
   'kEditProfile': 'Chỉnh sửa thông tin cá nhân',
@@ -169,14 +172,15 @@ final Map<String, String> vi = {
   'kNoHistoryTrip': 'Không có lịch sử đi chung',
   'kHasHistoryTrip': 'Lịch sử đi chung',
   'kEnterYourReport': 'Nhập phản ánh của bạn về người này...',
-  'kReportAndBlock': 'Báo cáo và chặn',
-  'kConfirmBlock': 'Bạn có chắc chắn\nmuốn chặn người này?',
-  'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn\ntại trang hồ sơ cá nhân',
+  'kBlock': 'Chặn',
+  'kConfirmBlock': 'Bạn có chắc chắn muốn chặn người này?',
+  'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn tại trang hồ sơ cá nhân',
   'kYes': 'Có',
   'kNo': 'Không',
   'kThankYouForReport': 'Cảm ơn bạn đã báo cáo',
   'kSorryMessage':
       'Biiké rất tiếc vì những trải nghiệm chưa được hoàn hảo. Biiké đã nhận được thông tin báo cáo và sẽ xử lý trong thời gian sớm nhất.',
+  'kYouBlockThisPerson': 'Bạn đã chặn người này',
 
   // 'finding_biker_success' screen
   'kFoundBiker': 'Đã tìm được người chở bạn!',

@@ -33,14 +33,17 @@ class BanListPage extends HookWidget {
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return SingleChildScrollView(
-                child: ListBan(
-                  itemPadding: 10.0,
-                  data: _banListController.data,
-                  onTapItem: (blackListItem) async {
-                    await _banListController.unBlock(
-                        context: context, blackListItem: blackListItem);
-                  },
-                ),
+                child: GetBuilder<BanListController>(
+                    builder: (BanListController controller) {
+                  return ListBan(
+                    itemPadding: 10.0,
+                    data: controller.data,
+                    onTapItem: (blackListItem) async {
+                      await controller.unBlock(
+                          context: context, blackListItem: blackListItem);
+                    },
+                  );
+                }),
               );
             } else {
               return Loading();

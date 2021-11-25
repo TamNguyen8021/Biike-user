@@ -1,5 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
+import 'package:bikes_user/app/data/providers/intimacies_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -19,6 +21,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class ViewUserController extends GetxController {
   final _userProvider = Get.find<UserProvider>();
   final _tripProvider = Get.find<TripProvider>();
+  final _intimaciesProvider = Get.find<IntimaciesProvider>();
   final PagingController<int, HistoryTripCard> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -28,6 +31,8 @@ class ViewUserController extends GetxController {
   Map<String, dynamic> historyTripsPagination = {};
   int _currentPage = 1;
   int _limit = 10;
+
+  Rx<bool> isUserBlocked = false.obs;
 
   @override
   onInit() {
@@ -190,10 +195,10 @@ class ViewUserController extends GetxController {
                               hasBorder: false,
                               backgroundColor: CustomColors.kRed,
                               foregroundColor: Colors.white,
-                              text: CustomStrings.kReportAndBlock.tr,
+                              text: CustomStrings.kBlock.tr,
                               onPressedFunc: () {
                                 Get.back();
-                                _showConfirmBlockDialog(context: context);
+                                showConfirmBlockDialog(context: context);
                               }),
                           CustomTextButton(
                               hasBorder: false,
@@ -217,7 +222,7 @@ class ViewUserController extends GetxController {
   /// Display a dialog on [context] to confirm if user wants to block another user.
   ///
   /// Author: TamNTT
-  void _showConfirmBlockDialog({required BuildContext context}) async {
+  void showConfirmBlockDialog({required BuildContext context}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -229,7 +234,7 @@ class ViewUserController extends GetxController {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     CustomStrings.kConfirmBlock.tr,
@@ -253,9 +258,48 @@ class ViewUserController extends GetxController {
                               backgroundColor: CustomColors.kBlue,
                               foregroundColor: Colors.white,
                               text: CustomStrings.kYes.tr,
-                              onPressedFunc: () {
-                                Get.back();
-                                _showThankYouForReportDialog(context: context);
+                              onPressedFunc: () async {
+                                if (await _intimaciesProvider.checkIntimacies(
+                                    partnerId: user.userId)) {
+                                  if (await _intimaciesProvider.editIntimacies(
+                                      body: {
+                                        "userOneId": Biike.userId.value,
+                                        "userTwoId": user.userId
+                                      })) {
+                                    isUserBlocked.value = true;
+                                    Get.back(closeOverlays: true);
+                                    await CommonFunctions().showSuccessDialog(
+                                        context: context,
+                                        message: CustomStrings
+                                            .kYouBlockThisPerson.tr);
+                                  } else {
+                                    Get.back();
+                                    await CommonFunctions().showErrorDialog(
+                                        context: context,
+                                        message: CustomErrorsString
+                                            .kDevelopError.tr);
+                                  }
+                                } else {
+                                  if (await _intimaciesProvider
+                                      .createIntimacies(body: {
+                                    "userOneId": Biike.userId.value,
+                                    "userTwoId": user.userId,
+                                    "isBlock": false
+                                  })) {
+                                    isUserBlocked.value = true;
+                                    Get.back(closeOverlays: true);
+                                    await CommonFunctions().showSuccessDialog(
+                                        context: context,
+                                        message: CustomStrings
+                                            .kYouBlockThisPerson.tr);
+                                  } else {
+                                    Get.back();
+                                    await CommonFunctions().showErrorDialog(
+                                        context: context,
+                                        message: CustomErrorsString
+                                            .kDevelopError.tr);
+                                  }
+                                }
                               }),
                           CustomTextButton(
                               hasBorder: false,
@@ -263,7 +307,7 @@ class ViewUserController extends GetxController {
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
                               onPressedFunc: () {
-                                Get.back();
+                                Get.back(closeOverlays: true);
                               }),
                         ],
                       ),

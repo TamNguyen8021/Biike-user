@@ -11,6 +11,7 @@ class UrlStrings {
   static const String bikeUrl = _baseUrl + 'bikes/';
   static const String imageUrl = _baseUrl + 'images';
   static const String pointUrl = _baseUrl + 'pointHistory';
+  static const String intimaciesUrl = _baseUrl + 'intimacies';
 
   static const String googleMapApiKey =
       'AIzaSyATchI6wf0LyaEBcSB9xZz86iYuPm9Je-k';
