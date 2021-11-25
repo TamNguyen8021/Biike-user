@@ -61,8 +61,9 @@ dependencies:
   google_sign_in: ^5.1.1
   firebase_messaging: ^11.1.0
   firebase_analytics: ^8.3.4
+  firebase_database: ^8.1.0
 
-  # api 
+  # api
   retrofit: ^2.0.1
   dio: ^4.0.0
 
@@ -80,8 +81,7 @@ dependencies:
   google_maps_flutter: ^2.1.0
   flutter_polyline_points: ^1.0.0
   share_plus: ^3.0.4
-  firebase_database: ^8.1.0
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

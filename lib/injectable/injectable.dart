@@ -1,3 +1,4 @@
+import 'package:bikes_user/services/firebase_realtime_database_service.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:get_it/get_it.dart';
@@ -18,6 +19,11 @@ Future<void> configureDependencies() async => $initGetIt(getIt);
 abstract class Services {
   @singleton
   FirebaseServices get firebaseServices => FirebaseServices.init();
+
+  @singleton
+  FirebaseRealtimeDatabaseService get realtimeDatabaseService =>
+      FirebaseRealtimeDatabaseService.init();
+
   @preResolve
   Future<AppPref> get appPref => AppPref.instance();
 }
