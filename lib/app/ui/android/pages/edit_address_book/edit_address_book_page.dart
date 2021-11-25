@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// The 'edit_address_book' screen
+//ignore:must_be_immutable
 class EditAddressBookPage extends StatelessWidget {
   final editAddressBookPageController = Get.find<EditAddressBookController>();
   final _addressBookController = Get.find<AddressBookController>();
@@ -26,6 +27,17 @@ class EditAddressBookPage extends StatelessWidget {
     editAddressBookPageController.name.value = name;
     editAddressBookPageController.address.value = address;
     editAddressBookPageController.note.value = note;
+
+    editAddressBookPageController.tempName = name;
+    editAddressBookPageController.tempAddress = address;
+    editAddressBookPageController.tempNote = note;
+
+    Rx<bool> isSaveButtonDisable = editAddressBookPageController
+        .isSaveButtonDisable(
+            newName: editAddressBookPageController.name.value,
+            newAddress: editAddressBookPageController.address.value,
+            newNote: editAddressBookPageController.note.value)
+        .obs;
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -42,7 +54,8 @@ class EditAddressBookPage extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
               onPressed: () => {
-                _addressBookController.removeAddressBook(context: context, id: id)
+                _addressBookController.removeAddressBook(
+                    context: context, id: id)
               },
               icon: Icon(Icons.delete),
             ),
@@ -81,6 +94,14 @@ class EditAddressBookPage extends StatelessWidget {
                         labelText: CustomStrings.kName.tr,
                         onChangedFunc: (value) {
                           editAddressBookPageController.name.value = value;
+                          isSaveButtonDisable.value =
+                              editAddressBookPageController.isSaveButtonDisable(
+                                  newName:
+                                      editAddressBookPageController.name.value,
+                                  newAddress: editAddressBookPageController
+                                      .address.value,
+                                  newNote:
+                                      editAddressBookPageController.note.value);
                         }),
                   ),
                   Row(
@@ -127,35 +148,51 @@ class EditAddressBookPage extends StatelessWidget {
                         labelText: CustomStrings.kNote.tr,
                         onChangedFunc: (value) {
                           editAddressBookPageController.note.value = value;
+                          isSaveButtonDisable.value =
+                              editAddressBookPageController.isSaveButtonDisable(
+                                  newName:
+                                      editAddressBookPageController.name.value,
+                                  newAddress: editAddressBookPageController
+                                      .address.value,
+                                  newNote:
+                                      editAddressBookPageController.note.value);
                         }),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 18.0),
-                    child: CustomElevatedIconHasLoadingButton(
-                      onPressedFunc: () async {
-                        if (editAddressBookPageController.validate()) {
-                          if (await editAddressBookPageController
-                              .editAddress(id)) {
-                            await _addressBookController.getAddressBooks();
-                            Get.back();
-                          } else {
-                            CommonFunctions().showErrorDialog(
-                                context: context,
-                                message: CustomErrorsString.kDevelopError.tr);
-                          }
-                        } else {
-                          CommonFunctions().showErrorDialog(
-                              context: context,
-                              message: CustomErrorsString
-                                  .kFillInAllField.tr);
-                        }
-                      },
-                      text: CustomStrings.kSave.tr,
-                      backgroundColor: CustomColors.kBlue,
-                      foregroundColor: Colors.white,
-                      elevation: 2.0,
-                      icon: Icons.save,
-                      isLoading: editAddressBookPageController.isLoading,
+                  Obx(
+                    () => Padding(
+                      padding: const EdgeInsets.only(top: 18.0),
+                      child: CustomElevatedIconHasLoadingButton(
+                        onPressedFunc: isSaveButtonDisable.isTrue
+                            ? () {}
+                            : () async {
+                                if (editAddressBookPageController.validate()) {
+                                  if (await editAddressBookPageController
+                                      .editAddress(id)) {
+                                    await _addressBookController
+                                        .getAddressBooks();
+                                    Get.back();
+                                  } else {
+                                    CommonFunctions().showErrorDialog(
+                                        context: context,
+                                        message: CustomErrorsString
+                                            .kDevelopError.tr);
+                                  }
+                                } else {
+                                  CommonFunctions().showErrorDialog(
+                                      context: context,
+                                      message: CustomErrorsString
+                                          .kNotFillAllFields.tr);
+                                }
+                              },
+                        text: CustomStrings.kSave.tr,
+                        backgroundColor: isSaveButtonDisable.isTrue
+                            ? CustomColors.kDarkGray
+                            : CustomColors.kBlue,
+                        foregroundColor: Colors.white,
+                        elevation: 2.0,
+                        icon: Icons.save,
+                        isLoading: editAddressBookPageController.isLoading,
+                      ),
                     ),
                   )
                 ],

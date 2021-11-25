@@ -18,49 +18,50 @@ class AddressBookPage extends StatelessWidget {
 
     return FutureBuilder(
         future: addressBookController.getAddressBooks(),
-        builder: (BuildContext context,  AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Obx(
-                      () => Scaffold(
-                        appBar: CustomAppBar(
-                          isVisible: true,
-                          hasShape: true,
-                          appBar: AppBar(),
-                          hasLeading: true,
-                          onPressedFunc: () {
-                            Get.back();
-                          },
-                          title: Text(
-                            CustomStrings.kAddressBook.tr,
-                          ),
-                        ),
-                        body: SingleChildScrollView(
-                          child: Column(children: <Widget>[
-                            Container(
-                                height: MediaQuery.of(context).size.height,
-                                padding: const EdgeInsets.all(22.0),
-                                child: ListAddressBooks(
-                                  listAddressBooks: addressBookController.addressBooks.value,
-                                  itemPadding: 10.0,
-                                )),
-                          ]),
-                        ),
-                        floatingActionButton: FloatingActionButton(
-                          elevation: 1.0,
-                          onPressed: () => Get.toNamed(CommonRoutes.ADD_ADDRESS_BOOK)?.then((value) => addressBookController.getAddressBooks()),
-                          backgroundColor: CustomColors.kDarkBlue,
-                          child: Icon(
-                            Icons.add,
-                            size: 50,
-                          ),
-                        ),
-                        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-                      )
-              );
-            } else {
-              return Loading();
-            }
-        }
-    );
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Obx(() => Scaffold(
+                  appBar: CustomAppBar(
+                    isVisible: true,
+                    hasShape: true,
+                    appBar: AppBar(),
+                    hasLeading: true,
+                    onPressedFunc: () {
+                      Get.back();
+                    },
+                    title: Text(
+                      CustomStrings.kAddressBook.tr,
+                    ),
+                  ),
+                  body: SingleChildScrollView(
+                    child: Column(children: <Widget>[
+                      Container(
+                          height: MediaQuery.of(context).size.height,
+                          padding: const EdgeInsets.all(22.0),
+                          child: ListAddressBooks(
+                            listAddressBooks:
+                                addressBookController.addressBooks.toList(),
+                            itemPadding: 10.0,
+                          )),
+                    ]),
+                  ),
+                  floatingActionButton: FloatingActionButton(
+                    elevation: 1.0,
+                    onPressed: () => Get.toNamed(CommonRoutes.ADD_ADDRESS_BOOK)
+                        ?.then(
+                            (value) => addressBookController.getAddressBooks()),
+                    backgroundColor: CustomColors.kDarkBlue,
+                    child: Icon(
+                      Icons.add,
+                      size: 50,
+                    ),
+                  ),
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerFloat,
+                ));
+          } else {
+            return Loading();
+          }
+        });
   }
 }

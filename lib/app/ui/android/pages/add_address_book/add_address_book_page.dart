@@ -52,14 +52,14 @@ class AddAddressBookPage extends StatelessWidget {
                   ),
                   Obx(
                     () => AddressBookTextField(
-                        hintText: CustomStrings.kEnterName.tr,
-                        isReadOnly: false,
-                        isEditAddressBook: true,
-                        initialValue: '${addAddressBookPageController.name}',
-                        labelText: CustomStrings.kName.tr,
-                        onChangedFunc: (value) {
-                          addAddressBookPageController.name.value = value;
-                        },
+                      hintText: CustomStrings.kEnterName.tr,
+                      isReadOnly: false,
+                      isEditAddressBook: true,
+                      initialValue: '${addAddressBookPageController.name}',
+                      labelText: CustomStrings.kName.tr,
+                      onChangedFunc: (value) {
+                        addAddressBookPageController.name.value = value;
+                      },
                     ),
                   ),
                   Row(
@@ -98,14 +98,14 @@ class AddAddressBookPage extends StatelessWidget {
                   ),
                   Obx(
                     () => AddressBookTextField(
-                        hintText: CustomStrings.kEnterNote.tr,
-                        isReadOnly: false,
-                        isEditAddressBook: true,
-                        initialValue: '${addAddressBookPageController.note}',
-                        labelText: CustomStrings.kNote.tr,
-                        onChangedFunc: (value) {
-                          addAddressBookPageController.note.value = value;
-                        },
+                      hintText: CustomStrings.kEnterNote.tr,
+                      isReadOnly: false,
+                      isEditAddressBook: true,
+                      initialValue: '${addAddressBookPageController.note}',
+                      labelText: CustomStrings.kNote.tr,
+                      onChangedFunc: (value) {
+                        addAddressBookPageController.note.value = value;
+                      },
                     ),
                   ),
                   Padding(
@@ -113,8 +113,7 @@ class AddAddressBookPage extends StatelessWidget {
                     child: CustomElevatedIconHasLoadingButton(
                       onPressedFunc: () async {
                         if (addAddressBookPageController.validate()) {
-                          if (await addAddressBookPageController
-                              .addAddress()) {
+                          if (await addAddressBookPageController.addAddress()) {
                             Get.back();
                           } else {
                             CommonFunctions().showErrorDialog(
@@ -124,8 +123,7 @@ class AddAddressBookPage extends StatelessWidget {
                         } else {
                           CommonFunctions().showErrorDialog(
                               context: context,
-                              message: CustomErrorsString
-                                  .kFillInAllField.tr);
+                              message: CustomErrorsString.kNotFillAllFields.tr);
                         }
                       },
                       text: CustomStrings.kSave.tr,

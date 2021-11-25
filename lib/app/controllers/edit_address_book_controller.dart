@@ -7,9 +7,12 @@ class EditAddressBookController extends GetxController {
 
   Rx<String> name = ''.obs;
   Rx<String> address = '1426/39, Nguyễn Duy Trinh'.obs;
-  Rx<String> note =''.obs;
+  Rx<String> note = ''.obs;
 
   bool isLoading = false;
+  String tempName = '';
+  String tempAddress = '';
+  String tempNote = '';
 
   void _enableLoading(bool loading) {
     isLoading = loading;
@@ -20,7 +23,7 @@ class EditAddressBookController extends GetxController {
     _enableLoading(true);
 
     Map<String, dynamic> body = {
-      'userId' : Biike.userId.value,
+      'userId': Biike.userId.value,
       'userAddressName': name.value,
       'userAddressDetail': address.value,
       'userAddressCoordinate': '123,123',
@@ -36,5 +39,14 @@ class EditAddressBookController extends GetxController {
     }
 
     return true;
+  }
+
+  bool isSaveButtonDisable(
+      {required String newName,
+      required String newAddress,
+      required String newNote}) {
+    return (tempName == newName) &&
+        (tempAddress == newAddress) &&
+        (tempNote == newNote);
   }
 }
