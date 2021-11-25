@@ -15,15 +15,24 @@ class CustomStrings {
   static const String kStart = 'kStart';
 
   // '003.1_login'
-  static const String kLoginButton = 'kLoginButton';
-  static const String kConfirmTerm = 'kConfirmTerm';
-  static const String kTerm = 'kTerm';
   static const String kForgotPassword = 'kForgotPassword';
   static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
+  static const String kInputEmail = 'kInputEmail';
+  static const String kPassword = 'kPassword';
+  static const String kInputPassword = 'kInputPassword';
+  static const String kLogin = 'kLogin';
+  static const String kNoAccount = 'kNoAccount';
 
-  // '004.1_input_phone_no' screen
+  // 'register' screen
+  static const String kConfirmTerm = 'kConfirmTerm';
+  static const String kAnd = 'kAnd';
+  static const String kRegister = 'kRegister';
+  static const String kHasAccount = 'kHasAccount';
+  static const String kInputName = 'kInputName';
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
   static const String kErrorInputPhoneNumber = 'kErrorInputPhoneNumber';
+  static const String kSentVerifiedEmail = 'kSentVerifiedEmail';
+  static const String kRegisterSuccess = 'kRegisterSuccess';
 
   // '004.2_verify_phone' screen
   static const String kInputVerifyCode = 'kInputVerifyCode';
@@ -31,9 +40,7 @@ class CustomStrings {
   static const String kInvalidPin = 'kInvalidPin';
 
   // '004.3_input_name' screen
-  static const String kInputName = 'kInputName';
   static const String kErrorName = 'kErrorName';
-  static const String kInputEmail = 'kInputEmail';
   static const String kErrorEmail = 'kErrorEmail';
 
   // '004.4_choose_mode' screen
@@ -151,16 +158,21 @@ class CustomStrings {
   static const String kCall = 'kCall';
   static const String kMessage = 'kMessage';
   static const String kReport = 'kReport';
+  static const String kReportAndBlock = 'kReportAndBlock';
   static const String kNoHistoryTrip = 'kNoHistoryTrip';
   static const String kHasHistoryTrip = 'kHasHistoryTrip';
   static const String kEnterYourReport = 'kEnterYourReport';
-  static const String kReportAndBlock = 'kReportAndBlock';
+  static const String kBlock = 'kBlock';
   static const String kConfirmBlock = 'kConfirmBlock';
   static const String kSeeBlacklist = 'kSeeBlacklist';
   static const String kYes = 'kYes';
   static const String kNo = 'kNo';
   static const String kThankYouForReport = 'kThankYouForReport';
   static const String kSorryMessage = 'kSorryMessage';
+  static const String kYouBlockThisPerson = 'kYouBlockThisPerson';
+
+  // 'block_list' screen
+  static const String kEmptyBlockList = 'kEmptyBlockList';
 
   // 'finding_biker_success' screen
   static const String kFoundBiker = 'kFoundBiker';

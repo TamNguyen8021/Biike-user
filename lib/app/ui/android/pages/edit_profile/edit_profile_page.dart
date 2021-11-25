@@ -55,20 +55,20 @@ class EditProfilePage extends StatelessWidget {
                         NetworkImage(_profileController.user.avatar),
                     radius: 55,
                   ),
-                  Positioned(
-                    top: 75,
-                    left: 80,
-                    child: CircleAvatar(
-                      radius: 15,
-                      backgroundColor: CustomColors.kBlue,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.camera_alt),
-                        iconSize: 15,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
+                  // Positioned(
+                  //   top: 75,
+                  //   left: 80,
+                  //   child: CircleAvatar(
+                  //     radius: 15,
+                  //     backgroundColor: CustomColors.kBlue,
+                  //     child: IconButton(
+                  //       onPressed: () {},
+                  //       icon: Icon(Icons.camera_alt),
+                  //       iconSize: 15,
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
               Form(
