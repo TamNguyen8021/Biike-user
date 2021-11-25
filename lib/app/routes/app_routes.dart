@@ -19,7 +19,6 @@ abstract class CommonRoutes {
   static const FIND_BIKER_SUCCESS = '/findBikerSuccess';
   static const FIND_BIKER_FAIL = '/findBikerFail';
   static const GET_TRIP_SUCCESS = '/getTripSuccess';
-  static const EXCHANGE_VOUCHER = '/exchangeVoucher';
   static const TRIP_DETAILS = '/tripDetails';
   static const TRIP_DETAILS_FULL_MAP = '/tripDetailsFullMap';
   static const BOOK_TRIP = '/bookTrip';
@@ -34,9 +33,11 @@ abstract class CommonRoutes {
   static const ADD_SOS_NUMBER = '/addSOSNumber';
   static const EDIT_SOS_NUMBER = '/editSOSNumber';
   static const BAN_LIST = '/banList';
-  static const VOUCHER_DETAILS = '/voucherDetails';
+  static const EXCHANGE_VOUCHER = '/exchangeVoucher';
+  static const VOUCHER_DETAILS = '/exchangeVoucher/voucherDetails';
   static const YOUR_VOUCHERS = '/yourVouchers';
-  static const YOUR_VOUCHER_DETAIL = '/yourVoucherDetail';
+  static const YOUR_VOUCHER_DETAIL = '/yourVouchers/yourVoucherDetail';
   static const TAKE_PICTURE = '/takePicture';
   static const POINT = '/point';
+  static const NOTIFICATION = '/notification';
 }

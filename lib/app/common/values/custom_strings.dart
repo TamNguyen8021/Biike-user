@@ -382,5 +382,8 @@ class CustomStrings {
   static const String kExpired = 'kExpired';
   static const String kFindMore = 'kFindMore';
 
+  // noti
+  static const String kNotification = 'kNotification';
+
   static const String kAll = 'kAll';
 }
