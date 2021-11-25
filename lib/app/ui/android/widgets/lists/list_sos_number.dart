@@ -22,10 +22,7 @@ class ListSOSNumbers extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
               padding: EdgeInsets.only(bottom: itemPadding),
-              child: SOSNumberCard(
-                name: listSOSNumbers.elementAt(index).name,
-                number: listSOSNumbers.elementAt(index).number,
-              )
+              child: listSOSNumbers[index]
           );
         });
   }

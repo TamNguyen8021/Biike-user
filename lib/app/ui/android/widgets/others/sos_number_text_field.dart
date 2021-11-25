@@ -7,6 +7,7 @@ class SOSNumberTextField extends StatelessWidget {
   final String initialValue;
   final String labelText;
   final String hintText;
+  final Function(String)? onChangedFunc;
 
   const SOSNumberTextField(
       {Key? key,
@@ -14,7 +15,8 @@ class SOSNumberTextField extends StatelessWidget {
         required this.isEditSOSNumber,
         required this.initialValue,
         required this.labelText,
-        required this.hintText})
+        required this.hintText,
+        this.onChangedFunc})
       : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class SOSNumberTextField extends StatelessWidget {
       child: TextFormField(
         readOnly: isReadOnly,
         initialValue: initialValue,
+        onChanged: onChangedFunc,
         textAlignVertical: TextAlignVertical.center,
         style: TextStyle(
             fontWeight: FontWeight.normal,

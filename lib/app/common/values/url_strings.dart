@@ -23,4 +23,5 @@ class UrlStrings {
   static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';
   static const String pathshareUserUrl = _pathshareBaseUrl + 'users';
   static const String directionUrl = _googleMapUrl + 'directions/json';
+  static const String sos = _baseUrl + 'Sos';
 }
