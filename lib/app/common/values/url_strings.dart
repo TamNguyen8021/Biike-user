@@ -22,4 +22,6 @@ class UrlStrings {
       CustomLocation departure, CustomLocation destination) {
     return 'http://maps.google.com/maps?saddr=${departure.latitude},${departure.longitude}&daddr=${destination.latitude},${destination.longitude}&travelmode=driving';
   }
+
+  static const String apiMomoPayment = 'https://test-payment.momo.vn/pay/app';
 }

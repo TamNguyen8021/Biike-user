@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/bindings/TopUpPointBinding.dart';
+import 'package:bikes_user/app/bindings/top_up_point_binding.dart';
 import 'package:bikes_user/app/bindings/bike_binding.dart';
 import 'package:bikes_user/app/bindings/cho_now_settings_binding.dart';
 import 'package:bikes_user/app/bindings/login_binding.dart';

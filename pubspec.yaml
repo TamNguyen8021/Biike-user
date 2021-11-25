@@ -76,6 +76,11 @@ dependencies:
   location: ^4.3.0
   back_pressed: ^0.0.2
   google_maps_flutter: ^2.1.0
+  momo_vn: ^2.0.1
+  pointycastle: ^3.4.0
+  rsa_encrypt: ^2.0.0
+  asn1lib: ^1.0.3
+  random_string: ^2.3.1
   
 dev_dependencies:
   flutter_test:
