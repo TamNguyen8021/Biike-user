@@ -6,22 +6,26 @@ part of 'notification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Notification _$NotificationFromJson(Map<String, dynamic> json) {
-  return Notification(
-      notiId: json['notiId'] as int?,
+BiikeNoti _$NotificationFromJson(Map<dynamic, dynamic> json) {
+  return BiikeNoti(
+      // notiId: json['notiId'] as int?,
       receiverId: json['receiverId'] as int?,
+      title: json['title'] as String? ?? '',
+      content: json['content'] as String? ?? '',
       url: json['url'] as String? ?? '',
-      timeSent: json['timeSent'] == null
+      createdDate: json['createdDate'] == null
           ? null
-          : DateTime.parse(json['timeSent'] as String),
+          : DateTime.parse(json['createdDate'] as String),
       isRead: json['isRead'] as bool?);
 }
 
-Map<String, dynamic> _$NotificationToJson(Notification instance) =>
+Map<String, dynamic> _$NotificationToJson(BiikeNoti instance) =>
     <String, dynamic>{
-      'notiId': instance.notiId,
+      // 'notiId': instance.notiId,
       'receiverId': instance.receiverId,
+      'title': instance.title,
+      'content': instance.content,
       'url': instance.url,
-      'timeSent': instance.timeSent?.toIso8601String(),
+      'createdDate': instance.createdDate?.toIso8601String(),
       'isRead': instance.isRead
     };

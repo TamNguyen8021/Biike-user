@@ -394,7 +394,7 @@ final Map<String, String> en = {
   'kFindMore': 'Learn more',
 
   // noti
-  'kNotification': 'Notification',
+  'kNotification': 'BiikeNoti',
 
   'kAll': 'All',
 }..addAll(<String, String>{

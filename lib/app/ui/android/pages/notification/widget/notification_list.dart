@@ -1,26 +1,27 @@
+import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:bikes_user/app/ui/android/pages/notification/widget/notificaiton_card.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class NotificationList extends StatelessWidget {
-  final List notiList;
+  final List<dynamic> listNotification;
 
-  const NotificationList({Key? key, required this.notiList}) : super(key: key);
+  const NotificationList({Key? key, required this.listNotification})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
+        reverse: true,
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: notiList.length,
+        itemCount: listNotification.length,
         itemBuilder: (BuildContext context, int i) {
           return Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: NotificationCard(
-                title: 'Accepted',
-                content: 'csmakmalscmalkmclakmcamclamclkmalcsmakcmlakcmslmclamcklamcklamcklamlmcaslmcsa',
-                date: DateTime.now()),
-          );
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: NotificationCard(
+                  notification:
+                      BiikeNoti.fromJson(listNotification[i])));
         });
   }
 }
