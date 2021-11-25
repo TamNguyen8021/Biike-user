@@ -1,10 +1,11 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
-import 'package:bikes_user/main.dart';
-import 'package:bikes_user/app/controllers/home_controller.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,78 +24,81 @@ class Activity extends StatelessWidget {
       _roleActivity = CustomStrings.kBikerActivities.tr;
     }
 
-    return GetBuilder(
-        init: homeController,
-        builder: (_) {
-          return Scaffold(
-            appBar: null,
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 40.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30.0),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            _roleActivity,
-                            style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                color: CustomColors.kBlue),
-                          ),
-                          IconButton(
-                              onPressed: () =>
-                                  Get.toNamed(CommonRoutes.TRIP_HISTORY),
-                              icon: Icon(
-                                Icons.history,
-                                color: CustomColors.kBlue,
-                              ))
-                        ]),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height - 230,
-                    child: RefreshIndicator(
+    return Scaffold(
+      appBar: null,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 40.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        _roleActivity,
+                        style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                            color: CustomColors.kBlue),
+                      ),
+                      IconButton(
+                          onPressed: () =>
+                              Get.toNamed(CommonRoutes.TRIP_HISTORY),
+                          icon: Icon(
+                            Icons.history,
+                            color: CustomColors.kBlue,
+                          ))
+                    ]),
+              ),
+              GetBuilder<HomeController>(
+                  init: homeController,
+                  builder: (HomeController controller) {
+                    return RefreshIndicator(
                       onRefresh: () => Future.sync(
-                        () => homeController.pagingController.refresh(),
+                        () => controller.pagingController.refresh(),
                       ),
                       child: PagedListView<int, dynamic>(
-                        pagingController: homeController.pagingController,
+                        pagingController: controller.pagingController,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
                         builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                            animateTransitions: true,
                             itemBuilder: (context, item, index) => Padding(
                                   padding: const EdgeInsets.only(bottom: 10.0),
                                   child: UpcomingTripCard(
-                                      tripId: homeController
+                                      isSearchedTrip: false,
+                                      tripId: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .tripId,
-                                      userId: homeController
+                                      userId: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .userId,
-                                      avatarUrl: homeController
+                                      avatarUrl: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .avatarUrl,
-                                      name: homeController
+                                      name: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .name,
-                                      phoneNo: homeController
+                                      phoneNo: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .phoneNo,
-                                      bookTime: homeController
+                                      bookTime: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .bookTime,
-                                      departureStation: homeController
+                                      departureStation: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .departureStation,
-                                      destinationStation: homeController
+                                      destinationStation: controller
                                           .pagingController.itemList!
                                           .elementAt(index)
                                           .destinationStation),
@@ -102,14 +106,20 @@ class Activity extends StatelessWidget {
                             noItemsFoundIndicatorBuilder:
                                 (BuildContext context) {
                               return Text(CustomStrings.kNoUpcomingTrips.tr);
+                            },
+                            firstPageErrorIndicatorBuilder:
+                                (BuildContext context) {
+                              return LazyLoadingListErrorBuilder(onPressed: () {
+                                controller.pagingController.refresh();
+                              });
                             }),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
+                    );
+                  }),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

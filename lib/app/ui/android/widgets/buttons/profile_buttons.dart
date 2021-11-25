@@ -141,7 +141,7 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {},
               child: Row(
                 children: <Widget>[
                   Padding(

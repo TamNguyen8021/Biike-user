@@ -9,15 +9,19 @@ part 'wallet.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class Wallet {
-  final int? walletId;
-  final int? userId;
-  final DateTime? fromDate;
-  final DateTime? toDate;
-  final int? point;
-  final int? walletStatus;
+  int? walletId;
+  int? userId;
+  DateTime? fromDate;
+  DateTime? toDate;
+  int? point;
+  int? walletStatus;
 
   Wallet(this.walletId, this.userId, this.fromDate, this.toDate, this.point,
       this.walletStatus);
+
+  Wallet.empty() {
+    walletId = -1;
+  }
 
   /// A necessary factory constructor for creating a new Wallet instance
   /// from a map. Pass the map to the generated `_$WalletFromJson()` constructor.

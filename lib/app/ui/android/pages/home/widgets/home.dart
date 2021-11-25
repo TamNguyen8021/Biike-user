@@ -1,7 +1,11 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/pages/home/widgets/list_upcoming_trips.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
@@ -27,584 +31,614 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-        init: homeController,
-        builder: (_) {
-          return FutureBuilder(
-            future: Biike.role.value == Role.keer
-                ? homeController.getUpcomingTrips()
-                : homeController.getStations(),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                late DateTime _firstTripTimeBook;
-                DateTime _currentTime = DateTime.now();
-                String _timeLeft = '';
+    late DateTime _firstTripTimeBook;
+    DateTime _currentTime = DateTime.now();
+    String _timeLeft = '';
 
-                if (homeController.upcomingTrips.isNotEmpty) {
-                  _firstTripTimeBook = DateTime.tryParse(
-                          homeController.upcomingTrips.toList()[0].bookTime) ??
-                      DateTime.now();
-                  if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
-                    _timeLeft = _timeLeft +
-                        (_firstTripTimeBook.hour - _currentTime.hour)
-                            .toString() +
-                        CustomStrings.kReminderHour.tr;
-                  }
+    if (homeController.upcomingTrips.isNotEmpty) {
+      _firstTripTimeBook = DateTime.tryParse(
+              homeController.upcomingTrips.toList()[0].bookTime) ??
+          DateTime.now();
+      if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
+        _timeLeft = _timeLeft +
+            (_firstTripTimeBook.hour - _currentTime.hour).toString() +
+            CustomStrings.kReminderHour.tr;
+      }
 
-                  if (_timeLeft.isNotEmpty) {
-                    _timeLeft = _timeLeft +
-                        (_firstTripTimeBook.minute - _currentTime.minute)
-                            .abs()
-                            .toString() +
-                        CustomStrings.kReminderMinute.tr +
-                        CustomStrings.kReminderLeft.tr;
-                  } else if (_firstTripTimeBook.hour == _currentTime.hour &&
-                      _firstTripTimeBook.minute - _currentTime.minute > 0) {
-                    _timeLeft = _timeLeft +
-                        (_firstTripTimeBook.minute - _currentTime.minute)
-                            .toString() +
-                        CustomStrings.kReminderMinute.tr +
-                        CustomStrings.kReminderLeft.tr;
-                  }
-                }
-                return Scaffold(
-                  body: SingleChildScrollView(
-                    child: SafeArea(
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                                22.0, 22.0, 22.0, 0.0),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+      if (_timeLeft.isNotEmpty) {
+        _timeLeft = _timeLeft +
+            (_firstTripTimeBook.minute - _currentTime.minute).abs().toString() +
+            CustomStrings.kReminderMinute.tr +
+            CustomStrings.kReminderLeft.tr;
+      } else if (_firstTripTimeBook.hour == _currentTime.hour &&
+          _firstTripTimeBook.minute - _currentTime.minute > 0) {
+        _timeLeft = _timeLeft +
+            (_firstTripTimeBook.minute - _currentTime.minute).toString() +
+            CustomStrings.kReminderMinute.tr +
+            CustomStrings.kReminderLeft.tr;
+      }
+    }
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 0.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      if (Biike.role.value == Role.biker) ...[
+                        GestureDetector(
+                          child: Container(
+                              margin: const EdgeInsets.only(bottom: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              decoration: BoxDecoration(
+                                  color: CustomColors.kLightBlue,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Row(
                                 children: <Widget>[
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 20.0),
-                                    child: TopBiker(),
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, right: 8.0),
+                                    child: Image.asset(
+                                      'assets/images/fire.png',
+                                      height: 20,
+                                    ),
                                   ),
-                                  if (homeController
-                                      .upcomingTrips.isNotEmpty) ...[
-                                    if (_firstTripTimeBook.day ==
-                                            _currentTime.day &&
-                                        _firstTripTimeBook.month ==
-                                            _currentTime.month &&
-                                        _firstTripTimeBook.year ==
-                                            _currentTime.year) ...[
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Text(
-                                              Biike.role.value == Role.keer
-                                                  ? CustomStrings
-                                                      .kKeerReadyReminder.tr
-                                                  : CustomStrings
-                                                      .kBikerReadyReminder.tr,
-                                              style: TextStyle(
-                                                  color:
-                                                      CustomColors.kDarkGray),
-                                            ),
-                                            Text(
-                                              _timeLeft,
-                                              style: TextStyle(
-                                                  color: CustomColors.kBlue,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12.sp),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10.0),
-                                        child: UpcomingTripCard(
-                                            tripId: homeController.upcomingTrips
-                                                .toList()[0]
-                                                .tripId,
-                                            userId: homeController.upcomingTrips
-                                                .toList()[0]
-                                                .userId,
-                                            backgroundColor: CustomColors.kBlue,
-                                            foregroundColor: Colors.white,
-                                            iconColor: Colors.white,
-                                            avatarUrl: homeController
-                                                .upcomingTrips
-                                                .toList()[0]
-                                                .avatarUrl,
-                                            name: homeController.upcomingTrips
-                                                .toList()[0]
-                                                .name,
-                                            phoneNo: homeController
-                                                .upcomingTrips
-                                                .toList()[0]
-                                                .phoneNo,
-                                            bookTime: homeController
-                                                .upcomingTrips
-                                                .toList()[0]
-                                                .bookTime,
-                                            departureStation: homeController
-                                                .upcomingTrips
-                                                .toList()[0]
-                                                .departureStation,
-                                            destinationStation: homeController
-                                                .upcomingTrips
-                                                .toList()[0]
-                                                .destinationStation),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          ConfirmArrivalButton(
-                                            isOnHomeScreen: true,
-                                          ),
-                                          ContactButtons(
-                                            phoneNo: homeController
-                                                .upcomingTrips
-                                                .toList()[0]
-                                                .phoneNo,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ]
-                                ]),
-                          ),
-                          if (homeController.upcomingTrips.isNotEmpty ||
-                              Biike.role.value == Role.biker) ...[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 4.0),
-                              child: Divider(),
+                                  Expanded(
+                                      child: Text(
+                                    CustomStrings.kNoKeNowTrip.tr,
+                                  )),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  )
+                                ],
+                              )),
+                          onTap: () => Get.toNamed(CommonRoutes.CHO_NOW),
+                        )
+                      ],
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: TopBiker(),
+                      ),
+                      if (homeController.upcomingTrips.isNotEmpty) ...[
+                        if (_firstTripTimeBook.day == _currentTime.day &&
+                            _firstTripTimeBook.month == _currentTime.month &&
+                            _firstTripTimeBook.year == _currentTime.year) ...[
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  Biike.role.value == Role.keer
+                                      ? CustomStrings.kKeerReadyReminder.tr
+                                      : CustomStrings.kBikerReadyReminder.tr,
+                                  style:
+                                      TextStyle(color: CustomColors.kDarkGray),
+                                ),
+                                Text(
+                                  _timeLeft,
+                                  style: TextStyle(
+                                      color: CustomColors.kBlue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12.sp),
+                                ),
+                              ],
                             ),
-                            if (Biike.role.value == Role.keer) ...[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 22.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    AdContainer(),
-                                    if (homeController.upcomingTrips.length >
-                                            1 &&
-                                        (_firstTripTimeBook.day ==
-                                                _currentTime.day &&
-                                            _firstTripTimeBook.month ==
-                                                _currentTime.month &&
-                                            _firstTripTimeBook.year ==
-                                                _currentTime.year)) ...[
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 8.0, top: 35.0),
-                                        child: Text(
-                                          CustomStrings.kUpcomingTrips.tr,
-                                          style: TextStyle(
-                                              color: CustomColors.kDarkGray),
-                                        ),
-                                      ),
-                                      Container(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                2,
-                                        margin: EdgeInsets.only(
-                                            bottom: homeController
-                                                        .upcomingTrips.length >
-                                                    2
-                                                ? 70.0
-                                                : 0.0),
-                                        child: RefreshIndicator(
-                                          onRefresh: () => Future.sync(
-                                            () => homeController
-                                                .pagingController
-                                                .refresh(),
-                                          ),
-                                          child: PagedListView<int, dynamic>(
-                                            pagingController:
-                                                homeController.pagingController,
-                                            builderDelegate:
-                                                PagedChildBuilderDelegate<
-                                                        dynamic>(
-                                                    itemBuilder:
-                                                        (context, item, index) {
-                                              if (index == 0 &&
-                                                  (_firstTripTimeBook.day ==
-                                                          _currentTime.day &&
-                                                      _firstTripTimeBook
-                                                              .month ==
-                                                          _currentTime.month &&
-                                                      _firstTripTimeBook.year ==
-                                                          _currentTime.year)) {
-                                                return SizedBox.shrink();
-                                              } else {
-                                                return Padding(
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: UpcomingTripCard(
+                                isSearchedTrip: false,
+                                tripId: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .tripId,
+                                userId: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .userId,
+                                backgroundColor: CustomColors.kBlue,
+                                foregroundColor: Colors.white,
+                                iconColor: Colors.white,
+                                avatarUrl: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .avatarUrl,
+                                name: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .name,
+                                phoneNo: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .phoneNo,
+                                bookTime: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .bookTime,
+                                departureStation: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .departureStation,
+                                destinationStation: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .destinationStation),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              ConfirmArrivalButton(
+                                isOnHomeScreen: true,
+                              ),
+                              ContactButtons(
+                                phoneNo: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .phoneNo,
+                              )
+                            ],
+                          ),
+                        ],
+                      ]
+                    ]),
+              ),
+              if (homeController.upcomingTrips.isNotEmpty ||
+                  Biike.role.value == Role.biker) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Divider(),
+                ),
+                if (Biike.role.value == Role.keer) ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        AdContainer(),
+                        if (homeController.upcomingTrips.isNotEmpty &&
+                            (_firstTripTimeBook.day != _currentTime.day &&
+                                _firstTripTimeBook.month !=
+                                    _currentTime.month &&
+                                _firstTripTimeBook.year !=
+                                    _currentTime.year)) ...[
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 8.0, top: 35.0),
+                            child: Text(
+                              CustomStrings.kUpcomingTrips.tr,
+                              style: TextStyle(color: CustomColors.kDarkGray),
+                            ),
+                          ),
+                          GetBuilder<HomeController>(
+                              init: homeController,
+                              builder: (HomeController controller) {
+                                return RefreshIndicator(
+                                  onRefresh: () => Future.sync(
+                                    () => controller.pagingController.refresh(),
+                                  ),
+                                  child: PagedListView<int, dynamic>(
+                                    pagingController:
+                                        controller.pagingController,
+                                    shrinkWrap: true,
+                                    builderDelegate: PagedChildBuilderDelegate<
+                                            dynamic>(
+                                        animateTransitions: true,
+                                        itemBuilder: (context, item, index) {
+                                          if (index == 0 &&
+                                              (_firstTripTimeBook.day ==
+                                                      _currentTime.day &&
+                                                  _firstTripTimeBook.month ==
+                                                      _currentTime.month &&
+                                                  _firstTripTimeBook.year ==
+                                                      _currentTime.year)) {
+                                            return SizedBox.shrink();
+                                          } else {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10.0),
+                                              child: UpcomingTripCard(
+                                                  isSearchedTrip: false,
+                                                  tripId: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .tripId,
+                                                  userId: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .userId,
+                                                  avatarUrl: controller
+                                                      .pagingController
+                                                      .itemList!
+                                                      .elementAt(index)
+                                                      .avatarUrl,
+                                                  name: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .name,
+                                                  phoneNo: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .phoneNo,
+                                                  bookTime: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .bookTime,
+                                                  departureStation: controller
+                                                      .pagingController
+                                                      .itemList!
+                                                      .elementAt(index)
+                                                      .departureStation,
+                                                  destinationStation: controller
+                                                      .pagingController
+                                                      .itemList!
+                                                      .elementAt(index)
+                                                      .destinationStation),
+                                            );
+                                          }
+                                        },
+                                        noItemsFoundIndicatorBuilder:
+                                            (BuildContext context) {
+                                          return Text(CustomStrings
+                                              .kNoUpcomingTrips.tr);
+                                        },
+                                        firstPageErrorIndicatorBuilder:
+                                            (BuildContext context) {
+                                          return LazyLoadingListErrorBuilder(
+                                              onPressed: () {
+                                            controller.pagingController
+                                                .refresh();
+                                          });
+                                        }),
+                                  ),
+                                );
+                              }),
+                        ],
+                      ],
+                    ),
+                  )
+                ] else ...[
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text(CustomStrings.kFilter.tr,
+                              style: Theme.of(context).textTheme.bodyText2),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: IntrinsicHeight(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    width: 110,
+                                    margin: const EdgeInsets.only(right: 8.0),
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                        color: CustomColors.kLightGray,
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                            color: CustomColors.kDarkGray
+                                                .withOpacity(0.4),
+                                            // changes position of shadow
+                                            offset: Offset(0, 1),
+                                          )
+                                        ]),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Obx(
+                                          () => GestureDetector(
+                                            child: Row(
+                                              children: <Widget>[
+                                                Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          bottom: 10.0),
-                                                  child: UpcomingTripCard(
-                                                      tripId: homeController.pagingController.itemList!
-                                                          .elementAt(index)
-                                                          .tripId,
-                                                      userId: homeController
-                                                          .pagingController
-                                                          .itemList!
-                                                          .elementAt(index)
-                                                          .userId,
-                                                      avatarUrl: homeController
-                                                          .pagingController
-                                                          .itemList!
-                                                          .elementAt(index)
-                                                          .avatarUrl,
-                                                      name: homeController.pagingController.itemList!
-                                                          .elementAt(index)
-                                                          .name,
-                                                      phoneNo: homeController
-                                                          .pagingController
-                                                          .itemList!
-                                                          .elementAt(index)
-                                                          .phoneNo,
-                                                      bookTime: homeController
-                                                          .pagingController
-                                                          .itemList!
-                                                          .elementAt(index)
-                                                          .bookTime,
-                                                      departureStation: homeController
-                                                          .pagingController
-                                                          .itemList!
-                                                          .elementAt(index)
-                                                          .departureStation,
-                                                      destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
-                                                );
-                                              }
-                                            }, noItemsFoundIndicatorBuilder:
-                                                        (BuildContext context) {
-                                              if (homeController
-                                                      .upcomingTrips.length ==
-                                                  0) {
-                                                return Text(CustomStrings
-                                                    .kNoUpcomingTrips.tr);
-                                              }
-                                              return SizedBox.shrink();
-                                            }),
+                                                          right: 5.0),
+                                                  child: Icon(
+                                                    Icons.event_outlined,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  homeController
+                                                      .searchDateString.value,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                            onTap: () async {
+                                              homeController.searchDate.value =
+                                                  await CommonFunctions()
+                                                      .selectDate(
+                                                          context: context,
+                                                          selectedDate:
+                                                              homeController
+                                                                  .searchDate,
+                                                          isBirthDatePicker:
+                                                              false);
+                                              homeController
+                                                      .searchDateString.value =
+                                                  DateFormat('dd-MM-yyyy')
+                                                      .format(homeController
+                                                          .searchDate.value!);
+                                            },
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ],
-                                ),
-                              )
-                            ] else ...[
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 22.0, vertical: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: Text(CustomStrings.kFilter.tr,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2),
-                                    ),
-                                    IntrinsicHeight(
+                                        Divider(),
+                                        Obx(
+                                          () => GestureDetector(
+                                            child: Row(
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 5.0),
+                                                  child: Icon(
+                                                    Icons.access_time,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  homeController
+                                                      .searchTimeString.value,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                            onTap: () async {
+                                              TimeOfDay tempTime =
+                                                  await CommonFunctions()
+                                                      .selectTime(
+                                                          context: context,
+                                                          selectedTime:
+                                                              homeController
+                                                                  .searchTime);
+                                              int tempTimeNum =
+                                                  tempTime.hour * 60 +
+                                                      tempTime.minute;
+                                              int lowestBoundTimeNum = 5 * 60;
+                                              int highestBoundTimeNum = 21 * 60;
+                                              if (tempTimeNum >=
+                                                      lowestBoundTimeNum &&
+                                                  tempTimeNum <=
+                                                      highestBoundTimeNum) {
+                                                homeController.searchTimeString
+                                                    .value = MaterialLocalizations
+                                                        .of(context)
+                                                    .formatTimeOfDay(tempTime,
+                                                        alwaysUse24HourFormat:
+                                                            true);
+                                              } else {
+                                                CommonFunctions().showErrorDialog(
+                                                    context: context,
+                                                    message: CustomErrorsString
+                                                        .kTripCanOnlySearchFrom5AMTo9PM
+                                                        .tr);
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                                Expanded(
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                          color: CustomColors.kLightGray,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          boxShadow: <BoxShadow>[
+                                            BoxShadow(
+                                              color: CustomColors.kDarkGray
+                                                  .withOpacity(0.4),
+                                              // changes position of shadow
+                                              offset: Offset(0, 1),
+                                            )
+                                          ]),
                                       child: Row(
                                         children: <Widget>[
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                right: 8.0),
-                                            child: Container(
-                                                width: 110,
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        CustomColors.kLightGray,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    boxShadow: <BoxShadow>[
-                                                      BoxShadow(
-                                                        color: CustomColors
-                                                            .kDarkGray
-                                                            .withOpacity(0.4),
-                                                        // changes position of shadow
-                                                        offset: Offset(0, 1),
-                                                      )
-                                                    ]),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: <Widget>[
-                                                      Obx(
-                                                        () => GestureDetector(
-                                                          child: Row(
-                                                            children: <Widget>[
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            5.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .event_outlined,
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                homeController
-                                                                    .searchDateString
-                                                                    .value,
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .bodyText1,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          onTap: () async {
-                                                            homeController
-                                                                .searchDateString
-                                                                .value = DateFormat(
-                                                                    'dd-MM-yyyy')
-                                                                .format(await CommonFunctions().selectDate(
-                                                                    context:
-                                                                        context,
-                                                                    selectedDate:
-                                                                        homeController
-                                                                            .searchDate,
-                                                                    isBirthDatePicker:
-                                                                        false));
-                                                          },
-                                                        ),
-                                                      ),
-                                                      Divider(),
-                                                      Obx(
-                                                        () => GestureDetector(
-                                                          child: Row(
-                                                            children: <Widget>[
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            5.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .access_time,
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                homeController
-                                                                    .searchTimeString
-                                                                    .value,
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .bodyText1,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          onTap: () async {
-                                                            homeController
-                                                                    .searchTimeString
-                                                                    .value =
-                                                                await CommonFunctions().selectTime(
-                                                                    context:
-                                                                        context,
-                                                                    selectedTime:
-                                                                        homeController
-                                                                            .searchTime);
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )),
+                                                right: 10.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.adjust,
+                                                ),
+                                                Icon(
+                                                  Icons.more_vert_outlined,
+                                                ),
+                                                Icon(
+                                                  Icons.location_on,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           Expanded(
-                                            child: Container(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        CustomColors.kLightGray,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    boxShadow: <BoxShadow>[
-                                                      BoxShadow(
-                                                        color: CustomColors
-                                                            .kDarkGray
-                                                            .withOpacity(0.4),
-                                                        // changes position of shadow
-                                                        offset: Offset(0, 1),
-                                                      )
-                                                    ]),
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 10.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons.adjust,
-                                                          ),
-                                                          Icon(
-                                                            Icons
-                                                                .more_vert_outlined,
-                                                          ),
-                                                          Icon(
-                                                            Icons.location_on,
-                                                          ),
-                                                        ],
-                                                      ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Obx(
+                                                  () => GestureDetector(
+                                                    child: Text(
+                                                      homeController
+                                                          .departureStationName
+                                                          .value,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1,
                                                     ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: <Widget>[
-                                                          GestureDetector(
-                                                            child: Text(
-                                                              CustomStrings
-                                                                  .kSelectSourceStation
-                                                                  .tr,
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .bodyText1,
-                                                            ),
-                                                            onTap: () {
-                                                              homeController
-                                                                  .showStationsDialog(
-                                                                      context:
-                                                                          context);
-                                                            },
-                                                          ),
-                                                          Expanded(
-                                                            child: Divider(),
-                                                          ),
-                                                          GestureDetector(
-                                                            child: Text(
-                                                              CustomStrings
-                                                                  .kSelectDestinationStation
-                                                                  .tr,
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .bodyText1,
-                                                            ),
-                                                            onTap: () {
-                                                              homeController
-                                                                  .showStationsDialog(
-                                                                      context:
-                                                                          context);
-                                                            },
-                                                          ),
-                                                        ],
-                                                      ),
+                                                    onTap: () {
+                                                      homeController
+                                                          .showStationsDialog(
+                                                              context: context,
+                                                              isDepartureStation:
+                                                                  true);
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Divider(),
+                                                ),
+                                                Obx(
+                                                  () => GestureDetector(
+                                                    child: Text(
+                                                      homeController
+                                                          .destinationStationName
+                                                          .value,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1,
                                                     ),
-                                                    Icon(
-                                                      Icons.swap_vert_sharp,
-                                                      size: 30,
-                                                    ),
-                                                  ],
-                                                )),
-                                          )
+                                                    onTap: () {
+                                                      homeController
+                                                          .showStationsDialog(
+                                                              context: context,
+                                                              isDepartureStation:
+                                                                  false);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            child: Icon(
+                                              Icons.swap_vert_sharp,
+                                              size: 30,
+                                            ),
+                                            onTap: () {
+                                              homeController.swapStations();
+                                            },
+                                          ),
                                         ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Divider(),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    22.0,
-                                    5.0,
-                                    22.0,
-                                    homeController.upcomingTrips.length > 2
-                                        ? 35.0
-                                        : 8.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    // if (homeController.upcomingTrips.isNotEmpty) ...[
-                                    //   ListUpcomingTrips(
-                                    //     listUpcomingTrips:
-                                    //         homeController.upcomingTrips.toList(),
-                                    //     itemPadding: 12.0,
-                                    //   ),
-                                    // ],
-                                  ],
-                                ),
-                              ),
-                            ]
-                          ] else ...[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 22.0),
-                              child:
-                                  SvgPicture.asset('assets/images/blank.svg'),
+                                      )),
+                                )
+                              ],
                             ),
-                          ]
-                        ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: CustomTextButton(
+                                  width: 120,
+                                  backgroundColor: CustomColors.kLightGray,
+                                  foregroundColor: CustomColors.kDarkGray,
+                                  text: CustomStrings.kSearchAgain.tr,
+                                  onPressedFunc: () {
+                                    homeController.upcomingTripsForBiker
+                                        .clear();
+                                    homeController.hasSearchedTrips = false;
+                                    homeController.searchDateString.value =
+                                        CustomStrings.kChooseDate.tr;
+                                    homeController.searchTimeString.value =
+                                        CustomStrings.kChooseTime.tr;
+                                    homeController
+                                        .departureStation.value.stationId = -1;
+                                    homeController.departureStationName
+                                        .value = homeController
+                                            .departureStation.value.name =
+                                        CustomStrings.kSelectSourceStation.tr;
+                                    homeController.destinationStation.value
+                                        .stationId = -1;
+                                    homeController.destinationStationName
+                                        .value = homeController
+                                            .destinationStation.value.name =
+                                        CustomStrings
+                                            .kSelectDestinationStation.tr;
+                                  },
+                                  hasBorder: false),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: CustomTextButton(
+                                  width: 120,
+                                  backgroundColor: CustomColors.kBlue,
+                                  foregroundColor: Colors.white,
+                                  text: CustomStrings.kSearch.tr,
+                                  onPressedFunc: () async {
+                                    await homeController.searchTrips(
+                                        date: homeController.searchDate.value,
+                                        time: homeController.searchTime.value,
+                                        departureId: homeController
+                                            .departureStation.value.stationId,
+                                        destinationId: homeController
+                                            .destinationStation
+                                            .value
+                                            .stationId);
+                                  },
+                                  hasBorder: false),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Divider(),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(22.0, 5.0, 22.0,
+                        homeController.upcomingTrips.length > 2 ? 35.0 : 8.0),
+                    child: Obx(
+                      () => ListUpcomingTrips(
+                          listUpcomingTrips:
+                              homeController.upcomingTripsForBiker.toList(),
+                          itemPadding: 10.0,
+                          hasSearchTrips: homeController.hasSearchedTrips),
+                    ),
+                  ),
+                ]
+              ] else ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                  child: SvgPicture.asset('assets/images/blank.svg'),
+                ),
+              ]
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: Biike.role.value == Role.keer
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                if (homeController.upcomingTrips.isEmpty) ...[
+                  CustomPaint(
+                    foregroundPainter: TooltipPainter(),
+                    child: Container(
+                      alignment: Alignment.bottomCenter,
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      margin: const EdgeInsets.only(
+                          bottom: 20.0, left: 22.0, right: 22.0),
+                      decoration: BoxDecoration(
+                        color: CustomColors.kLightGray,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        CustomStrings.kCreateTrip.tr,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ),
                   ),
-                  floatingActionButton: Biike.role.value == Role.keer
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            if (homeController.upcomingTrips.isEmpty) ...[
-                              CustomPaint(
-                                foregroundPainter: TooltipPainter(),
-                                child: Container(
-                                  alignment: Alignment.bottomCenter,
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0),
-                                  margin: const EdgeInsets.only(
-                                      bottom: 20.0, left: 22.0, right: 22.0),
-                                  decoration: BoxDecoration(
-                                    color: CustomColors.kLightGray,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    CustomStrings.kCreateTrip.tr,
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            CreateTripButton(),
-                          ],
-                        )
-                      : null,
-                  floatingActionButtonLocation:
-                      FloatingActionButtonLocation.centerFloat,
-                );
-              } else {
-                return Loading();
-              }
-            },
-          );
-        });
+                ],
+                CreateTripButton(),
+              ],
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
 import 'package:bikes_user/network/config_network.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -25,4 +26,16 @@ abstract class RestClient {
     @Field('isPhoneVerified') bool? isPhoneVerified,
     @Field('isEmailVerified') bool? isEmailVerified,
   );
+
+  @GET(EndPoint.blackList + '/{idUser}')
+  Future<BlackListResponse> getBlackList(
+    @Path('idUser') int idUser,
+    @Query('page') int page,
+    @Query('limit') int limit,
+  );
+
+  @PUT(EndPoint.blackList)
+  Future<dynamic> unBlock({
+    @Body() required BlackListItem blackListItem,
+  });
 }

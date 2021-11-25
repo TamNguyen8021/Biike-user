@@ -31,8 +31,8 @@ class FeedbackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => CommonFunctions()
-          .onBackPressed(errorMessage: CustomErrorsString.kNotRated),
+      onWillPop: () => CommonFunctions().onBackPressed(
+          context: context, errorMessage: CustomErrorsString.kNotRated),
       child: Scaffold(
         body: Container(
           child: SafeArea(
@@ -91,7 +91,7 @@ class FeedbackPage extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     Text(
-                                      "EXP",
+                                      'EXP',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),

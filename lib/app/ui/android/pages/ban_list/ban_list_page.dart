@@ -1,13 +1,17 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/controllers/ban_list_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/cards/ban_list_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_ban.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
 /// The 'block_list' screen
-class BanListPage extends StatelessWidget {
-  const BanListPage({Key? key}) : super(key: key);
+class BanListPage extends HookWidget {
+  final _banListController = Get.find<BanListController>();
+
+  BanListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +28,27 @@ class BanListPage extends StatelessWidget {
           CustomStrings.kBanList.tr,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              padding: const EdgeInsets.all(22.0),
-              child: ListBan(
-                banList: [
-                  BanListCard(name: 'Võ Thị Kim Thuỳ'),
-                  BanListCard(name: 'Võ Thị Kim Thuỳ'),
-                  BanListCard(name: 'Võ Thị Kim Thuỳ'),
-                ],
-                itemPadding: 10.0,
-              )),
-        ]),
-      ),
+      body: FutureBuilder(
+          future: _banListController.getBlackList(context: context),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return SingleChildScrollView(
+                child: GetBuilder<BanListController>(
+                    builder: (BanListController controller) {
+                  return ListBan(
+                    itemPadding: 10.0,
+                    data: controller.data,
+                    onTapItem: (blackListItem) async {
+                      await controller.unBlock(
+                          context: context, blackListItem: blackListItem);
+                    },
+                  );
+                }),
+              );
+            } else {
+              return Loading();
+            }
+          }),
     );
   }
 }

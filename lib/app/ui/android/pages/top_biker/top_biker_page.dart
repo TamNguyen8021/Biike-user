@@ -21,8 +21,7 @@ class TopBikerPage extends StatelessWidget {
         future: topBikerController.getTopBiker(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Obx(
-                    () => Scaffold(
+            return Obx(() => Scaffold(
                   appBar: CustomAppBar(
                     isVisible: true,
                     hasShape: true,
@@ -36,44 +35,51 @@ class TopBikerPage extends StatelessWidget {
                     ),
                     actionWidgets: <Widget>[
                       Padding(
-                        padding:
-                        const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 8.0),
                         child: IconButton(
                           onPressed: () => showDialog(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: Text(CustomStrings.kBikerRank.tr,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      fontSize: 16, fontWeight: FontWeight.bold)),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
                               content: Container(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     Text(
-                                      CustomStrings.kTopBikerInfoFirstContent.tr,
+                                      CustomStrings
+                                          .kTopBikerInfoFirstContent.tr,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1!
                                           .copyWith(
-                                          fontSize: 14,
-                                          color: CustomColors.kDarkGray),
+                                              fontSize: 14,
+                                              color: CustomColors.kDarkGray),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: Text(
-                                        CustomStrings.kTopBikerInfoSecondContent.tr,
+                                        CustomStrings
+                                            .kTopBikerInfoSecondContent.tr,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
                                             .copyWith(
-                                            fontSize: 14,
-                                            color: CustomColors.kDarkGray),
+                                                fontSize: 14,
+                                                color: CustomColors.kDarkGray),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
                                       child: TextButton(
-                                        onPressed: () => Navigator.pop(context, 'OK'),
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
                                         child: Text(
                                           CustomStrings.kGotIt.tr,
                                           style: TextStyle(
@@ -82,10 +88,12 @@ class TopBikerPage extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         style: TextButton.styleFrom(
-                                            backgroundColor: CustomColors.kDarkBlue,
+                                            backgroundColor:
+                                                CustomColors.kDarkBlue,
                                             elevation: 5.0,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 20.0, vertical: 10.0)),
+                                                horizontal: 20.0,
+                                                vertical: 10.0)),
                                       ),
                                     )
                                   ],
@@ -124,10 +132,11 @@ class TopBikerPage extends StatelessWidget {
                                 //   },
                                 // ),
                                 Obx(() => Expanded(
-                                    child: Center(
-                                        child: Text(
-                                          CustomStrings.kMonth.tr + currentMonth.value,
-                                        )))),
+                                        child: Center(
+                                            child: Text(
+                                      CustomStrings.kMonth.tr +
+                                          currentMonth.value,
+                                    )))),
                                 // GestureDetector(
                                 //   child: Padding(
                                 //     padding: const EdgeInsets.only(right: 8.0),
@@ -151,7 +160,8 @@ class TopBikerPage extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.symmetric(horizontal: 22.0),
                           child: ListTopBikers(
-                              listTopBikers: topBikerController.topBiker.value,
+                              listTopBikers:
+                                  topBikerController.topBiker.toList(),
                               itemPadding: 8.0),
                         )
                       ],
@@ -159,25 +169,24 @@ class TopBikerPage extends StatelessWidget {
                   ),
                   bottomSheet: Container(
                     height: 100,
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 22.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 22.0),
                     decoration: BoxDecoration(
                       color: CustomColors.kDarkBlue,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5)),
                     ),
                     child: TopBikerBottomSheet(
                         index: 1,
                         avatarUrl: topBikerController.userAvatar.value,
                         name: topBikerController.userFullName.value,
-                        point: topBikerController.userPoint.value
-                    ),
+                        point: topBikerController.userPoint.value),
                   ),
-                )
-            );
+                ));
           } else {
             return Loading();
           }
-        }
-    );
+        });
   }
 }

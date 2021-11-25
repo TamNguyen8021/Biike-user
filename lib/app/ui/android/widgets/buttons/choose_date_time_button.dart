@@ -28,9 +28,11 @@ class ChooseDateTimeButton extends StatelessWidget {
             : width,
         margin: const EdgeInsets.only(bottom: 8.0),
         decoration: BoxDecoration(
-          border: Border(
-              bottom:
-                  BorderSide(color: CustomColors.kDarkGray.withOpacity(0.2))),
+          border: isOnProfilePage
+              ? Border(
+                  bottom: BorderSide(
+                      color: CustomColors.kDarkGray.withOpacity(0.2)))
+              : null,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

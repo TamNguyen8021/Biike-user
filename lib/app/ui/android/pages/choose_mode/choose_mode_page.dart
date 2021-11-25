@@ -1,4 +1,7 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
 import 'package:bikes_user/main.dart';
@@ -12,7 +15,9 @@ import 'package:get/get.dart';
 
 /// The '004.4_choose_mode' screen
 class ChooseModePage extends StatelessWidget {
-  const ChooseModePage({Key? key}) : super(key: key);
+  final _userProvider = Get.find<UserProvider>();
+
+  ChooseModePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class ChooseModePage extends StatelessWidget {
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/line-map.png"),
+                  image: AssetImage('assets/images/line-map.png'),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                       CustomColors.kLightGray.withOpacity(0.5),
@@ -97,7 +102,7 @@ class ChooseModePage extends StatelessWidget {
                           ],
                         )),
                     onTap: () {
-                      chooseModeController.selectBikerMode();
+                      chooseModeController.selectBikerMode(context: context);
                     },
                   ),
                 ),
@@ -155,7 +160,7 @@ class ChooseModePage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      chooseModeController.selectKeerMode();
+                      chooseModeController.selectKeerMode(context: context);
                     },
                   ),
                 ),
@@ -183,16 +188,26 @@ class ChooseModePage extends StatelessWidget {
               hoverColor: CustomColors.kLightGray,
             ),
             NextPageButton(
-              onPressedFunc: () {
+              onPressedFunc: () async {
                 if (Biike.role.value != Role.none) {
-                  Get.offAllNamed(CommonRoutes.HOME);
+                  int role = 1;
+
+                  if (Biike.role.value == Role.biker) {
+                    role = 2;
+                  }
+
+                  if (await _userProvider.changeRole(role: role)) {
+                    Biike.localAppData.saveRole(Biike.role.value);
+                    Get.offAllNamed(CommonRoutes.HOME);
+                  } else {
+                    CommonFunctions().showErrorDialog(
+                        context: context,
+                        message: CustomErrorsString.kDevelopError.tr);
+                  }
                 } else {
-                  Get.defaultDialog(
-                      title: 'Nhắc nhở',
-                      middleText:
-                          'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
-                      middleTextStyle:
-                          TextStyle(color: CustomColors.kDarkGray));
+                  CommonFunctions().showErrorDialog(
+                      context: context,
+                      message: CustomErrorsString.kNoRoleWereChosen.tr);
                 }
               },
               backgroundColor: Colors.white,

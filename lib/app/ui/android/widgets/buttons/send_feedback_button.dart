@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/feedback_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -23,11 +24,8 @@ class SendFeedbackButton extends StatelessWidget {
           // validate feedback
           String validateMsg = feedbackController.validateFeedback();
           if (_NO_ERR_MSG.compareTo(validateMsg) != _STRING_EQUALS) {
-            Get.snackbar(CustomErrorsString.kError.tr, validateMsg.tr,
-                backgroundColor: Colors.red,
-                colorText: Colors.white,
-                snackPosition: SnackPosition.BOTTOM);
-            return;
+            CommonFunctions()
+                .showErrorDialog(context: context, message: validateMsg);
           }
 
           // send feedback

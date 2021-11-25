@@ -9,23 +9,41 @@ part 'bike.g.dart';
 // JSON serialization logic to be generated.
 @JsonSerializable()
 class Bike {
-  final int? bikeId;
-  final int? userId;
-  final String? bikeOwner;
-  final String? plateNumber;
-  final String? color;
-  final String? brand;
-  final bool? isBikeDeleted;
+  int? bikeId;
+  int? userId;
+  String? bikeOwner;
+  String? plateNumber;
+  String? color;
+  String? brand;
+  String? plateNumberPicture;
+  String? bikeLicensePicture;
+  String? bikePicture;
+  bool? isBikeDeleted;
 
   Bike(
-    this.bikeId,
-    this.userId,
-    this.bikeOwner,
-    this.plateNumber,
-    this.color,
-    this.brand,
-    this.isBikeDeleted,
-  );
+      {this.bikeId,
+      this.userId,
+      this.bikeOwner,
+      this.plateNumber,
+      this.color,
+      this.brand,
+      this.isBikeDeleted,
+      this.plateNumberPicture,
+      this.bikeLicensePicture,
+      this.bikePicture});
+
+  Bike.empty() {
+    this.bikeId = -1;
+    this.userId = -1;
+    this.bikeOwner = '';
+    this.plateNumber = '';
+    this.color = '';
+    this.brand = '';
+    this.isBikeDeleted = false;
+    this.plateNumberPicture = '';
+    this.bikeLicensePicture = '';
+    this.bikePicture = '';
+  }
 
   /// A necessary factory constructor for creating a new Bike instance
   /// from a map. Pass the map to the generated `_$BikeFromJson()` constructor.

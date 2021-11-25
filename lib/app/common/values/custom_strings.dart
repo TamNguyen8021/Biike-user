@@ -2,6 +2,7 @@
 class CustomStrings {
   // '002.1_welcome_1' screen
   static const String kIntroduction = 'kIntroduction';
+  static const String kConfirm = 'kConfirm';
 
   //'002.,.2,.3' screen
   static const String kSkip = 'kSkip';
@@ -11,16 +12,27 @@ class CustomStrings {
   static const String kThirdDescription = 'kThirdDescription';
   static const String kConnectSociety = 'kConnectSociety';
   static const String kProtectEnvironment = 'kProtectEnvironment';
-  static const String kStartOnBoard = 'kStartOnBoard';
+  static const String kStart = 'kStart';
 
   // '003.1_login'
-  static const String kLoginButton = 'kLoginButton';
-  static const String kConfirmTerm = 'kConfirmTerm';
-  static const String kTerm = 'kTerm';
+  static const String kForgotPassword = 'kForgotPassword';
+  static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
+  static const String kInputEmail = 'kInputEmail';
+  static const String kPassword = 'kPassword';
+  static const String kInputPassword = 'kInputPassword';
+  static const String kLogin = 'kLogin';
+  static const String kNoAccount = 'kNoAccount';
 
-  // '004.1_input_phone_no' screen
+  // 'register' screen
+  static const String kConfirmTerm = 'kConfirmTerm';
+  static const String kAnd = 'kAnd';
+  static const String kRegister = 'kRegister';
+  static const String kHasAccount = 'kHasAccount';
+  static const String kInputName = 'kInputName';
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
   static const String kErrorInputPhoneNumber = 'kErrorInputPhoneNumber';
+  static const String kSentVerifiedEmail = 'kSentVerifiedEmail';
+  static const String kRegisterSuccess = 'kRegisterSuccess';
 
   // '004.2_verify_phone' screen
   static const String kInputVerifyCode = 'kInputVerifyCode';
@@ -28,9 +40,7 @@ class CustomStrings {
   static const String kInvalidPin = 'kInvalidPin';
 
   // '004.3_input_name' screen
-  static const String kInputName = 'kInputName';
   static const String kErrorName = 'kErrorName';
-  static const String kInputEmail = 'kInputEmail';
   static const String kErrorEmail = 'kErrorEmail';
 
   // '004.4_choose_mode' screen
@@ -59,15 +69,36 @@ class CustomStrings {
       'kConfirmArrivalMessageForKeer';
   static const String kConfirmArrivalMessageForBiker =
       'kConfirmArrivalMessageForBiker';
+  static const String kConfirmExitApp = 'kConfirmExitApp';
 
   // 'biker_home' screen
+  static const String kNoKeNowTrip = 'kNoKeNowTrip';
   static const String kBikerReadyReminder = 'kBikerReadyReminder';
   static const String kFilter = 'kFilter';
   static const String kSelectHour = 'kSelectHour';
   static const String kSelectSourceStation = 'kSelectSourceStation';
   static const String kSelectDestinationStation = 'kSelectDestinationStation';
-  static const String kDecline = 'kDecline';
   static const String kAccept = 'kAccept';
+  static const String kAcceptSuccessful = 'kAcceptSuccessful';
+  static const String kSearchAgain = 'kSearchAgain';
+  static const String kSearch = 'kSearch';
+
+  // 'require_add_bike' screen
+  static const String kNeedAddBikeToBecomeBiker = 'kNeedAddBikeToBecomeBiker';
+
+  // 'cho_now' screen
+  static const String kChoNow = 'kChoNow';
+  static const String kChoNowDescription1 = 'kChoNowDescription1';
+  static const String kChoNowDescription2 = 'kChoNowDescription2';
+  static const String kChoNowDescription3 = 'kChoNowDescription3';
+  static const String kChoNowSettings = 'kChoNowSettings';
+  static const String kTurnOnChoNow = 'kTurnOnChoNow';
+  static const String kChoNowStation = 'kChoNowStation';
+  static const String kAddPickUpStation = 'kAddPickUpStation';
+  static const String kAddChoNowStation = 'kAddChoNowStation';
+  static const String kAdd = 'kAdd';
+  static const String kDelete = 'kDelete';
+  static const String kChooseStation = 'kChooseStation';
 
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
@@ -127,15 +158,21 @@ class CustomStrings {
   static const String kCall = 'kCall';
   static const String kMessage = 'kMessage';
   static const String kReport = 'kReport';
+  static const String kReportAndBlock = 'kReportAndBlock';
   static const String kNoHistoryTrip = 'kNoHistoryTrip';
   static const String kHasHistoryTrip = 'kHasHistoryTrip';
   static const String kEnterYourReport = 'kEnterYourReport';
-  static const String kReportAndBlock = 'kReportAndBlock';
+  static const String kBlock = 'kBlock';
   static const String kConfirmBlock = 'kConfirmBlock';
   static const String kSeeBlacklist = 'kSeeBlacklist';
-  static const String kSure = 'kSure';
+  static const String kYes = 'kYes';
+  static const String kNo = 'kNo';
   static const String kThankYouForReport = 'kThankYouForReport';
   static const String kSorryMessage = 'kSorryMessage';
+  static const String kYouBlockThisPerson = 'kYouBlockThisPerson';
+
+  // 'block_list' screen
+  static const String kEmptyBlockList = 'kEmptyBlockList';
 
   // 'finding_biker_success' screen
   static const String kFoundBiker = 'kFoundBiker';
@@ -163,7 +200,10 @@ class CustomStrings {
 
   // 'biker_point' screen
   static const String kListVouchers = 'kListVouchers';
-  static const String kTradedVouchers = 'kTradedVouchers';
+  static const String kCanExchange = 'kCanExchange';
+  static const String kExchanged = 'kExchanged';
+  static const String kUsedOrExpired = 'kUsedOrExpired';
+  static const String kNearMe = 'kNearMe';
 
   // 'trip_details' screen
   static const String kTripDetails = 'kTripDetails';
@@ -171,17 +211,39 @@ class CustomStrings {
   static const String kNewTrip = 'kNewTrip';
   static const String kCancelTrip = 'kCancelTrip';
   static const String kConfirmArrival = 'kConfirmArrival';
-  static const String kStartTrip = 'kStartTrip';
   static const String kCompleteTrip = 'kCompleteTrip';
   static const String kTripHasFinished = 'kTripHasFinished';
   static const String kYourFeedback = 'kYourFeedback';
   static const String kPartnerFeedback = 'kPartnerFeedback';
-  static const String kOpenStreetMap = 'kOpenStreetMap';
+  static const String kExpandMap = 'kExpandMap';
+  static const String kMinimizeMap = 'kMinimizeMap';
+  static const String kViewRouteInstruction = 'kViewRouteInstruction';
+  static const String kStartLocation = 'kStartLocation';
+  static const String kEndLocation = 'kEndLocation';
+  static const String kYourLocation = 'kYourLocation';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
+  static const String kHelpCenter = 'kHelpCenter';
+  static const String kShareLocation = 'kShareLocation';
+  static const String kMyLocation = 'kMyLocation';
+  static const String kStopSharingLocation = 'kStopSharingLocation';
+  static const String kSOSCenter = 'kSOSCenter';
+  static const String kMessageWereSent = 'kMessageWereSent';
+  static const String kNeedSharingLocationToUseSOS =
+      'kNeedSharingLocationToUseSOS';
+  static const String kNearestPoliceStation = 'kNearestPoliceStation';
+  static const String kNearestHospital = 'kNearestHospital';
+  static const String kNearestMechanicShop = 'kNearestMechanicShop';
+  static const String kNearestGasStation = 'kNearestGasStation';
+  static const String kRoad = 'kRoad';
+  static const String kSuburb = 'kSuburb';
+  static const String kTown = 'kTown';
+  static const String kCity = 'kCity';
+  static const String kCountry = 'kCountry';
+  static const String kNeedLocationPermission = 'kNeedLocationPermission';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';
@@ -197,7 +259,6 @@ class CustomStrings {
   static const String kChooseDate = 'kChooseDate';
   static const String kChooseTime = 'kChooseTime';
   static const String kRepeat = 'kRepeat';
-  static const String kRepeatTo = 'kRepeatTo';
   static const String kCancel = 'kCancel';
 
   // 'bike_manager' screen
@@ -208,18 +269,30 @@ class CustomStrings {
   static const String kBikeBrand = 'kBikeBrand';
   static const String kBikeColor = 'kBikeColor';
   static const String kSuggestAddBike = 'kSuggestAddBike';
+  static const String kBecomeKeerDueToDeleteBike = 'kBecomeKeerDueToDeleteBike';
 
   // 'add_bike' screen
   static const String kAddBike = 'kAddBike';
-  static const String kCheckBikeInfo = 'kCheckBikeInfo';
+  static const String kPleaseEnterCorrectBikeInfo =
+      'kPleaseEnterCorrectBikeInfo';
+  static const String kChangeBike = 'kChangeBike';
   static const String kNumberPlate = 'kNumberPlate';
-  static const String kTakePictureAgain = 'kTakePictureAgain';
+  static const String kTakePicture = 'kTakePicture';
   static const String kEnterBikeOwner = 'kEnterBikeOwner';
   static const String kEnterBrand = 'kEnterBrand';
   static const String kEnterCategory = 'kEnterCategory';
   static const String kEnterColor = 'kEnterColor';
   static const String kEnterNumberPlate = 'kEnterNumberPlate';
   static const String kNumberPlatePicture = 'kNumberPlatePicture';
+  static const String kPleaseTakeNumberPlatePicture =
+      'kPleaseTakeNumberPlatePicture';
+  static const String kBikeVolume = 'kBikeVolume';
+  static const String kEnterVolume = 'kEnterVolume';
+  static const String kBikePicture = 'kBikePicture';
+  static const String kPleaseTakeBikePicture = 'kPleaseTakeBikePicture';
+  static const String kRegistrationPicture = 'kRegistrationPicture';
+  static const String kPleaseTakeRegistrationPicture =
+      'kPleaseTakeRegistrationPicture';
 
   // 'voucher_detail' screen
   static const String kGiftDetail = 'kGiftDetail';
@@ -234,6 +307,9 @@ class CustomStrings {
   static const String kYourCode = 'kYourCode';
   static const String kExchangeVoucherSuccess = 'kExchangeVoucherSuccess';
   static const String kViewAVoucher = 'kViewAVoucher';
+  static const String kShowVoucherCode = 'kShowVoucherCode';
+  static const String kMarkAsUsed = 'kMarkAsUsed';
+  static const String kMarkAsUnused = 'kMarkAsUnused';
 
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';
@@ -244,6 +320,7 @@ class CustomStrings {
   static const String kChangePassword = 'kChangePassword';
   static const String kLoginByFingerprint = 'kLoginByFingerprint';
   static const String kLanguage = 'kLanguage';
+  static const String kCurrentLanguage = 'kCurrentLanguage';
   static const String kOther = 'kOther';
   static const String kFollowOnFacebook = 'kFollowOnFacebook';
   static const String kWebsite = 'kWebsite';
@@ -296,4 +373,14 @@ class CustomStrings {
   static const String kFriday = 'kFriday';
   static const String kSaturday = 'kSaturday';
   static const String kSunday = 'kSunday';
+
+  // point
+  static const String kPoint = 'kPoint';
+  static const String kExchangeVoucher = 'kExchangeVoucher';
+  static const String kBuyPoint = 'kBuyPoint';
+  static const String kYouHave = 'kYouHave';
+  static const String kExpired = 'kExpired';
+  static const String kFindMore = 'kFindMore';
+
+  static const String kAll = 'kAll';
 }

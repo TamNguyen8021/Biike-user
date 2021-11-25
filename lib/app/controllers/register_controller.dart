@@ -1,9 +1,10 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
-import 'package:bikes_user/app/common/functions/snackbar.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_logs/flutter_logs.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -20,31 +21,38 @@ class RegisterController extends GetxController {
   }
 
   Future<void> next(
-      String name, String email, String pass, String phone) async {
+      {required BuildContext context,
+      required String name,
+      required String email,
+      required String pass,
+      required String phone}) async {
     if (!validate(name, email, pass, phone)) {
       return;
     }
 
-    signup(name, email, phone, pass);
+    signup(
+        context: context, name: name, email: email, phone: phone, pass: pass);
   }
 
   Future<void> signup(
-      String name, String email, String phone, String pass) async {
+      {required BuildContext context,
+      required String name,
+      required String email,
+      required String phone,
+      required String pass}) async {
     try {
       _enableLoading(true);
       await _userRepo.signup(name, email, formatPhone(phone), pass);
-      Get.toNamed(CommonRoutes.LOGIN);
-      SnackBarServices.showSnackbar(
-          title: '', message: 'Đăng ký thành công vui lòng đăng nhập');
+      Get.offAndToNamed(CommonRoutes.LOGIN);
+      CommonFunctions().showInfoDialog(
+          context: context, message: CustomStrings.kRegisterSuccess.tr);
     } catch (error) {
-      Biike.logger.e('RegisterController - signup()', error);
       if (error is DioError && error.response?.statusCode == 400) {
-        SnackBarServices.showSnackbar(
-            title: 'Bikke',
-            message: 'Số điiện thoại hoặc mail đã có người đăng ký');
+        CommonFunctions().showErrorDialog(
+            context: context,
+            message: CustomErrorsString.kDuplicateEmailOrPhone.tr);
       }
-      FlutterLogs.logErrorTrace(
-          'Biike', 'RegisterController - signup()', error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
     } finally {
       _enableLoading(false);
     }
@@ -64,24 +72,23 @@ class RegisterController extends GetxController {
   }
 
   String _validate(String name, String email, String pass, String phone) {
-    if (name.replaceAll(" ", "").isEmpty) {
-      return 'not null';
+    if (name.trim().isEmpty) {
+      return CustomErrorsString.kNotFillAllFields.tr;
     }
-    if (email.replaceAll(" ", "").isEmpty) {
-      return 'email must not be null';
+    if (email.trim().isEmpty) {
+      return CustomErrorsString.kNotFillAllFields.tr;
     }
 
     if (!(EmailValidator.validate(email) &&
         email.toUpperCase().contains('@FPT.EDU.VN'))) {
-      return 'must login with FPT email';
+      return CustomErrorsString.kMustLoginWithFPTEmail.tr;
     }
 
-    if (pass.replaceAll(" ", "").length < 6) {
-      return 'mat khau phia dat 6 ky tu';
+    if (pass.trim().length < 6) {
+      return CustomErrorsString.kPasswordMustAtLeast6.tr;
     }
-    if (phone.replaceAll(" ", "").length < 9 ||
-        phone.replaceAll(" ", "").length > 11) {
-      return 'vui long nhap so dien thoai đúng';
+    if (phone.trim().length < 9 || phone.trim().length > 11) {
+      return CustomErrorsString.kInvalidPhoneNo.tr;
     }
     return '';
   }

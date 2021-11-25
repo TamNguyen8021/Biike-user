@@ -25,18 +25,18 @@ class FeedbackController extends GetxController {
 
   String validateFeedback() {
     if (!_isStarRated()) {
-      return CustomErrorsString.kNotRated;
+      return CustomErrorsString.kNotRated.tr;
     }
 
     if (_isFeedbackContainsBadWords()) {
-      return CustomErrorsString.kIncludeBadWords;
+      return CustomErrorsString.kIncludeBadWords.tr;
     }
 
     return '';
   }
 
   bool isSendFeedbackSuccess() {
-    Biike.logger.d(_star.toString() + " - " + _feedback.toString());
+    Biike.logger.d(_star.toString() + ' - ' + _feedback.toString());
     _star = null;
     _feedback = null;
     return true;

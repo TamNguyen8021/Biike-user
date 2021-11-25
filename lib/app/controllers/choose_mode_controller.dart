@@ -16,7 +16,7 @@ class ChooseModeController extends GetxController {
   Rx<Color> bikerTitleAndIconColor = CustomColors.kBlue.obs;
   Rx<Color> bikerTextColor = CustomColors.kDarkGray.obs;
 
-  void selectKeerMode() {
+  void selectKeerMode({required BuildContext context}) async {
     if (isKeerModeSelected.isFalse) {
       if (isBikerModeSelected.isTrue) {
         Biike.role.value = Role.none;
@@ -37,10 +37,9 @@ class ChooseModeController extends GetxController {
       keerTitleAndIconColor.value = CustomColors.kBlue;
       keerTextColor.value = CustomColors.kDarkGray;
     }
-    Biike.localAppData.saveRole(Biike.role.value);
   }
 
-  void selectBikerMode() {
+  void selectBikerMode({required BuildContext context}) async {
     if (isBikerModeSelected.isFalse) {
       if (isKeerModeSelected.isTrue) {
         Biike.role.value = Role.none;
@@ -61,6 +60,5 @@ class ChooseModeController extends GetxController {
       bikerTitleAndIconColor.value = CustomColors.kBlue;
       bikerTextColor.value = CustomColors.kDarkGray;
     }
-    Biike.localAppData.saveRole(Biike.role.value);
   }
 }

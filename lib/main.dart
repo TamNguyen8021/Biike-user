@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:camera/camera.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,20 +43,21 @@ void main() {
         logFileExtension: LogFileExtension.TXT,
         logSystemCrashes: true,
         singleLogFileSize: 5,
-        logsWriteDirectoryName: "Logs",
-        logsExportDirectoryName: "Logs/Exported",
+        logsWriteDirectoryName: 'Logs',
+        logsExportDirectoryName: 'Logs/Exported',
         debugFileOperations: true,
         isDebuggable: true);
 
     FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterLogs.logErrorTrace(
-          'Biike', 'main()', details.stack.toString(), Error());
+      CommonFunctions.logErrorTraceFlutter(error: details.stack.toString());
     };
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     runApp(Biike());
   }, (Object error, StackTrace stack) {
-    FlutterLogs.logErrorTrace('Biike', 'main()',
-        error.toString() + ' - stack: ' + stack.toString(), Error());
+    CommonFunctions.logErrorTraceFlutter(error: error.toString() + ' - stack: ' + stack.toString());
   });
 }
 
@@ -66,8 +68,9 @@ class Biike extends StatefulWidget {
   static final Logger logger = Logger();
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
-  static Rx<String> token = ''.obs;
   static CameraDescription camera = cameras[0];
+  static String pathshareUserToken = '';
+  static String pathshareUserIdentifier = '';
 
   const Biike({Key? key}) : super(key: key);
 
@@ -77,7 +80,6 @@ class Biike extends StatefulWidget {
 
 class _BiikeState extends State<Biike> {
   final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
-
   RxMap _deviceData = {}.obs;
 
   @override

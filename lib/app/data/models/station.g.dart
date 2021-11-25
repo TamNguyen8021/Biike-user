@@ -16,8 +16,7 @@ Station _$StationFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$StationToJson(Station instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
       'stationId': instance.stationId,
       'areaId': instance.areaId,
       'name': instance.name,

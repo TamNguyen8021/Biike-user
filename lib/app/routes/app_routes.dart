@@ -8,6 +8,8 @@ abstract class CommonRoutes {
   static const CHOOSE_MODE = '/chooseMode';
   static const TRIP_HISTORY = '/tripHistory';
   static const HOME = '/home';
+  static const REQUIRE_ADD_BIKE = '/requireAddBike';
+  static const CHO_NOW = '/choNow';
   static const TOP_BIKER = '/topBiker';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/editProfile';
@@ -19,6 +21,7 @@ abstract class CommonRoutes {
   static const GET_TRIP_SUCCESS = '/getTripSuccess';
   static const EXCHANGE_VOUCHER = '/exchangeVoucher';
   static const TRIP_DETAILS = '/tripDetails';
+  static const TRIP_DETAILS_FULL_MAP = '/tripDetailsFullMap';
   static const BOOK_TRIP = '/bookTrip';
   static const BOOK_SCHEDULE_TRIP = '/bookScheduleTrip';
   static const MANAGE_BIKE = '/manageBike';
@@ -35,4 +38,5 @@ abstract class CommonRoutes {
   static const YOUR_VOUCHERS = '/yourVouchers';
   static const YOUR_VOUCHER_DETAIL = '/yourVoucherDetail';
   static const TAKE_PICTURE = '/takePicture';
+  static const POINT = '/point';
 }
