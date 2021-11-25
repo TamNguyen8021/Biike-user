@@ -1,7 +1,6 @@
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:get/get.dart';
 
 class ChangeLanguageButton extends StatelessWidget {
@@ -36,8 +35,7 @@ class ChangeLanguageButton extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        LocaleNames.of(context)!
-                            .nameOf(currentLg.languageCode)!,
+                        CustomStrings.kCurrentLanguage.tr,
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                       Icon(

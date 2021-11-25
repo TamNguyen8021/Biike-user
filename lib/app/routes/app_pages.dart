@@ -1,10 +1,13 @@
 import 'package:bikes_user/app/bindings/bike_binding.dart';
+import 'package:bikes_user/app/bindings/cho_now_settings_binding.dart';
 import 'package:bikes_user/app/bindings/login_binding.dart';
 import 'package:bikes_user/app/bindings/open_page_bingding.dart';
+import 'package:bikes_user/app/bindings/pathshare_binding.dart';
 import 'package:bikes_user/app/bindings/station_binding.dart';
 import 'package:bikes_user/app/bindings/trip_binding.dart';
 import 'package:bikes_user/app/bindings/trip_details_binding.dart';
 import 'package:bikes_user/app/bindings/user_binding.dart';
+import 'package:bikes_user/app/bindings/view_point_binding.dart';
 import 'package:bikes_user/app/bindings/view_user_binding.dart';
 import 'package:bikes_user/app/bindings/add_bike_binding.dart';
 import 'package:bikes_user/app/bindings/voucher_binding.dart';
@@ -26,7 +29,9 @@ import 'package:bikes_user/app/bindings/verify_phone_binding.dart';
 import 'package:bikes_user/app/bindings/wallet_binding.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/add_address_book/add_address_book_page.dart';
+import 'package:bikes_user/app/ui/android/pages/cho_now_settings/cho_now_settings_page.dart';
 import 'package:bikes_user/app/ui/android/pages/home/require_add_bike_page.dart';
+import 'package:bikes_user/app/ui/android/pages/login_register/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_page.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/add_bike_camera_page.dart';
 import 'package:bikes_user/app/ui/android/pages/add_sos_number/add_sos_number_page.dart';
@@ -43,25 +48,25 @@ import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_succ
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_full_map_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
+import 'package:bikes_user/app/ui/android/pages/view_point/view_point_page.dart';
 import 'package:bikes_user/app/ui/android/pages/view_user/view_user_page.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/exchange_voucher_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_fail_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_page.dart';
-import 'package:bikes_user/app/ui/android/pages/finding_biker/login/login_page.dart';
 import 'package:bikes_user/app/ui/android/pages/get_trip/get_trip_success_page.dart';
 import 'package:bikes_user/app/ui/android/pages/home/home_page.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/manage_bike_page.dart';
 import 'package:bikes_user/app/ui/android/pages/open/open_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/profile_page.dart';
-import 'package:bikes_user/app/ui/android/pages/register/register_page.dart';
-import 'package:bikes_user/app/ui/android/pages/register/verify_phone_page.dart';
+import 'package:bikes_user/app/ui/android/pages/login_register/register_page.dart';
+import 'package:bikes_user/app/ui/android/pages/login_register/verify_phone_page.dart';
 import 'package:bikes_user/app/ui/android/pages/sos_number/sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/top_biker/top_biker_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/your_voucher_details_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/your_vouchers_page.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_details_page.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_page.dart';
 import 'package:bikes_user/app/ui/android/pages/welcome/welcome_page.dart';
-import 'package:bikes_user/app/ui/android/pages/your_voucher/your_voucher_details_page.dart';
-import 'package:bikes_user/app/ui/android/pages/your_voucher/your_vouchers_page.dart';
 import 'package:get/get.dart';
 import 'package:bikes_user/app/bindings/feedback_binding.dart';
 import 'package:bikes_user/app/ui/android/pages/feedback/feedback_page.dart';
@@ -112,10 +117,20 @@ class AppPages {
           TripBinding(),
           StationBinding(),
           BikeBinding(),
+          TripDetailsBinding(),
+          PathshareBinding(),
         ]),
     GetPage(
       name: CommonRoutes.REQUIRE_ADD_BIKE,
       page: () => RequireAddBikePage(),
+    ),
+    GetPage(
+      name: CommonRoutes.CHO_NOW,
+      page: () => ChoNowSettingsPage(),
+      bindings: <Bindings>[
+        ChoNowSettingsBinding(),
+        StationBinding(),
+      ],
     ),
     GetPage(
       name: CommonRoutes.TOP_BIKER,
@@ -150,7 +165,7 @@ class AppPages {
         name: CommonRoutes.GET_TRIP_SUCCESS, page: () => GetTripSuccessPage()),
     GetPage(
         name: CommonRoutes.EXCHANGE_VOUCHER,
-        page: () => ExchangeVoucherPage(),
+        page: () => VoucherPage(),
         binding: VoucherBinding()),
     GetPage(
         name: CommonRoutes.TRIP_DETAILS,
@@ -159,7 +174,9 @@ class AppPages {
           TripDetailsBinding(),
           TripBinding(),
           HomeBinding(),
-          TripHistoryBinding()
+          TripHistoryBinding(),
+          ProfileBinding(),
+          PathshareBinding(),
         ]),
     GetPage(
         name: CommonRoutes.TRIP_DETAILS_FULL_MAP,
@@ -242,6 +259,10 @@ class AppPages {
         name: CommonRoutes.BAN_LIST,
         page: () => BanListPage(),
         binding: BanListBinding()),
-    GetPage(name: CommonRoutes.TAKE_PICTURE, page: () => AddBikeCameraPage())
+    GetPage(name: CommonRoutes.TAKE_PICTURE, page: () => AddBikeCameraPage()),
+    GetPage(
+        name: CommonRoutes.POINT,
+        page: () => ViewPointPage(),
+        binding: ViewPointBinding()),
   ];
 }

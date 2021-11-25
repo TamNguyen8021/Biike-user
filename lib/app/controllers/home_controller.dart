@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -11,7 +12,6 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -66,28 +66,17 @@ class HomeController extends GetxController {
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
       if (isLastPage) {
-        // if (Biike.role.value == Role.keer) {
         pagingController.appendLastPage(upcomingTrips.toList());
-        // } else {
-        //   pagingController.appendLastPage(stations.values.toList());
-        // }
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        // if (Biike.role.value == Role.keer) {
         nextPageKey += upcomingTrips.length;
         pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
-        // } else {
-        //   nextPageKey += stations.length;
-        //   pagingController.appendPage(stations.values.toList(), nextPageKey);
-        // }
       }
     } catch (error) {
       pagingController.error = error;
-      Biike.logger.e('HomeController - _fetchPage()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike', 'HomeController - _fetchPage()', error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
     }
   }
 
@@ -140,6 +129,7 @@ class HomeController extends GetxController {
 
       upcomingTrips.add(upcomingTripCard);
     }
+    update();
     return upcomingTrips.cast();
   }
 
@@ -182,7 +172,6 @@ class HomeController extends GetxController {
 
       upcomingTripsForBiker.add(upcomingTripCard);
     }
-
     return upcomingTripsForBiker.cast();
   }
 
@@ -228,11 +217,11 @@ class HomeController extends GetxController {
   /// Display a dialog which contains stations for user to choose.
   ///
   /// Author: TamNTT
-  Future showStationsDialog(
+  void showStationsDialog(
       {required BuildContext context, required bool isDepartureStation}) async {
     Rx<int?> _tempStationId = (-1).obs;
 
-    showDialog(
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(
@@ -266,18 +255,12 @@ class HomeController extends GetxController {
                                     departureStationName.value =
                                         departureStation.value.name =
                                             stations.values.elementAt(index);
-                                    Biike.logger
-                                        .d(departureStation.value.stationId);
                                   } else {
                                     destinationStation.value.stationId =
                                         _tempStationId.value;
                                     destinationStationName.value =
                                         destinationStation.value.name =
                                             stations.values.elementAt(index);
-                                    Biike.logger
-                                        .d(destinationStation.value.stationId);
-                                    Biike.logger
-                                        .d(destinationStation.value.name);
                                   }
                                   Get.back();
                                 },

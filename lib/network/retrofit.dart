@@ -29,7 +29,7 @@ abstract class RestClient {
 
   @GET(EndPoint.blackList + '/{idUser}')
   Future<BlackListResponse> getBlackList(
-    @Path('idUser') String idUser,
+    @Path('idUser') int idUser,
     @Query('page') int page,
     @Query('limit') int limit,
   );

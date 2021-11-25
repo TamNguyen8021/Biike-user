@@ -17,7 +17,7 @@ class ProfileController extends GetxController {
   Rxn<DateTime> birthDate = Rxn<DateTime>();
   String tempName = '';
   int tempGender = -1;
-  String tempBirthDate = '';
+  String? tempBirthDate;
 
   /// Change user's gender with [newGender].
   ///
@@ -40,17 +40,19 @@ class ProfileController extends GetxController {
     var data = await _userProvider.getProfile(userId: Biike.userId.value);
     user = User.fromJson(data);
 
-    birthDate.value = DateTime.tryParse(user.birthDate!);
+    if (user.birthDate != null) {
+      birthDate.value = DateTime.tryParse(user.birthDate!);
+    }
 
     tempName = user.userFullname;
     tempGender = user.gender;
-    tempBirthDate = user.birthDate!;
+    tempBirthDate = user.birthDate;
   }
 
   bool isSaveButtonDisable(
       {required String newName,
       required int newGender,
-      required String newBirthDate}) {
+      required String? newBirthDate}) {
     return (tempName == newName) &&
         (tempGender == newGender) &&
         (tempBirthDate == newBirthDate);
@@ -62,10 +64,13 @@ class ProfileController extends GetxController {
 
     newUserProfile.putIfAbsent('userFullname', () => user.userFullname);
     newUserProfile.putIfAbsent('gender', () => user.gender);
-    newUserProfile.putIfAbsent(
-        'birthDate',
-        () => DateFormat('yyyy-MM-dd')
-            .format(DateTime.tryParse(user.birthDate!)!));
+
+    if (user.birthDate != null) {
+      newUserProfile.putIfAbsent(
+          'birthDate',
+          () => DateFormat('yyyy-MM-dd')
+              .format(DateTime.tryParse(user.birthDate!)!));
+    }
 
     bool isSuccess = await _userProvider.editProfile(
         userId: Biike.userId.value, body: jsonEncode(newUserProfile));

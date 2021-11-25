@@ -3,30 +3,38 @@ import 'dart:convert';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
+import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/trip_feedback.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
+import 'package:bikes_user/app/data/providers/pathshare_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:share_plus/share_plus.dart';
 
 class TripDetailsController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
   final _homeController = Get.find<HomeController>();
+  final _profileController = Get.find<ProfileController>();
+  final _pathshareProvider = Get.find<PathshareProvider>();
 
-  Rx<String> buttonText = CustomStrings.kStartTrip.tr.obs;
+  Rx<String> buttonText = CustomStrings.kStart.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
   Rx<String> _cancelReason = ''.obs;
   Rx<bool> isTripStarted = false.obs;
+  Rx<bool> isLocationShared = false.obs;
 
   Function onPressedFunc = () {};
   Trip trip = Trip.empty();
@@ -41,7 +49,10 @@ class TripDetailsController extends GetxController {
   TripFeedback feedback2 = TripFeedback.empty();
 
   List<LatLng> polypoints = [];
-  late LocationData userLocation;
+  LocationData? userLocation;
+  String _shareUrl = '';
+  String sessionIdentifier = '';
+  DateTime? _lastTimeSharedLocation;
 
   @override
   onInit() {
@@ -56,15 +67,13 @@ class TripDetailsController extends GetxController {
     PermissionStatus _permissionGranted;
 
     _serviceEnabled = await _location.serviceEnabled();
-    if (!_serviceEnabled) {
+    while (!_serviceEnabled) {
       _serviceEnabled = await _location.requestService();
-      if (!_serviceEnabled) {}
     }
 
     _permissionGranted = await _location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
+    while (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await _location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {}
     }
 
     userLocation = await _location.getLocation();
@@ -103,9 +112,9 @@ class TripDetailsController extends GetxController {
   }
 
   Future<Map<String, dynamic>> getLocationDetails(
-      {required double latitude, required double longtitude}) async {
-    Map<String, dynamic> data = await _tripProvider.getLocationDetails(
-        latitude: latitude, longtitude: longtitude);
+      {required String placeId}) async {
+    Map<String, dynamic> data =
+        await _tripProvider.getLocationDetails(placeId: placeId);
     return data;
   }
 
@@ -113,15 +122,12 @@ class TripDetailsController extends GetxController {
   ///
   /// Author: TamNTT
   void showLocationDetails(
-      {required BuildContext context,
-      required double latitude,
-      required double longtitude}) {
-    showDialog(
+      {required BuildContext context, required String placeId}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return FutureBuilder(
-              future: getLocationDetails(
-                  latitude: latitude, longtitude: longtitude),
+              future: getLocationDetails(placeId: placeId),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Dialog(
@@ -211,18 +217,6 @@ class TripDetailsController extends GetxController {
         });
   }
 
-  Future<void> getRoutePoints(
-      String startLng, String startLat, String endLng, String endLat) async {
-    polypoints.clear();
-    var data =
-        await _tripProvider.getRouteData(startLng, startLat, endLng, endLat);
-    List coordinates = data['features'][0]['geometry']['coordinates'];
-
-    coordinates.map((pair) {
-      polypoints.add(LatLng(pair[1], pair[0]));
-    }).toList();
-  }
-
   /// Cancel a trip based on [tripId].
   ///
   /// Author: TamNTT
@@ -234,7 +228,7 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
-      Get.back();
+      Get.back(closeOverlays: true);
       Get.back();
       _homeController.pagingController.refresh();
       CommonFunctions().showSuccessDialog(
@@ -245,12 +239,60 @@ class TripDetailsController extends GetxController {
     }
   }
 
-  /// Display a dialog on [context] to enter cancel reason.
+  /// Copies a link which contains user's real-time location to clipboard and shows a share dialog
   ///
   /// Author: TamNTT
-  dynamic showCancelReasonDialog(
-      {required BuildContext context, required int tripId}) {
-    showDialog(
+  void _shareLink({required BuildContext context}) async {
+    if (isLocationShared.isFalse) {
+      if (Biike.pathshareUserToken.isEmpty ||
+          Biike.pathshareUserIdentifier.isEmpty) {
+        Map<String, dynamic> data = await _pathshareProvider.createUser(
+            userName: _profileController.user.userFullname,
+            userPhoneNumber: _profileController.user.userPhoneNumber);
+        Biike.pathshareUserToken = data['user']['token'];
+        Biike.pathshareUserIdentifier = data['user']['identifier'];
+        Biike.localAppData.savePathshareUserToken(Biike.pathshareUserToken);
+        Biike.localAppData
+            .savePathshareUserIdentifier(Biike.pathshareUserIdentifier);
+      }
+
+      if (await _pathshareProvider.createUserLocation(
+          userLat: userLocation!.latitude!,
+          userLng: userLocation!.longitude!)) {
+        if (sessionIdentifier.isEmpty ||
+            DateTime.now()
+                .subtract(Duration(minutes: 30))
+                .isAfter(_lastTimeSharedLocation!)) {
+          Map<String, dynamic> data = await _pathshareProvider.createSession();
+          if (data.isNotEmpty) {
+            isLocationShared.value = true;
+            sessionIdentifier = data['session']['identifier'];
+            _shareUrl = data['session']['users'][0]['invitation_url'];
+            if (_lastTimeSharedLocation == null) {
+              _lastTimeSharedLocation = DateTime.now();
+            }
+          } else {
+            CommonFunctions().showErrorDialog(
+                context: context, message: CustomErrorsString.kDevelopError.tr);
+          }
+        } else {
+          isLocationShared.value =
+              await _pathshareProvider.startOrStopLocationSharing(
+                  isShared: true, sessionIdentifier: sessionIdentifier);
+        }
+      } else {
+        CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kDevelopError.tr);
+      }
+    }
+
+    Clipboard.setData(ClipboardData(text: _shareUrl));
+    Share.share(_shareUrl, subject: CustomStrings.kMyLocation.tr);
+  }
+
+  void showCancelReasonDialog(
+      {required BuildContext context, required int tripId}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -322,8 +364,8 @@ class TripDetailsController extends GetxController {
   }
 
   /// Author: TamNTT
-  dynamic showHelpCenter({required BuildContext context}) {
-    showDialog(
+  void showHelpCenter({required BuildContext context}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -348,15 +390,71 @@ class TripDetailsController extends GetxController {
                   ),
                   HelpCenterRow(
                     icon: Icons.share_outlined,
-                    text: CustomStrings.kShareTripInfo.tr,
+                    text: CustomStrings.kShareLocation.tr,
                     isLastRow: false,
-                    onTapFunc: () {},
+                    onTapFunc: () async {
+                      _shareLink(context: context);
+                    },
+                  ),
+                  Obx(
+                    () => Visibility(
+                      visible: isLocationShared.value,
+                      child: HelpCenterRow(
+                        icon: Icons.wrong_location,
+                        text: CustomStrings.kStopSharingLocation.tr,
+                        isLastRow: false,
+                        onTapFunc: () async {
+                          if (await _pathshareProvider
+                              .startOrStopLocationSharing(
+                                  isShared: false,
+                                  sessionIdentifier: sessionIdentifier)) {
+                            isLocationShared.value = false;
+                          } else {
+                            CommonFunctions().showErrorDialog(
+                                context: context,
+                                message: CustomErrorsString.kDevelopError.tr);
+                          }
+                        },
+                      ),
+                    ),
                   ),
                   HelpCenterRow(
                     icon: Icons.dialpad,
                     text: CustomStrings.kSOSCenter.tr,
                     isLastRow: false,
-                    onTapFunc: () {},
+                    onTapFunc: () {
+                      if (isLocationShared.isTrue) {
+                        final TextEditingController controller =
+                            TextEditingController();
+                        Get.defaultDialog(
+                          content: TextFormField(
+                            controller: controller,
+                            decoration: InputDecoration(
+                              labelText: CustomStrings.kPhoneNo.tr,
+                            ),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () async {
+                                CommonFunctions().makingSms(
+                                    phoneNo: [controller.text],
+                                    body: '(Nội dung tiếng Việt): ' +
+                                        _shareUrl +
+                                        '\n\n(English content): ' +
+                                        _shareUrl);
+                              },
+                              child: Text(CustomStrings.kBtnSend.tr),
+                            ),
+                          ],
+                        );
+                      } else {
+                        CommonFunctions().showInfoDialog(
+                            context: context,
+                            message:
+                                CustomStrings.kNeedSharingLocationToUseSOS.tr);
+                      }
+                    },
                   ),
                   HelpCenterRow(
                     icon: Icons.local_police_outlined,
@@ -365,8 +463,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'công+an',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -377,8 +475,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'bệnh+viện',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -389,8 +487,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'tiệm+sửa+xe',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),
@@ -401,8 +499,8 @@ class TripDetailsController extends GetxController {
                     onTapFunc: () async {
                       await CommonFunctions().openMap(
                           keyword: 'trạm+xăng',
-                          latitude: userLocation.latitude,
-                          longtitude: userLocation.longitude,
+                          latitude: userLocation!.latitude,
+                          longitude: userLocation!.longitude,
                           context: context);
                     },
                   ),

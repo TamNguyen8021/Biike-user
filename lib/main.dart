@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
@@ -9,7 +10,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -49,8 +49,7 @@ void main() {
         isDebuggable: true);
 
     FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterLogs.logErrorTrace(
-          'Biike', 'main()', details.stack.toString(), Error());
+      CommonFunctions.logErrorTraceFlutter(error: details.stack.toString());
     };
 
     SystemChrome.setPreferredOrientations([
@@ -58,8 +57,7 @@ void main() {
     ]);
     runApp(Biike());
   }, (Object error, StackTrace stack) {
-    FlutterLogs.logErrorTrace('Biike', 'main()',
-        error.toString() + ' - stack: ' + stack.toString(), Error());
+    CommonFunctions.logErrorTraceFlutter(error: error.toString() + ' - stack: ' + stack.toString());
   });
 }
 
@@ -71,6 +69,8 @@ class Biike extends StatefulWidget {
   static Rx<Role> role = Role.none.obs;
   static Rx<int> userId = (-1).obs;
   static CameraDescription camera = cameras[0];
+  static String pathshareUserToken = '';
+  static String pathshareUserIdentifier = '';
 
   const Biike({Key? key}) : super(key: key);
 
@@ -80,7 +80,6 @@ class Biike extends StatefulWidget {
 
 class _BiikeState extends State<Biike> {
   final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
-
   RxMap _deviceData = {}.obs;
 
   @override
@@ -170,9 +169,6 @@ class _BiikeState extends State<Biike> {
         locale: LocalizationService.locale,
         fallbackLocale: LocalizationService.fallbackLocale,
         translations: LocalizationService(),
-        localizationsDelegates: [
-          LocaleNamesLocalizationsDelegate(),
-        ],
       ),
     );
   }

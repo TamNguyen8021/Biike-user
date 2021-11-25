@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/retrofit.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:dio/dio.dart';
@@ -47,9 +48,9 @@ class Repositories implements RestClient {
   }
 
   @override
-  Future<BlackListResponse> getBlackList(String idUser, int page, int limit) {
+  Future<BlackListResponse> getBlackList(int userId, int page, int limit) {
     return _client.getBlackList(
-      idUser,
+      Biike.userId.value,
       page,
       limit,
     );

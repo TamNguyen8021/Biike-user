@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/CustomTrace/custom_trace.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/services/firebase_services.dart';

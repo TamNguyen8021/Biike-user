@@ -1,7 +1,8 @@
-import 'package:bikes_user/app/common/functions/snackbar.dart';
-import 'package:bikes_user/main.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_logs/flutter_logs.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 class FirebaseServices {
   User? get user => firebaseAuth.currentUser;
@@ -11,7 +12,7 @@ class FirebaseServices {
   bool get isVerifyEmail => user?.emailVerified ?? false;
   String _verificationId = '';
   late FirebaseAuth firebaseAuth;
- 
+
   static FirebaseServices init() {
     FirebaseServices firebaseServices = FirebaseServices();
     firebaseServices.firebaseAuth = FirebaseAuth.instance;
@@ -25,7 +26,8 @@ class FirebaseServices {
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          Biike.logger.e('The provided phone number is not valid.');
+          CommonFunctions.logBiike(
+              error: 'The provided phone number is not valid.');
         }
       },
       codeSent: (String verificationId, int? resendToken) {
@@ -50,9 +52,7 @@ class FirebaseServices {
       }
       return false;
     } catch (error) {
-      Biike.logger.e('FirebaseServices - verifyOtp()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike', 'FirebaseServices - verifyOtp()', error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
       return false;
     }
   }
@@ -67,33 +67,22 @@ class FirebaseServices {
         throw (FirebaseAuthException);
       }
     } on FirebaseAuthException catch (error) {
-      Biike.logger.e('FirebaseServices - signinWithEmailAndPassword()', error);
-      FlutterLogs.logErrorTrace(
-          'Biike',
-          'FirebaseServices - signinWithEmailAndPassword()',
-          error.toString(),
-          Error());
+      CommonFunctions.catchExceptionError(error);
 
-      if (error.code == 'user-not-found') {
-        return 'No user found for that email.';
-      } else if (error.code == 'wrong-password') {
-        return 'Wrong password provided for that user.';
+      if (error.code == 'user-not-found' || error.code == 'wrong-password') {
+        return CustomErrorsString.kWrongEmailOrPassword.tr;
       }
-
-      return 'lỗi ngoại lệ';
+      return CustomErrorsString.kDevelopError.tr;
     }
   }
 
-  Future<void> sentVerifyEmail() async {
+  Future<void> sentVerifyEmail({required BuildContext context}) async {
     try {
       await user?.sendEmailVerification();
     } on FirebaseAuthException catch (error) {
-      Biike.logger.e('FirebaseServices - sentVerifyEmail()', error);
-      FlutterLogs.logErrorTrace('Biike', 'FirebaseServices - sentVerifyEmail()',
-          error.toString(), Error());
-
-      SnackBarServices.showSnackbar(
-          title: '', message: 'Vui lòng chờ trong giây lát rồi thử lại sau');
+      CommonFunctions.catchExceptionError(error);
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
     }
   }
 
@@ -101,18 +90,20 @@ class FirebaseServices {
     await user?.reload();
   }
 
-  Future<bool> resetPasswordWithEmail(String email) async {
+  Future<bool> resetPasswordWithEmail(
+      {required BuildContext context, required String email}) async {
     try {
       await firebaseAuth.sendPasswordResetEmail(email: email);
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
-        SnackBarServices.showSnackbar(title: '', message: 'Email khong hop le');
+        CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kInvalidEmail.tr);
         return false;
       }
       if (e.code == 'user-not-found') {
-        SnackBarServices.showSnackbar(
-            title: '', message: 'Khong tim thay email nay');
+        CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kWrongEmail.tr);
         return false;
       }
       return false;

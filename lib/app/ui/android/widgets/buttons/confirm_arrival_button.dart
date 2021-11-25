@@ -23,8 +23,8 @@ class ConfirmArrivalButton extends StatelessWidget {
       : super(key: key);
 
   void _showConfirmArrivalDialog(
-      {required BuildContext context, required Role role}) {
-    showDialog(
+      {required BuildContext context, required Role role}) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -74,7 +74,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                             hasBorder: false,
                             backgroundColor: CustomColors.kBlue,
                             foregroundColor: Colors.white,
-                            text: CustomStrings.kSure.tr,
+                            text: CustomStrings.kYes.tr,
                             onPressedFunc: () {
                               isAtDestination.value = true;
                               buttonColor.value = CustomColors.kDarkGray;

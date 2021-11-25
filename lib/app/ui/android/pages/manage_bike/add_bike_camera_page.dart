@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -111,7 +112,7 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
 
                           Get.back(result: image.path);
                         } catch (e) {
-                          Biike.logger.e('AddBikeCameraPage: ' + e.toString());
+                          CommonFunctions.logBiike(error: e.toString());
                         }
                       })
                 ],

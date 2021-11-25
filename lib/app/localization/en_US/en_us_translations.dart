@@ -7,40 +7,49 @@ final Map<String, String> en = {
   'kSkip': 'Skip>>',
   'kFree': 'Absolutely free',
   'kFirstDescription':
-      'Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì khi sử dụng app',
+      'Biiké is a free connect application, you will not have to pay to use our service',
   'kSecondDescription':
-      'Biiké kết nối những người có chung hành trình, giúp tận dụng những chiếc yên xe vốn lãng phí',
+      'Biiké connects people who share the same route, take advance of the un-used motorcycle rear seat of yours',
   'kThirdDescription':
-      'Biiké giúp giảm thiểu lượng xe lưu thông, giảm kẹt xe, khói bụi và bảo vệ môi trường',
+      'Biiké helps prevent the traffic volume, smog and helps saving the enviroment',
   'kConnectSociety': 'Connects with everyone',
   'kProtectEnvironment': 'Protects the environment',
-  'kStartOnBoard': 'Start',
+  'kStart': 'Start',
 
   // '003.1_login'
-  'kLoginButton': 'Xác thực bằng email FPT',
-  'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
   'kForgotPassword': 'Forgot password',
+  'kSendResetPasswordEmail':
+      'Your password has been reset, please check your email',
+  'kInputEmail': 'Enter email',
+  'kPassword': 'Password',
+  'kInputPassword': 'Enter password',
+  'kLogin': 'Sign in',
+  'kNoAccount': 'No account yet? ',
+  'kRegister': 'Sign up now!',
 
-  // '004.1_input_phone_no' screen
-  'kInputPhoneNumber': 'Nhập số điện thoại',
+  // 'register' screen
+  'kConfirmTerm': 'By sign up, you aggre with',
+  'kAnd': ' and ',
+  'kHasAccount': 'Has an account? ',
+  'kInputName': 'Enter full name',
+  'kInputPhoneNumber': 'Enter phone number',
+  'kSentVerifiedEmail':
+      'We sent a verified email to your mailbox. Please verify your account before login',
+  'kRegisterSuccess': 'Your account was created',
 
   // '004.2_verify_phone' screen
-  'kInputVerifyCode': 'Nhập mã xác minh',
-  'kResendVerifyCode': 'Yêu cầu gửi lại mã sau 59 giây',
-  'kInvalidPin': 'Mã xác nhận không chính xác',
-
-  // '004.3_input_name' screen
-  'kInputName': 'Nhập tên của bạn',
+  'kInputVerifyCode': 'Input verification code',
+  'kResendVerifyCode': 'Resend the code after 59 seconds',
+  'kInvalidPin': 'Invalid code',
 
   // '004.4_choose_mode' screen
-  'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
-  'kBikerRole': 'Người chở',
-  'kKeerRole': 'Người đi ké',
+  'kChooseMode': 'Start using app\nwith the role',
+  'kBikerRole': 'Biker',
+  'kKeerRole': 'Ké-er',
   'kBikerDescription':
-      'Lựa chọn người bạn muốn chở, bắt đầu hành trình, nhận điểm thưởng và đổi lấy những voucher giá trị',
-  'kKeerDescription': 'Tạo chuyến đi của bạn và lên xe đi ké!',
-  'kRemindWords': 'Bạn có thể đổi sang chế độ còn lại\nkhi sử dụng ứng dụng',
+      'Choose who you want to match with, start your trip, receive bonus points and exchange for valuable vouchers',
+  'kKeerDescription': 'Create your own trips and catch a ride with our Bikers',
+  'kRemindWords': 'You can switch to other mode\nduring using our service',
 
   // 'ke_er_home' screen
   'kTopBiker': 'Top Biker on ',
@@ -55,12 +64,15 @@ final Map<String, String> en = {
   'kUpcomingTrips': 'Upcoming trips',
   'kFinding': 'Finding...',
   'kCreateTrip':
-      'Bạn chưa đặt chuyến nào.\nHãy chọn + và bắt đầu hành trình đi ké!',
+      'You have not booked any trips.\nPress + and start your trip now!',
   'kConfirmArrivalTitle': 'Are you sure you are at your pick up point?',
   'kConfirmArrivalMessageForKeer': 'We\'ll send a notification to your biker',
   'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your ké-er',
+  'kConfirmExitApp':
+      'Are you sure you want to exit? (If you are sharing your location, when you exit the application will stop sharing)',
 
   // 'biker_home' screen
+  'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
   'kBikerReadyReminder': 'Ready to go!',
   'kFilter': 'Filter trips',
   'kSelectHour': 'Hour',
@@ -75,14 +87,31 @@ final Map<String, String> en = {
   // 'require_add_bike' screen
   'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker Mode',
 
+  // 'cho_now' screen
+  'kChoNow': 'Chở Now',
+  'kChoNowDescription1':
+      'Chở Now hiển thị chuyến đi do người ké cần đi ngay (tính năng Ké Now của Ké Mode)',
+  'kChoNowDescription2':
+      'Chuyến đi cần Chở Now được gửi tới bạn dựa vào phần cài đặt Chở Now của bạn',
+  'kChoNowDescription3':
+      'Chuyến đi sẽ tự động hủy sau 3 phút nếu bạn không nhận chuyến',
+  'kChoNowSettings': 'Chở Now settings',
+  'kTurnOnChoNow': 'Turn on Chở Now',
+  'kChoNowStation': 'Pick up station',
+  'kAddPickUpStation': '+ Add pick up station',
+  'kAddChoNowStation': 'Add Chở Now station',
+  'kAdd': 'Add',
+  'kDelete': 'Delete',
+  'kChooseStation': 'Choose station',
+
   // 'top_biker' screen
-  'kBikerRank': 'Bảng xếp hạng Biker',
-  'kMonth': 'Tháng ',
-  'kTopBikerInfoFirstContent': 'Bảng xếp hạng Biker vinh danh'
-      ' những tài xế chở ké có hoạt động nổi bật, đạt được nhiều điểm thưởng.',
-  'kTopBikerInfoSecondContent': 'Các Biker tại Bảng xếp hạng '
-      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké. ',
-  'kGotIt': 'Đã hiểu',
+  'kBikerRank': 'Biker Rank',
+  'kMonth': 'Month ',
+  'kTopBikerInfoFirstContent':
+      'Board Of Honor Bikers for oustanding Bikers who are the most active, gain highest points.',
+  'kTopBikerInfoSecondContent':
+      'Bikers who appears on Board Of Honor Bikers will have special deals and gifts from Biiké.',
+  'kGotIt': 'Got it',
 
   // 'activity' screen
   'kNoUpcomingTrips': 'No upcoming trips',
@@ -102,7 +131,7 @@ final Map<String, String> en = {
   'kBikerActivities': 'Activity',
 
   //'profile' screen
-  'kEdit': 'Edit profile',
+  'kEdit': 'Edit',
   'kSavedAddress': 'Address book',
   'kSettings': 'Settings',
   'kBlockList': 'Blacklist',
@@ -134,47 +163,55 @@ final Map<String, String> en = {
   'kCall': 'Call',
   'kMessage': 'Message',
   'kReport': 'Report',
+  'kReportAndBlock': 'Report and block',
   'kNoHistoryTrip': 'No history trips with this person',
   'kHasHistoryTrip': 'History trips with this person',
   'kEnterYourReport': 'Type your feedback about this person...',
-  'kReportAndBlock': 'Report and block',
-  'kConfirmBlock': 'Are you sure you\nwant to block this person?',
-  'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn\ntại trang hồ sơ cá nhân',
-  'kSure': 'Sure',
+  'kBlock': 'Block',
+  'kConfirmBlock': 'Are you sure you want to block this person?',
+  'kSeeBlacklist': 'You can view your blacklist in profile page',
+  'kYes': 'Yes',
+  'kNo': 'No',
   'kThankYouForReport': 'Thank you for your report',
   'kSorryMessage':
-      'Biiké rất tiếc vì những trải nghiệm chưa được hoàn hảo. Biiké đã nhận được thông tin báo cáo và sẽ xử lý trong thời gian sớm nhất.',
+      'Biiké Team apologize for imperfect user experience. We have received your report and will handle it as soon as possible.',
+  'kYouBlockThisPerson': 'This person is blocked',
+
+  // 'block_list' screen
+  'kEmptyBlockList': 'Your blacklist is empty',
 
   // 'finding_biker_success' screen
-  'kFoundBiker': 'Đã tìm được người chở bạn!',
-  'kViewTrip': 'Xem chuyến đi',
+  'kFoundBiker': 'We found your Biker!',
+  'kViewTrip': 'View trip details',
 
   // 'get_trip_success' screen
-  'kGetTripSuccess': 'Nhận chở thành công!',
+  'kGetTripSuccess': 'Trip was matched successfully!',
 
   // 'finding_biker' screen
-  'kFindingBiker': 'Đang tìm người chở',
+  'kFindingBiker': 'Looking for Biker',
 
   // 'finding_biker_fail' screen
-  'kFindBikerFail': 'Không tìm thấy người chở ké',
+  'kFindBikerFail': 'No Biker found',
   'kTips':
-      'Bạn có thể tạo chuyến đi đặt lịch để tăng khả năng tìm được người chở ké nhé!',
+      'You can create schedule trips to improve the chance of matching with Biker!',
   'kBtnExit': 'Exit',
   'kBtnReturn': 'Back',
 
   // 'ke_er_feedback' screen
-  'kTripSuccessBiker': 'Chở ké thành công!',
-  'kTripSuccessKeer': 'Đi ké thành công!',
+  'kTripSuccessBiker': 'Successful trip!',
+  'kTripSuccessKeer': 'Successful trip!',
   'kBuyReminder':
-      'Vì đây là chuyến đi miễn phí, nên đừng quên gửi lời cảm ơn đến người bạn đồng hành, lâu lâu mua một ly cà phê hoặc một ổ bánh mì sẽ là ý tưởng xuất sắc đấy!',
-  'kRateReminder':
-      'Hãy đánh giá trải nghiệm của bạn cùng \'người ấy\' hôm nay nhé!',
+      'Since this was a free ride, please don\'t forget to send thank you to your partner, a cup of coffee or a cake would be an ideal option!',
+  'kRateReminder': 'Please rate your experience with your partner today!',
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
 
   // 'biker_point' screen
-  'kListVouchers': 'Danh mục đổi quà',
-  'kTradedVouchers': 'Quà đã đổi',
+  'kListVouchers': 'Voucher list',
+  'kCanExchange': 'Can be exchange',
+  'kExchanged': 'Exchanged',
+  'kUsedOrExpired': 'Used/Expired',
+  'kNearMe': 'Near me',
 
   // 'trip_details' screen
   'kTripDetails': 'View trip details',
@@ -182,7 +219,6 @@ final Map<String, String> en = {
   'kNewTrip': 'Created',
   'kCancelTrip': 'Cancel trip',
   'kConfirmArrival': 'Confirm arrival',
-  'kStartTrip': 'Start trip',
   'kCompleteTrip': 'Finish trip',
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
@@ -190,6 +226,9 @@ final Map<String, String> en = {
   'kExpandMap': 'Expand map',
   'kMinimizeMap': 'Minimize map',
   'kViewRouteInstruction': 'View route instruction',
+  'kStartLocation': 'Start location',
+  'kEndLocation': 'End location',
+  'kYourLocation': 'Your location',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
   'kViewCancelTripReminder': 'You can view your canceled trips in history',
@@ -197,8 +236,14 @@ final Map<String, String> en = {
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
   'kHelpCenter': 'Help Center',
-  'kShareTripInfo': 'Share your trip\'s info',
+  'kShareLocation': 'Share your location',
+  'kMyLocation': 'Your location',
+  'kStopSharingLocation': 'Stop sharing location',
   'kSOSCenter': 'S.O.S Center',
+  'kMessageWereSent':
+      'A messsage which contains your real-time location link were sent to your S.O.S numbers',
+  'kNeedSharingLocationToUseSOS':
+      'You need to share your location to use this feature',
   'kNearestPoliceStation': 'Nearest police station',
   'kNearestHospital': 'Nearest hospital',
   'kNearestMechanicShop': 'Nearest mechanic shop',
@@ -208,9 +253,11 @@ final Map<String, String> en = {
   'kTown': 'Town',
   'kCity': 'City',
   'kCountry': 'Country',
+  'kNeedLocationPermission':
+      'You need to grant location permission and turn on GPS to use this feature',
 
   // 'book_trip' screen
-  'kBookNewTrip': 'Tạo chuyến đi ké mới',
+  'kBookNewTrip': 'Book a new trip',
   'kFrom': 'From',
   'kChooseFrom': '-Departure station-',
   'kTo': 'To',
@@ -255,7 +302,6 @@ final Map<String, String> en = {
   'kPleaseTakeRegistrationPicture':
       'Please take a picture of your registration',
   'kTakePicture': 'Take picture',
-  'kFillInAllField': 'Please fill in all fields',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Gift details',
@@ -270,6 +316,9 @@ final Map<String, String> en = {
   'kYourCode': 'Your code',
   'kExchangeVoucherSuccess': 'Exchange voucher successful!',
   'kViewAVoucher': 'View',
+  'kShowVoucherCode': 'Show code',
+  'kMarkAsUsed': 'Mark as used',
+  'kMarkAsUnused': 'Mark as unused',
 
   // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -280,6 +329,7 @@ final Map<String, String> en = {
   'kChangePassword': 'Change Password',
   'kLoginByFingerprint': 'Login by Fingerprint',
   'kLanguage': 'Language',
+  'kCurrentLanguage': 'English',
   'kOther': 'Other',
   'kFollowOnFacebook': 'Follow Biké on Facebook',
   'kWebsite': 'Website',
@@ -323,8 +373,6 @@ final Map<String, String> en = {
   // 'ban_list' screen
   'kBanList': 'Ban List',
   'kUnBlock': 'Unblock',
-  'kLogin': 'Login',
-  'kRegister': 'Register',
 
   // date
   'kMonday': 'Mon',
@@ -334,26 +382,55 @@ final Map<String, String> en = {
   'kFriday': 'Fri',
   'kSaturday': 'Sat',
   'kSunday': 'Sun',
+
+  // point
+  'kPoint': 'Point',
+  'kExchangeVoucher': 'Voucher',
+  'kBuyPoint': 'Buy point',
+  'kYouHave': 'You have',
+  'kExpired': ' points will be expired in ',
+  'kFindMore': 'Learn more',
+
+  'kAll': 'All',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
-    'kErrorMessage':
-        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
     'kNotRated': 'Please rate your trip experience',
     'kIncludeBadWords': 'Please don\'t use bad words',
     'kSendFailed': 'Send feedback failed!',
     'kDevelopError':
-        'There are some errors, please contact Biiké development team for support',
+        'There are some errors, please try again later or contact Biiké development team for support',
     'kExchangeFailed': 'Can\'t exchange voucher!',
     'kNotEnoughPoint': 'User doesn\'t have enough point',
     'kNotChooseStation': 'You haven\'t choose your route',
     'kNotFillAllFields': 'Please fill in all fields',
     'kNotAfterNow': 'You can\'t book a trip from the past',
-    'kNotAvailableTimeRange': 'Available time is between 6 AM and 9 PM',
-    'kErrorName': 'Tên của bạn không hợp lệ',
-    'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
+    'kNotAvailableTimeRange': 'Available time is between 5AM and 9PM',
+    'kErrorName': 'Invalid name',
+    'kErrorInputPhoneNumber': 'Invalid phone number',
     'kEditProfileFailed':
         'Your profile was not changed. Please try again later',
     'kCannotGoBackWhenTripStarted':
         'You cannot go back when the trip has started',
+    'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
+    'kSameStationWereAdded': 'A station with the same information were added',
+    'kNoRoleWereChosen': 'You must choose a role to use our service',
+    'kEmailMustNotBeEmpty': 'Email must not be empty',
+    'kMustLoginWithFPTEmail': 'Please sign in with FPT email',
+    'kErrorWhenStopSharingLocation':
+        'There are some errors, we can\'t stop sharing your location. Your share link will be expired after 30 minutes',
+    'kNoVoucher': 'There\'s no voucher currently',
+    'kWrongEmailOrPassword': 'Wrong email or password',
+    'kNoPasswordEnter': 'Please enter your password to sign in',
+    'kInvalidEmail': 'Invalid email',
+    'kWrongEmail': 'Wrong email, please try again',
+    'kPasswordMustAtLeast6': 'Password must be at least 6 characters',
+    'kInvalidPhoneNo': 'Invalid phone number',
+    'kDuplicateEmailOrPhone': 'The email or phone number was used to sign up',
+    'kWrongOtp': 'Wrong OTP code',
+    'kEmptyOtp': 'Please enter your OTP code',
+    'kTryAgain': 'Try again',
+    'kNoHistory': 'History empty',
+    'kEmptyReportReasonOrContainsBadWords':
+        'Report reason must not be empty or contains inappropriate words',
   });

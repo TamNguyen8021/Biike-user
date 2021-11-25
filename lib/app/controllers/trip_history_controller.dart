@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -8,7 +8,6 @@ import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_history/trip_history_page.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/history_trip_card.dart';
 import 'package:bikes_user/main.dart';
-import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -57,10 +56,8 @@ class TripHistoryController extends GetxController {
         pagingController.appendPage(historyTrips.cast(), nextPageKey);
       }
     } catch (error) {
-      Biike.logger.e('TripHistoryController - _fetchPage()', error);
       pagingController.error = error;
-      FlutterLogs.logErrorTrace('Biike', 'TripHistoryController - _fetchPage()',
-          error.toString(), Error());
+      CommonFunctions.catchExceptionError(error);
     }
   }
 
@@ -99,9 +96,6 @@ class TripHistoryController extends GetxController {
           break;
         default:
           tripStatus = TripStatus.none;
-          Get.defaultDialog(
-              title: CustomErrorsString.kError.tr,
-              middleText: CustomErrorsString.kErrorMessage.tr);
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(

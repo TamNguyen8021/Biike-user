@@ -8,9 +8,10 @@ import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'dart:async';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BookTripController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
@@ -26,7 +27,8 @@ class BookTripController extends GetxController {
   Rx<bool> isTimeSelected = false.obs;
   Rx<bool> isRepeated = false.obs;
 
-  Rx<double> roadDistance = 0.0.obs;
+  Rx<String> roadDistance = ''.obs;
+  Rx<String> roadDuration = ''.obs;
 
   RxList<LatLng> polypoints = <LatLng>[].obs;
 
@@ -49,7 +51,8 @@ class BookTripController extends GetxController {
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
     polypoints.value = [];
-    roadDistance.value = 0;
+    roadDistance.value = '';
+    roadDuration.value = '';
 
     if (departureStation.value.stationId! >= 0) {
       await _getListRelatedStation();
@@ -64,17 +67,28 @@ class BookTripController extends GetxController {
   ///
   /// Author: UyenNLP
   void updateDestinationStation(destinationValue) async {
-    polypoints.value = [];
+    polypoints.clear();
 
     CustomLocation departure =
         CustomLocation(coordinate: departureStation.value.coordinate);
     CustomLocation destination =
         CustomLocation(coordinate: destinationValue.coordinate);
+    Map<String, dynamic> response = await _tripProvider.getDurationAndDistance(
+        startLat: departure.latitude,
+        startLng: departure.longitude,
+        endLat: destination.latitude,
+        endLng: destination.longitude);
 
-    await _drawLine(departure: departure, destination: destination);
+    await CommonFunctions().getRoutePoints(
+        polypoints: polypoints.toList(),
+        startLat: departure.latitude,
+        startLng: departure.longitude,
+        endLat: destination.latitude,
+        endLng: destination.longitude);
 
     destinationStation.value = destinationValue;
-    roadDistance.value = departure.distanceFrom(destination);
+    roadDistance.value = response['rows'][0]['elements'][0]['distance']['text'];
+    roadDuration.value = response['rows'][0]['elements'][0]['duration']['text'];
   }
 
   /// Add to a repeated date list
@@ -310,21 +324,6 @@ class BookTripController extends GetxController {
         days: duration > 1 // not on weekend
             ? duration + DateTime.daysPerWeek // add 1 more week
             : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
-  }
-
-  Future<void> _drawLine(
-      {required CustomLocation departure,
-      required CustomLocation destination}) async {
-    var data = await _tripProvider.getRouteData(
-        departure.longitude.toString(),
-        departure.latitude.toString(),
-        destination.longitude.toString(),
-        destination.latitude.toString());
-
-    List coordinates = data['features'][0]['geometry']['coordinates'];
-    coordinates
-        .map((pair) => polypoints.add(LatLng(pair[1], pair[0])))
-        .toList();
   }
 
   /// Get data to attach to body of api
