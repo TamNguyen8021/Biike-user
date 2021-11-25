@@ -398,6 +398,9 @@ final Map<String, String> vi = {
   'kExpired': ' điểm sẽ hết hạn vào ngày ',
   'kFindMore': 'Tìm hiểu thêm',
 
+  // noti
+  'kNotification': 'Thông báo',
+
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message

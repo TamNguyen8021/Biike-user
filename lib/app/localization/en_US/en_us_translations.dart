@@ -393,6 +393,9 @@ final Map<String, String> en = {
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
 
+  // noti
+  'kNotification': 'Notification',
+
   'kAll': 'All',
 }..addAll(<String, String>{
     // Error message
