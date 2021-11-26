@@ -20,7 +20,8 @@ class Bike {
   String? plateNumberPicture;
   String? bikeLicensePicture;
   String? bikePicture;
-  bool? isBikeDeleted;
+  int? bikeStatus;
+  String? failedVerificationReason;
 
   Bike(
       {this.bikeId,
@@ -31,10 +32,11 @@ class Bike {
       this.brand,
       this.bikeType,
       this.bikeVolume,
-      this.isBikeDeleted,
       this.plateNumberPicture,
       this.bikeLicensePicture,
-      this.bikePicture});
+      this.bikePicture,
+      this.bikeStatus,
+      this.failedVerificationReason});
 
   Bike.empty() {
     this.bikeId = -1;
@@ -45,10 +47,11 @@ class Bike {
     this.brand = '';
     this.bikeType = '';
     this.bikeVolume = '';
-    this.isBikeDeleted = false;
     this.plateNumberPicture = '';
     this.bikeLicensePicture = '';
     this.bikePicture = '';
+    this.bikeStatus = 1;
+    this.failedVerificationReason = '';
   }
 
   /// A necessary factory constructor for creating a new Bike instance

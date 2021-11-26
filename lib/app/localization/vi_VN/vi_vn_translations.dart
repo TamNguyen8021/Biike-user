@@ -284,7 +284,9 @@ final Map<String, String> vi = {
   'kBikeBrand': 'Nhãn hiệu',
   'kBikeColor': 'Màu sơn',
   'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
-  'kBecomeKeerDueToDeleteBike': 'Bạn không có xe nên đã trở thành Ké-er',
+  'kConfirmDeleteBike': 'Xác nhận xóa xe',
+  'kAreYouSureDeleteBike':
+      'Sau khi xóa xe bạn sẽ trở thành Ké-er. Bạn có chắc muốn xóa xe?',
 
   // 'add_bike' screen
   'kAddBike': 'Thêm xe mới',
