@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// The 'add_sos_number' screen
+// ignore: must_be_immutable
 class EditSOSNumberPage extends StatelessWidget {
   final editSOSNumberController = Get.find<EditSOSNumberController>();
   final sosNumberController = Get.find<SOSNumberController>();
@@ -71,14 +72,15 @@ class EditSOSNumberPage extends StatelessWidget {
                   ),
                   Obx(
                     () => SOSNumberTextField(
-                        hintText: CustomStrings.kEnterName.tr,
-                        isReadOnly: false,
-                        isEditSOSNumber: true,
-                        initialValue: '${editSOSNumberController.name}',
-                        labelText: CustomStrings.kName.tr,
-                        onChangedFunc: (value) {
-                          editSOSNumberController.name.value = value;
-                        },
+                      hintText: CustomStrings.kEnterName.tr,
+                      isReadOnly: false,
+                      isEditSOSNumber: true,
+                      initialValue: '${editSOSNumberController.name}',
+                      labelText: CustomStrings.kName.tr,
+                      inputType: TextInputType.name,
+                      onChangedFunc: (value) {
+                        editSOSNumberController.name.value = value;
+                      },
                     ),
                   ),
                   Row(
@@ -98,14 +100,15 @@ class EditSOSNumberPage extends StatelessWidget {
                   ),
                   Obx(
                     () => SOSNumberTextField(
-                        hintText: CustomStrings.kEnterNumberPhone.tr,
-                        isReadOnly: false,
-                        isEditSOSNumber: true,
-                        initialValue: '${editSOSNumberController.number}',
-                        labelText: CustomStrings.kNote.tr,
-                        onChangedFunc: (value) {
-                          editSOSNumberController.number.value = value;
-                        },
+                      hintText: CustomStrings.kEnterNumberPhone.tr,
+                      isReadOnly: false,
+                      isEditSOSNumber: true,
+                      initialValue: '${editSOSNumberController.number}',
+                      labelText: CustomStrings.kNote.tr,
+                      inputType: TextInputType.phone,
+                      onChangedFunc: (value) {
+                        editSOSNumberController.number.value = value;
+                      },
                     ),
                   ),
                   Padding(
@@ -113,8 +116,7 @@ class EditSOSNumberPage extends StatelessWidget {
                     child: CustomElevatedIconHasLoadingButton(
                       onPressedFunc: () async {
                         if (editSOSNumberController.validate()) {
-                          if (await editSOSNumberController
-                              .editSOSNumber(id)) {
+                          if (await editSOSNumberController.editSOSNumber(id)) {
                             await sosNumberController.getSOSNumbers();
                             Get.back();
                           } else {
@@ -123,10 +125,16 @@ class EditSOSNumberPage extends StatelessWidget {
                                 message: CustomErrorsString.kDevelopError.tr);
                           }
                         } else {
+                          String errorMessage =
+                              CustomErrorsString.kNotFillAllFields.tr;
+                          if (editSOSNumberController.number.value.length !=
+                              10) {
+                            errorMessage =
+                                CustomErrorsString.kInvalidPhoneNo.tr;
+                          }
+
                           CommonFunctions().showErrorDialog(
-                              context: context,
-                              message: CustomErrorsString
-                                  .kFillInAllField.tr);
+                              context: context, message: errorMessage);
                         }
                       },
                       text: CustomStrings.kSave.tr,

@@ -21,49 +21,48 @@ class SOSNumberPage extends StatelessWidget {
         future: sosNumberController.getSOSNumbers(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Obx(
-                    () => Scaffold(
-                      appBar: CustomAppBar(
-                        isVisible: true,
-                        hasShape: true,
-                        appBar: AppBar(),
-                        hasLeading: true,
-                        onPressedFunc: () {
-                          Get.back();
-                        },
-                        title: Text(
-                          CustomStrings.kSOSNumber.tr,
-                        ),
-                      ),
-                      body: SingleChildScrollView(
-                        child: Column(children: <Widget>[
-                          Container(
-                              padding: const EdgeInsets.all(22.0),
-                              child: ListSOSNumbers(
-                                listSOSNumbers: sosNumberController.sosNumbers.value,
-                                itemPadding: 10.0,
-                              )),
-                          SOSNumberDescription(),
-                          // Padding(
-                          //       padding: const EdgeInsets.only(top: 22.0),
-                          //       child: Text(
-                          //           CustomStrings.kSOSReachLimit.tr,
-                          //           style: TextStyle(
-                          //               fontSize: 10.0,
-                          //               color: CustomColors.kDarkGray
-                          //           )
-                          //     ),
-                          // ),
-                        ]),
-                      ),
-                      floatingActionButton: AddSOSNumberButton(),
-                      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-                    )
-            );
+            return Obx(() => Scaffold(
+                  appBar: CustomAppBar(
+                    isVisible: true,
+                    hasShape: true,
+                    appBar: AppBar(),
+                    hasLeading: true,
+                    onPressedFunc: () {
+                      Get.back();
+                    },
+                    title: Text(
+                      CustomStrings.kSOSNumber.tr,
+                    ),
+                  ),
+                  body: SingleChildScrollView(
+                    child: Column(children: <Widget>[
+                      Container(
+                          padding: const EdgeInsets.all(22.0),
+                          child: ListSOSNumbers(
+                            listSOSNumbers:
+                                sosNumberController.sosNumbers.toList(),
+                            itemPadding: 10.0,
+                          )),
+                      SOSNumberDescription(),
+                      // Padding(
+                      //       padding: const EdgeInsets.only(top: 22.0),
+                      //       child: Text(
+                      //           CustomStrings.kSOSReachLimit.tr,
+                      //           style: TextStyle(
+                      //               fontSize: 10.0,
+                      //               color: CustomColors.kDarkGray
+                      //           )
+                      //     ),
+                      // ),
+                    ]),
+                  ),
+                  floatingActionButton: AddSOSNumberButton(),
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerFloat,
+                ));
           } else {
             return Loading();
           }
-        }
-    );
+        });
   }
 }

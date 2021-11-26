@@ -331,11 +331,11 @@ final Map<String, String> en = {
   'kLanguage': 'Language',
   'kCurrentLanguage': 'English',
   'kOther': 'Other',
-  'kFollowOnFacebook': 'Follow Biké on Facebook',
+  'kFollowOnFacebook': 'Follow Biiké on Facebook',
   'kWebsite': 'Website',
   'kTermOfUse': 'Terms of Use',
   'kPrivacyPolicy': 'Privacy Policy',
-  'kDevelopBy': 'Develop by Biké Team,\nFPT University in HCM',
+  'kDevelopBy': 'Develop by Biiké Team,\nFPT University in HCM',
   'kDevelopAt': 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
 
   // 'address_book' screen
@@ -356,8 +356,8 @@ final Map<String, String> en = {
   // 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
-      'Biké will send SMS which contains information of trip\nto ',
-  'kSOSNumberSecondDescription': ' when you press on\n',
+      'Biiké will send SMS which contains information of trip to ',
+  'kSOSNumberSecondDescription': ' when you press on ',
   'kNeedSOS': 'I need Police/Ambulance',
   'kSOSNumberThirdDescription': ' while on road',
   'kSOSReachLimit': 'Reach S.O.S phone number limit',

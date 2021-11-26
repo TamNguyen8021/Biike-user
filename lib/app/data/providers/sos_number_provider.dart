@@ -21,8 +21,21 @@ class SOSNumberProvider extends CommonProvider {
   }
 
   Future<bool> addSOSNumber({required Map<String, dynamic> body}) async {
+    final response = await post(UrlStrings.sos, body, headers: await headers);
+
+    logResponse(response);
+    if (response.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<bool> editSOSNumber(
+      {required Map<String, dynamic> body, required int id}) async {
     final response =
-    await post(UrlStrings.sos, body, headers: await headers);
+        await put(UrlStrings.sos + '/$id', body, headers: await headers);
 
     logResponse(response);
     if (response.hasError) {
@@ -33,21 +46,9 @@ class SOSNumberProvider extends CommonProvider {
     }
   }
 
-  Future<bool> editSOSNumber({required Map<String, dynamic> body, required int id}) async {
-    final response = await put(UrlStrings.sos + '/${id}', body, headers: await headers);
-
-    logResponse(response);
-    if (response.hasError) {
-      logError(response);
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  Future<bool> removeSOSNumber({ required int id }) async {
-    final response = await delete(UrlStrings.sos + '/${id}',
-        headers: await headers);
+  Future<bool> removeSOSNumber({required int id}) async {
+    final response =
+        await delete(UrlStrings.sos + '/$id', headers: await headers);
 
     logResponse(response);
 

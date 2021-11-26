@@ -1,11 +1,12 @@
 import 'package:bikes_user/app/data/providers/sos_number_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddSOSNumberController extends GetxController {
   final _sosProvider = Get.find<SOSNumberProvider>();
 
   Rx<String> name = ''.obs;
-  Rx<String> number =''.obs;
+  Rx<String> number = ''.obs;
 
   bool isLoading = false;
 
@@ -14,7 +15,7 @@ class AddSOSNumberController extends GetxController {
     update();
   }
 
-  Future<bool> addSOSNumber() async {
+  Future<bool> addSOSNumber({required BuildContext context}) async {
     _enableLoading(true);
 
     Map<String, dynamic> body = {
@@ -26,7 +27,9 @@ class AddSOSNumberController extends GetxController {
   }
 
   bool validate() {
-    if (name.value.trim().isEmpty || number.value.trim().isEmpty) {
+    if (name.value.trim().isEmpty ||
+        number.value.trim().isEmpty ||
+        number.value.length != 10) {
       return false;
     }
 

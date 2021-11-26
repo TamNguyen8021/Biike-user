@@ -7,16 +7,18 @@ class SOSNumberTextField extends StatelessWidget {
   final String initialValue;
   final String labelText;
   final String hintText;
+  final TextInputType inputType;
   final Function(String)? onChangedFunc;
 
   const SOSNumberTextField(
       {Key? key,
-        required this.isReadOnly,
-        required this.isEditSOSNumber,
-        required this.initialValue,
-        required this.labelText,
-        required this.hintText,
-        this.onChangedFunc})
+      required this.isReadOnly,
+      required this.isEditSOSNumber,
+      required this.initialValue,
+      required this.labelText,
+      required this.hintText,
+      required this.inputType,
+      this.onChangedFunc})
       : super(key: key);
 
   @override
@@ -28,26 +30,21 @@ class SOSNumberTextField extends StatelessWidget {
         initialValue: initialValue,
         onChanged: onChangedFunc,
         textAlignVertical: TextAlignVertical.center,
+        keyboardType: inputType,
         style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 14.0,
-            color: CustomColors.kDarkGray
-        ),
+            color: CustomColors.kDarkGray),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-              color: CustomColors.kDarkGray.withOpacity(0.3)
-          ),
+          hintStyle: TextStyle(color: CustomColors.kDarkGray.withOpacity(0.3)),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
           enabledBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
-            borderRadius: BorderRadius.all(
-                const Radius.circular(5.0)),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+            borderRadius: BorderRadius.all(const Radius.circular(5.0)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
             borderRadius: const BorderRadius.all(
               const Radius.circular(5.0),
             ),

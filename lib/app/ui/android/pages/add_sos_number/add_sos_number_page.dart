@@ -7,7 +7,6 @@ import 'package:bikes_user/app/ui/android/widgets/others/sos_number_text_field.d
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,14 +53,14 @@ class AddSOSNumberPage extends StatelessWidget {
                   ),
                   Obx(
                     () => SOSNumberTextField(
-                        hintText: CustomStrings.kEnterName.tr,
-                        isReadOnly: false,
-                        isEditSOSNumber: true,
-                        initialValue: '${addSOSNumberController.name}',
-                        labelText: CustomStrings.kName.tr,
-                        onChangedFunc: (value) => {
-                          addSOSNumberController.name.value = value
-                        },
+                      hintText: CustomStrings.kEnterName.tr,
+                      isReadOnly: false,
+                      isEditSOSNumber: true,
+                      initialValue: '${addSOSNumberController.name}',
+                      labelText: CustomStrings.kName.tr,
+                      inputType: TextInputType.name,
+                      onChangedFunc: (value) =>
+                          {addSOSNumberController.name.value = value},
                     ),
                   ),
                   Row(
@@ -81,14 +80,15 @@ class AddSOSNumberPage extends StatelessWidget {
                   ),
                   Obx(
                     () => SOSNumberTextField(
-                        hintText: CustomStrings.kEnterNumberPhone.tr,
-                        isReadOnly: false,
-                        isEditSOSNumber: true,
-                        initialValue: '${addSOSNumberController.number}',
-                        labelText: CustomStrings.kNote.tr,
-                        onChangedFunc: (value) => {
-                          addSOSNumberController.number.value = value
-                        },
+                      hintText: CustomStrings.kEnterNumberPhone.tr,
+                      isReadOnly: false,
+                      isEditSOSNumber: true,
+                      initialValue: '${addSOSNumberController.number}',
+                      labelText: CustomStrings.kNote.tr,
+                      inputType: TextInputType.phone,
+                      onChangedFunc: (value) {
+                        addSOSNumberController.number.value = value;
+                      },
                     ),
                   ),
                   Padding(
@@ -96,8 +96,8 @@ class AddSOSNumberPage extends StatelessWidget {
                     child: CustomElevatedIconHasLoadingButton(
                       onPressedFunc: () async {
                         if (addSOSNumberController.validate()) {
-                          if (await addSOSNumberController
-                              .addSOSNumber()) {
+                          if (await addSOSNumberController.addSOSNumber(
+                              context: context)) {
                             await sosNumberController.getSOSNumbers();
                             Get.back();
                           } else {
@@ -106,10 +106,16 @@ class AddSOSNumberPage extends StatelessWidget {
                                 message: CustomErrorsString.kDevelopError.tr);
                           }
                         } else {
+                          String errorMessage =
+                              CustomErrorsString.kNotFillAllFields.tr;
+                          if (addSOSNumberController.number.value.length !=
+                              10) {
+                            errorMessage =
+                                CustomErrorsString.kInvalidPhoneNo.tr;
+                          }
+
                           CommonFunctions().showErrorDialog(
-                              context: context,
-                              message: CustomErrorsString
-                                  .kFillInAllField.tr);
+                              context: context, message: errorMessage);
                         }
                       },
                       text: CustomStrings.kSave.tr,

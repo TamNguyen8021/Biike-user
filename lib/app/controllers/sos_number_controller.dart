@@ -23,13 +23,8 @@ class SOSNumberController extends GetxController {
         for (var sosNumber in response) {
           SOS sos = SOS.fromJson(sosNumber);
 
-          sosNumbers.add(
-            SOSNumberCard(
-                id: sos.sosId!,
-                name: sos.sosName!,
-                number: sos.sosPhone!
-            )
-          );
+          sosNumbers.add(SOSNumberCard(
+              id: sos.sosId!, name: sos.sosName!, number: sos.sosPhone!));
         }
       } catch (e) {
         print(e);
@@ -37,14 +32,12 @@ class SOSNumberController extends GetxController {
     }
   }
 
-  Future<void> removeSOSNumber({required BuildContext context, required int id}) async {
+  Future<void> removeSOSNumber(
+      {required BuildContext context, required int id}) async {
     bool result = await _sosProvider.removeSOSNumber(id: id);
     if (result) {
       await getSOSNumbers();
       Get.back();
-      CommonFunctions().showInfoDialog(
-          context: context,
-          message: "Xoá số SOS thành công!");
     } else {
       CommonFunctions().showErrorDialog(
           context: context, message: CustomErrorsString.kDevelopError.tr);

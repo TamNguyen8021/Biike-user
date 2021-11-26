@@ -5,7 +5,7 @@ class EditSOSNumberController extends GetxController {
   final _sosProvider = Get.find<SOSNumberProvider>();
 
   Rx<String> name = ''.obs;
-  Rx<String> number =''.obs;
+  Rx<String> number = ''.obs;
 
   bool isLoading = false;
 
@@ -27,7 +27,9 @@ class EditSOSNumberController extends GetxController {
   }
 
   bool validate() {
-    if (name.value.trim().isEmpty || number.value.trim().isEmpty) {
+    if (name.value.trim().isEmpty ||
+        number.value.trim().isEmpty ||
+        number.value.length != 10) {
       return false;
     }
 
