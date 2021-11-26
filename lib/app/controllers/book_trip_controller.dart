@@ -272,13 +272,14 @@ class BookTripController extends GetxController {
   ///
   /// Author: UyenNLP
   bool _isAvailable(DateTime date) {
-    TimeOfDay startTime = TimeOfDay(hour: 6, minute: 00);
-    TimeOfDay endTime = TimeOfDay(hour: 21, minute: 00);
+    // TimeOfDay startTime = TimeOfDay(hour: 6, minute: 00);
+    // TimeOfDay endTime = TimeOfDay(hour: 21, minute: 00);
 
-    return ((date.hour > startTime.hour) ||
-            (date.hour == startTime.hour && date.minute >= startTime.minute)) &&
-        ((date.hour < endTime.hour) ||
-            (date.hour == endTime.hour && date.minute <= endTime.minute));
+    // return ((date.hour > startTime.hour) ||
+    //         (date.hour == startTime.hour && date.minute >= startTime.minute)) &&
+    //     ((date.hour < endTime.hour) ||
+    //         (date.hour == endTime.hour && date.minute <= endTime.minute));
+    return true;
   }
 
   /// Get a full list of station from db

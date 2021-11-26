@@ -570,15 +570,25 @@ class Home extends StatelessWidget {
                                   foregroundColor: Colors.white,
                                   text: CustomStrings.kSearch.tr,
                                   onPressedFunc: () async {
-                                    await homeController.searchTrips(
-                                        date: homeController.searchDate.value,
-                                        time: homeController.searchTime.value,
-                                        departureId: homeController
-                                            .departureStation.value.stationId,
-                                        destinationId: homeController
-                                            .destinationStation
-                                            .value
-                                            .stationId);
+                                    homeController
+                                        .verifyPhoneBeforeBookOrSearchStrip(
+                                      context: context,
+                                      onSuccess: () async {
+                                        await homeController.searchTrips(
+                                            date:
+                                                homeController.searchDate.value,
+                                            time:
+                                                homeController.searchTime.value,
+                                            departureId: homeController
+                                                .departureStation
+                                                .value
+                                                .stationId,
+                                            destinationId: homeController
+                                                .destinationStation
+                                                .value
+                                                .stationId);
+                                      },
+                                    );
                                   },
                                   hasBorder: false),
                             ),
@@ -635,7 +645,10 @@ class Home extends StatelessWidget {
                   ),
                 ],
                 CreateTripButton(
-                  createTrip: () => homeController.bookTrip(context: context),
+                  createTrip: () =>
+                      homeController.verifyPhoneBeforeBookOrSearchStrip(
+                          context: context,
+                          onSuccess: () => Get.toNamed(CommonRoutes.BOOK_TRIP)),
                 ),
               ],
             )

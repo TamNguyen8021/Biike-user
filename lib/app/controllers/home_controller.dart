@@ -306,7 +306,8 @@ class HomeController extends GetxController {
     destinationStation.value.stationId = tempStationId;
   }
 
-  void bookTrip({required BuildContext context}) async {
+  verifyPhoneBeforeBookOrSearchStrip(
+      {required BuildContext context, required Function() onSuccess}) async {
     final phone = await LocalAppData().phone;
     final userId = await LocalAppData().userId;
     final isPhoneVerified = await LocalAppData().isPhoneVerified;
@@ -320,9 +321,9 @@ class HomeController extends GetxController {
                 return DialogConfirm(
                   firebaseService: _firebaseService,
                   onSuccess: () {
-                    Get.toNamed(CommonRoutes.BOOK_TRIP);
-                    _userRepository.verifyUser(userId.toString(), true).then(
-                        (value) => LocalAppData().setIsPhoneVerified(value));
+                    LocalAppData().setIsPhoneVerified(true);
+                    _userRepository.verifyUser(userId.toString(), true);
+                    onSuccess();
                   },
                 );
               },
@@ -330,7 +331,7 @@ class HomeController extends GetxController {
           });
       return;
     }
-    Get.toNamed(CommonRoutes.BOOK_TRIP);
+    onSuccess();
   }
 }
 
@@ -349,6 +350,7 @@ class DialogConfirm extends HookWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Text('Để bắt đầu đi ké hoặc chở bạn cần xác thực OTP'),
           TextFormField(
             controller: otpController,
             decoration: InputDecoration(
