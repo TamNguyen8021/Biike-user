@@ -51,7 +51,8 @@ class CommonFunctions {
   /// Avoid force shutdown when user press backbutton with the message: [errorMessage].
   ///
   /// Author: UyenNLP
-  Future<bool> onBackPressed({String? errorMessage}) {
+  Future<bool> onBackPressed(
+      {required BuildContext context, String? errorMessage}) {
     errorMessage == null
         ? Get.defaultDialog(
             title: 'Confirm',
@@ -62,10 +63,8 @@ class CommonFunctions {
             onConfirm: () => SystemChannels.platform
                 .invokeMethod<void>('SystemNavigator.pop')) //exit the app
 
-        : Get.snackbar(CustomErrorsString.kError.tr, errorMessage.tr,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            snackPosition: SnackPosition.BOTTOM);
+        : CommonFunctions()
+            .showErrorDialog(context: context, message: errorMessage);
 
     return Future.value(false);
   }
@@ -336,6 +335,19 @@ class CommonFunctions {
       FlutterLogs.logError(
           'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       logBiike(error: 'Could not open map');
+    }
+  }
+
+  Future<void> openLink(
+      {required String url, required BuildContext context}) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
+      FlutterLogs.logError(
+          'Biiké', 'CommonFunctions - openLink()', 'Could not open link');
+      logBiike(error: 'Could not open link');
     }
   }
 

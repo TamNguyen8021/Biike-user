@@ -228,7 +228,7 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
-      Get.back();
+      Get.back(closeOverlays: true);
       Get.back();
       _homeController.pagingController.refresh();
       CommonFunctions().showSuccessDialog(
@@ -243,44 +243,47 @@ class TripDetailsController extends GetxController {
   ///
   /// Author: TamNTT
   void _shareLink({required BuildContext context}) async {
-    if (Biike.pathshareUserToken.isEmpty ||
-        Biike.pathshareUserIdentifier.isEmpty) {
-      Map<String, dynamic> data = await _pathshareProvider.createUser(
-          userName: _profileController.user.userFullname,
-          userPhoneNumber: _profileController.user.userPhoneNumber);
-      Biike.pathshareUserToken = data['user']['token'];
-      Biike.pathshareUserIdentifier = data['user']['identifier'];
-      Biike.localAppData.savePathshareUserToken(Biike.pathshareUserToken);
-      Biike.localAppData
-          .savePathshareUserIdentifier(Biike.pathshareUserIdentifier);
-    }
+    if (isLocationShared.isFalse) {
+      if (Biike.pathshareUserToken.isEmpty ||
+          Biike.pathshareUserIdentifier.isEmpty) {
+        Map<String, dynamic> data = await _pathshareProvider.createUser(
+            userName: _profileController.user.userFullname,
+            userPhoneNumber: _profileController.user.userPhoneNumber);
+        Biike.pathshareUserToken = data['user']['token'];
+        Biike.pathshareUserIdentifier = data['user']['identifier'];
+        Biike.localAppData.savePathshareUserToken(Biike.pathshareUserToken);
+        Biike.localAppData
+            .savePathshareUserIdentifier(Biike.pathshareUserIdentifier);
+      }
 
-    if (await _pathshareProvider.createUserLocation(
-        userLat: userLocation!.latitude!, userLng: userLocation!.longitude!)) {
-      if (sessionIdentifier.isEmpty ||
-          DateTime.now()
-              .subtract(Duration(minutes: 30))
-              .isAfter(_lastTimeSharedLocation!)) {
-        Map<String, dynamic> data = await _pathshareProvider.createSession();
-        if (data.isNotEmpty) {
-          isLocationShared.value = true;
-          sessionIdentifier = data['session']['identifier'];
-          _shareUrl = data['session']['users'][0]['invitation_url'];
-          if (_lastTimeSharedLocation == null) {
-            _lastTimeSharedLocation = DateTime.now();
+      if (await _pathshareProvider.createUserLocation(
+          userLat: userLocation!.latitude!,
+          userLng: userLocation!.longitude!)) {
+        if (sessionIdentifier.isEmpty ||
+            DateTime.now()
+                .subtract(Duration(minutes: 30))
+                .isAfter(_lastTimeSharedLocation!)) {
+          Map<String, dynamic> data = await _pathshareProvider.createSession();
+          if (data.isNotEmpty) {
+            isLocationShared.value = true;
+            sessionIdentifier = data['session']['identifier'];
+            _shareUrl = data['session']['users'][0]['invitation_url'];
+            if (_lastTimeSharedLocation == null) {
+              _lastTimeSharedLocation = DateTime.now();
+            }
+          } else {
+            CommonFunctions().showErrorDialog(
+                context: context, message: CustomErrorsString.kDevelopError.tr);
           }
         } else {
-          CommonFunctions().showErrorDialog(
-              context: context, message: CustomErrorsString.kDevelopError.tr);
+          isLocationShared.value =
+              await _pathshareProvider.startOrStopLocationSharing(
+                  isShared: true, sessionIdentifier: sessionIdentifier);
         }
       } else {
-        isLocationShared.value =
-            await _pathshareProvider.startOrStopLocationSharing(
-                isShared: true, sessionIdentifier: sessionIdentifier);
+        CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kDevelopError.tr);
       }
-    } else {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
     }
 
     Clipboard.setData(ClipboardData(text: _shareUrl));

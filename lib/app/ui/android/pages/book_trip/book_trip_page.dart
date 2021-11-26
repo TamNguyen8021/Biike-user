@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
@@ -9,10 +11,12 @@ import 'package:bikes_user/app/ui/android/widgets/others/station_dropdown_button
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 /// The 'book_trip' screen
 class BookTripPage extends StatelessWidget {
   final _bookTripController = Get.find<BookTripController>();
+  final Completer<GoogleMapController> controller = Completer();
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +76,7 @@ class BookTripPage extends StatelessWidget {
                       ),
                       Obx(() => MapViewer(
                             isFullMap: false,
+                            completerController: controller,
                             departureCoordinate: _bookTripController
                                 .departureStation.value.coordinate,
                             destinationCoordinate: _bookTripController

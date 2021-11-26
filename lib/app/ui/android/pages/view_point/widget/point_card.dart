@@ -1,19 +1,19 @@
+import 'package:bikes_user/app/data/models/point_history.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class PointCard extends StatelessWidget {
-  final String time;
-  final String title;
-  final String point;
+  final PointHistory pointHistory;
 
-  PointCard({Key? key,
-    required this.time,
-    required this.title,
-    required this.point}) : super(key: key);
+  PointCard({Key? key, required this.pointHistory}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var f = new DateFormat('hh:mm dd/MM/yyyy');
+    var dateString = f.format(pointHistory.timeStamp!);
+
     return Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -25,24 +25,16 @@ class PointCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    '1:50AM 12/12/2000',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!,
+                    dateString,
+                    style: Theme.of(context).textTheme.bodyText1!,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 3.0),
-                      child:
-                      Text(
-                        'Nạp điểm',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.sp)
-                      ),
+                    child: Text(pointHistory.description.toString(),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.sp)),
                   ),
                 ],
               ),
@@ -52,7 +44,9 @@ class PointCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  '+ 20',
+                  (pointHistory.point! > 0)
+                      ? '+${pointHistory.point}'
+                      : '${pointHistory.point}',
                   style: Theme.of(context)
                       .textTheme
                       .headline3!
@@ -75,5 +69,4 @@ class PointCard extends StatelessWidget {
           ]),
     );
   }
-
 }

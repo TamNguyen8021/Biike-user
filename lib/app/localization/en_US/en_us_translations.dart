@@ -17,23 +17,30 @@ final Map<String, String> en = {
   'kStart': 'Start',
 
   // '003.1_login'
-  'kLoginButton': 'Verify with FPT email',
-  'kConfirmTerm': 'By sign up, you aggre with',
-  'kTerm': 'our Terms of Service and Privacy Policy',
   'kForgotPassword': 'Forgot password',
   'kSendResetPasswordEmail':
       'Your password has been reset, please check your email',
+  'kInputEmail': 'Enter email',
+  'kPassword': 'Password',
+  'kInputPassword': 'Enter password',
+  'kLogin': 'Sign in',
+  'kNoAccount': 'No account yet? ',
+  'kRegister': 'Sign up now!',
 
-  // '004.1_input_phone_no' screen
-  'kInputPhoneNumber': 'Input phone number',
+  // 'register' screen
+  'kConfirmTerm': 'By sign up, you aggre with',
+  'kAnd': ' and ',
+  'kHasAccount': 'Has an account? ',
+  'kInputName': 'Enter full name',
+  'kInputPhoneNumber': 'Enter phone number',
+  'kSentVerifiedEmail':
+      'We sent a verified email to your mailbox. Please verify your account before login',
+  'kRegisterSuccess': 'Your account was created',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
   'kResendVerifyCode': 'Resend the code after 59 seconds',
   'kInvalidPin': 'Invalid code',
-
-  // '004.3_input_name' screen
-  'kInputName': 'Input name',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Start using app\nwith the role',
@@ -156,17 +163,22 @@ final Map<String, String> en = {
   'kCall': 'Call',
   'kMessage': 'Message',
   'kReport': 'Report',
+  'kReportAndBlock': 'Report and block',
   'kNoHistoryTrip': 'No history trips with this person',
   'kHasHistoryTrip': 'History trips with this person',
   'kEnterYourReport': 'Type your feedback about this person...',
-  'kReportAndBlock': 'Report and block',
-  'kConfirmBlock': 'Are you sure you\nwant to block this person?',
+  'kBlock': 'Block',
+  'kConfirmBlock': 'Are you sure you want to block this person?',
   'kSeeBlacklist': 'You can view your blacklist in profile page',
   'kYes': 'Yes',
   'kNo': 'No',
   'kThankYouForReport': 'Thank you for your report',
   'kSorryMessage':
       'Biiké Team apologize for imperfect user experience. We have received your report and will handle it as soon as possible.',
+  'kYouBlockThisPerson': 'This person is blocked',
+
+  // 'block_list' screen
+  'kEmptyBlockList': 'Your blacklist is empty',
 
   // 'finding_biker_success' screen
   'kFoundBiker': 'We found your Biker!',
@@ -319,11 +331,11 @@ final Map<String, String> en = {
   'kLanguage': 'Language',
   'kCurrentLanguage': 'English',
   'kOther': 'Other',
-  'kFollowOnFacebook': 'Follow Biké on Facebook',
+  'kFollowOnFacebook': 'Follow Biiké on Facebook',
   'kWebsite': 'Website',
   'kTermOfUse': 'Terms of Use',
   'kPrivacyPolicy': 'Privacy Policy',
-  'kDevelopBy': 'Develop by Biké Team,\nFPT University in HCM',
+  'kDevelopBy': 'Develop by Biiké Team,\nFPT University in HCM',
   'kDevelopAt': 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
 
   // 'address_book' screen
@@ -344,8 +356,8 @@ final Map<String, String> en = {
   // 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
-      'Biké will send SMS which contains information of trip\nto ',
-  'kSOSNumberSecondDescription': ' when you press on\n',
+      'Biiké will send SMS which contains information of trip to ',
+  'kSOSNumberSecondDescription': ' when you press on ',
   'kNeedSOS': 'I need Police/Ambulance',
   'kSOSNumberThirdDescription': ' while on road',
   'kSOSReachLimit': 'Reach S.O.S phone number limit',
@@ -361,8 +373,6 @@ final Map<String, String> en = {
   // 'ban_list' screen
   'kBanList': 'Ban List',
   'kUnBlock': 'Unblock',
-  'kLogin': 'Login',
-  'kRegister': 'Register',
 
   // date
   'kMonday': 'Mon',
@@ -380,11 +390,11 @@ final Map<String, String> en = {
   'kYouHave': 'You have',
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
+
+  'kAll': 'All',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Error!',
-    'kErrorMessage':
-        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
     'kNotRated': 'Please rate your trip experience',
     'kIncludeBadWords': 'Please don\'t use bad words',
     'kSendFailed': 'Send feedback failed!',
@@ -395,7 +405,7 @@ final Map<String, String> en = {
     'kNotChooseStation': 'You haven\'t choose your route',
     'kNotFillAllFields': 'Please fill in all fields',
     'kNotAfterNow': 'You can\'t book a trip from the past',
-    'kNotAvailableTimeRange': 'Available time is between 6 AM and 9 PM',
+    'kNotAvailableTimeRange': 'Available time is between 5AM and 9PM',
     'kErrorName': 'Invalid name',
     'kErrorInputPhoneNumber': 'Invalid phone number',
     'kEditProfileFailed':
@@ -406,8 +416,21 @@ final Map<String, String> en = {
     'kSameStationWereAdded': 'A station with the same information were added',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
     'kEmailMustNotBeEmpty': 'Email must not be empty',
-    'kMustLoginWithFPTEmail': 'Please use FPT email',
+    'kMustLoginWithFPTEmail': 'Please sign in with FPT email',
     'kErrorWhenStopSharingLocation':
         'There are some errors, we can\'t stop sharing your location. Your share link will be expired after 30 minutes',
-    'kNoVoucher': 'There\'s no voucher currently'
+    'kNoVoucher': 'There\'s no voucher currently',
+    'kWrongEmailOrPassword': 'Wrong email or password',
+    'kNoPasswordEnter': 'Please enter your password to sign in',
+    'kInvalidEmail': 'Invalid email',
+    'kWrongEmail': 'Wrong email, please try again',
+    'kPasswordMustAtLeast6': 'Password must be at least 6 characters',
+    'kInvalidPhoneNo': 'Invalid phone number',
+    'kDuplicateEmailOrPhone': 'The email or phone number was used to sign up',
+    'kWrongOtp': 'Wrong OTP code',
+    'kEmptyOtp': 'Please enter your OTP code',
+    'kTryAgain': 'Try again',
+    'kNoHistory': 'History empty',
+    'kEmptyReportReasonOrContainsBadWords':
+        'Report reason must not be empty or contains inappropriate words',
   });
