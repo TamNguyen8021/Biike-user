@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
 import 'package:bikes_user/network/config_network.dart';
 import 'package:retrofit/retrofit.dart';
@@ -16,6 +17,13 @@ abstract class RestClient {
     @Field('phoneNumber') String phone,
     @Field('password') String pass,
   );
+
+  @POST(EndPoint.signin)
+  Future<LoginResponse> signin({
+    @Field('email') required String email,
+    @Field('password') required String password,
+    @Field('isAdmin') required bool isAdmin,
+  });
 
   @GET(EndPoint.userVerify + '/{idUser}' + '/activation')
   Future<dynamic> isVerifyUser(@Path('idUser') String idUser);

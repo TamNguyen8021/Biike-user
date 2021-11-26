@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/network/repositories.dart';
 
@@ -14,6 +15,18 @@ abstract class UserBehavior {
 
 class UserRepository extends UserBehavior {
   final _repositories = getIt<Repositories>();
+
+  Future<LoginResponse> signin(
+      {required String email,
+      required String password,
+      bool isAdmin = false}) async {
+    return await _repositories.signin(
+      email: email,
+      password: password,
+      isAdmin: isAdmin,
+    );
+  }
+
   @override
   Future<dynamic> signup(
       String name, String email, String phone, String pass) async {

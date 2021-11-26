@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
@@ -72,6 +73,16 @@ class Repositories implements RestClient {
   Future<dynamic> unBlock({required BlackListItem blackListItem}) {
     return _client.unBlock(
       blackListItem: blackListItem,
+    );
+  }
+
+  @override
+  Future<LoginResponse> signin(
+      {required String email, required String password, bool isAdmin = false}) {
+    return _client.signin(
+      email: email,
+      password: password,
+      isAdmin: isAdmin,
     );
   }
 }

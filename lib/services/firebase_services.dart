@@ -57,24 +57,24 @@ class FirebaseServices {
     }
   }
 
-  Future<String> signinWithEmailAndPassword(String email, String pass) async {
-    try {
-      UserCredential userCredential = await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: pass);
-      if ((userCredential.user?.uid ?? '').isNotEmpty) {
-        return '';
-      } else {
-        throw (FirebaseAuthException);
-      }
-    } on FirebaseAuthException catch (error) {
-      CommonFunctions.catchExceptionError(error);
+  // Future<String> signinWithEmailAndPassword(String email, String pass) async {
+  //   try {
+  //     UserCredential userCredential = await firebaseAuth
+  //         .signInWithEmailAndPassword(email: email, password: pass);
+  //     if ((userCredential.user?.uid ?? '').isNotEmpty) {
+  //       return '';
+  //     } else {
+  //       throw (FirebaseAuthException);
+  //     }
+  //   } on FirebaseAuthException catch (error) {
+  //     CommonFunctions.catchExceptionError(error);
 
-      if (error.code == 'user-not-found' || error.code == 'wrong-password') {
-        return CustomErrorsString.kWrongEmailOrPassword.tr;
-      }
-      return CustomErrorsString.kDevelopError.tr;
-    }
-  }
+  //     if (error.code == 'user-not-found' || error.code == 'wrong-password') {
+  //       return CustomErrorsString.kWrongEmailOrPassword.tr;
+  //     }
+  //     return CustomErrorsString.kDevelopError.tr;
+  //   }
+  // }
 
   Future<void> sentVerifyEmail({required BuildContext context}) async {
     try {
