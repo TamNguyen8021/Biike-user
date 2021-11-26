@@ -40,24 +40,24 @@ class NotificationPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () =>
-                                  // Get.toNamed(CommonRoutes.FEEDBACK, arguments: 37),
-                                _notificationController.sendNoti(),
-                            child: Text(
-                              'Send noti',
-                              style: TextStyle(color: CustomColors.kDarkGray),
-                            ),
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        CustomColors.kLightGray),
-                                elevation:
-                                    MaterialStateProperty.all<double>(0.0)),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: double.infinity,
+                        //   child: ElevatedButton(
+                        //     onPressed: () =>
+                        //           // Get.toNamed(CommonRoutes.FEEDBACK, arguments: 37),
+                        //         _notificationController.sendNoti(),
+                        //     child: Text(
+                        //       'Send noti',
+                        //       style: TextStyle(color: CustomColors.kDarkGray),
+                        //     ),
+                        //     style: ButtonStyle(
+                        //         backgroundColor:
+                        //             MaterialStateProperty.all<Color>(
+                        //                 CustomColors.kLightGray),
+                        //         elevation:
+                        //             MaterialStateProperty.all<double>(0.0)),
+                        //   ),
+                        // ),
                         Container(
                           // height: MediaQuery.of(context).size.height - 230,
                           child: Obx(() => NotificationList(

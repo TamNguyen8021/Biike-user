@@ -1,9 +1,7 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/notification_controller.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,29 +21,7 @@ class NotificationCard extends StatelessWidget {
     await _notificationController.updateNoti(
         hashKey: hashKey, isRead: notification.isRead);
 
-    _moveToRoute(notification.url!);
-  }
-
-  _moveToRoute(String url) {
-    var origin = url;
-    // get trip Id
-    String remove = url.contains('details') ? 'details' : '';
-    remove = url.contains('feedback') ? 'feedback' : '';
-    if (remove != '' && url.contains(remove)) {
-      url = url.substring(0, url.length - remove.length - 1);
-    }
-    var tripId = CommonFunctions.getIdFromUrl(url: url);
-
-    // move to corresponding page
-    if (origin.contains('details')) {
-      Get.toNamed(CommonRoutes.TRIP_DETAILS, arguments: {
-        'tripId': tripId,
-        'userId': Biike.userId.value,
-        'route': 'home'
-      });
-    } else if (origin.contains('feedback')) {
-      Get.toNamed(CommonRoutes.FEEDBACK, arguments: tripId);
-    }
+    Get.toNamed(CommonRoutes.NOTIFICATION_DETAIL, arguments: notification);
   }
 
   @override

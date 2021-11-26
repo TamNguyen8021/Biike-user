@@ -3,8 +3,11 @@ import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class VoucherProvider extends CommonProvider {
-  Future<dynamic> getVoucherList({required int page, required int limit}) async {
-    final response = await get(UrlStrings.voucherUrl + '?page=$page&limit=$limit',
+  Future<dynamic> getVoucherList(
+      {required int page, required int limit, cateId = 0}) async {
+    final response = await get(
+        UrlStrings.voucherUrl +
+            '?page=$page&limit=$limit&voucherCategoryId=$cateId',
         headers: await headers);
 
     logResponse(response);
