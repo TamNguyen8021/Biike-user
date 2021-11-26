@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:bikes_user/injectable/injectable.dart';

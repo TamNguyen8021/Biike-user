@@ -8,7 +8,6 @@ import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
