@@ -49,6 +49,12 @@ class AddBikePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (isAddBike) {
+      _addBikeController.brand.value = brands.first;
+      _addBikeController.volume.value = volumes.first;
+      _addBikeController.category.value = categories.first;
+    }
+
     return OnBackPressed(
       perform: () {
         _onBackPressed();
@@ -104,6 +110,7 @@ class AddBikePage extends StatelessWidget {
                                 () => BikeDropdownField(
                                   hintText: CustomStrings.kEnterBrand.tr,
                                   items: brands.toList(),
+                                  defaultValue: _addBikeController.brand.value,
                                   onChangedFunc: (value) {
                                     _addBikeController.brand.value = value;
                                   },
@@ -126,6 +133,8 @@ class AddBikePage extends StatelessWidget {
                                 () => BikeDropdownField(
                                   hintText: CustomStrings.kEnterCategory.tr,
                                   items: categories.toList(),
+                                  defaultValue:
+                                      _addBikeController.category.value,
                                   onChangedFunc: (value) {
                                     _addBikeController.category.value = value;
                                   },
@@ -136,6 +145,7 @@ class AddBikePage extends StatelessWidget {
                                 () => BikeDropdownField(
                                   hintText: CustomStrings.kEnterVolume.tr,
                                   items: volumes.toList(),
+                                  defaultValue: _addBikeController.volume.value,
                                   onChangedFunc: (value) {
                                     _addBikeController.volume.value = value;
                                   },
@@ -171,13 +181,22 @@ class AddBikePage extends StatelessWidget {
                                   }),
                                 ],
                               ),
-                              Obx(
-                                () => ImageFileContainer(
-                                    condition: _addBikeController
-                                            .registrationPicture.value ==
-                                        '',
-                                    path: _addBikeController
-                                        .registrationPicture.value),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: Obx(
+                                  () => _addBikeController
+                                          .registrationPicture.value
+                                          .contains('https')
+                                      ? Image.network(_addBikeController
+                                          .registrationPicture.value)
+                                      : ImageFileContainer(
+                                          condition: _addBikeController
+                                                  .registrationPicture.value ==
+                                              '',
+                                          path: _addBikeController
+                                              .registrationPicture.value),
+                                ),
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -192,12 +211,21 @@ class AddBikePage extends StatelessWidget {
                                   }),
                                 ],
                               ),
-                              Obx(
-                                () => ImageFileContainer(
-                                    condition:
-                                        _addBikeController.bikePicture.value ==
-                                            '',
-                                    path: _addBikeController.bikePicture.value),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: Obx(
+                                  () => _addBikeController.bikePicture.value
+                                          .contains('https')
+                                      ? Image.network(
+                                          _addBikeController.bikePicture.value)
+                                      : ImageFileContainer(
+                                          condition: _addBikeController
+                                                  .bikePicture.value ==
+                                              '',
+                                          path: _addBikeController
+                                              .bikePicture.value),
+                                ),
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -215,13 +243,22 @@ class AddBikePage extends StatelessWidget {
                                   }),
                                 ],
                               ),
-                              Obx(
-                                () => ImageFileContainer(
-                                    condition: _addBikeController
-                                            .numberPlatePicture.value ==
-                                        '',
-                                    path: _addBikeController
-                                        .numberPlatePicture.value),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: Obx(
+                                  () => _addBikeController
+                                          .numberPlatePicture.value
+                                          .contains('https')
+                                      ? Image.network(_addBikeController
+                                          .numberPlatePicture.value)
+                                      : ImageFileContainer(
+                                          condition: _addBikeController
+                                                  .numberPlatePicture.value ==
+                                              '',
+                                          path: _addBikeController
+                                              .numberPlatePicture.value),
+                                ),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

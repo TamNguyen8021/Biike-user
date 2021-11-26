@@ -1,12 +1,13 @@
 import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
+import 'package:bikes_user/app/data/providers/image_provider.dart';
 // import 'package:bikes_user/app/data/providers/image_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class AddBikeController extends GetxController {
   final _bikeProvider = Get.find<BikeProvider>();
-  // final _imageProvider = Get.find<ImageProvider>();
+  final _imageProvider = Get.find<ImageProvider>();
   final _manageBikeController = Get.find<ManageBikeController>();
 
   Rx<String> plateNumber = ''.obs;
@@ -18,20 +19,23 @@ class AddBikeController extends GetxController {
   Rx<String> bikePicture = ''.obs;
   Rx<String> registrationPicture = ''.obs;
   Rx<String> numberPlatePicture = ''.obs;
+  Rx<int> bikeStatus = 1.obs;
 
   bool isLoading = false;
 
   @override
   void onInit() {
+    _manageBikeController.getBike();
     plateNumber = _manageBikeController.bike.plateNumber!.obs;
     bikeOwner = _manageBikeController.bike.bikeOwner!.obs;
     color = _manageBikeController.bike.color!.obs;
     brand = _manageBikeController.bike.brand!.obs;
-    category = ''.obs;
-    volume = ''.obs;
+    category = _manageBikeController.bike.bikeType!.obs;
+    volume = _manageBikeController.bike.bikeVolume!.obs;
     bikePicture = _manageBikeController.bike.bikePicture!.obs;
     registrationPicture = _manageBikeController.bike.bikeLicensePicture!.obs;
     numberPlatePicture = _manageBikeController.bike.plateNumberPicture!.obs;
+    bikeStatus = _manageBikeController.bike.bikeStatus!.obs;
     super.onInit();
   }
 
@@ -42,18 +46,23 @@ class AddBikeController extends GetxController {
 
   Future<bool> addBikeOrReplaceBike({required bool isAddBike}) async {
     // try {
-    _enableLoading(true);
+    // _enableLoading(true);
 
-    // String bikePictureUrl = await _imageProvider.postImage(
-    //     imageType: 1, imageName: 'bikePicture', imagePath: bikePicture.value);
-    // String bikeLicensePictureUrl = await _imageProvider.postImage(
-    //     imageType: 1,
-    //     imageName: 'registrationPicture',
-    //     imagePath: registrationPicture.value);
-    // String plateNumberPictureUrl = await _imageProvider.postImage(
-    //     imageType: 1,
-    //     imageName: 'numberPlatePicture',
-    //     imagePath: numberPlatePicture.value);
+    String bikePictureUrl = await _imageProvider.postImage(
+        imageType: 1,
+        imageName:
+            bikePicture.value.substring(bikePicture.value.lastIndexOf('/') + 1),
+        imagePath: bikePicture.value);
+    String bikeLicensePictureUrl = await _imageProvider.postImage(
+        imageType: 1,
+        imageName: registrationPicture.value
+            .substring(registrationPicture.value.lastIndexOf('/') + 1),
+        imagePath: registrationPicture.value);
+    String plateNumberPictureUrl = await _imageProvider.postImage(
+        imageType: 1,
+        imageName: numberPlatePicture.value
+            .substring(numberPlatePicture.value.lastIndexOf('/') + 1),
+        imagePath: numberPlatePicture.value);
 
     Map<String, dynamic> body = {
       'userId': Biike.userId.value,
@@ -61,9 +70,11 @@ class AddBikeController extends GetxController {
       'bikeOwner': bikeOwner.value,
       'color': color.value,
       'brand': brand.value,
-      'bikePicture': 'bikePictureUrl',
-      'bikeLicensePicture': 'bikeLicensePictureUrl',
-      'plateNumberPicture': 'plateNumberPictureUrl',
+      'bikeType': category.value,
+      'bikeVolume': volume.value,
+      'bikePicture': bikePictureUrl,
+      'bikeLicensePicture': bikeLicensePictureUrl,
+      'plateNumberPicture': plateNumberPictureUrl,
     };
 
     if (isAddBike) {

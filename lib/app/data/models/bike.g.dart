@@ -14,10 +14,13 @@ Bike _$BikeFromJson(Map<String, dynamic> json) {
     plateNumber: json['plateNumber'] as String?,
     color: json['color'] as String?,
     brand: json['brand'] as String?,
-    isBikeDeleted: json['isBikeDeleted'] as bool?,
+    bikeType: json['bikeType'] as String?,
+    bikeVolume: json['bikeVolume'] as String?,
     plateNumberPicture: json['plateNumberPicture'] as String?,
     bikeLicensePicture: json['bikeLicensePicture'] as String?,
     bikePicture: json['bikePicture'] as String?,
+    bikeStatus: json['bikeStatus'] as int?,
+    failedVerificationReason: json['failedVerificationReason'] as String?,
   );
 }
 
@@ -28,8 +31,11 @@ Map<String, dynamic> _$BikeToJson(Bike instance) => <String, dynamic>{
       'plateNumber': instance.plateNumber,
       'color': instance.color,
       'brand': instance.brand,
+      'bikeType': instance.bikeType,
+      'bikeVolume': instance.bikeVolume,
       'plateNumberPicture': instance.plateNumberPicture,
       'bikeLicensePicture': instance.bikeLicensePicture,
       'bikePicture': instance.bikePicture,
-      'isBikeDeleted': instance.isBikeDeleted,
+      'bikeStatus': instance.bikeStatus,
+      'failedVerificationReason': instance.failedVerificationReason,
     };
