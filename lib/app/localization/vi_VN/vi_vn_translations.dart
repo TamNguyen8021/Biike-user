@@ -336,11 +336,11 @@ final Map<String, String> vi = {
   'kLanguage': 'Ngôn ngữ',
   'kCurrentLanguage': 'Tiếng Việt',
   'kOther': 'Khác',
-  'kFollowOnFacebook': 'Theo dõi Biké trên Facebook',
+  'kFollowOnFacebook': 'Theo dõi Biiké trên Facebook',
   'kWebsite': 'Website',
   'kTermOfUse': 'Điều khoản sử dụng',
   'kPrivacyPolicy': 'Chính sách bảo mật',
-  'kDevelopBy': 'Biké được phát triển bởi Biké Team,\nĐại học FPT TP.HCM',
+  'kDevelopBy': 'Biiké được phát triển bởi Biiké Team,\nĐại học FPT TP.HCM',
   'kDevelopAt': 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM',
 
   // 'address_book' screen
@@ -361,8 +361,8 @@ final Map<String, String> vi = {
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
-      'Biké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi\nđến ',
-  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút\n',
+      'Biiké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi đến ',
+  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút ',
   'kNeedSOS': 'Tôi cần Cảnh sát/Xe cấp cứu',
   'kSOSNumberThirdDescription': ' trong khi đi xe và gọi',
   'kSOSReachLimit': 'Bạn đã thêm tối đa các số điện thoại S.O.S',

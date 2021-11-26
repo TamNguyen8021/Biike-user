@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 
 /// This widget contains an sos number's details
 class SOSNumberCard extends StatelessWidget {
+  final int id;
   final String name;
   final String number;
 
   const SOSNumberCard(
       {Key? key,
+        required this.id,
         required this.name,
         required this.number,})
       : super(key: key);
@@ -17,7 +19,11 @@ class SOSNumberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(CommonRoutes.EDIT_SOS_NUMBER),
+      onTap: () => Get.toNamed(CommonRoutes.EDIT_SOS_NUMBER, arguments: {
+        'id': id,
+        'name': name,
+        'number': number
+      }),
       child: Container(
         height: 72,
         child: Padding(

@@ -14,14 +14,16 @@ PointHistory _$PointHistoryFromJson(Map<String, dynamic> json) {
     relatedId: json['relatedId'] as int?,
     point: json['point'] as int?,
     totalPoint: json['totalPoint'] as int?,
-    description: json['description'] as String? ?? '',
-    timeStamp: json['timeStamp'] == null ? null : DateTime.parse(json['createdDate'] as String),
+    description: json['description'] as String?,
+    timeStamp: json['timeStamp'] == null
+        ? null
+        : DateTime.parse(json['timeStamp'] as String),
   );
 }
 
 Map<String, dynamic> _$PointHistoryToJson(PointHistory instance) =>
     <String, dynamic>{
-      'redemptionId': instance.pointHistoryId,
+      'pointHistoryId': instance.pointHistoryId,
       'userId': instance.userId,
       'historyType': instance.historyType,
       'relatedId': instance.relatedId,
