@@ -5,19 +5,29 @@ import 'package:get/get.dart';
 
 /// This widget contains an address book's details
 class AddressBookCard extends StatelessWidget {
+  final int id;
   final String name;
   final String address;
+  final String note;
 
   const AddressBookCard(
       {Key? key,
+        required this.id,
         required this.name,
-        required this.address,})
+        required this.address,
+        required this.note
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(CommonRoutes.EDIT_ADDRESS_BOOK),
+      onTap: () => Get.toNamed(CommonRoutes.EDIT_ADDRESS_BOOK, arguments: {
+        'id': id,
+        'name': name,
+        'address': address,
+        'note': note
+      }),
       child: Container(
         height: 72,
         child: Padding(

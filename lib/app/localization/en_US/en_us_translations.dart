@@ -163,17 +163,22 @@ final Map<String, String> en = {
   'kCall': 'Call',
   'kMessage': 'Message',
   'kReport': 'Report',
+  'kReportAndBlock': 'Report and block',
   'kNoHistoryTrip': 'No history trips with this person',
   'kHasHistoryTrip': 'History trips with this person',
   'kEnterYourReport': 'Type your feedback about this person...',
-  'kReportAndBlock': 'Report and block',
-  'kConfirmBlock': 'Are you sure you\nwant to block this person?',
+  'kBlock': 'Block',
+  'kConfirmBlock': 'Are you sure you want to block this person?',
   'kSeeBlacklist': 'You can view your blacklist in profile page',
   'kYes': 'Yes',
   'kNo': 'No',
   'kThankYouForReport': 'Thank you for your report',
   'kSorryMessage':
       'Biiké Team apologize for imperfect user experience. We have received your report and will handle it as soon as possible.',
+  'kYouBlockThisPerson': 'This person is blocked',
+
+  // 'block_list' screen
+  'kEmptyBlockList': 'Your blacklist is empty',
 
   // 'finding_biker_success' screen
   'kFoundBiker': 'We found your Biker!',
@@ -426,4 +431,6 @@ final Map<String, String> en = {
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',
+    'kEmptyReportReasonOrContainsBadWords':
+        'Report reason must not be empty or contains inappropriate words',
   });

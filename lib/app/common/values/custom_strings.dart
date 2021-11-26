@@ -158,16 +158,21 @@ class CustomStrings {
   static const String kCall = 'kCall';
   static const String kMessage = 'kMessage';
   static const String kReport = 'kReport';
+  static const String kReportAndBlock = 'kReportAndBlock';
   static const String kNoHistoryTrip = 'kNoHistoryTrip';
   static const String kHasHistoryTrip = 'kHasHistoryTrip';
   static const String kEnterYourReport = 'kEnterYourReport';
-  static const String kReportAndBlock = 'kReportAndBlock';
+  static const String kBlock = 'kBlock';
   static const String kConfirmBlock = 'kConfirmBlock';
   static const String kSeeBlacklist = 'kSeeBlacklist';
   static const String kYes = 'kYes';
   static const String kNo = 'kNo';
   static const String kThankYouForReport = 'kThankYouForReport';
   static const String kSorryMessage = 'kSorryMessage';
+  static const String kYouBlockThisPerson = 'kYouBlockThisPerson';
+
+  // 'block_list' screen
+  static const String kEmptyBlockList = 'kEmptyBlockList';
 
   // 'finding_biker_success' screen
   static const String kFoundBiker = 'kFoundBiker';
