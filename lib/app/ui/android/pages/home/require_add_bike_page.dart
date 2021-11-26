@@ -37,7 +37,7 @@ class RequireAddBikePage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: CustomElevatedIconButton(
-                        width: 120,
+                        width: 140,
                         onPressedFunc: () {
                           Get.offAndToNamed(CommonRoutes.ADD_BIKE, arguments: {
                             'isAddBike': true,
@@ -51,7 +51,7 @@ class RequireAddBikePage extends StatelessWidget {
                         elevation: 2.0),
                   ),
                   CustomTextButton(
-                      width: 120,
+                      width: 140,
                       backgroundColor: Colors.white,
                       foregroundColor: CustomColors.kBlue,
                       text: CustomStrings.kBtnExit.tr,

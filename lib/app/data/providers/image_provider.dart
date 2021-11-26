@@ -1,16 +1,34 @@
 import 'dart:io';
+
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:get/get_connect/connect.dart';
+import 'package:bikes_user/main.dart';
+import 'package:dio/dio.dart';
 
 class ImageProvider extends CommonProvider {
   Future<dynamic> postImage(
       {required int imageType,
       required String imageName,
       required dynamic imagePath}) async {
-    FormData data = FormData({
+    // var file = await DefaultCacheManager().getSingleFile(imagePath);
+    final File imageFile = File(imagePath);
+
+    Biike.logger.d(imageFile);
+
+    if (await imageFile.exists()) {
+      // Use the cached images if it exists
+    } else {
+      // Image doesn't exist in cache
+      await imageFile.create(recursive: true);
+    }
+
+    FormData data = FormData.fromMap({
       'imageType': imageType,
-      'imageList': MultipartFile(File(imagePath), filename: imageName)
+      'imageList': MultipartFile.fromFileSync(imageFile.path)
+    });
+
+    data.fields.forEach((element) {
+      Biike.logger.d(element.key + ':' + element.value);
     });
 
     final response =

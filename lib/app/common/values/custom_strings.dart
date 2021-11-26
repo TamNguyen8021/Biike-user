@@ -278,7 +278,8 @@ class CustomStrings {
   static const String kBikeBrand = 'kBikeBrand';
   static const String kBikeColor = 'kBikeColor';
   static const String kSuggestAddBike = 'kSuggestAddBike';
-  static const String kBecomeKeerDueToDeleteBike = 'kBecomeKeerDueToDeleteBike';
+  static const String kConfirmDeleteBike = 'kConfirmDeleteBike';
+  static const String kAreYouSureDeleteBike = 'kAreYouSureDeleteBike';
 
   // 'add_bike' screen
   static const String kAddBike = 'kAddBike';

@@ -201,9 +201,7 @@ class AppPages {
         binding: BookScheduleTripBinding()),
     GetPage(
       name: CommonRoutes.MANAGE_BIKE,
-      page: () => ManageBikePage(
-        isBikeVerified: false,
-      ),
+      page: () => ManageBikePage(),
       bindings: <Bindings>[ManageBikeBinding(), BikeBinding()],
     ),
     GetPage(

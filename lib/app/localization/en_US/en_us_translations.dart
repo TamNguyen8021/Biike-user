@@ -287,7 +287,9 @@ final Map<String, String> en = {
   'kBikeBrand': 'Brand',
   'kBikeColor': 'Color',
   'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
-  'kBecomeKeerDueToDeleteBike': 'You became a Ké-er because you have no bike',
+  'kConfirmDeleteBike': 'Confirm delete bike',
+  'kAreYouSureDeleteBike':
+      'After deleting your bike, you will become a Ké-er. Are you sure you want to delete your bike?',
 
   // 'add_bike' screen
   'kAddBike': 'Add bike',
