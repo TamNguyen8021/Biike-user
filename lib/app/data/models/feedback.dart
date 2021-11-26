@@ -32,7 +32,7 @@ class Feedback {
   /// A necessary factory constructor for creating a new Feedback instance
   /// from a map. Pass the map to the generated `_$FeedbackFromJson()` constructor.
   /// The constructor is named after the source class, in this case, Feedback.
-  factory Feedback.fromJson(Map<dynamic, dynamic> json) =>
+  factory Feedback.fromJson(Map<String, dynamic> json) =>
       _$FeedbackFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
