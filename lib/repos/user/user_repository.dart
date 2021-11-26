@@ -9,7 +9,6 @@ abstract class UserBehavior {
   Future<void> verifyUser(
     String idUser,
     bool? isPhoneVerified,
-    bool? isEmailVerified,
   );
 }
 
@@ -47,18 +46,18 @@ class UserRepository extends UserBehavior {
       return results['data']['isVerified'];
     } catch (error) {
       CommonFunctions.catchExceptionError(error);
-
       return false;
     }
   }
 
   @override
-  Future<void> verifyUser(
-      String idUser, bool? isPhoneVerified, bool? isEmailVerified) async {
+  Future<bool> verifyUser(String idUser, bool? isPhoneVerified) async {
     try {
-      await _repositories.verifyUser(idUser, isPhoneVerified, isEmailVerified);
+      await _repositories.verifyUser(idUser, isPhoneVerified);
+      return true;
     } catch (error) {
       CommonFunctions.catchExceptionError(error);
+      return false;
     }
   }
 }

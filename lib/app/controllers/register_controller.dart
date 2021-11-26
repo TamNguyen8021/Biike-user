@@ -79,8 +79,7 @@ class RegisterController extends GetxController {
       return CustomErrorsString.kNotFillAllFields.tr;
     }
 
-    if (!(EmailValidator.validate(email) &&
-        email.toUpperCase().contains('@FPT.EDU.VN'))) {
+    if (!(EmailValidator.validate(email)) || !checkMail(email)) {
       return CustomErrorsString.kMustLoginWithFPTEmail.tr;
     }
 
@@ -98,5 +97,16 @@ class RegisterController extends GetxController {
       return '+84' + phone.substring(1);
     }
     return '+84' + phone;
+  }
+
+  checkMail(String val) {
+    final a = '@Fe.edu.vn';
+    final b = '@FPT.EDU.VN';
+
+    if (val.toUpperCase().contains(a.toUpperCase()) ||
+        val.toUpperCase().contains(b.toUpperCase())) {
+      return true;
+    }
+    return false;
   }
 }

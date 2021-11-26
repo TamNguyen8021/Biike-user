@@ -12,6 +12,8 @@ class LocalAppData {
   Future<void> saveUserInfo(LoginData data) async {
     _pref = await SharedPreferences.getInstance()
       ..setString('token', data.idToken)
+      ..setString('phone', data.phone)
+      ..setBool('isPhoneVerified', data.isPhoneVerified)
       ..setString('refreshToken', data.refreshToken)
       ..setInt('userId', int.tryParse(data.userId) ?? -1)
       ..setString('email', data.email)
@@ -36,6 +38,33 @@ class LocalAppData {
   Future<String> get token async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('token') ?? '';
+  }
+
+  /// Author: van
+  Future<String> get phone async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getString('phone') ?? '';
+  }
+
+  /// Author: van
+  Future<bool> get isPhoneVerified async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getBool('isPhoneVerified') ?? false;
+  }
+
+  Future<bool> setIsPhoneVerified(bool val) async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.setBool('isPhoneVerified', val);
+  }
+
+  logout() async {
+    _pref = await SharedPreferences.getInstance()
+      ..setString('token', '')
+      ..remove('isPhoneVerified')
+      ..setString('phone', '')
+      ..setString('refreshToken', '')
+      ..setInt('userId', -1)
+      ..setString('email', '');
   }
 
   /// Get user's id

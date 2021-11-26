@@ -1,7 +1,6 @@
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
-import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
-import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +9,7 @@ class CommonProvider extends GetConnect {
   ///
   /// Author: UyenNLP
   Future<Map<String, String>> get headers async {
-    final token = await getIt<FirebaseServices>().user?.getIdToken(true);
+    final token = await LocalAppData().token;
     return <String, String>{'Authorization': 'Bearer $token'};
   }
 

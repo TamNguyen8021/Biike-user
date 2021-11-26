@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -7,16 +8,24 @@ import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/repos/user/user_repository.dart';
+import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Manage states of [HomePage]
 class HomeController extends GetxController {
+  final _userRepository = UserRepository();
+  final _firebaseService = getIt<FirebaseServices>();
   final _tripProvider = Get.find<TripProvider>();
   final _stationProvider = Get.find<StationProvider>();
   final PagingController<int, dynamic> pagingController =
@@ -295,5 +304,83 @@ class HomeController extends GetxController {
     int tempStationId = departureStation.value.stationId!;
     departureStation.value.stationId = destinationStation.value.stationId;
     destinationStation.value.stationId = tempStationId;
+  }
+
+  void bookTrip({required BuildContext context}) async {
+    final phone = await LocalAppData().phone;
+    final userId = await LocalAppData().userId;
+    final isPhoneVerified = await LocalAppData().isPhoneVerified;
+    if (!isPhoneVerified) {
+      await _firebaseService.sendCode(
+          fullPhone: phone,
+          codeSented: () {
+            showDialog<bool>(
+              context: context,
+              builder: (context) {
+                return DialogConfirm(
+                  firebaseService: _firebaseService,
+                  onSuccess: () {
+                    Get.toNamed(CommonRoutes.BOOK_TRIP);
+                    _userRepository.verifyUser(userId.toString(), true).then(
+                        (value) => LocalAppData().setIsPhoneVerified(value));
+                  },
+                );
+              },
+            );
+          });
+      return;
+    }
+    Get.toNamed(CommonRoutes.BOOK_TRIP);
+  }
+}
+
+class DialogConfirm extends HookWidget {
+  final FirebaseServices firebaseService;
+  final Function() onSuccess;
+
+  DialogConfirm({
+    required this.firebaseService,
+    required this.onSuccess,
+  });
+  @override
+  Widget build(BuildContext context) {
+    final otpController = useTextEditingController();
+    return AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          TextFormField(
+            controller: otpController,
+            decoration: InputDecoration(
+              labelText: 'typing otp',
+            ),
+            style: Theme.of(context).textTheme.bodyText1,
+            validator: (val) {
+              if ((val ?? '').isEmpty) {
+                return 'otp not null';
+              }
+            },
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () async {
+            final result = await firebaseService.verifyOtp(otpController.text);
+            if (result) {
+              Get.back(closeOverlays: true);
+              onSuccess();
+            } else {
+              CommonFunctions().showErrorDialog(
+                context: context,
+                message: 'otp not correct',
+              );
+            }
+          },
+          child: Text(CustomStrings.kBtnSend.tr),
+        ),
+      ],
+    );
   }
 }

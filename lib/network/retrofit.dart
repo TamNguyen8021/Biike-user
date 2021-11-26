@@ -29,11 +29,8 @@ abstract class RestClient {
   Future<dynamic> isVerifyUser(@Path('idUser') String idUser);
 
   @PUT(EndPoint.userVerify + '/{idUser}' + '/activation')
-  Future<dynamic> verifyUser(
-    @Path('idUser') String idUser,
-    @Field('isPhoneVerified') bool? isPhoneVerified,
-    @Field('isEmailVerified') bool? isEmailVerified,
-  );
+  Future<dynamic> verifyUser(@Path('idUser') String idUser,
+      @Field('isPhoneVerified') bool? isPhoneVerified);
 
   @GET(EndPoint.blackList + '/{idUser}')
   Future<BlackListResponse> getBlackList(

@@ -634,7 +634,9 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ],
-                CreateTripButton(),
+                CreateTripButton(
+                  createTrip: () => homeController.bookTrip(context: context),
+                ),
               ],
             )
           : null,

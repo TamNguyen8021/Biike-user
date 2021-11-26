@@ -31,6 +31,8 @@ class LoginData {
     required this.idToken,
     required this.refreshToken,
     required this.expiresIn,
+    required this.phone,
+    required this.isPhoneVerified,
   });
 
   String userId;
@@ -40,6 +42,8 @@ class LoginData {
   String idToken;
   String refreshToken;
   String expiresIn;
+  String phone;
+  bool isPhoneVerified;
 
   factory LoginData.fromRawJson(String str) =>
       LoginData.fromJson(json.decode(str));
@@ -54,6 +58,8 @@ class LoginData {
         idToken: json["idToken"] ?? '',
         refreshToken: json["refreshToken"] ?? '',
         expiresIn: json["expiresIn"] ?? '',
+        phone: json['phone'] ?? '',
+        isPhoneVerified: json['isPhoneVerified'] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,5 +70,7 @@ class LoginData {
         "idToken": idToken,
         "refreshToken": refreshToken,
         "expiresIn": expiresIn,
+        "phone": phone,
+        "isPhoneVerified": isPhoneVerified,
       };
 }
