@@ -200,7 +200,7 @@ final Map<String, String> vi = {
   'kBtnExit': 'Thoát',
   'kBtnReturn': 'Quay lại',
 
-  // 'ke_er_feedback' screen
+  // 'feedback' screen
   'kTripSuccessBiker': 'Chở ké thành công!',
   'kTripSuccessKeer': 'Đi ké thành công!',
   'kBuyReminder':
@@ -209,6 +209,13 @@ final Map<String, String> vi = {
       'Hãy đánh giá trải nghiệm của bạn cùng \'người ấy\' hôm nay nhé!',
   'kBtnSend': 'Gửi',
   'kSendSuccess': 'Gửi feedback thành công',
+  'kTipForBiker': 'Tip cho người chở',
+  'kCriteria1' : 'Đúng giờ',
+  'kCriteria2' : 'Thân thiện, hòa đồng',
+  'kCriteria3' : 'Vui vẻ',
+  'kCriteria4' : 'Có chuẩn bị nón bảo hiểm',
+  'kCriteria5' : 'Cám ơn',
+  'kCriteria6' : 'Rành đường',
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
@@ -396,6 +403,9 @@ final Map<String, String> vi = {
   'kExpired': ' điểm sẽ hết hạn vào ngày ',
   'kFindMore': 'Tìm hiểu thêm',
 
+  // noti
+  'kNotification': 'Thông báo',
+
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message
@@ -437,6 +447,7 @@ final Map<String, String> vi = {
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
     'kNoHistory': 'Không có lịch sử',
+    'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
   });

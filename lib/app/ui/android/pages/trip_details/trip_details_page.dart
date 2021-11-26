@@ -762,7 +762,11 @@ class TripDetailsPage extends StatelessWidget {
                                                                 .value = false;
                                                             Get.offAllNamed(
                                                                 CommonRoutes
-                                                                    .FEEDBACK);
+                                                                    .FEEDBACK,
+                                                                arguments:
+                                                                    controller
+                                                                        .trip
+                                                                        .tripId);
                                                           } else {
                                                             CommonFunctions()
                                                                 .showErrorDialog(

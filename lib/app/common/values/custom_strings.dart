@@ -190,13 +190,22 @@ class CustomStrings {
   static const String kBtnExit = 'kBtnExit';
   static const String kBtnReturn = 'kBtnReturn';
 
-  // 'ke_er_feedback' screen
+  // 'feedback' screen
   static const String kTripSuccessBiker = 'kTripSuccessBiker';
   static const String kTripSuccessKeer = 'kTripSuccessKeer';
   static const String kBuyReminder = 'kBuyReminder';
   static const String kRateReminder = 'kRateReminder';
   static const String kBtnSend = 'kBtnSend';
   static const String kSendSuccess = 'kSendSuccess';
+  static const String kTipForBiker = 'kTipForBiker';
+  static const kCriteria = [
+    'kCriteria1',
+    'kCriteria2',
+    'kCriteria3',
+    'kCriteria4',
+    'kCriteria5',
+    'kCriteria6'
+  ];
 
   // 'biker_point' screen
   static const String kListVouchers = 'kListVouchers';
@@ -382,5 +391,9 @@ class CustomStrings {
   static const String kExpired = 'kExpired';
   static const String kFindMore = 'kFindMore';
 
+  // noti
+  static const String kNotification = 'kNotification';
+
   static const String kAll = 'kAll';
+
 }
