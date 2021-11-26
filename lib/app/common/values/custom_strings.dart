@@ -363,4 +363,12 @@ class CustomStrings {
   static const String kYouHave = 'kYouHave';
   static const String kExpired = 'kExpired';
   static const String kFindMore = 'kFindMore';
+
+  // top up point
+  static const String kTopUpFromMomo = 'kTopUpFromMomo';
+  static const String kEnterPoint = 'kEnterPoint';
+  static const String kNeedAmount = 'kNeedAmount';
+  static const String kNoted = 'kNoted';
+  static const String kTopUpNoted = 'kTopUpNoted';
+  static const String kTopUpSuccess = 'kTopUpSuccess';
 }

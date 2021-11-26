@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:bikes_user/app/common/functions/rsa_utils.dart';
 import 'package:bikes_user/app/common/functions/text_utils.dart';
 import 'package:bikes_user/app/common/values/momo_constants.dart';
 import 'package:bikes_user/app/controllers/top_up_point_controller.dart';
+import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/top_up_point_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:momo_vn/momo_vn.dart';
@@ -43,63 +44,180 @@ class MomoPageState extends State<TopUpPointPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        isVisible: true,
-        hasShape: true,
-        hasLeading: true,
-        onPressedFunc: () {
-          Get.back();
-        },
-        appBar: AppBar(),
-        title: Text(CustomStrings.kAddAddressBook.tr),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 20.0),
-          child: Column(
-            children: <Widget>[
-              Form(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child: CustomElevatedIconButton(
-                          onPressedFunc: () async {
-                            MomoPaymentInfo options = MomoPaymentInfo(
-                                merchantName: "Biiké",
-                                appScheme: "momo6z6g20200121",
-                                merchantCode: MomoConstants.partnerCode,
-                                partnerCode: MomoConstants.partnerCode,
-                                amount: 1000,
-                                orderId: TextUtils.getOrderId(),
-                                orderLabel: 'Nạp điểm',
-                                merchantNameLabel: "TTND",
-                                fee: 0,
-                                description: 'Thanh toán nạp điểm',
-                                username: 'Biiké',
-                                partner: 'merchant',
-                                isTestMode: true
-                            );
-                            try {
-                              _momoPay.open(options);
-                            } catch (e) {
-                              print(e.toString());
-                            }
-                          },
-                          text: CustomStrings.kBuyPoint.tr,
-                          icon: Icons.save,
-                          elevation: 0.0,
-                          backgroundColor: CustomColors.kBlue,
-                          foregroundColor: Colors.white,
+    var percentTransfer = double.parse(topUpPointController.percent.value) * 1000;
+
+    return FutureBuilder(
+        future: topUpPointController.getConfigurations(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Obx(
+                    () => Scaffold(
+                      appBar: CustomAppBar(
+                        isVisible: true,
+                        hasShape: true,
+                        hasLeading: true,
+                        onPressedFunc: () {
+                          Get.back();
+                        },
+                        appBar: AppBar(),
+                        title: Text(CustomStrings.kBuyPoint.tr),
+                      ),
+                      body: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      CustomStrings.kTopUpFromMomo.tr,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline2!
+                                          .copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                )
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                                CustomStrings.kEnterPoint.tr
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                                            child: TopUpPointTextField(
+                                                hintText: '',
+                                                isReadOnly: false,
+                                                isEditPoint: true,
+                                                initialValue: '${topUpPointController.point}',
+                                                labelText:'',
+                                                onChangeFunc: (value) => {
+                                                  if (value.isNotEmpty) {
+                                                    topUpPointController.setAmount(value)
+                                                  }
+                                                },
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                                '1000 đ = ${percentTransfer} điểm'
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                  ),
+                                  Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                CustomStrings.kNeedAmount.tr,
+                                                style: TextStyle(
+                                                    color: CustomColors.kBlue,
+                                                    fontWeight: FontWeight.w300
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                '${topUpPointController.amount} đ',
+                                                style: TextStyle(
+                                                    color: CustomColors.kBlue,
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                              )
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                          CustomStrings.kNoted.tr,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black
+                                          ),
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                                        child: Align(
+                                          alignment: Alignment.bottomLeft,
+                                          child: Text(
+                                              CustomStrings.kTopUpNoted.tr,
+                                              style: TextStyle(fontSize: 12.0),
+                                          ),
+                                        ),
+                                    )
+                                  ],
+                                ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 18.0),
+                              child: CustomElevatedIconHasLoadingButton(
+                                onPressedFunc: () async {
+                                  MomoPaymentInfo options = MomoPaymentInfo(
+                                      merchantName: "Biiké",
+                                      appScheme: "momo6z6g20200121",
+                                      merchantCode: MomoConstants.partnerCode,
+                                      partnerCode: MomoConstants.partnerCode,
+                                      amount: int.parse(topUpPointController.amount.value),
+                                      orderId: TextUtils.getOrderId(),
+                                      orderLabel: 'Nạp điểm',
+                                      merchantNameLabel: "TTND",
+                                      fee: 0,
+                                      description: 'Thanh toán nạp điểm',
+                                      username: 'Biiké',
+                                      partner: 'merchant',
+                                      isTestMode: true
+                                  );
+                                  try {
+                                    _momoPay.open(options);
+                                  } catch (e) {
+                                    print(e.toString());
+                                  }
+                                },
+                                text: CustomStrings.kBuyPoint.tr,
+                                icon: Icons.save,
+                                elevation: 0.0,
+                                backgroundColor: CustomColors.kBlue,
+                                foregroundColor: Colors.white,
+                                isLoading: topUpPointController.isLoading,
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
-                  ))
-            ],
-          ),
-        ),
-      ),
+                      ),
+                    )
+            );
+          } else {
+            return Loading();
+          }
+        }
     );
   }
 
@@ -134,7 +252,7 @@ class MomoPageState extends State<TopUpPointPage> {
       'partnerCode': MomoConstants.partnerCode,
       'partnerRefId': TextUtils.getRefId(),
       'partnerTransId':TextUtils.getTransId(),
-      'amount': 1000,
+      'amount': int.parse(topUpPointController.amount.value),
     };
 
     RSAUtils rsaUtils = RSAUtils(MomoConstants.pubKey);
@@ -151,7 +269,7 @@ class MomoPageState extends State<TopUpPointPage> {
       'version': 2
     };
 
-    topUpPointController.createPayment(body: payment);
+    topUpPointController.createPayment(context: context, body: payment);
   }
 
   void _handlePaymentError(PaymentResponse response) {
