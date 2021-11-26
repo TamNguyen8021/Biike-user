@@ -309,6 +309,7 @@ final Map<String, String> vi = {
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
   'kTakePicture': 'Chụp',
+  'kAddBikeSuccess': 'Thêm xe thành công.\nVui lòng đợi Admin xác minh!',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
