@@ -27,20 +27,23 @@ class NotificationCard extends StatelessWidget {
   }
 
   _moveToRoute(String url) {
+    var origin = url;
     // get trip Id
-    if (url.contains('details') || url.contains('feedback')) {
-      url = url.substring(0, url.length - 8);
+    String remove = url.contains('details') ? 'details' : '';
+    remove = url.contains('feedback') ? 'feedback' : '';
+    if (remove != '' && url.contains(remove)) {
+      url = url.substring(0, url.length - remove.length - 1);
     }
     var tripId = CommonFunctions.getIdFromUrl(url: url);
 
     // move to corresponding page
-    if (url.contains('details')) {
+    if (origin.contains('details')) {
       Get.toNamed(CommonRoutes.TRIP_DETAILS, arguments: {
         'tripId': tripId,
         'userId': Biike.userId.value,
         'route': 'home'
       });
-    } else if (url.contains('feedback')) {
+    } else if (origin.contains('feedback')) {
       Get.toNamed(CommonRoutes.FEEDBACK, arguments: tripId);
     }
   }
