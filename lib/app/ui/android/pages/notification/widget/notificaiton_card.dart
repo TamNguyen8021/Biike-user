@@ -1,20 +1,56 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/controllers/notification_controller.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class NotificationCard extends StatelessWidget {
+  final _notificationController = Get.find<NotificationController>();
+
+  final hashKey;
   final BiikeNoti notification;
 
-  NotificationCard({Key? key, required this.notification}) : super(key: key);
+  NotificationCard(
+      {Key? key, required this.hashKey, required this.notification})
+      : super(key: key);
+
+  _readNoti() async {
+    await _notificationController.updateNoti(
+        hashKey: hashKey, isRead: notification.isRead);
+
+    _moveToRoute(notification.url!);
+  }
+
+  _moveToRoute(String url) {
+    // get trip Id
+    if (url.contains('details') || url.contains('feedback')) {
+      url = url.substring(0, url.length - 8);
+    }
+    var tripId = CommonFunctions.getIdFromUrl(url: url);
+
+    // move to corresponding page
+    if (url.contains('details')) {
+      Get.toNamed(CommonRoutes.TRIP_DETAILS, arguments: {
+        'tripId': tripId,
+        'userId': Biike.userId.value,
+        'route': 'home'
+      });
+    } else if (url.contains('feedback')) {
+      Get.toNamed(CommonRoutes.FEEDBACK, arguments: tripId);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     var f = new DateFormat('dd/MM/yyyy');
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => _readNoti(),
       child: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -55,6 +91,7 @@ class NotificationCard extends StatelessWidget {
           ),
         ),
         decoration: BoxDecoration(
+          color: !notification.isRead! ? CustomColors.kLightBlue : Colors.white,
           border: Border(
             bottom: BorderSide(width: 2.0, color: CustomColors.kLightGray),
           ),

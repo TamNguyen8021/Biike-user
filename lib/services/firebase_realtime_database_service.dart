@@ -15,9 +15,7 @@ class FirebaseRealtimeDatabaseService {
   }
 
   Future sendNotification(
-      {required receiverId,
-      // required notiId,
-      required BiikeNoti notification}) async {
+      {required receiverId, required BiikeNoti notification}) async {
     try {
       final ref = _database.child('/notification/$receiverId');
       final data = notification.toJson();
@@ -30,22 +28,31 @@ class FirebaseRealtimeDatabaseService {
     }
   }
 
-  updateNotification({required userId, required RxList data}) {
+  getNotifications({required userId, required RxMap data}) {
     _database
         .child('/notification/$userId')
-        .limitToLast(10)
+        .limitToLast(30)
         .onValue
         .listen((event) {
-
       try {
         final value = event.snapshot.value;
-        List x = value.entries.map((e) => e.value).toList();
-        print(x.toString());
-        data.value = x;
 
+        // List x = value.entries.map((e) => e.value).toList();
+        // print(x.toString());
+        data.value = value;
       } catch (error) {
         CommonFunctions.catchExceptionError(error);
       }
     });
+  }
+
+  updateNotification({required userId, required hashKey}) async {
+    try {
+      final ref = _database.child('/notification/$userId/$hashKey');
+      // final data = notification.toJson();
+      await ref.update({'isRead': true});
+    } catch (error) {
+      CommonFunctions.catchExceptionError(error);
+    }
   }
 }

@@ -197,7 +197,7 @@ final Map<String, String> en = {
   'kBtnExit': 'Exit',
   'kBtnReturn': 'Back',
 
-  // 'ke_er_feedback' screen
+  // 'feedback' screen
   'kTripSuccessBiker': 'Successful trip!',
   'kTripSuccessKeer': 'Successful trip!',
   'kBuyReminder':
@@ -205,6 +205,13 @@ final Map<String, String> en = {
   'kRateReminder': 'Please rate your experience with your partner today!',
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
+  'kTipForBiker': 'Tip for biker',
+  'kCriteria1' : 'On time',
+  'kCriteria2' : 'Friendly',
+  'kCriteria3' : 'Easy-going',
+  'kCriteria4' : 'Prepared helmet beforehand',
+  'kCriteria5' : 'Thanks',
+  'kCriteria6' : 'Know the way',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -434,6 +441,7 @@ final Map<String, String> en = {
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',
+    'kNoNotification': 'Notification empty',
     'kEmptyReportReasonOrContainsBadWords':
         'Report reason must not be empty or contains inappropriate words',
   });

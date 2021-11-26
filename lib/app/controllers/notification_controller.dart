@@ -9,9 +9,10 @@ import 'package:get/get.dart';
 class NotificationController extends GetxController {
   FirebaseRealtimeDatabaseService _databaseService =
       getIt<FirebaseRealtimeDatabaseService>();
-  RxList listNoti = [].obs;
 
-  void sendNoti(data) async {
+  RxMap listNoti = {}.obs;
+
+  Future<void> sendNoti() async {
     BiikeNoti notification = BiikeNoti(
         receiverId: Biike.userId.value,
         title: 'title',
@@ -23,8 +24,14 @@ class NotificationController extends GetxController {
         receiverId: Biike.userId.value, notification: notification);
   }
 
-  Future<void> updateNoti() async {
-    _databaseService.updateNotification(
+  Future<void> getNoti() async {
+    _databaseService.getNotifications(
         userId: Biike.userId.value, data: listNoti);
+  }
+
+  Future<void> updateNoti({required hashKey, required isRead}) async {
+    if (!isRead)
+      await _databaseService.updateNotification(
+          userId: Biike.userId.value, hashKey: hashKey);
   }
 }
