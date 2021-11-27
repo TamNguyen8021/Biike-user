@@ -12,10 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class YourVoucherDetailPage extends StatelessWidget {
-  final data;
   final _redemptionController = Get.find<RedemptionController>();
 
-  YourVoucherDetailPage({Key? key, this.data}) : super(key: key);
+  YourVoucherDetailPage({Key? key}) : super(key: key);
 
   _onBackPressed() {
     _redemptionController.refreshList();

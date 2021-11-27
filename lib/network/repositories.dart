@@ -1,7 +1,8 @@
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
+import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
-import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/retrofit.dart';
-import 'package:bikes_user/services/firebase_services.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -42,35 +43,38 @@ class Repositories implements RestClient {
 
   @override
   Future verifyUser(
-      String idUser, bool? isPhoneVerified, bool? isEmailVerified) {
-    return _client.verifyUser(idUser, isPhoneVerified, isEmailVerified);
+      String idUser, bool? isPhoneVerified) {
+    return _client.verifyUser(idUser, isPhoneVerified);
   }
 
   @override
-  Future<BlackListResponse> getBlackList(String idUser, int page, int limit) {
+  Future<BlackListResponse> getBlackList(int userId, int page, int limit) {
     return _client.getBlackList(
-      idUser,
+      Biike.userId.value,
       page,
       limit,
     );
   }
 
   Future<void> setToken() async {
-    final token = await getIt<FirebaseServices>().token;
+    final token = await LocalAppData().token;
     dio.options.headers = {'Authorization': 'Bearer $token'};
-    getIt<FirebaseServices>()
-        .firebaseAuth
-        .idTokenChanges()
-        .listen((event) async {
-      final token = await event?.getIdToken() ?? '';
-      dio.options.headers = {'Authorization': 'Bearer $token'};
-    });
   }
 
   @override
   Future<dynamic> unBlock({required BlackListItem blackListItem}) {
     return _client.unBlock(
       blackListItem: blackListItem,
+    );
+  }
+
+  @override
+  Future<LoginResponse> signin(
+      {required String email, required String password, bool isAdmin = false}) {
+    return _client.signin(
+      email: email,
+      password: password,
+      isAdmin: isAdmin,
     );
   }
 }

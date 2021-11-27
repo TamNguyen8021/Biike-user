@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:math';
-
 
 import 'package:asn1lib/asn1lib.dart';
 import 'package:pointycastle/export.dart';
@@ -21,9 +19,7 @@ class RSAUtils {
   }
 
   RSAUtils(String pubKey) {
-    if (pubKey != null) {
-      publicKey = parse(pubKey) as RSAPublicKey?;
-    }
+    publicKey = parse(pubKey) as RSAPublicKey?;
   }
 
   ///RSA public key encryption
@@ -63,8 +59,8 @@ class RSAUtils {
           index += keysize;
         }
         Uint8List encryptResult = cipher.process(listtmp);
-        for (int v_i = 0; v_i < blocksize; v_i++) {
-          list[count * blocksize + v_i] = encryptResult[v_i];
+        for (int i = 0; i < blocksize; i++) {
+          list[count * blocksize + i] = encryptResult[i];
         }
         count += 1;
       }
@@ -126,7 +122,6 @@ class RSAUtils {
 
     return asn1Parser.nextObject() as ASN1Sequence;
   }
-
 
   ASN1Sequence _pkcs8PublicSequence(ASN1Sequence sequence) {
     final ASN1Object bitString = sequence.elements[1];

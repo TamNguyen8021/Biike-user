@@ -189,25 +189,30 @@ class ChooseModePage extends StatelessWidget {
             ),
             NextPageButton(
               onPressedFunc: () async {
-                if (Biike.role.value != Role.none) {
-                  int role = 1;
+                try {
+                  if (Biike.role.value != Role.none) {
+                    int role = 1;
 
-                  if (Biike.role.value == Role.biker) {
-                    role = 2;
-                  }
+                    if (Biike.role.value == Role.biker) {
+                      role = 2;
+                    }
 
-                  if (await _userProvider.changeRole(role: role)) {
-                    Biike.localAppData.saveRole(Biike.role.value);
-                    Get.offAllNamed(CommonRoutes.HOME);
+                    if (await _userProvider.changeRole(role: role)) {
+                      Biike.localAppData.saveRole(Biike.role.value);
+                      Get.offAllNamed(CommonRoutes.HOME);
+                    } else {
+                      CommonFunctions().showErrorDialog(
+                          context: context,
+                          message: CustomErrorsString.kDevelopError.tr);
+                    }
                   } else {
                     CommonFunctions().showErrorDialog(
                         context: context,
-                        message: CustomErrorsString.kDevelopError.tr);
+                        message: CustomErrorsString.kNoRoleWereChosen.tr);
                   }
-                } else {
-                  CommonFunctions().showErrorDialog(
-                      context: context,
-                      message: CustomErrorsString.kNoRoleWereChosen.tr);
+                } catch (e) {
+                  CommonFunctions()
+                      .showErrorDialog(context: context, message: e.toString());
                 }
               },
               backgroundColor: Colors.white,

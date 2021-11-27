@@ -1,10 +1,11 @@
-
-import 'package:bikes_user/app/common/functions/snackbar.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
-import 'package:bikes_user/services/firebase_services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 /// Manage states of [BanListPage]
@@ -12,42 +13,36 @@ class BanListController extends GetxController {
   static BanListController get to => Get.find<BanListController>();
 
   final repositories = getIt<Repositories>();
-  final FirebaseServices firebaseServices = getIt<FirebaseServices>();
-  List<BlackListItem>? data;
+  List<BlackListItem> data = [];
 
-  void getBlackList() async {
+  Future<void> getBlackList({required BuildContext context}) async {
     try {
+      data.clear();
       final BlackListResponse result =
-          await repositories.getBlackList(firebaseServices.uid, 1, 10000);
+          await repositories.getBlackList(Biike.userId.value, 1, 10);
       data = result.data;
-      data?.removeWhere((element) => element.isBlock == false);
+      data.removeWhere((element) => element.isBlock == false);
     } catch (e) {
-      SnackBarServices.showSnackbar(
-          title: 'bike', message: 'đã có lỗi xảy ra vui lòng thử lại sau');
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
     } finally {
       update();
     }
   }
 
-  @override
-  void onInit() {
-    getBlackList();
-    super.onInit();
-  }
-
-  unBlock(BlackListItem blackListItem) async {
+  Future<void> unBlock(
+      {required BuildContext context,
+      required BlackListItem blackListItem}) async {
     try {
-      data = null;
-
       update();
       blackListItem.isBlock = false;
 
       await repositories.unBlock(blackListItem: blackListItem);
     } catch (e) {
-      SnackBarServices.showSnackbar(
-          title: 'bike', message: 'đã có lỗi xảy ra vui lòng thử lại sau');
+      CommonFunctions().showErrorDialog(
+          context: context, message: CustomErrorsString.kDevelopError.tr);
     } finally {
-      getBlackList();
+      getBlackList(context: context);
       update();
     }
   }

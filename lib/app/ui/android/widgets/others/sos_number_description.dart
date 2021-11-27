@@ -8,37 +8,33 @@ class SOSNumberDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      children: <Widget>[
-        RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-                style: TextStyle(
-                  fontSize: 10.0,
-                  color: CustomColors.kDarkBlue,
-                ),
-                children: [
-                  TextSpan(
-                      text: CustomStrings.kSOSNumberFirstDescription.tr
+    return Padding(
+      padding: const EdgeInsets.all(22.0),
+      child: Column(
+        children: <Widget>[
+          RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  style: TextStyle(
+                    color: CustomColors.kDarkBlue,
                   ),
-                  TextSpan(
-                      text: CustomStrings.kSOSNumber.tr,
-                      style: TextStyle( fontWeight: FontWeight.bold )
-                  ),
-                  TextSpan(
-                    text: CustomStrings.kSOSNumberSecondDescription.tr,
-                  ),
-                  TextSpan(
-                      text: CustomStrings.kNeedSOS.tr,
-                      style: TextStyle( fontWeight: FontWeight.bold )
-                  ),
-                  TextSpan(
-                    text: CustomStrings.kSOSNumberThirdDescription.tr,
-                  ),
-                ]
-            )
-        )
-      ],
+                  children: [
+                    TextSpan(text: CustomStrings.kSOSNumberFirstDescription.tr),
+                    TextSpan(
+                        text: CustomStrings.kSOSNumber.tr,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(
+                      text: CustomStrings.kSOSNumberSecondDescription.tr,
+                    ),
+                    TextSpan(
+                        text: CustomStrings.kNeedSOS.tr,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(
+                      text: CustomStrings.kSOSNumberThirdDescription.tr,
+                    ),
+                  ]))
+        ],
+      ),
     );
   }
 }

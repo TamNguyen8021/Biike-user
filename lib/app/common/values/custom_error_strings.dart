@@ -1,6 +1,5 @@
 class CustomErrorsString {
   static const String kError = 'kError';
-  static const String kErrorMessage = 'kErrorMessage';
   static const String kNotRated = 'kNotRated';
   static const String kIncludeBadWords = 'kIncludeBadWords';
   static const String kSendFailed = 'kSendFailed';
@@ -20,6 +19,23 @@ class CustomErrorsString {
       'kFromTimeMustBeBeforeToTime';
   static const String kSameStationWereAdded = 'kSameStationWereAdded';
   static const String kNoRoleWereChosen = 'kNoRoleWereChosen';
-  static const String kFillInAllField = 'kFillInAllField';
+  static const String kEmailMustNotBeEmpty = 'kEmailMustNotBeEmpty';
+  static const String kMustLoginWithFPTEmail = 'kMustLoginWithFPTEmail';
+  static const String kErrorWhenStopSharingLocation =
+      'kErrorWhenStopSharingLocation';
   static const String kNoVoucher = 'kNoVoucher';
+  static const String kWrongEmailOrPassword = 'kWrongEmailOrPassword';
+  static const String kNoPasswordEnter = 'kNoPasswordEnter';
+  static const String kInvalidEmail = 'kInvalidEmail';
+  static const String kWrongEmail = 'kWrongEmail';
+  static const String kPasswordMustAtLeast6 = 'kPasswordMustAtLeast6';
+  static const String kInvalidPhoneNo = 'kInvalidPhoneNo';
+  static const String kDuplicateEmailOrPhone = 'kDuplicateEmailOrPhone';
+  static const String kWrongOtp = 'kWrongOtp';
+  static const String kEmptyOtp = 'kEmptyOtp';
+  static const String kTryAgain = 'kTryAgain';
+  static const String kNoHistory = 'kNoHistory';
+  static const String kNoNotification = 'kNoNotification';
+  static const String kEmptyReportReasonOrContainsBadWords =
+      'kEmptyReportReasonOrContainsBadWords';
 }

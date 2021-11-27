@@ -1,6 +1,9 @@
+import 'package:bikes_user/app/common/functions/BadWordsFilter/bad_words_filter.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
+import 'package:bikes_user/app/data/providers/intimacies_provider.dart';
+import 'package:bikes_user/app/data/providers/report_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -20,6 +23,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class ViewUserController extends GetxController {
   final _userProvider = Get.find<UserProvider>();
   final _tripProvider = Get.find<TripProvider>();
+  final _intimaciesProvider = Get.find<IntimaciesProvider>();
+  final _reportProvider = Get.find<ReportProvider>();
   final PagingController<int, HistoryTripCard> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -27,8 +32,11 @@ class ViewUserController extends GetxController {
   Area area = Area.empty();
   RxList historyTrips = [].obs;
   Map<String, dynamic> historyTripsPagination = {};
+  TextEditingController _reportController = TextEditingController();
   int _currentPage = 1;
   int _limit = 10;
+
+  Rx<bool> isUserBlocked = false.obs;
 
   @override
   onInit() {
@@ -77,6 +85,10 @@ class ViewUserController extends GetxController {
         await _userProvider.getPartnerProfile(partnerId: partnerId);
     user = User.fromJson(partnerProfile);
     area = Area.fromJson(partnerProfile);
+    _reportController.text = '';
+
+    isUserBlocked.value =
+        await _intimaciesProvider.checkIfBlock(partnerId: partnerId);
   }
 
   /// Gets history trips with partner and shows it on [context].
@@ -118,9 +130,6 @@ class ViewUserController extends GetxController {
           break;
         default:
           tripStatus = TripStatus.none;
-          Get.defaultDialog(
-              title: CustomErrorsString.kError.tr,
-              middleText: CustomErrorsString.kErrorMessage.tr);
       }
 
       HistoryTripCard historyTripCard = HistoryTripCard(
@@ -135,7 +144,71 @@ class ViewUserController extends GetxController {
 
       historyTrips.add(historyTripCard);
     }
+    update();
     return historyTrips.cast();
+  }
+
+  bool _validateReport() {
+    BadWordsFilter filter = BadWordsFilter();
+
+    if (_reportController.text.trim().isEmpty) {
+      return false;
+    }
+
+    if (filter.hasBadWords(_reportController.text)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  void _reportUser({required BuildContext context}) async {
+    if (_validateReport()) {
+      if (await _reportProvider.reportUser(
+          partnerId: user.userId, reportReason: _reportController.text)) {
+        Get.back();
+        _showThankYouForReportDialog(context: context);
+      } else {
+        await CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kDevelopError.tr);
+      }
+    } else {
+      await CommonFunctions().showErrorDialog(
+          context: context,
+          message: CustomErrorsString.kEmptyReportReasonOrContainsBadWords.tr);
+    }
+  }
+
+  void _blockUser({required BuildContext context}) async {
+    if (await _intimaciesProvider.checkIfHasIntimacies(
+        partnerId: user.userId)) {
+      if (await _intimaciesProvider.editIntimacies(
+          body: {"userOneId": Biike.userId.value, "userTwoId": user.userId})) {
+        isUserBlocked.value = true;
+        Get.back(closeOverlays: true);
+        await CommonFunctions().showSuccessDialog(
+            context: context, message: CustomStrings.kYouBlockThisPerson.tr);
+      } else {
+        Get.back();
+        await CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kDevelopError.tr);
+      }
+    } else {
+      if (await _intimaciesProvider.createIntimacies(body: {
+        "userOneId": Biike.userId.value,
+        "userTwoId": user.userId,
+        "isBlock": false
+      })) {
+        isUserBlocked.value = true;
+        Get.back(closeOverlays: true);
+        await CommonFunctions().showSuccessDialog(
+            context: context, message: CustomStrings.kYouBlockThisPerson.tr);
+      } else {
+        Get.back();
+        await CommonFunctions().showErrorDialog(
+            context: context, message: CustomErrorsString.kDevelopError.tr);
+      }
+    }
   }
 
   /// Display a dialog on [context] to report a user.
@@ -172,6 +245,9 @@ class ViewUserController extends GetxController {
                         filled: true,
                         fillColor: CustomColors.kLightGray,
                       ),
+                      onChanged: (String value) {
+                        _reportController.text = value;
+                      },
                     ),
                   ),
                   Center(
@@ -186,18 +262,22 @@ class ViewUserController extends GetxController {
                               foregroundColor: Colors.white,
                               text: CustomStrings.kReport.tr,
                               onPressedFunc: () {
-                                Get.back();
-                                _showThankYouForReportDialog(context: context);
+                                _reportUser(context: context);
                               }),
-                          CustomTextButton(
-                              hasBorder: false,
-                              backgroundColor: CustomColors.kRed,
-                              foregroundColor: Colors.white,
-                              text: CustomStrings.kReportAndBlock.tr,
-                              onPressedFunc: () {
-                                Get.back();
-                                _showConfirmBlockDialog(context: context);
-                              }),
+                          Obx(
+                            () => Visibility(
+                              visible: !isUserBlocked.value,
+                              child: CustomTextButton(
+                                  hasBorder: false,
+                                  backgroundColor: CustomColors.kRed,
+                                  foregroundColor: Colors.white,
+                                  text: CustomStrings.kReportAndBlock.tr,
+                                  onPressedFunc: () {
+                                    _reportUser(context: context);
+                                    _blockUser(context: context);
+                                  }),
+                            ),
+                          ),
                           CustomTextButton(
                               hasBorder: false,
                               backgroundColor: CustomColors.kLightGray,
@@ -220,7 +300,7 @@ class ViewUserController extends GetxController {
   /// Display a dialog on [context] to confirm if user wants to block another user.
   ///
   /// Author: TamNTT
-  void _showConfirmBlockDialog({required BuildContext context}) async {
+  void showConfirmBlockDialog({required BuildContext context}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -232,7 +312,7 @@ class ViewUserController extends GetxController {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     CustomStrings.kConfirmBlock.tr,
@@ -255,10 +335,9 @@ class ViewUserController extends GetxController {
                               hasBorder: false,
                               backgroundColor: CustomColors.kBlue,
                               foregroundColor: Colors.white,
-                              text: CustomStrings.kSure.tr,
+                              text: CustomStrings.kYes.tr,
                               onPressedFunc: () {
-                                Get.back();
-                                _showThankYouForReportDialog(context: context);
+                                _blockUser(context: context);
                               }),
                           CustomTextButton(
                               hasBorder: false,
@@ -266,7 +345,7 @@ class ViewUserController extends GetxController {
                               foregroundColor: CustomColors.kDarkGray,
                               text: CustomStrings.kBtnExit.tr,
                               onPressedFunc: () {
-                                Get.back();
+                                Get.back(closeOverlays: true);
                               }),
                         ],
                       ),
@@ -282,8 +361,8 @@ class ViewUserController extends GetxController {
   /// Display a dialog on [context] to thank you user for their report.
   ///
   /// Author: TamNTT
-  void _showThankYouForReportDialog({required BuildContext context}) async {
-    await showDialog(
+  void _showThankYouForReportDialog({required BuildContext context}) {
+    showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
@@ -295,7 +374,7 @@ class ViewUserController extends GetxController {
                   const EdgeInsets.symmetric(vertical: 22.0, horizontal: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     CustomStrings.kThankYouForReport.tr,
@@ -306,7 +385,7 @@ class ViewUserController extends GetxController {
                     child: Text(
                       CustomStrings.kSorryMessage.tr,
                       style: Theme.of(context).textTheme.bodyText1,
-                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   Center(

@@ -17,21 +17,30 @@ final Map<String, String> vi = {
   'kStart': 'Bắt đầu',
 
   // '003.1_login'
-  'kLoginButton': 'Xác thực bằng email FPT',
-  'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
-  'kTerm': 'Điều khoản dịch vụ và Chính sách bảo mật',
   'kForgotPassword': 'Quên mật khẩu',
+  'kSendResetPasswordEmail':
+      'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
+  'kInputEmail': 'Nhập email',
+  'kPassword': 'Mật khẩu',
+  'kInputPassword': 'Nhập mật khẩu',
+  'kLogin': 'Đăng nhập',
+  'kNoAccount': 'Chưa có tài khoản? ',
 
-  // '004.1_input_phone_no' screen
+  // 'register' screen
+  'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
+  'kAnd': ' và ',
+  'kRegister': 'Đăng ký ngay!',
+  'kHasAccount': 'Đã có tài khoản? ',
+  'kInputName': 'Nhập họ tên',
   'kInputPhoneNumber': 'Nhập số điện thoại',
+  'kSentVerifiedEmail':
+      'Chúng tôi đã gửi email xác thực đến email đăng ký tài khoản của bạn. vui lòng xác thực trước khi đăng nhập',
+  'kRegisterSuccess': 'Đăng ký tài khoản thành công',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
   'kResendVerifyCode': 'Yêu cầu gửi lại mã sau 59 giây',
   'kInvalidPin': 'Mã xác nhận không chính xác',
-
-  // '004.3_input_name' screen
-  'kInputName': 'Nhập tên của bạn',
 
   // '004.4_choose_mode' screen
   'kChooseMode': 'Bắt đầu ứng dụng\nvới vai trò là',
@@ -61,7 +70,8 @@ final Map<String, String> vi = {
       'Chúng tôi sẽ gửi thông báo cho tài xế của bạn',
   'kConfirmArrivalMessageForBiker':
       'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
-  'kConfirmExitApp': 'Bạn có chắc muốn thoát ứng dụng?',
+  'kConfirmExitApp':
+      'Bạn có chắc muốn thoát ứng dụng? (Nếu bạn đang chia sẻ vị trí, khi thoát ứng dụng sẽ ngừng việc chia sẻ)',
 
   // 'biker_home' screen
   'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
@@ -123,7 +133,7 @@ final Map<String, String> vi = {
   'kKeerActivities': 'Lịch ké',
   'kBikerActivities': 'Lịch chở',
 
-  //'profile' screen
+  // 'profile' screen
   'kEdit': 'Chỉnh sửa',
   'kSavedAddress': 'Sổ địa chỉ',
   'kSettings': 'Cài đặt',
@@ -134,6 +144,9 @@ final Map<String, String> vi = {
   'kPhoneNo': 'Số điện thoại',
   'kEmail': 'Email',
   'kLogOut': 'Đăng xuất',
+
+  // 'block_list' screen
+  'kEmptyBlockList': 'Chưa có ai xui xẻo bị block',
 
   // 'update_profile' screen
   'kEditProfile': 'Chỉnh sửa thông tin cá nhân',
@@ -156,16 +169,19 @@ final Map<String, String> vi = {
   'kCall': 'Gọi điện',
   'kMessage': 'Nhắn tin',
   'kReport': 'Báo cáo',
+  'kReportAndBlock': 'Báo cáo và chặn',
   'kNoHistoryTrip': 'Không có lịch sử đi chung',
   'kHasHistoryTrip': 'Lịch sử đi chung',
   'kEnterYourReport': 'Nhập phản ánh của bạn về người này...',
-  'kReportAndBlock': 'Báo cáo và chặn',
-  'kConfirmBlock': 'Bạn có chắc chắn\nmuốn chặn người này?',
-  'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn\ntại trang hồ sơ cá nhân',
-  'kSure': 'Chắc chắn',
+  'kBlock': 'Chặn',
+  'kConfirmBlock': 'Bạn có chắc chắn muốn chặn người này?',
+  'kSeeBlacklist': 'Bạn có thể xem lại danh sách chặn tại trang hồ sơ cá nhân',
+  'kYes': 'Có',
+  'kNo': 'Không',
   'kThankYouForReport': 'Cảm ơn bạn đã báo cáo',
   'kSorryMessage':
       'Biiké rất tiếc vì những trải nghiệm chưa được hoàn hảo. Biiké đã nhận được thông tin báo cáo và sẽ xử lý trong thời gian sớm nhất.',
+  'kYouBlockThisPerson': 'Bạn đã chặn người này',
 
   // 'finding_biker_success' screen
   'kFoundBiker': 'Đã tìm được người chở bạn!',
@@ -184,7 +200,7 @@ final Map<String, String> vi = {
   'kBtnExit': 'Thoát',
   'kBtnReturn': 'Quay lại',
 
-  // 'ke_er_feedback' screen
+  // 'feedback' screen
   'kTripSuccessBiker': 'Chở ké thành công!',
   'kTripSuccessKeer': 'Đi ké thành công!',
   'kBuyReminder':
@@ -193,6 +209,13 @@ final Map<String, String> vi = {
       'Hãy đánh giá trải nghiệm của bạn cùng \'người ấy\' hôm nay nhé!',
   'kBtnSend': 'Gửi',
   'kSendSuccess': 'Gửi feedback thành công',
+  'kTipForBiker': 'Tip cho người chở',
+  'kCriteria1': 'Đúng giờ',
+  'kCriteria2': 'Thân thiện, hòa đồng',
+  'kCriteria3': 'Vui vẻ',
+  'kCriteria4': 'Có chuẩn bị nón bảo hiểm',
+  'kCriteria5': 'Cám ơn',
+  'kCriteria6': 'Rành đường',
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
@@ -206,7 +229,7 @@ final Map<String, String> vi = {
   'kSupport': 'Trợ giúp',
   'kNewTrip': 'Đã tạo',
   'kCancelTrip': 'Hủy chuyến',
-  'kConfirmArrival': 'Đánh dấu đã đến',
+  'kConfirmArrival': 'Tôi đã đến điểm đón',
   'kCompleteTrip': 'Hoàn thành',
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',
@@ -224,8 +247,14 @@ final Map<String, String> vi = {
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
   'kHelpCenter': 'Trung tâm trợ giúp',
-  'kShareTripInfo': 'Chia sẻ thông tin chuyến đi',
+  'kShareLocation': 'Chia sẻ vị trí',
+  'kMyLocation': 'Vị trí của bạn',
+  'kStopSharingLocation': 'Dừng chia sẻ vị trí',
   'kSOSCenter': 'Tổng đài S.O.S',
+  'kMessageWereSent':
+      'Tin nhắn có đường link chứa vị trí của bạn đã được gửi đến các số điện thoại trong danh sách S.O.S',
+  'kNeedSharingLocationToUseSOS':
+      'Bạn cần chia sẻ vị trí để sử dụng tính năng này',
   'kNearestPoliceStation': 'Đồn công an gần nhất',
   'kNearestHospital': 'Bệnh viện gần nhất',
   'kNearestMechanicShop': 'Tiệm sửa xe gần nhất',
@@ -246,7 +275,6 @@ final Map<String, String> vi = {
   'kChooseTo': '-Chọn điểm đến-',
   'kBookScheduleTrip': 'Đặt lịch ké',
   'kBookNowTrip': 'Ké now',
-  'kMins': 'phút',
 
   // 'book_schedule_trip' screen
   'kTime': 'Thời gian',
@@ -263,7 +291,9 @@ final Map<String, String> vi = {
   'kBikeBrand': 'Nhãn hiệu',
   'kBikeColor': 'Màu sơn',
   'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
-  'kBecomeKeerDueToDeleteBike': 'Bạn không có xe nên đã trở thành Ké-er',
+  'kConfirmDeleteBike': 'Xác nhận xóa xe',
+  'kAreYouSureDeleteBike':
+      'Sau khi xóa xe bạn sẽ trở thành Ké-er. Bạn có chắc muốn xóa xe?',
 
   // 'add_bike' screen
   'kAddBike': 'Thêm xe mới',
@@ -286,6 +316,7 @@ final Map<String, String> vi = {
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
   'kTakePicture': 'Chụp',
+  'kAddBikeSuccess': 'Thêm xe thành công.\nVui lòng đợi Admin xác minh!',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
@@ -300,9 +331,9 @@ final Map<String, String> vi = {
   'kYourCode': 'Mã của bạn',
   'kExchangeVoucherSuccess': 'Đổi voucher thành công!',
   'kViewAVoucher': 'Xem',
-  'kShowVoucherCode' : 'Hiện mã',
-  'kMarkAsUsed' : 'Đánh dấu đã dùng',
-  'kMarkAsUnused' : 'Đánh dấu chưa dùng',
+  'kShowVoucherCode': 'Hiện mã',
+  'kMarkAsUsed': 'Đánh dấu đã dùng',
+  'kMarkAsUnused': 'Đánh dấu chưa dùng',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',
@@ -315,11 +346,11 @@ final Map<String, String> vi = {
   'kLanguage': 'Ngôn ngữ',
   'kCurrentLanguage': 'Tiếng Việt',
   'kOther': 'Khác',
-  'kFollowOnFacebook': 'Theo dõi Biké trên Facebook',
+  'kFollowOnFacebook': 'Theo dõi Biiké trên Facebook',
   'kWebsite': 'Website',
   'kTermOfUse': 'Điều khoản sử dụng',
   'kPrivacyPolicy': 'Chính sách bảo mật',
-  'kDevelopBy': 'Biké được phát triển bởi Biké Team,\nĐại học FPT TP.HCM',
+  'kDevelopBy': 'Biiké được phát triển bởi Biiké Team,\nĐại học FPT TP.HCM',
   'kDevelopAt': 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM',
 
   // 'address_book' screen
@@ -340,8 +371,8 @@ final Map<String, String> vi = {
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
-      'Biké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi\nđến ',
-  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút\n',
+      'Biiké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi đến ',
+  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút ',
   'kNeedSOS': 'Tôi cần Cảnh sát/Xe cấp cứu',
   'kSOSNumberThirdDescription': ' trong khi đi xe và gọi',
   'kSOSReachLimit': 'Bạn đã thêm tối đa các số điện thoại S.O.S',
@@ -357,8 +388,6 @@ final Map<String, String> vi = {
   // 'ban_list' screen
   'kBanList': 'Danh sách hạn chế',
   'kUnBlock': 'Bỏ chặn',
-  'kLogin': 'Đăng nhập',
-  'kRegister': 'Đăng ký',
 
   // date
   'kMonday': 'T2',
@@ -370,24 +399,28 @@ final Map<String, String> vi = {
   'kSunday': 'CN',
 
   // point
-  'kPoint' : 'Điểm',
-  'kExchangeVoucher' : 'Đổi quà',
-  'kBuyPoint' : 'Nạp điểm',
-  'kYouHave' : 'Bạn có',
-  'kExpired' : ' điểm sẽ hết hạn vào ngày ',
-  'kFindMore' : 'Tìm hiểu thêm',
+  'kPoint': 'Điểm',
+  'kExchangeVoucher': 'Đổi quà',
+  'kBuyPoint': 'Nạp điểm',
+  'kYouHave': 'Bạn có',
+  'kExpired': ' điểm sẽ hết hạn vào ngày ',
+  'kFindMore': 'Tìm hiểu thêm',
 
   'kTopUpFromMomo': 'Nạp điểm từ Ví Momo',
   'kEnterPoint': 'Nhập số điểm cần nạp',
   'kNeedAmount': 'Số tiền cần chuyển',
   'kNoted': 'Lưu ý',
-  'kTopUpNoted': 'KHÔNG áp dụng đối với chuyển khoản tại các đại lý như FPT Shop, Circle K, Ministop, F88...',
+  'kTopUpNoted':
+      'KHÔNG áp dụng đối với chuyển khoản tại các đại lý như FPT Shop, Circle K, Ministop, F88...',
   'kTopUpSuccess': 'Nạp điểm thành công',
+
+  // noti
+  'kNotification': 'Thông báo',
+
+  'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',
-    'kErrorMessage':
-        'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ với bộ phận phát triển của Biiké',
     'kNotRated': 'Hãy đánh giá chuyến đi của bạn.',
     'kIncludeBadWords': 'Xin chỉ dùng những từ ngữ phù hợp',
     'kSendFailed': 'Gửi feedback thất bại!',
@@ -398,7 +431,7 @@ final Map<String, String> vi = {
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
     'kNotFillAllFields': 'Vui lòng điền đầy đủ thông tin',
     'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
-    'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 6h đến 21h',
+    'kNotAvailableTimeRange': 'Chỉ đặt chuyến trong khoảng 5h đến 21h',
     'kErrorInputPhoneNumber': 'Số điện thoại của bạn không hợp lệ',
     'kErrorName': 'Tên của bạn không hợp lệ',
     'kEditProfileFailed': 'Chỉnh sửa thông tin thất bại. Vui lòng thử lại sau',
@@ -409,5 +442,23 @@ final Map<String, String> vi = {
     'kSameStationWereAdded': 'Đã có trạm trùng khớp thông tin được thêm vào',
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
-    'kNoVoucher' : 'Hiện tại chưa có voucher'
+    'kEmailMustNotBeEmpty': 'Vui lòng điền email',
+    'kMustLoginWithFPTEmail': 'Vui lòng đăng nhập bằng mail FPT',
+    'kErrorWhenStopSharingLocation':
+        'Có lỗi xảy ra, chúng tôi không thể dừng việc chia sẻ vị trí của bạn. Link chia sẻ sẽ tự động hết hạn sau 30 phút',
+    'kNoVoucher': 'Hiện tại chưa có voucher',
+    'kWrongEmailOrPassword': 'Email hoặc mật khẩu không chính xác',
+    'kNoPasswordEnter': 'Vui lòng nhập mật khẩu để đăng nhập',
+    'kInvalidEmail': 'Email không hợp lệ',
+    'kWrongEmail': 'Email sai, vui lòng kiểm tra lại',
+    'kPasswordMustAtLeast6': 'Yêu cầu mật khẩu ít nhất 6 kí tự',
+    'kInvalidPhoneNo': 'Số điện thoại không hợp lệ',
+    'kDuplicateEmailOrPhone': 'Số điện thoại hoặc email đã có người đăng ký',
+    'kWrongOtp': 'Sai mã OTP',
+    'kEmptyOtp': 'Vui lòng nhập mã OTP',
+    'kTryAgain': 'Thử lại',
+    'kNoHistory': 'Không có lịch sử',
+    'kNoNotification': 'Chưa có thông báo',
+    'kEmptyReportReasonOrContainsBadWords':
+        'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
   });

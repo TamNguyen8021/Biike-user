@@ -1,16 +1,16 @@
+import 'dart:async';
+
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/app/ui/android/pages/trip_details/widgets/trip_details_map_viewer.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/map_viewer.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating.dart';
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
 /// 'trip_details' screen
@@ -30,9 +31,11 @@ class TripDetailsPage extends StatelessWidget {
   final _tripDetailsController = Get.find<TripDetailsController>();
   final _homeController = Get.find<HomeController>();
   final _tripHistoryController = Get.find<TripHistoryController>();
+  final Completer<GoogleMapController> completerController = Completer();
 
   String _statusBarTime = '';
   String _statusBarText = '';
+  Rx<String> _cancelReason = ''.obs;
 
   TripDetailsPage({
     Key? key,
@@ -116,42 +119,129 @@ class TripDetailsPage extends StatelessWidget {
     );
   }
 
+  /// Display a dialog on [context] to enter cancel reason.
+  ///
+  /// Author: TamNTT
+  Future<void> _showCancelReasonDialog(
+      {required BuildContext context, required int tripId}) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    CustomStrings.kLetUsKnowYourCancelReason.tr,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: TextFormField(
+                      maxLines: 10,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      onChanged: (String text) {
+                        _cancelReason.value = text;
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
+                        hintText: CustomStrings.kEnterYourCancelReason.tr,
+                        filled: true,
+                        fillColor: CustomColors.kLightGray,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: 150,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          CustomTextButton(
+                              hasBorder: false,
+                              backgroundColor: CustomColors.kRed,
+                              foregroundColor: Colors.white,
+                              text: CustomStrings.kCancel.tr,
+                              onPressedFunc: () async {
+                                if (_cancelReason.isNotEmpty) {
+                                  await _tripDetailsController.cancelTrip(
+                                      context: context,
+                                      tripId: tripId,
+                                      cancelReason: _cancelReason.value);
+                                } else {
+                                  await CommonFunctions().showErrorDialog(
+                                      context: context,
+                                      message: CustomStrings
+                                          .kLetUsKnowYourCancelReason.tr);
+                                }
+                              }),
+                          CustomTextButton(
+                              hasBorder: false,
+                              backgroundColor: CustomColors.kLightGray,
+                              foregroundColor: CustomColors.kDarkGray,
+                              text: CustomStrings.kBtnExit.tr,
+                              onPressedFunc: () {
+                                Get.back();
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  void _onBackPressed({required BuildContext context}) {
+    // if (_tripDetailsController.isTripStarted.isFalse) {
+    if (Get.arguments['route'] == 'home') {
+      _homeController.pagingController.refresh();
+    } else {
+      _tripHistoryController.pagingController.refresh();
+    }
+    Get.back();
+    // } else {
+    //   CommonFunctions().showErrorDialog(
+    //       context: context,
+    //       message: CustomErrorsString.kCannotGoBackWhenTripStarted.tr);
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
-    DateTime currentTime = DateTime.now();
-
     return OnBackPressed(
       perform: () {
-        if (_tripDetailsController.isTripStarted.isFalse) {
-          if (Get.arguments['route'] == 'home') {
-            _homeController.pagingController.refresh();
-          } else {
-            _tripHistoryController.pagingController.refresh();
-          }
-          Get.back();
-        } else {
-          CommonFunctions().showErrorDialog(
-              context: context,
-              message: CustomErrorsString.kCannotGoBackWhenTripStarted.tr);
-        }
+        _onBackPressed(context: context);
       },
-      child: GetBuilder(
+      child: GetBuilder<TripDetailsController>(
           init: _tripDetailsController,
-          builder: (_) {
+          builder: (TripDetailsController controller) {
             return FutureBuilder(
-                future: _tripDetailsController.getTripDetails(
-                    tripId: Get.arguments['tripId']),
+                future:
+                    controller.getTripDetails(tripId: Get.arguments['tripId']),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     Rx<bool> isStartTripButtonVisible = false.obs;
+                    DateTime currentTime = DateTime.now();
+                    DateTime tempBookTime =
+                        DateTime.tryParse(controller.trip.bookTime)!;
 
                     _addStatusBarTextAndTime();
 
-                    if (Biike.role.value == Role.biker &&
-                        currentTime.compareTo(DateTime.tryParse(
-                                _tripDetailsController.trip.bookTime)!) >=
-                            0) {
+                    if (tempBookTime.day == currentTime.day &&
+                        tempBookTime.month == currentTime.month &&
+                        tempBookTime.year == currentTime.year) {
                       isStartTripButtonVisible.value = true;
                     }
 
@@ -161,60 +251,52 @@ class TripDetailsPage extends StatelessWidget {
                         hasShape: true,
                         hasLeading: true,
                         onPressedFunc: () {
-                          if (_tripDetailsController.isTripStarted.isFalse) {
-                            if (Get.arguments['route'] == 'home') {
-                              _homeController.pagingController.refresh();
-                            } else {
-                              _tripHistoryController.pagingController.refresh();
-                            }
-                            Get.back();
-                          } else {
-                            CommonFunctions().showErrorDialog(
-                                context: context,
-                                message: CustomErrorsString
-                                    .kCannotGoBackWhenTripStarted.tr);
-                          }
+                          _onBackPressed(context: context);
                         },
                         appBar: AppBar(),
                         title: Text(CustomStrings.kTripDetails.tr),
-                        actionWidgets: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16.0, horizontal: 22.0),
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                if (_tripDetailsController.userLocation !=
-                                    null) {
-                                  _tripDetailsController.showHelpCenter(
-                                      context: context);
-                                } else {
-                                  CommonFunctions().showInfoDialog(
-                                      context: context,
-                                      message: CustomStrings
-                                          .kNeedLocationPermission.tr);
-                                }
-                              },
-                              icon: Icon(
-                                Icons.support,
-                                color: CustomColors.kBlue,
-                              ),
-                              label: Text(
-                                CustomStrings.kSupport.tr,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1!
-                                    .copyWith(color: CustomColors.kBlue),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                              ),
-                            ),
-                          ),
-                        ],
+                        actionWidgets: controller.trip.tripStatus != 4 &&
+                                controller.trip.tripStatus != 5
+                            ? <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0, horizontal: 22.0),
+                                  child: ElevatedButton.icon(
+                                    onPressed: () async {
+                                      await controller.getCurrentLocation();
+                                      if (controller.userLocation != null) {
+                                        controller.showHelpCenter(
+                                            context: context);
+                                      } else {
+                                        await CommonFunctions().showInfoDialog(
+                                            context: context,
+                                            message: CustomStrings
+                                                .kNeedLocationPermission.tr);
+                                      }
+                                    },
+                                    icon: Icon(
+                                      Icons.support,
+                                      color: CustomColors.kBlue,
+                                    ),
+                                    label: Text(
+                                      CustomStrings.kSupport.tr,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(color: CustomColors.kBlue),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            : null,
                       ),
                       body: SingleChildScrollView(
                         child: SafeArea(
@@ -252,18 +334,17 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    TripDetailsMapViewer(
+                                    MapViewer(
                                         isFullMap: false,
-                                        tripDetailsController:
-                                            _tripDetailsController,
-                                        departureCoordinate:
-                                            _tripDetailsController
-                                                .departureStation
-                                                .departureCoordinate,
-                                        destinationCoordinate:
-                                            _tripDetailsController
-                                                .destinationStation
-                                                .destinationCoordinate),
+                                        completerController:
+                                            completerController,
+                                        polypoints: controller.polypoints,
+                                        departureCoordinate: controller
+                                            .departureStation
+                                            .departureCoordinate,
+                                        destinationCoordinate: controller
+                                            .destinationStation
+                                            .destinationCoordinate),
                                     Container(
                                       alignment: Alignment.center,
                                       margin:
@@ -280,8 +361,7 @@ class TripDetailsPage extends StatelessWidget {
                                                     .TRIP_DETAILS_FULL_MAP,
                                                 arguments: {
                                                   'tripId':
-                                                      _tripDetailsController
-                                                          .trip.tripId
+                                                      controller.trip.tripId
                                                 });
                                           }),
                                     ),
@@ -345,7 +425,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                     'dd/MM/yyyy')
                                                                 .format(DateTime
                                                                     .tryParse(
-                                                                        _tripDetailsController
+                                                                        controller
                                                                             .trip
                                                                             .bookTime)!),
                                                             style: Theme.of(
@@ -371,8 +451,7 @@ class TripDetailsPage extends StatelessWidget {
                                                       Text(
                                                         DateFormat('HH:mm').format(
                                                             DateTime.tryParse(
-                                                                _tripDetailsController
-                                                                    .trip
+                                                                controller.trip
                                                                     .bookTime)!),
                                                         style: Theme.of(context)
                                                             .textTheme
@@ -407,7 +486,7 @@ class TripDetailsPage extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Text(
-                                                          _tripDetailsController
+                                                          controller
                                                               .departureStation
                                                               .departureName,
                                                           style:
@@ -432,7 +511,7 @@ class TripDetailsPage extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Text(
-                                                          _tripDetailsController
+                                                          controller
                                                               .destinationStation
                                                               .destinationName,
                                                           style:
@@ -448,11 +527,8 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    if (_tripDetailsController
-                                                .trip.tripStatus ==
-                                            5 &&
-                                        _tripDetailsController
-                                                .user.userFullname ==
+                                    if (controller.trip.tripStatus == 5 &&
+                                        controller.user.userFullname ==
                                             CustomStrings.kFinding)
                                       ...[]
                                     else ...[
@@ -468,8 +544,7 @@ class TripDetailsPage extends StatelessWidget {
                                                   BorderRadius.circular(5)),
                                           child: Row(
                                             children: <Widget>[
-                                              if (_tripDetailsController
-                                                      .trip.tripStatus !=
+                                              if (controller.trip.tripStatus !=
                                                   1) ...[
                                                 Padding(
                                                   padding:
@@ -477,8 +552,8 @@ class TripDetailsPage extends StatelessWidget {
                                                           right: 8.0),
                                                   child: CircleAvatar(
                                                     radius: 45,
-                                                    backgroundImage: NetworkImage(
-                                                        _tripDetailsController
+                                                    backgroundImage:
+                                                        NetworkImage(controller
                                                             .user.avatar),
                                                   ),
                                                 ),
@@ -495,8 +570,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                 bottom: 5.0,
                                                                 top: 10.0),
                                                         child: Text(
-                                                          _tripDetailsController
-                                                              .user
+                                                          controller.user
                                                               .userFullname,
                                                           style: TextStyle(
                                                               color:
@@ -508,20 +582,18 @@ class TripDetailsPage extends StatelessWidget {
                                                         ),
                                                       ),
                                                       UserRating(
-                                                          score:
-                                                              _tripDetailsController
-                                                                  .user.userStar
-                                                                  .toString()),
+                                                          score: controller
+                                                              .user.userStar
+                                                              .toString()),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
                                                                     .symmetric(
                                                                 vertical: 10.0),
                                                         child: ContactButtons(
-                                                          phoneNo:
-                                                              _tripDetailsController
-                                                                  .user
-                                                                  .userPhoneNumber,
+                                                          phoneNo: controller
+                                                              .user
+                                                              .userPhoneNumber,
                                                         ),
                                                       ),
                                                     ],
@@ -547,9 +619,7 @@ class TripDetailsPage extends StatelessWidget {
                                           ),
                                         ),
                                         onTap: () {
-                                          if (_tripDetailsController
-                                                  .trip.tripStatus !=
-                                              1) {
+                                          if (controller.trip.tripStatus != 1) {
                                             Get.toNamed(CommonRoutes.VIEW_USER,
                                                 arguments: {
                                                   'partnerId':
@@ -559,65 +629,16 @@ class TripDetailsPage extends StatelessWidget {
                                         },
                                       ),
                                     ],
-                                    if (_tripDetailsController
-                                                .trip.tripStatus !=
-                                            4 &&
-                                        _tripDetailsController
-                                                .trip.tripStatus !=
-                                            5) ...[
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Obx(
-                                            () => Visibility(
-                                              visible: !_tripDetailsController
-                                                  .isTripStarted.value,
-                                              child: CustomElevatedIconButton(
-                                                width: 150,
-                                                text: CustomStrings
-                                                    .kCancelTrip.tr,
-                                                backgroundColor:
-                                                    CustomColors.kLightGray,
-                                                foregroundColor:
-                                                    CustomColors.kDarkGray,
-                                                elevation: 0.0,
-                                                icon: Icons.clear,
-                                                onPressedFunc: () {
-                                                  CommonFunctions()
-                                                      .showConfirmDialog(
-                                                          context: context,
-                                                          title: CustomStrings
-                                                              .kConfirmCancelTrip
-                                                              .tr,
-                                                          message: CustomStrings
-                                                              .kViewCancelTripReminder
-                                                              .tr,
-                                                          onPressedFunc: () {
-                                                            Get.back();
-                                                            _tripDetailsController
-                                                                .showCancelReasonDialog(
-                                                                    context:
-                                                                        context,
-                                                                    tripId: Get
-                                                                            .arguments[
-                                                                        'tripId']);
-                                                          });
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          if (_tripDetailsController
-                                                  .trip.tripStatus ==
-                                              2) ...[
-                                            if (Biike.role.value ==
-                                                    Role.biker &&
-                                                currentTime.compareTo(
-                                                        DateTime.tryParse(
-                                                            _tripDetailsController
-                                                                .trip
-                                                                .bookTime)!) >=
-                                                    0) ...[
+                                    if (controller.trip.tripStatus != 4 &&
+                                        controller.trip.tripStatus != 5) ...[
+                                      Container(
+                                        width: double.infinity,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            if (controller.trip.tripStatus ==
+                                                2) ...[
                                               Obx(
                                                 () => Visibility(
                                                   visible:
@@ -626,26 +647,59 @@ class TripDetailsPage extends StatelessWidget {
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            left: 16.0),
+                                                            bottom: 16.0),
                                                     child:
                                                         CustomElevatedIconButton(
-                                                      width: 150,
+                                                      width: controller
+                                                              .isTripStarted
+                                                              .isTrue
+                                                          ? 140
+                                                          : 180,
+                                                      text: controller
+                                                          .buttonText.value,
+                                                      backgroundColor:
+                                                          CustomColors.kBlue,
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                      elevation: 0.0,
+                                                      icon: controller
+                                                          .buttonIcon.value,
                                                       onPressedFunc: () async {
-                                                        if (_tripDetailsController
+                                                        if (controller
                                                             .isTripStarted
                                                             .isFalse) {
-                                                          if (_tripDetailsController
+                                                          await controller
+                                                              .getCurrentLocation();
+                                                          if (controller
                                                                   .userLocation !=
                                                               null) {
+                                                            GoogleMapController
+                                                                googleMapController =
+                                                                await completerController
+                                                                    .future;
+                                                            await googleMapController
+                                                                .animateCamera(
+                                                                    CameraUpdate
+                                                                        .newCameraPosition(
+                                                                            CameraPosition(
+                                                              target: LatLng(
+                                                                  controller
+                                                                      .userLocation!
+                                                                      .latitude!,
+                                                                  controller
+                                                                      .userLocation!
+                                                                      .longitude!),
+                                                              zoom: 12,
+                                                            )));
                                                             if (await _tripProvider
                                                                 .startTripOrCompleteTrip(
                                                                     tripId: Get
                                                                             .arguments[
                                                                         'tripId'])) {
-                                                              _tripDetailsController
+                                                              controller
                                                                   .isTripStarted
                                                                   .value = true;
-                                                              _tripDetailsController
+                                                              controller
                                                                   .changeToFinishTripButton();
                                                             } else {
                                                               CommonFunctions()
@@ -675,9 +729,26 @@ class TripDetailsPage extends StatelessWidget {
                                                           if (isTripCompleted) {
                                                             isStartTripButtonVisible
                                                                 .value = false;
+                                                            if (controller
+                                                                .isLocationShared
+                                                                .isTrue) {
+                                                              await controller
+                                                                  .pathshareProvider
+                                                                  .startOrStopLocationSharing(
+                                                                      isShared:
+                                                                          false,
+                                                                      sessionIdentifier:
+                                                                          controller
+                                                                              .sessionIdentifier);
+                                                            }
+
                                                             Get.offAllNamed(
                                                                 CommonRoutes
-                                                                    .FEEDBACK);
+                                                                    .FEEDBACK,
+                                                                arguments:
+                                                                    controller
+                                                                        .trip
+                                                                        .tripId);
                                                           } else {
                                                             CommonFunctions()
                                                                 .showErrorDialog(
@@ -689,51 +760,75 @@ class TripDetailsPage extends StatelessWidget {
                                                           }
                                                         }
                                                       },
-                                                      text:
-                                                          _tripDetailsController
-                                                              .buttonText.value,
-                                                      backgroundColor:
-                                                          CustomColors.kBlue,
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      elevation: 0.0,
-                                                      icon:
-                                                          _tripDetailsController
-                                                              .buttonIcon.value,
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ] else ...[
-                                              // Expanded(
-                                              //   child: ConfirmArrivalButton(
-                                              //     isOnHomeScreen: false,
-                                              //   ),
-                                              // ),
-                                            ]
+                                            ],
+                                            Obx(
+                                              () => Visibility(
+                                                visible: !controller
+                                                    .isTripStarted.value,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 16.0),
+                                                  child:
+                                                      CustomElevatedIconButton(
+                                                    width: 180,
+                                                    text: CustomStrings
+                                                        .kCancelTrip.tr,
+                                                    backgroundColor:
+                                                        CustomColors.kLightGray,
+                                                    foregroundColor:
+                                                        CustomColors.kDarkGray,
+                                                    elevation: 0.0,
+                                                    icon: Icons.clear,
+                                                    onPressedFunc: () {
+                                                      CommonFunctions()
+                                                          .showConfirmDialog(
+                                                              context: context,
+                                                              title: CustomStrings
+                                                                  .kConfirmCancelTrip
+                                                                  .tr,
+                                                              message: CustomStrings
+                                                                  .kViewCancelTripReminder
+                                                                  .tr,
+                                                              onPressedFunc:
+                                                                  () {
+                                                                Get.back();
+                                                                _showCancelReasonDialog(
+                                                                    context:
+                                                                        context,
+                                                                    tripId: Get
+                                                                            .arguments[
+                                                                        'tripId']);
+                                                              });
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ],
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ],
                                 ),
                               ),
-                              if (_tripDetailsController.trip.tripStatus ==
-                                  4) ...[
+                              if (controller.trip.tripStatus == 4) ...[
                                 _showFeedbacks(
                                     context: context,
                                     title: CustomStrings.kYourFeedback.tr,
-                                    star: _tripDetailsController
-                                        .feedback1.tripStar,
-                                    feedbackContent: _tripDetailsController
-                                        .feedback1.feedbackContent),
+                                    star: controller.feedback1.tripStar,
+                                    feedbackContent:
+                                        controller.feedback1.feedbackContent),
                                 _showFeedbacks(
                                     context: context,
                                     title: CustomStrings.kPartnerFeedback.tr,
-                                    star: _tripDetailsController
-                                        .feedback2.tripStar,
-                                    feedbackContent: _tripDetailsController
-                                        .feedback2.feedbackContent),
+                                    star: controller.feedback2.tripStar,
+                                    feedbackContent:
+                                        controller.feedback2.feedbackContent),
                               ]
                             ],
                           ),

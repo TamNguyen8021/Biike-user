@@ -12,13 +12,12 @@ class TopUpPointTextField extends StatelessWidget {
 
   const TopUpPointTextField(
       {Key? key,
-        required this.isReadOnly,
-        required this.isEditPoint,
-        required this.initialValue,
-        required this.labelText,
-        required this.hintText,
-        this.onChangeFunc
-      })
+      required this.isReadOnly,
+      required this.isEditPoint,
+      required this.initialValue,
+      required this.labelText,
+      required this.hintText,
+      this.onChangeFunc})
       : super(key: key);
 
   @override
@@ -30,28 +29,21 @@ class TopUpPointTextField extends StatelessWidget {
         initialValue: initialValue,
         textAlignVertical: TextAlignVertical.center,
         keyboardType: TextInputType.number,
-        inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
         onChanged: onChangeFunc,
-        style: TextStyle( 
+        style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 14.0,
-            color: CustomColors.kDarkGray
-        ),
+            color: CustomColors.kDarkGray),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: CustomColors.kDarkGray.withOpacity(0.3)
-          ),
+          hintStyle: TextStyle(color: CustomColors.kDarkGray.withOpacity(0.3)),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
           enabledBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
-            borderRadius: BorderRadius.all(
-                const Radius.circular(5.0)),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+            borderRadius: BorderRadius.all(const Radius.circular(5.0)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
             borderRadius: const BorderRadius.all(
               const Radius.circular(5.0),
             ),

@@ -1,8 +1,11 @@
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/controllers/trip_details_controller.dart';
+import 'package:bikes_user/app/data/providers/pathshare_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/bottom_tabbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -21,6 +24,8 @@ class HomePage extends StatelessWidget {
 
   final _homeController = Get.find<HomeController>();
   final _profileController = Get.find<ProfileController>();
+  final _tripDetailsController = Get.find<TripDetailsController>();
+  final _pathshareProvider = Get.find<PathshareProvider>();
 
   // void _onBackPressed() async {
   //   await Get.defaultDialog(
@@ -37,116 +42,125 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return OnBackPressed(
       perform: () => CommonFunctions().showConfirmDialog(
-          context: context,
-          title: CustomStrings.kConfirm.tr,
-          message: CustomStrings.kConfirmExitApp.tr,
-          onPressedFunc: () => SystemChannels.platform
-              .invokeMethod<void>('SystemNavigator.pop')),
-      child: GetBuilder(
-          init: _profileController,
-          builder: (_) {
-            return FutureBuilder(
-                future: _profileController.getProfile(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return DefaultTabController(
-                      length: 2,
-                      child: Scaffold(
-                        appBar: PreferredSize(
-                          preferredSize:
-                              Size.fromHeight(AppBar().preferredSize.height),
-                          child: Builder(
-                            builder: (context) {
-                              switch (DefaultTabController.of(context)!.index) {
-                                case 0:
-                                  _homeController.setAppBarVisible(true);
-                                  break;
-                                case 1:
-                                  _homeController.setAppBarVisible(false);
-                                  break;
-                                default:
-                                  break;
-                              }
-                              return Obx(
-                                () => CustomAppBar(
-                                  isVisible:
-                                      _homeController.isAppBarVisible.value,
-                                  hasShape: true,
-                                  hasLeading: false,
-                                  onPressedFunc: () {},
-                                  appBar: AppBar(),
-                                  title: Padding(
-                                    padding: const EdgeInsets.only(left: 5.0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Image.asset(
-                                          'assets/images/logo-white.png',
-                                          height: 25.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: SwitchRoleButton(
-                                            route: CommonRoutes.HOME,
-                                            isOnProfilePage: false,
-                                          ),
-                                        ),
-                                      ],
+        context: context,
+        title: CustomStrings.kConfirm.tr,
+        message: CustomStrings.kConfirmExitApp.tr,
+        onPressedFunc: () async {
+          if (_tripDetailsController.isLocationShared.isTrue) {
+            if (await _pathshareProvider.leaveSession(
+                sessionIdentifier: _tripDetailsController.sessionIdentifier)) {
+              SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+            } else {
+              await CommonFunctions().showErrorDialog(
+                  context: context,
+                  message: CustomErrorsString.kErrorWhenStopSharingLocation.tr);
+            }
+          } else {
+            SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+          }
+        },
+      ),
+      child: FutureBuilder(
+          future: _profileController.getProfile(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar: PreferredSize(
+                    preferredSize:
+                        Size.fromHeight(AppBar().preferredSize.height),
+                    child: Builder(
+                      builder: (context) {
+                        switch (DefaultTabController.of(context)!.index) {
+                          case 0:
+                            _homeController.setAppBarVisible(true);
+                            break;
+                          case 1:
+                            _homeController.setAppBarVisible(false);
+                            break;
+                          default:
+                            break;
+                        }
+                        return Obx(
+                          () => CustomAppBar(
+                            isVisible: _homeController.isAppBarVisible.value,
+                            hasShape: true,
+                            hasLeading: false,
+                            onPressedFunc: () {},
+                            appBar: AppBar(),
+                            title: Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Image.asset(
+                                    'assets/images/logo-white.png',
+                                    height: 25.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: SwitchRoleButton(
+                                      route: CommonRoutes.HOME,
+                                      isOnProfilePage: false,
                                     ),
                                   ),
-                                  actionWidgets: <Widget>[
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.notifications)),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0.0, 16.0, 20.0, 16.0),
-                                      child: CircularProfileAvatar(
-                                        _profileController.user.avatar,
-                                        radius: 12,
-                                        onTap: () {
-                                          Get.toNamed(CommonRoutes.PROFILE);
-                                        },
-                                      ),
-                                    ),
-                                  ],
+                                ],
+                              ),
+                            ),
+                            actionWidgets: <Widget>[
+                              IconButton(
+                                  onPressed: () =>
+                                      Get.toNamed(CommonRoutes.NOTIFICATION),
+                                  icon: Icon(Icons.notifications)),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    0.0, 16.0, 20.0, 16.0),
+                                child: CircularProfileAvatar(
+                                  _profileController.user.avatar,
+                                  radius: 12,
+                                  onTap: () {
+                                    Get.toNamed(CommonRoutes.PROFILE);
+                                  },
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
-                        ),
-                        body: TabBarView(
-                          physics: NeverScrollableScrollPhysics(),
-                          children: <Widget>[
-                            Home(
-                              homeController: _homeController,
-                            ),
-                            Activity(
-                              homeController: _homeController,
-                            ),
-                          ],
-                        ),
-                        bottomNavigationBar: BottomTabBar(
-                          onTapFunction: (index) async {
-                            switch (index) {
-                              case 0:
-                                _homeController.setAppBarVisible(true);
-                                break;
-                              case 1:
-                                _homeController.setAppBarVisible(false);
-                                break;
-                              default:
-                                break;
-                            }
-                          },
-                        ),
+                        );
+                      },
+                    ),
+                  ),
+                  body: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: <Widget>[
+                      Home(
+                        homeController: _homeController,
                       ),
-                    );
-                  } else {
-                    return Loading();
-                  }
-                });
+                      Activity(
+                        homeController: _homeController,
+                      ),
+                    ],
+                  ),
+                  bottomNavigationBar: BottomTabBar(
+                    onTapFunction: (index) {
+                      switch (index) {
+                        case 0:
+                          _homeController.setAppBarVisible(true);
+                          break;
+                        case 1:
+                          _homeController.setAppBarVisible(false);
+                          _homeController.pagingController.refresh();
+                          break;
+                        default:
+                          break;
+                      }
+                    },
+                  ),
+                ),
+              );
+            } else {
+              return Loading();
+            }
           }),
     );
   }

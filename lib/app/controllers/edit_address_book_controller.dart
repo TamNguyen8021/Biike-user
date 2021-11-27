@@ -1,7 +1,52 @@
+import 'package:bikes_user/app/data/providers/address_book_provider.dart';
+import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class EditAddressBookController extends GetxController {
-  Rx<String> name = 'Chung cư SKY9'.obs;
-  Rx<String> address ='CT1SKY9, Phường Phú Hiệp, Tp.Thủ Đức, TP.HCM'.obs;
-  Rx<String> note =''.obs;
+  final _addressBookProvider = Get.find<AddressBookProvider>();
+
+  Rx<String> name = ''.obs;
+  Rx<String> address = '1426/39, Nguyễn Duy Trinh'.obs;
+  Rx<String> note = ''.obs;
+
+  bool isLoading = false;
+  String tempName = '';
+  String tempAddress = '';
+  String tempNote = '';
+
+  void _enableLoading(bool loading) {
+    isLoading = loading;
+    update();
+  }
+
+  Future<bool> editAddress(int id) async {
+    _enableLoading(true);
+
+    Map<String, dynamic> body = {
+      'userId': Biike.userId.value,
+      'userAddressName': name.value,
+      'userAddressDetail': address.value,
+      'userAddressCoordinate': '123,123',
+      'userAddressNote': note.value
+    };
+
+    return await _addressBookProvider.editAddressBook(body: body, id: id);
+  }
+
+  bool validate() {
+    if (name.value.trim().isEmpty || address.value.trim().isEmpty) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool isSaveButtonDisable(
+      {required String newName,
+      required String newAddress,
+      required String newNote}) {
+    return (tempName == newName) &&
+        (tempAddress == newAddress) &&
+        (tempNote == newNote);
+  }
 }

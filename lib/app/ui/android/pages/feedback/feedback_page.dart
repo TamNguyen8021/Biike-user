@@ -1,11 +1,14 @@
+import 'dart:math';
+
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/controllers/feedback_controller.dart';
+import 'package:bikes_user/app/controllers/feedbacks_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/ui/android/pages/feedback/widget/criteria_button.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/send_feedback_button.dart';
+import 'package:bikes_user/app/ui/android/pages/feedback/widget/send_feedback_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/half_oval_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,11 +31,26 @@ class FeedbackPage extends StatelessWidget {
     );
   }
 
+  _randomCriteria(Random random, List listSeed) {
+    int data = listSeed[random.nextInt(listSeed.length)];
+    listSeed.remove(data);
+
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var tripId = Get.arguments;
+
+    final random = new Random();
+    // get 4 random element
+    List listSeed = List.generate(CustomStrings.kCriteria.length, (_) => _);
+    List listCriteria =
+        new List.generate(4, (_) => _randomCriteria(random, listSeed));
+
     return WillPopScope(
-      onWillPop: () => CommonFunctions()
-          .onBackPressed(errorMessage: CustomErrorsString.kNotRated),
+      onWillPop: () => CommonFunctions().onBackPressed(
+          context: context, errorMessage: CustomErrorsString.kNotRated),
       child: Scaffold(
         body: Container(
           child: SafeArea(
@@ -85,32 +103,6 @@ class FeedbackPage extends StatelessWidget {
                                 ),
                               ]),
                         ),
-                        Biike.role.value == Role.biker
-                            ? Container(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Text(
-                                      'EXP',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12.sp),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5.0, horizontal: 2.0)),
-                                    Icon(Icons.star,
-                                        size: 20, color: Colors.white),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  color: CustomColors.kOrange,
-                                ),
-                                padding:
-                                    EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
-                              )
-                            : Padding(padding: const EdgeInsets.only(top: 2.0)),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
@@ -160,73 +152,139 @@ class FeedbackPage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 20.0, right: 20.0, top: 10.0),
-                              child: Card(
-                                color: CustomColors.kLightGray,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    maxLines: 3,
-                                    maxLength: 250,
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(250)
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                          child: CriteriaButton(
+                                              text: CustomStrings
+                                                  .kCriteria[listCriteria[0]]
+                                                  .tr)),
+                                      Container(
+                                        width: 5,
+                                      ),
+                                      Expanded(
+                                          child: CriteriaButton(
+                                              text: CustomStrings
+                                                  .kCriteria[listCriteria[1]]
+                                                  .tr)),
                                     ],
-                                    style: TextStyle(
-                                        color: CustomColors.kDarkGray),
-                                    decoration: InputDecoration(
-                                      counter: Offstage(),
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 15.0),
-                                    ),
-                                    onChanged: (feedback) {
-                                      feedbackController
-                                          .updateFeedback(feedback);
-                                    },
                                   ),
-                                ),
+                                  Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                          child: CriteriaButton(
+                                              text: CustomStrings
+                                                  .kCriteria[listCriteria[2]]
+                                                  .tr)),
+                                      Container(
+                                        width: 5,
+                                      ),
+                                      Expanded(
+                                          child: CriteriaButton(
+                                              text: CustomStrings
+                                                  .kCriteria[listCriteria[3]]
+                                                  .tr)),
+                                    ],
+                                  ),
+                                  Card(
+                                    color: CustomColors.kLightGray,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: TextField(
+                                        maxLines: 3,
+                                        maxLength: 250,
+                                        inputFormatters: [
+                                          LengthLimitingTextInputFormatter(250)
+                                        ],
+                                        style: TextStyle(
+                                            color: CustomColors.kDarkGray),
+                                        decoration: InputDecoration(
+                                          counter: Offstage(),
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 10.0, horizontal: 15.0),
+                                        ),
+                                        onChanged: (feedback) {
+                                          feedbackController
+                                              .updateFeedback(feedback);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[SendFeedbackButton()]),
                             ),
                           ],
                         )),
                         Biike.role.value == Role.keer
-                            ? Padding(
+                            ? Container(
+                          child: Column(
+                            children: <Widget>[
+                              Divider(thickness: 2.0),
+                              Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 20.0, horizontal: 10.0),
                                 child: Row(
                                   children: <Widget>[
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(right: 20.0),
-                                      child: SvgPicture.asset(
-                                        'assets/images/coffee-cup.svg',
-                                        height: 90,
-                                        alignment: Alignment.centerLeft,
-                                      ),
-                                    ),
-                                    Flexible(
+                                      const EdgeInsets.only(right: 5.0),
                                       child: Text(
-                                        CustomStrings.kBuyReminder.tr,
-                                        overflow: TextOverflow.clip,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        CustomStrings.kTipForBiker.tr + ': ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
                                             color: CustomColors.kDarkGray,
                                             fontSize: 12.sp),
                                       ),
                                     ),
+                                    Expanded(
+                                        child: TextField(
+                                          maxLines: 1,
+                                          maxLength: 250,
+                                          keyboardType: TextInputType.number,
+                                          style: TextStyle(
+                                              color: CustomColors.kDarkGray),
+                                          decoration: InputDecoration(
+                                            hintStyle: TextStyle(
+                                                color: CustomColors.kLightGray,
+                                                fontSize: 12),
+                                            hintText: 'Tips',
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: CustomColors.kDarkGray,
+                                                  width: 1.0),
+                                            ),
+                                            counter: Offstage(),
+                                            contentPadding: EdgeInsets.all(10),
+                                          ),
+                                          onChanged: (tip) {
+                                            feedbackController
+                                                .updateTip(tip);
+                                          },
+                                        ))
                                   ],
                                 ),
                               )
-                            : Padding(padding: const EdgeInsets.only(top: 2.0)),
+                            ],
+                          ),
+                        )
+                            : Container(),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SendFeedbackButton(tripId: tripId),
+                              ]),
+                        ),
                       ]),
                 ),
               ]),

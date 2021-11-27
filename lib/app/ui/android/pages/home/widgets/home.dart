@@ -4,6 +4,7 @@ import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/list_upcoming_trips.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/main.dart';
@@ -30,38 +31,37 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
+    late DateTime _firstTripTimeBook;
+    DateTime _currentTime = DateTime.now();
+    String _timeLeft = '';
+
+    if (homeController.upcomingTrips.isNotEmpty) {
+      _firstTripTimeBook = DateTime.tryParse(
+              homeController.upcomingTrips.toList()[0].bookTime) ??
+          DateTime.now();
+      if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
+        _timeLeft = _timeLeft +
+            (_firstTripTimeBook.hour - _currentTime.hour).toString() +
+            CustomStrings.kReminderHour.tr;
+      }
+
+      if (_timeLeft.isNotEmpty) {
+        _timeLeft = _timeLeft +
+            (_firstTripTimeBook.minute - _currentTime.minute).abs().toString() +
+            CustomStrings.kReminderMinute.tr +
+            CustomStrings.kReminderLeft.tr;
+      } else if (_firstTripTimeBook.hour == _currentTime.hour &&
+          _firstTripTimeBook.minute - _currentTime.minute > 0) {
+        _timeLeft = _timeLeft +
+            (_firstTripTimeBook.minute - _currentTime.minute).toString() +
+            CustomStrings.kReminderMinute.tr +
+            CustomStrings.kReminderLeft.tr;
+      }
+    }
+
+    return GetBuilder<HomeController>(
         init: homeController,
-        builder: (_) {
-          late DateTime _firstTripTimeBook;
-          DateTime _currentTime = DateTime.now();
-          String _timeLeft = '';
-
-          if (homeController.upcomingTrips.isNotEmpty) {
-            _firstTripTimeBook = DateTime.tryParse(
-                    homeController.upcomingTrips.toList()[0].bookTime) ??
-                DateTime.now();
-            if (_firstTripTimeBook.hour - _currentTime.hour > 0) {
-              _timeLeft = _timeLeft +
-                  (_firstTripTimeBook.hour - _currentTime.hour).toString() +
-                  CustomStrings.kReminderHour.tr;
-            }
-
-            if (_timeLeft.isNotEmpty) {
-              _timeLeft = _timeLeft +
-                  (_firstTripTimeBook.minute - _currentTime.minute)
-                      .abs()
-                      .toString() +
-                  CustomStrings.kReminderMinute.tr +
-                  CustomStrings.kReminderLeft.tr;
-            } else if (_firstTripTimeBook.hour == _currentTime.hour &&
-                _firstTripTimeBook.minute - _currentTime.minute > 0) {
-              _timeLeft = _timeLeft +
-                  (_firstTripTimeBook.minute - _currentTime.minute).toString() +
-                  CustomStrings.kReminderMinute.tr +
-                  CustomStrings.kReminderLeft.tr;
-            }
-          }
+        builder: (HomeController controller) {
           return Scaffold(
             body: SingleChildScrollView(
               child: SafeArea(
@@ -113,7 +113,7 @@ class Home extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 20.0),
                               child: TopBiker(),
                             ),
-                            if (homeController.upcomingTrips.isNotEmpty) ...[
+                            if (controller.upcomingTrips.isNotEmpty) ...[
                               if (_firstTripTimeBook.day == _currentTime.day &&
                                   _firstTripTimeBook.month ==
                                       _currentTime.month &&
@@ -148,32 +148,31 @@ class Home extends StatelessWidget {
                                   padding: const EdgeInsets.only(bottom: 10.0),
                                   child: UpcomingTripCard(
                                       isSearchedTrip: false,
-                                      tripId: homeController.upcomingTrips
+                                      tripId: controller.upcomingTrips
                                           .toList()[0]
                                           .tripId,
-                                      userId: homeController.upcomingTrips
+                                      userId: controller.upcomingTrips
                                           .toList()[0]
                                           .userId,
                                       backgroundColor: CustomColors.kBlue,
                                       foregroundColor: Colors.white,
                                       iconColor: Colors.white,
-                                      avatarUrl: homeController.upcomingTrips
+                                      avatarUrl: controller.upcomingTrips
                                           .toList()[0]
                                           .avatarUrl,
-                                      name: homeController.upcomingTrips
+                                      name: controller.upcomingTrips
                                           .toList()[0]
                                           .name,
-                                      phoneNo: homeController.upcomingTrips
+                                      phoneNo: controller.upcomingTrips
                                           .toList()[0]
                                           .phoneNo,
-                                      bookTime: homeController.upcomingTrips
+                                      bookTime: controller.upcomingTrips
                                           .toList()[0]
                                           .bookTime,
-                                      departureStation: homeController
-                                          .upcomingTrips
+                                      departureStation: controller.upcomingTrips
                                           .toList()[0]
                                           .departureStation,
-                                      destinationStation: homeController
+                                      destinationStation: controller
                                           .upcomingTrips
                                           .toList()[0]
                                           .destinationStation),
@@ -184,9 +183,12 @@ class Home extends StatelessWidget {
                                   children: <Widget>[
                                     ConfirmArrivalButton(
                                       isOnHomeScreen: true,
+                                      tripId: controller.upcomingTrips
+                                          .toList()[0]
+                                          .tripId,
                                     ),
                                     ContactButtons(
-                                      phoneNo: homeController.upcomingTrips
+                                      phoneNo: controller.upcomingTrips
                                           .toList()[0]
                                           .phoneNo,
                                     )
@@ -196,7 +198,7 @@ class Home extends StatelessWidget {
                             ]
                           ]),
                     ),
-                    if (homeController.upcomingTrips.isNotEmpty ||
+                    if (controller.upcomingTrips.isNotEmpty ||
                         Biike.role.value == Role.biker) ...[
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -209,12 +211,7 @@ class Home extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               AdContainer(),
-                              if (homeController.upcomingTrips.length > 1 &&
-                                  (_firstTripTimeBook.day == _currentTime.day &&
-                                      _firstTripTimeBook.month ==
-                                          _currentTime.month &&
-                                      _firstTripTimeBook.year ==
-                                          _currentTime.year)) ...[
+                              if (controller.upcomingTrips.isNotEmpty) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       bottom: 8.0, top: 35.0),
@@ -224,83 +221,78 @@ class Home extends StatelessWidget {
                                         color: CustomColors.kDarkGray),
                                   ),
                                 ),
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height / 2,
-                                  margin: EdgeInsets.only(
-                                      bottom:
-                                          homeController.upcomingTrips.length >
-                                                  2
-                                              ? 70.0
-                                              : 0.0),
-                                  child: RefreshIndicator(
-                                    onRefresh: () => Future.sync(
-                                      () => homeController.pagingController
-                                          .refresh(),
-                                    ),
-                                    child: PagedListView<int, dynamic>(
-                                      pagingController:
-                                          homeController.pagingController,
-                                      builderDelegate:
-                                          PagedChildBuilderDelegate<dynamic>(
-                                              itemBuilder:
-                                                  (context, item, index) {
-                                        if (index == 0 &&
-                                            (_firstTripTimeBook.day ==
-                                                    _currentTime.day &&
-                                                _firstTripTimeBook.month ==
-                                                    _currentTime.month &&
-                                                _firstTripTimeBook.year ==
-                                                    _currentTime.year)) {
-                                          return SizedBox.shrink();
-                                        } else {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 10.0),
-                                            child: UpcomingTripCard(
-                                                isSearchedTrip: false,
-                                                tripId: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .tripId,
-                                                userId: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .userId,
-                                                avatarUrl: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .avatarUrl,
-                                                name: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .name,
-                                                phoneNo: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .phoneNo,
-                                                bookTime: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .bookTime,
-                                                departureStation: homeController
-                                                    .pagingController.itemList!
-                                                    .elementAt(index)
-                                                    .departureStation,
-                                                destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
-                                          );
-                                        }
-                                      }, noItemsFoundIndicatorBuilder:
-                                                  (BuildContext context) {
-                                        if (homeController
-                                                .upcomingTrips.length ==
-                                            0) {
+                                RefreshIndicator(
+                                  onRefresh: () => Future.sync(
+                                    () => controller.pagingController.refresh(),
+                                  ),
+                                  child: PagedListView<int, dynamic>(
+                                    pagingController:
+                                        controller.pagingController,
+                                    shrinkWrap: true,
+                                    builderDelegate: PagedChildBuilderDelegate<
+                                            dynamic>(
+                                        animateTransitions: true,
+                                        itemBuilder: (context, item, index) {
+                                          if (index == 0 &&
+                                              (_firstTripTimeBook.day ==
+                                                      _currentTime.day &&
+                                                  _firstTripTimeBook.month ==
+                                                      _currentTime.month &&
+                                                  _firstTripTimeBook.year ==
+                                                      _currentTime.year)) {
+                                            return SizedBox.shrink();
+                                          } else {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10.0),
+                                              child: UpcomingTripCard(
+                                                  isSearchedTrip: false,
+                                                  tripId: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .tripId,
+                                                  userId: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .userId,
+                                                  avatarUrl: controller
+                                                      .pagingController
+                                                      .itemList!
+                                                      .elementAt(index)
+                                                      .avatarUrl,
+                                                  name: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .name,
+                                                  phoneNo: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .phoneNo,
+                                                  bookTime: controller.pagingController.itemList!
+                                                      .elementAt(index)
+                                                      .bookTime,
+                                                  departureStation: controller
+                                                      .pagingController
+                                                      .itemList!
+                                                      .elementAt(index)
+                                                      .departureStation,
+                                                  destinationStation: controller
+                                                      .pagingController
+                                                      .itemList!
+                                                      .elementAt(index)
+                                                      .destinationStation),
+                                            );
+                                          }
+                                        },
+                                        noItemsFoundIndicatorBuilder:
+                                            (BuildContext context) {
                                           return Text(CustomStrings
                                               .kNoUpcomingTrips.tr);
-                                        }
-                                        return SizedBox.shrink();
-                                      }),
-                                    ),
+                                        },
+                                        firstPageErrorIndicatorBuilder:
+                                            (BuildContext context) {
+                                          return LazyLoadingListErrorBuilder(
+                                              onPressed: () {
+                                            controller.pagingController
+                                                .refresh();
+                                          });
+                                        }),
                                   ),
                                 ),
                               ],
@@ -360,7 +352,7 @@ class Home extends StatelessWidget {
                                                         ),
                                                       ),
                                                       Text(
-                                                        homeController
+                                                        controller
                                                             .searchDateString
                                                             .value,
                                                         style: Theme.of(context)
@@ -370,25 +362,22 @@ class Home extends StatelessWidget {
                                                     ],
                                                   ),
                                                   onTap: () async {
-                                                    homeController
-                                                            .searchDate.value =
+                                                    controller.searchDate.value =
                                                         await CommonFunctions()
                                                             .selectDate(
                                                                 context:
                                                                     context,
                                                                 selectedDate:
-                                                                    homeController
+                                                                    controller
                                                                         .searchDate,
                                                                 isBirthDatePicker:
                                                                     false);
-                                                    homeController
-                                                            .searchDateString
+                                                    controller.searchDateString
                                                             .value =
                                                         DateFormat('dd-MM-yyyy')
-                                                            .format(
-                                                                homeController
-                                                                    .searchDate
-                                                                    .value!);
+                                                            .format(controller
+                                                                .searchDate
+                                                                .value!);
                                                   },
                                                 ),
                                               ),
@@ -407,7 +396,7 @@ class Home extends StatelessWidget {
                                                         ),
                                                       ),
                                                       Text(
-                                                        homeController
+                                                        controller
                                                             .searchTimeString
                                                             .value,
                                                         style: Theme.of(context)
@@ -423,7 +412,7 @@ class Home extends StatelessWidget {
                                                                 context:
                                                                     context,
                                                                 selectedTime:
-                                                                    homeController
+                                                                    controller
                                                                         .searchTime);
                                                     int tempTimeNum =
                                                         tempTime.hour * 60 +
@@ -436,7 +425,7 @@ class Home extends StatelessWidget {
                                                             lowestBoundTimeNum &&
                                                         tempTimeNum <=
                                                             highestBoundTimeNum) {
-                                                      homeController
+                                                      controller
                                                               .searchTimeString
                                                               .value =
                                                           MaterialLocalizations
@@ -510,7 +499,7 @@ class Home extends StatelessWidget {
                                                       Obx(
                                                         () => GestureDetector(
                                                           child: Text(
-                                                            homeController
+                                                            controller
                                                                 .departureStationName
                                                                 .value,
                                                             style: Theme.of(
@@ -519,7 +508,7 @@ class Home extends StatelessWidget {
                                                                 .bodyText1,
                                                           ),
                                                           onTap: () {
-                                                            homeController
+                                                            controller
                                                                 .showStationsDialog(
                                                                     context:
                                                                         context,
@@ -534,7 +523,7 @@ class Home extends StatelessWidget {
                                                       Obx(
                                                         () => GestureDetector(
                                                           child: Text(
-                                                            homeController
+                                                            controller
                                                                 .destinationStationName
                                                                 .value,
                                                             style: Theme.of(
@@ -543,7 +532,7 @@ class Home extends StatelessWidget {
                                                                 .bodyText1,
                                                           ),
                                                           onTap: () {
-                                                            homeController
+                                                            controller
                                                                 .showStationsDialog(
                                                                     context:
                                                                         context,
@@ -561,8 +550,7 @@ class Home extends StatelessWidget {
                                                     size: 30,
                                                   ),
                                                   onTap: () {
-                                                    homeController
-                                                        .swapStations();
+                                                    controller.swapStations();
                                                   },
                                                 ),
                                               ],
@@ -584,27 +572,24 @@ class Home extends StatelessWidget {
                                         foregroundColor: CustomColors.kDarkGray,
                                         text: CustomStrings.kSearchAgain.tr,
                                         onPressedFunc: () {
-                                          homeController.upcomingTripsForBiker
+                                          controller.upcomingTripsForBiker
                                               .clear();
-                                          homeController.hasSearchedTrips =
-                                              false;
-                                          homeController
-                                                  .searchDateString.value =
+                                          controller.hasSearchedTrips = false;
+                                          controller.searchDateString.value =
                                               CustomStrings.kChooseDate.tr;
-                                          homeController
-                                                  .searchTimeString.value =
+                                          controller.searchTimeString.value =
                                               CustomStrings.kChooseTime.tr;
-                                          homeController.departureStation.value
+                                          controller.departureStation.value
                                               .stationId = -1;
-                                          homeController.departureStationName
-                                              .value = homeController
+                                          controller.departureStationName
+                                              .value = controller
                                                   .departureStation.value.name =
                                               CustomStrings
                                                   .kSelectSourceStation.tr;
-                                          homeController.destinationStation
-                                              .value.stationId = -1;
-                                          homeController.destinationStationName
-                                              .value = homeController
+                                          controller.destinationStation.value
+                                              .stationId = -1;
+                                          controller.destinationStationName
+                                              .value = controller
                                                   .destinationStation
                                                   .value
                                                   .name =
@@ -621,19 +606,25 @@ class Home extends StatelessWidget {
                                         foregroundColor: Colors.white,
                                         text: CustomStrings.kSearch.tr,
                                         onPressedFunc: () async {
-                                          await homeController.searchTrips(
-                                              date: homeController
-                                                  .searchDate.value,
-                                              time: homeController
-                                                  .searchTime.value,
-                                              departureId: homeController
-                                                  .departureStation
-                                                  .value
-                                                  .stationId,
-                                              destinationId: homeController
-                                                  .destinationStation
-                                                  .value
-                                                  .stationId);
+                                          controller
+                                              .verifyPhoneBeforeBookOrSearchStrip(
+                                            context: context,
+                                            onSuccess: () async {
+                                              await controller.searchTrips(
+                                                  date: controller
+                                                      .searchDate.value,
+                                                  time: controller
+                                                      .searchTime.value,
+                                                  departureId: controller
+                                                      .departureStation
+                                                      .value
+                                                      .stationId,
+                                                  destinationId: controller
+                                                      .destinationStation
+                                                      .value
+                                                      .stationId);
+                                            },
+                                          );
                                         },
                                         hasBorder: false),
                                   ),
@@ -644,21 +635,14 @@ class Home extends StatelessWidget {
                         ),
                         Divider(),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              22.0,
-                              5.0,
-                              22.0,
-                              homeController.upcomingTrips.length > 2
-                                  ? 35.0
-                                  : 8.0),
+                          padding: EdgeInsets.fromLTRB(22.0, 5.0, 22.0,
+                              controller.upcomingTrips.length > 2 ? 35.0 : 8.0),
                           child: Obx(
                             () => ListUpcomingTrips(
-                                listUpcomingTrips: homeController
-                                    .upcomingTripsForBiker
-                                    .toList(),
+                                listUpcomingTrips:
+                                    controller.upcomingTripsForBiker.toList(),
                                 itemPadding: 10.0,
-                                hasSearchTrips:
-                                    homeController.hasSearchedTrips),
+                                hasSearchTrips: controller.hasSearchedTrips),
                           ),
                         ),
                       ]
@@ -676,7 +660,7 @@ class Home extends StatelessWidget {
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      if (homeController.upcomingTrips.isEmpty) ...[
+                      if (controller.upcomingTrips.isEmpty) ...[
                         CustomPaint(
                           foregroundPainter: TooltipPainter(),
                           child: Container(
@@ -696,7 +680,15 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ],
-                      CreateTripButton(),
+                      CreateTripButton(
+                        createTrip: () {
+                          Get.toNamed(CommonRoutes.BOOK_TRIP);
+                          // controller.verifyPhoneBeforeBookOrSearchStrip(
+                          //     context: context,
+                          //     onSuccess: () =>
+                          // Get.toNamed(CommonRoutes.BOOK_TRIP));
+                        },
+                      ),
                     ],
                   )
                 : null,

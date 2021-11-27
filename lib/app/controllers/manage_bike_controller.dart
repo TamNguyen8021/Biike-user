@@ -1,6 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/bike.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
@@ -21,6 +20,7 @@ class ManageBikeController extends GetxController {
     if (response != null) {
       bike = Bike.fromJson(response);
       hasBike.value = true;
+      update();
     }
   }
 
@@ -30,9 +30,6 @@ class ManageBikeController extends GetxController {
       hasBike.value = false;
       Biike.role.value = Role.keer;
       Get.offAllNamed(CommonRoutes.HOME);
-      CommonFunctions().showInfoDialog(
-          context: context,
-          message: CustomStrings.kBecomeKeerDueToDeleteBike.tr);
     } else {
       CommonFunctions().showErrorDialog(
           context: context, message: CustomErrorsString.kDevelopError.tr);
