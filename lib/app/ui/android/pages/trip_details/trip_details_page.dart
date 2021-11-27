@@ -754,6 +754,19 @@ class TripDetailsPage extends StatelessWidget {
                                                           if (isTripCompleted) {
                                                             isStartTripButtonVisible
                                                                 .value = false;
+                                                            if (controller
+                                                                .isLocationShared
+                                                                .isTrue) {
+                                                              await controller
+                                                                  .pathshareProvider
+                                                                  .startOrStopLocationSharing(
+                                                                      isShared:
+                                                                          false,
+                                                                      sessionIdentifier:
+                                                                          controller
+                                                                              .sessionIdentifier);
+                                                            }
+
                                                             Get.offAllNamed(
                                                                 CommonRoutes
                                                                     .FEEDBACK,
