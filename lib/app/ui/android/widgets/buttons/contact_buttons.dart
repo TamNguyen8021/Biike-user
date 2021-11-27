@@ -26,7 +26,8 @@ class ContactButtons extends StatelessWidget {
           icon: Icons.message,
           height: 35.0,
           width: 35.0,
-          function: () => CommonFunctions().makingSms(phoneNo: [phoneNo]),
+          function: () =>
+              CommonFunctions().makingSms(phoneNo: [phoneNo], body: ''),
         ),
       ],
     );

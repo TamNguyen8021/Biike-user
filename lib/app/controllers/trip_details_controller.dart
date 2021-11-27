@@ -33,12 +33,12 @@ class TripDetailsController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
   final _homeController = Get.find<HomeController>();
   final _profileController = Get.find<ProfileController>();
-  final _pathshareProvider = Get.find<PathshareProvider>();
+  final pathshareProvider = Get.find<PathshareProvider>();
   FirebaseRealtimeDatabaseService _databaseService =
       getIt<FirebaseRealtimeDatabaseService>();
 
   Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
-  Rx<IconData> buttonIcon = Icons.navigation.obs;
+  Rx<IconData> buttonIcon = Icons.done_all.obs;
   Rx<String> _cancelReason = ''.obs;
   Rx<bool> isTripStarted = false.obs;
   Rx<bool> isLocationShared = false.obs;
@@ -302,7 +302,7 @@ class TripDetailsController extends GetxController {
     if (isLocationShared.isFalse) {
       if (Biike.pathshareUserToken.isEmpty ||
           Biike.pathshareUserIdentifier.isEmpty) {
-        Map<String, dynamic> data = await _pathshareProvider.createUser(
+        Map<String, dynamic> data = await pathshareProvider.createUser(
             userName: _profileController.user.userFullname,
             userPhoneNumber: _profileController.user.userPhoneNumber);
         Biike.pathshareUserToken = data['user']['token'];
@@ -312,14 +312,14 @@ class TripDetailsController extends GetxController {
             .savePathshareUserIdentifier(Biike.pathshareUserIdentifier);
       }
 
-      if (await _pathshareProvider.createUserLocation(
+      if (await pathshareProvider.createUserLocation(
           userLat: userLocation!.latitude!,
           userLng: userLocation!.longitude!)) {
         if (sessionIdentifier.isEmpty ||
             DateTime.now()
                 .subtract(Duration(minutes: 30))
                 .isAfter(_lastTimeSharedLocation!)) {
-          Map<String, dynamic> data = await _pathshareProvider.createSession();
+          Map<String, dynamic> data = await pathshareProvider.createSession();
           if (data.isNotEmpty) {
             isLocationShared.value = true;
             sessionIdentifier = data['session']['identifier'];
@@ -333,7 +333,7 @@ class TripDetailsController extends GetxController {
           }
         } else {
           isLocationShared.value =
-              await _pathshareProvider.startOrStopLocationSharing(
+              await pathshareProvider.startOrStopLocationSharing(
                   isShared: true, sessionIdentifier: sessionIdentifier);
         }
       } else {
@@ -460,7 +460,7 @@ class TripDetailsController extends GetxController {
                         text: CustomStrings.kStopSharingLocation.tr,
                         isLastRow: false,
                         onTapFunc: () async {
-                          if (await _pathshareProvider
+                          if (await pathshareProvider
                               .startOrStopLocationSharing(
                                   isShared: false,
                                   sessionIdentifier: sessionIdentifier)) {

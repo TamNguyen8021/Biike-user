@@ -658,41 +658,42 @@ class Home extends StatelessWidget {
             ),
             floatingActionButton: Biike.role.value == Role.keer
                 ? Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                if (controller.upcomingTrips.isEmpty) ...[
-                  CustomPaint(
-                    foregroundPainter: TooltipPainter(),
-                    child: Container(
-                      alignment: Alignment.bottomCenter,
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      margin: const EdgeInsets.only(
-                          bottom: 20.0, left: 22.0, right: 22.0),
-                      decoration: BoxDecoration(
-                        color: CustomColors.kLightGray,
-                        borderRadius: BorderRadius.circular(5),
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      if (controller.upcomingTrips.isEmpty) ...[
+                        CustomPaint(
+                          foregroundPainter: TooltipPainter(),
+                          child: Container(
+                            alignment: Alignment.bottomCenter,
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            margin: const EdgeInsets.only(
+                                bottom: 20.0, left: 22.0, right: 22.0),
+                            decoration: BoxDecoration(
+                              color: CustomColors.kLightGray,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(
+                              CustomStrings.kCreateTrip.tr,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          ),
+                        ),
+                      ],
+                      CreateTripButton(
+                        createTrip: () {
+                          Get.toNamed(CommonRoutes.BOOK_TRIP);
+                          // controller.verifyPhoneBeforeBookOrSearchStrip(
+                          //     context: context,
+                          //     onSuccess: () =>
+                          // Get.toNamed(CommonRoutes.BOOK_TRIP));
+                        },
                       ),
-                      child: Text(
-                        CustomStrings.kCreateTrip.tr,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    ),
-                  ),
-                ],
-                CreateTripButton(
-                  createTrip: () {
-                    Get.toNamed(CommonRoutes.BOOK_TRIP);
-                    // controller.verifyPhoneBeforeBookOrSearchStrip(
-                    //     context: context,
-                    //     onSuccess: () =>
-                    // Get.toNamed(CommonRoutes.BOOK_TRIP));
-                  },
-                ),
-              ],
-            )
+                    ],
+                  )
                 : null,
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
           );
         });
   }
