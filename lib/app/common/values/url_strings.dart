@@ -23,6 +23,10 @@ class UrlStrings {
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
   static const String directionUrl = _googleMapUrl + 'directions/json';
 
+  static const String apiMomoPayment = 'https://test-payment.momo.vn/pay/app';
+  static const String configurationUrl = _baseUrl + 'Configurations';
+  static const String momoTransactionUrl = _baseUrl + 'MomoTransactions';
+
   static const String _pathshareBaseUrl =
       'https://pathsha.re/api/professional/v1/';
   static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';

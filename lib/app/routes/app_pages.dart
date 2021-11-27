@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/bindings/top_up_point_binding.dart';
 import 'package:bikes_user/app/bindings/bike_binding.dart';
 import 'package:bikes_user/app/bindings/cho_now_settings_binding.dart';
 import 'package:bikes_user/app/bindings/login_binding.dart';
@@ -49,6 +50,7 @@ import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_succ
 import 'package:bikes_user/app/ui/android/pages/notification/notification_detail.dart';
 import 'package:bikes_user/app/ui/android/pages/notification/notification_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
+import 'package:bikes_user/app/ui/android/pages/top_up_point/top_up_point_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_full_map_page.dart';
 import 'package:bikes_user/app/ui/android/pages/trip_details/trip_details_page.dart';
 import 'package:bikes_user/app/ui/android/pages/view_point/view_point_page.dart';
@@ -265,6 +267,10 @@ class AppPages {
         name: CommonRoutes.POINT,
         page: () => ViewPointPage(),
         binding: ViewPointBinding()),
+    GetPage(
+        name: CommonRoutes.TOP_UP_POINT,
+        page: () => TopUpPointPage(),
+        binding: TopUpPointBinding()),
     GetPage(
         name: CommonRoutes.NOTIFICATION,
         page: () => NotificationPage(),

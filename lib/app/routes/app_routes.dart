@@ -39,6 +39,7 @@ abstract class CommonRoutes {
   static const YOUR_VOUCHER_DETAIL = '/yourVouchers/yourVoucherDetail';
   static const TAKE_PICTURE = '/takePicture';
   static const POINT = '/point';
+  static const TOP_UP_POINT = '/top_up_point';
   static const NOTIFICATION = '/notification';
   static const NOTIFICATION_DETAIL = '/notification/detail';
 }

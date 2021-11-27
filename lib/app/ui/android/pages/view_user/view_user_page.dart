@@ -36,8 +36,8 @@ class ViewUserPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         child: CustomElevatedIconButton(
           width: 115,
-          onPressedFunc: () => CommonFunctions()
-              .makingSms(phoneNo: [_viewUserController.user.userPhoneNumber]),
+          onPressedFunc: () => CommonFunctions().makingSms(
+              phoneNo: [_viewUserController.user.userPhoneNumber], body: ''),
           text: CustomStrings.kMessage.tr,
           elevation: 2.0,
           icon: Icons.message,
@@ -123,16 +123,9 @@ class ViewUserPage extends StatelessWidget {
                                         color: CustomColors.kDarkGray,
                                         fontWeight: FontWeight.bold)),
                               ),
-                              if (MediaQuery.of(context).size.width >= 400) ...[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: contactAndReportButtons,
-                                ),
-                              ] else ...[
-                                Column(
-                                  children: contactAndReportButtons,
-                                )
-                              ]
+                              Column(
+                                children: contactAndReportButtons,
+                              ),
                             ],
                           ),
                         ),
