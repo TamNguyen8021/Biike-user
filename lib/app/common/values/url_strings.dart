@@ -13,7 +13,7 @@ class UrlStrings {
   static const String pointUrl = _baseUrl + 'pointHistory';
   static const String intimaciesUrl = _baseUrl + 'intimacies';
   static const String reportUrl = _baseUrl + 'reports';
-  static const String feedbackUrl = _baseUrl + 'feebacks';
+  static const String feedbackUrl = _baseUrl + 'feedbacks';
   static const String sos = _baseUrl + 'Sos';
 
   static const String googleMapApiKey =

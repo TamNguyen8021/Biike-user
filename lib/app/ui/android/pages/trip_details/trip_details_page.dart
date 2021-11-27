@@ -637,43 +637,6 @@ class TripDetailsPage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
-                                            Obx(
-                                              () => Visibility(
-                                                visible: !controller
-                                                    .isTripStarted.value,
-                                                child: CustomElevatedIconButton(
-                                                  width: 180,
-                                                  text: CustomStrings
-                                                      .kCancelTrip.tr,
-                                                  backgroundColor:
-                                                      CustomColors.kLightGray,
-                                                  foregroundColor:
-                                                      CustomColors.kDarkGray,
-                                                  elevation: 0.0,
-                                                  icon: Icons.clear,
-                                                  onPressedFunc: () {
-                                                    CommonFunctions()
-                                                        .showConfirmDialog(
-                                                            context: context,
-                                                            title: CustomStrings
-                                                                .kConfirmCancelTrip
-                                                                .tr,
-                                                            message: CustomStrings
-                                                                .kViewCancelTripReminder
-                                                                .tr,
-                                                            onPressedFunc: () {
-                                                              Get.back();
-                                                              _showCancelReasonDialog(
-                                                                  context:
-                                                                      context,
-                                                                  tripId: Get
-                                                                          .arguments[
-                                                                      'tripId']);
-                                                            });
-                                                  },
-                                                ),
-                                              ),
-                                            ),
                                             if (controller.trip.tripStatus ==
                                                 2) ...[
                                               Obx(
@@ -684,11 +647,23 @@ class TripDetailsPage extends StatelessWidget {
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            top: 16.0,
                                                             bottom: 16.0),
                                                     child:
                                                         CustomElevatedIconButton(
-                                                      width: 180,
+                                                      width: controller
+                                                              .isTripStarted
+                                                              .isTrue
+                                                          ? 140
+                                                          : 180,
+                                                      text: controller
+                                                          .buttonText.value,
+                                                      backgroundColor:
+                                                          CustomColors.kBlue,
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                      elevation: 0.0,
+                                                      icon: controller
+                                                          .buttonIcon.value,
                                                       onPressedFunc: () async {
                                                         if (controller
                                                             .isTripStarted
@@ -785,20 +760,55 @@ class TripDetailsPage extends StatelessWidget {
                                                           }
                                                         }
                                                       },
-                                                      text: controller
-                                                          .buttonText.value,
-                                                      backgroundColor:
-                                                          CustomColors.kBlue,
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      elevation: 0.0,
-                                                      icon: controller
-                                                          .buttonIcon.value,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
+                                            Obx(
+                                              () => Visibility(
+                                                visible: !controller
+                                                    .isTripStarted.value,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 16.0),
+                                                  child:
+                                                      CustomElevatedIconButton(
+                                                    width: 180,
+                                                    text: CustomStrings
+                                                        .kCancelTrip.tr,
+                                                    backgroundColor:
+                                                        CustomColors.kLightGray,
+                                                    foregroundColor:
+                                                        CustomColors.kDarkGray,
+                                                    elevation: 0.0,
+                                                    icon: Icons.clear,
+                                                    onPressedFunc: () {
+                                                      CommonFunctions()
+                                                          .showConfirmDialog(
+                                                              context: context,
+                                                              title: CustomStrings
+                                                                  .kConfirmCancelTrip
+                                                                  .tr,
+                                                              message: CustomStrings
+                                                                  .kViewCancelTripReminder
+                                                                  .tr,
+                                                              onPressedFunc:
+                                                                  () {
+                                                                Get.back();
+                                                                _showCancelReasonDialog(
+                                                                    context:
+                                                                        context,
+                                                                    tripId: Get
+                                                                            .arguments[
+                                                                        'tripId']);
+                                                              });
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
