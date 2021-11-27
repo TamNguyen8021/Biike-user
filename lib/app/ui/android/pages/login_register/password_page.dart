@@ -2,7 +2,6 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/previous_page_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -89,14 +88,9 @@ class PasswordPage extends StatelessWidget {
                     blurRadius: 10,
                   )
                 ],
-                onCompleted: (v) {
-                  Biike.logger.d('Completed');
-                },
-                onChanged: (value) {
-                  Biike.logger.d(value);
-                },
+                onCompleted: (v) {},
+                onChanged: (value) {},
                 beforeTextPaste: (text) {
-                  Biike.logger.d('Allowing to paste $text');
                   //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                   //but you can show anything you want here, like your pop up saying wrong paste format or etc
                   return true;
