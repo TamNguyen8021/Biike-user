@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,7 @@ class BuyPointButton extends StatelessWidget {
     return SizedBox(
       width: 100.sp,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => Get.toNamed(CommonRoutes.TOP_UP_POINT),
         child: Row(
           children: <Widget>[
             Icon(

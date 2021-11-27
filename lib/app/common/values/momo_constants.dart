@@ -1,0 +1,6 @@
+class MomoConstants {
+  static const String merchantCode = "MOMO6Z6G20200121";
+  static const String partnerCode = "MOMO6Z6G20200121";
+  static const String appScheme = "momo6z6g20200121";
+  static const String pubKey = "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAzNMAIPwdjIhPH2UJXioobx6xl5edcmcFSnjiJfjzj7GFMqxYpTTqN7TAHQpLEZRrVMXf07EupNXqov5JdJfEa2AxeJzUbjoER+VFNgacfpPQMINzQOVye11WX/wck6+8kJEkTa0V+0GUG1wcVhy4hHoTKdRhTuCKdRrvzdKa66QnTElMrZ+leNMwvviSvYXLjO5Ua1m6TJ37L2MiJ3tjD+H8u+5dpBtkI5ZFbn7JxYwH7ZHYspZQWHlb956yCWY1l7L6+uVmCjq3zIGfkwgKHhUyGxPdetvLtLyQfxSKujHcZWqYCKi5/+ZpXjDNdT1L0Ovh/F/w76yUTPX251Nidcg0i+LKLMWd2sUiVLEiUefkj5b4kmI2RvRr4tA7voIaR8efAzbir+F8tREVKoAcq46/LdlLFoH2p6pp9Fd5L14RH4da1veKZjdcPOdDV9QYp0nxLvdSqlQ0Tn39GCvf+YVct5PbuKsbFixCOdsGOttMyFa4deX6S5j+AAncQjyvfy42ee8srJsmdOk2o1kNZ8Dlwf+Ef2z524fvww9DeDJmTqMNN50RsgZ+HchPTpVstWAljW6Bz1CY8B7Eea5L1Ry83p8tmgjn1xfrrb9xn3Zt51qxMn/+rdfZQdAbUHTlWUgQRGJ1gXt7/Dl2bHSbc8IO+96U38tBYeItxDutZE8CAwEAAQ==\n-----END PUBLIC KEY-----";
+}
