@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late DateTime _firstTripTimeBook;
+    DateTime _firstTripTimeBook = DateTime.now();
     DateTime _currentTime = DateTime.now();
     String _timeLeft = '';
 

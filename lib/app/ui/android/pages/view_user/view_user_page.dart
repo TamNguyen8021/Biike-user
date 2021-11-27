@@ -123,16 +123,9 @@ class ViewUserPage extends StatelessWidget {
                                         color: CustomColors.kDarkGray,
                                         fontWeight: FontWeight.bold)),
                               ),
-                              if (MediaQuery.of(context).size.width >= 400) ...[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: contactAndReportButtons,
-                                ),
-                              ] else ...[
-                                Column(
-                                  children: contactAndReportButtons,
-                                )
-                              ]
+                              Column(
+                                children: contactAndReportButtons,
+                              ),
                             ],
                           ),
                         ),
