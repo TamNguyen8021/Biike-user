@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
+import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:bikes_user/app/data/models/trip_feedback.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/user.dart';
@@ -16,7 +19,9 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/services/firebase_realtime_database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -29,6 +34,8 @@ class TripDetailsController extends GetxController {
   final _homeController = Get.find<HomeController>();
   final _profileController = Get.find<ProfileController>();
   final _pathshareProvider = Get.find<PathshareProvider>();
+  FirebaseRealtimeDatabaseService _databaseService =
+      getIt<FirebaseRealtimeDatabaseService>();
 
   Rx<String> buttonText = CustomStrings.kStart.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
@@ -220,6 +227,7 @@ class TripDetailsController extends GetxController {
   /// Cancel a trip based on [tripId].
   ///
   /// Author: TamNTT
+  /// Updater: UyenNLP
   Future<void> cancelTrip(
       {required BuildContext context,
       required int tripId,
@@ -228,6 +236,8 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
+      await _sendNoti(tripId: tripId, status: TripStatus.canceled);
+      
       Get.back(closeOverlays: true);
       Get.back();
       _homeController.pagingController.refresh();
@@ -236,6 +246,53 @@ class TripDetailsController extends GetxController {
     } else {
       CommonFunctions().showErrorDialog(
           context: context, message: CustomErrorsString.kDevelopError.tr);
+    }
+  }
+
+  /// Send noti to partner when cancel trip
+  ///
+  /// Author: UyenNLP
+  _sendNoti({required tripId, required TripStatus status}) async {
+    var data = await _tripProvider.getTripDetails(tripId: tripId);
+    Trip trip = Trip.fromJson(data);
+
+    // has partner
+    if (trip.keerId != null && trip.bikerId != null) {
+      var receiverId =
+          Biike.userId.value != trip.keerId // send noti to partner
+              ? trip.keerId
+              : trip.bikerId;
+      BiikeNoti notification = BiikeNoti(
+          receiverId: receiverId,
+          title: _getNotiTitleByStatus(status),
+          content: _getNotiContentByStatus(status),
+          url: UrlStrings.tripUrl + '$tripId/details',
+          createdDate: DateTime.now());
+
+      await _databaseService.sendNotification(
+          receiverId: Biike.userId.value, notification: notification);
+    }
+  }
+
+  _getNotiTitleByStatus(TripStatus status) {
+    switch (status) {
+      case TripStatus.canceled:
+        return 'Trip canceled';
+      case TripStatus.started:
+        return 'Trip started';
+      default:
+        return 'Title';
+    }
+  }
+
+  _getNotiContentByStatus(TripStatus status) {
+    switch (status) {
+      case TripStatus.canceled:
+        return 'Your trip has been cancel';
+      case TripStatus.started:
+        return 'Your partner has arrived';
+      default:
+        return 'Content';
     }
   }
 

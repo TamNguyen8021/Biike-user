@@ -14,12 +14,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //ignore: must_be_immutable
 class ConfirmArrivalButton extends StatelessWidget {
   final isOnHomeScreen;
+  final tripId;
 
   Rx<bool> isAtDestination = false.obs;
   Rx<Color> buttonColor = CustomColors.kBlue.obs;
   Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
 
-  ConfirmArrivalButton({Key? key, required this.isOnHomeScreen})
+  ConfirmArrivalButton(
+      {Key? key, required this.isOnHomeScreen, required this.tripId})
       : super(key: key);
 
   void _showConfirmArrivalDialog(
@@ -30,16 +32,19 @@ class ConfirmArrivalButton extends StatelessWidget {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
                     CustomStrings.kConfirmArrivalTitle.tr,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headline6,
                     textAlign: TextAlign.center,
                   ),
                   Padding(
@@ -48,7 +53,8 @@ class ConfirmArrivalButton extends StatelessWidget {
                       role == Role.keer
                           ? CustomStrings.kConfirmArrivalMessageForKeer.tr
                           : CustomStrings.kConfirmArrivalMessageForBiker.tr,
-                      style: Theme.of(context)
+                      style: Theme
+                          .of(context)
                           .textTheme
                           .headline6!
                           .copyWith(fontWeight: FontWeight.normal),
@@ -97,7 +103,8 @@ class ConfirmArrivalButton extends StatelessWidget {
     return SizedBox(
       height: 35,
       width: isOnHomeScreen ? 170 : null,
-      child: Obx(() => ElevatedButton.icon(
+      child: Obx(() =>
+          ElevatedButton.icon(
             onPressed: () {
               if (isOnHomeScreen && isAtDestination.isFalse) {
                 _showConfirmArrivalDialog(
@@ -106,7 +113,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                 // buttonColor.value = CustomColors.kDarkGray;
                 // buttonText.value = CustomStrings.kArriveAtDestination.tr;
               } else if (!isOnHomeScreen) {
-                Get.offAllNamed(CommonRoutes.FEEDBACK);
+                Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: tripId);
               }
             },
             icon: Icon(Icons.done_all, size: 25),
@@ -115,7 +122,10 @@ class ConfirmArrivalButton extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize:
-                      MediaQuery.of(context).size.width >= 400 ? 12.sp : 10.sp),
+                  MediaQuery
+                      .of(context)
+                      .size
+                      .width >= 400 ? 12.sp : 10.sp),
             ),
             style: ElevatedButton.styleFrom(
               elevation: 0.0,
