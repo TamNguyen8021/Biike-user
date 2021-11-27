@@ -623,7 +623,7 @@ class TripDetailsPage extends StatelessWidget {
                                             Get.toNamed(CommonRoutes.VIEW_USER,
                                                 arguments: {
                                                   'partnerId':
-                                                      Get.arguments['userId']
+                                                      controller.user.userId
                                                 });
                                           }
                                         },
