@@ -47,14 +47,17 @@ class VoucherController extends GetxController {
 
   void updateCategory(category) {
     this.category.value = category;
-
-    //TODO search by category
+    pagingController.refresh();
   }
 
   Future<void> _getVoucherList() async {
     _voucherList.clear();
     Map<String, dynamic> response = await _voucherProvider.getVoucherList(
-        page: _currentPage, limit: _limit);
+        page: _currentPage,
+        limit: _limit,
+        cateId: this.category.value.voucherCategoryId! < 0
+            ? 0
+            : this.category.value.voucherCategoryId);
     _voucherList.value = response['data'];
     pagination = response['_meta'];
   }

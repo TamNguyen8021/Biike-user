@@ -12,6 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
   final bool isVisible;
   final bool hasShape;
+  final color;
 
   /// Widgets for action property in [AppBar]
   final List<Widget>? actionWidgets;
@@ -24,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       required this.hasLeading,
       required this.onPressedFunc,
       this.title,
+      this.color,
       required this.appBar,
       this.actionWidgets,
       this.bottomAppBar})
@@ -66,8 +68,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               actions: actionWidgets,
               bottom: bottomAppBar,
               shape: _shapeBorder,
-              backgroundColor:
-                  ModalRoute.of(context)!.settings.name == CommonRoutes.HOME &&
+              elevation: color != null ? 0 : 4,
+              backgroundColor: color != null
+                  ? color
+                  : ModalRoute.of(context)!.settings.name ==
+                              CommonRoutes.HOME &&
                           Biike.role.value == Role.biker
                       ? CustomColors.kOrange
                       : CustomColors.kBlue,

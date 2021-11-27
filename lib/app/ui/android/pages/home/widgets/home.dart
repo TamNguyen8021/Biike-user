@@ -172,6 +172,9 @@ class Home extends StatelessWidget {
                             children: <Widget>[
                               ConfirmArrivalButton(
                                 isOnHomeScreen: true,
+                                tripId: homeController.upcomingTrips
+                                    .toList()[0]
+                                    .tripId,
                               ),
                               ContactButtons(
                                 phoneNo: homeController.upcomingTrips
