@@ -648,10 +648,10 @@ class Home extends StatelessWidget {
                   ),
                 ],
                 CreateTripButton(
-                  createTrip: () =>
-                      homeController.verifyPhoneBeforeBookOrSearchStrip(
-                          context: context,
-                          onSuccess: () => Get.toNamed(CommonRoutes.BOOK_TRIP)),
+                  createTrip: () => Get.toNamed(CommonRoutes.BOOK_TRIP)
+                      // homeController.verifyPhoneBeforeBookOrSearchStrip(
+                      //     context: context,
+                      //     onSuccess: () => Get.toNamed(CommonRoutes.BOOK_TRIP)),
                 ),
               ],
             )
