@@ -38,7 +38,7 @@ class TripDetailsController extends GetxController {
       getIt<FirebaseRealtimeDatabaseService>();
 
   Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
-  Rx<IconData> buttonIcon = Icons.navigation.obs;
+  Rx<IconData> buttonIcon = Icons.done_all.obs;
   Rx<String> _cancelReason = ''.obs;
   Rx<bool> isTripStarted = false.obs;
   Rx<bool> isLocationShared = false.obs;
