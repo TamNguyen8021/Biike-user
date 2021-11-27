@@ -229,7 +229,7 @@ final Map<String, String> vi = {
   'kSupport': 'Trợ giúp',
   'kNewTrip': 'Đã tạo',
   'kCancelTrip': 'Hủy chuyến',
-  'kConfirmArrival': 'Đánh dấu đã đến',
+  'kConfirmArrival': 'Tôi đã đến điểm đón',
   'kCompleteTrip': 'Hoàn thành',
   'kTripHasFinished': 'Đã hoàn thành',
   'kYourFeedback': 'Feedback từ bạn',

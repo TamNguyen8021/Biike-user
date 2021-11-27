@@ -225,7 +225,7 @@ final Map<String, String> en = {
   'kSupport': 'Help',
   'kNewTrip': 'Created',
   'kCancelTrip': 'Cancel trip',
-  'kConfirmArrival': 'Confirm arrival',
+  'kConfirmArrival': 'I came to pick up point',
   'kCompleteTrip': 'Finish trip',
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
