@@ -692,7 +692,6 @@ class Home extends StatelessWidget {
               ],
             )
                 : null,
-
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           );
         });
