@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/main.dart';
-import 'package:bikes_user/services/firebase_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalAppData {
@@ -9,15 +9,17 @@ class LocalAppData {
   /// Save user data to local storage
   ///
   /// Author: UyenNLP
-  Future<void> saveUserInfo(FirebaseServices services) async {
-    _pref = await SharedPreferences.getInstance();
-    _pref.setInt(
-        'userId', int.tryParse(services.firebaseAuth.currentUser!.uid) ?? -1);
-    _pref.setString(
-        'email', services.firebaseAuth.currentUser!.email.toString());
-    _pref.setString('role', 'Role.none');
-    _pref.setString('pathshareUserToken', '');
-    _pref.setString('pathshareUserIdentifier', '');
+  Future<void> saveUserInfo(LoginData data) async {
+    _pref = await SharedPreferences.getInstance()
+      ..setString('token', data.idToken)
+      ..setString('phone', data.phone)
+      ..setBool('isPhoneVerified', data.isPhoneVerified)
+      ..setString('refreshToken', data.refreshToken)
+      ..setInt('userId', int.tryParse(data.userId) ?? -1)
+      ..setString('email', data.email)
+      ..setString('role', 'Role.none')
+      ..setString('pathshareUserToken', '')
+      ..setString('pathshareUserIdentifier', '');
   }
 
   /// Load role, and userId from local
@@ -30,6 +32,39 @@ class LocalAppData {
     Biike.pathshareUserToken = await Biike.localAppData.pathshareUserToken;
     Biike.pathshareUserIdentifier =
         await Biike.localAppData.pathshareUserIdentifier;
+  }
+
+  /// Author: van
+  Future<String> get token async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getString('token') ?? '';
+  }
+
+  /// Author: van
+  Future<String> get phone async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getString('phone') ?? '';
+  }
+
+  /// Author: van
+  Future<bool> get isPhoneVerified async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getBool('isPhoneVerified') ?? false;
+  }
+
+  Future<bool> setIsPhoneVerified(bool val) async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.setBool('isPhoneVerified', val);
+  }
+
+  logout() async {
+    _pref = await SharedPreferences.getInstance()
+      ..setString('token', '')
+      ..remove('isPhoneVerified')
+      ..setString('phone', '')
+      ..setString('refreshToken', '')
+      ..setInt('userId', -1)
+      ..setString('email', '');
   }
 
   /// Get user's id

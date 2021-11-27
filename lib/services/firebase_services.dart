@@ -2,14 +2,10 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FirebaseServices {
-  User? get user => firebaseAuth.currentUser;
-  Future<String> get token async => await user?.getIdToken() ?? '';
-  Future<bool> get isLogin async => (await token).isEmpty;
-  String get uid => user?.uid ?? '';
-  bool get isVerifyEmail => user?.emailVerified ?? false;
   String _verificationId = '';
   late FirebaseAuth firebaseAuth;
 
@@ -18,9 +14,10 @@ class FirebaseServices {
     firebaseServices.firebaseAuth = FirebaseAuth.instance;
     return firebaseServices;
   }
-
+  
   Future<void> sendCode(
-      {required String fullPhone, required Function callBackSentCode}) async {
+      {required String fullPhone, required Function() codeSented}) async {
+        
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: fullPhone,
       verificationCompleted: (PhoneAuthCredential credential) {},
@@ -32,10 +29,11 @@ class FirebaseServices {
       },
       codeSent: (String verificationId, int? resendToken) {
         _verificationId = verificationId;
-        callBackSentCode();
+        codeSented();
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
+ 
   }
 
   Future<bool> verifyOtp(String otp) async {
@@ -55,39 +53,6 @@ class FirebaseServices {
       CommonFunctions.catchExceptionError(error);
       return false;
     }
-  }
-
-  Future<String> signinWithEmailAndPassword(String email, String pass) async {
-    try {
-      UserCredential userCredential = await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: pass);
-      if ((userCredential.user?.uid ?? '').isNotEmpty) {
-        return '';
-      } else {
-        throw (FirebaseAuthException);
-      }
-    } on FirebaseAuthException catch (error) {
-      CommonFunctions.catchExceptionError(error);
-
-      if (error.code == 'user-not-found' || error.code == 'wrong-password') {
-        return CustomErrorsString.kWrongEmailOrPassword.tr;
-      }
-      return CustomErrorsString.kDevelopError.tr;
-    }
-  }
-
-  Future<void> sentVerifyEmail({required BuildContext context}) async {
-    try {
-      await user?.sendEmailVerification();
-    } on FirebaseAuthException catch (error) {
-      CommonFunctions.catchExceptionError(error);
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
-    }
-  }
-
-  Future<void> reloadUser() async {
-    await user?.reload();
   }
 
   Future<bool> resetPasswordWithEmail(

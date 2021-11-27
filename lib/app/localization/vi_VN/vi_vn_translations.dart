@@ -200,7 +200,7 @@ final Map<String, String> vi = {
   'kBtnExit': 'Thoát',
   'kBtnReturn': 'Quay lại',
 
-  // 'ke_er_feedback' screen
+  // 'feedback' screen
   'kTripSuccessBiker': 'Chở ké thành công!',
   'kTripSuccessKeer': 'Đi ké thành công!',
   'kBuyReminder':
@@ -209,6 +209,13 @@ final Map<String, String> vi = {
       'Hãy đánh giá trải nghiệm của bạn cùng \'người ấy\' hôm nay nhé!',
   'kBtnSend': 'Gửi',
   'kSendSuccess': 'Gửi feedback thành công',
+  'kTipForBiker': 'Tip cho người chở',
+  'kCriteria1': 'Đúng giờ',
+  'kCriteria2': 'Thân thiện, hòa đồng',
+  'kCriteria3': 'Vui vẻ',
+  'kCriteria4': 'Có chuẩn bị nón bảo hiểm',
+  'kCriteria5': 'Cám ơn',
+  'kCriteria6': 'Rành đường',
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
@@ -284,7 +291,9 @@ final Map<String, String> vi = {
   'kBikeBrand': 'Nhãn hiệu',
   'kBikeColor': 'Màu sơn',
   'kSuggestAddBike': 'Bạn chưa thêm xe.\nHãy chọn + để thêm xe',
-  'kBecomeKeerDueToDeleteBike': 'Bạn không có xe nên đã trở thành Ké-er',
+  'kConfirmDeleteBike': 'Xác nhận xóa xe',
+  'kAreYouSureDeleteBike':
+      'Sau khi xóa xe bạn sẽ trở thành Ké-er. Bạn có chắc muốn xóa xe?',
 
   // 'add_bike' screen
   'kAddBike': 'Thêm xe mới',
@@ -307,6 +316,7 @@ final Map<String, String> vi = {
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
   'kTakePicture': 'Chụp',
+  'kAddBikeSuccess': 'Thêm xe thành công.\nVui lòng đợi Admin xác minh!',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
@@ -336,11 +346,11 @@ final Map<String, String> vi = {
   'kLanguage': 'Ngôn ngữ',
   'kCurrentLanguage': 'Tiếng Việt',
   'kOther': 'Khác',
-  'kFollowOnFacebook': 'Theo dõi Biké trên Facebook',
+  'kFollowOnFacebook': 'Theo dõi Biiké trên Facebook',
   'kWebsite': 'Website',
   'kTermOfUse': 'Điều khoản sử dụng',
   'kPrivacyPolicy': 'Chính sách bảo mật',
-  'kDevelopBy': 'Biké được phát triển bởi Biké Team,\nĐại học FPT TP.HCM',
+  'kDevelopBy': 'Biiké được phát triển bởi Biiké Team,\nĐại học FPT TP.HCM',
   'kDevelopAt': 'Lô E2a-7, Đường D1, Khu Công nghệ cao Tp. Thủ Đức, TP.HCM',
 
   // 'address_book' screen
@@ -361,8 +371,8 @@ final Map<String, String> vi = {
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
-      'Biké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi\nđến ',
-  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút\n',
+      'Biiké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi đến ',
+  'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút ',
   'kNeedSOS': 'Tôi cần Cảnh sát/Xe cấp cứu',
   'kSOSNumberThirdDescription': ' trong khi đi xe và gọi',
   'kSOSReachLimit': 'Bạn đã thêm tối đa các số điện thoại S.O.S',
@@ -395,6 +405,9 @@ final Map<String, String> vi = {
   'kYouHave': 'Bạn có',
   'kExpired': ' điểm sẽ hết hạn vào ngày ',
   'kFindMore': 'Tìm hiểu thêm',
+
+  // noti
+  'kNotification': 'Thông báo',
 
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
@@ -437,6 +450,7 @@ final Map<String, String> vi = {
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
     'kNoHistory': 'Không có lịch sử',
+    'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
   });

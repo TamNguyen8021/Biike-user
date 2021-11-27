@@ -23,7 +23,6 @@ class CustomErrorsString {
   static const String kMustLoginWithFPTEmail = 'kMustLoginWithFPTEmail';
   static const String kErrorWhenStopSharingLocation =
       'kErrorWhenStopSharingLocation';
-  static const String kFillInAllField = 'kFillInAllField';
   static const String kNoVoucher = 'kNoVoucher';
   static const String kWrongEmailOrPassword = 'kWrongEmailOrPassword';
   static const String kNoPasswordEnter = 'kNoPasswordEnter';
@@ -36,6 +35,7 @@ class CustomErrorsString {
   static const String kEmptyOtp = 'kEmptyOtp';
   static const String kTryAgain = 'kTryAgain';
   static const String kNoHistory = 'kNoHistory';
+  static const String kNoNotification = 'kNoNotification';
   static const String kEmptyReportReasonOrContainsBadWords =
       'kEmptyReportReasonOrContainsBadWords';
 }

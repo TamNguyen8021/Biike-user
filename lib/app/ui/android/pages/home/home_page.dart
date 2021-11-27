@@ -110,7 +110,8 @@ class HomePage extends StatelessWidget {
                             ),
                             actionWidgets: <Widget>[
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      Get.toNamed(CommonRoutes.NOTIFICATION),
                                   icon: Icon(Icons.notifications)),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(

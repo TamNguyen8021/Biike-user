@@ -5,7 +5,6 @@ import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_respon
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
-import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +13,6 @@ class BanListController extends GetxController {
   static BanListController get to => Get.find<BanListController>();
 
   final repositories = getIt<Repositories>();
-  final FirebaseServices firebaseServices = getIt<FirebaseServices>();
   List<BlackListItem> data = [];
 
   Future<void> getBlackList({required BuildContext context}) async {

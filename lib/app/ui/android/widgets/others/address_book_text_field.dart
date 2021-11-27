@@ -7,6 +7,7 @@ class AddressBookTextField extends StatelessWidget {
   final String initialValue;
   final String labelText;
   final String hintText;
+  final Function(String)? onChangedFunc;
 
   const AddressBookTextField(
       {Key? key,
@@ -14,7 +15,9 @@ class AddressBookTextField extends StatelessWidget {
         required this.isEditAddressBook,
         required this.initialValue,
         required this.labelText,
-        required this.hintText})
+        required this.hintText,
+        this.onChangedFunc
+      })
       : super(key: key);
 
   @override
@@ -24,6 +27,7 @@ class AddressBookTextField extends StatelessWidget {
       child: TextFormField(
         readOnly: isReadOnly,
         initialValue: initialValue,
+        onChanged: onChangedFunc,
         textAlignVertical: TextAlignVertical.center,
         style: TextStyle( 
             fontWeight: FontWeight.normal,

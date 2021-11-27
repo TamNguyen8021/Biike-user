@@ -197,7 +197,7 @@ final Map<String, String> en = {
   'kBtnExit': 'Exit',
   'kBtnReturn': 'Back',
 
-  // 'ke_er_feedback' screen
+  // 'feedback' screen
   'kTripSuccessBiker': 'Successful trip!',
   'kTripSuccessKeer': 'Successful trip!',
   'kBuyReminder':
@@ -205,6 +205,13 @@ final Map<String, String> en = {
   'kRateReminder': 'Please rate your experience with your partner today!',
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
+  'kTipForBiker': 'Tip for biker',
+  'kCriteria1': 'On time',
+  'kCriteria2': 'Friendly',
+  'kCriteria3': 'Easy-going',
+  'kCriteria4': 'Prepared helmet beforehand',
+  'kCriteria5': 'Thanks',
+  'kCriteria6': 'Know the way',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -280,7 +287,9 @@ final Map<String, String> en = {
   'kBikeBrand': 'Brand',
   'kBikeColor': 'Color',
   'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
-  'kBecomeKeerDueToDeleteBike': 'You became a Ké-er because you have no bike',
+  'kConfirmDeleteBike': 'Confirm delete bike',
+  'kAreYouSureDeleteBike':
+      'After deleting your bike, you will become a Ké-er. Are you sure you want to delete your bike?',
 
   // 'add_bike' screen
   'kAddBike': 'Add bike',
@@ -331,11 +340,11 @@ final Map<String, String> en = {
   'kLanguage': 'Language',
   'kCurrentLanguage': 'English',
   'kOther': 'Other',
-  'kFollowOnFacebook': 'Follow Biké on Facebook',
+  'kFollowOnFacebook': 'Follow Biiké on Facebook',
   'kWebsite': 'Website',
   'kTermOfUse': 'Terms of Use',
   'kPrivacyPolicy': 'Privacy Policy',
-  'kDevelopBy': 'Develop by Biké Team,\nFPT University in HCM',
+  'kDevelopBy': 'Develop by Biiké Team,\nFPT University in HCM',
   'kDevelopAt': 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
 
   // 'address_book' screen
@@ -356,8 +365,8 @@ final Map<String, String> en = {
   // 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
-      'Biké will send SMS which contains information of trip\nto ',
-  'kSOSNumberSecondDescription': ' when you press on\n',
+      'Biiké will send SMS which contains information of trip to ',
+  'kSOSNumberSecondDescription': ' when you press on ',
   'kNeedSOS': 'I need Police/Ambulance',
   'kSOSNumberThirdDescription': ' while on road',
   'kSOSReachLimit': 'Reach S.O.S phone number limit',
@@ -390,6 +399,9 @@ final Map<String, String> en = {
   'kYouHave': 'You have',
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
+
+  // noti
+  'kNotification': 'BiikeNoti',
 
   'kAll': 'All',
 }..addAll(<String, String>{
@@ -431,6 +443,7 @@ final Map<String, String> en = {
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',
+    'kNoNotification': 'No notification',
     'kEmptyReportReasonOrContainsBadWords':
         'Report reason must not be empty or contains inappropriate words',
   });

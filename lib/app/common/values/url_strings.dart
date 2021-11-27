@@ -13,16 +13,18 @@ class UrlStrings {
   static const String pointUrl = _baseUrl + 'pointHistory';
   static const String intimaciesUrl = _baseUrl + 'intimacies';
   static const String reportUrl = _baseUrl + 'reports';
+  static const String feedbackUrl = _baseUrl + 'feebacks';
+  static const String sos = _baseUrl + 'Sos';
 
   static const String googleMapApiKey =
       'AIzaSyATchI6wf0LyaEBcSB9xZz86iYuPm9Je-k';
   static const String _googleMapUrl = 'https://maps.googleapis.com/maps/api/';
   static const String distancematrixUrl = _googleMapUrl + 'distancematrix/json';
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
+  static const String directionUrl = _googleMapUrl + 'directions/json';
 
   static const String _pathshareBaseUrl =
       'https://pathsha.re/api/professional/v1/';
   static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';
   static const String pathshareUserUrl = _pathshareBaseUrl + 'users';
-  static const String directionUrl = _googleMapUrl + 'directions/json';
 }

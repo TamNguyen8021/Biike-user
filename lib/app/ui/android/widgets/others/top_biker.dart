@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -11,9 +10,9 @@ class TopBiker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String systemLocale = Platform.localeName;
+    Locale appLocale = Get.locale!;
     String currentMonth = DateTime.now().month.toString();
-    if (systemLocale == 'en_US') {
+    if (appLocale == Locale('en', 'US')) {
       currentMonth = DateFormat.MMMM().format(DateTime.now());
     }
 
@@ -34,7 +33,7 @@ class TopBiker extends StatelessWidget {
               ),
               Expanded(
                   child: Text(
-                CustomStrings.kTopBiker.tr + currentMonth,
+                CustomStrings.kTopBiker.tr + ' ' + currentMonth,
               )),
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),

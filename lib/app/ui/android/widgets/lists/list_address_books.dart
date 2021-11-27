@@ -1,4 +1,3 @@
-import 'package:bikes_user/app/ui/android/widgets/cards/address_book_card.dart';
 import 'package:flutter/material.dart';
 
 /// A list of address books
@@ -21,12 +20,8 @@ class ListAddressBooks extends StatelessWidget {
         itemCount: listAddressBooks.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: EdgeInsets.only(bottom: itemPadding),
-            child: AddressBookCard(
-                name: listAddressBooks.elementAt(index).name,
-                address: listAddressBooks.elementAt(index).address,
-            )
-          );
+              padding: EdgeInsets.only(bottom: itemPadding),
+              child: listAddressBooks.elementAt(index));
         });
   }
 }
