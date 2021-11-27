@@ -206,12 +206,12 @@ final Map<String, String> en = {
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
   'kTipForBiker': 'Tip for biker',
-  'kCriteria1' : 'On time',
-  'kCriteria2' : 'Friendly',
-  'kCriteria3' : 'Easy-going',
-  'kCriteria4' : 'Prepared helmet beforehand',
-  'kCriteria5' : 'Thanks',
-  'kCriteria6' : 'Know the way',
+  'kCriteria1': 'On time',
+  'kCriteria2': 'Friendly',
+  'kCriteria3': 'Easy-going',
+  'kCriteria4': 'Prepared helmet beforehand',
+  'kCriteria5': 'Thanks',
+  'kCriteria6': 'Know the way',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -225,7 +225,7 @@ final Map<String, String> en = {
   'kSupport': 'Help',
   'kNewTrip': 'Created',
   'kCancelTrip': 'Cancel trip',
-  'kConfirmArrival': 'Confirm arrival',
+  'kConfirmArrival': 'I came to pick up point',
   'kCompleteTrip': 'Finish trip',
   'kTripHasFinished': 'Finished',
   'kYourFeedback': 'Your feedback',
@@ -443,7 +443,7 @@ final Map<String, String> en = {
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',
-    'kNoNotification': 'Notification empty',
+    'kNoNotification': 'No notification',
     'kEmptyReportReasonOrContainsBadWords':
         'Report reason must not be empty or contains inappropriate words',
   });

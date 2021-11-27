@@ -142,18 +142,18 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   bottomNavigationBar: BottomTabBar(
-                    onTapFunction: (index) async {
+                    onTapFunction: (index) {
                       switch (index) {
                         case 0:
                           _homeController.setAppBarVisible(true);
                           break;
                         case 1:
                           _homeController.setAppBarVisible(false);
+                          _homeController.pagingController.refresh();
                           break;
                         default:
                           break;
                       }
-                      await _homeController.getUpcomingTrips();
                     },
                   ),
                 ),
