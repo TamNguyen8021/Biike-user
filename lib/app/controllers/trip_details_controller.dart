@@ -37,7 +37,7 @@ class TripDetailsController extends GetxController {
   FirebaseRealtimeDatabaseService _databaseService =
       getIt<FirebaseRealtimeDatabaseService>();
 
-  Rx<String> buttonText = CustomStrings.kStart.tr.obs;
+  Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
   Rx<IconData> buttonIcon = Icons.navigation.obs;
   Rx<String> _cancelReason = ''.obs;
   Rx<bool> isTripStarted = false.obs;
@@ -237,7 +237,7 @@ class TripDetailsController extends GetxController {
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
       await _sendNoti(tripId: tripId, status: TripStatus.canceled);
-      
+
       Get.back(closeOverlays: true);
       Get.back();
       _homeController.pagingController.refresh();
@@ -258,10 +258,9 @@ class TripDetailsController extends GetxController {
 
     // has partner
     if (trip.keerId != null && trip.bikerId != null) {
-      var receiverId =
-          Biike.userId.value != trip.keerId // send noti to partner
-              ? trip.keerId
-              : trip.bikerId;
+      var receiverId = Biike.userId.value != trip.keerId // send noti to partner
+          ? trip.keerId
+          : trip.bikerId;
       BiikeNoti notification = BiikeNoti(
           receiverId: receiverId,
           title: _getNotiTitleByStatus(status),

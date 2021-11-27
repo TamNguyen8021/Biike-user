@@ -180,6 +180,7 @@ class HomeController extends GetxController {
 
       upcomingTripsForBiker.add(upcomingTripCard);
     }
+    update();
     return upcomingTripsForBiker.cast();
   }
 
