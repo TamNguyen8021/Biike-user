@@ -47,7 +47,7 @@ import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_b
 import 'package:bikes_user/app/ui/android/pages/edit_profile/edit_profile_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
-import 'package:bikes_user/app/ui/android/pages/notification/notification_detail.dart';
+import 'package:bikes_user/app/ui/android/pages/notification/notification_detail_page.dart';
 import 'package:bikes_user/app/ui/android/pages/notification/notification_page.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board_page.dart';
 import 'package:bikes_user/app/ui/android/pages/top_up_point/top_up_point_page.dart';
