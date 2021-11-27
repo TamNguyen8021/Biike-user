@@ -1,6 +1,5 @@
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';

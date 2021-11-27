@@ -46,7 +46,7 @@ class AddBikeController extends GetxController {
 
   Future<bool> addBikeOrReplaceBike({required bool isAddBike}) async {
     // try {
-    // _enableLoading(true);
+    _enableLoading(true);
 
     String bikePictureUrl = await _imageProvider.postImage(
         imageType: 1,
