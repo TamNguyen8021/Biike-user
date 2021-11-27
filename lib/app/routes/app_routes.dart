@@ -40,4 +40,5 @@ abstract class CommonRoutes {
   static const TAKE_PICTURE = '/takePicture';
   static const POINT = '/point';
   static const NOTIFICATION = '/notification';
+  static const NOTIFICATION_DETAIL = '/notification/detail';
 }

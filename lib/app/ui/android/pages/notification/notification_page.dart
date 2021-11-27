@@ -4,7 +4,6 @@ import 'package:bikes_user/app/controllers/notification_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/notification/widget/notification_list.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,24 +37,24 @@ class NotificationPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () =>
-                                  // Get.toNamed(CommonRoutes.FEEDBACK, arguments: 37),
-                                _notificationController.sendNoti(),
-                            child: Text(
-                              'Send noti',
-                              style: TextStyle(color: CustomColors.kDarkGray),
-                            ),
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        CustomColors.kLightGray),
-                                elevation:
-                                    MaterialStateProperty.all<double>(0.0)),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: double.infinity,
+                        //   child: ElevatedButton(
+                        //     onPressed: () =>
+                        //           // Get.toNamed(CommonRoutes.FEEDBACK, arguments: 37),
+                        //         _notificationController.sendNoti(),
+                        //     child: Text(
+                        //       'Send noti',
+                        //       style: TextStyle(color: CustomColors.kDarkGray),
+                        //     ),
+                        //     style: ButtonStyle(
+                        //         backgroundColor:
+                        //             MaterialStateProperty.all<Color>(
+                        //                 CustomColors.kLightGray),
+                        //         elevation:
+                        //             MaterialStateProperty.all<double>(0.0)),
+                        //   ),
+                        // ),
                         Container(
                           // height: MediaQuery.of(context).size.height - 230,
                           child: Obx(() => NotificationList(

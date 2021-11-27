@@ -303,6 +303,7 @@ class CustomStrings {
   static const String kRegistrationPicture = 'kRegistrationPicture';
   static const String kPleaseTakeRegistrationPicture =
       'kPleaseTakeRegistrationPicture';
+  static const String kAddBikeSuccess = 'kAddBikeSuccess';
 
   // 'voucher_detail' screen
   static const String kGiftDetail = 'kGiftDetail';

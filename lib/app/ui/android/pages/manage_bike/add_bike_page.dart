@@ -273,7 +273,11 @@ class AddBikePage extends StatelessWidget {
                                             if (await _addBikeController
                                                 .addBikeOrReplaceBike(
                                                     isAddBike: isAddBike)) {
-                                              _onBackPressed();
+                                              await _onBackPressed();
+                                              CommonFunctions().showSuccessDialog(
+                                                  context: context,
+                                                  message: CustomStrings.kAddBikeSuccess.tr
+                                              );
                                             } else {
                                               CommonFunctions().showErrorDialog(
                                                   context: context,

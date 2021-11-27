@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
-import 'package:dio/dio.dart';
+import 'package:get/get_connect/connect.dart';
 
 class ImageProvider extends CommonProvider {
   Future<dynamic> postImage(
@@ -22,9 +22,9 @@ class ImageProvider extends CommonProvider {
       await imageFile.create(recursive: true);
     }
 
-    FormData data = FormData.fromMap({
+    FormData data = FormData({
       'imageType': imageType,
-      'imageList': MultipartFile.fromFileSync(imageFile.path)
+      'imageList': MultipartFile(imageFile, filename: imageName)
     });
 
     data.fields.forEach((element) {
