@@ -12,7 +12,7 @@ class TopUpPointController extends GetxController {
 
   Rx<String> point = '0'.obs;
   Rx<String> amount = '0'.obs;
-  Rx<String> percent = '0'.obs;
+  Rx<String> percent = '0.06'.obs;
 
   bool isLoading = false;
 
@@ -22,19 +22,22 @@ class TopUpPointController extends GetxController {
   }
 
   void setAmount(value) {
-    var tempAmount = (int.parse(value) / double.parse(this.percent.value)).ceil();
+    var tempAmount =
+        (int.parse(value) / double.parse(this.percent.value)).ceil();
     this.amount.value = '$tempAmount';
   }
 
-  Future<void> createPayment({required BuildContext context, required Map<String, dynamic> body}) async {
+  Future<void> createPayment(
+      {required BuildContext context,
+      required Map<String, dynamic> body}) async {
     _enableLoading(true);
 
     final response = await _topUpPointProvider.paymentWithMomo(body: body);
     if (response['isSuccess']) {
       Map<String, dynamic> data = {
-          'transactionId': response['data']['transid'],
-          'amount': response['data']['amount'],
-          'orderId': body['partnerRefId']
+        'transactionId': response['data']['transid'],
+        'amount': response['data']['amount'],
+        'orderId': body['partnerRefId']
       };
 
       final result = await _topUpPointProvider.createTransaction(body: data);
@@ -50,8 +53,8 @@ class TopUpPointController extends GetxController {
       }
     } else {
       Get.back();
-      CommonFunctions().showErrorDialog(
-          context: context, message: response['errorMsg']);
+      CommonFunctions()
+          .showErrorDialog(context: context, message: response['errorMsg']);
     }
   }
 
