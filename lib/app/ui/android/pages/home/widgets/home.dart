@@ -351,13 +351,18 @@ class Home extends StatelessWidget {
                                                           Icons.event_outlined,
                                                         ),
                                                       ),
-                                                      Text(
-                                                        controller
-                                                            .searchDateString
-                                                            .value,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller
+                                                              .searchDateString
+                                                              .value,
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -395,13 +400,18 @@ class Home extends StatelessWidget {
                                                           Icons.access_time,
                                                         ),
                                                       ),
-                                                      Text(
-                                                        controller
-                                                            .searchTimeString
-                                                            .value,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller
+                                                              .searchTimeString
+                                                              .value,
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
