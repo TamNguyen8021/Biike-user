@@ -201,9 +201,8 @@ class BookTripController extends GetxController {
             .map((e) => e.toIso8601String())
             .toList());
 
-    return isRepeated.value
-        ? await _tripProvider.createScheduledTrip(data)
-        : _tripProvider.createKeNowTrip(data);
+    return await _tripProvider.createScheduledTrip(data);
+        // : _tripProvider.createKeNowTrip(data);
   }
 
   /// Get list of dates with the same name of date as listDate contains

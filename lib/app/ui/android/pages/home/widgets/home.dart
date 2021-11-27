@@ -689,12 +689,24 @@ class Home extends StatelessWidget {
                           // Get.toNamed(CommonRoutes.BOOK_TRIP));
                         },
                       ),
-                    ],
-                  )
-                : null,
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-          );
-        });
+                      child: Text(
+                        CustomStrings.kCreateTrip.tr,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    ),
+                  ),
+                ],
+                CreateTripButton(
+                  createTrip: () => Get.toNamed(CommonRoutes.BOOK_TRIP)
+                      // homeController.verifyPhoneBeforeBookOrSearchStrip(
+                      //     context: context,
+                      //     onSuccess: () => Get.toNamed(CommonRoutes.BOOK_TRIP)),
+                ),
+              ],
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
