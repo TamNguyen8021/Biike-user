@@ -69,46 +69,32 @@ class LoginPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: CustomTextButton(
-                        width: 135,
-                        backgroundColor: Colors.white,
-                        foregroundColor: CustomColors.kDarkBlue,
-                        text: CustomStrings.kLogin.tr,
-                        onPressedFunc: () {
-                          LoginController.to.login(emailController.text,
-                              passwordController.text, context);
-                        },
-                        hasBorder: false,
-                        elevation: 2.0,
-                      ),
-                      // child: TextButton(
-                      //   onPressed: () {
-                      //     LoginController.to.login(emailController.text,
-                      //         passwordController.text, context);
-                      //   },
-                      //   child:
-                      //       GetBuilder<LoginController>(builder: (controller) {
-                      //     if (controller.isLoading) {
-                      //       return SizedBox.fromSize(
-                      //         size: Size(14.sp, 14.sp),
-                      //         child: CircularProgressIndicator(
-                      //           color: Colors.blueAccent,
-                      //         ),
-                      //       );
-                      //     }
-                      //     return Text(
-                      //       CustomStrings.kLogin.tr,
-                      //       style: TextStyle(
-                      //         color: CustomColors.kDarkBlue,
-                      //       ),
-                      //     );
-                      //   }),
-                      //   style: TextButton.styleFrom(
-                      //       backgroundColor: Colors.white,
-                      //       elevation: 5.0,
-                      //       padding: EdgeInsets.symmetric(
-                      //           horizontal: 50.0, vertical: 16.0)),
-                      // ),
+                      child: GetBuilder<LoginController>(builder: (controller) {
+                        if (controller.isLoading) {
+                          return const SizedBox(
+                            width: 135,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                          );
+                        }
+                        return CustomTextButton(
+                          width: 135,
+                          backgroundColor: Colors.white,
+                          foregroundColor: CustomColors.kDarkBlue,
+                          text: CustomStrings.kLogin.tr,
+                          onPressedFunc: () {
+                            LoginController.to.login(emailController.text,
+                                passwordController.text, context);
+                          },
+                          hasBorder: false,
+                          elevation: 2.0,
+                        );
+                      }),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

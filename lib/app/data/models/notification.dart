@@ -17,15 +17,15 @@ class BiikeNoti {
   DateTime? createdDate;
   bool? isRead;
 
-  BiikeNoti({
-    // required this.notiId,
-    required this.receiverId,
-    required this.title,
-    required this.content,
-    required this.url,
-    required this.createdDate,
-    this.isRead = false
-  });
+  BiikeNoti(
+      {
+      // required this.notiId,
+      required this.receiverId,
+      required this.title,
+      required this.content,
+      required this.url,
+      required this.createdDate,
+      this.isRead = false});
 
   BiikeNoti.empty() {
     receiverId = 10;

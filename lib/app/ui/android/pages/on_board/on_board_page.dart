@@ -1,10 +1,9 @@
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/images.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/on_board/on_board/on_board.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/injectable/injectable.dart';
-import 'package:bikes_user/services/firebase_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,9 +22,9 @@ class OnBoardPage extends StatefulWidget {
 
 class _OnBoardPageState extends State<OnBoardPage> {
   late int indexState;
-  final FirebaseServices _firebaseServices = getIt<FirebaseServices>();
   Future<void> skip() async {
-    if (_firebaseServices.user != null) {
+    final token = await LocalAppData().token;
+    if (token.isNotEmpty) {
       Get.offAllNamed(CommonRoutes.HOME);
     } else {
       Get.offAllNamed(CommonRoutes.LOGIN);
