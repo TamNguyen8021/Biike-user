@@ -66,7 +66,7 @@ class FeedbackController extends GetxController {
         tripId: tripId,
         feedbackContent: _feedbackContent ?? '',
         tripStar: _star.round(),
-        tripTip: _tip ?? 0,
+        tripTip: _tip,
         criteria: _criteria.isEmpty ? '' : _criteria.toString(),
         createdDate: DateTime.now());
 
