@@ -1,6 +1,7 @@
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/notification_controller.dart';
+import 'package:bikes_user/app/ui/android/pages/notification/widget/notificaiton_card.dart';
 import 'package:bikes_user/app/ui/android/pages/notification/widget/notification_list.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
