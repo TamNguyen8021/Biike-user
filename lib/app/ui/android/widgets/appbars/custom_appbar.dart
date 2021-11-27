@@ -68,7 +68,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               actions: actionWidgets,
               bottom: bottomAppBar,
               shape: _shapeBorder,
-              elevation: color != null ? 0 : 4,
               backgroundColor: color != null
                   ? color
                   : ModalRoute.of(context)!.settings.name ==
