@@ -1,3 +1,5 @@
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
+
 class UrlStrings {
   static const String _baseUrl =
       'https://biike-api.azurewebsites.net/api/biike/v1/';
@@ -23,6 +25,14 @@ class UrlStrings {
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
   static const String directionUrl = _googleMapUrl + 'directions/json';
 
+  static String getGoogleMapUrl(
+      CustomLocation departure, CustomLocation destination) {
+    return 'http://maps.google.com/maps?saddr=${departure.latitude},${departure.longitude}&daddr=${destination.latitude},${destination.longitude}&travelmode=driving';
+  }
+
+  static const String apiMomoPayment = 'https://test-payment.momo.vn/pay/app';
+  static const String configurationUrl = _baseUrl + 'Configurations';
+  static const String momoTransactionUrl = _baseUrl + 'MomoTransactions';
   static const String _pathshareBaseUrl =
       'https://pathsha.re/api/professional/v1/';
   static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';
