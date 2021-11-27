@@ -205,18 +205,18 @@ class TripDetailsPage extends StatelessWidget {
   }
 
   void _onBackPressed({required BuildContext context}) {
-    if (_tripDetailsController.isTripStarted.isFalse) {
+    // if (_tripDetailsController.isTripStarted.isFalse) {
       if (Get.arguments['route'] == 'home') {
         _homeController.pagingController.refresh();
       } else {
         _tripHistoryController.pagingController.refresh();
       }
       Get.back();
-    } else {
-      CommonFunctions().showErrorDialog(
-          context: context,
-          message: CustomErrorsString.kCannotGoBackWhenTripStarted.tr);
-    }
+    // } else {
+    //   CommonFunctions().showErrorDialog(
+    //       context: context,
+    //       message: CustomErrorsString.kCannotGoBackWhenTripStarted.tr);
+    // }
   }
 
   @override
