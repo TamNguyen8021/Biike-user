@@ -676,49 +676,88 @@ class TripDetailsPage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Visibility(
-                                            visible: true,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 16.0,
-                                                  top: 16.0,
-                                                  bottom: 16.0),
-                                              child: CustomElevatedIconButton(
-                                                width: 150,
-                                                onPressedFunc: () async {
-                                                  if (controller
-                                                      .isTripStarted.isFalse) {
-                                                    await controller
-                                                        .getCurrentLocation();
-                                                    if (controller
-                                                            .userLocation !=
-                                                        null) {
-                                                      GoogleMapController
-                                                          googleMapController =
-                                                          await completerController
-                                                              .future;
-                                                      await googleMapController
-                                                          .animateCamera(CameraUpdate
-                                                              .newCameraPosition(
-                                                                  CameraPosition(
-                                                        target: LatLng(
-                                                            controller
-                                                                .userLocation!
-                                                                .latitude!,
-                                                            controller
-                                                                .userLocation!
-                                                                .longitude!),
-                                                        zoom: 12,
-                                                      )));
-                                                      if (await _tripProvider
-                                                          .startTripOrCompleteTrip(
-                                                              tripId: Get
-                                                                      .arguments[
-                                                                  'tripId'])) {
-                                                        controller.isTripStarted
-                                                            .value = true;
-                                                        controller
-                                                            .changeToFinishTripButton();
+                                          if (controller.trip.tripStatus ==
+                                              2) ...[
+                                            Visibility(
+                                              visible: true,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 16.0,
+                                                    top: 16.0,
+                                                    bottom: 16.0),
+                                                child: CustomElevatedIconButton(
+                                                  width: 150,
+                                                  onPressedFunc: () async {
+                                                    if (controller.isTripStarted
+                                                        .isFalse) {
+                                                      await controller
+                                                          .getCurrentLocation();
+                                                      if (controller
+                                                              .userLocation !=
+                                                          null) {
+                                                        GoogleMapController
+                                                            googleMapController =
+                                                            await completerController
+                                                                .future;
+                                                        await googleMapController
+                                                            .animateCamera(CameraUpdate
+                                                                .newCameraPosition(
+                                                                    CameraPosition(
+                                                          target: LatLng(
+                                                              controller
+                                                                  .userLocation!
+                                                                  .latitude!,
+                                                              controller
+                                                                  .userLocation!
+                                                                  .longitude!),
+                                                          zoom: 12,
+                                                        )));
+                                                        if (await _tripProvider
+                                                            .startTripOrCompleteTrip(
+                                                                tripId: Get
+                                                                        .arguments[
+                                                                    'tripId'])) {
+                                                          controller
+                                                              .isTripStarted
+                                                              .value = true;
+                                                          controller
+                                                              .changeToFinishTripButton();
+                                                        } else {
+                                                          CommonFunctions()
+                                                              .showErrorDialog(
+                                                                  context:
+                                                                      context,
+                                                                  message:
+                                                                      CustomErrorsString
+                                                                          .kDevelopError
+                                                                          .tr);
+                                                        }
+                                                      } else {
+                                                        CommonFunctions()
+                                                            .showInfoDialog(
+                                                                context:
+                                                                    context,
+                                                                message:
+                                                                    CustomStrings
+                                                                        .kNeedLocationPermission
+                                                                        .tr);
+                                                      }
+                                                    } else {
+                                                      final isTripCompleted =
+                                                          await _tripProvider
+                                                              .startTripOrCompleteTrip(
+                                                                  tripId: Get
+                                                                          .arguments[
+                                                                      'tripId']);
+                                                      if (isTripCompleted) {
+                                                        isStartTripButtonVisible
+                                                            .value = false;
+                                                        Get.offAllNamed(
+                                                            CommonRoutes
+                                                                .FEEDBACK,
+                                                            arguments:
+                                                                controller.trip
+                                                                    .tripId);
                                                       } else {
                                                         CommonFunctions()
                                                             .showErrorDialog(
@@ -729,48 +768,20 @@ class TripDetailsPage extends StatelessWidget {
                                                                         .kDevelopError
                                                                         .tr);
                                                       }
-                                                    } else {
-                                                      CommonFunctions().showInfoDialog(
-                                                          context: context,
-                                                          message: CustomStrings
-                                                              .kNeedLocationPermission
-                                                              .tr);
                                                     }
-                                                  } else {
-                                                    final isTripCompleted =
-                                                        await _tripProvider
-                                                            .startTripOrCompleteTrip(
-                                                                tripId: Get
-                                                                        .arguments[
-                                                                    'tripId']);
-                                                    if (isTripCompleted) {
-                                                      isStartTripButtonVisible
-                                                          .value = false;
-                                                      Get.offAllNamed(
-                                                          CommonRoutes.FEEDBACK,
-                                                          arguments: controller
-                                                              .trip.tripId);
-                                                    } else {
-                                                      CommonFunctions().showErrorDialog(
-                                                          context: context,
-                                                          message:
-                                                              CustomErrorsString
-                                                                  .kDevelopError
-                                                                  .tr);
-                                                    }
-                                                  }
-                                                },
-                                                text:
-                                                    controller.buttonText.value,
-                                                backgroundColor:
-                                                    CustomColors.kBlue,
-                                                foregroundColor: Colors.white,
-                                                elevation: 0.0,
-                                                icon:
-                                                    controller.buttonIcon.value,
+                                                  },
+                                                  text: controller
+                                                      .buttonText.value,
+                                                  backgroundColor:
+                                                      CustomColors.kBlue,
+                                                  foregroundColor: Colors.white,
+                                                  elevation: 0.0,
+                                                  icon: controller
+                                                      .buttonIcon.value,
+                                                ),
                                               ),
                                             ),
-                                          ),
+                                          ],
                                         ],
                                       ),
                                     ],
