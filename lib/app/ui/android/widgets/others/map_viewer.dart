@@ -124,7 +124,7 @@ class MapViewer extends StatelessWidget {
                   text: CustomStrings.kViewRouteInstruction.tr,
                   onPressedFunc: () async {
                     String url =
-                        'https://www.openstreetmap.org/directions?engine=fossgis_osrm_bike&route=10.8414%2C106.8100%3B10.8491%2C106.7740';
+                        'http://maps.google.com/maps?saddr=${departure.latitude},${departure.longitude}&daddr=${destination.latitude},${destination.longitude}&travelmode=driving';
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
