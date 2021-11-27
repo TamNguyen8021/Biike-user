@@ -687,12 +687,13 @@ class Home extends StatelessWidget {
                             controller.verifyPhoneBeforeBookOrSearchStrip(
                                 context: context,
                                 onSuccess: () =>
-                            Get.toNamed(CommonRoutes.BOOK_TRIP));
+                                    Get.toNamed(CommonRoutes.BOOK_TRIP));
                           },
                         ),
                       ])
                 : null,
-                  floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
           );
         });
   }
