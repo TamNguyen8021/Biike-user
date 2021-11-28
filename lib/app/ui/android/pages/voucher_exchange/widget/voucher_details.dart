@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class VoucherDetails extends StatelessWidget {
   final Voucher voucher;
+
   VoucherDetails({Key? key, required this.voucher}) : super(key: key);
 
   @override
@@ -17,14 +18,26 @@ class VoucherDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Image(
-          image: AssetImage('assets/images/facebook-featured-img.jpg'),
-          width: double.infinity,
-          height: 150,
-          fit: BoxFit.fill,
-          ),
+          voucher.voucherImages.length > 1 &&
+                  voucher.voucherImages.elementAt(1) != null
+              ? Image(
+                  image: NetworkImage(voucher.voucherImages
+                      .elementAt(1)!
+                      .voucherImageUrl
+                      .toString()),
+                  width: double.infinity,
+                  height: 150,
+                  fit: BoxFit.fill,
+                ) // img from link
+              : Image(
+                  image: AssetImage('assets/images/facebook-featured-img.jpg'),
+                  width: double.infinity,
+                  height: 150,
+                  fit: BoxFit.fill,
+                ), // img from asset package
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 22.0, vertical: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +55,9 @@ class VoucherDetails extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
-                                .copyWith(color: CustomColors.kOrange, fontWeight: FontWeight.bold),
+                                .copyWith(
+                                    color: CustomColors.kOrange,
+                                    fontWeight: FontWeight.bold),
                           ),
                           SvgPicture.asset(
                             'assets/images/crown.svg',
@@ -55,14 +70,16 @@ class VoucherDetails extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Text(
                           voucher.voucherName,
-                          style: Theme.of(context).textTheme.headline2!
-                              .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Text(
-                          CustomStrings.kAvailableUntil.tr +
-                              DateFormat('dd/MM/yyyy').format(voucher.endDate)
-                      )
+                      Text(CustomStrings.kAvailableUntil.tr +
+                          DateFormat('dd/MM/yyyy').format(voucher.endDate))
                     ],
                   ),
                 ),
@@ -79,16 +96,16 @@ class VoucherDetails extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!
-                              .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Text(
                           voucher.description,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1,
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                       ),
                     ],
@@ -106,16 +123,16 @@ class VoucherDetails extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!
-                              .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Text(
                           voucher.termsAndConditions,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1,
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                       ),
                     ],

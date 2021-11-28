@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class VoucherCard extends StatelessWidget {
   final Voucher voucher;
+
   VoucherCard({Key? key, required this.voucher}) : super(key: key);
 
   @override
@@ -33,12 +34,23 @@ class VoucherCard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25.0),
-                  child: Image(
-                    image: AssetImage('assets/images/voucher-banh-mi.jpg'),
-                    width: 100,
-                    height: 120,
-                    fit: BoxFit.fill,
-                  ),
+                  child: voucher.voucherImages.elementAt(0) != null
+                      ? Image(
+                          image: NetworkImage(voucher.voucherImages
+                              .elementAt(0)!
+                              .voucherImageUrl
+                              .toString()),
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.fill,
+                        )  // img from link
+                      : Image(
+                          image:
+                              AssetImage('assets/images/voucher-banh-mi.jpg'),
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.fill,
+                        ), // img from asset package
                 ),
               ),
               Column(
