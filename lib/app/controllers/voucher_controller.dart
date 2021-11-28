@@ -12,7 +12,6 @@ class VoucherController extends GetxController {
       PagingController(firstPageKey: 0);
 
   RxList<VoucherCategory> voucherCategoryList = <VoucherCategory>[].obs;
-  RxList<dynamic> _voucherList = [].obs;
 
   Rx<VoucherCategory> category = VoucherCategory.empty().obs;
 
@@ -50,16 +49,16 @@ class VoucherController extends GetxController {
     pagingController.refresh();
   }
 
-  Future<void> _getVoucherList() async {
-    _voucherList.clear();
+  Future<List> _getVoucherList() async {
     Map<String, dynamic> response = await _voucherProvider.getVoucherList(
         page: _currentPage,
         limit: _limit,
         cateId: this.category.value.voucherCategoryId! < 0
             ? 0
             : this.category.value.voucherCategoryId);
-    _voucherList.value = response['data'];
     pagination = response['_meta'];
+
+    return response['data'];
   }
 
   /// Lazy loading when list of available vouchers
@@ -67,7 +66,7 @@ class VoucherController extends GetxController {
   /// Author: UyenNLP
   Future<void> _fetchPage(int pageKey) async {
     try {
-      await _getVoucherList();
+      var voucherList = await _getVoucherList();
 
       final int previouslyFetchedItemsCount =
           pagingController.itemList?.length ?? 0;
@@ -76,13 +75,13 @@ class VoucherController extends GetxController {
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
 
       if (isLastPage) {
-        pagingController.appendLastPage(_voucherList);
+        pagingController.appendLastPage(voucherList);
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        nextPageKey += _voucherList.length;
-        pagingController.appendPage(_voucherList, nextPageKey);
+        nextPageKey += voucherList.length;
+        pagingController.appendPage(voucherList, nextPageKey);
       }
     } catch (error) {
       pagingController.error = error;
