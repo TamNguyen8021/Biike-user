@@ -54,7 +54,7 @@ class TripDetailsPage extends StatelessWidget {
   void _addStatusBarTextAndTime() {
     const String _timeFormat = 'HH:mm, dd-MM-yyyy';
     switch (_tripDetailsController.trip.tripStatus) {
-      case 4:
+      case 5:
         _statusBarText = CustomStrings.kTripHasFinished.tr;
         _statusBarTime = DateFormat(_timeFormat).format(
             DateTime.tryParse(_tripDetailsController.trip.finishedTime)!);
@@ -256,8 +256,8 @@ class TripDetailsPage extends StatelessWidget {
                         },
                         appBar: AppBar(),
                         title: Text(CustomStrings.kTripDetails.tr),
-                        actionWidgets: controller.trip.tripStatus != 4 &&
-                                controller.trip.tripStatus != 5
+                        actionWidgets: controller.trip.tripStatus != 5 &&
+                                controller.trip.tripStatus != 6
                             ? <Widget>[
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -528,7 +528,7 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    if (controller.trip.tripStatus == 5 &&
+                                    if (controller.trip.tripStatus == 6 &&
                                         controller.user.userFullname ==
                                             CustomStrings.kFinding)
                                       ...[]
@@ -630,8 +630,8 @@ class TripDetailsPage extends StatelessWidget {
                                         },
                                       ),
                                     ],
-                                    if (controller.trip.tripStatus != 4 &&
-                                        controller.trip.tripStatus != 5) ...[
+                                    if (controller.trip.tripStatus != 5 &&
+                                        controller.trip.tripStatus != 6) ...[
                                       Container(
                                         width: double.infinity,
                                         child: Column(
@@ -845,7 +845,7 @@ class TripDetailsPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (controller.trip.tripStatus == 4) ...[
+                              if (controller.trip.tripStatus == 5) ...[
                                 _showFeedbacks(
                                     context: context,
                                     title: CustomStrings.kYourFeedback.tr,
