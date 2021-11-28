@@ -8,7 +8,7 @@ import 'package:bikes_user/app/ui/android/widgets/others/top_up_point_text_field
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:momo_vn/momo_vn.dart';
+import 'package:momo_vn/momo_vn.dart';
 
 /// The 'top_up_point' screen
 class TopUpPointPage extends StatefulWidget {
@@ -17,8 +17,8 @@ class TopUpPointPage extends StatefulWidget {
 }
 
 class MomoPageState extends State<TopUpPointPage> {
-  // late MomoVn _momoPay;
-  // late PaymentResponse _momoPaymentResult;
+  late MomoVn _momoPay;
+  late PaymentResponse _momoPaymentResult;
   String paymentStatus = '';
   final topUpPointController = Get.find<TopUpPointController>();
 
