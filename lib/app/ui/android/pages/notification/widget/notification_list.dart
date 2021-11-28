@@ -19,6 +19,7 @@ class NotificationList extends StatelessWidget {
         : ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
+            reverse: true,
             scrollDirection: Axis.vertical,
             itemCount: listNotification.length,
             itemBuilder: (BuildContext context, int index) {
@@ -29,7 +30,7 @@ class NotificationList extends StatelessWidget {
                 children: <Widget>[
                   NotificationCard(
                       hashKey: key, notification: BiikeNoti.fromJson(noti)),
-                  if (index < listNotification.length - 1) ...[
+                  if (index > 0) ...[
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Divider(

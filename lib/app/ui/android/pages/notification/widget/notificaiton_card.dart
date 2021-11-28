@@ -28,7 +28,7 @@ class NotificationCard extends StatelessWidget {
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
     return GestureDetector(
       onTap: () => _readNoti(),
-      child: Container(
+      child: IntrinsicHeight(
         child: Row(
           children: <Widget>[
             Expanded(
@@ -36,12 +36,15 @@ class NotificationCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('${notification.title}',
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                      overflow: TextOverflow.fade),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: Text('${notification.title}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.fade),
+                  ),
                   Text('${notification.content}',
                       style: Theme.of(context).textTheme.bodyText1,
                       overflow: TextOverflow.ellipsis),
@@ -51,17 +54,22 @@ class NotificationCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text('${dateFormat.format(notification.createdDate!)}',
                       style: Theme.of(context).textTheme.bodyText1),
-                  Text(''),
+                  if (notification.isRead!) ...[
+                    Text(''),
+                  ] else ...[
+                    Padding(
+                      padding: const EdgeInsets.only(right: 22.0),
+                      child: Icon(Icons.circle),
+                    ),
+                  ],
                 ],
               ),
             )
           ],
-        ),
-        decoration: BoxDecoration(
-          color: !notification.isRead! ? CustomColors.kLightBlue : Colors.white,
         ),
       ),
     );
