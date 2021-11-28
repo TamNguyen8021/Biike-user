@@ -83,15 +83,18 @@ class TripHistoryController extends GetxController {
           tripStatus = TripStatus.finding;
           break;
         case 2:
-          tripStatus = TripStatus.waiting;
+          tripStatus = TripStatus.matched;
           break;
         case 3:
-          tripStatus = TripStatus.started;
+          tripStatus = TripStatus.waiting;
           break;
         case 4:
-          tripStatus = TripStatus.finished;
+          tripStatus = TripStatus.started;
           break;
         case 5:
+          tripStatus = TripStatus.finding;
+          break;
+        case 6:
           tripStatus = TripStatus.canceled;
           break;
         default:

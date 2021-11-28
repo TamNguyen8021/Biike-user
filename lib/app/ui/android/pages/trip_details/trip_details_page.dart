@@ -712,7 +712,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                     departureLocation
                                                                         .longitude)) {
                                                               if (await _tripProvider
-                                                                  .startTripOrCompleteTrip(
+                                                                  .startTrip(
                                                                       tripId: Get
                                                                               .arguments[
                                                                           'tripId'])) {
@@ -750,7 +750,7 @@ class TripDetailsPage extends StatelessWidget {
                                                         } else {
                                                           final isTripCompleted =
                                                               await _tripProvider
-                                                                  .startTripOrCompleteTrip(
+                                                                  .completeTrip(
                                                                       tripId: Get
                                                                               .arguments[
                                                                           'tripId']);
