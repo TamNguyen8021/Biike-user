@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -378,6 +380,30 @@ class CommonFunctions {
   static TimeOfDay stringToTimeOfDay(String time) {
     final format = DateFormat.Hm(); //"16:00"
     return TimeOfDay.fromDateTime(format.parse(time));
+  }
+
+  bool isArrivedAtPickUpPoint(
+      {required double userLat,
+      required double userLng,
+      required double departureLat,
+      required double departureLng}) {
+    const r = 6371; // Radius of earth in kilometers. Use 3956 for miles
+    double fi1 = userLat * math.pi / 180; // φ, λ in radians
+    double fi2 = departureLat * math.pi / 180;
+    double deltaFi = (departureLat - userLat) * math.pi / 180;
+    double deltaLamda = (departureLng - userLng) * math.pi / 180;
+
+    double a = math.sin(deltaFi / 2) * math.sin(deltaFi / 2) +
+        math.cos(fi1) *
+            math.cos(fi2) *
+            math.sin(deltaLamda / 2) *
+            math.sin(deltaLamda / 2);
+    double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
+    double d = r * c; // in kilometres
+    if (d < 0.5) {
+      return true;
+    }
+    return false;
   }
 
   /// Log to Biike logger

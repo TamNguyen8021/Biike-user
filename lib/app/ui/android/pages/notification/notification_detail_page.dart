@@ -4,7 +4,6 @@ import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:get/get.dart';
@@ -18,11 +17,8 @@ class NotificationDetailPage extends StatelessWidget {
 
     // move to corresponding page
     if (url.contains('details')) {
-      Get.toNamed(CommonRoutes.TRIP_DETAILS, arguments: {
-        'tripId': tripId,
-        'userId': Biike.userId.value,
-        'route': 'home'
-      });
+      Get.toNamed(CommonRoutes.TRIP_DETAILS,
+          arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
       Get.toNamed(CommonRoutes.FEEDBACK, arguments: tripId);
     }

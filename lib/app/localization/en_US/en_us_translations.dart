@@ -111,6 +111,8 @@ final Map<String, String> en = {
       'Board Of Honor Bikers for oustanding Bikers who are the most active, gain highest points.',
   'kTopBikerInfoSecondContent':
       'Bikers who appears on Board Of Honor Bikers will have special deals and gifts from Biiké.',
+  'kTopBikerInfoThirdContent':
+      'The point shown on chart represent the point you\'ve earned from your trips, which does not include top up points.',
   'kGotIt': 'Got it',
 
   // 'activity' screen
@@ -367,8 +369,8 @@ final Map<String, String> en = {
   'kSOSNumberFirstDescription':
       'Biiké will send SMS which contains information of trip to ',
   'kSOSNumberSecondDescription': ' when you press on ',
-  'kNeedSOS': 'I need Police/Ambulance',
-  'kSOSNumberThirdDescription': ' while on road',
+  'kNeedSOS': 'Send location',
+  'kSOSNumberThirdDescription': ' to S.O.S numbers',
   'kSOSReachLimit': 'Reach S.O.S phone number limit',
 
   // 'add_sos_number' screen
@@ -446,4 +448,5 @@ final Map<String, String> en = {
     'kNoNotification': 'No notification',
     'kEmptyReportReasonOrContainsBadWords':
         'Report reason must not be empty or contains inappropriate words',
+    'kNotArrivedAtPickUpPoint': 'You are not at the pick up point',
   });
