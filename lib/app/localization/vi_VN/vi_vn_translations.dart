@@ -461,4 +461,5 @@ final Map<String, String> vi = {
     'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
+    'kOutOfDate': 'Đã hết hạn',
   });

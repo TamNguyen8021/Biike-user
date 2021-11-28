@@ -27,6 +27,7 @@ class YourVoucherDetailPage extends StatelessWidget {
     Voucher voucher = Voucher.fromJson(data);
     Redemption redemption = Redemption.fromJson(data);
     voucher.setAmountOfPoint(redemption.voucherPoint);
+    var now = DateTime.now();
 
     return OnBackPressed(
       perform: () => _onBackPressed(),
@@ -56,7 +57,7 @@ class YourVoucherDetailPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     ShowVoucherCodeButton(voucherCode: redemption.voucherCode),
-                    MarkUsedButton(redemption: redemption),
+                    MarkUsedButton(redemption: redemption, isOutOfDate: now.isAfter(voucher.endDate)),
                   ],
                 ),
               ),
