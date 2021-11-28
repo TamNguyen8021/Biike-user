@@ -1,4 +1,3 @@
-import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
@@ -12,7 +11,7 @@ class OpenPageController extends GetxController {
   Future<void> navigateToWelcomeScreen() async {
     await Future.delayed(Duration(seconds: 3)).then((value) async {
       if (_appPref.initOpenApp) {
-        final token = await LocalAppData().token;
+        final token = _appPref.token;
         if (token.isNotEmpty) {
           Get.offAllNamed(CommonRoutes.HOME);
         } else {
