@@ -22,12 +22,12 @@ abstract class Services {
   FirebaseServices get firebaseServices => FirebaseServices.init();
 
   @singleton
-  TokenService get tokenService => TokenService.init();
-
-  @singleton
   FirebaseRealtimeDatabaseService get realtimeDatabaseService =>
       FirebaseRealtimeDatabaseService.init();
 
   @preResolve
   Future<AppPref> get appPref => AppPref.instance();
+
+  @singleton
+  TokenService get tokenService => TokenService.init();
 }

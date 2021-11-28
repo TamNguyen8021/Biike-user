@@ -4,11 +4,13 @@ import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/controllers/choose_mode_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/previous_page_button.dart';
+import 'package:bikes_user/services/token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -198,6 +200,7 @@ class ChooseModePage extends StatelessWidget {
                     }
 
                     if (await _userProvider.changeRole(role: role)) {
+                      await getIt<TokenService>().refreshToken();
                       Biike.localAppData.saveRole(Biike.role.value);
                       Get.offAllNamed(CommonRoutes.HOME);
                     } else {

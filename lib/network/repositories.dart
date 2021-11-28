@@ -1,8 +1,9 @@
-import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/retrofit.dart';
+import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,7 +19,7 @@ class Repositories implements RestClient {
       requestBody: true,
       responseBody: true,
     ));
-    setToken();
+    setHeaders();
 
     _client = RestClient(
       dio,
@@ -55,8 +56,8 @@ class Repositories implements RestClient {
     );
   }
 
-  Future<void> setToken() async {
-    final token = await LocalAppData().token;
+  Future<void> setHeaders() async {
+    final token = getIt<AppPref>().token;
     dio.options.headers = {'Authorization': 'Bearer $token'};
   }
 
