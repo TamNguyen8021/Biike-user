@@ -1,6 +1,7 @@
 import 'package:bikes_user/services/firebase_realtime_database_service.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
+import 'package:bikes_user/services/token_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,4 +27,7 @@ abstract class Services {
 
   @preResolve
   Future<AppPref> get appPref => AppPref.instance();
+
+  @singleton
+  TokenService get tokenService => TokenService.init();
 }

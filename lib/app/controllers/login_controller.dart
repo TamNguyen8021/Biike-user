@@ -5,6 +5,7 @@ import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
+import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class LoginController extends GetxController {
     _enableLoading(true);
 
     try {
+      // sau khi login xong save user info
       final response =
           await _userRepository.signin(email: email, password: pass);
 
@@ -33,10 +35,15 @@ class LoginController extends GetxController {
         throw ('Lỗi server trả token empty');
       }
 
-      // Save user data to local memory
+      // Set token, refresh token
+      getIt<AppPref>()
+        ..setToken(response.data.idToken)
+        ..setRefreshToken(response.data.refreshToken);
+      getIt<Repositories>().setHeaders();
+      // *
       await Biike.localAppData.saveUserInfo(response.data);
       await Biike.localAppData.loadDataFromLocal();
-      getIt<Repositories>().setToken();
+      getIt<Repositories>().setHeaders();
       Get.toNamed(CommonRoutes.CHOOSE_MODE);
     } on DioError catch (e) {
       print(e);
