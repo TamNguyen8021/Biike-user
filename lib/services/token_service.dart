@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 class TokenService {
   static init() async {
     final tokenService = TokenService();
-    // tokenService._refreshToken();
+    tokenService._refreshToken();
     return tokenService;
   }
 
