@@ -32,7 +32,7 @@ class CommonFunctions {
   /// Use device default message app to send a message to [phoneNo].
   ///
   /// Author: TamNTT
-  makingSms({required List<String> phoneNo, String? body}) async {
+  makingSms({required List<String> phoneNo, required String body}) async {
     String recipients = '';
     for (int i = 0; i < phoneNo.length; i++) {
       recipients += phoneNo[i];

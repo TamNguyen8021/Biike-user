@@ -406,6 +406,14 @@ final Map<String, String> vi = {
   'kExpired': ' điểm sẽ hết hạn vào ngày ',
   'kFindMore': 'Tìm hiểu thêm',
 
+  'kTopUpFromMomo': 'Nạp điểm từ Ví Momo',
+  'kEnterPoint': 'Nhập số điểm cần nạp',
+  'kNeedAmount': 'Số tiền cần chuyển',
+  'kNoted': 'Lưu ý',
+  'kTopUpNoted':
+      'KHÔNG áp dụng đối với chuyển khoản tại các đại lý như FPT Shop, Circle K, Ministop, F88...',
+  'kTopUpSuccess': 'Nạp điểm thành công',
+
   // noti
   'kNotification': 'Thông báo',
 

@@ -54,13 +54,13 @@ class ViewPointPage extends StatelessWidget {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text(
+                                  Obx(() => Text(
                                     '${_walletController.totalWalletPoint.value} ',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline3!
                                         .copyWith(color: CustomColors.kOrange),
-                                  ),
+                                  )),
                                   SvgPicture.asset(
                                     'assets/images/crown.svg',
                                     color: CustomColors.kOrange,

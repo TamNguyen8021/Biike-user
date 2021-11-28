@@ -13,7 +13,7 @@ class UrlStrings {
   static const String pointUrl = _baseUrl + 'pointHistory';
   static const String intimaciesUrl = _baseUrl + 'intimacies';
   static const String reportUrl = _baseUrl + 'reports';
-  static const String feedbackUrl = _baseUrl + 'feebacks';
+  static const String feedbackUrl = _baseUrl + 'feedbacks';
   static const String sos = _baseUrl + 'Sos';
 
   static const String googleMapApiKey =
@@ -22,6 +22,10 @@ class UrlStrings {
   static const String distancematrixUrl = _googleMapUrl + 'distancematrix/json';
   static const String placeDetailsUrl = _googleMapUrl + 'place/details/json';
   static const String directionUrl = _googleMapUrl + 'directions/json';
+
+  static const String apiMomoPayment = 'https://test-payment.momo.vn/pay/app';
+  static const String configurationUrl = _baseUrl + 'Configurations';
+  static const String momoTransactionUrl = _baseUrl + 'MomoTransactions';
 
   static const String _pathshareBaseUrl =
       'https://pathsha.re/api/professional/v1/';

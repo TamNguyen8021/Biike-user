@@ -23,7 +23,7 @@ class NotificationDetailPage extends StatelessWidget {
         'userId': Biike.userId.value,
         'route': 'home'
       });
-    } else if (url.contains('feedback')) {
+    } else if (url.contains('feedbacks')) {
       Get.toNamed(CommonRoutes.FEEDBACK, arguments: tripId);
     }
   }
@@ -31,7 +31,7 @@ class NotificationDetailPage extends StatelessWidget {
   _getTripId(String url) {
     // get trip Id
     String remove = url.contains('details') ? 'details' : '';
-    if (remove == '') remove = url.contains('feedback') ? 'feedback' : '';
+    if (remove == '') remove = url.contains('feedbacks') ? 'feedbacks' : '';
     if (remove != '' && url.contains(remove)) {
       url = url.substring(0, url.length - remove.length - 1);
     }

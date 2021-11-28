@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late DateTime _firstTripTimeBook;
+    DateTime _firstTripTimeBook = DateTime.now();
     DateTime _currentTime = DateTime.now();
     String _timeLeft = '';
 
@@ -351,13 +351,18 @@ class Home extends StatelessWidget {
                                                           Icons.event_outlined,
                                                         ),
                                                       ),
-                                                      Text(
-                                                        controller
-                                                            .searchDateString
-                                                            .value,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller
+                                                              .searchDateString
+                                                              .value,
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -395,13 +400,18 @@ class Home extends StatelessWidget {
                                                           Icons.access_time,
                                                         ),
                                                       ),
-                                                      Text(
-                                                        controller
-                                                            .searchTimeString
-                                                            .value,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller
+                                                              .searchTimeString
+                                                              .value,
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -660,37 +670,37 @@ class Home extends StatelessWidget {
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                        if (controller.upcomingTrips.isEmpty) ...[
-                          CustomPaint(
-                            foregroundPainter: TooltipPainter(),
-                            child: Container(
-                              alignment: Alignment.bottomCenter,
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              margin: const EdgeInsets.only(
-                                  bottom: 20.0, left: 22.0, right: 22.0),
-                              decoration: BoxDecoration(
-                                color: CustomColors.kLightGray,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Text(
-                                CustomStrings.kCreateTrip.tr,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
+                      if (controller.upcomingTrips.isEmpty) ...[
+                        CustomPaint(
+                          foregroundPainter: TooltipPainter(),
+                          child: Container(
+                            alignment: Alignment.bottomCenter,
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            margin: const EdgeInsets.only(
+                                bottom: 20.0, left: 22.0, right: 22.0),
+                            decoration: BoxDecoration(
+                              color: CustomColors.kLightGray,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(
+                              CustomStrings.kCreateTrip.tr,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),
-                        ],
-                        CreateTripButton(
-                          createTrip: () {
-                            // Get.toNamed(CommonRoutes.BOOK_TRIP);
-                            controller.verifyPhoneBeforeBookOrSearchStrip(
-                                context: context,
-                                onSuccess: () =>
-                                    Get.toNamed(CommonRoutes.BOOK_TRIP));
-                          },
                         ),
-                      ])
+                      ],
+                      CreateTripButton(
+                        createTrip: () {
+                          // Get.toNamed(CommonRoutes.BOOK_TRIP);
+                          controller.verifyPhoneBeforeBookOrSearchStrip(
+                              context: context,
+                              onSuccess: () =>
+                                  Get.toNamed(CommonRoutes.BOOK_TRIP));
+                        },
+                      ),
+                    ],
+                  )
                 : null,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,

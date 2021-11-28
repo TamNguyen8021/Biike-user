@@ -27,7 +27,6 @@ class NotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var f = new DateFormat('dd/MM/yyyy');
-
     return GestureDetector(
       onTap: () => _readNoti(),
       child: Container(
