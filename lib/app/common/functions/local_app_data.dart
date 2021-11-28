@@ -11,6 +11,7 @@ class LocalAppData {
   /// Author: UyenNLP
   Future<void> saveUserInfo(LoginData data) async {
     _pref = await SharedPreferences.getInstance()
+      ..setString('refreshToken', data.refreshToken)
       ..setString('token', data.idToken)
       ..setString('phone', data.phone)
       ..setBool('isPhoneVerified', data.isPhoneVerified)
@@ -34,24 +35,42 @@ class LocalAppData {
         await Biike.localAppData.pathshareUserIdentifier;
   }
 
-  /// Author: van
+  /// author: van
+  /// get token
   Future<String> get token async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('token') ?? '';
   }
 
+  /// author: van
+  /// set token
+  Future<bool> setToken(String token) async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.setString('token', token);
+  }
+
   /// Author: van
+  /// get refresh token
+  Future<String> get refreshToken async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getString('refreshToken') ?? '';
+  }
+
+  /// Author: van
+  /// get phone
   Future<String> get phone async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('phone') ?? '';
   }
 
   /// Author: van
+  /// get isphoneveriied
   Future<bool> get isPhoneVerified async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getBool('isPhoneVerified') ?? false;
   }
 
+  /// set isphoneveriied
   Future<bool> setIsPhoneVerified(bool val) async {
     _pref = await SharedPreferences.getInstance();
     return _pref.setBool('isPhoneVerified', val);
@@ -59,6 +78,7 @@ class LocalAppData {
 
   logout() async {
     _pref = await SharedPreferences.getInstance()
+      ..setString('refreshToken', '')
       ..setString('token', '')
       ..remove('isPhoneVerified')
       ..setString('phone', '')

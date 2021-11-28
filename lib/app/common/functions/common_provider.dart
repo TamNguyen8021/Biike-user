@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 
 class CommonProvider extends GetConnect {
   /// Return header to attach to api request
-  ///
+  /// reset token no keu lam o day ne anh
+
   /// Author: UyenNLP
   Future<Map<String, String>> get headers async {
     final token = await LocalAppData().token;

@@ -1,19 +1,14 @@
-import 'dart:convert';
-import 'dart:typed_data';
-import 'package:bikes_user/app/common/functions/rsa_utils.dart';
-import 'package:bikes_user/app/common/functions/text_utils.dart';
-import 'package:bikes_user/app/common/values/momo_constants.dart';
+
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/top_up_point_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_up_point_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:momo_vn/momo_vn.dart';
+// import 'package:momo_vn/momo_vn.dart';
 
 /// The 'top_up_point' screen
 class TopUpPointPage extends StatefulWidget {
@@ -22,17 +17,17 @@ class TopUpPointPage extends StatefulWidget {
 }
 
 class MomoPageState extends State<TopUpPointPage> {
-  late MomoVn _momoPay;
-  late PaymentResponse _momoPaymentResult;
+  // late MomoVn _momoPay;
+  // late PaymentResponse _momoPaymentResult;
   String paymentStatus = '';
   final topUpPointController = Get.find<TopUpPointController>();
 
   @override
   void initState() {
     super.initState();
-    _momoPay = MomoVn();
-    _momoPay.on(MomoVn.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _momoPay.on(MomoVn.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    // _momoPay = MomoVn();
+    // _momoPay.on(MomoVn.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    // _momoPay.on(MomoVn.EVENT_PAYMENT_ERROR, _handlePaymentError);
   }
 
   Future<void> initPlatformState() async {
@@ -175,26 +170,26 @@ class MomoPageState extends State<TopUpPointPage> {
                           padding: const EdgeInsets.only(top: 18.0),
                           child: CustomElevatedIconHasLoadingButton(
                             onPressedFunc: () async {
-                              MomoPaymentInfo options = MomoPaymentInfo(
-                                  merchantName: 'Biiké',
-                                  appScheme: 'momo6z6g20200121',
-                                  merchantCode: MomoConstants.partnerCode,
-                                  partnerCode: MomoConstants.partnerCode,
-                                  amount: int.parse(
-                                      topUpPointController.amount.value),
-                                  orderId: TextUtils.getOrderId(),
-                                  orderLabel: 'Nạp điểm',
-                                  merchantNameLabel: 'TTND',
-                                  fee: 0,
-                                  description: 'Thanh toán nạp điểm',
-                                  username: 'Biiké',
-                                  partner: 'merchant',
-                                  isTestMode: true);
-                              try {
-                                _momoPay.open(options);
-                              } catch (e) {
-                                print(e.toString());
-                              }
+                              // MomoPaymentInfo options = MomoPaymentInfo(
+                              //     merchantName: 'Biiké',
+                              //     appScheme: 'momo6z6g20200121',
+                              //     merchantCode: MomoConstants.partnerCode,
+                              //     partnerCode: MomoConstants.partnerCode,
+                              //     amount: int.parse(
+                              //         topUpPointController.amount.value),
+                              //     orderId: TextUtils.getOrderId(),
+                              //     orderLabel: 'Nạp điểm',
+                              //     merchantNameLabel: 'TTND',
+                              //     fee: 0,
+                              //     description: 'Thanh toán nạp điểm',
+                              //     username: 'Biiké',
+                              //     partner: 'merchant',
+                              //     isTestMode: true);
+                              // try {
+                              //   _momoPay.open(options);
+                              // } catch (e) {
+                              //   print(e.toString());
+                              // }
                             },
                             text: CustomStrings.kBuyPoint.tr,
                             icon: Icons.save,
@@ -217,59 +212,59 @@ class MomoPageState extends State<TopUpPointPage> {
   @override
   void dispose() {
     super.dispose();
-    _momoPay.clear();
+    // _momoPay.clear();
   }
 
-  void _setState() {
-    paymentStatus = 'Đã chuyển thanh toán';
-    if (_momoPaymentResult.isSuccess == true) {
-      paymentStatus += '\nTình trạng: Thành công.';
-      paymentStatus +=
-          '\nSố điện thoại: ' + _momoPaymentResult.phoneNumber.toString();
-      paymentStatus += '\nExtra: ' + _momoPaymentResult.extra!;
-      paymentStatus += '\nToken: ' + _momoPaymentResult.token.toString();
-    } else {
-      paymentStatus += '\nTình trạng: Thất bại.';
-      paymentStatus += '\nExtra: ' + _momoPaymentResult.extra.toString();
-      paymentStatus += '\nMã lỗi: ' + _momoPaymentResult.status.toString();
-    }
-  }
+  // void _setState() {
+    // paymentStatus = 'Đã chuyển thanh toán';
+    // if (_momoPaymentResult.isSuccess == true) {
+    //   paymentStatus += '\nTình trạng: Thành công.';
+    //   paymentStatus +=
+    //       '\nSố điện thoại: ' + _momoPaymentResult.phoneNumber.toString();
+    //   paymentStatus += '\nExtra: ' + _momoPaymentResult.extra!;
+    //   paymentStatus += '\nToken: ' + _momoPaymentResult.token.toString();
+    // } else {
+    //   paymentStatus += '\nTình trạng: Thất bại.';
+    //   paymentStatus += '\nExtra: ' + _momoPaymentResult.extra.toString();
+    //   paymentStatus += '\nMã lỗi: ' + _momoPaymentResult.status.toString();
+    // }
+  // }
 
-  void _handlePaymentSuccess(PaymentResponse response) {
-    setState(() {
-      _momoPaymentResult = response;
-      _setState();
-    });
+  // void _handlePaymentSuccess(PaymentResponse response) {
+  //   setState(() {
+  //     _momoPaymentResult = response;
+  //     _setState();
+  //   });
 
-    Map<String, dynamic> paymentRequest = {
-      'partnerCode': MomoConstants.partnerCode,
-      'partnerRefId': TextUtils.getRefId(),
-      'partnerTransId': TextUtils.getTransId(),
-      'amount': int.parse(topUpPointController.amount.value),
-    };
+  //   Map<String, dynamic> paymentRequest = {
+  //     'partnerCode': MomoConstants.partnerCode,
+  //     'partnerRefId': TextUtils.getRefId(),
+  //     'partnerTransId': TextUtils.getTransId(),
+  //     'amount': int.parse(topUpPointController.amount.value),
+  //   };
 
-    RSAUtils rsaUtils = RSAUtils(MomoConstants.pubKey);
+  //   RSAUtils rsaUtils = RSAUtils(MomoConstants.pubKey);
 
-    List<int> unit8List = json.encode(paymentRequest).codeUnits;
+  //   List<int> unit8List = json.encode(paymentRequest).codeUnits;
 
-    Map<String, dynamic> payment = {
-      'customerNumber': response.phoneNumber,
-      'appData': response.token!.trim(),
-      'partnerCode': paymentRequest['partnerCode'],
-      'partnerRefId': paymentRequest['partnerRefId'],
-      'hash': rsaUtils.encryptStr(Uint8List.fromList(unit8List)),
-      'description': 'Thanh toán nạp điểm',
-      'version': 2
-    };
+  //   Map<String, dynamic> payment = {
+  //     'customerNumber': response.phoneNumber,
+  //     'appData': response.token!.trim(),
+  //     'partnerCode': paymentRequest['partnerCode'],
+  //     'partnerRefId': paymentRequest['partnerRefId'],
+  //     'hash': rsaUtils.encryptStr(Uint8List.fromList(unit8List)),
+  //     'description': 'Thanh toán nạp điểm',
+  //     'version': 2
+  //   };
 
-    topUpPointController.createPayment(context: context, body: payment);
-  }
+  //   topUpPointController.createPayment(context: context, body: payment);
+  // }
 
-  void _handlePaymentError(PaymentResponse response) {
-    setState(() {
-      _momoPaymentResult = response;
-      _setState();
-    });
-    Biike.logger.e('_handlePaymentError: failed');
-  }
+  // void _handlePaymentError(PaymentResponse response) {
+  //   setState(() {
+  //     _momoPaymentResult = response;
+  //     _setState();
+  //   });
+  //   Biike.logger.e('_handlePaymentError: failed');
+  // }
 }

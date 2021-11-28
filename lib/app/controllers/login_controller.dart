@@ -26,6 +26,7 @@ class LoginController extends GetxController {
     _enableLoading(true);
 
     try {
+      // sau khi login xong save user info
       final response =
           await _userRepository.signin(email: email, password: pass);
 
@@ -34,6 +35,7 @@ class LoginController extends GetxController {
       }
 
       // Save user data to local memory
+    
       await Biike.localAppData.saveUserInfo(response.data);
       await Biike.localAppData.loadDataFromLocal();
       getIt<Repositories>().setToken();

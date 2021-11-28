@@ -42,8 +42,7 @@ class Repositories implements RestClient {
   }
 
   @override
-  Future verifyUser(
-      String idUser, bool? isPhoneVerified) {
+  Future verifyUser(String idUser, bool? isPhoneVerified) {
     return _client.verifyUser(idUser, isPhoneVerified);
   }
 
