@@ -8,7 +8,9 @@ import 'package:dio/dio.dart';
 
 class TokenService {
   static TokenService init() {
-    final tokenService = TokenService()..cronJob();
+    final tokenService = TokenService()
+      ..cronJob()
+      ..refreshToken();
     return tokenService;
   }
 
