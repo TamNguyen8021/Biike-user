@@ -6,7 +6,7 @@ part of 'notification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BiikeNoti _$BiikeNotiFromJson(Map<String, dynamic> json) {
+BiikeNoti _$BiikeNotiFromJson(Map<dynamic, dynamic> json) {
   return BiikeNoti(
     receiverId: json['receiverId'] as int?,
     title: json['title'] as String?,
@@ -15,7 +15,7 @@ BiikeNoti _$BiikeNotiFromJson(Map<String, dynamic> json) {
     createdDate: json['createdDate'] == null
         ? null
         : DateTime.parse(json['createdDate'] as String),
-    isRead: json['isRead'] as bool?,
+    isRead: json['isRead'] as bool? ?? false,
   );
 }
 

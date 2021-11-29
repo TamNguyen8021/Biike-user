@@ -38,7 +38,7 @@ class BiikeNoti {
   /// A necessary factory constructor for creating a new BiikeNoti instance
   /// from a map. Pass the map to the generated `_$NotificationFromJson()` constructor.
   /// The constructor is named after the source class, in this case, BiikeNoti.
-  factory BiikeNoti.fromJson(Map<String, dynamic> json) =>
+  factory BiikeNoti.fromJson(Map<dynamic, dynamic> json) =>
       _$BiikeNotiFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
