@@ -92,7 +92,7 @@ class TripHistoryController extends GetxController {
           tripStatus = TripStatus.started;
           break;
         case 5:
-          tripStatus = TripStatus.finding;
+          tripStatus = TripStatus.finished;
           break;
         case 6:
           tripStatus = TripStatus.canceled;

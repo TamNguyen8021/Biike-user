@@ -639,7 +639,9 @@ class TripDetailsPage extends StatelessWidget {
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
                                             if (controller.trip.tripStatus ==
-                                                2) ...[
+                                                    2 ||
+                                                controller.trip.tripStatus ==
+                                                    3) ...[
                                               Obx(
                                                 () => Visibility(
                                                   visible:

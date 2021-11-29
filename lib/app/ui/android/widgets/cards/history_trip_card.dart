@@ -57,7 +57,6 @@ class HistoryTripCard extends StatelessWidget {
       case TripStatus.waiting:
       case TripStatus.matched:
       case TripStatus.started:
-        break;
       case TripStatus.finished:
         _statusText = CustomStrings.kTripFinished.tr;
         break;
