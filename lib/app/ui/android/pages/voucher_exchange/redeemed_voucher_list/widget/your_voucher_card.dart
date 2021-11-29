@@ -8,18 +8,23 @@ import 'package:intl/intl.dart';
 
 class YourVoucherCard extends StatelessWidget {
   final data;
+
   YourVoucherCard({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Voucher voucher = Voucher.fromJson(data);
+    var now = DateTime.now();
+
     return GestureDetector(
         onTap: () =>
             Get.toNamed(CommonRoutes.YOUR_VOUCHER_DETAIL, arguments: data),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
           decoration: BoxDecoration(
-              color: CustomColors.kLightGray,
+              color: now.isAfter(voucher.endDate)
+                  ? CustomColors.kDarkGray
+                  : CustomColors.kLightGray,
               borderRadius: BorderRadius.circular(5),
               boxShadow: <BoxShadow>[
                 BoxShadow(

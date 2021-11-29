@@ -6,7 +6,7 @@ part of 'notification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BiikeNoti _$BiikeNotiFromJson(Map<dynamic, dynamic> json) {
+BiikeNoti _$BiikeNotiFromJson(Map<String, dynamic> json) {
   return BiikeNoti(
     receiverId: json['receiverId'] as int?,
     title: json['title'] as String?,

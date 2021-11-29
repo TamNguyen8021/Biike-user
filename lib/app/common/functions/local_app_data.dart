@@ -11,7 +11,6 @@ class LocalAppData {
   /// Author: UyenNLP
   Future<void> saveUserInfo(LoginData data) async {
     _pref = await SharedPreferences.getInstance()
-      ..setString('token', data.idToken)
       ..setString('phone', data.phone)
       ..setBool('isPhoneVerified', data.isPhoneVerified)
       ..setString('refreshToken', data.refreshToken)
@@ -35,23 +34,20 @@ class LocalAppData {
   }
 
   /// Author: van
-  Future<String> get token async {
-    _pref = await SharedPreferences.getInstance();
-    return _pref.getString('token') ?? '';
-  }
-
-  /// Author: van
+  /// get phone
   Future<String> get phone async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString('phone') ?? '';
   }
 
   /// Author: van
+  /// get isphoneveriied
   Future<bool> get isPhoneVerified async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getBool('isPhoneVerified') ?? false;
   }
 
+  /// set isphoneveriied
   Future<bool> setIsPhoneVerified(bool val) async {
     _pref = await SharedPreferences.getInstance();
     return _pref.setBool('isPhoneVerified', val);
@@ -59,7 +55,6 @@ class LocalAppData {
 
   logout() async {
     _pref = await SharedPreferences.getInstance()
-      ..setString('token', '')
       ..remove('isPhoneVerified')
       ..setString('phone', '')
       ..setString('refreshToken', '')

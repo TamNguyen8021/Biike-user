@@ -464,4 +464,5 @@ final Map<String, String> vi = {
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
     'kNotArrivedAtPickUpPoint': 'Bạn chưa đến điểm đón',
+    'kOutOfDate': 'Đã hết hạn',
   });
