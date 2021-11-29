@@ -38,5 +38,6 @@ class CustomErrorsString {
   static const String kNoNotification = 'kNoNotification';
   static const String kEmptyReportReasonOrContainsBadWords =
       'kEmptyReportReasonOrContainsBadWords';
+  static const String kNotArrivedAtPickUpPoint = 'kNotArrivedAtPickUpPoint';
   static const String kOutOfDate = 'kOutOfDate';
 }

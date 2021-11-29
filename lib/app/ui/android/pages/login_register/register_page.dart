@@ -135,7 +135,8 @@ class RegisterPage extends HookWidget {
                                       ),
                                       onTap: () async {
                                         await CommonFunctions().openLink(
-                                            url: 'https://www.biike.in',
+                                            url:
+                                                'https://www.biike.in/terms.html',
                                             context: context);
                                       },
                                     ),
@@ -154,7 +155,8 @@ class RegisterPage extends HookWidget {
                                       ),
                                       onTap: () async {
                                         await CommonFunctions().openLink(
-                                            url: 'https://www.biike.in/privacy',
+                                            url:
+                                                'https://www.biike.in/privacy.html',
                                             context: context);
                                       },
                                     ),

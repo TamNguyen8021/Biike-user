@@ -40,7 +40,7 @@ class TripDetailsController extends GetxController {
   Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
   Rx<IconData> buttonIcon = Icons.done_all.obs;
   Rx<String> _cancelReason = ''.obs;
-  Rx<bool> isTripStarted = false.obs;
+  Rx<bool> isArrivedAtPickUpPoint = false.obs;
   Rx<bool> isLocationShared = false.obs;
 
   Function onPressedFunc = () {};
@@ -114,7 +114,7 @@ class TripDetailsController extends GetxController {
     }
 
     if (trip.tripStatus == 3) {
-      isTripStarted.value = true;
+      isArrivedAtPickUpPoint.value = true;
     }
   }
 

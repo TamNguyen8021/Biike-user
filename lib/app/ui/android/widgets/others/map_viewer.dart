@@ -13,8 +13,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
 class MapViewer extends StatelessWidget {
-  // final Completer<GoogleMapController> _controller = Completer();
-
   final Completer<GoogleMapController> completerController;
   final List<LatLng> polypoints;
   final LocationData? userLocation;
@@ -44,73 +42,73 @@ class MapViewer extends StatelessWidget {
       isViewRouteInstructionButtonVisible.value = false;
     }
 
+    final Widget googleMap = Container(
+      width: double.infinity,
+      height: isFullMap ? null : 200.0,
+      margin: EdgeInsets.only(top: isFullMap ? 0.0 : 16.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
+        child: FutureBuilder(
+            future: CommonFunctions().getRoutePoints(
+                polypoints: polypoints,
+                startLat: departure.latitude,
+                startLng: departure.longitude,
+                endLat: destination.latitude,
+                endLng: destination.longitude),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return GoogleMap(
+                  myLocationEnabled: true,
+                  mapType: MapType.normal,
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(
+                        (departure.latitude + destination.latitude) / 2,
+                        (departure.longitude + destination.longitude) / 2),
+                    zoom: isFullMap ? 14 : 12,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    completerController.complete(controller);
+                  },
+                  markers: <Marker>{
+                    Marker(
+                      markerId: MarkerId('departure'),
+                      position: LatLng(departure.latitude, departure.longitude),
+                      infoWindow: InfoWindow(
+                          title: CustomStrings.kStartLocation.tr,
+                          snippet: 'Info'),
+                    ),
+                    Marker(
+                        markerId: MarkerId('destination'),
+                        position:
+                            LatLng(destination.latitude, destination.longitude),
+                        infoWindow: InfoWindow(
+                            title: CustomStrings.kEndLocation.tr,
+                            snippet: 'Info'),
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                            BitmapDescriptor.hueGreen)),
+                  },
+                  polylines: <Polyline>{
+                    Polyline(
+                        polylineId: PolylineId('route'),
+                        color: CustomColors.kBlue.withOpacity(0.5),
+                        width: 5,
+                        points: polypoints)
+                  },
+                );
+              } else {
+                return Loading();
+              }
+            }),
+      ),
+    );
+
     return Column(
       children: <Widget>[
-        Container(
-          width: double.infinity,
-          height: isFullMap
-              ? MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).padding.top -
-                  88.0
-              : 200.0,
-          margin: EdgeInsets.only(top: isFullMap ? 0.0 : 16.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
-            child: FutureBuilder(
-                future: CommonFunctions().getRoutePoints(
-                    polypoints: polypoints,
-                    startLat: departure.latitude,
-                    startLng: departure.longitude,
-                    endLat: destination.latitude,
-                    endLng: destination.longitude),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return GoogleMap(
-                      myLocationEnabled: true,
-                      mapType: MapType.normal,
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(
-                            (departure.latitude + destination.latitude) / 2,
-                            (departure.longitude + destination.longitude) / 2),
-                        zoom: isFullMap ? 14 : 12,
-                      ),
-                      onMapCreated: (GoogleMapController controller) {
-                        completerController.complete(controller);
-                      },
-                      markers: <Marker>{
-                        Marker(
-                          markerId: MarkerId('departure'),
-                          position:
-                              LatLng(departure.latitude, departure.longitude),
-                          infoWindow: InfoWindow(
-                              title: CustomStrings.kStartLocation.tr,
-                              snippet: 'Info'),
-                        ),
-                        Marker(
-                            markerId: MarkerId('destination'),
-                            position: LatLng(
-                                destination.latitude, destination.longitude),
-                            infoWindow: InfoWindow(
-                                title: CustomStrings.kEndLocation.tr,
-                                snippet: 'Info'),
-                            icon: BitmapDescriptor.defaultMarkerWithHue(
-                                BitmapDescriptor.hueGreen)),
-                      },
-                      polylines: <Polyline>{
-                        Polyline(
-                            polylineId: PolylineId('route'),
-                            color: CustomColors.kBlue.withOpacity(0.5),
-                            width: 5,
-                            points: polypoints)
-                      },
-                    );
-                  } else {
-                    return Loading();
-                  }
-                }),
-          ),
-        ),
+        if (isFullMap) ...[
+          Expanded(child: googleMap),
+        ] else ...[
+          googleMap,
+        ],
         Obx(
           () => Visibility(
             visible: isViewRouteInstructionButtonVisible.value,

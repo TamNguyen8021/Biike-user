@@ -265,14 +265,28 @@ class TripProvider extends CommonProvider {
     }
   }
 
-  /// Mark a trip as started or completed based on [tripId].
+  /// Mark a trip as started based on [tripId].
   ///
   /// Author: TamNTT
-  Future<bool> startTripOrCompleteTrip({required int tripId}) async {
-    final response = await put(
-        UrlStrings.tripUrl +
-            '$tripId/progressTime?bikerId=${Biike.userId.value.toString()}&time=${DateTime.now()}',
-        {},
+  Future<bool> startTrip({required int tripId}) async {
+    final response = await put(UrlStrings.tripUrl + '$tripId/startTime', {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /// Mark a trip as completed based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> completeTrip({required int tripId}) async {
+    final response = await put(UrlStrings.tripUrl + '$tripId/finishTime', {},
         headers: await headers);
 
     logResponse(response);

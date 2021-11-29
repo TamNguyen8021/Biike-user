@@ -36,9 +36,6 @@ class FirebaseRealtimeDatabaseService {
         .listen((event) {
       try {
         final value = event.snapshot.value;
-
-        // List x = value.entries.map((e) => e.value).toList();
-        // print(x.toString());
         data.value = value;
       } catch (error) {
         CommonFunctions.catchExceptionError(error);

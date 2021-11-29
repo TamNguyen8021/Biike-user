@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
@@ -204,9 +205,13 @@ class ChooseModePage extends StatelessWidget {
                       Biike.localAppData.saveRole(Biike.role.value);
                       Get.offAllNamed(CommonRoutes.HOME);
                     } else {
-                      CommonFunctions().showErrorDialog(
-                          context: context,
-                          message: CustomErrorsString.kDevelopError.tr);
+                      if (await BikeProvider().getBike() == null) {
+                        Get.toNamed(CommonRoutes.REQUIRE_ADD_BIKE);
+                      } else {
+                        CommonFunctions().showErrorDialog(
+                            context: context,
+                            message: CustomErrorsString.kDevelopError.tr);
+                      }
                     }
                   } else {
                     CommonFunctions().showErrorDialog(
