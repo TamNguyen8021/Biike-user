@@ -357,6 +357,7 @@ final Map<String, String> vi = {
 
   // 'address_book' screen
   'kAddressBook': 'Sổ địa chỉ',
+  'kDefault': 'Mặc định',
 
   // 'edit_address_book' screen
   'kEditAddressBook': 'Chỉnh sửa địa chỉ',
@@ -369,6 +370,7 @@ final Map<String, String> vi = {
   'kEnterName': 'Nhập tên',
   'kSelectAddress': 'Chọn địa chỉ',
   'kEnterNote': 'Nhập ghi chú',
+  'kSetAsDefault': 'Đặt làm mặc định',
 
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',

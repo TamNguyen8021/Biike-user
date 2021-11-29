@@ -20,12 +20,13 @@ class AddressBookController extends GetxController {
     if (response != null) {
       try {
         for (var address in response['userAddresses']) {
-          print(address);
           addressBooks.add(AddressBookCard(
               id: address['userAddressId'],
               name: address['userAddressName'],
               address: address['userAddressDetail'],
-              note: address['userAddressNote']));
+              note: address['userAddressNote'],
+              isDefault: address['isDefault'])
+          );
         }
       } catch (e) {
         print(e);

@@ -343,6 +343,7 @@ class CustomStrings {
 
   // 'address_book' screen
   static const String kAddressBook = 'kAddressBook';
+  static const String kDefault = 'kDefault';
 
   // 'edit_address_book' screen
   static const String kEditAddressBook = 'kEditAddressBook';
@@ -355,6 +356,7 @@ class CustomStrings {
   static const String kEnterName = 'kEnterName';
   static const String kSelectAddress = 'kSelectAddress';
   static const String kEnterNote = 'kEnterNote';
+  static const String kSetAsDefault = 'kSetAsDefault';
 
   // 'sos_number' screen
   static const String kSOSNumber = 'kSOSNumber';

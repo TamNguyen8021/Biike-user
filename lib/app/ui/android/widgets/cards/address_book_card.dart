@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,15 @@ class AddressBookCard extends StatelessWidget {
   final String name;
   final String address;
   final String note;
+  final bool isDefault;
 
   const AddressBookCard(
       {Key? key,
         required this.id,
         required this.name,
         required this.address,
-        required this.note
+        required this.note,
+        required this.isDefault
       })
       : super(key: key);
 
@@ -26,7 +29,8 @@ class AddressBookCard extends StatelessWidget {
         'id': id,
         'name': name,
         'address': address,
-        'note': note
+        'note': note,
+        'isDefault': isDefault
       }),
       child: Container(
         height: 72,
@@ -39,13 +43,28 @@ class AddressBookCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                      name,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
+                  Row(
+                    children: <Widget>[
+                      Text(
+                          name,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black
+                          )
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Text(
+                            isDefault ? CustomStrings.kDefault.tr : "",
+                            style: TextStyle (
+                                fontSize: 11.0,
+                                color: CustomColors.kBlue,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
                       )
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),

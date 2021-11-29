@@ -21,22 +21,26 @@ class EditAddressBookPage extends StatelessWidget {
   String name = Get.arguments['name'];
   String address = Get.arguments['address'];
   String note = Get.arguments['note'];
+  bool isDefault = Get.arguments['isDefault'];
 
   @override
   Widget build(BuildContext context) {
     editAddressBookPageController.name.value = name;
     editAddressBookPageController.address.value = address;
     editAddressBookPageController.note.value = note;
+    editAddressBookPageController.isDefault.value = isDefault;
 
     editAddressBookPageController.tempName = name;
     editAddressBookPageController.tempAddress = address;
     editAddressBookPageController.tempNote = note;
+    editAddressBookPageController.tempDefault = isDefault;
 
     Rx<bool> isSaveButtonDisable = editAddressBookPageController
         .isSaveButtonDisable(
             newName: editAddressBookPageController.name.value,
             newAddress: editAddressBookPageController.address.value,
-            newNote: editAddressBookPageController.note.value)
+            newNote: editAddressBookPageController.note.value,
+            newDefault: editAddressBookPageController.isDefault.value)
         .obs;
 
     return Scaffold(
@@ -101,7 +105,9 @@ class EditAddressBookPage extends StatelessWidget {
                                   newAddress: editAddressBookPageController
                                       .address.value,
                                   newNote:
-                                      editAddressBookPageController.note.value);
+                                      editAddressBookPageController.note.value,
+                                  newDefault:
+                                      editAddressBookPageController.isDefault.value);
                         }),
                   ),
                   Row(
@@ -155,8 +161,39 @@ class EditAddressBookPage extends StatelessWidget {
                                   newAddress: editAddressBookPageController
                                       .address.value,
                                   newNote:
-                                      editAddressBookPageController.note.value);
+                                      editAddressBookPageController.note.value,
+                                  newDefault:
+                                      editAddressBookPageController.isDefault.value);
                         }),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        CustomStrings.kSetAsDefault.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Obx(
+                              () => Switch(
+                                  value: editAddressBookPageController.isDefault.value,
+                                  onChanged: (bool value) {
+                                    editAddressBookPageController.changeDefault();
+                                    isSaveButtonDisable.value =
+                                      editAddressBookPageController.isSaveButtonDisable(
+                                        newName:
+                                          editAddressBookPageController.name.value,
+                                        newAddress: editAddressBookPageController
+                                            .address.value,
+                                        newNote:
+                                          editAddressBookPageController.note.value,
+                                        newDefault:
+                                          editAddressBookPageController.isDefault.value);
+                                  }
+                              )
+                      ),
+                    ],
                   ),
                   Obx(
                     () => Padding(
