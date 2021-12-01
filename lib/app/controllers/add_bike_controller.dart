@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/image_provider.dart';
-// import 'package:bikes_user/app/data/providers/image_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
@@ -48,21 +49,16 @@ class AddBikeController extends GetxController {
     // try {
     _enableLoading(true);
 
-    String bikePictureUrl = await _imageProvider.postImage(
-        imageType: 1,
-        imageName:
-            bikePicture.value.substring(bikePicture.value.lastIndexOf('/') + 1),
-        imagePath: bikePicture.value);
-    String bikeLicensePictureUrl = await _imageProvider.postImage(
-        imageType: 1,
-        imageName: registrationPicture.value
-            .substring(registrationPicture.value.lastIndexOf('/') + 1),
-        imagePath: registrationPicture.value);
-    String plateNumberPictureUrl = await _imageProvider.postImage(
-        imageType: 1,
-        imageName: numberPlatePicture.value
-            .substring(numberPlatePicture.value.lastIndexOf('/') + 1),
-        imagePath: numberPlatePicture.value);
+    List<MultipartFile> imageList = [];
+    imageList.add(await createMultipartFile(bikePicture.value,
+        bikePicture.value.substring(bikePicture.value.lastIndexOf('/') + 1)));
+    imageList.add(await createMultipartFile(registrationPicture.value,
+        registrationPicture.value.substring(registrationPicture.value.lastIndexOf('/') + 1)));
+    imageList.add(await createMultipartFile(numberPlatePicture.value,
+        numberPlatePicture.value.substring(numberPlatePicture.value.lastIndexOf('/') + 1)));
+
+    dynamic imageURLs = await _imageProvider.postImage(imageType: 1,
+        imageList: [bikePicture.value, registrationPicture.value, numberPlatePicture.value]);
 
     Map<String, dynamic> body = {
       'userId': Biike.userId.value,
@@ -72,9 +68,9 @@ class AddBikeController extends GetxController {
       'brand': brand.value,
       'bikeType': category.value,
       'bikeVolume': volume.value,
-      'bikePicture': bikePictureUrl,
-      'bikeLicensePicture': bikeLicensePictureUrl,
-      'plateNumberPicture': plateNumberPictureUrl,
+      'bikePicture': imageURLs[0],
+      'bikeLicensePicture': imageURLs[1],
+      'plateNumberPicture': imageURLs[2],
     };
 
     if (isAddBike) {
@@ -88,10 +84,26 @@ class AddBikeController extends GetxController {
     if (plateNumber.value.trim().isEmpty ||
         bikeOwner.value.trim().isEmpty ||
         color.value.trim().isEmpty ||
-        brand.value.trim().isEmpty) {
+        brand.value.trim().isEmpty ||
+        bikePicture.value.trim().isEmpty ||
+        numberPlatePicture.value.trim().isEmpty ||
+        registrationPicture.value.trim().isEmpty) {
       return false;
     }
 
     return true;
+  }
+
+  Future<MultipartFile> createMultipartFile(imagePath, imageName) async {
+    final File imageFile = File(imagePath);
+
+    if (await imageFile.exists()) {
+    // Use the cached images if it exists
+    } else {
+    // Image doesn't exist in cache
+      await imageFile.create(recursive: true);
+    }
+
+    return MultipartFile(imageFile, filename: imageName);
   }
 }

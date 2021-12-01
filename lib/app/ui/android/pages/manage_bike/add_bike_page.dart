@@ -188,8 +188,10 @@ class AddBikePage extends StatelessWidget {
                                   () => _addBikeController
                                           .registrationPicture.value
                                           .contains('https')
-                                      ? Image.network(_addBikeController
-                                          .registrationPicture.value)
+                                      ? Container(
+                                          height: 250,
+                                          child: Image.network(_addBikeController
+                                            .registrationPicture.value, fit: BoxFit.cover))
                                       : ImageFileContainer(
                                           condition: _addBikeController
                                                   .registrationPicture.value ==
@@ -217,8 +219,10 @@ class AddBikePage extends StatelessWidget {
                                 child: Obx(
                                   () => _addBikeController.bikePicture.value
                                           .contains('https')
-                                      ? Image.network(
-                                          _addBikeController.bikePicture.value)
+                                      ? Container(
+                                          height: 250,
+                                          child: Image.network(_addBikeController
+                                              .bikePicture.value, fit: BoxFit.cover))
                                       : ImageFileContainer(
                                           condition: _addBikeController
                                                   .bikePicture.value ==
@@ -250,8 +254,10 @@ class AddBikePage extends StatelessWidget {
                                   () => _addBikeController
                                           .numberPlatePicture.value
                                           .contains('https')
-                                      ? Image.network(_addBikeController
-                                          .numberPlatePicture.value)
+                                      ? Container(
+                                          height: 250,
+                                          child: Image.network(_addBikeController
+                                              .numberPlatePicture.value, fit: BoxFit.cover))
                                       : ImageFileContainer(
                                           condition: _addBikeController
                                                   .numberPlatePicture.value ==
