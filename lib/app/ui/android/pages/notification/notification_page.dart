@@ -22,48 +22,29 @@ class NotificationPage extends StatelessWidget {
           onPressedFunc: () => Get.back(),
           appBar: AppBar(),
           title: Text(CustomStrings.kNotification.tr),
+          actionWidgets: _notificationController.listNoti.isNotEmpty
+              ? <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child:
+                        IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                  ),
+                ]
+              : null,
         ),
         body: FutureBuilder(
           future: _notificationController.getNoti(),
           builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Container();
-            } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.connectionState == ConnectionState.done) {
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 22.0, vertical: 10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        // SizedBox(
-                        //   width: double.infinity,
-                        //   child: ElevatedButton(
-                        //     onPressed: () =>
-                        //           // Get.toNamed(CommonRoutes.FEEDBACK, arguments: 37),
-                        //         _notificationController.sendNoti(),
-                        //     child: Text(
-                        //       'Send noti',
-                        //       style: TextStyle(color: CustomColors.kDarkGray),
-                        //     ),
-                        //     style: ButtonStyle(
-                        //         backgroundColor:
-                        //             MaterialStateProperty.all<Color>(
-                        //                 CustomColors.kLightGray),
-                        //         elevation:
-                        //             MaterialStateProperty.all<double>(0.0)),
-                        //   ),
-                        // ),
-                        Container(
-                          // height: MediaQuery.of(context).size.height - 230,
-                          child: Obx(() => NotificationList(
-                              listNotification:
-                                  // ignore: invalid_use_of_protected_member
-                                  _notificationController.listNoti.value)),
-                        ),
-                      ],
-                    ),
+                        EdgeInsets.symmetric(horizontal: 22.0, vertical: 16.0),
+                    child: Obx(() => NotificationList(
+                        listNotification:
+                            // ignore: invalid_use_of_protected_member
+                            _notificationController.listNoti.value)),
                   ),
                 ),
               );

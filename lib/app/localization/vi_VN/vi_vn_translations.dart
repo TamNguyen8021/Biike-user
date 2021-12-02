@@ -113,7 +113,9 @@ final Map<String, String> vi = {
   'kTopBikerInfoFirstContent': 'Bảng xếp hạng Biker vinh danh'
       ' những tài xế chở ké có hoạt động nổi bật, đạt được nhiều điểm thưởng.',
   'kTopBikerInfoSecondContent': 'Các Biker tại Bảng xếp hạng '
-      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké. ',
+      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké.',
+  'kTopBikerInfoThirdContent':
+      'Điểm được xếp hạng là điểm bạn có từ chuyến đi, không bao gồm điểm nạp.',
   'kGotIt': 'Đã hiểu',
 
   // 'activity' screen
@@ -373,8 +375,8 @@ final Map<String, String> vi = {
   'kSOSNumberFirstDescription':
       'Biiké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi đến ',
   'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút ',
-  'kNeedSOS': 'Tôi cần Cảnh sát/Xe cấp cứu',
-  'kSOSNumberThirdDescription': ' trong khi đi xe và gọi',
+  'kNeedSOS': 'Gửi định vị',
+  'kSOSNumberThirdDescription': ' đến số S.O.S',
   'kSOSReachLimit': 'Bạn đã thêm tối đa các số điện thoại S.O.S',
 
   // 'add_sos_number' screen
@@ -461,5 +463,6 @@ final Map<String, String> vi = {
     'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
+    'kNotArrivedAtPickUpPoint': 'Bạn chưa đến điểm đón',
     'kOutOfDate': 'Đã hết hạn',
   });

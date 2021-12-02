@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:bikes_user/main.dart';
 import 'package:get/get_connect/connect.dart';
 
 class ImageProvider extends CommonProvider {
@@ -12,8 +11,6 @@ class ImageProvider extends CommonProvider {
       required dynamic imagePath}) async {
     // var file = await DefaultCacheManager().getSingleFile(imagePath);
     final File imageFile = File(imagePath);
-
-    Biike.logger.d(imageFile);
 
     if (await imageFile.exists()) {
       // Use the cached images if it exists
@@ -25,10 +22,6 @@ class ImageProvider extends CommonProvider {
     FormData data = FormData({
       'imageType': imageType,
       'imageList': MultipartFile(imageFile, filename: imageName)
-    });
-
-    data.fields.forEach((element) {
-      Biike.logger.d(element.key + ':' + element.value);
     });
 
     final response =

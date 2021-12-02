@@ -105,6 +105,7 @@ class CustomStrings {
   static const String kMonth = 'kMonth';
   static const String kTopBikerInfoFirstContent = 'kTopBikerInfoFirstContent';
   static const String kTopBikerInfoSecondContent = 'kTopBikerInfoSecondContent';
+  static const String kTopBikerInfoThirdContent = 'kTopBikerInfoThirdContent';
   static const String kGotIt = 'kGotIt';
 
   // 'activity' screen

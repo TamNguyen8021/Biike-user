@@ -82,58 +82,7 @@ class AddBikeController extends GetxController {
     } else {
       return await _bikeProvider.replaceBike(body: body);
     }
-    // } catch (e) {
-    //   _enableLoading(false);
-    //   Biike.logger.e('AddBikeController - addBikeOrReplaceBike(): ' + e.toString());
-    // }
-
-    // if (result) {
-    //   Get.back();
-    //   SnackBarServices.showSnackbar(
-    //       title: '', message: 'Đã thêm xe.\nVui lòng đợi Admin duyệt!');
-    // } else {
-    //   SnackBarServices.showSnackbar(title: '', message: 'Thêm xe thất bại!');
-    // }
-    // } catch (error) {
-    //   SnackBarServices.showSnackbar(title: '', message: 'Thêm xe thất bại!');
-    // } finally {
-    //   _enableLoading(false);
-    // }
   }
-
-  /// Edit bike's info
-  ///
-  /// Author: TamNTT
-  // Future<bool> replaceBike() async {
-  //   // _enableLoading(true);
-
-  //   // String bikePictureUrl = await _imageProvider.postImage(
-  //   //     imageType: 1, imageName: 'bikePicture', imagePath: bikePicture.value);
-  //   // Biike.logger.d(bikePictureUrl);
-  //   // String bikeLicensePictureUrl = await _imageProvider.postImage(
-  //   //     imageType: 1,
-  //   //     imageName: 'bikeLicensePicture',
-  //   //     imagePath: registrationPicture.value);
-  //   // Biike.logger.d(bikeLicensePictureUrl);
-  //   // String plateNumberPictureUrl = await _imageProvider.postImage(
-  //   //     imageType: 1,
-  //   //     imageName: 'plateNumberPicture',
-  //   //     imagePath: numberPlatePicture.value);
-  //   // Biike.logger.d(plateNumberPictureUrl);
-
-  //   Map<String, dynamic> body = {
-  //     'userId': Biike.userId.value,
-  //     'bikeOwner': bikeOwner.value,
-  //     'brand': brand.value,
-  //     'color': color.value,
-  //     'plateNumber': plateNumber.value,
-  //     'bikeLicensePicture': 'link',
-  //     'bikePicture': 'link',
-  //     'plateNumberPicture': 'link',
-  //   };
-
-  //   return await _bikeProvider.replaceBike(body: body);
-  // }
 
   bool validate() {
     if (plateNumber.value.trim().isEmpty ||

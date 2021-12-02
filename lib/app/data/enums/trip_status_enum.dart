@@ -1,1 +1,1 @@
-enum TripStatus { none, finding, waiting, started, finished, canceled }
+enum TripStatus { none, finding, matched, waiting, started, finished, canceled }
