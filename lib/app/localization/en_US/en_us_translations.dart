@@ -208,12 +208,19 @@ final Map<String, String> en = {
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
   'kTipForBiker': 'Tip for biker',
-  'kCriteria1': 'On time',
-  'kCriteria2': 'Friendly',
-  'kCriteria3': 'Easy-going',
-  'kCriteria4': 'Prepared helmet beforehand',
-  'kCriteria5': 'Thanks',
-  'kCriteria6': 'Know the way',
+
+  'kOnTime' : 'On time',
+  'kFamiliarWithTheRoad' : 'Familiar with the road',
+  'kFriendly' : 'Friendly and funny',
+  'kHelmetPrepared' : 'Helmet prepared',
+  'kHappyPartner' : 'Happy partner',
+  'kGrateful' : 'Grateful',
+  'kLate' : 'Late',
+  'kAngry' : 'Angry',
+  'kHelmetNonPrepared' : 'Helmet non-prepared',
+  'kRoadBlind' : 'Road blind',
+  'kNotFriendly' : 'Not friendly',
+  'kDisrespect' : 'Disrespect',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -450,4 +457,6 @@ final Map<String, String> en = {
         'Report reason must not be empty or contains inappropriate words',
     'kNotArrivedAtPickUpPoint': 'You are not at the pick up point',
     'kOutOfDate': 'Out of date',
+    'kTripCanceled': 'The trip is canceled',
+    'kAlreadyFeedbacked': 'You have sent feedback for this trip.',
   });

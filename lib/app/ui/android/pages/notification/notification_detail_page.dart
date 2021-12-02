@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/controllers/notification_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -10,9 +11,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class NotificationDetailPage extends StatelessWidget {
+  final _notificationController = Get.find<NotificationController>();
+
   NotificationDetailPage({Key? key}) : super(key: key);
 
-  _moveToRoute(String url) {
+  _moveToRoute(context, String url) {
     var tripId = _getTripId(url);
 
     // move to corresponding page
@@ -20,14 +23,30 @@ class NotificationDetailPage extends StatelessWidget {
       Get.toNamed(CommonRoutes.TRIP_DETAILS,
           arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
-      Get.toNamed(CommonRoutes.FEEDBACK, arguments: tripId);
+      _moveToFeedback(context, tripId);
+    }
+  }
+
+  _moveToFeedback(context, tripId) async {
+    String isMoveToFeedBack =
+        await _notificationController.isMoveToFeedBack(tripId);
+    if (isMoveToFeedBack == '') {
+      Get.toNamed(CommonRoutes.FEEDBACK, arguments: {
+        'tripId': tripId,
+        'isKeer': _notificationController.isKeer
+      });
+    } else {
+      CommonFunctions().showErrorDialog(context: context, message: isMoveToFeedBack);
     }
   }
 
   _getTripId(String url) {
     // get trip Id
-    String remove = url.contains('details') ? 'details' : '';
-    if (remove == '') remove = url.contains('feedbacks') ? 'feedbacks' : '';
+    String remove = url.contains('details')
+        ? 'details'
+        : url.contains('feedbacks')
+            ? 'feedbacks'
+            : '';
     if (remove != '' && url.contains(remove)) {
       url = url.substring(0, url.length - remove.length - 1);
     }
@@ -109,7 +128,7 @@ class NotificationDetailPage extends StatelessWidget {
                         foregroundColor: Colors.white,
                         text: CustomStrings.kViewTrip.tr,
                         onPressedFunc: () {
-                          _moveToRoute(notification.url!);
+                          _moveToRoute(context, notification.url!);
                         },
                         hasBorder: false),
                   ),

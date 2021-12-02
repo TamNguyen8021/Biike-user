@@ -28,7 +28,7 @@ class SendFeedbackButton extends StatelessWidget {
 
     // send feedback
     var result = await _feedbackController.sendFeedback(tripId);
-    if (result) {
+    if (result is bool) {
       switch (Biike.role.value) {
         case Role.biker:
         case Role.keer:

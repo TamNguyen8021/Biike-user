@@ -1,21 +1,43 @@
 import 'package:bikes_user/app/common/functions/BadWordsFilter/bad_words_filter.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
 import 'package:bikes_user/app/data/models/feedback.dart';
+import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/providers/feedback_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
   final _feedbackProvider = Get.find<FeedbackProvider>();
+
   final _walletController = Get.find<WalletController>();
 
+  RxBool isRated = false.obs;
   var _star, _feedbackContent, _tip;
   List<String> _criteria = [];
+  RxList<String> criteria = List<String>.generate(4, (index) => '').obs;
   final filter = BadWordsFilter();
 
-  void updateStarRating(star) {
+  void updateStarRating(star, {bool isKeer = false}) {
     _star = star;
+
+    isRated.value = true;
+
+    if (isKeer) {
+      if (star < 3) {
+        criteria.value = CustomStrings.kKeerCriteriaLow;
+      } else if (star >= 3) {
+        criteria.value = CustomStrings.kKeerCriteriaHigh;
+      }
+    } else if (!isKeer) {
+      if (star < 3) {
+        criteria.value = CustomStrings.kBikerCriteriaLow;
+      } else if (star >= 3) {
+        criteria.value = CustomStrings.kBikerCriteriaHigh;
+      }
+    }
   }
 
   void updateFeedback(feedbackContent) {
@@ -59,14 +81,14 @@ class FeedbackController extends GetxController {
     return '';
   }
 
-  Future<bool> sendFeedback(tripId) async {
+  Future<dynamic> sendFeedback(tripId) async {
     Feedback feedback = Feedback(
         feedbackId: 0,
         userId: Biike.userId.value,
         tripId: tripId,
         feedbackContent: _feedbackContent ?? '',
         tripStar: _star.round(),
-        tripTip: _tip,
+        tripTip: (_tip == null || _tip == '') ? null : _tip,
         criteria: _criteria.isEmpty ? '' : _criteria.toString(),
         createdDate: DateTime.now());
 

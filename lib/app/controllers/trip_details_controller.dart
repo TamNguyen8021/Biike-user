@@ -236,7 +236,7 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
-      await _sendNoti(tripId: tripId, status: TripStatus.canceled);
+      // await _sendNoti(tripId: tripId, status: TripStatus.canceled);
 
       Get.back(closeOverlays: true);
       Get.back();

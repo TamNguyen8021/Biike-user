@@ -40,4 +40,6 @@ class CustomErrorsString {
       'kEmptyReportReasonOrContainsBadWords';
   static const String kNotArrivedAtPickUpPoint = 'kNotArrivedAtPickUpPoint';
   static const String kOutOfDate = 'kOutOfDate';
+  static const String kTripCanceled = 'kTripCanceled';
+  static const String kAlreadyFeedbacked = 'kAlreadyFeedbacked';
 }

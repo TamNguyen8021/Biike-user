@@ -1,4 +1,9 @@
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
+import 'package:bikes_user/app/data/models/trip.dart';
+import 'package:bikes_user/app/data/models/trip_feedback.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/services/firebase_realtime_database_service.dart';
@@ -7,20 +12,10 @@ import 'package:get/get.dart';
 class NotificationController extends GetxController {
   FirebaseRealtimeDatabaseService _databaseService =
       getIt<FirebaseRealtimeDatabaseService>();
+  final _tripProvider = Get.find<TripProvider>();
 
   RxMap listNoti = {}.obs;
-
-  Future<void> sendNoti() async {
-    BiikeNoti notification = BiikeNoti(
-        receiverId: Biike.userId.value,
-        title: 'title',
-        content: 'content',
-        url: 'url',
-        createdDate: DateTime.now());
-
-    await _databaseService.sendNotification(
-        receiverId: Biike.userId.value, notification: notification);
-  }
+  bool isKeer = false;
 
   Future<void> getNoti() async {
     _databaseService.getNotifications(
@@ -31,5 +26,33 @@ class NotificationController extends GetxController {
     if (!isRead)
       await _databaseService.updateNotification(
           userId: Biike.userId.value, hashKey: hashKey);
+  }
+
+  Future<String> isMoveToFeedBack(tripId) async {
+    var data = await _tripProvider.getTripDetails(tripId: tripId);
+    var trip = Trip.fromJson(data);
+
+    // is cancel
+    if (trip.tripStatus == TripStatus.canceled.index) {
+      return CustomErrorsString.kTripCanceled.tr;
+    }
+
+    if (data['feedbacks'].length > 0) {
+      var feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
+      var feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
+
+      // đã feedback
+      if ((feedback1.userId != null &&
+              Biike.userId.value == feedback1.userId) ||
+          (feedback2.userId != null &&
+              Biike.userId.value == feedback2.userId)) {
+        return CustomErrorsString.kAlreadyFeedbacked.tr;
+      }
+    }
+
+    // check is user keer on that trip
+    isKeer = (trip.keerId == Biike.userId.value);
+
+    return '';
   }
 }
