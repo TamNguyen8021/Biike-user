@@ -205,12 +205,12 @@ class TripDetailsPage extends StatelessWidget {
 
   void _onBackPressed({required BuildContext context}) {
     // if (_tripDetailsController.isTripStarted.isFalse) {
-      if (Get.arguments['route'] == 'home') {
-        _homeController.pagingController.refresh();
-      } else {
-        _tripHistoryController.pagingController.refresh();
-      }
-      Get.back();
+    if (Get.arguments['route'] == 'home') {
+      _homeController.pagingController.refresh();
+    } else {
+      _tripHistoryController.pagingController.refresh();
+    }
+    Get.back();
     // } else {
     //   CommonFunctions().showErrorDialog(
     //       context: context,
@@ -335,170 +335,111 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    MapViewer(
-                                        isFullMap: false,
-                                        completerController:
-                                            completerController,
-                                        polypoints: controller.polypoints,
-                                        departureCoordinate: controller
-                                            .departureStation
-                                            .departureCoordinate,
-                                        destinationCoordinate: controller
-                                            .destinationStation
-                                            .destinationCoordinate),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      margin:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: CustomTextButton(
-                                          hasBorder: true,
-                                          width: double.infinity,
-                                          backgroundColor: Colors.white,
-                                          foregroundColor: CustomColors.kBlue,
-                                          text: CustomStrings.kExpandMap.tr,
-                                          onPressedFunc: () {
-                                            Get.toNamed(
-                                                CommonRoutes
-                                                    .TRIP_DETAILS_FULL_MAP,
-                                                arguments: {
-                                                  'tripId':
-                                                      controller.trip.tripId
-                                                });
-                                          }),
-                                    ),
-                                    IntrinsicHeight(
-                                      child: Row(
-                                        children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border(
-                                                  right: BorderSide(
-                                                      color: CustomColors
-                                                          .kDarkGray
-                                                          .withOpacity(0.1))),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 5.0),
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            bottom: 5.0),
-                                                    decoration: BoxDecoration(
-                                                      border: Border(
-                                                        bottom: BorderSide(
-                                                          color: CustomColors
-                                                              .kDarkGray
-                                                              .withOpacity(0.1),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons
-                                                                .event_outlined,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 8.0),
-                                                          child: Text(
-                                                            DateFormat(
-                                                                    'dd/MM/yyyy')
-                                                                .format(DateTime
-                                                                    .tryParse(
-                                                                        controller
-                                                                            .trip
-                                                                            .bookTime)!),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyText1,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 5.0),
-                                                        child: Icon(
-                                                          Icons.access_time,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        DateFormat('HH:mm').format(
-                                                            DateTime.tryParse(
-                                                                controller.trip
-                                                                    .bookTime)!),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                    if (controller.trip.tripStatus != 5 &&
+                                        controller.trip.tripStatus != 6) ...[
+                                      MapViewer(
+                                          isFullMap: false,
+                                          completerController:
+                                              completerController,
+                                          polypoints: controller.polypoints,
+                                          departureCoordinate: controller
+                                              .departureStation
+                                              .departureCoordinate,
+                                          destinationCoordinate: controller
+                                              .destinationStation
+                                              .destinationCoordinate),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        child: CustomTextButton(
+                                            hasBorder: true,
+                                            width: double.infinity,
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: CustomColors.kBlue,
+                                            text: CustomStrings.kExpandMap.tr,
+                                            onPressedFunc: () {
+                                              Get.toNamed(
+                                                  CommonRoutes
+                                                      .TRIP_DETAILS_FULL_MAP,
+                                                  arguments: {
+                                                    'tripId':
+                                                        controller.trip.tripId
+                                                  });
+                                            }),
+                                      ),
+                                    ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 16.0),
+                                      child: IntrinsicHeight(
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border(
+                                                    right: BorderSide(
+                                                        color: CustomColors
+                                                            .kDarkGray
+                                                            .withOpacity(0.1))),
                                               ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Container(
+                                              child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                ),
+                                                    bottom: 8.0),
                                                 child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
-                                                    Row(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons.adjust,
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 5.0),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              bottom: 5.0),
+                                                      decoration: BoxDecoration(
+                                                        border: Border(
+                                                          bottom: BorderSide(
+                                                            color: CustomColors
+                                                                .kDarkGray
+                                                                .withOpacity(
+                                                                    0.1),
                                                           ),
                                                         ),
-                                                        Text(
-                                                          controller
-                                                              .departureStation
-                                                              .departureName,
-                                                          style:
-                                                              Theme.of(context)
+                                                      ),
+                                                      child: Row(
+                                                        children: <Widget>[
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 5.0),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .event_outlined,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 8.0),
+                                                            child: Text(
+                                                              DateFormat(
+                                                                      'dd/MM/yyyy')
+                                                                  .format(DateTime.tryParse(
+                                                                      controller
+                                                                          .trip
+                                                                          .bookTime)!),
+                                                              style: Theme.of(
+                                                                      context)
                                                                   .textTheme
                                                                   .bodyText1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Icon(
-                                                      Icons.more_vert_outlined,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                     Row(
                                                       children: <Widget>[
@@ -508,13 +449,16 @@ class TripDetailsPage extends StatelessWidget {
                                                                       .only(
                                                                   right: 5.0),
                                                           child: Icon(
-                                                            Icons.location_on,
+                                                            Icons.access_time,
                                                           ),
                                                         ),
                                                         Text(
-                                                          controller
-                                                              .destinationStation
-                                                              .destinationName,
+                                                          DateFormat('HH:mm')
+                                                              .format(DateTime
+                                                                  .tryParse(
+                                                                      controller
+                                                                          .trip
+                                                                          .bookTime)!),
                                                           style:
                                                               Theme.of(context)
                                                                   .textTheme
@@ -523,9 +467,75 @@ class TripDetailsPage extends StatelessWidget {
                                                       ],
                                                     ),
                                                   ],
-                                                )),
-                                          )
-                                        ],
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Row(
+                                                        children: <Widget>[
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 5.0),
+                                                            child: Icon(
+                                                              Icons.adjust,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            controller
+                                                                .departureStation
+                                                                .departureName,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Icon(
+                                                        Icons
+                                                            .more_vert_outlined,
+                                                      ),
+                                                      Row(
+                                                        children: <Widget>[
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 5.0),
+                                                            child: Icon(
+                                                              Icons.location_on,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            controller
+                                                                .destinationStation
+                                                                .destinationName,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  )),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     if (controller.trip.tripStatus == 6 &&
