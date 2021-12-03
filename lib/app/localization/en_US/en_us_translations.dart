@@ -209,18 +209,18 @@ final Map<String, String> en = {
   'kSendSuccess': 'Feedback was sent successfully',
   'kTipForBiker': 'Tip for biker',
 
-  'kOnTime' : 'On time',
-  'kFamiliarWithTheRoad' : 'Familiar with the road',
-  'kFriendly' : 'Friendly and funny',
-  'kHelmetPrepared' : 'Helmet prepared',
-  'kHappyPartner' : 'Happy partner',
-  'kGrateful' : 'Grateful',
-  'kLate' : 'Late',
-  'kAngry' : 'Angry',
-  'kHelmetNonPrepared' : 'Helmet non-prepared',
-  'kRoadBlind' : 'Road blind',
-  'kNotFriendly' : 'Not friendly',
-  'kDisrespect' : 'Disrespect',
+  'kOnTime': 'On time',
+  'kFamiliarWithTheRoad': 'Familiar with the road',
+  'kFriendly': 'Friendly and funny',
+  'kHelmetPrepared': 'Helmet prepared',
+  'kHappyPartner': 'Happy partner',
+  'kGrateful': 'Grateful',
+  'kLate': 'Late',
+  'kAngry': 'Angry',
+  'kHelmetNonPrepared': 'Helmet non-prepared',
+  'kRoadBlind': 'Road blind',
+  'kNotFriendly': 'Not friendly',
+  'kDisrespect': 'Disrespect',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -459,4 +459,7 @@ final Map<String, String> en = {
     'kOutOfDate': 'Out of date',
     'kTripCanceled': 'The trip is canceled',
     'kAlreadyFeedbacked': 'You have sent feedback for this trip.',
+    'kNotTurnOnGPS': 'Please turn on the GPS',
+    'kNotAllowGetLocation':
+        'Please turn on the permission to access user current location',
   });

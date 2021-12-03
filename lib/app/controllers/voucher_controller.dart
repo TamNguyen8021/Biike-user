@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/models/voucher_category.dart';
 import 'package:bikes_user/app/data/providers/voucher_category_provider.dart';
 import 'package:bikes_user/app/data/providers/voucher_provider.dart';
@@ -15,7 +16,7 @@ class VoucherController extends GetxController {
   RxList<VoucherCategory> voucherCategoryList = <VoucherCategory>[].obs;
 
   Rx<VoucherCategory> category = VoucherCategory.empty().obs;
-  bool _isNearMe = false;
+  RxBool isNearMeSelected = false.obs;
 
   Map<String, dynamic> pagination = {};
   int _currentPage = 1;
@@ -51,21 +52,24 @@ class VoucherController extends GetxController {
     pagingController.refresh();
   }
 
-  Future<void> updateNearMe(isSelected) async {
-    _isNearMe = isSelected;
-
+  Future<dynamic> updateNearMe() async {
     try {
       var isPermitted = await _checkLocationPermission();
       if (!isPermitted) {
-        return;
+        return CustomErrorsString.kNotAllowGetLocation.tr;
       }
 
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
-      print(position.toString());
+      isNearMeSelected.value = !isNearMeSelected.value;
+
+      //TODO send user current location
     } catch (e) {
       CommonFunctions.catchExceptionError(e);
+      return CustomErrorsString.kNotTurnOnGPS.tr;
     }
+
+    return true;
   }
 
   Future<bool> _checkLocationPermission() async {
