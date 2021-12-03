@@ -18,7 +18,7 @@ class TokenService {
   late Timer _timer;
 
   cronJob() {
-    _timer = Timer.periodic(const Duration(minutes: 5), (_) {
+    _timer = Timer.periodic(const Duration(minutes: 55), (_) {
       refreshToken();
     });
   }
