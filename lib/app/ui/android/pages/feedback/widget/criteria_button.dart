@@ -13,6 +13,7 @@ class CriteriaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Rx<bool> isSelected = false.obs;
+    if (_feedbackController.isResetCriteriaField.value) isSelected.value = false;
 
     return SizedBox(
       child: Obx(() => ElevatedButton(

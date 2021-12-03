@@ -33,9 +33,9 @@ class NotificationController extends GetxController {
     var trip = Trip.fromJson(data);
 
     // is cancel
-    // if (trip.tripStatus == TripStatus.canceled.index) {
-    //   return CustomErrorsString.kTripCanceled.tr;
-    // }
+    if (trip.tripStatus == TripStatus.canceled.index) {
+      return CustomErrorsString.kTripCanceled.tr;
+    }
 
     if (data['feedbacks'].length > 0) {
       var feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
@@ -43,7 +43,7 @@ class NotificationController extends GetxController {
       try {
         feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
       } catch (e) {
-        CommonFunctions.logBiike(error: 'This is currently has only 1 feedback');
+        CommonFunctions.logBiike(error: 'This trip currently has only 1 feedback');
         feedback2 = null;
       }
 
