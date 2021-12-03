@@ -17,8 +17,9 @@ class NearMeButton extends StatelessWidget {
       width: 100,
       height: 36,
       child: Obx(() => ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             isSelected.value = !isSelected.value;
+            await _voucherController.updateNearMe(isSelected.value);
           },
           child: Text(
             CustomStrings.kNearMe.tr,

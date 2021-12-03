@@ -2,6 +2,7 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/models/voucher_category.dart';
 import 'package:bikes_user/app/data/providers/voucher_category_provider.dart';
 import 'package:bikes_user/app/data/providers/voucher_provider.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -50,9 +51,38 @@ class VoucherController extends GetxController {
     pagingController.refresh();
   }
 
-  void selectedNearMe(isNearMe) {
-    _isNearMe = isNearMe;
+  Future<void> updateNearMe(isSelected) async {
+    _isNearMe = isSelected;
 
+    try {
+      var isPermitted = await _checkLocationPermission();
+      if (!isPermitted) {
+        return;
+      }
+
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      print(position.toString());
+    } catch (e) {
+      CommonFunctions.catchExceptionError(e);
+    }
+  }
+
+  Future<bool> _checkLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+
+      // ask for permission
+      LocationPermission permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        // if denied
+        return false;
+      }
+    }
+     return true;
   }
 
   Future<List> _getVoucherList() async {

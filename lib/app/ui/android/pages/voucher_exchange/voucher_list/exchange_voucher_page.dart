@@ -1,6 +1,5 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
-import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/category_dropdown_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/voucher_list/widget/near_me_button.dart';
 import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_card.dart';
@@ -81,9 +80,9 @@ class ExchangeVoucherPage extends StatelessWidget {
                           itemBuilder: (context, item, index) => Padding(
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: VoucherCard(
-                                    voucher: Voucher.fromJson(_voucherController
+                                    data: _voucherController
                                         .pagingController.itemList!
-                                        .elementAt(index))),
+                                        .elementAt(index)),
                               ),
                           noItemsFoundIndicatorBuilder: (BuildContext context) {
                             return Text(CustomErrorsString.kNoVoucher.tr);
