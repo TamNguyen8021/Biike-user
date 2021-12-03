@@ -14,6 +14,7 @@ class VoucherController extends GetxController {
   RxList<VoucherCategory> voucherCategoryList = <VoucherCategory>[].obs;
 
   Rx<VoucherCategory> category = VoucherCategory.empty().obs;
+  bool _isNearMe = false;
 
   Map<String, dynamic> pagination = {};
   int _currentPage = 1;
@@ -47,6 +48,11 @@ class VoucherController extends GetxController {
   void updateCategory(category) {
     this.category.value = category;
     pagingController.refresh();
+  }
+
+  void selectedNearMe(isNearMe) {
+    _isNearMe = isNearMe;
+
   }
 
   Future<List> _getVoucherList() async {

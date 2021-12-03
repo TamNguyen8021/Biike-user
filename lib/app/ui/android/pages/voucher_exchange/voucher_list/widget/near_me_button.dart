@@ -1,9 +1,12 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NearMeButton extends StatelessWidget {
+  final _voucherController = Get.find<VoucherController>();
+
   NearMeButton({Key? key}) : super(key: key);
 
   @override
