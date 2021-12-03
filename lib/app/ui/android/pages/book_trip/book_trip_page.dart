@@ -77,8 +77,12 @@ class BookTripPage extends StatelessWidget {
                       Obx(() => MapViewer(
                             isFullMap: false,
                             completerController: controller,
+                            departureName:
+                                _bookTripController.departureStation.value.name,
                             departureCoordinate: _bookTripController
                                 .departureStation.value.coordinate,
+                            destinationName: _bookTripController
+                                .destinationStation.value.name,
                             destinationCoordinate: _bookTripController
                                 .destinationStation.value.coordinate,
                             polypoints: _bookTripController.polypoints.toList(),

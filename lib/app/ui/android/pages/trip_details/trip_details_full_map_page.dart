@@ -74,7 +74,11 @@ class TripDetailsFullMapPage extends StatelessWidget {
                     isFullMap: true,
                     completerController: controller,
                     polypoints: _tripDetailsController.polypoints,
+                    departureName:
+                        _tripDetailsController.departureStation.departureName,
                     departureCoordinate: _departureCoordinate,
+                    destinationName: _tripDetailsController
+                        .destinationStation.destinationName,
                     destinationCoordinate: _destinationCoordinate),
                 Container(
                   alignment: Alignment.bottomCenter,

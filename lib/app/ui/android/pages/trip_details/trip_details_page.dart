@@ -6,6 +6,7 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
+import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -18,6 +19,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,6 +36,7 @@ class TripDetailsPage extends StatelessWidget {
   final _tripHistoryController = Get.find<TripHistoryController>();
   final Completer<GoogleMapController> completerController = Completer();
 
+  int tripId = Get.arguments['tripId'];
   String _statusBarTime = '';
   String _statusBarText = '';
   Rx<String> _cancelReason = ''.obs;
@@ -228,12 +231,12 @@ class TripDetailsPage extends StatelessWidget {
           init: _tripDetailsController,
           builder: (TripDetailsController controller) {
             return FutureBuilder(
-                future:
-                    controller.getTripDetails(tripId: Get.arguments['tripId']),
+                future: controller.getTripDetails(tripId: tripId),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     Rx<bool> isArriveAtPickUpPointButtonVisible = false.obs;
+                    Rx<bool> isCancelTripButtonVisible = true.obs;
                     DateTime currentTime = DateTime.now();
                     DateTime tempBookTime =
                         DateTime.tryParse(controller.trip.bookTime)!;
@@ -244,6 +247,32 @@ class TripDetailsPage extends StatelessWidget {
                         tempBookTime.month == currentTime.month &&
                         tempBookTime.year == currentTime.year) {
                       isArriveAtPickUpPointButtonVisible.value = true;
+                    }
+
+                    if (controller.trip.tripStatus != 3 &&
+                        controller.trip.tripStatus != 4) {
+                      controller.buttonText.value =
+                          CustomStrings.kConfirmArrival.tr;
+                      controller.buttonIcon.value = Icons.done_all;
+                      controller.isArrivedAtPickUpPoint.value = false;
+                    }
+
+                    if (controller.trip.tripStatus == 3) {
+                      if (Biike.role.value == Role.keer) {
+                        isArriveAtPickUpPointButtonVisible.value = false;
+                      } else {
+                        isArriveAtPickUpPointButtonVisible.value = true;
+                        controller.changeToStartTripButton();
+                      }
+                    }
+
+                    if (controller.trip.tripStatus == 4) {
+                      if (Biike.role.value == Role.keer) {
+                        isArriveAtPickUpPointButtonVisible.value = false;
+                      } else {
+                        isArriveAtPickUpPointButtonVisible.value = true;
+                        controller.changeToFinishTripButton();
+                      }
                     }
 
                     return Scaffold(
@@ -342,9 +371,15 @@ class TripDetailsPage extends StatelessWidget {
                                           completerController:
                                               completerController,
                                           polypoints: controller.polypoints,
+                                          departureName: _tripDetailsController
+                                              .departureStation.departureName,
                                           departureCoordinate: controller
                                               .departureStation
                                               .departureCoordinate,
+                                          destinationName:
+                                              _tripDetailsController
+                                                  .destinationStation
+                                                  .destinationName,
                                           destinationCoordinate: controller
                                               .destinationStation
                                               .destinationCoordinate),
@@ -648,10 +683,11 @@ class TripDetailsPage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
-                                            if (controller.trip.tripStatus ==
-                                                    2 ||
+                                            if (controller.trip.tripStatus == 2 ||
                                                 controller.trip.tripStatus ==
-                                                    3) ...[
+                                                    3 ||
+                                                controller.trip.tripStatus ==
+                                                    4) ...[
                                               Obx(
                                                 () => Visibility(
                                                   visible:
@@ -663,11 +699,7 @@ class TripDetailsPage extends StatelessWidget {
                                                             bottom: 16.0),
                                                     child:
                                                         CustomElevatedIconButton(
-                                                      width: controller
-                                                              .isArrivedAtPickUpPoint
-                                                              .isTrue
-                                                          ? 140
-                                                          : 180,
+                                                      width: 180,
                                                       text: controller
                                                           .buttonText.value,
                                                       backgroundColor:
@@ -678,6 +710,13 @@ class TripDetailsPage extends StatelessWidget {
                                                       icon: controller
                                                           .buttonIcon.value,
                                                       onPressedFunc: () async {
+                                                        CustomLocation
+                                                            departureLocation =
+                                                            CustomLocation(
+                                                                coordinate: controller
+                                                                    .departureStation
+                                                                    .departureCoordinate);
+
                                                         if (controller
                                                             .isArrivedAtPickUpPoint
                                                             .isFalse) {
@@ -704,12 +743,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                       .longitude!),
                                                               zoom: 12,
                                                             )));
-                                                            CustomLocation
-                                                                departureLocation =
-                                                                CustomLocation(
-                                                                    coordinate: controller
-                                                                        .departureStation
-                                                                        .departureCoordinate);
+
                                                             if (CommonFunctions().isArrivedAtPickUpPoint(
                                                                 userLat: controller
                                                                     .userLocation!
@@ -724,15 +758,14 @@ class TripDetailsPage extends StatelessWidget {
                                                                     departureLocation
                                                                         .longitude)) {
                                                               if (await _tripProvider
-                                                                  .startTrip(
-                                                                      tripId: Get
-                                                                              .arguments[
-                                                                          'tripId'])) {
+                                                                  .markArrivedAtPickUpPoint(
+                                                                      tripId:
+                                                                          tripId)) {
                                                                 controller
                                                                     .isArrivedAtPickUpPoint
                                                                     .value = true;
                                                                 controller
-                                                                    .changeToFinishTripButton();
+                                                                    .changeToStartTripButton();
                                                               } else {
                                                                 CommonFunctions().showErrorDialog(
                                                                     context:
@@ -760,43 +793,86 @@ class TripDetailsPage extends StatelessWidget {
                                                                         .tr);
                                                           }
                                                         } else {
-                                                          final isTripCompleted =
-                                                              await _tripProvider
-                                                                  .completeTrip(
-                                                                      tripId: Get
-                                                                              .arguments[
-                                                                          'tripId']);
-                                                          if (isTripCompleted) {
-                                                            isArriveAtPickUpPointButtonVisible
-                                                                .value = false;
-                                                            if (controller
-                                                                .isLocationShared
-                                                                .isTrue) {
-                                                              await controller
-                                                                  .pathshareProvider
-                                                                  .startOrStopLocationSharing(
-                                                                      isShared:
-                                                                          false,
-                                                                      sessionIdentifier:
-                                                                          controller
-                                                                              .sessionIdentifier);
+                                                          if (controller
+                                                                  .buttonText
+                                                                  .value ==
+                                                              CustomStrings
+                                                                  .kStart) {
+                                                            if (await _tripProvider
+                                                                .startTrip(
+                                                                    tripId:
+                                                                        tripId)) {
+                                                              controller
+                                                                  .changeToFinishTripButton();
+                                                            } else {
+                                                              CommonFunctions()
+                                                                  .showErrorDialog(
+                                                                      context:
+                                                                          context,
+                                                                      message: CustomErrorsString
+                                                                          .kDevelopError
+                                                                          .tr);
                                                             }
-
-                                                            Get.offAllNamed(
-                                                                CommonRoutes
-                                                                    .FEEDBACK,
-                                                                arguments:
-                                                                    controller
-                                                                        .trip
-                                                                        .tripId);
                                                           } else {
-                                                            CommonFunctions()
-                                                                .showErrorDialog(
+                                                            if (CommonFunctions().isArrivedAtPickUpPoint(
+                                                                userLat: controller
+                                                                    .userLocation!
+                                                                    .latitude!,
+                                                                userLng: controller
+                                                                    .userLocation!
+                                                                    .longitude!,
+                                                                departureLat:
+                                                                    departureLocation
+                                                                        .latitude,
+                                                                departureLng:
+                                                                    departureLocation
+                                                                        .longitude)) {
+                                                              if (await _tripProvider
+                                                                  .completeTrip(
+                                                                      tripId:
+                                                                          tripId)) {
+                                                                isArriveAtPickUpPointButtonVisible
+                                                                        .value =
+                                                                    false;
+                                                                isCancelTripButtonVisible
+                                                                        .value =
+                                                                    false;
+                                                                if (controller
+                                                                    .isLocationShared
+                                                                    .isTrue) {
+                                                                  await controller
+                                                                      .pathshareProvider
+                                                                      .startOrStopLocationSharing(
+                                                                          isShared:
+                                                                              false,
+                                                                          sessionIdentifier:
+                                                                              controller.sessionIdentifier);
+                                                                }
+
+                                                                Get.offAllNamed(
+                                                                    CommonRoutes
+                                                                        .FEEDBACK,
+                                                                    arguments:
+                                                                        controller
+                                                                            .trip
+                                                                            .tripId);
+                                                              } else {
+                                                                CommonFunctions().showErrorDialog(
                                                                     context:
                                                                         context,
                                                                     message: CustomErrorsString
                                                                         .kDevelopError
                                                                         .tr);
+                                                              }
+                                                            } else {
+                                                              CommonFunctions()
+                                                                  .showErrorDialog(
+                                                                      context:
+                                                                          context,
+                                                                      message: CustomErrorsString
+                                                                          .kNotArrivedAtPickUpPoint
+                                                                          .tr);
+                                                            }
                                                           }
                                                         }
                                                       },
@@ -807,9 +883,9 @@ class TripDetailsPage extends StatelessWidget {
                                             ],
                                             Obx(
                                               () => Visibility(
-                                                visible: !controller
-                                                    .isArrivedAtPickUpPoint
-                                                    .value,
+                                                visible:
+                                                    isCancelTripButtonVisible
+                                                        .value,
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(

@@ -265,6 +265,23 @@ class TripProvider extends CommonProvider {
     }
   }
 
+  /// Change trip status to waiting based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> markArrivedAtPickUpPoint({required int tripId}) async {
+    final response = await put(UrlStrings.tripUrl + '$tripId/waitingTime', {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   /// Mark a trip as started based on [tripId].
   ///
   /// Author: TamNTT

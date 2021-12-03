@@ -1,4 +1,7 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/main.dart';
@@ -8,13 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// On [HomePage] screen, this widget means user has arrived at the pick up point.
-///
-/// On [TripDetailsPage] screen, ke-er taps this button to finish a trip.
-//ignore: must_be_immutable
+/// This widget means user has arrived at the pick up point.
+// ignore: must_be_immutable
 class ConfirmArrivalButton extends StatelessWidget {
-  final isOnHomeScreen;
-  final tripId;
+  final _tripProvider = Get.find<TripProvider>();
+  final bool isOnHomeScreen;
+  final int tripId;
 
   Rx<bool> isAtDestination = false.obs;
   Rx<Color> buttonColor = CustomColors.kBlue.obs;
@@ -32,19 +34,16 @@ class ConfirmArrivalButton extends StatelessWidget {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
                     CustomStrings.kConfirmArrivalTitle.tr,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline6,
+                    style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.center,
                   ),
                   Padding(
@@ -53,8 +52,8 @@ class ConfirmArrivalButton extends StatelessWidget {
                       role == Role.keer
                           ? CustomStrings.kConfirmArrivalMessageForKeer.tr
                           : CustomStrings.kConfirmArrivalMessageForBiker.tr,
-                      style: Theme
-                          .of(context)
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
                           .textTheme
                           .headline6!
                           .copyWith(fontWeight: FontWeight.normal),
@@ -81,12 +80,20 @@ class ConfirmArrivalButton extends StatelessWidget {
                             backgroundColor: CustomColors.kBlue,
                             foregroundColor: Colors.white,
                             text: CustomStrings.kYes.tr,
-                            onPressedFunc: () {
-                              isAtDestination.value = true;
-                              buttonColor.value = CustomColors.kDarkGray;
-                              buttonText.value =
-                                  CustomStrings.kArriveAtDestination.tr;
-                              Get.back();
+                            onPressedFunc: () async {
+                              if (await _tripProvider.markArrivedAtPickUpPoint(
+                                  tripId: tripId)) {
+                                isAtDestination.value = true;
+                                buttonColor.value = CustomColors.kDarkGray;
+                                buttonText.value =
+                                    CustomStrings.kArriveAtDestination.tr;
+                                Get.back();
+                              } else {
+                                CommonFunctions().showErrorDialog(
+                                    context: context,
+                                    message:
+                                        CustomErrorsString.kDevelopError.tr);
+                              }
                             }),
                       ),
                     ],
@@ -103,15 +110,11 @@ class ConfirmArrivalButton extends StatelessWidget {
     return SizedBox(
       height: 35,
       width: isOnHomeScreen ? 170 : null,
-      child: Obx(() =>
-          ElevatedButton.icon(
+      child: Obx(() => ElevatedButton.icon(
             onPressed: () {
               if (isOnHomeScreen && isAtDestination.isFalse) {
                 _showConfirmArrivalDialog(
                     context: context, role: Biike.role.value);
-                // isAtDestination.value = true;
-                // buttonColor.value = CustomColors.kDarkGray;
-                // buttonText.value = CustomStrings.kArriveAtDestination.tr;
               } else if (!isOnHomeScreen) {
                 Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: tripId);
               }
@@ -122,10 +125,7 @@ class ConfirmArrivalButton extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize:
-                  MediaQuery
-                      .of(context)
-                      .size
-                      .width >= 400 ? 12.sp : 10.sp),
+                      MediaQuery.of(context).size.width >= 400 ? 12.sp : 10.sp),
             ),
             style: ElevatedButton.styleFrom(
               elevation: 0.0,

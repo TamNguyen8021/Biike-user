@@ -86,16 +86,24 @@ class TripDetailsController extends GetxController {
     userLocation = await _location.getLocation();
   }
 
-  changeToFinishTripButton() {
+  void changeToStartTripButton() {
+    if (buttonText.value != CustomStrings.kStart.tr) {
+      buttonText.value = CustomStrings.kStart.tr;
+    }
+
+    if (buttonIcon.value != Icons.navigation) {
+      buttonIcon.value = Icons.navigation;
+    }
+  }
+
+  void changeToFinishTripButton() {
     if (buttonText.value != CustomStrings.kCompleteTrip.tr) {
       buttonText.value = CustomStrings.kCompleteTrip.tr;
     }
 
     if (buttonIcon.value != Icons.done_all) {
       buttonIcon.value = Icons.done_all;
-    } /* else {
-      Get.offAllNamed(CommonRoutes.FEEDBACK);
-    }*/
+    }
   }
 
   /// Loads trip details.
