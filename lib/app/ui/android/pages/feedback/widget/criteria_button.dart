@@ -20,6 +20,7 @@ class CriteriaButton extends StatelessWidget {
               isSelected.value = !isSelected.value;
               _feedbackController.updateCriteria(text,
                   isRemove: isSelected.value);
+              _feedbackController.isResetCriteriaField.value = false;
             },
             child: Row(
               children: <Widget>[
@@ -36,8 +37,10 @@ class CriteriaButton extends StatelessWidget {
               ],
             ),
             style: ElevatedButton.styleFrom(
-              primary:
-                  isSelected.value ? CustomColors.kLightBlue : Colors.white,
+              primary: (isSelected.value &&
+                      !_feedbackController.isResetCriteriaField.value)
+                  ? CustomColors.kLightBlue
+                  : Colors.white,
               elevation: 0.0,
               side: BorderSide(width: 2.0, color: CustomColors.kLightGray),
             ),

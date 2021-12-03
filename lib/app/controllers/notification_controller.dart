@@ -1,6 +1,6 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
-import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/models/trip_feedback.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
@@ -33,18 +33,24 @@ class NotificationController extends GetxController {
     var trip = Trip.fromJson(data);
 
     // is cancel
-    if (trip.tripStatus == TripStatus.canceled.index) {
-      return CustomErrorsString.kTripCanceled.tr;
-    }
+    // if (trip.tripStatus == TripStatus.canceled.index) {
+    //   return CustomErrorsString.kTripCanceled.tr;
+    // }
 
     if (data['feedbacks'].length > 0) {
       var feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
-      var feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
+      var feedback2;
+      try {
+        feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
+      } catch (e) {
+        CommonFunctions.logBiike(error: 'This is currently has only 1 feedback');
+        feedback2 = null;
+      }
 
       // đã feedback
       if ((feedback1.userId != null &&
               Biike.userId.value == feedback1.userId) ||
-          (feedback2.userId != null &&
+          (feedback2 != null &&
               Biike.userId.value == feedback2.userId)) {
         return CustomErrorsString.kAlreadyFeedbacked.tr;
       }

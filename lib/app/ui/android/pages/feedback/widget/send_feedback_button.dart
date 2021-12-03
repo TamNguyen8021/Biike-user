@@ -45,7 +45,7 @@ class SendFeedbackButton extends StatelessWidget {
     } else {
       Get.defaultDialog(
         title: CustomErrorsString.kError.tr,
-        middleText: CustomErrorsString.kSendFailed.tr,
+        middleText: result,
         middleTextStyle: TextStyle(color: CustomColors.kDarkGray),
       );
     }
