@@ -45,7 +45,7 @@ final Map<String, String> en = {
   // '004.4_choose_mode' screen
   'kChooseMode': 'Start using app\nwith the role',
   'kBikerRole': 'Biker',
-  'kKeerRole': 'Ké-er',
+  'kKeerRole': 'Keer',
   'kBikerDescription':
       'Choose who you want to match with, start your trip, receive bonus points and exchange for valuable vouchers',
   'kKeerDescription': 'Create your own trips and catch a ride with our Bikers',
@@ -58,7 +58,7 @@ final Map<String, String> en = {
   'kReminderHour': ' hours ',
   'kReminderLeft': ' left',
   'kArriveAtDestination': 'Has arrived',
-  'kKeerMode': 'Ké-er mode',
+  'kKeerMode': 'Keer mode',
   'kBikerMode': 'Biker mode',
   'kToday': 'Today',
   'kUpcomingTrips': 'Upcoming trips',
@@ -66,13 +66,13 @@ final Map<String, String> en = {
   'kCreateTrip':
       'You have not booked any trips.\nPress + and start your trip now!',
   'kConfirmArrivalTitle': 'Are you sure you are at your pick up point?',
-  'kConfirmArrivalMessageForKeer': 'We\'ll send a notification to your biker',
-  'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your ké-er',
+  'kConfirmArrivalMessageForKeer': 'We\'ll send a notification to your Biker',
+  'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your Keer',
   'kConfirmExitApp':
       'Are you sure you want to exit? (If you are sharing your location, when you exit the application will stop sharing)',
 
   // 'biker_home' screen
-  'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
+  'kNoKeNowTrip': 'No Ride Now trip',
   'kBikerReadyReminder': 'Ready to go!',
   'kFilter': 'Filter trips',
   'kSelectHour': 'Hour',
@@ -85,21 +85,21 @@ final Map<String, String> en = {
   'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
 
   // 'require_add_bike' screen
-  'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker Mode',
+  'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker mode',
 
   // 'cho_now' screen
-  'kChoNow': 'Chở Now',
+  'kChoNow': 'Ride Now',
   'kChoNowDescription1':
-      'Chở Now hiển thị chuyến đi do người ké cần đi ngay (tính năng Ké Now của Ké Mode)',
+      'Ride Now show trips which Keer needs to go immediately (Trip Now feature in Keer mode)',
   'kChoNowDescription2':
-      'Chuyến đi cần Chở Now được gửi tới bạn dựa vào phần cài đặt Chở Now của bạn',
+      'Trip Now trips will be notified to you based on your Ride Now settings',
   'kChoNowDescription3':
-      'Chuyến đi sẽ tự động hủy sau 3 phút nếu bạn không nhận chuyến',
-  'kChoNowSettings': 'Chở Now settings',
-  'kTurnOnChoNow': 'Turn on Chở Now',
+      'The trip will automatically cancel after 3 mins if don\'t accept it',
+  'kChoNowSettings': 'Ride Now settings',
+  'kTurnOnChoNow': 'Turn on Ride Now',
   'kChoNowStation': 'Pick up station',
   'kAddPickUpStation': '+ Add pick up station',
-  'kAddChoNowStation': 'Add Chở Now station',
+  'kAddChoNowStation': 'Add Ride Now station',
   'kAdd': 'Add',
   'kDelete': 'Delete',
   'kChooseStation': 'Choose station',
@@ -120,11 +120,11 @@ final Map<String, String> en = {
 
   // 'trip_history' screen
   'kHistory': 'History',
-  'kKeerHistory': 'Ké-er',
+  'kKeerHistory': 'Keer',
   'kBikerHistory': 'Biker',
   'kTripFinished': 'Finished',
   'kTripCanceled': 'Canceled',
-  'kNoKeerHistoryTrips': 'No history trips as Ké-er',
+  'kNoKeerHistoryTrips': 'No history trips as Keer',
   'kNoBikerHistoryTrips': 'No history trips as Biker',
 
   // bottom tabbar
@@ -207,7 +207,7 @@ final Map<String, String> en = {
   'kRateReminder': 'Please rate your experience with your partner today!',
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
-  'kTipForBiker': 'Tip for biker',
+  'kTipForBiker': 'Tips for Biker',
   'kCriteria1': 'On time',
   'kCriteria2': 'Friendly',
   'kCriteria3': 'Easy-going',
@@ -272,7 +272,7 @@ final Map<String, String> en = {
   'kTo': 'To',
   'kChooseTo': '-Destination station-',
   'kBookScheduleTrip': 'Book trip',
-  'kBookNowTrip': 'Ké Now',
+  'kBookNowTrip': 'Trip Now',
 
   // 'book_schedule_trip' screen
   'kTime': 'Time',
@@ -291,7 +291,7 @@ final Map<String, String> en = {
   'kSuggestAddBike': 'You don\'t have any bike.\nTap + to add a bike',
   'kConfirmDeleteBike': 'Confirm delete bike',
   'kAreYouSureDeleteBike':
-      'After deleting your bike, you will become a Ké-er. Are you sure you want to delete your bike?',
+      'After deleting your bike, you will become a Keer. Are you sure you want to delete your bike?',
 
   // 'add_bike' screen
   'kAddBike': 'Add bike',
