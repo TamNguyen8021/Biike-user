@@ -24,7 +24,12 @@ final Map<String, String> vi = {
   'kPassword': 'Mật khẩu',
   'kInputPassword': 'Nhập mật khẩu',
   'kLogin': 'Đăng nhập',
-  'kNoAccount': 'Chưa có tài khoản? ',
+  'kNoAccount': 'Bạn chưa có tài khoản? Xin vui lòng Đăng Ký ',
+  'kWrongAccount' : 'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
+  'kUnVerifiedEmail' : 'Chúng tôi đã gửi link xác thực qua email đăng kí của bạn, xin hãy vui lòng xác thực để hoàn tất đăng ký',
+  'kLoginExceptionError' : 'Đã có lỗi ngoại lệ xảy ra, xin vui lòng thử lại',
+  'kEmptyToken' : 'Lỗi server trả token trống',
+
 
   // 'register' screen
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
