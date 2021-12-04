@@ -69,7 +69,7 @@ class UpcomingTripCard extends StatelessWidget {
       onTap: () {
         if (!isSearchedTrip) {
           Get.toNamed(CommonRoutes.TRIP_DETAILS,
-              arguments: {'tripId': tripId, 'userId': userId, 'route': 'home'});
+              arguments: {'tripId': tripId, 'route': 'home'});
         } else {
           _isStationVisible.value = !_isStationVisible.value;
         }

@@ -46,9 +46,9 @@ class NotificationCard extends StatelessWidget {
                               .textTheme
                               .bodyText1!
                               .copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.sp),
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.sp),
                           overflow: TextOverflow.fade),
                       Text('${notification.content}',
                           style: Theme.of(context).textTheme.bodyText1,

@@ -5,20 +5,38 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class VoucherCard extends StatelessWidget {
-  final Voucher voucher;
-  VoucherCard({Key? key, required this.voucher}) : super(key: key);
+  final data;
+  final bool isExchanged;
+
+  VoucherCard({Key? key, required this.data, this.isExchanged = false})
+      : super(key: key);
+
+  ImageProvider _getImage(voucher) {
+    if (voucher.voucherImages.length > 0) {
+      return NetworkImage(
+          voucher.voucherImages.elementAt(0)!.voucherImageUrl.toString());
+    }
+    return AssetImage('assets/images/voucher-banh-mi.jpg');
+  }
 
   @override
   Widget build(BuildContext context) {
+    Voucher voucher = Voucher.fromJson(data);
+    var now = DateTime.now();
+
     return GestureDetector(
-        onTap: () =>
-            Get.toNamed(CommonRoutes.VOUCHER_DETAILS, arguments: voucher),
+        onTap: () => isExchanged
+            ? Get.toNamed(CommonRoutes.YOUR_VOUCHER_DETAIL, arguments: data)
+            : Get.toNamed(CommonRoutes.VOUCHER_DETAILS, arguments: voucher),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
           decoration: BoxDecoration(
-              color: CustomColors.kLightGray,
+              color: now.isAfter(voucher.endDate)
+                  ? CustomColors.kDarkGray
+                  : CustomColors.kLightGray,
               borderRadius: BorderRadius.circular(5),
               boxShadow: <BoxShadow>[
                 BoxShadow(
@@ -34,9 +52,9 @@ class VoucherCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25.0),
                   child: Image(
-                    image: AssetImage('assets/images/voucher-banh-mi.jpg'),
+                    image: _getImage(voucher),
                     width: 100,
-                    height: 120,
+                    height: 100,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -57,7 +75,18 @@ class VoucherCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
-                  Row(
+                  isExchanged ?
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: Text(
+                      CustomStrings.kHsd.tr +
+                          DateFormat('dd/MM/yyyy').format(voucher.endDate),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: CustomColors.kOrange),
+                    ),
+                  ) : Row(
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(right: 4.0),
@@ -78,7 +107,7 @@ class VoucherCard extends StatelessWidget {
                         ),
                       )
                     ],
-                  )
+                  ),
                 ],
               )
             ],

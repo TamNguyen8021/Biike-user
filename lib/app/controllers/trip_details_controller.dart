@@ -40,7 +40,7 @@ class TripDetailsController extends GetxController {
   Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
   Rx<IconData> buttonIcon = Icons.done_all.obs;
   Rx<String> _cancelReason = ''.obs;
-  Rx<bool> isTripStarted = false.obs;
+  Rx<bool> isArrivedAtPickUpPoint = false.obs;
   Rx<bool> isLocationShared = false.obs;
 
   Function onPressedFunc = () {};
@@ -114,7 +114,7 @@ class TripDetailsController extends GetxController {
     }
 
     if (trip.tripStatus == 3) {
-      isTripStarted.value = true;
+      isArrivedAtPickUpPoint.value = true;
     }
   }
 
@@ -236,7 +236,7 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
-      await _sendNoti(tripId: tripId, status: TripStatus.canceled);
+      // await _sendNoti(tripId: tripId, status: TripStatus.canceled);
 
       Get.back(closeOverlays: true);
       Get.back();
@@ -252,6 +252,8 @@ class TripDetailsController extends GetxController {
   /// Send noti to partner when cancel trip
   ///
   /// Author: UyenNLP
+  // TODO: handle send noti
+  // ignore: unused_element
   _sendNoti({required tripId, required TripStatus status}) async {
     var data = await _tripProvider.getTripDetails(tripId: tripId);
     Trip trip = Trip.fromJson(data);

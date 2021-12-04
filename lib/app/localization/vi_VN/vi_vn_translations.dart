@@ -113,7 +113,9 @@ final Map<String, String> vi = {
   'kTopBikerInfoFirstContent': 'Bảng xếp hạng Biker vinh danh'
       ' những tài xế chở ké có hoạt động nổi bật, đạt được nhiều điểm thưởng.',
   'kTopBikerInfoSecondContent': 'Các Biker tại Bảng xếp hạng '
-      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké. ',
+      'sẽ nhận được những ưu đãi và phần thưởng đặc biệt đến từ Biiké.',
+  'kTopBikerInfoThirdContent':
+      'Điểm được xếp hạng là điểm bạn có từ chuyến đi, không bao gồm điểm nạp.',
   'kGotIt': 'Đã hiểu',
 
   // 'activity' screen
@@ -210,12 +212,19 @@ final Map<String, String> vi = {
   'kBtnSend': 'Gửi',
   'kSendSuccess': 'Gửi feedback thành công',
   'kTipForBiker': 'Tip cho người chở',
-  'kCriteria1': 'Đúng giờ',
-  'kCriteria2': 'Thân thiện, hòa đồng',
-  'kCriteria3': 'Vui vẻ',
-  'kCriteria4': 'Có chuẩn bị nón bảo hiểm',
-  'kCriteria5': 'Cám ơn',
-  'kCriteria6': 'Rành đường',
+
+  'kOnTime': 'Đúng giờ',
+  'kFamiliarWithTheRoad': 'Rành đường',
+  'kFriendly': 'Thân thiện, hòa đồng',
+  'kHelmetPrepared': 'Có chuẩn bị nón bảo hiểm',
+  'kHappyPartner': 'Vui vẻ',
+  'kGrateful': 'Biết ơn',
+  'kLate': 'Trễ giờ',
+  'kAngry': 'Không vui vẻ',
+  'kHelmetNonPrepared': 'Không chuẩn bị nón bảo hiểm',
+  'kRoadBlind': 'Không rành đường',
+  'kNotFriendly': 'Không thân thiện',
+  'kDisrespect': 'Thái độ thiếu tôn trọng',
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
@@ -373,8 +382,8 @@ final Map<String, String> vi = {
   'kSOSNumberFirstDescription':
       'Biiké sẽ gửi tin nhắn SMS chứa thông tin chi tiết chuyến đi đến ',
   'kSOSNumberSecondDescription': ' khi bạn nhấn vào nút ',
-  'kNeedSOS': 'Tôi cần Cảnh sát/Xe cấp cứu',
-  'kSOSNumberThirdDescription': ' trong khi đi xe và gọi',
+  'kNeedSOS': 'Gửi định vị',
+  'kSOSNumberThirdDescription': ' đến số S.O.S',
   'kSOSReachLimit': 'Bạn đã thêm tối đa các số điện thoại S.O.S',
 
   // 'add_sos_number' screen
@@ -427,7 +436,7 @@ final Map<String, String> vi = {
     'kDevelopError':
         'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
     'kExchangeFailed': 'Không thể đổi voucher!',
-    'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
+    'kNotEnoughPoint': 'Người dùng không đủ điểm!',
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
     'kNotFillAllFields': 'Vui lòng điền đầy đủ thông tin',
     'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
@@ -461,4 +470,11 @@ final Map<String, String> vi = {
     'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
+    'kNotArrivedAtPickUpPoint': 'Bạn chưa đến điểm đón',
+    'kOutOfDate': 'Đã hết hạn',
+    'kTripCanceled': 'Chuyến đi này đã bị hủy',
+    'kAlreadyFeedbacked': 'Bạn đã gửi feedback chuyến đi này.',
+    'kNotTurnOnGPS': 'Xin hãy bật GPS',
+    'kNotAllowGetLocation':
+        'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
   });

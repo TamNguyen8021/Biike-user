@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/data/models/voucher_image.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 /// This allows the `Voucher` class to access private members in
@@ -20,6 +21,7 @@ class Voucher {
   int? amountOfPoint;
   String description;
   String termsAndConditions;
+  List<VoucherImage?> voucherImages;
 
   Voucher(
       {required this.voucherId,
@@ -32,7 +34,8 @@ class Voucher {
       this.remaining,
       this.amountOfPoint,
       required this.description,
-      required this.termsAndConditions});
+      required this.termsAndConditions,
+      required this.voucherImages});
 
   /// A necessary factory constructor for creating a new Voucher instance
   /// from a map. Pass the map to the generated `_$VoucherFromJson()` constructor.

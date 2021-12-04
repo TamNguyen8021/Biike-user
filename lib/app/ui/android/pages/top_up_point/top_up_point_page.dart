@@ -1,4 +1,3 @@
-
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/top_up_point_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
@@ -8,7 +7,6 @@ import 'package:bikes_user/app/ui/android/widgets/others/top_up_point_text_field
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:momo_vn/momo_vn.dart';
 
 /// The 'top_up_point' screen
 class TopUpPointPage extends StatefulWidget {
@@ -216,18 +214,18 @@ class MomoPageState extends State<TopUpPointPage> {
   }
 
   // void _setState() {
-    // paymentStatus = 'Đã chuyển thanh toán';
-    // if (_momoPaymentResult.isSuccess == true) {
-    //   paymentStatus += '\nTình trạng: Thành công.';
-    //   paymentStatus +=
-    //       '\nSố điện thoại: ' + _momoPaymentResult.phoneNumber.toString();
-    //   paymentStatus += '\nExtra: ' + _momoPaymentResult.extra!;
-    //   paymentStatus += '\nToken: ' + _momoPaymentResult.token.toString();
-    // } else {
-    //   paymentStatus += '\nTình trạng: Thất bại.';
-    //   paymentStatus += '\nExtra: ' + _momoPaymentResult.extra.toString();
-    //   paymentStatus += '\nMã lỗi: ' + _momoPaymentResult.status.toString();
-    // }
+  // paymentStatus = 'Đã chuyển thanh toán';
+  // if (_momoPaymentResult.isSuccess == true) {
+  //   paymentStatus += '\nTình trạng: Thành công.';
+  //   paymentStatus +=
+  //       '\nSố điện thoại: ' + _momoPaymentResult.phoneNumber.toString();
+  //   paymentStatus += '\nExtra: ' + _momoPaymentResult.extra!;
+  //   paymentStatus += '\nToken: ' + _momoPaymentResult.token.toString();
+  // } else {
+  //   paymentStatus += '\nTình trạng: Thất bại.';
+  //   paymentStatus += '\nExtra: ' + _momoPaymentResult.extra.toString();
+  //   paymentStatus += '\nMã lỗi: ' + _momoPaymentResult.status.toString();
+  // }
   // }
 
   // void _handlePaymentSuccess(PaymentResponse response) {

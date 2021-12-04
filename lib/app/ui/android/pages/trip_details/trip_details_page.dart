@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
@@ -53,7 +54,7 @@ class TripDetailsPage extends StatelessWidget {
   void _addStatusBarTextAndTime() {
     const String _timeFormat = 'HH:mm, dd-MM-yyyy';
     switch (_tripDetailsController.trip.tripStatus) {
-      case 4:
+      case 5:
         _statusBarText = CustomStrings.kTripHasFinished.tr;
         _statusBarTime = DateFormat(_timeFormat).format(
             DateTime.tryParse(_tripDetailsController.trip.finishedTime)!);
@@ -204,12 +205,12 @@ class TripDetailsPage extends StatelessWidget {
 
   void _onBackPressed({required BuildContext context}) {
     // if (_tripDetailsController.isTripStarted.isFalse) {
-    if (Get.arguments['route'] == 'home') {
-      _homeController.pagingController.refresh();
-    } else {
-      _tripHistoryController.pagingController.refresh();
-    }
-    Get.back();
+      if (Get.arguments['route'] == 'home') {
+        _homeController.pagingController.refresh();
+      } else {
+        _tripHistoryController.pagingController.refresh();
+      }
+      Get.back();
     // } else {
     //   CommonFunctions().showErrorDialog(
     //       context: context,
@@ -232,7 +233,7 @@ class TripDetailsPage extends StatelessWidget {
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    Rx<bool> isStartTripButtonVisible = false.obs;
+                    Rx<bool> isArriveAtPickUpPointButtonVisible = false.obs;
                     DateTime currentTime = DateTime.now();
                     DateTime tempBookTime =
                         DateTime.tryParse(controller.trip.bookTime)!;
@@ -242,7 +243,7 @@ class TripDetailsPage extends StatelessWidget {
                     if (tempBookTime.day == currentTime.day &&
                         tempBookTime.month == currentTime.month &&
                         tempBookTime.year == currentTime.year) {
-                      isStartTripButtonVisible.value = true;
+                      isArriveAtPickUpPointButtonVisible.value = true;
                     }
 
                     return Scaffold(
@@ -255,8 +256,8 @@ class TripDetailsPage extends StatelessWidget {
                         },
                         appBar: AppBar(),
                         title: Text(CustomStrings.kTripDetails.tr),
-                        actionWidgets: controller.trip.tripStatus != 4 &&
-                                controller.trip.tripStatus != 5
+                        actionWidgets: controller.trip.tripStatus != 5 &&
+                                controller.trip.tripStatus != 6
                             ? <Widget>[
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -527,7 +528,7 @@ class TripDetailsPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    if (controller.trip.tripStatus == 5 &&
+                                    if (controller.trip.tripStatus == 6 &&
                                         controller.user.userFullname ==
                                             CustomStrings.kFinding)
                                       ...[]
@@ -629,8 +630,8 @@ class TripDetailsPage extends StatelessWidget {
                                         },
                                       ),
                                     ],
-                                    if (controller.trip.tripStatus != 4 &&
-                                        controller.trip.tripStatus != 5) ...[
+                                    if (controller.trip.tripStatus != 5 &&
+                                        controller.trip.tripStatus != 6) ...[
                                       Container(
                                         width: double.infinity,
                                         child: Column(
@@ -638,11 +639,13 @@ class TripDetailsPage extends StatelessWidget {
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
                                             if (controller.trip.tripStatus ==
-                                                2) ...[
+                                                    2 ||
+                                                controller.trip.tripStatus ==
+                                                    3) ...[
                                               Obx(
                                                 () => Visibility(
                                                   visible:
-                                                      isStartTripButtonVisible
+                                                      isArriveAtPickUpPointButtonVisible
                                                           .value,
                                                   child: Padding(
                                                     padding:
@@ -651,7 +654,7 @@ class TripDetailsPage extends StatelessWidget {
                                                     child:
                                                         CustomElevatedIconButton(
                                                       width: controller
-                                                              .isTripStarted
+                                                              .isArrivedAtPickUpPoint
                                                               .isTrue
                                                           ? 140
                                                           : 180,
@@ -666,7 +669,7 @@ class TripDetailsPage extends StatelessWidget {
                                                           .buttonIcon.value,
                                                       onPressedFunc: () async {
                                                         if (controller
-                                                            .isTripStarted
+                                                            .isArrivedAtPickUpPoint
                                                             .isFalse) {
                                                           await controller
                                                               .getCurrentLocation();
@@ -691,23 +694,50 @@ class TripDetailsPage extends StatelessWidget {
                                                                       .longitude!),
                                                               zoom: 12,
                                                             )));
-                                                            if (await _tripProvider
-                                                                .startTripOrCompleteTrip(
-                                                                    tripId: Get
-                                                                            .arguments[
-                                                                        'tripId'])) {
-                                                              controller
-                                                                  .isTripStarted
-                                                                  .value = true;
-                                                              controller
-                                                                  .changeToFinishTripButton();
+                                                            CustomLocation
+                                                                departureLocation =
+                                                                CustomLocation(
+                                                                    coordinate: controller
+                                                                        .departureStation
+                                                                        .departureCoordinate);
+                                                            if (CommonFunctions().isArrivedAtPickUpPoint(
+                                                                userLat: controller
+                                                                    .userLocation!
+                                                                    .latitude!,
+                                                                userLng: controller
+                                                                    .userLocation!
+                                                                    .longitude!,
+                                                                departureLat:
+                                                                    departureLocation
+                                                                        .latitude,
+                                                                departureLng:
+                                                                    departureLocation
+                                                                        .longitude)) {
+                                                              if (await _tripProvider
+                                                                  .startTrip(
+                                                                      tripId: Get
+                                                                              .arguments[
+                                                                          'tripId'])) {
+                                                                controller
+                                                                    .isArrivedAtPickUpPoint
+                                                                    .value = true;
+                                                                controller
+                                                                    .changeToFinishTripButton();
+                                                              } else {
+                                                                CommonFunctions().showErrorDialog(
+                                                                    context:
+                                                                        context,
+                                                                    message: CustomErrorsString
+                                                                        .kDevelopError
+                                                                        .tr);
+                                                              }
                                                             } else {
                                                               CommonFunctions()
                                                                   .showErrorDialog(
                                                                       context:
                                                                           context,
                                                                       message: CustomErrorsString
-                                                                          .kDevelopError
+                                                                          .kNotArrivedAtPickUpPoint
                                                                           .tr);
                                                             }
                                                           } else {
@@ -722,12 +752,12 @@ class TripDetailsPage extends StatelessWidget {
                                                         } else {
                                                           final isTripCompleted =
                                                               await _tripProvider
-                                                                  .startTripOrCompleteTrip(
+                                                                  .completeTrip(
                                                                       tripId: Get
                                                                               .arguments[
                                                                           'tripId']);
                                                           if (isTripCompleted) {
-                                                            isStartTripButtonVisible
+                                                            isArriveAtPickUpPointButtonVisible
                                                                 .value = false;
                                                             if (controller
                                                                 .isLocationShared
@@ -768,7 +798,8 @@ class TripDetailsPage extends StatelessWidget {
                                             Obx(
                                               () => Visibility(
                                                 visible: !controller
-                                                    .isTripStarted.value,
+                                                    .isArrivedAtPickUpPoint
+                                                    .value,
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -816,7 +847,7 @@ class TripDetailsPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (controller.trip.tripStatus == 4) ...[
+                              if (controller.trip.tripStatus == 5) ...[
                                 _showFeedbacks(
                                     context: context,
                                     title: CustomStrings.kYourFeedback.tr,

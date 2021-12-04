@@ -111,6 +111,8 @@ final Map<String, String> en = {
       'Board Of Honor Bikers for oustanding Bikers who are the most active, gain highest points.',
   'kTopBikerInfoSecondContent':
       'Bikers who appears on Board Of Honor Bikers will have special deals and gifts from Biiké.',
+  'kTopBikerInfoThirdContent':
+      'The point shown on chart represent the point you\'ve earned from your trips, which does not include top up points.',
   'kGotIt': 'Got it',
 
   // 'activity' screen
@@ -206,12 +208,19 @@ final Map<String, String> en = {
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
   'kTipForBiker': 'Tip for biker',
-  'kCriteria1': 'On time',
-  'kCriteria2': 'Friendly',
-  'kCriteria3': 'Easy-going',
-  'kCriteria4': 'Prepared helmet beforehand',
-  'kCriteria5': 'Thanks',
-  'kCriteria6': 'Know the way',
+
+  'kOnTime': 'On time',
+  'kFamiliarWithTheRoad': 'Familiar with the road',
+  'kFriendly': 'Friendly and funny',
+  'kHelmetPrepared': 'Helmet prepared',
+  'kHappyPartner': 'Happy partner',
+  'kGrateful': 'Grateful',
+  'kLate': 'Late',
+  'kAngry': 'Angry',
+  'kHelmetNonPrepared': 'Helmet non-prepared',
+  'kRoadBlind': 'Road blind',
+  'kNotFriendly': 'Not friendly',
+  'kDisrespect': 'Disrespect',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -367,8 +376,8 @@ final Map<String, String> en = {
   'kSOSNumberFirstDescription':
       'Biiké will send SMS which contains information of trip to ',
   'kSOSNumberSecondDescription': ' when you press on ',
-  'kNeedSOS': 'I need Police/Ambulance',
-  'kSOSNumberThirdDescription': ' while on road',
+  'kNeedSOS': 'Send location',
+  'kSOSNumberThirdDescription': ' to S.O.S numbers',
   'kSOSReachLimit': 'Reach S.O.S phone number limit',
 
   // 'add_sos_number' screen
@@ -446,4 +455,11 @@ final Map<String, String> en = {
     'kNoNotification': 'No notification',
     'kEmptyReportReasonOrContainsBadWords':
         'Report reason must not be empty or contains inappropriate words',
+    'kNotArrivedAtPickUpPoint': 'You are not at the pick up point',
+    'kOutOfDate': 'Out of date',
+    'kTripCanceled': 'The trip is canceled',
+    'kAlreadyFeedbacked': 'You have sent feedback for this trip.',
+    'kNotTurnOnGPS': 'Please turn on the GPS',
+    'kNotAllowGetLocation':
+        'Please turn on the permission to access user current location',
   });

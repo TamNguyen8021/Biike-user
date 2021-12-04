@@ -11,8 +11,6 @@ class LocalAppData {
   /// Author: UyenNLP
   Future<void> saveUserInfo(LoginData data) async {
     _pref = await SharedPreferences.getInstance()
-      ..setString('refreshToken', data.refreshToken)
-      ..setString('token', data.idToken)
       ..setString('phone', data.phone)
       ..setBool('isPhoneVerified', data.isPhoneVerified)
       ..setString('refreshToken', data.refreshToken)
@@ -33,27 +31,6 @@ class LocalAppData {
     Biike.pathshareUserToken = await Biike.localAppData.pathshareUserToken;
     Biike.pathshareUserIdentifier =
         await Biike.localAppData.pathshareUserIdentifier;
-  }
-
-  /// author: van
-  /// get token
-  Future<String> get token async {
-    _pref = await SharedPreferences.getInstance();
-    return _pref.getString('token') ?? '';
-  }
-
-  /// author: van
-  /// set token
-  Future<bool> setToken(String token) async {
-    _pref = await SharedPreferences.getInstance();
-    return _pref.setString('token', token);
-  }
-
-  /// Author: van
-  /// get refresh token
-  Future<String> get refreshToken async {
-    _pref = await SharedPreferences.getInstance();
-    return _pref.getString('refreshToken') ?? '';
   }
 
   /// Author: van
@@ -78,8 +55,6 @@ class LocalAppData {
 
   logout() async {
     _pref = await SharedPreferences.getInstance()
-      ..setString('refreshToken', '')
-      ..setString('token', '')
       ..remove('isPhoneVerified')
       ..setString('phone', '')
       ..setString('refreshToken', '')
