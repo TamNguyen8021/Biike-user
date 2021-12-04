@@ -332,6 +332,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  eventify:
+    dependency: transitive
+    description:
+      name: eventify
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -843,6 +850,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  momo_vn:
+    dependency: "direct main"
+    description:
+      name: momo_vn
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   octo_image:
     dependency: transitive
     description:
