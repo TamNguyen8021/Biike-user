@@ -207,6 +207,30 @@ class CustomStrings {
     'kCriteria5',
     'kCriteria6'
   ];
+  static const kKeerCriteriaHigh = [
+    'kOnTime',
+    'kFamiliarWithTheRoad',
+    'kFriendly',
+    'kHelmetPrepared'
+  ];
+  static const kKeerCriteriaLow = [
+    'kLate',
+    'kRoadBlind',
+    'kAngry',
+    'kHelmetNonPrepared'
+  ];
+  static const kBikerCriteriaHigh = [
+    'kOnTime',
+    'kFriendly',
+    'kHappyPartner',
+    'kGrateful'
+  ];
+  static const kBikerCriteriaLow = [
+    'kLate',
+    'kNotFriendly',
+    'kAngry',
+    'kDisrespect'
+  ];
 
   // 'biker_point' screen
   static const String kListVouchers = 'kListVouchers';
@@ -401,6 +425,7 @@ class CustomStrings {
   static const String kNoted = 'kNoted';
   static const String kTopUpNoted = 'kTopUpNoted';
   static const String kTopUpSuccess = 'kTopUpSuccess';
+
   // noti
   static const String kNotification = 'kNotification';
   static const String kAll = 'kAll';

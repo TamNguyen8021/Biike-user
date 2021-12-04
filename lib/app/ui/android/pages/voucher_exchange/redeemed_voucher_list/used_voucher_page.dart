@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
-import 'package:bikes_user/app/ui/android/pages/voucher_exchange/redeemed_voucher_list/widget/your_voucher_card.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,10 +29,11 @@ class UsedVoucherPage extends StatelessWidget {
                     animateTransitions: true,
                     itemBuilder: (context, item, index) => Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
-                          child: YourVoucherCard(
+                          child: VoucherCard(
                               data: controller
                                   .usedVoucherPagingController.itemList!
-                                  .elementAt(index)),
+                                  .elementAt(index),
+                              isExchanged: true),
                         ),
                     noItemsFoundIndicatorBuilder: (BuildContext context) {
                       return Text(CustomErrorsString.kNoVoucher.tr);
