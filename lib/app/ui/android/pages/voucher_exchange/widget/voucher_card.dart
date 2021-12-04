@@ -15,7 +15,7 @@ class VoucherCard extends StatelessWidget {
       : super(key: key);
 
   ImageProvider _getImage(voucher) {
-    if (voucher.voucherImages.elementAt(0) != null) {
+    if (voucher.voucherImages.length > 0) {
       return NetworkImage(
           voucher.voucherImages.elementAt(0)!.voucherImageUrl.toString());
     }

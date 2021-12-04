@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/feedbacks_controller.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/android/pages/feedback/widget/criteria_button.dart';
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -29,13 +27,6 @@ class FeedbackPage extends StatelessWidget {
       height: 30.0,
       width: 30.0,
     );
-  }
-
-  _randomCriteria(Random random, List listSeed) {
-    int data = listSeed[random.nextInt(listSeed.length)];
-    listSeed.remove(data);
-
-    return data;
   }
 
   @override
@@ -157,10 +148,6 @@ class FeedbackPage extends StatelessWidget {
                                           Row(
                                             children: <Widget>[
                                               Expanded(
-                                                  // child: CriteriaButton(
-                                                  //     text: CustomStrings
-                                                  //         .kCriteria[listCriteria[0]
-                                                  //         .tr)),
                                                   child: CriteriaButton(
                                                       text: _feedbackController
                                                           .criteria
