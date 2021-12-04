@@ -30,7 +30,6 @@ class HomeController extends GetxController {
   final PagingController<int, dynamic> pagingController =
       PagingController(firstPageKey: 0);
 
-  Rx<bool> isAppBarVisible = true.obs;
   Rxn<DateTime> searchDate = Rxn<DateTime>();
   Rxn<TimeOfDay> searchTime = Rxn<TimeOfDay>();
   Rx<String> searchDateString = CustomStrings.kChooseDate.tr.obs;
@@ -86,13 +85,6 @@ class HomeController extends GetxController {
       pagingController.error = error;
       CommonFunctions.catchExceptionError(error);
     }
-  }
-
-  /// Show/hide appbar depends on [isVisible]
-  ///
-  /// Author: TamNTT
-  void setAppBarVisible(isVisible) {
-    isAppBarVisible.value = isVisible;
   }
 
   /// Load upcoming trips from API.

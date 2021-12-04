@@ -24,100 +24,90 @@ class Activity extends StatelessWidget {
       _roleActivity = CustomStrings.kBikerActivities.tr;
     }
 
-    return Scaffold(
-      appBar: null,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 40.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        _roleActivity,
-                        style: TextStyle(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                            color: CustomColors.kBlue),
-                      ),
-                      IconButton(
-                          onPressed: () =>
-                              Get.toNamed(CommonRoutes.TRIP_HISTORY),
-                          icon: Icon(
-                            Icons.history,
-                            color: CustomColors.kBlue,
-                          ))
-                    ]),
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(22.0, 40.0, 22.0, 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      _roleActivity,
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: CustomColors.kBlue),
+                    ),
+                    IconButton(
+                        onPressed: () => Get.toNamed(CommonRoutes.TRIP_HISTORY),
+                        icon: Icon(
+                          Icons.history,
+                          color: CustomColors.kBlue,
+                        ))
+                  ]),
+            ),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () => Future.sync(
+                  () => homeController.pagingController.refresh(),
+                ),
+                child: PagedListView<int, dynamic>(
+                  pagingController: homeController.pagingController,
+                  shrinkWrap: true,
+                  builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                      animateTransitions: true,
+                      itemBuilder: (context, item, index) => Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: UpcomingTripCard(
+                                isSearchedTrip: false,
+                                tripId: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .tripId,
+                                userId: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .userId,
+                                avatarUrl: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .avatarUrl,
+                                name: homeController.pagingController.itemList!
+                                    .elementAt(index)
+                                    .name,
+                                phoneNo: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .phoneNo,
+                                bookTime: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .bookTime,
+                                departureStation: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .departureStation,
+                                destinationStation: homeController
+                                    .pagingController.itemList!
+                                    .elementAt(index)
+                                    .destinationStation),
+                          ),
+                      noItemsFoundIndicatorBuilder: (BuildContext context) {
+                        return Text(CustomStrings.kNoUpcomingTrips.tr);
+                      },
+                      firstPageErrorIndicatorBuilder: (BuildContext context) {
+                        return LazyLoadingListErrorBuilder(onPressed: () {
+                          homeController.pagingController.refresh();
+                        });
+                      }),
+                ),
               ),
-              GetBuilder<HomeController>(
-                  init: homeController,
-                  builder: (HomeController controller) {
-                    return RefreshIndicator(
-                      onRefresh: () => Future.sync(
-                        () => controller.pagingController.refresh(),
-                      ),
-                      child: PagedListView<int, dynamic>(
-                        pagingController: controller.pagingController,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                            animateTransitions: true,
-                            itemBuilder: (context, item, index) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: UpcomingTripCard(
-                                      isSearchedTrip: false,
-                                      tripId: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .tripId,
-                                      userId: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .userId,
-                                      avatarUrl: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .avatarUrl,
-                                      name: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .name,
-                                      phoneNo: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .phoneNo,
-                                      bookTime: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .bookTime,
-                                      departureStation: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .departureStation,
-                                      destinationStation: controller
-                                          .pagingController.itemList!
-                                          .elementAt(index)
-                                          .destinationStation),
-                                ),
-                            noItemsFoundIndicatorBuilder:
-                                (BuildContext context) {
-                              return Text(CustomStrings.kNoUpcomingTrips.tr);
-                            },
-                            firstPageErrorIndicatorBuilder:
-                                (BuildContext context) {
-                              return LazyLoadingListErrorBuilder(onPressed: () {
-                                controller.pagingController.refresh();
-                              });
-                            }),
-                      ),
-                    );
-                  }),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

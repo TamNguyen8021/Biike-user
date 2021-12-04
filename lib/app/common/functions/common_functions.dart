@@ -369,6 +369,11 @@ class CommonFunctions {
         PointLatLng(startLat, startLng),
         PointLatLng(endLat, endLng));
 
+    Biike.logger.d(startLat);
+    Biike.logger.d(startLng);
+    Biike.logger.d(endLat);
+    Biike.logger.d(endLng);
+
     for (PointLatLng point in result.points) {
       polypoints.add(LatLng(point.latitude, point.longitude));
     }
