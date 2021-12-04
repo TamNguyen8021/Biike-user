@@ -5,7 +5,10 @@ import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:get/get_connect/connect.dart';
 
 class ImageProvider extends CommonProvider {
-  Future<dynamic> postImage(
+  /// Upload an image to server and get the image url
+  ///
+  /// Author: PhatDH
+  Future<String> postImage(
       {required int imageType,
       required String imageName,
       required dynamic imagePath}) async {

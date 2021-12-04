@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/choose_date_time_button.dart';
@@ -6,8 +8,8 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -50,25 +52,52 @@ class EditProfilePage extends StatelessWidget {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(_profileController.user.avatar),
-                    radius: 55,
+                  Obx(
+                    () => CircleAvatar(
+                      backgroundImage: _profileController.avatarUrl.value
+                              .contains('http')
+                          ? NetworkImage(_profileController.avatarUrl.value)
+                          : FileImage(File(_profileController.avatarUrl.value))
+                              as ImageProvider,
+                      radius: 55,
+                    ),
                   ),
-                  // Positioned(
-                  //   top: 75,
-                  //   left: 80,
-                  //   child: CircleAvatar(
-                  //     radius: 15,
-                  //     backgroundColor: CustomColors.kBlue,
-                  //     child: IconButton(
-                  //       onPressed: () {},
-                  //       icon: Icon(Icons.camera_alt),
-                  //       iconSize: 15,
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // )
+                  Positioned(
+                    top: 75,
+                    left: 80,
+                    child: CircleAvatar(
+                      radius: 15,
+                      backgroundColor: CustomColors.kBlue,
+                      child: IconButton(
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles(
+                            type: FileType.image,
+                          );
+
+                          if (result != null) {
+                            _profileController.avatarUrl.value =
+                                result.files.single.path!;
+                            _profileController.avatarName =
+                                result.files.single.name;
+
+                            isSaveButtonDisable.value =
+                                _profileController.isSaveButtonDisable(
+                                    newName:
+                                        _profileController.user.userFullname,
+                                    newGender: _profileController.user.gender,
+                                    newBirthDate:
+                                        _profileController.user.birthDate);
+                          } else {
+                            // User canceled the picker
+                          }
+                        },
+                        icon: Icon(Icons.camera_alt),
+                        iconSize: 15,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
                 ],
               ),
               Form(
@@ -105,7 +134,7 @@ class EditProfilePage extends StatelessWidget {
                           visible: false, child: Icon(Icons.arrow_downward)),
                       decoration: InputDecoration(
                         labelText: CustomStrings.kGender.tr,
-                        labelStyle: TextStyle(fontSize: 14.sp),
+                        labelStyle: Theme.of(context).textTheme.headline6,
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color:

@@ -13,8 +13,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dar
 import 'package:bikes_user/app/ui/android/pages/home/widgets/activity.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/home.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
-import 'package:bikes_user/injectable/injectable.dart';
-import 'package:bikes_user/services/token_service.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,8 +40,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getIt<TokenService>().refreshToken();
-
     return OnBackPressed(
       perform: () => CommonFunctions().showConfirmDialog(
         context: context,

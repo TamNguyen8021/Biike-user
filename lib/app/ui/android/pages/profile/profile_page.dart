@@ -57,136 +57,149 @@ class ProfilePage extends StatelessWidget {
                       ),
                       body: SingleChildScrollView(
                         child: SafeArea(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      CustomPaint(
-                                        painter: HalfOvalPainter(),
-                                        child: Container(height: 50),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              _profileController.user.avatar),
-                                          radius: 50,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 22.0),
+                          child: GetBuilder<ProfileController>(
+                              init: _profileController,
+                              builder: (ProfileController controller) {
+                                return Container(
+                                  // width: MediaQuery.of(context).size.width,
                                   child: Column(
                                     children: <Widget>[
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(bottom: 6.0),
-                                        child: Text(
-                                          _profileController.user.userFullname,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline2,
-                                        ),
-                                      ),
-                                      Obx(
-                                        () => UserRatingAndScore(
-                                            rating: _profileController
-                                                .user.userStar,
-                                            score: _walletController
-                                                .totalWalletPoint.value),
-                                      ),
-                                      Padding(
-                                        padding:
                                             const EdgeInsets.only(bottom: 8.0),
-                                        child: ProfileTextField(
-                                            isReadOnly: true,
-                                            isEditProfile: false,
-                                            initialValue: _profileController
-                                                .user.userPhoneNumber,
-                                            labelText:
-                                                CustomStrings.kPhoneNo.tr),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 25.0),
-                                        child: ProfileTextField(
-                                            isReadOnly: true,
-                                            isEditProfile: false,
-                                            initialValue:
-                                                _profileController.user.email,
-                                            labelText: CustomStrings.kEmail.tr),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 16.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                        child: Stack(
                                           children: <Widget>[
-                                            if (Biike.role.value ==
-                                                Role.biker) ...[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: CustomElevatedIconButton(
-                                                  width: 135,
-                                                  onPressedFunc: () =>
-                                                      Get.toNamed(CommonRoutes
-                                                          .MANAGE_BIKE),
-                                                  text: CustomStrings
-                                                      .kManageBike.tr,
-                                                  elevation: 0.0,
-                                                  icon: Icons.two_wheeler,
-                                                  backgroundColor:
-                                                      CustomColors.kBlue,
-                                                  foregroundColor: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                            CustomElevatedIconButton(
-                                              width: 135,
-                                              onPressedFunc: () => Get.toNamed(
-                                                  CommonRoutes.EDIT_PROFILE),
-                                              text: CustomStrings.kEdit.tr,
-                                              icon: Icons.edit,
-                                              elevation: 0.0,
-                                              backgroundColor:
-                                                  CustomColors.kBlue,
-                                              foregroundColor: Colors.white,
+                                            CustomPaint(
+                                              painter: HalfOvalPainter(),
+                                              child: Container(height: 50),
                                             ),
+                                            Align(
+                                              alignment: Alignment.bottomCenter,
+                                              child: CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                    controller.user.avatar),
+                                                radius: 50,
+                                              ),
+                                            )
                                           ],
                                         ),
                                       ),
-                                      ProfileButtons(),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 24.0),
-                                        child: TextButton(
-                                          child: Text(
-                                            CustomStrings.kLogOut.tr,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2,
-                                          ),
-                                          onPressed: () {
-                                            LocalAppData().logout();
-                                            Get.offAllNamed(CommonRoutes.LOGIN);
-                                          },
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 22.0),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 6.0),
+                                              child: Text(
+                                                controller.user.userFullname,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline2,
+                                              ),
+                                            ),
+                                            Obx(
+                                              () => UserRatingAndScore(
+                                                  rating:
+                                                      controller.user.userStar,
+                                                  score: _walletController
+                                                      .totalWalletPoint.value),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: ProfileTextField(
+                                                  isReadOnly: true,
+                                                  isEditProfile: false,
+                                                  initialValue: controller
+                                                      .user.userPhoneNumber,
+                                                  labelText: CustomStrings
+                                                      .kPhoneNo.tr),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 25.0),
+                                              child: ProfileTextField(
+                                                  isReadOnly: true,
+                                                  isEditProfile: false,
+                                                  initialValue:
+                                                      controller.user.email,
+                                                  labelText:
+                                                      CustomStrings.kEmail.tr),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 16.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  if (Biike.role.value ==
+                                                      Role.biker) ...[
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child:
+                                                          CustomElevatedIconButton(
+                                                        width: 135,
+                                                        onPressedFunc: () => Get
+                                                            .toNamed(CommonRoutes
+                                                                .MANAGE_BIKE),
+                                                        text: CustomStrings
+                                                            .kManageBike.tr,
+                                                        elevation: 0.0,
+                                                        icon: Icons.two_wheeler,
+                                                        backgroundColor:
+                                                            CustomColors.kBlue,
+                                                        foregroundColor:
+                                                            Colors.white,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                  CustomElevatedIconButton(
+                                                    width: 135,
+                                                    onPressedFunc: () =>
+                                                        Get.toNamed(CommonRoutes
+                                                            .EDIT_PROFILE),
+                                                    text:
+                                                        CustomStrings.kEdit.tr,
+                                                    icon: Icons.edit,
+                                                    elevation: 0.0,
+                                                    backgroundColor:
+                                                        CustomColors.kBlue,
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            ProfileButtons(),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 24.0),
+                                              child: TextButton(
+                                                child: Text(
+                                                  CustomStrings.kLogOut.tr,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2,
+                                                ),
+                                                onPressed: () {
+                                                  LocalAppData().logout();
+                                                  Get.offAllNamed(
+                                                      CommonRoutes.LOGIN);
+                                                },
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                );
+                              }),
                         ),
                       ),
                     );
