@@ -1,6 +1,8 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/login.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalAppData {
@@ -54,6 +56,7 @@ class LocalAppData {
   }
 
   logout() async {
+    getIt<AppPref>().logout();
     _pref = await SharedPreferences.getInstance()
       ..remove('isPhoneVerified')
       ..setString('phone', '')

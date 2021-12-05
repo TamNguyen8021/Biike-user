@@ -24,8 +24,13 @@ final Map<String, String> en = {
   'kPassword': 'Password',
   'kInputPassword': 'Enter password',
   'kLogin': 'Sign in',
-  'kNoAccount': 'No account yet? ',
+  'kNoAccount': 'No account yet? Please try Sign Up',
   'kRegister': 'Sign up now!',
+  'kWrongAccount': 'Your account/password is incorrect, please check again',
+  'kUnVerifiedEmail':
+      'We just sent you verify link via your email, please verify email to finish sign up',
+  'kLoginExceptionError': 'Something went wrong, please try again',
+  'kEmptyToken': 'Server sent empty token',
 
   // 'register' screen
   'kConfirmTerm': 'By sign up, you aggre with',
@@ -35,7 +40,7 @@ final Map<String, String> en = {
   'kInputPhoneNumber': 'Enter phone number',
   'kSentVerifiedEmail':
       'We sent a verified email to your mailbox. Please verify your account before login',
-  'kRegisterSuccess': 'Your account was created',
+  'kRegisterSuccess': 'Your account created successful',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',

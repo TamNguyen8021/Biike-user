@@ -252,6 +252,8 @@ class TripDetailsController extends GetxController {
   /// Send noti to partner when cancel trip
   ///
   /// Author: UyenNLP
+  // TODO: handle send noti
+  // ignore: unused_element
   _sendNoti({required tripId, required TripStatus status}) async {
     var data = await _tripProvider.getTripDetails(tripId: tripId);
     Trip trip = Trip.fromJson(data);

@@ -1,6 +1,4 @@
-import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:get/get.dart';
 
 /// This allows the `VoucherImage` class to access private members in
 /// the generated file. The value for this is *.g.dart, where

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/feedbacks_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/feedback/widget/criteria_button.dart';
@@ -151,7 +149,7 @@ class FeedbackPage extends StatelessWidget {
                                                   child: CriteriaButton(
                                                       text: _feedbackController
                                                           .criteria
-                                                          .value[0]
+                                                          .toList()[0]
                                                           .tr)),
                                               Container(
                                                 width: 5,
@@ -160,7 +158,7 @@ class FeedbackPage extends StatelessWidget {
                                                   child: CriteriaButton(
                                                       text: _feedbackController
                                                           .criteria
-                                                          .value[1]
+                                                          .toList()[1]
                                                           .tr)),
                                             ],
                                           ),
@@ -170,7 +168,7 @@ class FeedbackPage extends StatelessWidget {
                                                   child: CriteriaButton(
                                                       text: _feedbackController
                                                           .criteria
-                                                          .value[2]
+                                                          .toList()[2]
                                                           .tr)),
                                               Container(
                                                 width: 5,
@@ -179,7 +177,7 @@ class FeedbackPage extends StatelessWidget {
                                                   child: CriteriaButton(
                                                       text: _feedbackController
                                                           .criteria
-                                                          .value[3]
+                                                          .toList()[3]
                                                           .tr)),
                                             ],
                                           ),

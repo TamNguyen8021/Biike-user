@@ -59,9 +59,9 @@ class VoucherController extends GetxController {
         return CustomErrorsString.kNotAllowGetLocation.tr;
       }
 
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      isNearMeSelected.value = !isNearMeSelected.value;
+      // Position position = await Geolocator.getCurrentPosition(
+      //     desiredAccuracy: LocationAccuracy.high);
+      // isNearMeSelected.value = !isNearMeSelected.value;
 
       //TODO send user current location
     } catch (e) {
