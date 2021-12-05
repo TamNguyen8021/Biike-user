@@ -305,6 +305,12 @@ class CustomStrings {
   static const String kPleaseTakeRegistrationPicture =
       'kPleaseTakeRegistrationPicture';
   static const String kAddBikeSuccess = 'kAddBikeSuccess';
+  static const String kDrivingLicenseBackPicture = 'kDrivingLicenseBackPicture';
+  static const String kDrivingLicenseFrontPicture = 'kDrivingLicenseFrontPicture';
+  static const String kPleaseTakeDrivingLicenseBackPicture =
+      'kPleaseTakeDrivingLicenseBackPicture';
+  static const String kPleaseTakeDrivingLicenseFrontPicture =
+      'kPleaseTakeDrivingLicenseFrontPicture';
 
   // 'voucher_detail' screen
   static const String kGiftDetail = 'kGiftDetail';

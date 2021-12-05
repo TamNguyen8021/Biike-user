@@ -267,6 +267,76 @@ class AddBikePage extends StatelessWidget {
                                 ),
                               ),
                               Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(CustomStrings.kDrivingLicenseBackPicture.tr),
+                                  CameraButton(onPressed: () async {
+                                    _addBikeController
+                                        .drivingLicenseBackPicture.value =
+                                    await Get.toNamed(
+                                        CommonRoutes.TAKE_PICTURE,
+                                        arguments: {
+                                          'type': 'driving license back'
+                                        });
+                                  }),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 16.0),
+                                child: Obx(
+                                      () => _addBikeController
+                                      .drivingLicenseBackPicture.value
+                                      .contains('https')
+                                      ? Container(
+                                      height: 250,
+                                      child: Image.network(_addBikeController
+                                          .drivingLicenseBackPicture.value, fit: BoxFit.cover))
+                                      : ImageFileContainer(
+                                      condition: _addBikeController
+                                          .drivingLicenseBackPicture.value ==
+                                          '',
+                                      path: _addBikeController
+                                          .drivingLicenseBackPicture.value),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(CustomStrings.kDrivingLicenseFrontPicture.tr),
+                                  CameraButton(onPressed: () async {
+                                    _addBikeController
+                                        .drivingLicenseFrontPicture.value =
+                                    await Get.toNamed(
+                                        CommonRoutes.TAKE_PICTURE,
+                                        arguments: {
+                                          'type': 'driving license front'
+                                        });
+                                  }),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 16.0),
+                                child: Obx(
+                                      () => _addBikeController
+                                      .drivingLicenseFrontPicture.value
+                                      .contains('https')
+                                      ? Container(
+                                      height: 250,
+                                      child: Image.network(_addBikeController
+                                          .drivingLicenseFrontPicture.value, fit: BoxFit.cover))
+                                      : ImageFileContainer(
+                                      condition: _addBikeController
+                                          .drivingLicenseFrontPicture.value ==
+                                          '',
+                                      path: _addBikeController
+                                          .drivingLicenseFrontPicture.value),
+                                ),
+                              ),
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Expanded(

@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/image_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class AddBikeController extends GetxController {
   final _bikeProvider = Get.find<BikeProvider>();
@@ -20,6 +19,8 @@ class AddBikeController extends GetxController {
   Rx<String> bikePicture = ''.obs;
   Rx<String> registrationPicture = ''.obs;
   Rx<String> numberPlatePicture = ''.obs;
+  Rx<String> drivingLicenseBackPicture = ''.obs;
+  Rx<String> drivingLicenseFrontPicture = ''.obs;
   Rx<int> bikeStatus = 1.obs;
 
   bool isLoading = false;
@@ -36,6 +37,8 @@ class AddBikeController extends GetxController {
     bikePicture = _manageBikeController.bike.bikePicture!.obs;
     registrationPicture = _manageBikeController.bike.bikeLicensePicture!.obs;
     numberPlatePicture = _manageBikeController.bike.plateNumberPicture!.obs;
+    drivingLicenseBackPicture = _manageBikeController.bike.drivingLicenseBackPicture!.obs;
+    drivingLicenseFrontPicture = _manageBikeController.bike.drivingLicenseFrontPicture!.obs;
     bikeStatus = _manageBikeController.bike.bikeStatus!.obs;
     super.onInit();
   }
@@ -49,16 +52,15 @@ class AddBikeController extends GetxController {
     // try {
     _enableLoading(true);
 
-    List<MultipartFile> imageList = [];
-    imageList.add(await createMultipartFile(bikePicture.value,
-        bikePicture.value.substring(bikePicture.value.lastIndexOf('/') + 1)));
-    imageList.add(await createMultipartFile(registrationPicture.value,
-        registrationPicture.value.substring(registrationPicture.value.lastIndexOf('/') + 1)));
-    imageList.add(await createMultipartFile(numberPlatePicture.value,
-        numberPlatePicture.value.substring(numberPlatePicture.value.lastIndexOf('/') + 1)));
+    List<http.MultipartFile> imageList = [];
+    imageList.add(await createMultipartFile(bikePicture.value));
+    imageList.add(await createMultipartFile(registrationPicture.value));
+    imageList.add(await createMultipartFile(numberPlatePicture.value));
+    imageList.add(await createMultipartFile(drivingLicenseBackPicture.value));
+    imageList.add(await createMultipartFile(drivingLicenseFrontPicture.value));
 
     dynamic imageURLs = await _imageProvider.postImage(imageType: 1,
-        imageList: [bikePicture.value, registrationPicture.value, numberPlatePicture.value]);
+        imageList: imageList);
 
     Map<String, dynamic> body = {
       'userId': Biike.userId.value,
@@ -71,6 +73,8 @@ class AddBikeController extends GetxController {
       'bikePicture': imageURLs[0],
       'bikeLicensePicture': imageURLs[1],
       'plateNumberPicture': imageURLs[2],
+      'drivingLicenseBackPicture': imageURLs[3],
+      'drivingLicenseFrontPicture': imageURLs[4]
     };
 
     if (isAddBike) {
@@ -87,23 +91,24 @@ class AddBikeController extends GetxController {
         brand.value.trim().isEmpty ||
         bikePicture.value.trim().isEmpty ||
         numberPlatePicture.value.trim().isEmpty ||
-        registrationPicture.value.trim().isEmpty) {
+        registrationPicture.value.trim().isEmpty ||
+        drivingLicenseBackPicture.value.trim().isEmpty ||
+        drivingLicenseFrontPicture.value.trim().isEmpty) {
       return false;
     }
 
     return true;
   }
 
-  Future<MultipartFile> createMultipartFile(imagePath, imageName) async {
-    final File imageFile = File(imagePath);
-
-    if (await imageFile.exists()) {
-    // Use the cached images if it exists
-    } else {
-    // Image doesn't exist in cache
-      await imageFile.create(recursive: true);
-    }
-
-    return MultipartFile(imageFile, filename: imageName);
+  Future<http.MultipartFile> createMultipartFile(imagePath) async {
+    // final File imageFile = File(imagePath);
+    //
+    // if (await imageFile.exists()) {
+    // // Use the cached images if it exists
+    // } else {
+    // // Image doesn't exist in cache
+    //   await imageFile.create(recursive: true);
+    // }
+    return await http.MultipartFile.fromPath('imageList', imagePath);
   }
 }

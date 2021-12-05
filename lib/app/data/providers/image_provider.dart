@@ -7,15 +7,15 @@ import 'package:http/http.dart' as http;
 class ImageProvider extends CommonProvider {
   Future<dynamic> postImage(
       {required int imageType,
-      required List<String> imageList}) async {
+      required List<http.MultipartFile> imageList}) async {
 
     var request = http.MultipartRequest('POST', Uri.parse(UrlStrings.imageUrl));
     request.fields.addAll({
       'imageType': '1'
     });
 
-    for (String imagePath in imageList) {
-      request.files.add(await http.MultipartFile.fromPath('imageList', imagePath));
+    for (http.MultipartFile image in imageList) {
+      request.files.add(image);
     }
 
     request.headers.addAll(await headers);
