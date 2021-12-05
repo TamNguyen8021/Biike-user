@@ -44,6 +44,8 @@ class CustomErrorsString {
   static const String kAlreadyFeedbacked = 'kAlreadyFeedbacked';
   static const String kNotTurnOnGPS = 'kNotTurnOnGPS';
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
+
+  //Login error message
   static const String kNoAccount = 'kNoAccount';
   static const String kWrongAccount = 'kWrongAccount';
   static const String kUnVerifiedEmail = 'kUnVerifiedEmail';

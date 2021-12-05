@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/login_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/login_register/widgets/login_register_text_field.dart';
@@ -100,7 +101,7 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          CustomStrings.kNoAccount.tr,
+                          CustomErrorsString.kNoAccount.tr,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         GestureDetector(
