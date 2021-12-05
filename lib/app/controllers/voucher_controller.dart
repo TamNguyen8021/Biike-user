@@ -1,9 +1,11 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/voucher_category.dart';
 import 'package:bikes_user/app/data/providers/voucher_category_provider.dart';
 import 'package:bikes_user/app/data/providers/voucher_provider.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:location/location.dart';
 
 class VoucherController extends GetxController {
   final _voucherProvider = Get.find<VoucherProvider>();
@@ -14,6 +16,7 @@ class VoucherController extends GetxController {
   RxList<VoucherCategory> voucherCategoryList = <VoucherCategory>[].obs;
 
   Rx<VoucherCategory> category = VoucherCategory.empty().obs;
+  RxBool isNearMeSelected = false.obs;
 
   Map<String, dynamic> pagination = {};
   int _currentPage = 1;
@@ -47,6 +50,27 @@ class VoucherController extends GetxController {
   void updateCategory(category) {
     this.category.value = category;
     pagingController.refresh();
+  }
+
+  Future<dynamic> updateNearMe() async {
+    try {
+      LocationData? userLocation = await CommonFunctions().getCurrentLocation();
+
+      if (userLocation == null) {
+        return CustomStrings.kNeedLocationPermission.tr;
+      }
+
+      // Position position = await Geolocator.getCurrentPosition(
+      //     desiredAccuracy: LocationAccuracy.high);
+      // isNearMeSelected.value = !isNearMeSelected.value;
+
+      //TODO send user current location
+    } catch (e) {
+      CommonFunctions.catchExceptionError(e);
+      return CustomStrings.kNeedLocationPermission.tr;
+    }
+
+    return true;
   }
 
   Future<List> _getVoucherList() async {

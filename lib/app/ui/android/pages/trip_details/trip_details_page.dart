@@ -293,7 +293,9 @@ class TripDetailsPage extends StatelessWidget {
                                       vertical: 16.0, horizontal: 22.0),
                                   child: ElevatedButton.icon(
                                     onPressed: () async {
-                                      await controller.getCurrentLocation();
+                                      controller.userLocation =
+                                          await CommonFunctions()
+                                              .getCurrentLocation();
                                       if (controller.userLocation != null) {
                                         controller.showHelpCenter(
                                             context: context);
@@ -720,8 +722,6 @@ class TripDetailsPage extends StatelessWidget {
                                                         if (controller
                                                             .isArrivedAtPickUpPoint
                                                             .isFalse) {
-                                                          await controller
-                                                              .getCurrentLocation();
                                                           if (controller
                                                                   .userLocation !=
                                                               null) {
@@ -743,7 +743,6 @@ class TripDetailsPage extends StatelessWidget {
                                                                       .longitude!),
                                                               zoom: 12,
                                                             )));
-
                                                             if (CommonFunctions().isArrivedAtPickUpPoint(
                                                                 userLat: controller
                                                                     .userLocation!

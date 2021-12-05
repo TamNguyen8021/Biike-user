@@ -62,28 +62,9 @@ class TripDetailsController extends GetxController {
   DateTime? _lastTimeSharedLocation;
 
   @override
-  onInit() {
+  onInit() async {
     super.onInit();
-    getCurrentLocation();
-  }
-
-  Future<void> getCurrentLocation() async {
-    final _location = Location();
-
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-
-    _serviceEnabled = await _location.serviceEnabled();
-    while (!_serviceEnabled) {
-      _serviceEnabled = await _location.requestService();
-    }
-
-    _permissionGranted = await _location.hasPermission();
-    while (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _location.requestPermission();
-    }
-
-    userLocation = await _location.getLocation();
+    userLocation = await CommonFunctions().getCurrentLocation();
   }
 
   void changeToStartTripButton() {
@@ -244,7 +225,7 @@ class TripDetailsController extends GetxController {
     bool response =
         await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
     if (response) {
-      await _sendNoti(tripId: tripId, status: TripStatus.canceled);
+      // await _sendNoti(tripId: tripId, status: TripStatus.canceled);
 
       Get.back(closeOverlays: true);
       Get.back();
@@ -260,6 +241,8 @@ class TripDetailsController extends GetxController {
   /// Send noti to partner when cancel trip
   ///
   /// Author: UyenNLP
+  // TODO: handle send noti
+  // ignore: unused_element
   _sendNoti({required tripId, required TripStatus status}) async {
     var data = await _tripProvider.getTripDetails(tripId: tripId);
     Trip trip = Trip.fromJson(data);

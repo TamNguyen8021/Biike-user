@@ -24,7 +24,13 @@ final Map<String, String> vi = {
   'kPassword': 'Mật khẩu',
   'kInputPassword': 'Nhập mật khẩu',
   'kLogin': 'Đăng nhập',
-  'kNoAccount': 'Chưa có tài khoản? ',
+  'kNoAccount': 'Bạn chưa có tài khoản? Xin vui lòng Đăng Ký ',
+  'kWrongAccount':
+      'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
+  'kUnVerifiedEmail':
+      'Chúng tôi đã gửi link xác thực qua email đăng kí của bạn, xin hãy vui lòng xác thực để hoàn tất đăng ký',
+  'kLoginExceptionError': 'Đã có lỗi ngoại lệ xảy ra, xin vui lòng thử lại',
+  'kEmptyToken': 'Lỗi server trả token trống',
 
   // 'register' screen
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
@@ -212,12 +218,19 @@ final Map<String, String> vi = {
   'kBtnSend': 'Gửi',
   'kSendSuccess': 'Gửi feedback thành công',
   'kTipForBiker': 'Tip cho người chở',
-  'kCriteria1': 'Đúng giờ',
-  'kCriteria2': 'Thân thiện, hòa đồng',
-  'kCriteria3': 'Vui vẻ',
-  'kCriteria4': 'Có chuẩn bị nón bảo hiểm',
-  'kCriteria5': 'Cám ơn',
-  'kCriteria6': 'Rành đường',
+
+  'kOnTime': 'Đúng giờ',
+  'kFamiliarWithTheRoad': 'Rành đường',
+  'kFriendly': 'Thân thiện, hòa đồng',
+  'kHelmetPrepared': 'Có chuẩn bị nón bảo hiểm',
+  'kHappyPartner': 'Vui vẻ',
+  'kGrateful': 'Biết ơn',
+  'kLate': 'Trễ giờ',
+  'kAngry': 'Không vui vẻ',
+  'kHelmetNonPrepared': 'Không chuẩn bị nón bảo hiểm',
+  'kRoadBlind': 'Không rành đường',
+  'kNotFriendly': 'Không thân thiện',
+  'kDisrespect': 'Thái độ thiếu tôn trọng',
 
   // 'biker_point' screen
   'kListVouchers': 'Danh mục đổi quà',
@@ -429,7 +442,7 @@ final Map<String, String> vi = {
     'kDevelopError':
         'Có lỗi xảy ra, vui lòng thử lại sau hoặc liên hệ bộ phận phát triển của Biiké để được hỗ trợ kịp thời',
     'kExchangeFailed': 'Không thể đổi voucher!',
-    'kNotEnoughPoint': 'Người dùng không đủ điểm để đổi!',
+    'kNotEnoughPoint': 'Người dùng không đủ điểm!',
     'kNotChooseStation': 'Bạn chưa chọn tuyến đường muốn đi',
     'kNotFillAllFields': 'Vui lòng điền đầy đủ thông tin',
     'kNotAfterNow': 'Không thể đặt một chuyến có thời gian trong quá khứ',
@@ -465,4 +478,9 @@ final Map<String, String> vi = {
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
     'kNotArrivedAtPickUpPoint': 'Bạn chưa đến trạm',
     'kOutOfDate': 'Đã hết hạn',
+    'kTripCanceled': 'Chuyến đi này đã bị hủy',
+    'kAlreadyFeedbacked': 'Bạn đã gửi feedback chuyến đi này.',
+    'kNotTurnOnGPS': 'Xin hãy bật GPS',
+    'kNotAllowGetLocation':
+        'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
   });

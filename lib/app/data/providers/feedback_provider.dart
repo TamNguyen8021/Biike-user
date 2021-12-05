@@ -15,6 +15,6 @@ class FeedbackProvider extends CommonProvider {
     }
 
     logError(response);
-    return false;
+    return response.bodyString;
   }
 }

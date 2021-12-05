@@ -4,6 +4,7 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Contains functions which are called multiple times in app
@@ -369,14 +371,30 @@ class CommonFunctions {
         PointLatLng(startLat, startLng),
         PointLatLng(endLat, endLng));
 
-    Biike.logger.d(startLat);
-    Biike.logger.d(startLng);
-    Biike.logger.d(endLat);
-    Biike.logger.d(endLng);
-
     for (PointLatLng point in result.points) {
       polypoints.add(LatLng(point.latitude, point.longitude));
     }
+  }
+
+  /// Author: TamNTT
+  Future<LocationData?> getCurrentLocation() async {
+    final _location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await _location.serviceEnabled();
+    while (!_serviceEnabled) {
+      _serviceEnabled = await _location.requestService();
+    }
+
+    _permissionGranted = await _location.hasPermission();
+    while (_permissionGranted == PermissionStatus.denied ||
+        _permissionGranted == PermissionStatus.deniedForever) {
+      _permissionGranted = await _location.requestPermission();
+    }
+
+    return _location.getLocation();
   }
 
   /// Convert string to timeOfDate
@@ -438,5 +456,15 @@ class CommonFunctions {
 
     logBiike(info: info, error: error);
     logErrorTraceFlutter(info: info, error: error);
+  }
+
+  static moveToNotiPageWhenHasNoti(String? title, String? body) {
+    Get.snackbar(title ?? 'Notification', body ?? 'You have new notification',
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        onTap: (_) => Get.toNamed(CommonRoutes.NOTIFICATION),
+        isDismissible: true,
+        duration: Duration(seconds: 3),
+        backgroundColor: CustomColors.kBlue);
   }
 }

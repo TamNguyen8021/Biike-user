@@ -24,8 +24,13 @@ final Map<String, String> en = {
   'kPassword': 'Password',
   'kInputPassword': 'Enter password',
   'kLogin': 'Sign in',
-  'kNoAccount': 'No account yet? ',
+  'kNoAccount': 'No account yet? Please try Sign Up',
   'kRegister': 'Sign up now!',
+  'kWrongAccount': 'Your account/password is incorrect, please check again',
+  'kUnVerifiedEmail':
+      'We just sent you verify link via your email, please verify email to finish sign up',
+  'kLoginExceptionError': 'Something went wrong, please try again',
+  'kEmptyToken': 'Server sent empty token',
 
   // 'register' screen
   'kConfirmTerm': 'By sign up, you aggre with',
@@ -35,7 +40,7 @@ final Map<String, String> en = {
   'kInputPhoneNumber': 'Enter phone number',
   'kSentVerifiedEmail':
       'We sent a verified email to your mailbox. Please verify your account before login',
-  'kRegisterSuccess': 'Your account was created',
+  'kRegisterSuccess': 'Your account created successful',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
@@ -207,13 +212,20 @@ final Map<String, String> en = {
   'kRateReminder': 'Please rate your experience with your partner today!',
   'kBtnSend': 'Send',
   'kSendSuccess': 'Feedback was sent successfully',
-  'kTipForBiker': 'Tips for Biker',
-  'kCriteria1': 'On time',
-  'kCriteria2': 'Friendly',
-  'kCriteria3': 'Easy-going',
-  'kCriteria4': 'Prepared helmet beforehand',
-  'kCriteria5': 'Thanks',
-  'kCriteria6': 'Know the way',
+  'kTipForBiker': 'Tip for biker',
+
+  'kOnTime': 'On time',
+  'kFamiliarWithTheRoad': 'Familiar with the road',
+  'kFriendly': 'Friendly and funny',
+  'kHelmetPrepared': 'Helmet prepared',
+  'kHappyPartner': 'Happy partner',
+  'kGrateful': 'Grateful',
+  'kLate': 'Late',
+  'kAngry': 'Angry',
+  'kHelmetNonPrepared': 'Helmet non-prepared',
+  'kRoadBlind': 'Road blind',
+  'kNotFriendly': 'Not friendly',
+  'kDisrespect': 'Disrespect',
 
   // 'biker_point' screen
   'kListVouchers': 'Voucher list',
@@ -450,4 +462,9 @@ final Map<String, String> en = {
         'Report reason must not be empty or contains inappropriate words',
     'kNotArrivedAtPickUpPoint': 'You are not at the pick up point',
     'kOutOfDate': 'Out of date',
+    'kTripCanceled': 'The trip is canceled',
+    'kAlreadyFeedbacked': 'You have sent feedback for this trip.',
+    'kNotTurnOnGPS': 'Please turn on the GPS',
+    'kNotAllowGetLocation':
+        'Please turn on the permission to access user current location',
   });

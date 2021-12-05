@@ -87,6 +87,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   share_plus: ^3.0.4
   file_picker: ^4.2.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
