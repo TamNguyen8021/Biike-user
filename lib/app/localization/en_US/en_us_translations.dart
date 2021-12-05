@@ -29,10 +29,10 @@ final Map<String, String> en = {
   'kWrongAccount' : 'Your account/password is incorrect, please check again',
   'kUnVerifiedEmail' : 'We just sent you verify link via your email, please verify email to finish sign up', 
   'kLoginExceptionError' : 'Something went wrong, please try again',
-  'kEmptyToken' : 'Server sent empty token'
+  'kEmptyToken' : 'Server sent empty token',
 
   // 'register' screen
-  'kConfirmTerm': 'By sign up, you aggre with',
+  'kConfirmTerm' : 'By sign up, you aggre with',
   'kAnd': ' and ',
   'kHasAccount': 'Has an account? ',
   'kInputName': 'Enter full name',

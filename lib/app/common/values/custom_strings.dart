@@ -21,11 +21,7 @@ class CustomStrings {
   static const String kPassword = 'kPassword';
   static const String kInputPassword = 'kInputPassword';
   static const String kLogin = 'kLogin';
-  static const String kNoAccount = 'kNoAccount';
-  static const String kWrongAccount = 'kWrongAccount';
-  static const String kUnVerifiedEmail = 'kUnVerifiedEmail';
-  static const String kLoginExceptionError = 'kLoginExceptionError';
-  static const String kEmptyToken = 'kEmptyToken';
+
 
   // 'register' screen
   static const String kConfirmTerm = 'kConfirmTerm';
