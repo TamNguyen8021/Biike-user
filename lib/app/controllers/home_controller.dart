@@ -136,7 +136,7 @@ class HomeController extends GetxController {
       _tempUpcomingTrips.add(upcomingTripCard);
       upcomingTrips.add(upcomingTripCard);
     }
-    Biike.logger.d(upcomingTrips.length);
+
     return _tempUpcomingTrips.cast();
   }
 
