@@ -51,4 +51,6 @@ class CustomErrorsString {
   static const String kUnVerifiedEmail = 'kUnVerifiedEmail';
   static const String kLoginExceptionError = 'kLoginExceptionError';
   static const String kEmptyToken = 'kEmptyToken';
+
+  
 }
