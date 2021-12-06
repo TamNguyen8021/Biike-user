@@ -1,3 +1,4 @@
+import 'package:bikes_user/services/firebase_cloud_message_service.dart';
 import 'package:bikes_user/services/firebase_realtime_database_service.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
@@ -24,6 +25,10 @@ abstract class Services {
   @singleton
   FirebaseRealtimeDatabaseService get realtimeDatabaseService =>
       FirebaseRealtimeDatabaseService.init();
+
+  @singleton
+  FirebaseCloudMessagingService get cloudMessagingService =>
+      FirebaseCloudMessagingService.init();
 
   @preResolve
   Future<AppPref> get appPref => AppPref.instance();

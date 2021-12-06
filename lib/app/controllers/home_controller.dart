@@ -30,7 +30,6 @@ class HomeController extends GetxController {
   final PagingController<int, dynamic> pagingController =
       PagingController(firstPageKey: 0);
 
-  Rx<bool> isAppBarVisible = true.obs;
   Rxn<DateTime> searchDate = Rxn<DateTime>();
   Rxn<TimeOfDay> searchTime = Rxn<TimeOfDay>();
   Rx<String> searchDateString = CustomStrings.kChooseDate.tr.obs;
@@ -41,7 +40,10 @@ class HomeController extends GetxController {
   Rx<String> destinationStationName =
       CustomStrings.kSelectDestinationStation.tr.obs;
   RxList upcomingTrips = [].obs;
+  List _tempUpcomingTrips = [];
   RxList upcomingTripsForBiker = [].obs;
+  Rx<bool> isUpcomingTripsLoading = true.obs;
+
   Map<int?, String> stations = {};
   Map<String, dynamic> pagination = {};
   bool hasSearchedTrips = false;
@@ -74,32 +76,28 @@ class HomeController extends GetxController {
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
       if (isLastPage) {
-        pagingController.appendLastPage(upcomingTrips.toList());
+        pagingController.appendLastPage(_tempUpcomingTrips);
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        nextPageKey += upcomingTrips.length;
-        pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
+        nextPageKey += _tempUpcomingTrips.length;
+        pagingController.appendPage(_tempUpcomingTrips, nextPageKey);
       }
+      isUpcomingTripsLoading.value = false;
     } catch (error) {
       pagingController.error = error;
       CommonFunctions.catchExceptionError(error);
     }
   }
 
-  /// Show/hide appbar depends on [isVisible]
-  ///
-  /// Author: TamNTT
-  void setAppBarVisible(isVisible) {
-    isAppBarVisible.value = isVisible;
-  }
-
   /// Load upcoming trips from API.
   ///
   /// Author: TamNTT
   Future<List<UpcomingTripCard>> getUpcomingTrips() async {
-    upcomingTrips.clear();
+    isUpcomingTripsLoading.value = true;
+    _tempUpcomingTrips.clear();
+
     Map<String, dynamic> response = await _tripProvider.getUpcomingTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
@@ -135,10 +133,11 @@ class HomeController extends GetxController {
           departureStation: startingStation.departureName,
           destinationStation: destinationStation.destinationName);
 
+      _tempUpcomingTrips.add(upcomingTripCard);
       upcomingTrips.add(upcomingTripCard);
     }
-    update();
-    return upcomingTrips.cast();
+
+    return _tempUpcomingTrips.cast();
   }
 
   /// Load upcoming trips for biker from API.
@@ -180,7 +179,6 @@ class HomeController extends GetxController {
 
       upcomingTripsForBiker.add(upcomingTripCard);
     }
-    update();
     return upcomingTripsForBiker.cast();
   }
 

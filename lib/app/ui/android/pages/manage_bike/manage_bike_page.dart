@@ -30,7 +30,6 @@ class ManageBikePage extends StatelessWidget {
               perform: () => _onBackPressed(),
               child: Scaffold(
                 appBar: CustomAppBar(
-                  isVisible: true,
                   hasLeading: true,
                   onPressedFunc: _onBackPressed,
                   hasShape: true,

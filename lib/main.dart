@@ -5,6 +5,7 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/ui/theme/app_theme.dart';
+import 'package:bikes_user/services/firebase_cloud_message_service.dart';
 import 'package:camera/camera.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +21,8 @@ import 'app/routes/app_routes.dart';
 import 'injectable/injectable.dart';
 
 List<CameraDescription> cameras = [];
+FirebaseCloudMessagingService _msgService =
+    getIt<FirebaseCloudMessagingService>();
 
 /// Runs the application.
 void main() {
@@ -55,9 +58,13 @@ void main() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+
+    _msgService.onBackgroundMessage();
+
     runApp(Biike());
   }, (Object error, StackTrace stack) {
-    CommonFunctions.logErrorTraceFlutter(error: error.toString() + ' - stack: ' + stack.toString());
+    CommonFunctions.logErrorTraceFlutter(
+        error: error.toString() + ' - stack: ' + stack.toString());
   });
 }
 
@@ -87,6 +94,7 @@ class _BiikeState extends State<Biike> {
     super.initState();
     initPlatformState();
     Biike.localAppData.loadDataFromLocal();
+    _msgService.listen();
   }
 
   Future<void> initPlatformState() async {

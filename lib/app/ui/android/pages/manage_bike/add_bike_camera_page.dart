@@ -59,7 +59,6 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        isVisible: true,
         appBar: AppBar(),
         hasShape: true,
         hasLeading: true,

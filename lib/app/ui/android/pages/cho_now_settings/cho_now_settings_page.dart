@@ -333,7 +333,6 @@ class ChoNowSettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        isVisible: true,
         hasShape: false,
         appBar: AppBar(),
         hasLeading: true,
