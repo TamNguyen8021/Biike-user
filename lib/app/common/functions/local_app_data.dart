@@ -23,7 +23,7 @@ class LocalAppData {
       ..setString('pathshareUserIdentifier', '');
   }
 
-  /// Load role, and userId from local
+  /// Load data from local
   ///
   /// Author: TamNTT
   Future<void> loadDataFromLocal() async {
@@ -62,7 +62,10 @@ class LocalAppData {
       ..setString('phone', '')
       ..setString('refreshToken', '')
       ..setInt('userId', -1)
-      ..setString('email', '');
+      ..setString('email', '')
+      ..setString('role', 'Role.none')
+      ..setString('pathshareUserToken', '')
+      ..setString('pathshareUserIdentifier', '');
   }
 
   /// Get user's id

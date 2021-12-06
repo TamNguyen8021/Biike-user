@@ -77,7 +77,6 @@ class ViewUserPage extends StatelessWidget {
 
     return Scaffold(
         appBar: CustomAppBar(
-          isVisible: true,
           hasShape: true,
           appBar: AppBar(),
           hasLeading: true,

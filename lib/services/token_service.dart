@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +18,7 @@ class TokenService {
   late Timer _timer;
 
   cronJob() {
-    _timer = Timer.periodic(const Duration(minutes: 5), (_) {
+    _timer = Timer.periodic(const Duration(minutes: 55), (_) {
       refreshToken();
     });
   }
@@ -30,11 +30,9 @@ class TokenService {
   Future<void> refreshToken() async {
     final _refreshToken = getIt<AppPref>().refreshToken;
     if (_refreshToken.isEmpty) {
-      log('refreshToken.isEmpty');
       return;
     }
     try {
-      log('start');
       final dio = Dio();
       final response = await dio.post(
         'https://securetoken.googleapis.com/v1/token?key=$_apiKey',
@@ -49,11 +47,10 @@ class TokenService {
         ..setToken(idToken)
         ..setRefreshToken(refreshToken);
       getIt<Repositories>().setHeaders();
-      log(response.data.toString());
     } on DioError catch (e) {
-      log(e.response?.data ?? 'data is null');
+      Biike.logger.e(e.response?.data ?? 'data is null');
     } catch (e) {
-      log(e.toString());
+      Biike.logger.e(e.toString());
     }
   }
 }

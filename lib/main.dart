@@ -94,7 +94,6 @@ class _BiikeState extends State<Biike> {
     super.initState();
     initPlatformState();
     Biike.localAppData.loadDataFromLocal();
-
     _msgService.listen();
   }
 

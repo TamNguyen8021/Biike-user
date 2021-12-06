@@ -24,12 +24,13 @@ final Map<String, String> vi = {
   'kPassword': 'Mật khẩu',
   'kInputPassword': 'Nhập mật khẩu',
   'kLogin': 'Đăng nhập',
-  'kNoAccount': 'Bạn chưa có tài khoản? Xin vui lòng Đăng Ký ',
-  'kWrongAccount' : 'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
-  'kUnVerifiedEmail' : 'Chúng tôi đã gửi link xác thực qua email đăng kí của bạn, xin hãy vui lòng xác thực để hoàn tất đăng ký',
-  'kLoginExceptionError' : 'Đã có lỗi ngoại lệ xảy ra, xin vui lòng thử lại',
-  'kEmptyToken' : 'Lỗi server trả token trống',
-
+  'kNoAccount': 'Chưa có tài khoản? ',
+  'kWrongAccount':
+      'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
+  'kUnVerifiedEmail':
+      'Chúng tôi đã gửi link xác thực qua email đăng kí của bạn, xin hãy vui lòng xác thực để hoàn tất đăng ký',
+  'kLoginExceptionError': 'Đã có lỗi ngoại lệ xảy ra, xin vui lòng thử lại',
+  'kEmptyToken': 'Lỗi server trả token trống',
 
   // 'register' screen
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
@@ -62,7 +63,7 @@ final Map<String, String> vi = {
   'kReminderMinute': ' phút ',
   'kReminderHour': ' tiếng ',
   'kReminderLeft': ' nữa',
-  'kArriveAtDestination': 'Đã đến',
+  'kArriveAtDestination': 'Đã đến điểm đón',
   'kKeerMode': 'Đi ké mode',
   'kBikerMode': 'Chở mode',
   'kToday': 'Hôm nay',
@@ -475,7 +476,7 @@ final Map<String, String> vi = {
     'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
-    'kNotArrivedAtPickUpPoint': 'Bạn chưa đến điểm đón',
+    'kNotArrivedAtPickUpPoint': 'Bạn chưa đến trạm',
     'kOutOfDate': 'Đã hết hạn',
     'kTripCanceled': 'Chuyến đi này đã bị hủy',
     'kAlreadyFeedbacked': 'Bạn đã gửi feedback chuyến đi này.',

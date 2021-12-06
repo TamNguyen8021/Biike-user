@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function() onPressedFunc;
   final Widget? title;
   final AppBar appBar;
-  final bool isVisible;
+  // final bool isVisible;
   final bool hasShape;
   final color;
 
@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar(
       {Key? key,
-      required this.isVisible,
+      // required this.isVisible,
       required this.hasShape,
       required this.hasLeading,
       required this.onPressedFunc,
@@ -58,25 +58,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     }
-    // sửa lỗi giựt khi switch: vanlnt
-    return AnimatedSwitcher(
-      duration: Duration(milliseconds: 500),
-      child: isVisible
-          ? AppBar(
-              leading: _leadingWidget,
-              title: title,
-              actions: actionWidgets,
-              bottom: bottomAppBar,
-              shape: _shapeBorder,
-              backgroundColor: color != null
-                  ? color
-                  : ModalRoute.of(context)!.settings.name ==
-                              CommonRoutes.HOME &&
-                          Biike.role.value == Role.biker
-                      ? CustomColors.kOrange
-                      : CustomColors.kBlue,
-            )
-          : SizedBox.shrink(),
+
+    return AppBar(
+      leading: _leadingWidget,
+      title: title,
+      actions: actionWidgets,
+      bottom: bottomAppBar,
+      shape: _shapeBorder,
+      backgroundColor: color != null
+          ? color
+          : ModalRoute.of(context)!.settings.name == CommonRoutes.HOME &&
+                  Biike.role.value == Role.biker
+              ? CustomColors.kOrange
+              : CustomColors.kBlue,
     );
   }
 }
