@@ -277,7 +277,6 @@ class TripDetailsPage extends StatelessWidget {
 
                     return Scaffold(
                       appBar: CustomAppBar(
-                        isVisible: true,
                         hasShape: true,
                         hasLeading: true,
                         onPressedFunc: () {

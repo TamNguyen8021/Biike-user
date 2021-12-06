@@ -20,7 +20,6 @@ class ViewPointPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        isVisible: true,
         hasShape: true,
         hasLeading: true,
         onPressedFunc: () => Get.back(),
@@ -55,12 +54,13 @@ class ViewPointPage extends StatelessWidget {
                               Row(
                                 children: <Widget>[
                                   Obx(() => Text(
-                                    '${_walletController.totalWalletPoint.value} ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline3!
-                                        .copyWith(color: CustomColors.kOrange),
-                                  )),
+                                        '${_walletController.totalWalletPoint.value} ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3!
+                                            .copyWith(
+                                                color: CustomColors.kOrange),
+                                      )),
                                   SvgPicture.asset(
                                     'assets/images/crown.svg',
                                     color: CustomColors.kOrange,

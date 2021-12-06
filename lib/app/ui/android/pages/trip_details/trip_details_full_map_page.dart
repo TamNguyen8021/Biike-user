@@ -29,7 +29,6 @@ class TripDetailsFullMapPage extends StatelessWidget {
         builder: (_) {
           return Scaffold(
             appBar: CustomAppBar(
-              isVisible: true,
               hasShape: true,
               hasLeading: true,
               onPressedFunc: () async {

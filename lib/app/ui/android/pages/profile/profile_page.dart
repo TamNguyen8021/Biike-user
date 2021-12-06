@@ -37,7 +37,6 @@ class ProfilePage extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return Scaffold(
                       appBar: CustomAppBar(
-                        isVisible: true,
                         hasShape: false,
                         appBar: AppBar(),
                         hasLeading: true,

@@ -64,7 +64,6 @@ class AddBikePage extends StatelessWidget {
           builder: (_) {
             return Scaffold(
                 appBar: CustomAppBar(
-                  isVisible: true,
                   appBar: AppBar(),
                   hasShape: true,
                   hasLeading: true,
@@ -274,10 +273,11 @@ class AddBikePage extends StatelessWidget {
                                                 .addBikeOrReplaceBike(
                                                     isAddBike: isAddBike)) {
                                               await _onBackPressed();
-                                              CommonFunctions().showSuccessDialog(
-                                                  context: context,
-                                                  message: CustomStrings.kAddBikeSuccess.tr
-                                              );
+                                              CommonFunctions()
+                                                  .showSuccessDialog(
+                                                      context: context,
+                                                      message: CustomStrings
+                                                          .kAddBikeSuccess.tr);
                                             } else {
                                               CommonFunctions().showErrorDialog(
                                                   context: context,

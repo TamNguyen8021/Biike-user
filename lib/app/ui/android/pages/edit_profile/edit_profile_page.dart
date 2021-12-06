@@ -35,7 +35,6 @@ class EditProfilePage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
-        isVisible: true,
         hasShape: true,
         hasLeading: true,
         onPressedFunc: () async {

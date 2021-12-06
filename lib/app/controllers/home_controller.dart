@@ -40,7 +40,10 @@ class HomeController extends GetxController {
   Rx<String> destinationStationName =
       CustomStrings.kSelectDestinationStation.tr.obs;
   RxList upcomingTrips = [].obs;
+  List _tempUpcomingTrips = [];
   RxList upcomingTripsForBiker = [].obs;
+  Rx<bool> isUpcomingTripsLoading = true.obs;
+
   Map<int?, String> stations = {};
   Map<String, dynamic> pagination = {};
   bool hasSearchedTrips = false;
@@ -73,14 +76,15 @@ class HomeController extends GetxController {
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
       if (isLastPage) {
-        pagingController.appendLastPage(upcomingTrips.toList());
+        pagingController.appendLastPage(_tempUpcomingTrips);
         _currentPage = 1;
       } else {
         _currentPage += 1;
         int nextPageKey = pageKey;
-        nextPageKey += upcomingTrips.length;
-        pagingController.appendPage(upcomingTrips.toList(), nextPageKey);
+        nextPageKey += _tempUpcomingTrips.length;
+        pagingController.appendPage(_tempUpcomingTrips, nextPageKey);
       }
+      isUpcomingTripsLoading.value = false;
     } catch (error) {
       pagingController.error = error;
       CommonFunctions.catchExceptionError(error);
@@ -91,7 +95,9 @@ class HomeController extends GetxController {
   ///
   /// Author: TamNTT
   Future<List<UpcomingTripCard>> getUpcomingTrips() async {
-    upcomingTrips.clear();
+    isUpcomingTripsLoading.value = true;
+    _tempUpcomingTrips.clear();
+
     Map<String, dynamic> response = await _tripProvider.getUpcomingTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
@@ -127,10 +133,11 @@ class HomeController extends GetxController {
           departureStation: startingStation.departureName,
           destinationStation: destinationStation.destinationName);
 
+      _tempUpcomingTrips.add(upcomingTripCard);
       upcomingTrips.add(upcomingTripCard);
     }
-    update();
-    return upcomingTrips.cast();
+    Biike.logger.d(upcomingTrips.length);
+    return _tempUpcomingTrips.cast();
   }
 
   /// Load upcoming trips for biker from API.
@@ -172,7 +179,6 @@ class HomeController extends GetxController {
 
       upcomingTripsForBiker.add(upcomingTripCard);
     }
-    update();
     return upcomingTripsForBiker.cast();
   }
 

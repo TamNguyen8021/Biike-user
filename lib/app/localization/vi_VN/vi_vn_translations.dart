@@ -24,7 +24,7 @@ final Map<String, String> vi = {
   'kPassword': 'Mật khẩu',
   'kInputPassword': 'Nhập mật khẩu',
   'kLogin': 'Đăng nhập',
-  'kNoAccount': 'Bạn chưa có tài khoản? Xin vui lòng Đăng Ký ',
+  'kNoAccount': 'Chưa có tài khoản? ',
   'kWrongAccount':
       'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
   'kUnVerifiedEmail':

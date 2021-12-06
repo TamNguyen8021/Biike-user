@@ -8,7 +8,9 @@ import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/image_provider.dart'
     as imageProvider;
 import 'package:bikes_user/app/data/providers/user_provider.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/services/token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +26,12 @@ class ProfileController extends GetxController {
   int tempGender = -1;
   String? tempBirthDate;
   String avatarName = '';
+
+  @override
+  void onInit() async {
+    await getIt<TokenService>().refreshToken();
+    super.onInit();
+  }
 
   /// Change user's gender with [newGender].
   ///

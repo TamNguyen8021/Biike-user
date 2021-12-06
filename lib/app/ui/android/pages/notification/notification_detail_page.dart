@@ -63,7 +63,6 @@ class NotificationDetailPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppBar(
-          isVisible: true,
           hasShape: false,
           hasLeading: true,
           onPressedFunc: () {

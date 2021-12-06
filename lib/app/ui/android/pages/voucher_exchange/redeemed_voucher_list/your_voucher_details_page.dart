@@ -33,7 +33,6 @@ class YourVoucherDetailPage extends StatelessWidget {
       perform: () => _onBackPressed(),
       child: Scaffold(
         appBar: CustomAppBar(
-          isVisible: true,
           hasShape: true,
           hasLeading: true,
           onPressedFunc: () => _onBackPressed(),
@@ -57,7 +56,9 @@ class YourVoucherDetailPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     ShowVoucherCodeButton(voucherCode: redemption.voucherCode),
-                    MarkUsedButton(redemption: redemption, isOutOfDate: now.isAfter(voucher.endDate)),
+                    MarkUsedButton(
+                        redemption: redemption,
+                        isOutOfDate: now.isAfter(voucher.endDate)),
                   ],
                 ),
               ),
