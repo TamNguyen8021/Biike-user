@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
                     children: <Widget>[
                       Home(
                         homeController: controller,
+                        tripDetailsController: _tripDetailsController,
                       ),
                       Activity(
                         homeController: controller,

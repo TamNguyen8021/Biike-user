@@ -37,10 +37,7 @@ class TripDetailsController extends GetxController {
   FirebaseRealtimeDatabaseService _databaseService =
       getIt<FirebaseRealtimeDatabaseService>();
 
-  Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
-  Rx<IconData> buttonIcon = Icons.done_all.obs;
   Rx<String> _cancelReason = ''.obs;
-  Rx<bool> isArrivedAtPickUpPoint = false.obs;
   Rx<bool> isLocationShared = false.obs;
 
   Function onPressedFunc = () {};
@@ -67,26 +64,6 @@ class TripDetailsController extends GetxController {
     super.onInit();
   }
 
-  void changeToStartTripButton() {
-    if (buttonText.value != CustomStrings.kStart.tr) {
-      buttonText.value = CustomStrings.kStart.tr;
-    }
-
-    if (buttonIcon.value != Icons.navigation) {
-      buttonIcon.value = Icons.navigation;
-    }
-  }
-
-  void changeToFinishTripButton() {
-    if (buttonText.value != CustomStrings.kCompleteTrip.tr) {
-      buttonText.value = CustomStrings.kCompleteTrip.tr;
-    }
-
-    if (buttonIcon.value != Icons.done_all) {
-      buttonIcon.value = Icons.done_all;
-    }
-  }
-
   /// Loads trip details.
   ///
   /// Author: TamNTT
@@ -100,10 +77,6 @@ class TripDetailsController extends GetxController {
     if (data['feedbacks'].length > 0) {
       feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
       feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
-    }
-
-    if (trip.tripStatus == 3) {
-      isArrivedAtPickUpPoint.value = true;
     }
   }
 

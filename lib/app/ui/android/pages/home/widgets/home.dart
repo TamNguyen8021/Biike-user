@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/home/widgets/list_upcoming_trips.dart';
@@ -32,8 +33,13 @@ import 'package:intl/intl.dart';
 class Home extends StatelessWidget {
   final _profileController = Get.find<ProfileController>();
   final HomeController homeController;
+  final TripDetailsController tripDetailsController;
 
-  Home({Key? key, required this.homeController}) : super(key: key);
+  Home(
+      {Key? key,
+      required this.homeController,
+      required this.tripDetailsController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -235,20 +241,24 @@ class Home extends StatelessWidget {
                                           .upcomingTrips[0].destinationStation),
                                   if (homeController.upcomingTrips[0].name !=
                                       CustomStrings.kFinding) ...[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        ConfirmArrivalButton(
-                                          isOnHomeScreen: true,
-                                          tripId: homeController
-                                              .upcomingTrips[0].tripId,
-                                        ),
-                                        ContactButtons(
-                                          phoneNo: homeController
-                                              .upcomingTrips[0].phoneNo,
-                                        )
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          ConfirmArrivalButton(
+                                            tripDetailsController:
+                                                tripDetailsController,
+                                            tripId: homeController
+                                                .upcomingTrips[0].tripId,
+                                          ),
+                                          ContactButtons(
+                                            phoneNo: homeController
+                                                .upcomingTrips[0].phoneNo,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ],

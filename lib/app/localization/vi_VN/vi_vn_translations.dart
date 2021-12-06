@@ -63,7 +63,7 @@ final Map<String, String> vi = {
   'kReminderMinute': ' phút ',
   'kReminderHour': ' tiếng ',
   'kReminderLeft': ' nữa',
-  'kArriveAtDestination': 'Đã đến',
+  'kArriveAtDestination': 'Đã đến điểm đón',
   'kKeerMode': 'Đi ké mode',
   'kBikerMode': 'Chở mode',
   'kToday': 'Hôm nay',

@@ -405,6 +405,9 @@ class CommonFunctions {
     return TimeOfDay.fromDateTime(format.parse(time));
   }
 
+  /// Use haversine formula to calculate distance between 2 coordinates
+  ///
+  /// Author: TamNTT
   bool isArrivedAtPickUpPoint(
       {required double userLat,
       required double userLng,
@@ -423,6 +426,7 @@ class CommonFunctions {
             math.sin(deltaLamda / 2);
     double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     double d = r * c; // in kilometres
+
     if (d < 0.5) {
       return true;
     }

@@ -62,7 +62,7 @@ final Map<String, String> en = {
   'kReminderMinute': ' minutes ',
   'kReminderHour': ' hours ',
   'kReminderLeft': ' left',
-  'kArriveAtDestination': 'Has arrived',
+  'kArriveAtDestination': 'At pick up point',
   'kKeerMode': 'Keer mode',
   'kBikerMode': 'Biker mode',
   'kToday': 'Today',

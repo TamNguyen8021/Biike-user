@@ -5,13 +5,7 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: (MediaQuery.of(context).size.height -
-              MediaQuery.of(context).padding.top -
-              MediaQuery.of(context).padding.bottom) /
-          2,
-      alignment: Alignment.bottomCenter,
+    return Center(
       child: CircularProgressIndicator(),
     );
   }
