@@ -466,4 +466,194 @@ final Map<String, String> en = {
     'kNotTurnOnGPS': 'Please turn on the GPS',
     'kNotAllowGetLocation':
         'Please turn on the permission to access user current location',
+
+    //Exception 
+    //VanLNT
+    'kException' : 'Something went wrong, please try again!',
+
+
+    //Cancel Request
+    //VanLNT
+    'kCancelRequest' : 'Request was cancelled.',
+
+
+    //Address 
+    //VanLNT
+    'kFailToCreate' : 'Failed to create new address.',
+    'kCreateAddressSuccess': 'Successfully created new address.',
+    'kAddressNotFound' : 'Address does not exist.',
+    'kFailedToDeleteAddress' : 'Failed to delete this address',
+    'kDeleteAddressSuccess' : 'Delete address successful.',
+    'kAddressDetailSuccesfull' : 'Successfully retrieved list of all address',
+    'kFailedToUpdateAddress' : 'Failed to update this address',
+    'kUpdateAddressSuccesfull' : '"Successfully update this address',
+    'kListAddressSuccesfull' : 'Successfully retrieved list of all addresses',
+
+    //Advertisement
+    //VanLNT
+    'kAdsNotFound' : 'Advertisement doesn\'t  exist',
+    'kFailedToUpdateClickCount' : 'Failed to update click count of this advertisement',
+    'kSuccesfullToUpdateClickCount' : 'Successfully updated click count of this advertisement',
+    'kEndDateSoonerThanStartDate' : 'EndDate must be set later than StartDate',
+    'kFailedToCreateAds' : 'Failed to create new advertisement',
+    'kCreateAdsSuccesfull' : 'Successfully created new advertisement',
+    'kFailedToDeleteAds' : 'Failed to delete advertisement',
+    'kDeleteAdsSuccesfull' : 'Successfully deleted advertisement',
+    'kAdsDetail' : 'Successfully retrieved advertisement',
+    'kFailedToUpdateAds' : 'Failed to update this advertisement',
+    'kAdsImageMissed' : 'Advertisement image list must be provided',
+    'kAdsImageCreateFailed' : 'Failed to create new advertisement image',
+    'kAdsImageCreateSuccesfull' : 'Successfully created new advertisement image',
+    'kNoImageId' : 'There are no imageId in request',
+    'kNotMatchAdsImageId' : 'AdvertisementImage with AdvertisementImageId {AdvertisementImageId} does not belong to advertisement  with AdvertisementId {AdvertisementId}',
+    'kDeleteAdsImageSuccesfull' : 'Successfully deleted advertisement image by advertisementId {request.AdvertisementImageDeletionDto.AdvertisementId}',
+    'kAdsPageEqualZero' : 'Page must be larger than 0',
+    'kAdsLimitEqualZero' : 'Limit must be larger than 0',
+    'kRetrivedListOfAdsSuccesfull' : 'Successfully retrieved list of all advertisements',
+    
+
+    //Bike Availability 
+    //VanLNT
+    'kFailedToCreateBikeAvailability' : 'Failed to create new bike availability',
+    'kCreateBikeSuccesfull' : 'Successfully created bike availability',
+    'kBikeAvailabilityNotExist' : 'Bike availability doesn\'t exist',
+    'kBikeAvailabilityDoesNotBelongsToUser' : 'This bike availability doesn\'t belong to user with this User',
+    'kFailedToDeleteBikeAvaibility' : 'Failed to delete bike availability',
+    'kSuccessToDeleteBikeAvaibility' : 'Successfully deleted bike availability',
+    'kSuccessToRetrivedBikeAvaibility' : 'Successfully retrieved bike availability',
+    'kInvalidFromTime5AM' : 'FromTime must be later than 5AM',
+    'kInvalidFromTime9PM' : 'FromTime must be earlier than 9PM',
+    'kInvalidFromToTime' : 'FromTime must be earlier than ToTime',
+    'kFailedtToUpdateBikeAvailability' : 'Failed to update bike availability',
+    'kSuccessToUpdateBikeAvailability' : 'Successfully updated bike availability',
+    'kBikeAvailabilityPageEqualZero' : 'Page must be larger than 0',
+    'kBikeAvaillabilityLimit' : 'Limit must be larger than 0',
+    'kSuccesfullyRetrivedListOfBikeAvability' : 'Successfully retrieved list of all bike availabilities',
+
+    //Bike
+    //VanLNT
+    'kBikeUserNotExist' : 'User does not exist',
+    'kUserHasABike' : 'User already has a bike',
+    'kFailedToCreateBike' : 'Failed to create new bike',
+    'kSuccessToCreateBike' : 'Successfully created new bike',
+    'kUserDeleteBikeNotExist' : 'User to delete bike does not exist',
+    'kFailedToDeleteBike' : 'Failed to delete bike',
+    'kErrorCreateUserFireBase' : 'Error create user on Firebase',
+    'kDeleteBikeSuccessfull' : 'Successfully deleted bike',
+    'kBikeNotFound' : 'Could not found bike',
+    'kBikeFound' : 'Successfully retrieved bike',
+    'kBikePageEqualZero' : 'Page must be larger than 0',
+    'kBikeLimit' : 'Limit must be larger than 0',
+    'kRetrievedListBike' : 'Successfully retrieved list of all bikes',
+    'kReplaceBikeFailed' : 'Failed to replace old bike with new bike',
+    'kReplaceBikeSuccessful' : 'Successfully replace old bike with new bike',
+    'kBikeVerifiedAlready' : 'Bike has already been verified',
+    'kBikeNotVerified' : 'Failed verification need a reason about why it is not verified',
+    'kBikeVerifiedFailed' : 'Failed to verify bike',
+    'kBikeVerifiedSuccessful' : 'Successfully verified bike',
+
+    //Configurations
+    //VanLNT
+    'kCreateConfigurationFailed' : 'Failed to create new configuration',
+    'kCreateConfigurationSuccessfull' : 'Successfully created configuration',
+    'kConfigurationNotExisted' : 'Configuration doesn\'t exist',
+    'kConfigurationName' : 'ConfigurationName field is required',
+    'kConfigurationValue' : 'ConfigurationValue field is required',
+    'kConfigurationUpdateFailed' : 'Failed to update configuration',
+    'kConfigurationUpdateSuccessfull' : 'Successfully updated configuration',
+    'kConfigurationPageEqualZero' : 'Page must be larger than 0',
+    'kConfigurationLimit' : 'Limit must be larger than 0',
+    'kRetrievedConfigurationSuccessfull' : 'Successfully retrieved list of all configurations',
+    
+    //Core
+    //VanLNT 
+
+    //Feedback
+    //VanLNT
+    'kTripNotExist' : 'Trip doesn\'t exist',
+    'kFeedbackInTripID' : 'User send feedback must be in this trip',
+    'kTripCancelled' : 'Trip has already been cancelled',
+    'kFeedbackWhileInTrip' : 'Can\'t create feedback because trip hasn\'t finished yet',
+    'kFeedbackExisted' : 'Trip\'s feedback is already existed',
+    'kKeerNotExisted' : 'Keer doesn\'t existed',
+    'kTipRules' : 'Tip point should be larger than 1 and smaller than total point of keerd',
+    'kKeerNotHaveWallet' : 'Keer with UserId doesn\'t have wallet',
+    'kCreateNewFeedbackFailed' : 'Failed to create new trip feedback',
+    'kCreateFeedbackSuccessfull' : 'Successfully created feedback',
+    'kCreateFeedbackFailed' : 'Failed to create new feedback',
+    'kFeedbackNotExisted' : 'Feedback doesn\'t exist',
+    'kFeedbackRetrived' : 'Successfully retrieved feedback',
+    'kFeedbackPageEqualZero' : 'Page must be larger than 0',
+    'kFeedbackLimit' : 'Limit must be larger than 0',
+    'kUserNotInTrip' : 'User send request must be in the trip',
+    'kTripHasNotFinished' : 'Trip hasn\'t finished',
+
+    //Intimacies
+    //VanLNT
+    'kIntimaciesExisted' : 'Intimacy has already existed',
+    'kUser2NotExisted' : 'User two doesn\'t exist',
+    'kCreateIntimacyFailed' : 'Failed to create new intimacy',
+    'kCreateIntimacySuccessfull' : 'Successfully created intimacy',
+    'kUpdateIntimacyFailed' : 'Failed to update intimacy',
+    'kUpdateIntimacySuccessfull' : 'Successfully updated intimacy',
+    'kIntimacyRetrived' : 'Successfully retrieved result of intimacy\'s existence',
+    'kIntimacyPageEqualZero' : 'Page must be larger than 0',
+    'kIntimacyLimit' : 'Limit must be larger than 0',
+    'kAllIntimacyRetrived' : 'Successfully retrieved list of all intimacies',
+    'kIntimacyByUserRetrived' : 'Successfully retrieved list of user intimacies by UserId',
+    
+    //Momo Transaction 
+    //VanLNT
+    'kCheckMomoFailed' : 'Failed to check momo transaction on Momo server',
+    'kAmountNotMatch' : 'Amount value doesn\'t match with Momo server',
+    'kTransactionIDNotMatch' : 'TransactionId value doesn\'t match with Momo server',
+    'kTransactionIDExisted' : 'Momo transaction with this TransactionId or OrderId is already exist',
+    'kFindConversionRateFailed' : 'Failed to find conversion rate',
+    'kConverVNDToPointFailed' : 'Failed to convert money to point',
+    'kUserNotExisted' : 'User doesn\'t exist',
+    'kUserNotHaveWallet' : 'User doesn\'t have wallet',
+    'kCreateMomoTransactionFailed' : 'Failed to create new momo transaction',
+    'kCreateMomoTransactionSuccessfull' : 'Successfully created momo transaction',
+    'kMomoPageEqualZero' : 'Page must be larger than 0',
+    'kMomoLimit' : 'Limit must be larger than 0',
+    'kMomoListRetrived' : 'Successfully retrieved list of all Momo Transactions',
+
+    //Notification
+    //VanLNT
+    'kSentNotiSuccess' : 'Successfully sent notification to selected users',
+
+    //Point History 
+    //VanLNT
+    'kCreatePointHistoryFailed' : 'Failed to create new point history',
+    'kCreatePointHistorySuccess' : 'Successfully created point history',
+    'kPointHistoryPageEqualZero' : 'Page must be larger than 0',
+    'kPointHistoryLimit' : 'Limit must be larger than 0',
+    'kAllPointHistoryListRetrived' : 'Successfully retrieved list of all Momo Transactions',
+    'kPointHistoryByUserListRetrived' : 'Successfully retrieved list of all point history by User',
+    
+    //Redemptions
+    //VanLNT
+    'kRedemptionPageEqualZero' : 'Page must be larger than 0',
+    'kRedemptionLimit' : 'Limit must be larger than 0',
+    ///User not have wallet in momo transaction message
+    'kRedemptionAndVoucherRetrived' : 'Successfully retrieved redemptions and vouchers of user',
+    ///User not existed in momo transaction message 
+    'kVoucherNotExisted' : 'Voucher doesn\'t exist',
+    'kVoucherExprired' : 'Voucher has expired',
+    'kVoucherNotForChangedYet' : 'Voucher is not open for exchange yet',
+    'kNoCodeForVoucher' : 'There is no available voucher code for this voucher',
+    'kUserNotHaveEnoughPoint' : 'There is no available voucher code for this voucher',
+    'kCreateRedemptionFailed' : 'Failed to create new redemption',
+    'kCreateRedemptionSuccess' : 'Successfully created redemption',
+    'kRedemptionNotExisted' : 'Redemption doesn\'t exist',
+    'kRedemptionRetrived' : 'Successfully retrieved redemption',
+    'kAllRedemptionRetrived' : 'Successfully retrieved all redemption',
+    'kRedemptionByUserRetrived' : 'Successfully retrieved redemptions of user',
+    'kUerNotHaveAnyRedemption' : 'User doesn\'t have any redemption',
+
+    //Report
+    //VanLNT
+    
+    
+    
   });
