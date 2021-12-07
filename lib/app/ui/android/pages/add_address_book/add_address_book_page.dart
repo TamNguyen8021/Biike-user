@@ -27,7 +27,7 @@ class AddAddressBookPage extends StatelessWidget {
         appBar: AppBar(),
         title: Text(CustomStrings.kAddAddressBook.tr),
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 20.0),
           child: Column(
@@ -117,14 +117,11 @@ class AddAddressBookPage extends StatelessWidget {
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold),
                       ),
-                      Obx(
-                              () => Switch(
-                              value: addAddressBookPageController.isDefault.value,
-                              onChanged: (bool value) {
-                                addAddressBookPageController.changeDefault();
-                              }
-                          )
-                      ),
+                      Obx(() => Switch(
+                          value: addAddressBookPageController.isDefault.value,
+                          onChanged: (bool value) {
+                            addAddressBookPageController.changeDefault();
+                          })),
                     ],
                   ),
                   Padding(
