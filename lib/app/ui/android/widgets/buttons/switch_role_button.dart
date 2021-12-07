@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
-import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
@@ -80,9 +79,9 @@ class SwitchRoleButton extends StatelessWidget {
               } else {
                 AwesomeDialog(
                     context: context,
-                    dialogType: DialogType.ERROR,
+                    dialogType: DialogType.INFO,
                     headerAnimationLoop: false,
-                    desc: CustomErrorsString.kDevelopError.tr);
+                    desc: CustomStrings.kWaitingAdminVerifiedBike.tr);
               }
             }
           },

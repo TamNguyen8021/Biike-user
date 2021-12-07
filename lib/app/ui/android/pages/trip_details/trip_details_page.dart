@@ -247,6 +247,7 @@ class TripDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<bool> isArrivedAtPickUpPoint = false.obs;
+    // CustomDialog customDialog = CustomDialog(context: context);
 
     return OnBackPressed(
       perform: () {

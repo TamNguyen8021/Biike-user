@@ -104,15 +104,6 @@ class AddBikeController extends GetxController {
         registrationPicture.value.trim().isEmpty ||
         drivingLicenseBackPicture.value.trim().isEmpty ||
         drivingLicenseFrontPicture.value.trim().isEmpty) {
-      Biike.logger.d(plateNumber.value);
-      Biike.logger.d(bikeOwner.value);
-      Biike.logger.d(color.value);
-      Biike.logger.d(brand.value);
-      Biike.logger.d(bikePicture.value);
-      Biike.logger.d(numberPlatePicture.value);
-      Biike.logger.d(registrationPicture.value);
-      Biike.logger.d(drivingLicenseBackPicture.value);
-      Biike.logger.d(drivingLicenseFrontPicture.value);
       return false;
     }
 
