@@ -27,7 +27,7 @@ class TopBikerController extends GetxController {
                   index: index,
                   avatarUrl: user.avatar,
                   name: user.userFullname,
-                  point: user.totalPoint
+                  point: biker['maxTotalPoint']
               )
           );
 
@@ -43,7 +43,7 @@ class TopBikerController extends GetxController {
         User user = User.fromJson(response);
         userAvatar.value = user.avatar;
         userFullName.value = user.userFullname;
-        userPoint.value = user.totalPoint;
+        userPoint.value = response['maxTotalPoint'];
       } catch (e) {
         print(e);
       }

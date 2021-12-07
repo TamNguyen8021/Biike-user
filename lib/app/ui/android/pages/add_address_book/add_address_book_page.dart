@@ -107,6 +107,25 @@ class AddAddressBookPage extends StatelessWidget {
                       },
                     ),
                   ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        CustomStrings.kSetAsDefault.tr,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Obx(
+                              () => Switch(
+                              value: addAddressBookPageController.isDefault.value,
+                              onChanged: (bool value) {
+                                addAddressBookPageController.changeDefault();
+                              }
+                          )
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0),
                     child: CustomElevatedIconHasLoadingButton(

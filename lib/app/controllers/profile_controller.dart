@@ -14,6 +14,7 @@ import 'package:bikes_user/services/token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileController extends GetxController {
   final _userProvider = Get.find<UserProvider>();
@@ -91,12 +92,13 @@ class ProfileController extends GetxController {
 
     if (!avatarUrl.value.contains('http')) {
       ImageType imageType = ImageType.user;
-      String newAvatarUrl = await _imageProvider.postImage(
+      var result = await _imageProvider.postImage(
           imageType: imageType.getImageTypeInt(imageType),
-          imageName: avatarName,
-          imagePath: avatarUrl.value);
+          imageList: [
+            await http.MultipartFile.fromPath('imageList', avatarUrl.value)
+          ]);
 
-      newUserProfile.putIfAbsent('avatar', () => newAvatarUrl);
+      newUserProfile.putIfAbsent('avatar', () => result[0]);
     }
 
     bool isSuccess = await _userProvider.editProfile(

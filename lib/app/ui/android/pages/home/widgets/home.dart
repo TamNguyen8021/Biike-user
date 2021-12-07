@@ -795,7 +795,8 @@ class Home extends StatelessWidget {
               }
             }),
             floatingActionButton: Obx(() {
-              if (homeController.isUpcomingTripsLoading.isFalse) {
+              if (Biike.role.value == Role.keer &&
+                  homeController.isUpcomingTripsLoading.isFalse) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[

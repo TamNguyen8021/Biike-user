@@ -1,42 +1,31 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
-import 'package:get/get_connect/connect.dart';
+import 'package:http/http.dart' as http;
 
 class ImageProvider extends CommonProvider {
   /// Upload an image to server and get the image url
   ///
   /// Author: PhatDH
-  Future<String> postImage(
+  Future<List> postImage(
       {required int imageType,
-      required String imageName,
-      required dynamic imagePath}) async {
-    // var file = await DefaultCacheManager().getSingleFile(imagePath);
-    final File imageFile = File(imagePath);
+      required List<http.MultipartFile> imageList}) async {
+    var request = http.MultipartRequest('POST', Uri.parse(UrlStrings.imageUrl));
 
-    if (await imageFile.exists()) {
-      // Use the cached images if it exists
-    } else {
-      // Image doesn't exist in cache
-      await imageFile.create(recursive: true);
+    request.fields.addAll({'imageType': imageType.toString()});
+    for (http.MultipartFile image in imageList) {
+      request.files.add(image);
     }
 
-    FormData data = FormData({
-      'imageType': imageType,
-      'imageList': MultipartFile(imageFile, filename: imageName)
-    });
+    request.headers.addAll(await headers);
 
-    final response =
-        await post(UrlStrings.imageUrl, data, headers: await headers);
+    http.StreamedResponse response = await request.send();
 
-    logResponse(response);
-
-    if (response.hasError) {
-      logError(response);
-      return Future.error(response.statusText!);
+    if (response.statusCode < 200 || response.statusCode > 299) {
+      return Future.error(response.statusCode);
     } else {
-      return response.body['data'][0];
+      return jsonDecode(await response.stream.bytesToString())['data'];
     }
   }
 }

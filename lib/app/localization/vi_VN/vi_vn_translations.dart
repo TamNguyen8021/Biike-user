@@ -325,13 +325,17 @@ final Map<String, String> vi = {
   'kNumberPlate': 'Biển số đăng ký',
   'kNumberPlatePicture': 'Ảnh chụp biển số xe',
   'kPleaseTakeNumberPlatePicture': 'Vui lòng chụp biển số xe',
-  'kBikePicture': 'Hình xe',
-  'kPleaseTakeBikePicture': 'Ảnh chụp toàn thân xe',
+  'kBikePicture': 'Ảnh chụp toàn thân xe',
+  'kPleaseTakeBikePicture': 'Vui lòng chụp toàn thân xe',
   'kRegistrationPicture': 'Ảnh chụp cà vẹt xe',
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
   'kTakePicture': 'Chụp',
   'kAddBikeSuccess': 'Thêm xe thành công.\nVui lòng đợi Admin xác minh!',
+  'kDrivingLicenseBackPicture': 'Ảnh chụp mặt sau bằng lái',
+  'kDrivingLicenseFrontPicture': 'Ảnh chụp mặt trước bằng lái',
+  'kPleaseTakeDrivingLicenseBackPicture': 'Vui lòng chụp mặt sau bằng lái',
+  'kPleaseTakeDrivingLicenseFrontPicture': 'Vui lòng chụp mặt trước bằng lái',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
@@ -370,6 +374,7 @@ final Map<String, String> vi = {
 
   // 'address_book' screen
   'kAddressBook': 'Sổ địa chỉ',
+  'kDefault': 'Mặc định',
 
   // 'edit_address_book' screen
   'kEditAddressBook': 'Chỉnh sửa địa chỉ',
@@ -382,6 +387,7 @@ final Map<String, String> vi = {
   'kEnterName': 'Nhập tên',
   'kSelectAddress': 'Chọn địa chỉ',
   'kEnterNote': 'Nhập ghi chú',
+  'kSetAsDefault': 'Đặt làm mặc định',
 
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',

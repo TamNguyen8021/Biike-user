@@ -7,13 +7,18 @@ class AddAddressBookController extends GetxController {
   
   Rx<String> name = ''.obs;
   Rx<String> address = '1426/39, Nguyễn Duy Trinh'.obs;
-  Rx<String> note =''.obs;
+  Rx<String> note = ''.obs;
+  Rx<bool> isDefault = false.obs;
 
   bool isLoading = false;
 
   void _enableLoading(bool loading) {
     isLoading = loading;
     update();
+  }
+
+  void changeDefault() {
+    isDefault.value = !isDefault.value;
   }
 
   Future<bool> addAddress() async {
@@ -24,8 +29,10 @@ class AddAddressBookController extends GetxController {
       'userAddressName': name.value,
       'userAddressDetail': address.value,
       'userAddressCoordinate': '123,123',
-      'userAddressNote': note.value
+      'userAddressNote': note.value,
+      'isDefault': isDefault.value,
     };
+    print(body);
 
     return await _addressBookProvider.addAddressBook(body: body);
   }

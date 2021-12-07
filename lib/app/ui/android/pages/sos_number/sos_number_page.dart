@@ -55,7 +55,7 @@ class SOSNumberPage extends StatelessWidget {
                       // ),
                     ]),
                   ),
-                  floatingActionButton: AddSOSNumberButton(),
+                  floatingActionButton: AddSOSNumberButton(isDisable: sosNumberController.isMaximun.value),
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.centerFloat,
                 ));

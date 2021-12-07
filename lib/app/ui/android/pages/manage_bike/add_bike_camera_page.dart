@@ -48,6 +48,12 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
       case 'number plate':
         text = CustomStrings.kPleaseTakeNumberPlatePicture.tr;
         break;
+      case 'drivingLicenseBack':
+        text = CustomStrings.kPleaseTakeDrivingLicenseBackPicture.tr;
+        break;
+      case 'drivingLicenseFront':
+        text = CustomStrings.kPleaseTakeDrivingLicenseFrontPicture.tr;
+        break;
       default:
     }
 

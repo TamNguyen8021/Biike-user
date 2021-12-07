@@ -20,6 +20,8 @@ class Bike {
   String? plateNumberPicture;
   String? bikeLicensePicture;
   String? bikePicture;
+  String? drivingLicenseBackPicture;
+  String? drivingLicenseFrontPicture;
   int? bikeStatus;
   String? failedVerificationReason;
 
@@ -35,6 +37,8 @@ class Bike {
       this.plateNumberPicture,
       this.bikeLicensePicture,
       this.bikePicture,
+      this.drivingLicenseBackPicture,
+      this.drivingLicenseFrontPicture,
       this.bikeStatus,
       this.failedVerificationReason});
 
@@ -50,6 +54,8 @@ class Bike {
     this.plateNumberPicture = '';
     this.bikeLicensePicture = '';
     this.bikePicture = '';
+    this.drivingLicenseBackPicture = '';
+    this.drivingLicenseFrontPicture = '';
     this.bikeStatus = 1;
     this.failedVerificationReason = '';
   }

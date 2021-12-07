@@ -1,4 +1,5 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
@@ -45,6 +46,9 @@ class SwitchRoleButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           onPressed: () async {
+            CustomDialog customDialog = CustomDialog(context: context);
+            customDialog.loadingDialog.show();
+
             int role = 2;
 
             if (Biike.role.value == Role.biker) {
@@ -67,14 +71,18 @@ class SwitchRoleButton extends StatelessWidget {
               }
               await getIt<TokenService>().refreshToken();
               Biike.localAppData.saveRole(Biike.role.value);
+              customDialog.loadingDialog.dismiss();
               Get.offAllNamed(route);
             } else {
               if (await _bikeProvider.getBike() == null) {
+                customDialog.loadingDialog.dismiss();
                 Get.toNamed(CommonRoutes.REQUIRE_ADD_BIKE);
               } else {
-                CommonFunctions().showErrorDialog(
+                AwesomeDialog(
                     context: context,
-                    message: CustomErrorsString.kDevelopError.tr);
+                    dialogType: DialogType.ERROR,
+                    headerAnimationLoop: false,
+                    desc: CustomErrorsString.kDevelopError.tr);
               }
             }
           },

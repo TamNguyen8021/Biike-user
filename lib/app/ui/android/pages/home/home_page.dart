@@ -69,7 +69,12 @@ class HomePage extends StatelessWidget {
               onTapFunction: (int index) {
                 _homeController.upcomingTrips.clear();
                 _homeController.isUpcomingTripsLoading.value = true;
-                Future.sync(() => _homeController.pagingController.refresh());
+                if (_homeController.upcomingTrips.isNotEmpty) {
+                  _homeController.update();
+                } else {
+                  _homeController.pagingController.itemList!.clear();
+                  _homeController.pagingController.refresh();
+                }
               },
             ),
           ),
