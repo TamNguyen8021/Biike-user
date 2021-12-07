@@ -1,6 +1,6 @@
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
-import 'package:bikes_user/app/ui/android/pages/notification/widget/notificaiton_card.dart';
+import 'package:bikes_user/app/ui/android/pages/notification/widget/notification_card.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

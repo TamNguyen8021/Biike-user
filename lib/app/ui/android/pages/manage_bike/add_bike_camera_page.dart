@@ -48,18 +48,17 @@ class AddBikeCameraPageState extends State<AddBikeCameraPage> {
       case 'number plate':
         text = CustomStrings.kPleaseTakeNumberPlatePicture.tr;
         break;
-      case 'driving license back':
-        text = CustomStrings.kPleaseTakeNumberPlatePicture.tr;
+      case 'drivingLicenseBack':
+        text = CustomStrings.kPleaseTakeDrivingLicenseBackPicture.tr;
         break;
-      case 'driving license front':
-        text = CustomStrings.kPleaseTakeNumberPlatePicture.tr;
+      case 'drivingLicenseFront':
+        text = CustomStrings.kPleaseTakeDrivingLicenseFrontPicture.tr;
         break;
       default:
     }
 
     return Scaffold(
       appBar: CustomAppBar(
-        isVisible: true,
         appBar: AppBar(),
         hasShape: true,
         hasLeading: true,

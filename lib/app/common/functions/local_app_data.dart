@@ -1,6 +1,8 @@
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/models/login.dart';
+import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalAppData {
@@ -21,7 +23,7 @@ class LocalAppData {
       ..setString('pathshareUserIdentifier', '');
   }
 
-  /// Load role, and userId from local
+  /// Load data from local
   ///
   /// Author: TamNTT
   Future<void> loadDataFromLocal() async {
@@ -54,12 +56,16 @@ class LocalAppData {
   }
 
   logout() async {
+    getIt<AppPref>().logout();
     _pref = await SharedPreferences.getInstance()
       ..remove('isPhoneVerified')
       ..setString('phone', '')
       ..setString('refreshToken', '')
       ..setInt('userId', -1)
-      ..setString('email', '');
+      ..setString('email', '')
+      ..setString('role', 'Role.none')
+      ..setString('pathshareUserToken', '')
+      ..setString('pathshareUserIdentifier', '');
   }
 
   /// Get user's id

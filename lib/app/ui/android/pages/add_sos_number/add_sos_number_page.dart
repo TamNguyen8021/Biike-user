@@ -19,7 +19,6 @@ class AddSOSNumberPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        isVisible: true,
         hasShape: true,
         hasLeading: true,
         onPressedFunc: () {

@@ -22,7 +22,6 @@ class AddressBookPage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return Obx(() => Scaffold(
                   appBar: CustomAppBar(
-                    isVisible: true,
                     hasShape: true,
                     appBar: AppBar(),
                     hasLeading: true,

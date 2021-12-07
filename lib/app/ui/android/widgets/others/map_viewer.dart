@@ -16,7 +16,9 @@ class MapViewer extends StatelessWidget {
   final Completer<GoogleMapController> completerController;
   final List<LatLng> polypoints;
   final LocationData? userLocation;
+  final String departureName;
   final String departureCoordinate;
+  final String destinationName;
   final String destinationCoordinate;
   final bool isFullMap;
 
@@ -26,7 +28,9 @@ class MapViewer extends StatelessWidget {
       required this.completerController,
       required this.polypoints,
       this.userLocation,
+      required this.departureName,
       required this.departureCoordinate,
+      required this.destinationName,
       required this.destinationCoordinate})
       : super(key: key);
 
@@ -44,7 +48,7 @@ class MapViewer extends StatelessWidget {
 
     final Widget googleMap = Container(
       width: double.infinity,
-      height: isFullMap ? null : 200.0,
+      height: isFullMap ? null : 150.0,
       margin: EdgeInsets.only(top: isFullMap ? 0.0 : 16.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(isFullMap ? 0.0 : 5.0),
@@ -64,7 +68,7 @@ class MapViewer extends StatelessWidget {
                     target: LatLng(
                         (departure.latitude + destination.latitude) / 2,
                         (departure.longitude + destination.longitude) / 2),
-                    zoom: isFullMap ? 14 : 12,
+                    zoom: isFullMap ? 14 : 11,
                   ),
                   onMapCreated: (GoogleMapController controller) {
                     completerController.complete(controller);
@@ -75,7 +79,7 @@ class MapViewer extends StatelessWidget {
                       position: LatLng(departure.latitude, departure.longitude),
                       infoWindow: InfoWindow(
                           title: CustomStrings.kStartLocation.tr,
-                          snippet: 'Info'),
+                          snippet: departureName),
                     ),
                     Marker(
                         markerId: MarkerId('destination'),
@@ -83,7 +87,7 @@ class MapViewer extends StatelessWidget {
                             LatLng(destination.latitude, destination.longitude),
                         infoWindow: InfoWindow(
                             title: CustomStrings.kEndLocation.tr,
-                            snippet: 'Info'),
+                            snippet: destinationName),
                         icon: BitmapDescriptor.defaultMarkerWithHue(
                             BitmapDescriptor.hueGreen)),
                   },

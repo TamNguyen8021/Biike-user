@@ -1,14 +1,21 @@
-import 'package:bikes_user/app/controllers/manage_bike_controller.dart';
+import 'dart:async';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/data/enums/image_type_enum.dart';
 import 'package:bikes_user/app/data/providers/bike_provider.dart';
-import 'package:bikes_user/app/data/providers/image_provider.dart';
+import 'package:bikes_user/app/data/providers/image_provider.dart'
+    as imageProvider;
 import 'package:bikes_user/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class AddBikeController extends GetxController {
   final _bikeProvider = Get.find<BikeProvider>();
-  final _imageProvider = Get.find<ImageProvider>();
-  final _manageBikeController = Get.find<ManageBikeController>();
+  final _imageProvider = Get.find<imageProvider.ImageProvider>();
 
   Rx<String> plateNumber = ''.obs;
   Rx<String> bikeOwner = ''.obs;
@@ -23,44 +30,38 @@ class AddBikeController extends GetxController {
   Rx<String> drivingLicenseFrontPicture = ''.obs;
   Rx<int> bikeStatus = 1.obs;
 
-  bool isLoading = false;
-
-  @override
-  void onInit() {
-    _manageBikeController.getBike();
-    plateNumber = _manageBikeController.bike.plateNumber!.obs;
-    bikeOwner = _manageBikeController.bike.bikeOwner!.obs;
-    color = _manageBikeController.bike.color!.obs;
-    brand = _manageBikeController.bike.brand!.obs;
-    category = _manageBikeController.bike.bikeType!.obs;
-    volume = _manageBikeController.bike.bikeVolume!.obs;
-    bikePicture = _manageBikeController.bike.bikePicture!.obs;
-    registrationPicture = _manageBikeController.bike.bikeLicensePicture!.obs;
-    numberPlatePicture = _manageBikeController.bike.plateNumberPicture!.obs;
-    drivingLicenseBackPicture = _manageBikeController.bike.drivingLicenseBackPicture!.obs;
-    drivingLicenseFrontPicture = _manageBikeController.bike.drivingLicenseFrontPicture!.obs;
-    bikeStatus = _manageBikeController.bike.bikeStatus!.obs;
-    super.onInit();
-  }
-
-  void _enableLoading(bool loading) {
-    isLoading = loading;
-    update();
-  }
-
-  Future<bool> addBikeOrReplaceBike({required bool isAddBike}) async {
-    // try {
-    _enableLoading(true);
-
+  Future<bool> addBikeOrReplaceBike(
+      {required bool isAddBike,
+      required CustomDialog customDialog,
+      required BuildContext context}) async {
     List<http.MultipartFile> imageList = [];
-    imageList.add(await createMultipartFile(bikePicture.value));
-    imageList.add(await createMultipartFile(registrationPicture.value));
-    imageList.add(await createMultipartFile(numberPlatePicture.value));
-    imageList.add(await createMultipartFile(drivingLicenseBackPicture.value));
-    imageList.add(await createMultipartFile(drivingLicenseFrontPicture.value));
+    imageList
+        .add(await http.MultipartFile.fromPath('imageList', bikePicture.value));
+    imageList.add(await http.MultipartFile.fromPath(
+        'imageList', registrationPicture.value));
+    imageList.add(await http.MultipartFile.fromPath(
+        'imageList', numberPlatePicture.value));
+    imageList.add(await http.MultipartFile.fromPath(
+        'imageList', drivingLicenseBackPicture.value));
+    imageList.add(await http.MultipartFile.fromPath(
+        'imageList', drivingLicenseFrontPicture.value));
 
-    dynamic imageURLs = await _imageProvider.postImage(imageType: 1,
-        imageList: imageList);
+    ImageType bikeImage = ImageType.bike;
+
+    var imageURLs = await _imageProvider
+        .postImage(
+            imageType: bikeImage.getImageTypeInt(bikeImage),
+            imageList: imageList)
+        .catchError((error) {
+      CommonFunctions.catchExceptionError(error);
+      customDialog.loadingDialog.dismiss();
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
+    });
 
     Map<String, dynamic> body = {
       'userId': Biike.userId.value,
@@ -80,7 +81,16 @@ class AddBikeController extends GetxController {
     if (isAddBike) {
       return await _bikeProvider.addBike(body: body);
     } else {
-      return await _bikeProvider.replaceBike(body: body);
+      return await _bikeProvider.replaceBike(body: body).catchError((error) {
+        CommonFunctions.catchExceptionError(error);
+        customDialog.loadingDialog.dismiss();
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
+      });
     }
   }
 
@@ -94,21 +104,18 @@ class AddBikeController extends GetxController {
         registrationPicture.value.trim().isEmpty ||
         drivingLicenseBackPicture.value.trim().isEmpty ||
         drivingLicenseFrontPicture.value.trim().isEmpty) {
+      Biike.logger.d(plateNumber.value);
+      Biike.logger.d(bikeOwner.value);
+      Biike.logger.d(color.value);
+      Biike.logger.d(brand.value);
+      Biike.logger.d(bikePicture.value);
+      Biike.logger.d(numberPlatePicture.value);
+      Biike.logger.d(registrationPicture.value);
+      Biike.logger.d(drivingLicenseBackPicture.value);
+      Biike.logger.d(drivingLicenseFrontPicture.value);
       return false;
     }
 
     return true;
-  }
-
-  Future<http.MultipartFile> createMultipartFile(imagePath) async {
-    // final File imageFile = File(imagePath);
-    //
-    // if (await imageFile.exists()) {
-    // // Use the cached images if it exists
-    // } else {
-    // // Image doesn't exist in cache
-    //   await imageFile.create(recursive: true);
-    // }
-    return await http.MultipartFile.fromPath('imageList', imagePath);
   }
 }

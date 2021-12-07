@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/bindings/image_binding.dart';
 import 'package:bikes_user/app/bindings/top_up_point_binding.dart';
 import 'package:bikes_user/app/bindings/bike_binding.dart';
 import 'package:bikes_user/app/bindings/cho_now_settings_binding.dart';
@@ -124,6 +125,7 @@ class AppPages {
           BikeBinding(),
           TripDetailsBinding(),
           PathshareBinding(),
+          ImageBinding(),
         ]),
     GetPage(
       name: CommonRoutes.REQUIRE_ADD_BIKE,
@@ -149,13 +151,17 @@ class AppPages {
         ProfileBinding(),
         UserBinding(),
         WalletBinding(),
-        BikeBinding()
+        BikeBinding(),
+        ImageBinding(),
       ],
     ),
     GetPage(
         name: CommonRoutes.EDIT_PROFILE,
         page: () => EditProfilePage(),
-        bindings: <Bindings>[ProfileBinding(), UserBinding()]),
+        bindings: <Bindings>[
+          ProfileBinding(),
+          UserBinding(),
+        ]),
     GetPage(
         name: CommonRoutes.FEEDBACK,
         page: () => FeedbackPage(),
@@ -213,7 +219,8 @@ class AppPages {
         bindings: <Bindings>[
           AddBikeBinding(),
           ManageBikeBinding(),
-          BikeBinding()
+          BikeBinding(),
+          ImageBinding(),
         ]),
     GetPage(
       name: CommonRoutes.VOUCHER_DETAILS,

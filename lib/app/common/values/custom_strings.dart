@@ -22,6 +22,10 @@ class CustomStrings {
   static const String kInputPassword = 'kInputPassword';
   static const String kLogin = 'kLogin';
   static const String kNoAccount = 'kNoAccount';
+  static const String kWrongAccount = 'kWrongAccount';
+  static const String kUnVerifiedEmail = 'kUnVerifiedEmail';
+  static const String kLoginExceptionError = 'kLoginExceptionError';
+  static const String kEmptyToken = 'kEmptyToken';
 
   // 'register' screen
   static const String kConfirmTerm = 'kConfirmTerm';
@@ -206,6 +210,30 @@ class CustomStrings {
     'kCriteria4',
     'kCriteria5',
     'kCriteria6'
+  ];
+  static const kKeerCriteriaHigh = [
+    'kOnTime',
+    'kFamiliarWithTheRoad',
+    'kFriendly',
+    'kHelmetPrepared'
+  ];
+  static const kKeerCriteriaLow = [
+    'kLate',
+    'kRoadBlind',
+    'kAngry',
+    'kHelmetNonPrepared'
+  ];
+  static const kBikerCriteriaHigh = [
+    'kOnTime',
+    'kFriendly',
+    'kHappyPartner',
+    'kGrateful'
+  ];
+  static const kBikerCriteriaLow = [
+    'kLate',
+    'kNotFriendly',
+    'kAngry',
+    'kDisrespect'
   ];
 
   // 'biker_point' screen
@@ -409,6 +437,7 @@ class CustomStrings {
   static const String kNoted = 'kNoted';
   static const String kTopUpNoted = 'kTopUpNoted';
   static const String kTopUpSuccess = 'kTopUpSuccess';
+
   // noti
   static const String kNotification = 'kNotification';
   static const String kAll = 'kAll';

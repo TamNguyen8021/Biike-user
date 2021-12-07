@@ -73,7 +73,6 @@ class VoucherPage extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Scaffold(
                   appBar: CustomAppBar(
-                      isVisible: true,
                       hasShape: true,
                       hasLeading: true,
                       onPressedFunc: () async {
