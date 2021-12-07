@@ -75,6 +75,8 @@ final Map<String, String> en = {
   'kConfirmArrivalMessageForBiker': 'We\'ll send a notification to your Keer',
   'kConfirmExitApp':
       'Are you sure you want to exit? (If you are sharing your location, when you exit the application will stop sharing)',
+  'kWaitingAdminVerifiedBike':
+      'Please waiting for admin to verify your bike to use Biker mode',
 
   'kNoKeNowTrip': 'No Ride Now trip',
   'kBikerReadyReminder': 'Ready to go!',

@@ -47,6 +47,7 @@ class Home extends StatelessWidget {
     DateTime firstTripTimeBook = DateTime.now();
     DateTime currentTime = DateTime.now();
     String timeLeft = '';
+    Rx<bool> isPageFirstLoad = true.obs;
 
     return FutureBuilder(
         future: _profileController.getProfile(),
@@ -686,10 +687,9 @@ class Home extends StatelessWidget {
                                               CustomColors.kDarkGray,
                                           text: CustomStrings.kSearchAgain.tr,
                                           onPressedFunc: () {
+                                            isPageFirstLoad.value = true;
                                             homeController.upcomingTripsForBiker
                                                 .clear();
-                                            homeController.hasSearchedTrips =
-                                                false;
                                             homeController
                                                     .searchDateString.value =
                                                 CustomStrings.kChooseDate.tr;
@@ -730,9 +730,22 @@ class Home extends StatelessWidget {
                                             homeController
                                                 .verifyPhoneBeforeBookOrSearchStrip(
                                               context: context,
-                                              onSuccess: () {
-                                                homeController
-                                                    .hasSearchedTrips = true;
+                                              onSuccess: () async {
+                                                await homeController.searchTrips(
+                                                    date: homeController
+                                                        .searchDate.value,
+                                                    time: homeController
+                                                        .searchTime.value,
+                                                    departureId: homeController
+                                                        .departureStation
+                                                        .value
+                                                        .stationId,
+                                                    destinationId:
+                                                        homeController
+                                                            .destinationStation
+                                                            .value
+                                                            .stationId);
+                                                isPageFirstLoad.value = false;
                                               },
                                             );
                                           },
@@ -744,44 +757,32 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           Divider(),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                22.0,
-                                5.0,
-                                22.0,
-                                homeController.upcomingTripsForBiker.length > 2
-                                    ? 35.0
-                                    : 8.0),
-                            child: Obx(
-                              () {
-                                return FutureBuilder(
-                                    future: homeController.searchTrips(
-                                        date: homeController.searchDate.value,
-                                        time: homeController.searchTime.value,
-                                        departureId: homeController
-                                            .departureStation.value.stationId,
-                                        destinationId: homeController
-                                            .destinationStation
-                                            .value
-                                            .stationId),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<dynamic> snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return ListUpcomingTrips(
-                                            listUpcomingTrips: homeController
-                                                .upcomingTripsForBiker
-                                                .toList(),
-                                            itemPadding: 10.0,
-                                            hasSearchTrips: homeController
-                                                .hasSearchedTrips);
-                                      } else {
-                                        return Loading();
-                                      }
-                                    });
-                              },
-                            ),
-                          ),
+                          Obx(() {
+                            if (isPageFirstLoad.isFalse) {
+                              if (homeController.isSearchTripLoading.isTrue) {
+                                return Loading();
+                              } else {
+                                return Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      22.0,
+                                      5.0,
+                                      22.0,
+                                      homeController.upcomingTripsForBiker
+                                                  .length >
+                                              2
+                                          ? 35.0
+                                          : 8.0),
+                                  child: ListUpcomingTrips(
+                                      listUpcomingTrips: homeController
+                                          .upcomingTripsForBiker
+                                          .toList(),
+                                      itemPadding: 10.0),
+                                );
+                              }
+                            } else {
+                              return SizedBox.shrink();
+                            }
+                          }),
                         ]
                       ] else ...[
                         Padding(

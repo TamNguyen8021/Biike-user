@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
@@ -262,7 +264,10 @@ class TripDetailsController extends GetxController {
   /// Copies a link which contains user's real-time location to clipboard and shows a share dialog
   ///
   /// Author: TamNTT
-  void _shareLink({required BuildContext context}) async {
+  void _shareLink(
+      {required BuildContext context,
+      required CustomDialog customDialog}) async {
+    customDialog.loadingDialog.show();
     if (isLocationShared.isFalse) {
       if (Biike.pathshareUserToken.isEmpty ||
           Biike.pathshareUserIdentifier.isEmpty) {
@@ -281,7 +286,7 @@ class TripDetailsController extends GetxController {
           userLng: userLocation!.longitude!)) {
         if (sessionIdentifier.isEmpty ||
             DateTime.now()
-                .subtract(Duration(minutes: 30))
+                .subtract(Duration(hours: 1))
                 .isAfter(_lastTimeSharedLocation!)) {
           Map<String, dynamic> data = await pathshareProvider.createSession();
           if (data.isNotEmpty) {
@@ -291,18 +296,32 @@ class TripDetailsController extends GetxController {
             if (_lastTimeSharedLocation == null) {
               _lastTimeSharedLocation = DateTime.now();
             }
+            customDialog.loadingDialog.dismiss();
           } else {
-            CommonFunctions().showErrorDialog(
-                context: context, message: CustomErrorsString.kDevelopError.tr);
+            customDialog.loadingDialog.dismiss();
+
+            AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.ERROR,
+                    headerAnimationLoop: false,
+                    desc: CustomErrorsString.kDevelopError.tr)
+                .show();
           }
         } else {
           isLocationShared.value =
               await pathshareProvider.startOrStopLocationSharing(
                   isShared: true, sessionIdentifier: sessionIdentifier);
+          customDialog.loadingDialog.dismiss();
         }
       } else {
-        CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kDevelopError.tr);
+        customDialog.loadingDialog.dismiss();
+
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
       }
     }
 
@@ -385,6 +404,8 @@ class TripDetailsController extends GetxController {
 
   /// Author: TamNTT
   void showHelpCenter({required BuildContext context}) async {
+    CustomDialog customDialog = CustomDialog(context: context);
+
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -413,7 +434,7 @@ class TripDetailsController extends GetxController {
                     text: CustomStrings.kShareLocation.tr,
                     isLastRow: false,
                     onTapFunc: () async {
-                      _shareLink(context: context);
+                      _shareLink(context: context, customDialog: customDialog);
                     },
                   ),
                   Obx(
@@ -430,9 +451,12 @@ class TripDetailsController extends GetxController {
                                   sessionIdentifier: sessionIdentifier)) {
                             isLocationShared.value = false;
                           } else {
-                            CommonFunctions().showErrorDialog(
-                                context: context,
-                                message: CustomErrorsString.kDevelopError.tr);
+                            AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.ERROR,
+                                    headerAnimationLoop: false,
+                                    desc: CustomErrorsString.kDevelopError.tr)
+                                .show();
                           }
                         },
                       ),
