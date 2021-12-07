@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/top_biker_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 
 /// Manage states for [TopBikerPage]
 class TopBikerController extends GetxController {
+  final _topBikerProvider = Get.find<TopBikerProvider>();
+  final _userProvider = Get.find<UserProvider>();
   RxList topBiker = [].obs;
   Rx<String> userAvatar = "".obs;
   Rx<String> userFullName = "".obs;
@@ -15,7 +18,7 @@ class TopBikerController extends GetxController {
   Future<void> getTopBiker() async {
     topBiker.clear();
 
-    dynamic response = await TopBikerProvider().getTopBiker();
+    dynamic response = await _topBikerProvider.getTopBiker();
     if (response != null) {
       try {
         var index = 0;
@@ -34,10 +37,10 @@ class TopBikerController extends GetxController {
           index ++;
         }
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
-    response = await UserProvider().getProfile(userId: Biike.userId.value);
+    response = await _userProvider.getProfile(userId: Biike.userId.value);
     if (response != null) {
       try {
         User user = User.fromJson(response);
@@ -45,7 +48,7 @@ class TopBikerController extends GetxController {
         userFullName.value = user.userFullname;
         userPoint.value = response['maxTotalPoint'];
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
   }

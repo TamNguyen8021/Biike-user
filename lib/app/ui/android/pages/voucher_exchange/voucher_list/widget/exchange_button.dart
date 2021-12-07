@@ -15,6 +15,7 @@ class ExchangeVoucherButton extends StatelessWidget {
   final _walletController = Get.find<WalletController>();
 
   final Voucher voucher;
+
   ExchangeVoucherButton({Key? key, required this.voucher}) : super(key: key);
 
   _exchangeVoucher(BuildContext context) async {
@@ -28,16 +29,17 @@ class ExchangeVoucherButton extends StatelessWidget {
     dynamic result =
         await _redemptionController.exchangeVoucher(voucher.voucherId);
     if (result is String) {
-      CommonFunctions().showErrorDialog(
-          context: context,
-          message:
-              result == '' ? CustomErrorsString.kExchangeFailed.tr : result);
+      CommonFunctions().showErrorDialog(context: context, message: result);
     } else {
       _walletController.updateWalletPoint();
       int redemptionId = CommonFunctions.getIdFromUrl(
           url: result.headers['location'] as String);
 
-      Get.defaultDialog(
+      _successDialog(redemptionId);
+    }
+  }
+
+  _successDialog(redemptionId) => Get.defaultDialog(
         title: CustomStrings.kExchangeVoucherSuccess.tr,
         content: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -55,8 +57,6 @@ class ExchangeVoucherButton extends StatelessWidget {
           ),
         ],
       );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

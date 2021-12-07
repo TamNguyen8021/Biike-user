@@ -44,4 +44,6 @@ class CustomErrorsString {
   static const String kAlreadyFeedbacked = 'kAlreadyFeedbacked';
   static const String kNotTurnOnGPS = 'kNotTurnOnGPS';
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
+  static const String kNoVoucherCode = 'kNoVoucherCode';
+  static const String kTripTimeExist = 'kTripTimeExist';
 }

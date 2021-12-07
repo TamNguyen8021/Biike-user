@@ -14,7 +14,7 @@ class BookScheduledTripButton extends StatelessWidget {
     var result = await _bookTripController.createScheduledTrip();
 
     if (result is bool) {
-      Get.offAllNamed(CommonRoutes.HOME);
+      Get.toNamed(CommonRoutes.FIND_BIKER);
     } else {
       CommonFunctions().showErrorDialog(context: context, message: result);
     }

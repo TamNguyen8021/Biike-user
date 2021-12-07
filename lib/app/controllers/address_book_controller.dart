@@ -10,13 +10,15 @@ import 'package:get/get.dart';
 
 /// Manage states of [AddressBookPage]
 class AddressBookController extends GetxController {
+  final _addressBookProvider = Get.find<AddressBookProvider>();
+  final _userProvider = Get.find<UserProvider>();
   RxList<dynamic> addressBooks = [].obs;
 
   Future<void> getAddressBooks() async {
     addressBooks.clear();
 
     dynamic response =
-        await UserProvider().getProfile(userId: Biike.userId.value);
+        await _userProvider.getProfile(userId: Biike.userId.value);
     if (response != null) {
       try {
         for (var address in response['userAddresses']) {
@@ -29,14 +31,14 @@ class AddressBookController extends GetxController {
           );
         }
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
   }
 
   Future<void> removeAddressBook(
       {required BuildContext context, required int id}) async {
-    bool result = await AddressBookProvider().removeAddressBook(id: id);
+    bool result = await _addressBookProvider.removeAddressBook(id: id);
     if (result) {
       await getAddressBooks();
       Get.back();

@@ -50,7 +50,7 @@ class TokenService {
     } on DioError catch (e) {
       Biike.logger.e(e.response?.data ?? 'data is null');
     } catch (e) {
-      Biike.logger.e(e.toString());
+      log(e.toString());
     }
   }
 }

@@ -297,6 +297,10 @@ final Map<String, String> vi = {
   'kChooseTime': 'Chọn giờ',
   'kRepeat': 'Lặp lại',
   'kCancel': 'Hủy',
+  'kRuleWhenBookTrip' : 'Quy định khi đặt chuyến',
+  'kRuleBookTrip1':
+      '1.\tKhông được đặt lịch quá 15 chuyến',
+  'kRuleBookTrip2': '2.\tChỉ có thể hủy tối đa 3 chuyến/ngày',
 
   // 'bike_manager' screen
   'kBikeVerified': 'Đã xác minh',
@@ -489,4 +493,8 @@ final Map<String, String> vi = {
     'kNotTurnOnGPS': 'Xin hãy bật GPS',
     'kNotAllowGetLocation':
         'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
+    'kNoVoucherCode':
+        'Hiện đã hết voucher code có thể đổi, xin hãy thu7e3 lại sau.',
+    'kTripTimeExist':
+        'Bạn đã đặt một chuyến trước đó trong khoảng thời gian này rồi',
   });

@@ -16,73 +16,6 @@ class ChoNowSettingsPage extends StatelessWidget {
 
   ChoNowSettingsPage({Key? key}) : super(key: key);
 
-  /// Show dialog when user taps lightbulb icon
-  ///
-  /// Author: TamNTT
-  Future<void> _showHintDialog({required BuildContext context}) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    CustomStrings.kChoNow.tr,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2!
-                        .copyWith(color: CustomColors.kDarkGray),
-                    textAlign: TextAlign.center,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Text(
-                      CustomStrings.kChoNowDescription1.tr,
-                      style: TextStyle(
-                        color: CustomColors.kDarkGray,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    CustomStrings.kChoNowDescription2.tr,
-                    style: TextStyle(
-                      color: CustomColors.kDarkGray,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Text(
-                      CustomStrings.kChoNowDescription3.tr,
-                      style: TextStyle(
-                        color: CustomColors.kDarkGray,
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: CustomTextButton(
-                        backgroundColor: CustomColors.kBlue,
-                        foregroundColor: Colors.white,
-                        text: CustomStrings.kGotIt.tr,
-                        onPressedFunc: () {
-                          Get.back();
-                        },
-                        hasBorder: false),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
   /// Show a dialog when user wants to add station to receive Ke Now trip notification
   ///
   /// Author: TamNTT
@@ -343,15 +276,10 @@ class ChoNowSettingsPage extends StatelessWidget {
           CustomStrings.kChoNow.tr,
         ),
         actionWidgets: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              onPressed: () {
-                _showHintDialog(context: context);
-              },
-              icon: Icon(Icons.lightbulb),
-            ),
-          ),
+          CommonFunctions().lightBulbIcon(
+              context,
+              CustomStrings.kChoNow,
+              contents: CustomStrings.kChoNowDescription),
         ],
       ),
       body: SingleChildScrollView(

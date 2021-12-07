@@ -46,8 +46,18 @@ class FirebaseRealtimeDatabaseService {
   updateNotification({required userId, required hashKey}) async {
     try {
       final ref = _database.child('/notification/$userId/$hashKey');
-      // final data = notification.toJson();
+
       await ref.update({'isRead': true});
+    } catch (error) {
+      CommonFunctions.catchExceptionError(error);
+    }
+  }
+
+  deleteAllNotification({required userId}) async {
+    try {
+      final ref = _database.child('/notification/$userId/');
+
+      await ref.remove();
     } catch (error) {
       CommonFunctions.catchExceptionError(error);
     }

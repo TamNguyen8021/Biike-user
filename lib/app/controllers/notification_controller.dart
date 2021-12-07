@@ -28,6 +28,10 @@ class NotificationController extends GetxController {
           userId: Biike.userId.value, hashKey: hashKey);
   }
 
+  Future<void> deleteNoti() async {
+    await _databaseService.deleteAllNotification(userId: Biike.userId.value);
+  }
+
   Future<String> isMoveToFeedBack(tripId) async {
     var data = await _tripProvider.getTripDetails(tripId: tripId);
     var trip = Trip.fromJson(data);
