@@ -26,12 +26,14 @@ class AddBikePage extends StatelessWidget {
   final _manageBikeController = Get.find<ManageBikeController>();
 
   RxList<String> brands = [
-    'Honda',
-    'Yamaha',
-    'Toyota',
+    'Aprilia', 'Bazan', 'Benelli', 'BMW', 'Brixton', 'CR&S', 'Daelim', 'Detech', 'Ducati',
+    'Euro Reibel', 'GPX', 'Halim', 'Harley Davidson', 'Honda', 'Hyosung', 'Kawasaki', 'Keeway', 'Kengo', 'KTM',
+    'Kymco', 'Lambretta', 'Malaguti', 'Moto Guzzi', 'MV Agusta', 'Nioshima', 'Norton', 'Peugeot', 'Piaggio', 'RebelUSA',
+    'Regal Raptor', 'Royal Enfield', 'Sachs', 'Sanda', 'Suzuki', 'SYM', 'Taya', 'Triumph', 'Vento', 'Victory',
+    'Visitor', 'Yamaha', 'Hãng khác'
   ].obs;
-  RxList<String> categories = ['Xe số', 'Tay ga', 'Tay côn'].obs;
-  RxList<String> volumes = ['50cc', '100cc', '120cc'].obs;
+  RxList<String> categories = ['Xe số', 'Tay ga', 'Tay côn/Moto'].obs;
+  RxList<String> volumes = ['Dưới 50cc', '50 - 100cc', '100 - 175cc', 'Trên 175cc'].obs;
 
   bool isAddBike = Get.arguments['isAddBike'];
   String fromPage = Get.arguments['from'];
