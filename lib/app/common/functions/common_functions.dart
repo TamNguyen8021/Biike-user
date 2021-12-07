@@ -403,14 +403,6 @@ class CommonFunctions {
     return _location.getLocation();
   }
 
-  /// Convert string to timeOfDate
-  ///
-  /// Author: UyenNLP
-  static TimeOfDay stringToTimeOfDay(String time) {
-    final format = DateFormat.Hm(); //"16:00"
-    return TimeOfDay.fromDateTime(format.parse(time));
-  }
-
   /// Use haversine formula to calculate distance between 2 coordinates
   ///
   /// Author: TamNTT

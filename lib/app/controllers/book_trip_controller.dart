@@ -125,14 +125,6 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Set date from selected tag
-  ///
-  /// Author: UyenNLP
-  void setTimeFromTag(String date) {
-    isTimeSelected.value = true;
-    selectedTime.value = CommonFunctions.stringToTimeOfDay(date);
-  }
-
   /// Ké-er book a ké-now trip
   ///
   /// Author: UyenNLP

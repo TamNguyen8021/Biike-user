@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
+import 'package:bikes_user/app/controllers/home_controller.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -17,7 +19,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 /// The 'book_trip' screen
 class BookTripPage extends StatelessWidget {
   final _bookTripController = Get.find<BookTripController>();
+  final _homeController = Get.find<HomeController>();
   final Completer<GoogleMapController> controller = Completer();
+
+  _onBackPressed() {
+    _homeController.pagingController.refresh();
+    Get.back();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +34,7 @@ class BookTripPage extends StatelessWidget {
           appBar: CustomAppBar(
             hasShape: true,
             hasLeading: true,
-            onPressedFunc: () {
-              Get.back();
-            },
+            onPressedFunc: () => _onBackPressed(),
             appBar: AppBar(),
             title: Text(CustomStrings.kBookNewTrip.tr),
           ),
@@ -126,6 +132,6 @@ class BookTripPage extends StatelessWidget {
                 }),
           ),
         ),
-        perform: () => Get.back());
+        perform: () => _onBackPressed());
   }
 }
