@@ -528,23 +528,4 @@ class CommonFunctions {
           ),
         ),
       );
-
-  /// Bind new instance if it hadn't been binded before
-  /// to prevent repeatedly bind
-  ///
-  /// Author: UyenNLP
-  static bind<S>(S dependency) {
-    try {
-      // has binded before
-      Get.find<S>();
-
-    } catch (e) {
-      catchExceptionError(e);
-      if (dependency is CommonProvider) {
-        Get.put(dependency);
-      } else if (dependency is GetxController) {
-        Get.lazyPut<S>(() => dependency);
-      }
-    }
-  }
 }
