@@ -78,6 +78,8 @@ final Map<String, String> vi = {
       'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
   'kConfirmExitApp':
       'Bạn có chắc muốn thoát ứng dụng? (Nếu bạn đang chia sẻ vị trí, khi thoát ứng dụng sẽ ngừng việc chia sẻ)',
+  'kWaitingAdminVerifiedBike':
+      'Bạn vui lòng chờ admin duyệt xe để sử dụng Chở mode nhé',
 
   // 'biker_home' screen
   'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',

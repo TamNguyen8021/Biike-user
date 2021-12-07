@@ -74,6 +74,7 @@ class CustomStrings {
   static const String kConfirmArrivalMessageForBiker =
       'kConfirmArrivalMessageForBiker';
   static const String kConfirmExitApp = 'kConfirmExitApp';
+  static const String kWaitingAdminVerifiedBike = 'kWaitingAdminVerifiedBike';
 
   // 'biker_home' screen
   static const String kNoKeNowTrip = 'kNoKeNowTrip';
@@ -334,7 +335,8 @@ class CustomStrings {
       'kPleaseTakeRegistrationPicture';
   static const String kAddBikeSuccess = 'kAddBikeSuccess';
   static const String kDrivingLicenseBackPicture = 'kDrivingLicenseBackPicture';
-  static const String kDrivingLicenseFrontPicture = 'kDrivingLicenseFrontPicture';
+  static const String kDrivingLicenseFrontPicture =
+      'kDrivingLicenseFrontPicture';
   static const String kPleaseTakeDrivingLicenseBackPicture =
       'kPleaseTakeDrivingLicenseBackPicture';
   static const String kPleaseTakeDrivingLicenseFrontPicture =

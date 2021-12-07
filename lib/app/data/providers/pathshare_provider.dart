@@ -77,7 +77,7 @@ class PathshareProvider extends CommonProvider {
           "session": {
             "name": "My Location",
             "expires_at":
-                DateTime.now().add(Duration(minutes: 30)).toIso8601String()
+                DateTime.now().subtract(Duration(hours: 5)).toIso8601String()
             // "destination": {
             //   "name": "Destination",
             //   "latitude": endLat,

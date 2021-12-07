@@ -43,10 +43,10 @@ class HomeController extends GetxController {
   List _tempUpcomingTrips = [];
   RxList upcomingTripsForBiker = [].obs;
   Rx<bool> isUpcomingTripsLoading = true.obs;
+  Rx<bool> isSearchTripLoading = false.obs;
 
   Map<int?, String> stations = {};
   Map<String, dynamic> pagination = {};
-  bool hasSearchedTrips = false;
   int _currentPage = 1;
   int _limit = 10;
 
@@ -89,6 +89,7 @@ class HomeController extends GetxController {
       isUpcomingTripsLoading.value = false;
       Biike.logger.d(pagingController.itemList?.length ?? 0);
     } catch (error) {
+      isUpcomingTripsLoading.value = false;
       pagingController.error = error;
       CommonFunctions.catchExceptionError(error);
     }
@@ -152,8 +153,8 @@ class HomeController extends GetxController {
       TimeOfDay? time,
       int? departureId,
       int? destinationId}) async {
+    isSearchTripLoading.value = true;
     upcomingTripsForBiker.clear();
-    hasSearchedTrips = true;
 
     Map<String, dynamic> response = await _tripProvider.searchTrips(
         page: _currentPage,
@@ -183,6 +184,8 @@ class HomeController extends GetxController {
 
       upcomingTripsForBiker.add(upcomingTripCard);
     }
+
+    isSearchTripLoading.value = false;
     return upcomingTripsForBiker.cast();
   }
 

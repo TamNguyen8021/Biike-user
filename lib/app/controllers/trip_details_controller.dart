@@ -281,7 +281,7 @@ class TripDetailsController extends GetxController {
           userLng: userLocation!.longitude!)) {
         if (sessionIdentifier.isEmpty ||
             DateTime.now()
-                .subtract(Duration(minutes: 30))
+                .subtract(Duration(hours: 1))
                 .isAfter(_lastTimeSharedLocation!)) {
           Map<String, dynamic> data = await pathshareProvider.createSession();
           if (data.isNotEmpty) {

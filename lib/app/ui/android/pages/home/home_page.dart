@@ -67,14 +67,10 @@ class HomePage extends StatelessWidget {
                 }),
             bottomNavigationBar: BottomTabBar(
               onTapFunction: (int index) {
-                _homeController.upcomingTrips.clear();
-                _homeController.isUpcomingTripsLoading.value = true;
-                if (_homeController.upcomingTrips.isNotEmpty) {
-                  _homeController.update();
-                } else {
-                  _homeController.pagingController.itemList!.clear();
-                  _homeController.pagingController.refresh();
-                }
+                // _homeController.upcomingTrips.clear();
+                // _homeController.isUpcomingTripsLoading.value = true;
+                // _homeController.pagingController.itemList!.clear();
+                // _homeController.pagingController.notifyPageRequestListeners(0);
               },
             ),
           ),

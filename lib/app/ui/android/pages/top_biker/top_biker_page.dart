@@ -42,6 +42,7 @@ class TopBikerPage extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: Text(CustomStrings.kBikerRank.tr,
+                                  textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline3!

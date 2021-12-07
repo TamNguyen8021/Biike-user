@@ -7,18 +7,16 @@ import 'package:get/get.dart';
 class ListUpcomingTrips extends StatelessWidget {
   final List<dynamic> listUpcomingTrips;
   final double itemPadding;
-  final bool hasSearchTrips;
 
   const ListUpcomingTrips({
     Key? key,
     required this.listUpcomingTrips,
     required this.itemPadding,
-    required this.hasSearchTrips,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (listUpcomingTrips.isEmpty && hasSearchTrips) {
+    if (listUpcomingTrips.isEmpty) {
       return Text(
         CustomStrings.kNoUpcomingTrips.tr,
       );
