@@ -325,8 +325,8 @@ final Map<String, String> vi = {
   'kNumberPlate': 'Biển số đăng ký',
   'kNumberPlatePicture': 'Ảnh chụp biển số xe',
   'kPleaseTakeNumberPlatePicture': 'Vui lòng chụp biển số xe',
-  'kBikePicture': 'Hình xe',
-  'kPleaseTakeBikePicture': 'Ảnh chụp toàn thân xe',
+  'kBikePicture': 'Ảnh chụp toàn thân xe',
+  'kPleaseTakeBikePicture': 'Vui lòng chụp toàn thân xe',
   'kRegistrationPicture': 'Ảnh chụp cà vẹt xe',
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',

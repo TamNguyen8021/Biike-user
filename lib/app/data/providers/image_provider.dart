@@ -8,15 +8,12 @@ class ImageProvider extends CommonProvider {
   /// Upload an image to server and get the image url
   ///
   /// Author: PhatDH
-  Future<String> postImage(
+  Future<List> postImage(
       {required int imageType,
       required List<http.MultipartFile> imageList}) async {
-
     var request = http.MultipartRequest('POST', Uri.parse(UrlStrings.imageUrl));
-    request.fields.addAll({
-      'imageType': '1'
-    });
 
+    request.fields.addAll({'imageType': imageType.toString()});
     for (http.MultipartFile image in imageList) {
       request.files.add(image);
     }
@@ -27,8 +24,7 @@ class ImageProvider extends CommonProvider {
 
     if (response.statusCode < 200 || response.statusCode > 299) {
       return Future.error(response.statusCode);
-    }
-    else {
+    } else {
       return jsonDecode(await response.stream.bytesToString())['data'];
     }
   }
