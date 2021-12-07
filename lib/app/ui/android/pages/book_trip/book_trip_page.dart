@@ -24,7 +24,6 @@ class BookTripPage extends StatelessWidget {
     return OnBackPressed(
         child: Scaffold(
           appBar: CustomAppBar(
-            isVisible: true,
             hasShape: true,
             hasLeading: true,
             onPressedFunc: () {
@@ -85,6 +84,10 @@ class BookTripPage extends StatelessWidget {
                                     .destinationStation.value.coordinate,
                                 polypoints:
                                     _bookTripController.polypoints.toList(),
+                                departureName: _bookTripController
+                                    .departureStation.value.name,
+                                destinationName: _bookTripController
+                                    .destinationStation.value.name,
                               )),
                           Obx(
                             () => Padding(

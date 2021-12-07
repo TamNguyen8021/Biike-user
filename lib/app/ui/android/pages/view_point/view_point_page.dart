@@ -22,7 +22,6 @@ class ViewPointPage extends StatelessWidget {
     return OnBackPressed(
         child: Scaffold(
           appBar: CustomAppBar(
-            isVisible: true,
             hasShape: true,
             hasLeading: true,
             onPressedFunc: () => Get.back(),
