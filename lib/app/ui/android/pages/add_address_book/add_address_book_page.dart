@@ -26,8 +26,8 @@ class AddAddressBookPage extends StatelessWidget {
         appBar: AppBar(),
         title: Text(CustomStrings.kAddAddressBook.tr),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 22.0, vertical: 20.0),

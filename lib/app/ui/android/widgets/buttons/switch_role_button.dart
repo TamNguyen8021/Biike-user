@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
-import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
@@ -15,7 +15,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SwitchRoleButton extends StatelessWidget {
   final _userProvider = Get.find<UserProvider>();
-  final _bikeProvider = Get.find<BikeProvider>();
 
   final String route;
   final bool isOnProfilePage;
@@ -56,7 +55,7 @@ class SwitchRoleButton extends StatelessWidget {
 
             final hasRoleChanged = await _userProvider.changeRole(role: role);
 
-            if (hasRoleChanged) {
+            if (hasRoleChanged is bool) {
               if (Biike.role.value == Role.keer) {
                 Biike.role.value = Role.biker;
                 if (!isOnProfilePage) {
@@ -73,15 +72,25 @@ class SwitchRoleButton extends StatelessWidget {
               customDialog.loadingDialog.dismiss();
               Get.offAllNamed(route);
             } else {
-              if (await _bikeProvider.getBike() == null) {
+              if (hasRoleChanged.contains('have bike')) {
                 customDialog.loadingDialog.dismiss();
                 Get.toNamed(CommonRoutes.REQUIRE_ADD_BIKE);
-              } else {
+              } else if (hasRoleChanged.contains('verified')) {
+                customDialog.loadingDialog.dismiss();
                 AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.INFO,
-                    headerAnimationLoop: false,
-                    desc: CustomStrings.kWaitingAdminVerifiedBike.tr);
+                        context: context,
+                        dialogType: DialogType.INFO_REVERSED,
+                        headerAnimationLoop: false,
+                        desc: CustomStrings.kWaitingAdminVerifiedBike.tr)
+                    .show();
+              } else {
+                customDialog.loadingDialog.dismiss();
+                AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.ERROR,
+                        headerAnimationLoop: false,
+                        desc: CustomErrorsString.kDevelopError.tr)
+                    .show();
               }
             }
           },

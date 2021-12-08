@@ -15,6 +15,7 @@ class BikeProvider extends CommonProvider {
       if (response.statusCode == 404) {
         return null;
       }
+      return response.bodyString;
     } else {
       return response.body['data'];
     }

@@ -108,7 +108,7 @@ class CommonFunctions {
   /// Show a time picker on [context].
   ///
   /// Author: TamNTT
-  Future<TimeOfDay> selectTime(
+  static Future<TimeOfDay> selectTime(
       {required BuildContext context,
       required Rx<TimeOfDay?> selectedTime}) async {
     final TimeOfDay? pickedTime = await showTimePicker(
@@ -403,6 +403,15 @@ class CommonFunctions {
   static TimeOfDay stringToTimeOfDay(String time) {
     final format = DateFormat.Hm(); //"16:00"
     return TimeOfDay.fromDateTime(format.parse(time));
+  }
+
+  /// Convert string to timeOfDate
+  ///
+  /// Author: UyenNLP
+  static String convertTimeOfDayToString(
+      {required BuildContext context, required TimeOfDay time}) {
+    return MaterialLocalizations.of(context)
+        .formatTimeOfDay(time, alwaysUse24HourFormat: true);
   }
 
   /// Use haversine formula to calculate distance between 2 coordinates

@@ -491,4 +491,6 @@ final Map<String, String> vi = {
     'kNotTurnOnGPS': 'Xin hãy bật GPS',
     'kNotAllowGetLocation':
         'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
+    'kCanOnlyAddStationFrom5AMTo9PM':
+        'Bạn chỉ có thể thêm trạm trong khoảng thời gian từ 5 giờ sáng đến 9 giờ tối',
   });

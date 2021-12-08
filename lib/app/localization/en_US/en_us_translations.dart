@@ -469,4 +469,6 @@ final Map<String, String> en = {
     'kNotTurnOnGPS': 'Please turn on the GPS',
     'kNotAllowGetLocation':
         'Please turn on the permission to access user current location',
+    'kCanOnlyAddStationFrom5AMTo9PM':
+        'You can only add station from 5AM to 9PM',
   });

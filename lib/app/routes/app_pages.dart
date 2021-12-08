@@ -122,7 +122,6 @@ class AppPages {
           UserBinding(),
           TripBinding(),
           StationBinding(),
-          BikeBinding(),
           TripDetailsBinding(),
           PathshareBinding(),
           ImageBinding(),
@@ -137,6 +136,7 @@ class AppPages {
       bindings: <Bindings>[
         ChoNowSettingsBinding(),
         StationBinding(),
+        UserBinding(),
       ],
     ),
     GetPage(

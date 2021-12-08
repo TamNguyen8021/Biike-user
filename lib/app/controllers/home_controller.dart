@@ -76,7 +76,7 @@ class HomeController extends GetxController {
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
-      Biike.logger.d(isLastPage);
+
       if (isLastPage) {
         pagingController.appendLastPage(_tempUpcomingTrips);
         _currentPage = 1;
@@ -87,7 +87,6 @@ class HomeController extends GetxController {
         pagingController.appendPage(_tempUpcomingTrips, nextPageKey);
       }
       isUpcomingTripsLoading.value = false;
-      Biike.logger.d(pagingController.itemList?.length ?? 0);
     } catch (error) {
       isUpcomingTripsLoading.value = false;
       pagingController.error = error;
