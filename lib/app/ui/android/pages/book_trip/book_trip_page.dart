@@ -4,7 +4,6 @@ import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/schedule_trip_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -20,7 +19,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class BookTripPage extends StatelessWidget {
   final _bookTripController = Get.find<BookTripController>();
   final _homeController = Get.find<HomeController>();
-  final Completer<GoogleMapController> controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 
   _onBackPressed() {
     _homeController.pagingController.refresh();
@@ -83,7 +82,7 @@ class BookTripPage extends StatelessWidget {
                           ),
                           Obx(() => MapViewer(
                                 isFullMap: false,
-                                completerController: controller,
+                                completerController: _controller,
                                 departureCoordinate: _bookTripController
                                     .departureStation.value.coordinate,
                                 destinationCoordinate: _bookTripController
