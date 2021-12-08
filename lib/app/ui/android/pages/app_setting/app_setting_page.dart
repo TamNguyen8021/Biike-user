@@ -14,7 +14,6 @@ class AppSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-          isVisible: true,
           hasShape: true,
           appBar: AppBar(),
           hasLeading: true,

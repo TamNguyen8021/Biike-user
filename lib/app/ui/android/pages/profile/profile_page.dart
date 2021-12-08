@@ -26,177 +26,185 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _profileController.getProfile(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return FutureBuilder(
-                future: _walletController.updateWalletPoint(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Scaffold(
-                      appBar: CustomAppBar(
-                        isVisible: true,
-                        hasShape: false,
-                        appBar: AppBar(),
-                        hasLeading: true,
-                        onPressedFunc: () {
-                          Get.offAllNamed(CommonRoutes.HOME);
-                        },
-                        actionWidgets: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 16.0, top: 19.0, bottom: 19.0),
-                            child: SwitchRoleButton(
-                              route: CommonRoutes.PROFILE,
-                              isOnProfilePage: true,
-                            ),
-                          ),
-                        ],
-                      ),
-                      body: SingleChildScrollView(
+    return Scaffold(
+      appBar: CustomAppBar(
+        hasShape: false,
+        appBar: AppBar(),
+        hasLeading: true,
+        onPressedFunc: () {
+          Get.offAllNamed(CommonRoutes.HOME);
+        },
+        actionWidgets: <Widget>[
+          Padding(
+            padding:
+                const EdgeInsets.only(right: 16.0, top: 19.0, bottom: 19.0),
+            child: SwitchRoleButton(
+              route: CommonRoutes.PROFILE,
+              isOnProfilePage: true,
+            ),
+          ),
+        ],
+      ),
+      body: FutureBuilder(
+          future: _profileController.getProfile(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return FutureBuilder(
+                  future: _walletController.updateWalletPoint(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return SingleChildScrollView(
                         child: SafeArea(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      CustomPaint(
-                                        painter: HalfOvalPainter(),
-                                        child: Container(height: 50),
+                          child: GetBuilder<ProfileController>(
+                              init: _profileController,
+                              builder: (ProfileController controller) {
+                                return Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: Stack(
+                                        children: <Widget>[
+                                          CustomPaint(
+                                            painter: HalfOvalPainter(),
+                                            child: Container(height: 50),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  controller.user.avatar),
+                                              radius: 50,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              _profileController.user.avatar),
-                                          radius: 50,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 22.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 6.0),
-                                        child: Text(
-                                          _profileController.user.userFullname,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline2,
-                                        ),
-                                      ),
-                                      Obx(
-                                        () => UserRatingAndScore(
-                                            rating: _profileController
-                                                .user.userStar,
-                                            score: _walletController
-                                                .totalWalletPoint.value),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8.0),
-                                        child: ProfileTextField(
-                                            isReadOnly: true,
-                                            isEditProfile: false,
-                                            initialValue: _profileController
-                                                .user.userPhoneNumber,
-                                            labelText:
-                                                CustomStrings.kPhoneNo.tr),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 25.0),
-                                        child: ProfileTextField(
-                                            isReadOnly: true,
-                                            isEditProfile: false,
-                                            initialValue:
-                                                _profileController.user.email,
-                                            labelText: CustomStrings.kEmail.tr),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 16.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            if (Biike.role.value ==
-                                                Role.biker) ...[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: CustomElevatedIconButton(
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 22.0),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 6.0),
+                                            child: Text(
+                                              controller.user.userFullname,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline2,
+                                            ),
+                                          ),
+                                          Obx(
+                                            () => UserRatingAndScore(
+                                                rating:
+                                                    controller.user.userStar,
+                                                score: _walletController
+                                                    .totalWalletPoint.value),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8.0),
+                                            child: ProfileTextField(
+                                                isReadOnly: true,
+                                                isEditProfile: false,
+                                                initialValue: controller
+                                                    .user.userPhoneNumber,
+                                                labelText:
+                                                    CustomStrings.kPhoneNo.tr),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 25.0),
+                                            child: ProfileTextField(
+                                                isReadOnly: true,
+                                                isEditProfile: false,
+                                                initialValue:
+                                                    controller.user.email,
+                                                labelText:
+                                                    CustomStrings.kEmail.tr),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 16.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                if (Biike.role.value ==
+                                                    Role.biker) ...[
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 8.0),
+                                                    child:
+                                                        CustomElevatedIconButton(
+                                                      width: 135,
+                                                      onPressedFunc: () =>
+                                                          Get.toNamed(
+                                                              CommonRoutes
+                                                                  .MANAGE_BIKE),
+                                                      text: CustomStrings
+                                                          .kManageBike.tr,
+                                                      elevation: 0.0,
+                                                      icon: Icons.two_wheeler,
+                                                      backgroundColor:
+                                                          CustomColors.kBlue,
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                                CustomElevatedIconButton(
                                                   width: 135,
                                                   onPressedFunc: () =>
                                                       Get.toNamed(CommonRoutes
-                                                          .MANAGE_BIKE),
-                                                  text: CustomStrings
-                                                      .kManageBike.tr,
+                                                          .EDIT_PROFILE),
+                                                  text: CustomStrings.kEdit.tr,
+                                                  icon: Icons.edit,
                                                   elevation: 0.0,
-                                                  icon: Icons.two_wheeler,
                                                   backgroundColor:
                                                       CustomColors.kBlue,
                                                   foregroundColor: Colors.white,
                                                 ),
-                                              ),
-                                            ],
-                                            CustomElevatedIconButton(
-                                              width: 135,
-                                              onPressedFunc: () => Get.toNamed(
-                                                  CommonRoutes.EDIT_PROFILE),
-                                              text: CustomStrings.kEdit.tr,
-                                              icon: Icons.edit,
-                                              elevation: 0.0,
-                                              backgroundColor:
-                                                  CustomColors.kBlue,
-                                              foregroundColor: Colors.white,
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      ProfileButtons(),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 24.0),
-                                        child: TextButton(
-                                          child: Text(
-                                            CustomStrings.kLogOut.tr,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2,
                                           ),
-                                          onPressed: () {
-                                            LocalAppData().logout();
-                                            Get.offAllNamed(CommonRoutes.LOGIN);
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                          ProfileButtons(),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 24.0),
+                                            child: TextButton(
+                                              child: Text(
+                                                CustomStrings.kLogOut.tr,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                              ),
+                                              onPressed: () {
+                                                LocalAppData().logout();
+                                                Get.offAllNamed(
+                                                    CommonRoutes.LOGIN);
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }),
                         ),
-                      ),
-                    );
-                  } else {
-                    return Loading();
-                  }
-                });
-          } else {
-            return Loading();
-          }
-        });
+                      );
+                    } else {
+                      return Loading();
+                    }
+                  });
+            } else {
+              return Loading();
+            }
+          }),
+    );
   }
 }

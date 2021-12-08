@@ -10,8 +10,10 @@ import 'package:get/get.dart';
 /// Manage states of [SOSNumberPage]
 class SOSNumberController extends GetxController {
   final _sosProvider = Get.find<SOSNumberProvider>();
+  final sosNumbersLimit = 3;
 
   RxList<dynamic> sosNumbers = [].obs;
+  Rx<bool> isMaximun = false.obs;
 
   Future<void> getSOSNumbers() async {
     sosNumbers.clear();
@@ -20,6 +22,8 @@ class SOSNumberController extends GetxController {
 
     if (response != null) {
       try {
+        isMaximun.value = response.length == sosNumbersLimit;
+
         for (var sosNumber in response) {
           SOS sos = SOS.fromJson(sosNumber);
 

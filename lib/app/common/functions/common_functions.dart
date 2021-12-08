@@ -16,6 +16,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Contains functions which are called multiple times in app
@@ -58,17 +59,16 @@ class CommonFunctions {
       {required BuildContext context, String? errorMessage}) {
     errorMessage == null
         ? Get.defaultDialog(
-        title: 'Confirm',
-        middleText: 'Do you want to exit the app?',
-        middleTextStyle: TextStyle(color: Colors.black),
-        textCancel: CustomStrings.kCancel.tr,
-        textConfirm: 'Yes',
-        onConfirm: () =>
-            SystemChannels.platform
+            title: 'Confirm',
+            middleText: 'Do you want to exit the app?',
+            middleTextStyle: TextStyle(color: Colors.black),
+            textCancel: CustomStrings.kCancel.tr,
+            textConfirm: 'Yes',
+            onConfirm: () => SystemChannels.platform
                 .invokeMethod<void>('SystemNavigator.pop')) //exit the app
 
         : CommonFunctions()
-        .showErrorDialog(context: context, message: errorMessage);
+            .showErrorDialog(context: context, message: errorMessage);
 
     return Future.value(false);
   }
@@ -76,9 +76,10 @@ class CommonFunctions {
   /// Show a date picker on [context].
   ///
   /// Author: TamNTT
-  Future<DateTime> selectDate({required BuildContext context,
-    required Rx<DateTime?> selectedDate,
-    required bool isBirthDatePicker}) async {
+  Future<DateTime> selectDate(
+      {required BuildContext context,
+      required Rx<DateTime?> selectedDate,
+      required bool isBirthDatePicker}) async {
     DateTime _currentTime = DateTime.now();
     DateTime _firstDate = DateTime(_currentTime.year - 90);
     DateTime _lastDate = DateTime(_currentTime.year - 18, 12, 31);
@@ -107,8 +108,9 @@ class CommonFunctions {
   /// Show a time picker on [context].
   ///
   /// Author: TamNTT
-  Future<TimeOfDay> selectTime({required BuildContext context,
-    required Rx<TimeOfDay?> selectedTime}) async {
+  Future<TimeOfDay> selectTime(
+      {required BuildContext context,
+      required Rx<TimeOfDay?> selectedTime}) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: selectedTime.value ?? TimeOfDay.now(),
@@ -130,10 +132,10 @@ class CommonFunctions {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -146,8 +148,7 @@ class CommonFunctions {
                   ),
                   Text(
                     message.tr,
-                    style: Theme
-                        .of(context)
+                    style: Theme.of(context)
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
@@ -171,10 +172,10 @@ class CommonFunctions {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -187,8 +188,7 @@ class CommonFunctions {
                   ),
                   Text(
                     message.tr,
-                    style: Theme
-                        .of(context)
+                    style: Theme.of(context)
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
@@ -212,10 +212,10 @@ class CommonFunctions {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -228,8 +228,7 @@ class CommonFunctions {
                   ),
                   Text(
                     message.tr,
-                    style: Theme
-                        .of(context)
+                    style: Theme.of(context)
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
@@ -245,17 +244,18 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  Future<void> showConfirmDialog({required BuildContext context,
-    required String title,
-    required String message,
-    required Function() onPressedFunc}) async {
+  Future<void> showConfirmDialog(
+      {required BuildContext context,
+      required String title,
+      required String message,
+      required Function() onPressedFunc}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -263,20 +263,14 @@ class CommonFunctions {
                 children: <Widget>[
                   Text(
                     title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline6,
+                    style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.center,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0, bottom: 30.0),
                     child: Text(
                       message,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .bodyText1,
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -324,15 +318,16 @@ class CommonFunctions {
 
     return indexOfQuestionMark != -1 // not found
         ? int.tryParse(
-        url.substring(indexOfForwardSlash + 1, indexOfQuestionMark)) ??
-        -1
+                url.substring(indexOfForwardSlash + 1, indexOfQuestionMark)) ??
+            -1
         : int.tryParse(url.substring(indexOfForwardSlash + 1)) ?? -1;
   }
 
-  Future<void> openMap({required String keyword,
-    required double? latitude,
-    required double? longitude,
-    required BuildContext context}) async {
+  Future<void> openMap(
+      {required String keyword,
+      required double? latitude,
+      required double? longitude,
+      required BuildContext context}) async {
     String googleUrl =
         'https://www.google.com/maps/search/$keyword/@$latitude,$longitude';
 
@@ -363,11 +358,12 @@ class CommonFunctions {
   /// Get polypoints to draw route on map
   ///
   /// Author: TamNTT
-  Future<void> getRoutePoints({required List<LatLng> polypoints,
-    required double startLat,
-    required double startLng,
-    required double endLat,
-    required double endLng}) async {
+  Future<void> getRoutePoints(
+      {required List<LatLng> polypoints,
+      required double startLat,
+      required double startLng,
+      required double endLat,
+      required double endLng}) async {
     polypoints.clear();
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
@@ -380,6 +376,27 @@ class CommonFunctions {
     }
   }
 
+  /// Author: TamNTT
+  Future<LocationData?> getCurrentLocation() async {
+    final _location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await _location.serviceEnabled();
+    while (!_serviceEnabled) {
+      _serviceEnabled = await _location.requestService();
+    }
+
+    _permissionGranted = await _location.hasPermission();
+    while (_permissionGranted == PermissionStatus.denied ||
+        _permissionGranted == PermissionStatus.deniedForever) {
+      _permissionGranted = await _location.requestPermission();
+    }
+
+    return _location.getLocation();
+  }
+
   /// Convert string to timeOfDate
   ///
   /// Author: UyenNLP
@@ -388,10 +405,14 @@ class CommonFunctions {
     return TimeOfDay.fromDateTime(format.parse(time));
   }
 
-  bool isArrivedAtPickUpPoint({required double userLat,
-    required double userLng,
-    required double departureLat,
-    required double departureLng}) {
+  /// Use haversine formula to calculate distance between 2 coordinates
+  ///
+  /// Author: TamNTT
+  bool isArrivedAtPickUpPoint(
+      {required double userLat,
+      required double userLng,
+      required double departureLat,
+      required double departureLng}) {
     const r = 6371; // Radius of earth in kilometers. Use 3956 for miles
     double fi1 = userLat * math.pi / 180; // φ, λ in radians
     double fi2 = departureLat * math.pi / 180;
@@ -405,6 +426,7 @@ class CommonFunctions {
             math.sin(deltaLamda / 2);
     double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     double d = r * c; // in kilometres
+
     if (d < 0.5) {
       return true;
     }
@@ -441,15 +463,12 @@ class CommonFunctions {
   }
 
   static moveToNotiPageWhenHasNoti(String? title, String? body) {
-    Get.snackbar(
-        title ?? 'Notification',
-        body ?? 'You have new notification',
+    Get.snackbar(title ?? 'Notification', body ?? 'You have new notification',
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
         onTap: (_) => Get.toNamed(CommonRoutes.NOTIFICATION),
         isDismissible: true,
         duration: Duration(seconds: 3),
-      backgroundColor: CustomColors.kBlue
-    );
+        backgroundColor: CustomColors.kBlue);
   }
 }

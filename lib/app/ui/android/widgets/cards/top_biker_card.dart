@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -57,10 +58,12 @@ class TopBikerCard extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Padding(
-                padding: const EdgeInsets.only(left: 0.0, right: 5.0),
-                child: CircleAvatar(
-                  radius: _avatarHeight,
-                  backgroundImage: NetworkImage(avatarUrl),
+                padding: index < 3
+                    ? const EdgeInsets.symmetric(horizontal: 11)
+                    : const EdgeInsets.symmetric(horizontal: 21),
+                child: CircularProfileAvatar(
+                  avatarUrl,
+                  radius: _avatarHeight
                 ),
               ),
             ),

@@ -24,12 +24,13 @@ final Map<String, String> vi = {
   'kPassword': 'Mật khẩu',
   'kInputPassword': 'Nhập mật khẩu',
   'kLogin': 'Đăng nhập',
-  'kNoAccount': 'Bạn chưa có tài khoản? Xin vui lòng Đăng Ký ',
-  'kWrongAccount' : 'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
-  'kUnVerifiedEmail' : 'Chúng tôi đã gửi link xác thực qua email đăng kí của bạn, xin hãy vui lòng xác thực để hoàn tất đăng ký',
-  'kLoginExceptionError' : 'Đã có lỗi ngoại lệ xảy ra, xin vui lòng thử lại',
-  'kEmptyToken' : 'Lỗi server trả token trống',
-
+  'kNoAccount': 'Chưa có tài khoản? ',
+  'kWrongAccount':
+      'Email hoặc mật khẩu của bạn không đúng, xin vui lòng kiểm tra lại',
+  'kUnVerifiedEmail':
+      'Chúng tôi đã gửi link xác thực qua email đăng kí của bạn, xin hãy vui lòng xác thực để hoàn tất đăng ký',
+  'kLoginExceptionError': 'Đã có lỗi ngoại lệ xảy ra, xin vui lòng thử lại',
+  'kEmptyToken': 'Lỗi server trả token trống',
 
   // 'register' screen
   'kConfirmTerm': 'Bằng việc đăng ký, bạn đồng ý với',
@@ -62,7 +63,7 @@ final Map<String, String> vi = {
   'kReminderMinute': ' phút ',
   'kReminderHour': ' tiếng ',
   'kReminderLeft': ' nữa',
-  'kArriveAtDestination': 'Đã đến',
+  'kArriveAtDestination': 'Đã đến điểm đón',
   'kKeerMode': 'Đi ké mode',
   'kBikerMode': 'Chở mode',
   'kToday': 'Hôm nay',
@@ -77,6 +78,8 @@ final Map<String, String> vi = {
       'Chúng tôi sẽ gửi thông báo cho khách hàng của bạn',
   'kConfirmExitApp':
       'Bạn có chắc muốn thoát ứng dụng? (Nếu bạn đang chia sẻ vị trí, khi thoát ứng dụng sẽ ngừng việc chia sẻ)',
+  'kWaitingAdminVerifiedBike':
+      'Bạn vui lòng chờ admin duyệt xe để sử dụng Chở mode nhé',
 
   // 'biker_home' screen
   'kNoKeNowTrip': 'Chưa có chuyến cần Chở Now',
@@ -324,13 +327,17 @@ final Map<String, String> vi = {
   'kNumberPlate': 'Biển số đăng ký',
   'kNumberPlatePicture': 'Ảnh chụp biển số xe',
   'kPleaseTakeNumberPlatePicture': 'Vui lòng chụp biển số xe',
-  'kBikePicture': 'Hình xe',
-  'kPleaseTakeBikePicture': 'Ảnh chụp toàn thân xe',
+  'kBikePicture': 'Ảnh chụp toàn thân xe',
+  'kPleaseTakeBikePicture': 'Vui lòng chụp toàn thân xe',
   'kRegistrationPicture': 'Ảnh chụp cà vẹt xe',
   'kPleaseTakeRegistrationPicture':
       'Vui lòng chụp mặt sau cà vẹt xe\n(mặt chứa thông tin xe)',
   'kTakePicture': 'Chụp',
   'kAddBikeSuccess': 'Thêm xe thành công.\nVui lòng đợi Admin xác minh!',
+  'kDrivingLicenseBackPicture': 'Ảnh chụp mặt sau bằng lái',
+  'kDrivingLicenseFrontPicture': 'Ảnh chụp mặt trước bằng lái',
+  'kPleaseTakeDrivingLicenseBackPicture': 'Vui lòng chụp mặt sau bằng lái',
+  'kPleaseTakeDrivingLicenseFrontPicture': 'Vui lòng chụp mặt trước bằng lái',
 
   // 'voucher_detail' screen
   'kGiftDetail': 'Chi tiết quà tặng',
@@ -369,6 +376,7 @@ final Map<String, String> vi = {
 
   // 'address_book' screen
   'kAddressBook': 'Sổ địa chỉ',
+  'kDefault': 'Mặc định',
 
   // 'edit_address_book' screen
   'kEditAddressBook': 'Chỉnh sửa địa chỉ',
@@ -381,6 +389,7 @@ final Map<String, String> vi = {
   'kEnterName': 'Nhập tên',
   'kSelectAddress': 'Chọn địa chỉ',
   'kEnterNote': 'Nhập ghi chú',
+  'kSetAsDefault': 'Đặt làm mặc định',
 
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
@@ -475,7 +484,7 @@ final Map<String, String> vi = {
     'kNoNotification': 'Chưa có thông báo',
     'kEmptyReportReasonOrContainsBadWords':
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
-    'kNotArrivedAtPickUpPoint': 'Bạn chưa đến điểm đón',
+    'kNotArrivedAtPickUpPoint': 'Bạn chưa đến trạm',
     'kOutOfDate': 'Đã hết hạn',
     'kTripCanceled': 'Chuyến đi này đã bị hủy',
     'kAlreadyFeedbacked': 'Bạn đã gửi feedback chuyến đi này.',

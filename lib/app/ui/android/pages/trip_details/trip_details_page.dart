@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/trip_history_controller.dart';
+import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
@@ -18,6 +20,7 @@ import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,9 +37,12 @@ class TripDetailsPage extends StatelessWidget {
   final _tripHistoryController = Get.find<TripHistoryController>();
   final Completer<GoogleMapController> completerController = Completer();
 
+  int tripId = Get.arguments['tripId'];
   String _statusBarTime = '';
   String _statusBarText = '';
   Rx<String> _cancelReason = ''.obs;
+  Rx<String> buttonText = CustomStrings.kConfirmArrival.tr.obs;
+  Rx<IconData> buttonIcon = Icons.done_all.obs;
 
   TripDetailsPage({
     Key? key,
@@ -205,12 +211,12 @@ class TripDetailsPage extends StatelessWidget {
 
   void _onBackPressed({required BuildContext context}) {
     // if (_tripDetailsController.isTripStarted.isFalse) {
-      if (Get.arguments['route'] == 'home') {
-        _homeController.pagingController.refresh();
-      } else {
-        _tripHistoryController.pagingController.refresh();
-      }
-      Get.back();
+    if (Get.arguments['route'] == 'home') {
+      _homeController.pagingController.refresh();
+    } else {
+      _tripHistoryController.pagingController.refresh();
+    }
+    Get.back();
     // } else {
     //   CommonFunctions().showErrorDialog(
     //       context: context,
@@ -218,8 +224,31 @@ class TripDetailsPage extends StatelessWidget {
     // }
   }
 
+  void changeToStartTripButton() {
+    if (buttonText.value != CustomStrings.kStart.tr) {
+      buttonText.value = CustomStrings.kStart.tr;
+    }
+
+    if (buttonIcon.value != Icons.navigation) {
+      buttonIcon.value = Icons.navigation;
+    }
+  }
+
+  void changeToFinishTripButton() {
+    if (buttonText.value != CustomStrings.kCompleteTrip.tr) {
+      buttonText.value = CustomStrings.kCompleteTrip.tr;
+    }
+
+    if (buttonIcon.value != Icons.done_all) {
+      buttonIcon.value = Icons.done_all;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    Rx<bool> isArrivedAtPickUpPoint = false.obs;
+    // CustomDialog customDialog = CustomDialog(context: context);
+
     return OnBackPressed(
       perform: () {
         _onBackPressed(context: context);
@@ -227,649 +256,732 @@ class TripDetailsPage extends StatelessWidget {
       child: GetBuilder<TripDetailsController>(
           init: _tripDetailsController,
           builder: (TripDetailsController controller) {
-            return FutureBuilder(
-                future:
-                    controller.getTripDetails(tripId: Get.arguments['tripId']),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    Rx<bool> isArriveAtPickUpPointButtonVisible = false.obs;
-                    DateTime currentTime = DateTime.now();
-                    DateTime tempBookTime =
-                        DateTime.tryParse(controller.trip.bookTime)!;
+            return Scaffold(
+              appBar: CustomAppBar(
+                hasShape: true,
+                hasLeading: true,
+                onPressedFunc: () {
+                  _onBackPressed(context: context);
+                },
+                appBar: AppBar(),
+                title: Text(CustomStrings.kTripDetails.tr),
+                actionWidgets: controller.trip.tripStatus != 5 &&
+                        controller.trip.tripStatus != 6
+                    ? <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 22.0),
+                          child: ElevatedButton.icon(
+                            onPressed: () async {
+                              controller.userLocation =
+                                  await CommonFunctions().getCurrentLocation();
+                              if (controller.userLocation != null) {
+                                controller.showHelpCenter(context: context);
+                              } else {
+                                await CommonFunctions().showInfoDialog(
+                                    context: context,
+                                    message: CustomStrings
+                                        .kNeedLocationPermission.tr);
+                              }
+                            },
+                            icon: Icon(
+                              Icons.support,
+                              color: CustomColors.kBlue,
+                            ),
+                            label: Text(
+                              CustomStrings.kSupport.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: CustomColors.kBlue),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                            ),
+                          ),
+                        ),
+                      ]
+                    : null,
+              ),
+              body: FutureBuilder(
+                  future: controller.getTripDetails(tripId: tripId),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return FutureBuilder(
+                          future: _tripProvider.isArrivedAtPickUpPoint(
+                              tripId: tripId),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              DateTime currentTime = DateTime.now();
+                              DateTime tempBookTime =
+                                  DateTime.tryParse(controller.trip.bookTime)!;
 
-                    _addStatusBarTextAndTime();
+                              _addStatusBarTextAndTime();
 
-                    if (tempBookTime.day == currentTime.day &&
-                        tempBookTime.month == currentTime.month &&
-                        tempBookTime.year == currentTime.year) {
-                      isArriveAtPickUpPointButtonVisible.value = true;
-                    }
+                              switch (controller.trip.tripStatus) {
+                                case 3:
+                                  isArrivedAtPickUpPoint.value = true;
 
-                    return Scaffold(
-                      appBar: CustomAppBar(
-                        isVisible: true,
-                        hasShape: true,
-                        hasLeading: true,
-                        onPressedFunc: () {
-                          _onBackPressed(context: context);
-                        },
-                        appBar: AppBar(),
-                        title: Text(CustomStrings.kTripDetails.tr),
-                        actionWidgets: controller.trip.tripStatus != 5 &&
-                                controller.trip.tripStatus != 6
-                            ? <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0, horizontal: 22.0),
-                                  child: ElevatedButton.icon(
-                                    onPressed: () async {
-                                      await controller.getCurrentLocation();
-                                      if (controller.userLocation != null) {
-                                        controller.showHelpCenter(
-                                            context: context);
-                                      } else {
-                                        await CommonFunctions().showInfoDialog(
-                                            context: context,
-                                            message: CustomStrings
-                                                .kNeedLocationPermission.tr);
-                                      }
-                                    },
-                                    icon: Icon(
-                                      Icons.support,
-                                      color: CustomColors.kBlue,
-                                    ),
-                                    label: Text(
-                                      CustomStrings.kSupport.tr,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(color: CustomColors.kBlue),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                    ),
-                                  ),
-                                ),
-                              ]
-                            : null,
-                      ),
-                      body: SingleChildScrollView(
-                        child: SafeArea(
-                          child: Column(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    22.0, 16.0, 22.0, 0.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          color: CustomColors.kDarkGray
-                                              .withOpacity(0.05),
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Text(
-                                            _statusBarText,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                          ),
-                                          Text(
-                                            _statusBarTime,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    MapViewer(
-                                        isFullMap: false,
-                                        completerController:
-                                            completerController,
-                                        polypoints: controller.polypoints,
-                                        departureCoordinate: controller
-                                            .departureStation
-                                            .departureCoordinate,
-                                        destinationCoordinate: controller
-                                            .destinationStation
-                                            .destinationCoordinate),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      margin:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: CustomTextButton(
-                                          hasBorder: true,
-                                          width: double.infinity,
-                                          backgroundColor: Colors.white,
-                                          foregroundColor: CustomColors.kBlue,
-                                          text: CustomStrings.kExpandMap.tr,
-                                          onPressedFunc: () {
-                                            Get.toNamed(
-                                                CommonRoutes
-                                                    .TRIP_DETAILS_FULL_MAP,
-                                                arguments: {
-                                                  'tripId':
-                                                      controller.trip.tripId
-                                                });
-                                          }),
-                                    ),
-                                    IntrinsicHeight(
-                                      child: Row(
-                                        children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border(
-                                                  right: BorderSide(
-                                                      color: CustomColors
-                                                          .kDarkGray
-                                                          .withOpacity(0.1))),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Column(
+                                  if (Biike.role.value == Role.biker) {
+                                    changeToStartTripButton();
+                                  }
+                                  break;
+                                case 4:
+                                  if (Biike.role.value == Role.biker) {
+                                    changeToFinishTripButton();
+                                  }
+                                  break;
+                                default:
+                              }
+
+                              isArrivedAtPickUpPoint.value = snapshot.data;
+                              if (isArrivedAtPickUpPoint.isTrue) {
+                                if (Biike.role.value == Role.keer) {
+                                  buttonText.value =
+                                      CustomStrings.kArriveAtDestination.tr;
+                                }
+                              }
+
+                              return SingleChildScrollView(
+                                child: SafeArea(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            22.0, 16.0, 22.0, 0.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              decoration: BoxDecoration(
+                                                  color: CustomColors.kDarkGray
+                                                      .withOpacity(0.05),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
                                                 children: <Widget>[
-                                                  Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 5.0),
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            bottom: 5.0),
-                                                    decoration: BoxDecoration(
-                                                      border: Border(
-                                                        bottom: BorderSide(
-                                                          color: CustomColors
-                                                              .kDarkGray
-                                                              .withOpacity(0.1),
+                                                  Text(
+                                                    _statusBarText,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1,
+                                                  ),
+                                                  Text(
+                                                    _statusBarTime,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            if (controller.trip.tripStatus !=
+                                                    5 &&
+                                                controller.trip.tripStatus !=
+                                                    6) ...[
+                                              MapViewer(
+                                                  isFullMap: false,
+                                                  completerController:
+                                                      completerController,
+                                                  polypoints:
+                                                      controller.polypoints,
+                                                  departureName:
+                                                      _tripDetailsController
+                                                          .departureStation
+                                                          .departureName,
+                                                  departureCoordinate:
+                                                      controller
+                                                          .departureStation
+                                                          .departureCoordinate,
+                                                  destinationName:
+                                                      _tripDetailsController
+                                                          .destinationStation
+                                                          .destinationName,
+                                                  destinationCoordinate:
+                                                      controller
+                                                          .destinationStation
+                                                          .destinationCoordinate),
+                                              Container(
+                                                alignment: Alignment.center,
+                                                child: CustomTextButton(
+                                                    hasBorder: true,
+                                                    width: double.infinity,
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    foregroundColor:
+                                                        CustomColors.kBlue,
+                                                    text: CustomStrings
+                                                        .kExpandMap.tr,
+                                                    onPressedFunc: () {
+                                                      Get.toNamed(
+                                                          CommonRoutes
+                                                              .TRIP_DETAILS_FULL_MAP,
+                                                          arguments: {
+                                                            'tripId': controller
+                                                                .trip.tripId
+                                                          });
+                                                    }),
+                                              ),
+                                            ],
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 16.0),
+                                              child: IntrinsicHeight(
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        border: Border(
+                                                            right: BorderSide(
+                                                                color: CustomColors
+                                                                    .kDarkGray
+                                                                    .withOpacity(
+                                                                        0.1))),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: <Widget>[
+                                                            Container(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      bottom:
+                                                                          5.0),
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      bottom:
+                                                                          5.0),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border: Border(
+                                                                  bottom:
+                                                                      BorderSide(
+                                                                    color: CustomColors
+                                                                        .kDarkGray
+                                                                        .withOpacity(
+                                                                            0.1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              child: Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            5.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .event_outlined,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            8.0),
+                                                                    child: Text(
+                                                                      DateFormat(
+                                                                              'dd/MM/yyyy')
+                                                                          .format(DateTime.tryParse(controller
+                                                                              .trip
+                                                                              .bookTime)!),
+                                                                      style: Theme.of(
+                                                                              context)
+                                                                          .textTheme
+                                                                          .bodyText1,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Row(
+                                                              children: <
+                                                                  Widget>[
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          5.0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .access_time,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  DateFormat(
+                                                                          'HH:mm')
+                                                                      .format(DateTime.tryParse(controller
+                                                                          .trip
+                                                                          .bookTime)!),
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .bodyText1,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Padding(
+                                                    Expanded(
+                                                      child: Container(
                                                           padding:
                                                               const EdgeInsets
                                                                       .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons
-                                                                .event_outlined,
+                                                                  left: 8.0),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.white,
                                                           ),
-                                                        ),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: <Widget>[
+                                                              Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            5.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .adjust,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    controller
+                                                                        .departureStation
+                                                                        .departureName,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .bodyText1,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Icon(
+                                                                Icons
+                                                                    .more_vert_outlined,
+                                                              ),
+                                                              Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            5.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .location_on,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    controller
+                                                                        .destinationStation
+                                                                        .destinationName,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .bodyText1,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          )),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            if (controller.trip.tripStatus ==
+                                                    6 &&
+                                                controller.user.userFullname ==
+                                                    CustomStrings.kFinding)
+                                              ...[]
+                                            else ...[
+                                              GestureDetector(
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10.0),
+                                                  margin: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 16.0),
+                                                  decoration: BoxDecoration(
+                                                      color: CustomColors
+                                                          .kLightGray,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      if (controller.trip
+                                                              .tripStatus !=
+                                                          1) ...[
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
                                                                       .only(
                                                                   right: 8.0),
-                                                          child: Text(
-                                                            DateFormat(
-                                                                    'dd/MM/yyyy')
-                                                                .format(DateTime
-                                                                    .tryParse(
-                                                                        controller
-                                                                            .trip
-                                                                            .bookTime)!),
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyText1,
+                                                          child: CircleAvatar(
+                                                            radius: 45,
+                                                            backgroundImage:
+                                                                NetworkImage(
+                                                                    controller
+                                                                        .user
+                                                                        .avatar),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 5.0),
-                                                        child: Icon(
-                                                          Icons.access_time,
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: <Widget>[
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        bottom:
+                                                                            5.0,
+                                                                        top:
+                                                                            10.0),
+                                                                child: Text(
+                                                                  controller
+                                                                      .user
+                                                                      .userFullname,
+                                                                  style: TextStyle(
+                                                                      color: CustomColors
+                                                                          .kBlue,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              UserRating(
+                                                                  score: controller
+                                                                      .user
+                                                                      .userStar
+                                                                      .toString()),
+                                                              Padding(
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        10.0),
+                                                                child:
+                                                                    ContactButtons(
+                                                                  phoneNo:
+                                                                      controller
+                                                                          .user
+                                                                          .userPhoneNumber,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Text(
-                                                        DateFormat('HH:mm').format(
-                                                            DateTime.tryParse(
-                                                                controller.trip
-                                                                    .bookTime)!),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                      ),
+                                                      ] else ...[
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(20.0),
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            'assets/images/loading.svg',
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          CustomStrings
+                                                              .kFinding.tr,
+                                                          style: TextStyle(
+                                                            color: CustomColors
+                                                                .kBlue,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ]
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
                                                 ),
+                                                onTap: () {
+                                                  if (controller
+                                                          .trip.tripStatus !=
+                                                      1) {
+                                                    Get.toNamed(
+                                                        CommonRoutes.VIEW_USER,
+                                                        arguments: {
+                                                          'partnerId':
+                                                              controller
+                                                                  .user.userId
+                                                        });
+                                                  }
+                                                },
+                                              ),
+                                            ],
+                                            if (controller.trip.tripStatus !=
+                                                    5 &&
+                                                controller.trip.tripStatus !=
+                                                    6) ...[
+                                              Container(
+                                                width: double.infinity,
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.center,
                                                   children: <Widget>[
-                                                    Row(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons.adjust,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          controller
-                                                              .departureStation
-                                                              .departureName,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .bodyText1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Icon(
-                                                      Icons.more_vert_outlined,
-                                                    ),
-                                                    Row(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 5.0),
-                                                          child: Icon(
-                                                            Icons.location_on,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          controller
-                                                              .destinationStation
-                                                              .destinationName,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .bodyText1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    if (controller.trip.tripStatus == 6 &&
-                                        controller.user.userFullname ==
-                                            CustomStrings.kFinding)
-                                      ...[]
-                                    else ...[
-                                      GestureDetector(
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 16.0),
-                                          decoration: BoxDecoration(
-                                              color: CustomColors.kLightGray,
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          child: Row(
-                                            children: <Widget>[
-                                              if (controller.trip.tripStatus !=
-                                                  1) ...[
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 8.0),
-                                                  child: CircleAvatar(
-                                                    radius: 45,
-                                                    backgroundImage:
-                                                        NetworkImage(controller
-                                                            .user.avatar),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: <Widget>[
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                bottom: 5.0,
-                                                                top: 10.0),
-                                                        child: Text(
-                                                          controller.user
-                                                              .userFullname,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  CustomColors
+                                                    if (tempBookTime.day ==
+                                                            currentTime.day &&
+                                                        tempBookTime.month ==
+                                                            currentTime.month &&
+                                                        tempBookTime.year ==
+                                                            currentTime
+                                                                .year) ...[
+                                                      if (controller.trip.tripStatus == 2 ||
+                                                          controller.trip
+                                                                  .tripStatus ==
+                                                              3 ||
+                                                          controller.trip
+                                                                  .tripStatus ==
+                                                              4) ...[
+                                                        Obx(
+                                                          () => Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    bottom:
+                                                                        16.0),
+                                                            child:
+                                                                CustomElevatedIconButton(
+                                                              width: 180,
+                                                              text: buttonText
+                                                                  .value,
+                                                              backgroundColor: buttonText
+                                                                          .value ==
+                                                                      CustomStrings
+                                                                          .kArriveAtDestination
+                                                                          .tr
+                                                                  ? CustomColors
+                                                                      .kDarkGray
+                                                                  : CustomColors
                                                                       .kBlue,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                                              foregroundColor:
+                                                                  Colors.white,
+                                                              elevation: 0.0,
+                                                              icon: buttonIcon
+                                                                  .value,
+                                                              onPressedFunc: buttonText
+                                                                          .value ==
+                                                                      CustomStrings
+                                                                          .kArriveAtDestination
+                                                                          .tr
+                                                                  ? () {}
+                                                                  : () async {
+                                                                      CustomLocation
+                                                                          departureLocation =
+                                                                          CustomLocation(
+                                                                              coordinate: controller.departureStation.departureCoordinate);
+
+                                                                      if (isArrivedAtPickUpPoint
+                                                                          .isFalse) {
+                                                                        controller.userLocation =
+                                                                            await CommonFunctions().getCurrentLocation();
+
+                                                                        if (controller.userLocation !=
+                                                                            null) {
+                                                                          CommonFunctions().showConfirmDialog(
+                                                                              context: context,
+                                                                              title: CustomStrings.kConfirmArrivalTitle.tr,
+                                                                              message: Biike.role.value == Role.keer ? CustomStrings.kConfirmArrivalMessageForKeer.tr : CustomStrings.kConfirmArrivalMessageForBiker.tr,
+                                                                              onPressedFunc: () async {
+                                                                                controller.userLocation = await CommonFunctions().getCurrentLocation();
+
+                                                                                if (CommonFunctions().isArrivedAtPickUpPoint(userLat: controller.userLocation!.latitude!, userLng: controller.userLocation!.longitude!, departureLat: departureLocation.latitude, departureLng: departureLocation.longitude)) {
+                                                                                  Get.back();
+
+                                                                                  CustomDialog(context: context).loadingDialog.show();
+
+                                                                                  if (await _tripProvider.markArrivedAtPickUpPoint(tripId: tripId)) {
+                                                                                    isArrivedAtPickUpPoint.value = true;
+
+                                                                                    if (Biike.role.value == Role.keer) {
+                                                                                      buttonText.value = CustomStrings.kArriveAtDestination.tr;
+                                                                                    } else {
+                                                                                      changeToStartTripButton();
+                                                                                    }
+
+                                                                                    CustomDialog(context: context).loadingDialog.dismiss();
+                                                                                  } else {
+                                                                                    CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kDevelopError.tr);
+                                                                                  }
+                                                                                } else {
+                                                                                  CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kNotArrivedAtPickUpPoint.tr);
+                                                                                }
+                                                                              });
+                                                                        } else {
+                                                                          CommonFunctions().showInfoDialog(
+                                                                              context: context,
+                                                                              message: CustomStrings.kNeedLocationPermission.tr);
+                                                                        }
+                                                                      } else {
+                                                                        if (buttonText.value ==
+                                                                            CustomStrings.kStart) {
+                                                                          GoogleMapController
+                                                                              googleMapController =
+                                                                              await completerController.future;
+
+                                                                          await googleMapController
+                                                                              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                                                                            target:
+                                                                                LatLng(controller.userLocation!.latitude!, controller.userLocation!.longitude!),
+                                                                            zoom:
+                                                                                12,
+                                                                          )));
+
+                                                                          if (await _tripProvider.startTrip(
+                                                                              tripId: tripId)) {
+                                                                            changeToFinishTripButton();
+                                                                          } else {
+                                                                            CommonFunctions().showErrorDialog(
+                                                                                context: context,
+                                                                                message: CustomErrorsString.kDevelopError.tr);
+                                                                          }
+                                                                        } else {
+                                                                          if (CommonFunctions().isArrivedAtPickUpPoint(
+                                                                              userLat: controller.userLocation!.latitude!,
+                                                                              userLng: controller.userLocation!.longitude!,
+                                                                              departureLat: departureLocation.latitude,
+                                                                              departureLng: departureLocation.longitude)) {
+                                                                            if (await _tripProvider.completeTrip(tripId: tripId)) {
+                                                                              if (controller.isLocationShared.isTrue) {
+                                                                                await controller.pathshareProvider.startOrStopLocationSharing(isShared: false, sessionIdentifier: controller.sessionIdentifier);
+                                                                              }
+
+                                                                              Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: controller.trip.tripId);
+                                                                            } else {
+                                                                              CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kDevelopError.tr);
+                                                                            }
+                                                                          } else {
+                                                                            CommonFunctions().showErrorDialog(
+                                                                                context: context,
+                                                                                message: CustomErrorsString.kNotArrivedAtPickUpPoint.tr);
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    },
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                      UserRating(
-                                                          score: controller
-                                                              .user.userStar
-                                                              .toString()),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                vertical: 10.0),
-                                                        child: ContactButtons(
-                                                          phoneNo: controller
-                                                              .user
-                                                              .userPhoneNumber,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ] else ...[
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      20.0),
-                                                  child: SvgPicture.asset(
-                                                    'assets/images/loading.svg',
-                                                  ),
-                                                ),
-                                                Text(
-                                                  CustomStrings.kFinding.tr,
-                                                  style: TextStyle(
-                                                    color: CustomColors.kBlue,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ]
-                                            ],
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          if (controller.trip.tripStatus != 1) {
-                                            Get.toNamed(CommonRoutes.VIEW_USER,
-                                                arguments: {
-                                                  'partnerId':
-                                                      controller.user.userId
-                                                });
-                                          }
-                                        },
-                                      ),
-                                    ],
-                                    if (controller.trip.tripStatus != 5 &&
-                                        controller.trip.tripStatus != 6) ...[
-                                      Container(
-                                        width: double.infinity,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            if (controller.trip.tripStatus ==
-                                                    2 ||
-                                                controller.trip.tripStatus ==
-                                                    3) ...[
-                                              Obx(
-                                                () => Visibility(
-                                                  visible:
-                                                      isArriveAtPickUpPointButtonVisible
-                                                          .value,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 16.0),
-                                                    child:
-                                                        CustomElevatedIconButton(
-                                                      width: controller
-                                                              .isArrivedAtPickUpPoint
-                                                              .isTrue
-                                                          ? 140
-                                                          : 180,
-                                                      text: controller
-                                                          .buttonText.value,
-                                                      backgroundColor:
-                                                          CustomColors.kBlue,
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      elevation: 0.0,
-                                                      icon: controller
-                                                          .buttonIcon.value,
-                                                      onPressedFunc: () async {
-                                                        if (controller
-                                                            .isArrivedAtPickUpPoint
-                                                            .isFalse) {
-                                                          await controller
-                                                              .getCurrentLocation();
-                                                          if (controller
-                                                                  .userLocation !=
-                                                              null) {
-                                                            GoogleMapController
-                                                                googleMapController =
-                                                                await completerController
-                                                                    .future;
-                                                            await googleMapController
-                                                                .animateCamera(
-                                                                    CameraUpdate
-                                                                        .newCameraPosition(
-                                                                            CameraPosition(
-                                                              target: LatLng(
-                                                                  controller
-                                                                      .userLocation!
-                                                                      .latitude!,
-                                                                  controller
-                                                                      .userLocation!
-                                                                      .longitude!),
-                                                              zoom: 12,
-                                                            )));
-                                                            CustomLocation
-                                                                departureLocation =
-                                                                CustomLocation(
-                                                                    coordinate: controller
-                                                                        .departureStation
-                                                                        .departureCoordinate);
-                                                            if (CommonFunctions().isArrivedAtPickUpPoint(
-                                                                userLat: controller
-                                                                    .userLocation!
-                                                                    .latitude!,
-                                                                userLng: controller
-                                                                    .userLocation!
-                                                                    .longitude!,
-                                                                departureLat:
-                                                                    departureLocation
-                                                                        .latitude,
-                                                                departureLng:
-                                                                    departureLocation
-                                                                        .longitude)) {
-                                                              if (await _tripProvider
-                                                                  .startTrip(
-                                                                      tripId: Get
-                                                                              .arguments[
-                                                                          'tripId'])) {
-                                                                controller
-                                                                    .isArrivedAtPickUpPoint
-                                                                    .value = true;
-                                                                controller
-                                                                    .changeToFinishTripButton();
-                                                              } else {
-                                                                CommonFunctions().showErrorDialog(
-                                                                    context:
-                                                                        context,
-                                                                    message: CustomErrorsString
-                                                                        .kDevelopError
-                                                                        .tr);
-                                                              }
-                                                            } else {
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 16.0),
+                                                          child:
+                                                              CustomElevatedIconButton(
+                                                            width: 180,
+                                                            text: CustomStrings
+                                                                .kCancelTrip.tr,
+                                                            backgroundColor:
+                                                                CustomColors
+                                                                    .kLightGray,
+                                                            foregroundColor:
+                                                                CustomColors
+                                                                    .kDarkGray,
+                                                            elevation: 0.0,
+                                                            icon: Icons.clear,
+                                                            onPressedFunc: () {
                                                               CommonFunctions()
-                                                                  .showErrorDialog(
+                                                                  .showConfirmDialog(
                                                                       context:
                                                                           context,
-                                                                      message: CustomErrorsString
-                                                                          .kNotArrivedAtPickUpPoint
-                                                                          .tr);
-                                                            }
-                                                          } else {
-                                                            CommonFunctions()
-                                                                .showInfoDialog(
-                                                                    context:
-                                                                        context,
-                                                                    message: CustomStrings
-                                                                        .kNeedLocationPermission
-                                                                        .tr);
-                                                          }
-                                                        } else {
-                                                          final isTripCompleted =
-                                                              await _tripProvider
-                                                                  .completeTrip(
-                                                                      tripId: Get
-                                                                              .arguments[
-                                                                          'tripId']);
-                                                          if (isTripCompleted) {
-                                                            isArriveAtPickUpPointButtonVisible
-                                                                .value = false;
-                                                            if (controller
-                                                                .isLocationShared
-                                                                .isTrue) {
-                                                              await controller
-                                                                  .pathshareProvider
-                                                                  .startOrStopLocationSharing(
-                                                                      isShared:
-                                                                          false,
-                                                                      sessionIdentifier:
-                                                                          controller
-                                                                              .sessionIdentifier);
-                                                            }
+                                                                      title: CustomStrings
+                                                                          .kConfirmCancelTrip
+                                                                          .tr,
+                                                                      message: CustomStrings
+                                                                          .kViewCancelTripReminder
+                                                                          .tr,
+                                                                      onPressedFunc:
+                                                                          () {
+                                                                        Get.back();
 
-                                                            Get.offAllNamed(
-                                                                CommonRoutes
-                                                                    .FEEDBACK,
-                                                                arguments:
-                                                                    controller
-                                                                        .trip
-                                                                        .tripId);
-                                                          } else {
-                                                            CommonFunctions()
-                                                                .showErrorDialog(
-                                                                    context:
-                                                                        context,
-                                                                    message: CustomErrorsString
-                                                                        .kDevelopError
-                                                                        .tr);
-                                                          }
-                                                        }
-                                                      },
-                                                    ),
-                                                  ),
+                                                                        _showCancelReasonDialog(
+                                                                            context:
+                                                                                context,
+                                                                            tripId:
+                                                                                Get.arguments['tripId']);
+                                                                      });
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ],
+                                                  ],
                                                 ),
                                               ),
                                             ],
-                                            Obx(
-                                              () => Visibility(
-                                                visible: !controller
-                                                    .isArrivedAtPickUpPoint
-                                                    .value,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 16.0),
-                                                  child:
-                                                      CustomElevatedIconButton(
-                                                    width: 180,
-                                                    text: CustomStrings
-                                                        .kCancelTrip.tr,
-                                                    backgroundColor:
-                                                        CustomColors.kLightGray,
-                                                    foregroundColor:
-                                                        CustomColors.kDarkGray,
-                                                    elevation: 0.0,
-                                                    icon: Icons.clear,
-                                                    onPressedFunc: () {
-                                                      CommonFunctions()
-                                                          .showConfirmDialog(
-                                                              context: context,
-                                                              title: CustomStrings
-                                                                  .kConfirmCancelTrip
-                                                                  .tr,
-                                                              message: CustomStrings
-                                                                  .kViewCancelTripReminder
-                                                                  .tr,
-                                                              onPressedFunc:
-                                                                  () {
-                                                                Get.back();
-                                                                _showCancelReasonDialog(
-                                                                    context:
-                                                                        context,
-                                                                    tripId: Get
-                                                                            .arguments[
-                                                                        'tripId']);
-                                                              });
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
                                           ],
                                         ),
                                       ),
+                                      if (controller.trip.tripStatus == 5) ...[
+                                        _showFeedbacks(
+                                            context: context,
+                                            title:
+                                                CustomStrings.kYourFeedback.tr,
+                                            star: controller.feedback1.tripStar,
+                                            feedbackContent: controller
+                                                .feedback1.feedbackContent),
+                                        _showFeedbacks(
+                                            context: context,
+                                            title: CustomStrings
+                                                .kPartnerFeedback.tr,
+                                            star: controller.feedback2.tripStar,
+                                            feedbackContent: controller
+                                                .feedback2.feedbackContent),
+                                      ]
                                     ],
-                                  ],
+                                  ),
                                 ),
-                              ),
-                              if (controller.trip.tripStatus == 5) ...[
-                                _showFeedbacks(
-                                    context: context,
-                                    title: CustomStrings.kYourFeedback.tr,
-                                    star: controller.feedback1.tripStar,
-                                    feedbackContent:
-                                        controller.feedback1.feedbackContent),
-                                _showFeedbacks(
-                                    context: context,
-                                    title: CustomStrings.kPartnerFeedback.tr,
-                                    star: controller.feedback2.tripStar,
-                                    feedbackContent:
-                                        controller.feedback2.feedbackContent),
-                              ]
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Loading();
-                  }
-                });
+                              );
+                            } else {
+                              return Loading();
+                            }
+                          });
+                    } else {
+                      return Loading();
+                    }
+                  }),
+            );
           }),
     );
   }

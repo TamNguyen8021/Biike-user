@@ -12,7 +12,7 @@ class TopUpPointController extends GetxController {
 
   Rx<String> point = '0'.obs;
   Rx<String> amount = '0'.obs;
-  Rx<String> percent = '0.06'.obs;
+  Rx<String> percent = '0'.obs;
 
   bool isLoading = false;
 
@@ -59,7 +59,9 @@ class TopUpPointController extends GetxController {
   }
 
   Future<void> getConfigurations() async {
-    dynamic response = _topUpPointProvider.getConfigurations();
-    print(response);
+    dynamic response = await _topUpPointProvider.getConfigurations();
+    if (response != null) {
+      percent.value = response;
+    }
   }
 }

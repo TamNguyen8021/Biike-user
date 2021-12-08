@@ -36,7 +36,8 @@ class NotificationDetailPage extends StatelessWidget {
         'isKeer': _notificationController.isKeer
       });
     } else {
-      CommonFunctions().showErrorDialog(context: context, message: isMoveToFeedBack);
+      CommonFunctions()
+          .showErrorDialog(context: context, message: isMoveToFeedBack);
     }
   }
 
@@ -62,7 +63,6 @@ class NotificationDetailPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppBar(
-          isVisible: true,
           hasShape: false,
           hasLeading: true,
           onPressedFunc: () {

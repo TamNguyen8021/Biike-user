@@ -8,15 +8,21 @@ class EditAddressBookController extends GetxController {
   Rx<String> name = ''.obs;
   Rx<String> address = '1426/39, Nguyễn Duy Trinh'.obs;
   Rx<String> note = ''.obs;
+  Rx<bool> isDefault = false.obs;
 
   bool isLoading = false;
   String tempName = '';
   String tempAddress = '';
   String tempNote = '';
+  bool tempDefault = false;
 
   void _enableLoading(bool loading) {
     isLoading = loading;
     update();
+  }
+
+  void changeDefault() {
+    isDefault.value = !isDefault.value;
   }
 
   Future<bool> editAddress(int id) async {
@@ -27,7 +33,8 @@ class EditAddressBookController extends GetxController {
       'userAddressName': name.value,
       'userAddressDetail': address.value,
       'userAddressCoordinate': '123,123',
-      'userAddressNote': note.value
+      'userAddressNote': note.value,
+      'isDefault': isDefault.value,
     };
 
     return await _addressBookProvider.editAddressBook(body: body, id: id);
@@ -44,9 +51,11 @@ class EditAddressBookController extends GetxController {
   bool isSaveButtonDisable(
       {required String newName,
       required String newAddress,
-      required String newNote}) {
+      required String newNote,
+      required bool newDefault}) {
     return (tempName == newName) &&
         (tempAddress == newAddress) &&
-        (tempNote == newNote);
+        (tempNote == newNote) &&
+        (tempDefault == newDefault);
   }
 }

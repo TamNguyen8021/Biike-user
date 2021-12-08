@@ -23,7 +23,6 @@ class TripHistoryPage extends StatelessWidget {
       length: 1,
       child: Scaffold(
         appBar: CustomAppBar(
-          isVisible: true,
           hasShape: false,
           appBar: AppBar(),
           hasLeading: true,

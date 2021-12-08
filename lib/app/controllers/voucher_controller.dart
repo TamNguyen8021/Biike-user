@@ -1,11 +1,11 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/voucher_category.dart';
 import 'package:bikes_user/app/data/providers/voucher_category_provider.dart';
 import 'package:bikes_user/app/data/providers/voucher_provider.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:location/location.dart';
 
 class VoucherController extends GetxController {
   final _voucherProvider = Get.find<VoucherProvider>();
@@ -54,9 +54,10 @@ class VoucherController extends GetxController {
 
   Future<dynamic> updateNearMe() async {
     try {
-      var isPermitted = await _checkLocationPermission();
-      if (!isPermitted) {
-        return CustomErrorsString.kNotAllowGetLocation.tr;
+      LocationData? userLocation = await CommonFunctions().getCurrentLocation();
+
+      if (userLocation == null) {
+        return CustomStrings.kNeedLocationPermission.tr;
       }
 
       // Position position = await Geolocator.getCurrentPosition(
@@ -66,27 +67,10 @@ class VoucherController extends GetxController {
       //TODO send user current location
     } catch (e) {
       CommonFunctions.catchExceptionError(e);
-      return CustomErrorsString.kNotTurnOnGPS.tr;
+      return CustomStrings.kNeedLocationPermission.tr;
     }
 
     return true;
-  }
-
-  Future<bool> _checkLocationPermission() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-
-      // ask for permission
-      LocationPermission permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
-        // if denied
-        return false;
-      }
-    }
-     return true;
   }
 
   Future<List> _getVoucherList() async {

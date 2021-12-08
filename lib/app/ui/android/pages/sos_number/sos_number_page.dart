@@ -23,7 +23,6 @@ class SOSNumberPage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return Obx(() => Scaffold(
                   appBar: CustomAppBar(
-                    isVisible: true,
                     hasShape: true,
                     appBar: AppBar(),
                     hasLeading: true,
@@ -56,7 +55,7 @@ class SOSNumberPage extends StatelessWidget {
                       // ),
                     ]),
                   ),
-                  floatingActionButton: AddSOSNumberButton(),
+                  floatingActionButton: AddSOSNumberButton(isDisable: sosNumberController.isMaximun.value),
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.centerFloat,
                 ));

@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
+import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
@@ -32,7 +33,7 @@ class LoginController extends GetxController {
           await _userRepository.signin(email: email, password: pass);
 
       if (response.data.idToken.isEmpty) {
-        throw (CustomErrorsString.kEmptyToken);
+        throw (CustomStrings.kEmptyToken);
       }
 
       // Set token, refresh token
@@ -46,19 +47,19 @@ class LoginController extends GetxController {
       getIt<Repositories>().setHeaders();
       Get.toNamed(CommonRoutes.CHOOSE_MODE);
     } on DioError catch (e) {
-      var _errorMessage = CustomErrorsString.kLoginExceptionError;
+      var _errorMessage = CustomStrings.kLoginExceptionError;
       final _errorResult = e.response?.data;
 
       if (_errorResult is String) {
         if (_errorResult.contains('EMAIL_NOT_FOUND')) {
-          _errorMessage = CustomErrorsString.kNoAccount;
+          _errorMessage = CustomStrings.kNoAccount;
         }
         if (_errorResult.contains('INVALID_PASSWORD')) {
-          _errorMessage = CustomErrorsString.kWrongAccount;
+          _errorMessage = CustomStrings.kWrongAccount;
         }
         if (_errorResult.contains('verified') &&
             _errorResult.contains('email')) {
-          _errorMessage = CustomErrorsString.kUnVerifiedEmail;
+          _errorMessage = CustomStrings.kUnVerifiedEmail;
         }
       }
 

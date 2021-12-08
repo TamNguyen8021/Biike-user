@@ -37,8 +37,7 @@ class TopUpPointProvider extends CommonProvider {
     final response = await get(
         UrlStrings.configurationUrl + '?configName=conversionrate',
         headers: await headers);
-
-    print(response.body);
+    
     logResponse(response);
 
     if (response.hasError) {

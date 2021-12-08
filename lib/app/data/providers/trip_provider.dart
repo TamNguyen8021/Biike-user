@@ -1,5 +1,4 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
-import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
@@ -131,25 +130,6 @@ class TripProvider extends CommonProvider {
     }
   }
 
-  Future<dynamic> calculateDistanceAndDuration(
-      {required CustomLocation departure,
-      required CustomLocation destination}) async {
-    final response = await get(
-        'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial' +
-            '&origins=${departure.latitude},${departure.longitude}' +
-            '&destinations=${destination.latitude},${destination.longitude}' +
-            '&key=${UrlStrings.googleMapApiKey}');
-
-    logResponse(response);
-
-    if (response.status.hasError) {
-      logError(response);
-      return false;
-    }
-
-    return response;
-  }
-
   /// Cancel a trip based on [tripId].
   ///
   /// Author: TamNTT
@@ -253,6 +233,38 @@ class TripProvider extends CommonProvider {
     final response = await put(
         UrlStrings.tripUrl + '$tripId?bikerId=${Biike.userId.value.toString()}',
         {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /// Author: TamNTT
+  Future<bool> isArrivedAtPickUpPoint({required int tripId}) async {
+    final response = await get(UrlStrings.tripUrl + '$tripId/waitingStatus',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return response.body['data'];
+    }
+  }
+
+  /// Change trip status to waiting based on [tripId].
+  ///
+  /// Author: TamNTT
+  Future<bool> markArrivedAtPickUpPoint({required int tripId}) async {
+    final response = await put(UrlStrings.tripUrl + '$tripId/waitingTime', {},
         headers: await headers);
 
     logResponse(response);
