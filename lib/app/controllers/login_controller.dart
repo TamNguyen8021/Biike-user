@@ -6,6 +6,7 @@ import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
+import 'package:bikes_user/services/firebase_cloud_message_service.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
@@ -28,9 +29,12 @@ class LoginController extends GetxController {
     _enableLoading(true);
 
     try {
-      // sau khi login xong save user info
-      final response =
-          await _userRepository.signin(email: email, password: pass);
+      final _fcmToken = await getIt<FirebaseCloudMessagingService>().token;
+      final response = await _userRepository.signin(
+        email: email,
+        password: pass,
+        fcmToken: _fcmToken,
+      );
 
       if (response.data.idToken.isEmpty) {
         throw (CustomStrings.kEmptyToken);
@@ -65,7 +69,12 @@ class LoginController extends GetxController {
 
       await CommonFunctions()
           .showErrorDialog(context: context, message: _errorMessage);
-    } finally {
+    } catch(e){
+      print(e);
+      print(e.toString());
+    }
+    
+     finally {
       _enableLoading(false);
     }
   }

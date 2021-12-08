@@ -70,11 +70,12 @@ class Repositories implements RestClient {
 
   @override
   Future<LoginResponse> signin(
-      {required String email, required String password, bool isAdmin = false}) {
+      {required String email, required String password, bool isAdmin = false , required String fcmToken}) {
     return _client.signin(
       email: email,
       password: password,
       isAdmin: isAdmin,
+      fcmToken: fcmToken,
     );
   }
 }

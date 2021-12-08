@@ -23,6 +23,7 @@ abstract class RestClient {
     @Field('email') required String email,
     @Field('password') required String password,
     @Field('isAdmin') required bool isAdmin,
+    @Field('fcmToken') required String fcmToken,
   });
 
   @GET(EndPoint.userVerify + '/{idUser}' + '/activation')

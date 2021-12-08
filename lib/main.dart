@@ -63,6 +63,9 @@ void main() {
 
     runApp(Biike());
   }, (Object error, StackTrace stack) {
+    print(error.toString());
+    print('---');
+    print(stack);
     CommonFunctions.logErrorTraceFlutter(
         error: error.toString() + ' - stack: ' + stack.toString());
   });

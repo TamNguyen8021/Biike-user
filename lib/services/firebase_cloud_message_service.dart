@@ -63,13 +63,14 @@ class FirebaseCloudMessagingService {
   /// push noti to
   ///
   /// Author: UyenNLP
-  get fcmToken async {
+  Future<String> get token async {
     try {
       var fcmToken = await _fcm.getToken();
 
-      return fcmToken;
+      return fcmToken ?? '';
     } catch (e) {
       CommonFunctions.catchExceptionError(e);
+      return '';
     }
   }
 }
