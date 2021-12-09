@@ -213,10 +213,16 @@ class TripDetailsPage extends StatelessWidget {
         });
   }
 
-  void _onBackPressed({required BuildContext context}) {
+  void _onBackPressed({required BuildContext context}) async {
     // if (_tripDetailsController.isTripStarted.isFalse) {
     if (Get.arguments['route'] == 'home') {
       _homeController.pagingController.refresh();
+    } else if (Get.arguments['route'] == 'getTripSuccess') {
+      await _homeController.searchTrips(
+          date: _homeController.searchDate.value,
+          time: _homeController.searchTime.value,
+          departureId: _homeController.departureStation.value.stationId,
+          destinationId: _homeController.destinationStation.value.stationId);
     } else {
       _tripHistoryController.pagingController.refresh();
     }
@@ -691,25 +697,35 @@ class TripDetailsPage extends StatelessWidget {
                                                                           .spaceBetween,
                                                                   children: <
                                                                       Widget>[
-                                                                    Text(
-                                                                      controller
-                                                                          .user
-                                                                          .userFullname,
-                                                                      style: TextStyle(
-                                                                          color: CustomColors
-                                                                              .kBlue,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        controller
+                                                                            .user
+                                                                            .userFullname,
+                                                                        overflow:
+                                                                            TextOverflow.ellipsis,
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                CustomColors.kBlue,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
                                                                     ),
-                                                                    Text(
-                                                                      controller
-                                                                          .bike
-                                                                          .plateNumber!,
-                                                                      style: TextStyle(
-                                                                          color: CustomColors
-                                                                              .kDarkGray,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          left:
+                                                                              4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        controller
+                                                                            .bike
+                                                                            .plateNumber!,
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                CustomColors.kDarkGray,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -942,50 +958,50 @@ class TripDetailsPage extends StatelessWidget {
                                                             ),
                                                           ),
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  bottom: 16.0),
-                                                          child:
-                                                              CustomElevatedIconButton(
-                                                            width: 180,
-                                                            text: CustomStrings
-                                                                .kCancelTrip.tr,
-                                                            backgroundColor:
-                                                                CustomColors
-                                                                    .kLightGray,
-                                                            foregroundColor:
-                                                                CustomColors
-                                                                    .kDarkGray,
-                                                            elevation: 0.0,
-                                                            icon: Icons.clear,
-                                                            onPressedFunc: () {
-                                                              CommonFunctions()
-                                                                  .showConfirmDialog(
-                                                                      context:
-                                                                          context,
-                                                                      title: CustomStrings
-                                                                          .kConfirmCancelTrip
-                                                                          .tr,
-                                                                      message: CustomStrings
-                                                                          .kViewCancelTripReminder
-                                                                          .tr,
-                                                                      onPressedFunc:
-                                                                          () {
-                                                                        Get.back();
-
-                                                                        _showCancelReasonDialog(
-                                                                            context:
-                                                                                context,
-                                                                            tripId:
-                                                                                Get.arguments['tripId']);
-                                                                      });
-                                                            },
-                                                          ),
-                                                        ),
                                                       ],
                                                     ],
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 16.0),
+                                                      child:
+                                                          CustomElevatedIconButton(
+                                                        width: 180,
+                                                        text: CustomStrings
+                                                            .kCancelTrip.tr,
+                                                        backgroundColor:
+                                                            CustomColors
+                                                                .kLightGray,
+                                                        foregroundColor:
+                                                            CustomColors
+                                                                .kDarkGray,
+                                                        elevation: 0.0,
+                                                        icon: Icons.clear,
+                                                        onPressedFunc: () {
+                                                          CommonFunctions()
+                                                              .showConfirmDialog(
+                                                                  context:
+                                                                      context,
+                                                                  title: CustomStrings
+                                                                      .kConfirmCancelTrip
+                                                                      .tr,
+                                                                  message:
+                                                                      CustomStrings
+                                                                          .kViewCancelTripReminder
+                                                                          .tr,
+                                                                  onPressedFunc:
+                                                                      () {
+                                                                    Get.back();
+
+                                                                    _showCancelReasonDialog(
+                                                                        context:
+                                                                            context,
+                                                                        tripId:
+                                                                            Get.arguments['tripId']);
+                                                                  });
+                                                        },
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),

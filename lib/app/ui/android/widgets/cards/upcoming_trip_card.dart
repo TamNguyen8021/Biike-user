@@ -240,8 +240,7 @@ class UpcomingTripCard extends StatelessWidget {
                                     arguments: {
                                       'controller': _homeController,
                                       'tripId': tripId,
-                                      'userId': userId,
-                                      'route': 'home'
+                                      'userId': userId
                                     });
                               } else {
                                 customDialog.loadingDialog.dismiss();

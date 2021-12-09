@@ -76,7 +76,7 @@ class GetTripSuccessPage extends StatelessWidget {
                                       arguments: {
                                         'tripId': Get.arguments['tripId'],
                                         'userId': Get.arguments['userId'],
-                                        'route': Get.arguments['route']
+                                        'route': 'getTripSuccess'
                                       });
                                 },
                                 hasBorder: false),
