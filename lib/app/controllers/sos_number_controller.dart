@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/models/sos.dart';
@@ -31,7 +32,7 @@ class SOSNumberController extends GetxController {
               id: sos.sosId!, name: sos.sosName!, number: sos.sosPhone!));
         }
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
   }
@@ -43,8 +44,12 @@ class SOSNumberController extends GetxController {
       await getSOSNumbers();
       Get.back();
     } else {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     }
   }
 }

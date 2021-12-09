@@ -59,6 +59,16 @@ class ProfilePage extends StatelessWidget {
                           child: GetBuilder<ProfileController>(
                               init: _profileController,
                               builder: (ProfileController controller) {
+                                Color iconColor = CustomColors.kDarkGray;
+
+                                if (controller.user.isPhoneVerified!) {
+                                  iconColor = CustomColors.kBlue;
+                                }
+
+                                if (controller.user.isBikeVerified!) {
+                                  iconColor = CustomColors.kOrange;
+                                }
+
                                 return Column(
                                   children: <Widget>[
                                     Padding(
@@ -89,11 +99,43 @@ class ProfilePage extends StatelessWidget {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 6.0),
-                                            child: Text(
-                                              controller.user.userFullname,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline2,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 4.0),
+                                                  child: Text(
+                                                    controller
+                                                        .user.userFullname,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headline2,
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  child: Icon(
+                                                    Icons.verified,
+                                                    color: iconColor,
+                                                    size: 25,
+                                                  ),
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                        CommonRoutes
+                                                            .ACCOUNT_VERIFICATION,
+                                                        arguments: {
+                                                          'isPhoneVerified':
+                                                              controller.user
+                                                                  .isPhoneVerified,
+                                                          'isBikeVerified':
+                                                              controller.user
+                                                                  .isBikeVerified
+                                                        });
+                                                  },
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           Obx(

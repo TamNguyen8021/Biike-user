@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -43,14 +44,21 @@ class RegisterController extends GetxController {
     try {
       _enableLoading(true);
       await _userRepo.signup(name, email, formatPhone(phone), pass);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.INFO_REVERSED,
+              headerAnimationLoop: false,
+              desc: CustomStrings.kSentVerifiedEmail.tr)
+          .show();
       Get.offAndToNamed(CommonRoutes.LOGIN);
-      CommonFunctions().showInfoDialog(
-          context: context, message: CustomStrings.kRegisterSuccess.tr);
     } catch (error) {
       if (error is DioError && error.response?.statusCode == 400) {
-        CommonFunctions().showErrorDialog(
-            context: context,
-            message: CustomErrorsString.kDuplicateEmailOrPhone.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDuplicateEmailOrPhone.tr)
+            .show();
       }
       CommonFunctions.catchExceptionError(error);
     } finally {

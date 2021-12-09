@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 
@@ -52,7 +53,7 @@ class FirebaseCloudMessagingService {
     /// but is still open
     FirebaseMessaging.onMessageOpenedApp.listen((msg) {
       if (msg.notification != null) {
-        print(msg.notification!.title);
+        Biike.logger.d(msg.notification!.title);
         CommonFunctions.logBiike(error: msg.notification!.body);
         Get.toNamed(CommonRoutes.NOTIFICATION);
       }

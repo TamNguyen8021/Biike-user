@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
@@ -299,10 +300,12 @@ class Home extends StatelessWidget {
                                         : null,
                                     margin: const EdgeInsets.only(bottom: 75.0),
                                     child: RefreshIndicator(
-                                      onRefresh: () => Future.sync(
-                                        () => homeController.pagingController
-                                            .refresh(),
-                                      ),
+                                      onRefresh: () {
+                                        homeController.upcomingTrips.clear();
+                                        return Future.sync(() => homeController
+                                            .pagingController
+                                            .refresh());
+                                      },
                                       child: PagedListView<int, dynamic>(
                                         pagingController:
                                             homeController.pagingController,
@@ -515,7 +518,7 @@ class Home extends StatelessWidget {
                                                     ),
                                                     onTap: () async {
                                                       TimeOfDay tempTime =
-                                                          await CommonFunctions()
+                                                          await CommonFunctions
                                                               .selectTime(
                                                                   context:
                                                                       context,
@@ -543,14 +546,18 @@ class Home extends StatelessWidget {
                                                                     alwaysUse24HourFormat:
                                                                         true);
                                                       } else {
-                                                        CommonFunctions()
-                                                            .showErrorDialog(
+                                                        AwesomeDialog(
                                                                 context:
                                                                     context,
-                                                                message:
-                                                                    CustomErrorsString
-                                                                        .kTripCanOnlySearchFrom5AMTo9PM
-                                                                        .tr);
+                                                                dialogType:
+                                                                    DialogType
+                                                                        .ERROR,
+                                                                headerAnimationLoop:
+                                                                    false,
+                                                                desc: CustomErrorsString
+                                                                    .kTripCanOnlySearchFrom5AMTo9PM
+                                                                    .tr)
+                                                            .show();
                                                       }
                                                     },
                                                   ),

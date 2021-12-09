@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/notification_controller.dart';
@@ -36,8 +37,12 @@ class NotificationDetailPage extends StatelessWidget {
         'isKeer': _notificationController.isKeer
       });
     } else {
-      CommonFunctions()
-          .showErrorDialog(context: context, message: isMoveToFeedBack);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: isMoveToFeedBack)
+          .show();
     }
   }
 

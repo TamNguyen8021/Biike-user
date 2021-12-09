@@ -91,22 +91,28 @@ class ConfirmArrivalButton extends StatelessWidget {
                                       .loadingDialog
                                       .dismiss();
                                 } else {
-                                  CommonFunctions().showErrorDialog(
-                                      context: context,
-                                      message:
-                                          CustomErrorsString.kDevelopError.tr);
+                                  AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.ERROR,
+                                          headerAnimationLoop: false,
+                                          desc: CustomErrorsString
+                                              .kDevelopError.tr)
+                                      .show();
                                 }
                               } else {
-                                CommonFunctions().showErrorDialog(
-                                    context: context,
-                                    message: CustomErrorsString
-                                        .kNotArrivedAtPickUpPoint.tr);
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.ERROR,
+                                        headerAnimationLoop: false,
+                                        desc: CustomErrorsString
+                                            .kNotArrivedAtPickUpPoint.tr)
+                                    .show();
                               }
                             });
                       } else {
                         AwesomeDialog(
                                 context: context,
-                                dialogType: DialogType.INFO,
+                                dialogType: DialogType.INFO_REVERSED,
                                 headerAnimationLoop: false,
                                 desc: CustomStrings.kNeedLocationPermission.tr)
                             .show();

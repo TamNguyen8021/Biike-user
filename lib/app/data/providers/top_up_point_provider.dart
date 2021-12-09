@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
@@ -5,27 +6,23 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class TopUpPointProvider extends CommonProvider {
-  Future<Map<String, dynamic>> paymentWithMomo({ required Map<String, dynamic> body }) async {
+  Future<Map<String, dynamic>> paymentWithMomo(
+      {required Map<String, dynamic> body}) async {
     try {
       Map<String, String> headers = {
         Headers.contentTypeHeader: "application/json",
       };
-      final response = await post(UrlStrings.apiMomoPayment, body, headers: headers);
+      final response =
+          await post(UrlStrings.apiMomoPayment, body, headers: headers);
 
       var status = response.body['status'];
       if (status == 0) {
-        return {
-          'isSuccess': true,
-          'data': response.body
-        };
+        return {'isSuccess': true, 'data': response.body};
       } else {
-        return {
-          'isSuccess': false,
-          'errorMsg': response.body['message']
-        };
+        return {'isSuccess': false, 'errorMsg': response.body['message']};
       }
     } catch (e) {
-      print(e.toString());
+      CommonFunctions.catchExceptionError(e);
       return {
         'isSuccess': false,
         'errorMsg': CustomErrorsString.kDevelopError.tr
@@ -37,7 +34,7 @@ class TopUpPointProvider extends CommonProvider {
     final response = await get(
         UrlStrings.configurationUrl + '?configName=conversionrate',
         headers: await headers);
-    
+
     logResponse(response);
 
     if (response.hasError) {
@@ -50,9 +47,9 @@ class TopUpPointProvider extends CommonProvider {
     }
   }
 
-  Future<bool> createTransaction({ required Map<String, dynamic> body }) async {
+  Future<bool> createTransaction({required Map<String, dynamic> body}) async {
     final response =
-    await post(UrlStrings.momoTransactionUrl, body, headers: await headers);
+        await post(UrlStrings.momoTransactionUrl, body, headers: await headers);
 
     logResponse(response);
     if (response.hasError) {

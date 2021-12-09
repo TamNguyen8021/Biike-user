@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
@@ -227,26 +228,41 @@ class UpcomingTripCard extends StatelessWidget {
                             foregroundColor: Colors.white,
                             text: CustomStrings.kAccept.tr,
                             onPressedFunc: () async {
+                              CustomDialog customDialog =
+                                  CustomDialog(context: context);
+                              customDialog.loadingDialog.show();
+
                               bool isSuccess = await _tripProvider.acceptTrip(
                                   tripId: tripId);
                               if (isSuccess) {
-                                CommonFunctions().showSuccessDialog(
-                                    context: context,
-                                    message:
-                                        CustomStrings.kAcceptSuccessful.tr);
+                                customDialog.loadingDialog.dismiss();
+                                Get.toNamed(CommonRoutes.GET_TRIP_SUCCESS,
+                                    arguments: {
+                                      'controller': _homeController,
+                                      'tripId': tripId,
+                                      'userId': userId
+                                    });
                               } else {
-                                CommonFunctions().showErrorDialog(
-                                    context: context,
-                                    message:
-                                        CustomErrorsString.kDevelopError.tr);
+                                customDialog.loadingDialog.dismiss();
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.ERROR,
+                                  headerAnimationLoop: false,
+                                  desc: CustomErrorsString.kDevelopError.tr,
+                                  onDissmissCallback:
+                                      (DismissType dismissType) async {
+                                    await _homeController.searchTrips(
+                                        date: _homeController.searchDate.value,
+                                        time: _homeController.searchTime.value,
+                                        departureId: _homeController
+                                            .departureStation.value.stationId,
+                                        destinationId: _homeController
+                                            .destinationStation
+                                            .value
+                                            .stationId);
+                                  },
+                                ).show();
                               }
-                              await _homeController.searchTrips(
-                                  date: _homeController.searchDate.value,
-                                  time: _homeController.searchTime.value,
-                                  departureId: _homeController
-                                      .departureStation.value.stationId,
-                                  destinationId: _homeController
-                                      .destinationStation.value.stationId);
                             },
                             hasBorder: false),
                       ),

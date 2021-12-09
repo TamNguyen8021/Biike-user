@@ -52,5 +52,6 @@ class CustomErrorsString {
   static const String kLoginExceptionError = 'kLoginExceptionError';
   static const String kEmptyToken = 'kEmptyToken';
 
-    
+  static const String kCanOnlyAddStationFrom5AMTo9PM =
+      'kCanOnlyAddStationFrom5AMTo9PM';
 }

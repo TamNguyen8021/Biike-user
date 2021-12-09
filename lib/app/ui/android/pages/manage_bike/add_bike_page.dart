@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:back_pressed/back_pressed.dart';
-import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/add_bike_controller.dart';
@@ -26,14 +25,52 @@ class AddBikePage extends StatelessWidget {
   final _manageBikeController = Get.find<ManageBikeController>();
 
   RxList<String> brands = [
-    'Aprilia', 'Bazan', 'Benelli', 'BMW', 'Brixton', 'CR&S', 'Daelim', 'Detech', 'Ducati',
-    'Euro Reibel', 'GPX', 'Halim', 'Harley Davidson', 'Honda', 'Hyosung', 'Kawasaki', 'Keeway', 'Kengo', 'KTM',
-    'Kymco', 'Lambretta', 'Malaguti', 'Moto Guzzi', 'MV Agusta', 'Nioshima', 'Norton', 'Peugeot', 'Piaggio', 'RebelUSA',
-    'Regal Raptor', 'Royal Enfield', 'Sachs', 'Sanda', 'Suzuki', 'SYM', 'Taya', 'Triumph', 'Vento', 'Victory',
-    'Visitor', 'Yamaha', 'Hãng khác'
+    'Aprilia',
+    'Bazan',
+    'Benelli',
+    'BMW',
+    'Brixton',
+    'CR&S',
+    'Daelim',
+    'Detech',
+    'Ducati',
+    'Euro Reibel',
+    'GPX',
+    'Halim',
+    'Harley Davidson',
+    'Honda',
+    'Hyosung',
+    'Kawasaki',
+    'Keeway',
+    'Kengo',
+    'KTM',
+    'Kymco',
+    'Lambretta',
+    'Malaguti',
+    'Moto Guzzi',
+    'MV Agusta',
+    'Nioshima',
+    'Norton',
+    'Peugeot',
+    'Piaggio',
+    'RebelUSA',
+    'Regal Raptor',
+    'Royal Enfield',
+    'Sachs',
+    'Sanda',
+    'Suzuki',
+    'SYM',
+    'Taya',
+    'Triumph',
+    'Vento',
+    'Victory',
+    'Visitor',
+    'Yamaha',
+    'Hãng khác'
   ].obs;
   RxList<String> categories = ['Xe số', 'Tay ga', 'Tay côn/Moto'].obs;
-  RxList<String> volumes = ['Dưới 50cc', '50 - 100cc', '100 - 175cc', 'Trên 175cc'].obs;
+  RxList<String> volumes =
+      ['Dưới 50cc', '50 - 100cc', '100 - 175cc', 'Trên 175cc'].obs;
 
   bool isAddBike = Get.arguments['isAddBike'];
   String fromPage = Get.arguments['from'];
@@ -383,17 +420,22 @@ class AddBikePage extends StatelessWidget {
                                       .show();
                                 } else {
                                   customDialog.loadingDialog.dismiss();
-
-                                  CommonFunctions().showErrorDialog(
-                                      context: context,
-                                      message:
-                                          CustomErrorsString.kDevelopError.tr);
+                                  AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.ERROR,
+                                          headerAnimationLoop: false,
+                                          desc: CustomErrorsString
+                                              .kDevelopError.tr)
+                                      .show();
                                 }
                               } else {
-                                CommonFunctions().showErrorDialog(
-                                    context: context,
-                                    message: CustomErrorsString
-                                        .kNotFillAllFields.tr);
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.ERROR,
+                                        headerAnimationLoop: false,
+                                        desc: CustomErrorsString
+                                            .kNotFillAllFields.tr)
+                                    .show();
                               }
                             },
                             text: CustomStrings.kSave.tr,

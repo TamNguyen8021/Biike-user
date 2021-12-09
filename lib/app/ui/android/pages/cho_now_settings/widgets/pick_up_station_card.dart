@@ -4,11 +4,17 @@ import 'package:get/get.dart';
 
 //ignore:must_be_immutable
 class PickUpStationCard extends StatelessWidget {
-  Rx<String> stationName;
-  Rx<String> timeRange;
+  final int id;
+  final int stationId;
+  final String stationName;
+  final String timeRange;
 
-  PickUpStationCard(
-      {Key? key, required this.stationName, required this.timeRange})
+  const PickUpStationCard(
+      {Key? key,
+      required this.id,
+      required this.stationId,
+      required this.stationName,
+      required this.timeRange})
       : super(key: key);
 
   @override
@@ -34,7 +40,7 @@ class PickUpStationCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
-                stationName.value,
+                stationName,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
@@ -42,7 +48,7 @@ class PickUpStationCard extends StatelessWidget {
               ),
             ),
             Text(
-              timeRange.value,
+              timeRange,
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ],

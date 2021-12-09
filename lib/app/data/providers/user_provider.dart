@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/functions/common_provider.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
+import 'package:bikes_user/main.dart';
 
 class UserProvider extends CommonProvider {
   /// Loads profile from API based on [userId]
@@ -56,9 +57,44 @@ class UserProvider extends CommonProvider {
   /// Change user's role.
   ///
   /// Author: TamNTT
-  Future<bool> changeRole({required int role}) async {
+  Future<dynamic> changeRole({required int role}) async {
     final response = await put(
         UrlStrings.userUrl + 'role?startupRole=$role', {},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return response.bodyString;
+    } else {
+      return true;
+    }
+  }
+
+  /// Loads profile from API based on [userId]
+  ///
+  /// Author: TamNTT
+  Future getRideNowStatus() async {
+    final response = await get(
+        UrlStrings.userUrl + '${Biike.userId.value}/tripNowAvailability',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body['data'];
+    }
+  }
+
+  /// Change Ride Now status
+  ///
+  /// Author: TamNTT
+  Future<bool> changeRideNowStatus() async {
+    final response = await put(UrlStrings.userUrl + 'tripNowAvailability', {},
         headers: await headers);
 
     logResponse(response);
@@ -68,6 +104,24 @@ class UserProvider extends CommonProvider {
       return false;
     } else {
       return true;
+    }
+  }
+
+  /// Loads user's achievement from API
+  ///
+  /// Author: TamNTT
+  Future<Map<String, dynamic>> getUserAchievement() async {
+    final response = await get(
+        UrlStrings.userUrl + '${Biike.userId.value}/achievement',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body['data'];
     }
   }
 }

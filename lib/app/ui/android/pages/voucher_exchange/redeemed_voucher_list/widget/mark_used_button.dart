@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
@@ -28,8 +28,12 @@ class MarkUsedButton extends StatelessWidget {
               dynamic result = await _redemptionController
                   .editVoucherUsage(redemption.redemptionId);
               if (result is String) {
-                CommonFunctions()
-                    .showErrorDialog(context: context, message: result);
+                AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.ERROR,
+                        headerAnimationLoop: false,
+                        desc: result)
+                    .show();
               } else {
                 // redemption = Redemption.fromJson(result);
                 status.value = !status.value;

@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/address_book_controller.dart';
 import 'package:bikes_user/app/controllers/edit_address_book_controller.dart';
@@ -105,8 +105,8 @@ class EditAddressBookPage extends StatelessWidget {
                                       .address.value,
                                   newNote:
                                       editAddressBookPageController.note.value,
-                                  newDefault:
-                                      editAddressBookPageController.isDefault.value);
+                                  newDefault: editAddressBookPageController
+                                      .isDefault.value);
                         }),
                   ),
                   Row(
@@ -161,8 +161,8 @@ class EditAddressBookPage extends StatelessWidget {
                                       .address.value,
                                   newNote:
                                       editAddressBookPageController.note.value,
-                                  newDefault:
-                                      editAddressBookPageController.isDefault.value);
+                                  newDefault: editAddressBookPageController
+                                      .isDefault.value);
                         }),
                   ),
                   Row(
@@ -174,24 +174,24 @@ class EditAddressBookPage extends StatelessWidget {
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold),
                       ),
-                      Obx(
-                              () => Switch(
-                                  value: editAddressBookPageController.isDefault.value,
-                                  onChanged: (bool value) {
-                                    editAddressBookPageController.changeDefault();
-                                    isSaveButtonDisable.value =
-                                      editAddressBookPageController.isSaveButtonDisable(
-                                        newName:
-                                          editAddressBookPageController.name.value,
-                                        newAddress: editAddressBookPageController
-                                            .address.value,
-                                        newNote:
-                                          editAddressBookPageController.note.value,
+                      Obx(() => Switch(
+                          value: editAddressBookPageController.isDefault.value,
+                          onChanged: (bool value) {
+                            editAddressBookPageController.changeDefault();
+                            isSaveButtonDisable.value =
+                                editAddressBookPageController
+                                    .isSaveButtonDisable(
+                                        newName: editAddressBookPageController
+                                            .name.value,
+                                        newAddress:
+                                            editAddressBookPageController
+                                                .address.value,
+                                        newNote: editAddressBookPageController
+                                            .note.value,
                                         newDefault:
-                                          editAddressBookPageController.isDefault.value);
-                                  }
-                              )
-                      ),
+                                            editAddressBookPageController
+                                                .isDefault.value);
+                          })),
                     ],
                   ),
                   Obx(
@@ -208,16 +208,22 @@ class EditAddressBookPage extends StatelessWidget {
                                         .getAddressBooks();
                                     Get.back();
                                   } else {
-                                    CommonFunctions().showErrorDialog(
-                                        context: context,
-                                        message: CustomErrorsString
-                                            .kDevelopError.tr);
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.ERROR,
+                                            headerAnimationLoop: false,
+                                            desc: CustomErrorsString
+                                                .kDevelopError.tr)
+                                        .show();
                                   }
                                 } else {
-                                  CommonFunctions().showErrorDialog(
-                                      context: context,
-                                      message: CustomErrorsString
-                                          .kNotFillAllFields.tr);
+                                  AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.ERROR,
+                                          headerAnimationLoop: false,
+                                          desc: CustomErrorsString
+                                              .kNotFillAllFields.tr)
+                                      .show();
                                 }
                               },
                         text: CustomStrings.kSave.tr,

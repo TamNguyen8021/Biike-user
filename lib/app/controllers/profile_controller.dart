@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/image_type_enum.dart';
@@ -104,13 +104,21 @@ class ProfileController extends GetxController {
     bool isSuccess = await _userProvider.editProfile(
         userId: Biike.userId.value, body: jsonEncode(newUserProfile));
     if (isSuccess) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.SUCCES,
+              headerAnimationLoop: false,
+              desc: CustomStrings.kEditProfileSuccess.tr)
+          .show();
       update();
-      CommonFunctions().showSuccessDialog(
-          context: context, message: CustomStrings.kEditProfileSuccess.tr);
       return true;
     } else {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kEditProfileFailed.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
       return false;
     }
   }

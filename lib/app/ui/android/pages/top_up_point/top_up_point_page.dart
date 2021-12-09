@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/rsa_utils.dart';
 import 'package:bikes_user/app/common/functions/text_utils.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -194,7 +195,7 @@ class MomoPageState extends State<TopUpPointPage> {
                               try {
                                 _momoPay.open(options);
                               } catch (e) {
-                                print(e.toString());
+                                CommonFunctions.catchExceptionError(e);
                               }
                             },
                             text: CustomStrings.kBuyPoint.tr,

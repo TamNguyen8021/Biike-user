@@ -14,7 +14,8 @@ class UrlStrings {
   static const String intimaciesUrl = _baseUrl + 'intimacies';
   static const String reportUrl = _baseUrl + 'reports';
   static const String feedbackUrl = _baseUrl + 'feedbacks';
-  static const String sos = _baseUrl + 'Sos';
+  static const String sos = _baseUrl + 'sos';
+  static const String bikeAvailability = _baseUrl + 'bikeAvailabilities';
 
   static const String googleMapApiKey =
       'AIzaSyATchI6wf0LyaEBcSB9xZz86iYuPm9Je-k';

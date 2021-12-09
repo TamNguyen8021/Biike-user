@@ -36,7 +36,6 @@ class CustomStrings {
   static const String kInputPhoneNumber = 'kInputPhoneNumber';
   static const String kErrorInputPhoneNumber = 'kErrorInputPhoneNumber';
   static const String kSentVerifiedEmail = 'kSentVerifiedEmail';
-  static const String kRegisterSuccess = 'kRegisterSuccess';
 
   // '004.2_verify_phone' screen
   static const String kInputVerifyCode = 'kInputVerifyCode';
@@ -132,6 +131,7 @@ class CustomStrings {
 
   //'profile' screen
   static const String kEdit = 'kEdit';
+  static const String kBiikeProfile = 'kBiikeProfile';
   static const String kSavedAddress = 'kSavedAddress';
   static const String kSettings = 'kSettings';
   static const String kBlockList = 'kBlockList';
@@ -154,6 +154,28 @@ class CustomStrings {
   static const String kBirthDate = 'kBirthDate';
   static const String kChooseBirthDate = 'kChooseBirthDate';
   static const String kEditProfileSuccess = 'kEditProfileSuccess';
+
+  // 'account_verification' screen'
+  static const String kAccountVerification = 'kAccountVerification';
+  static const String kLetsVerifiedAccount = 'kLetsVerifiedAccount';
+  static const String kEmailVerification = 'kEmailVerification';
+  static const String kEmailVerificationDescription =
+      'kEmailVerificationDescription';
+  static const String kPhoneVerification = 'kPhoneVerification';
+  static const String kPhoneVerificationDescription =
+      'kPhoneVerificationDescription';
+  static const String kBikeVerification = 'kBikeVerification';
+  static const String kBikeVerificationDescription =
+      'kBikeVerificationDescription';
+
+  // 'biike_profile' screen
+  static const String kOnJourneyWithBiike = 'kOnJourneyWithBiike';
+  static const String kNoOfRideTrips = 'kNoOfRideTrips';
+  static const String kNoOfFreeTrips = 'kNoOfFreeTrips';
+  static const String kNoOfKm = 'kNoOfKm';
+  static const String kNoOfGasLitres = 'kNoOfGasLitres';
+  static const String kThankYouForChoosingBiike = 'kThankYouForChoosingBiike';
+  static const String kFromFPTUniversity = 'kFromFPTUniversity';
 
   // 'biker_profile' screen
   static const String kManageBike = 'kManageBike';
