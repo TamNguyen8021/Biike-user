@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
@@ -34,9 +35,12 @@ class HomePage extends StatelessWidget {
                 sessionIdentifier: _tripDetailsController.sessionIdentifier)) {
               SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
             } else {
-              await CommonFunctions().showErrorDialog(
-                  context: context,
-                  message: CustomErrorsString.kErrorWhenStopSharingLocation.tr);
+              AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      headerAnimationLoop: false,
+                      desc: CustomErrorsString.kErrorWhenStopSharingLocation.tr)
+                  .show();
             }
           } else {
             SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');

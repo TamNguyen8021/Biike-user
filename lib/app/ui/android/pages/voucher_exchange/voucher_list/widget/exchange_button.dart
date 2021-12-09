@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -20,18 +21,25 @@ class ExchangeVoucherButton extends StatelessWidget {
   _exchangeVoucher(BuildContext context) async {
     if (_walletController.isNotEnoughPoint(
         voucherPoint: voucher.amountOfPoint!)) {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kNotEnoughPoint.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kNotEnoughPoint.tr)
+          .show();
       return;
     }
 
     dynamic result =
         await _redemptionController.exchangeVoucher(voucher.voucherId);
     if (result is String) {
-      CommonFunctions().showErrorDialog(
-          context: context,
-          message:
-              result == '' ? CustomErrorsString.kExchangeFailed.tr : result);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc:
+                  result == '' ? CustomErrorsString.kExchangeFailed.tr : result)
+          .show();
     } else {
       _walletController.updateWalletPoint();
       int redemptionId = CommonFunctions.getIdFromUrl(

@@ -40,8 +40,7 @@ final Map<String, String> vi = {
   'kInputName': 'Nhập họ tên',
   'kInputPhoneNumber': 'Nhập số điện thoại',
   'kSentVerifiedEmail':
-      'Chúng tôi đã gửi email xác thực đến email đăng ký tài khoản của bạn. vui lòng xác thực trước khi đăng nhập',
-  'kRegisterSuccess': 'Đăng ký tài khoản thành công',
+      'Chúng tôi đã gửi email xác thực đến email đăng ký tài khoản của bạn. Vui lòng xác thực trước khi đăng nhập',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -160,6 +159,7 @@ final Map<String, String> vi = {
 
   // 'update_profile' screen
   'kEditProfile': 'Chỉnh sửa thông tin cá nhân',
+  'kBiikeProfile': 'Nhật ký Biiké',
   'kFullName': 'Họ và tên',
   'kGender': 'Giới tính',
   'kMale': 'Nam',
@@ -169,6 +169,27 @@ final Map<String, String> vi = {
   'kBirthDate': 'Ngày sinh',
   'kChooseBirthDate': 'Chọn ngày sinh',
   'kEditProfileSuccess': 'Chỉnh sửa thông tin thành công',
+
+  // 'account_verification' screen'
+  'kAccountVerification': 'Xác thực tài khoản',
+  'kLetsVerifiedAccount':
+      'Hãy xác thực tài khoản để những chuyến đi tại Biiké trở nên an toàn hơn.',
+  'kEmailVerification': 'Xác thực email',
+  'kEmailVerificationDescription': 'được truy cập ứng dụng',
+  'kPhoneVerification': 'Xác thực số điện thoại',
+  'kPhoneVerificationDescription': 'được đặt chuyến',
+  'kBikeVerification': 'Xác thực xe',
+  'kBikeVerificationDescription': 'được nhận chuyến',
+
+  // 'biike_profile' screen
+  'kOnJourneyWithBiike': 'Tại hành trình với Biiké, bạn đã có',
+  'kNoOfRideTrips': 'Chuyến chở',
+  'kNoOfFreeTrips': 'Chuyến ké',
+  'kNoOfKm': 'km được tiết kiệm',
+  'kNoOfGasLitres': 'lít xăng được tiết kiệm',
+  'kThankYouForChoosingBiike':
+      'Cảm ơn bạn đã chọn Biiké và hãy cùng tạo nên những cột mốc tuyệt vời cùng Biiké nhé!',
+  'kFromFPTUniversity': 'từ Đại học FPT',
 
   // 'biker_profile' screen
   'kManageBike': 'Quản lí xe',
@@ -491,4 +512,6 @@ final Map<String, String> vi = {
     'kNotTurnOnGPS': 'Xin hãy bật GPS',
     'kNotAllowGetLocation':
         'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
+    'kCanOnlyAddStationFrom5AMTo9PM':
+        'Bạn chỉ có thể thêm trạm trong khoảng thời gian từ 5 giờ sáng đến 9 giờ tối',
   });

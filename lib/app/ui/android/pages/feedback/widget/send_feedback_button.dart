@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/controllers/feedbacks_controller.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -16,14 +16,18 @@ class SendFeedbackButton extends StatelessWidget {
   static const _NO_ERR_MSG = '';
 
   SendFeedbackButton({Key? key, required this.tripId}) : super(key: key);
-  
+
   _sendFeedback(context) async {
     // validate feedback
     String validateMsg = await _feedbackController.validateFeedback();
 
     if (_NO_ERR_MSG.compareTo(validateMsg) != _STRING_EQUALS) {
-      CommonFunctions()
-          .showErrorDialog(context: context, message: validateMsg);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: validateMsg)
+          .show();
     }
 
     // send feedback

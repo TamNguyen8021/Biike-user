@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/BadWordsFilter/bad_words_filter.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
@@ -172,13 +173,20 @@ class ViewUserController extends GetxController {
         Get.back();
         _showThankYouForReportDialog(context: context);
       } else {
-        await CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kDevelopError.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
       }
     } else {
-      await CommonFunctions().showErrorDialog(
-          context: context,
-          message: CustomErrorsString.kEmptyReportReasonOrContainsBadWords.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kEmptyReportReasonOrContainsBadWords.tr)
+          .show();
     }
   }
 
@@ -189,12 +197,20 @@ class ViewUserController extends GetxController {
           body: {"userOneId": Biike.userId.value, "userTwoId": user.userId})) {
         isUserBlocked.value = true;
         Get.back(closeOverlays: true);
-        await CommonFunctions().showSuccessDialog(
-            context: context, message: CustomStrings.kYouBlockThisPerson.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.SUCCES,
+                headerAnimationLoop: false,
+                desc: CustomStrings.kYouBlockThisPerson.tr)
+            .show();
       } else {
         Get.back();
-        await CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kDevelopError.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
       }
     } else {
       if (await _intimaciesProvider.createIntimacies(body: {
@@ -204,12 +220,20 @@ class ViewUserController extends GetxController {
       })) {
         isUserBlocked.value = true;
         Get.back(closeOverlays: true);
-        await CommonFunctions().showSuccessDialog(
-            context: context, message: CustomStrings.kYouBlockThisPerson.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.SUCCES,
+                headerAnimationLoop: false,
+                desc: CustomStrings.kYouBlockThisPerson.tr)
+            .show();
       } else {
         Get.back();
-        await CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kDevelopError.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
       }
     }
   }

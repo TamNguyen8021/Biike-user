@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -76,7 +78,7 @@ class HomeController extends GetxController {
           pagingController.itemList?.length ?? 0;
       final bool isLastPage =
           pagination['totalRecord'] - previouslyFetchedItemsCount <= _limit;
-      Biike.logger.d(isLastPage);
+
       if (isLastPage) {
         pagingController.appendLastPage(_tempUpcomingTrips);
         _currentPage = 1;
@@ -87,7 +89,6 @@ class HomeController extends GetxController {
         pagingController.appendPage(_tempUpcomingTrips, nextPageKey);
       }
       isUpcomingTripsLoading.value = false;
-      Biike.logger.d(pagingController.itemList?.length ?? 0);
     } catch (error) {
       isUpcomingTripsLoading.value = false;
       pagingController.error = error;
@@ -379,10 +380,12 @@ class DialogConfirm extends HookWidget {
               Get.back(closeOverlays: true);
               onSuccess();
             } else {
-              CommonFunctions().showErrorDialog(
-                context: context,
-                message: 'otp not correct',
-              );
+              AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      headerAnimationLoop: false,
+                      desc: CustomErrorsString.kWrongOtp.tr)
+                  .show();
             }
           },
           child: Text(CustomStrings.kBtnSend.tr),

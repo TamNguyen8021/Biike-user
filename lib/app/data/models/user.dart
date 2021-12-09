@@ -42,6 +42,8 @@ class User {
 
   DateTime? createDate;
   bool? isBikeVerified;
+  bool? isEmailVerified;
+  bool? isPhoneVerified;
 
   User(
       this.userPhoneNumber,
@@ -55,7 +57,9 @@ class User {
       this.lastLoginTime,
       this.userStar,
       this.createDate,
-      this.isBikeVerified);
+      this.isBikeVerified,
+      this.isEmailVerified,
+      this.isPhoneVerified);
 
   User.empty() {
     this.userId = -1;

@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/edit_sos_number_controller.dart';
 import 'package:bikes_user/app/controllers/sos_number_controller.dart';
@@ -119,9 +119,12 @@ class EditSOSNumberPage extends StatelessWidget {
                             await sosNumberController.getSOSNumbers();
                             Get.back();
                           } else {
-                            CommonFunctions().showErrorDialog(
-                                context: context,
-                                message: CustomErrorsString.kDevelopError.tr);
+                            AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.ERROR,
+                                    headerAnimationLoop: false,
+                                    desc: CustomErrorsString.kDevelopError.tr)
+                                .show();
                           }
                         } else {
                           String errorMessage =
@@ -132,8 +135,12 @@ class EditSOSNumberPage extends StatelessWidget {
                                 CustomErrorsString.kInvalidPhoneNo.tr;
                           }
 
-                          CommonFunctions().showErrorDialog(
-                              context: context, message: errorMessage);
+                          AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.ERROR,
+                                  headerAnimationLoop: false,
+                                  desc: errorMessage)
+                              .show();
                         }
                       },
                       text: CustomStrings.kSave.tr,

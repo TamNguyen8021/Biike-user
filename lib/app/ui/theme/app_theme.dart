@@ -20,7 +20,10 @@ final ThemeData appThemeData = ThemeData(
       bodyText2: TextStyle(color: CustomColors.kDarkGray),
       button: TextStyle(
           fontSize: 12.sp, color: Colors.white, fontWeight: FontWeight.bold),
-      headline1: TextStyle(fontSize: 25.sp, color: CustomColors.kBlue),
+      headline1: TextStyle(
+          fontSize: 25.sp,
+          color: CustomColors.kBlue,
+          fontWeight: FontWeight.bold),
       headline2: TextStyle(
           fontSize: 18.sp,
           color: CustomColors.kBlue,

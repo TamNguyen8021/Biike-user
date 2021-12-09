@@ -55,9 +55,12 @@ class Activity extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: RefreshIndicator(
-                    onRefresh: () => Future.sync(
-                      () => homeController.pagingController.refresh(),
-                    ),
+                    onRefresh: () {
+                      homeController.upcomingTrips.clear();
+                      return Future.sync(
+                        () => homeController.pagingController.refresh(),
+                      );
+                    },
                     child: PagedListView<int, dynamic>(
                       pagingController: homeController.pagingController,
                       shrinkWrap: true,
