@@ -44,6 +44,14 @@ class CustomErrorsString {
   static const String kAlreadyFeedbacked = 'kAlreadyFeedbacked';
   static const String kNotTurnOnGPS = 'kNotTurnOnGPS';
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
+
+  //Login error message
+  static const String kNoAccount = 'kNoAccount';
+  static const String kWrongAccount = 'kWrongAccount';
+  static const String kUnVerifiedEmail = 'kUnVerifiedEmail';
+  static const String kLoginExceptionError = 'kLoginExceptionError';
+  static const String kEmptyToken = 'kEmptyToken';
+
   static const String kCanOnlyAddStationFrom5AMTo9PM =
       'kCanOnlyAddStationFrom5AMTo9PM';
 }

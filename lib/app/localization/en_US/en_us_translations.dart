@@ -24,7 +24,7 @@ final Map<String, String> en = {
   'kPassword': 'Password',
   'kInputPassword': 'Enter password',
   'kLogin': 'Sign in',
-  'kNoAccount': 'No account yet? ',
+  'kNoAccount': 'No account yet? Please try Sign Up',
   'kRegister': 'Sign up now!',
   'kWrongAccount': 'Your account/password is incorrect, please check again',
   'kUnVerifiedEmail':
