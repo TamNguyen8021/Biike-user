@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/providers/address_book_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
@@ -28,7 +29,7 @@ class AddressBookController extends GetxController {
               isDefault: address['isDefault']));
         }
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
   }

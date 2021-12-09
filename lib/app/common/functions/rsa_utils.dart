@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:asn1lib/asn1lib.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:pointycastle/export.dart';
 import 'package:rsa_encrypt/rsa_encrypt.dart';
 
@@ -30,7 +31,7 @@ class RSAUtils {
       var bytes = utf8.encode(result);
       result = base64.encode(bytes);
     } catch (e) {
-      print(e.toString());
+      CommonFunctions.catchExceptionError(e);
     }
     return result;
   }
@@ -67,7 +68,7 @@ class RSAUtils {
       Uint8List bytes = Uint8List.fromList(list);
       return base64Encode(bytes);
     } catch (e) {
-      print(e.toString());
+      CommonFunctions.catchExceptionError(e);
       return null;
     }
   }

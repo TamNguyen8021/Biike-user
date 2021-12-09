@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/models/sos.dart';
 import 'package:bikes_user/app/data/providers/sos_number_provider.dart';
@@ -31,7 +32,7 @@ class SOSNumberController extends GetxController {
               id: sos.sosId!, name: sos.sosName!, number: sos.sosPhone!));
         }
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
   }

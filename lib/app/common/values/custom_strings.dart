@@ -465,4 +465,6 @@ class CustomStrings {
   // noti
   static const String kNotification = 'kNotification';
   static const String kAll = 'kAll';
+  
+
 }

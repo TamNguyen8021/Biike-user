@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/top_biker_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
@@ -21,20 +22,17 @@ class TopBikerController extends GetxController {
         var index = 0;
         for (var biker in response) {
           User user = User.fromJson(biker);
- 
-          topBiker.add(
-              TopBikerCard(
-                  index: index,
-                  avatarUrl: user.avatar,
-                  name: user.userFullname,
-                  point: biker['maxTotalPoint']
-              )
-          );
 
-          index ++;
+          topBiker.add(TopBikerCard(
+              index: index,
+              avatarUrl: user.avatar,
+              name: user.userFullname,
+              point: biker['maxTotalPoint']));
+
+          index++;
         }
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
     response = await UserProvider().getProfile(userId: Biike.userId.value);
@@ -45,7 +43,7 @@ class TopBikerController extends GetxController {
         userFullName.value = user.userFullname;
         userPoint.value = response['maxTotalPoint'];
       } catch (e) {
-        print(e);
+        CommonFunctions.catchExceptionError(e);
       }
     }
   }
