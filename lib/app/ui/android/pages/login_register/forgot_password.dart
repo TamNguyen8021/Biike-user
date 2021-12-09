@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/injectable/injectable.dart';
@@ -55,9 +55,12 @@ class _ForgotPasswordState extends State<ForgotPasswordDialog> {
               final result = await firbaseService.resetPasswordWithEmail(
                   context: context, email: emailController.text);
               if (result) {
-                CommonFunctions().showInfoDialog(
-                    context: context,
-                    message: CustomStrings.kSendResetPasswordEmail.tr);
+                AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.INFO_REVERSED,
+                        headerAnimationLoop: false,
+                        desc: CustomStrings.kSendResetPasswordEmail.tr)
+                    .show();
               }
             }
           },

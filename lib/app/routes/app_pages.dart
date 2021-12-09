@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/bindings/biike_profile_binding.dart';
 import 'package:bikes_user/app/bindings/image_binding.dart';
 import 'package:bikes_user/app/bindings/top_up_point_binding.dart';
 import 'package:bikes_user/app/bindings/bike_binding.dart';
@@ -46,6 +47,7 @@ import 'package:bikes_user/app/ui/android/pages/book_trip/book_trip_page.dart';
 import 'package:bikes_user/app/ui/android/pages/choose_mode/choose_mode_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_address_book/edit_address_book_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/account_verification_page.dart';
+import 'package:bikes_user/app/ui/android/pages/profile/biike_profile_page.dart';
 import 'package:bikes_user/app/ui/android/pages/profile/edit_profile_page.dart';
 import 'package:bikes_user/app/ui/android/pages/edit_sos_number/edit_sos_number_page.dart';
 import 'package:bikes_user/app/ui/android/pages/finding_biker/finding_biker_success_page.dart';
@@ -167,6 +169,13 @@ class AppPages {
       name: CommonRoutes.ACCOUNT_VERIFICATION,
       page: () => AccountVerificationPage(),
     ),
+    GetPage(
+        name: CommonRoutes.BIIKE_PROFILE,
+        page: () => BiikeProfilePage(),
+        bindings: <Bindings>[
+          BiikeProfileBinding(),
+          UserBinding(),
+        ]),
     GetPage(
         name: CommonRoutes.FEEDBACK,
         page: () => FeedbackPage(),

@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
@@ -14,8 +14,12 @@ class ScheduleTripButton extends StatelessWidget {
   _toNextScreen(BuildContext context) {
     if (_bookTripController.departureStation.value.stationId == -1 ||
         _bookTripController.destinationStation.value.stationId == -1) {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kNotChooseStation.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kNotChooseStation.tr)
+          .show();
       return;
     }
 

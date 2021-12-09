@@ -208,11 +208,19 @@ class TripDetailsController extends GetxController {
       Get.back(closeOverlays: true);
       Get.back();
       _homeController.pagingController.refresh();
-      CommonFunctions().showSuccessDialog(
-          context: context, message: CustomStrings.kCancelTripSuccess);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.SUCCES,
+              headerAnimationLoop: false,
+              desc: CustomStrings.kCancelTripSuccess.tr)
+          .show();
     } else {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     }
   }
 
@@ -496,10 +504,13 @@ class TripDetailsController extends GetxController {
                           ],
                         );
                       } else {
-                        CommonFunctions().showInfoDialog(
-                            context: context,
-                            message:
-                                CustomStrings.kNeedSharingLocationToUseSOS.tr);
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.INFO_REVERSED,
+                                headerAnimationLoop: false,
+                                desc: CustomStrings
+                                    .kNeedSharingLocationToUseSOS.tr)
+                            .show();
                       }
                     },
                   ),

@@ -40,8 +40,7 @@ final Map<String, String> vi = {
   'kInputName': 'Nhập họ tên',
   'kInputPhoneNumber': 'Nhập số điện thoại',
   'kSentVerifiedEmail':
-      'Chúng tôi đã gửi email xác thực đến email đăng ký tài khoản của bạn. vui lòng xác thực trước khi đăng nhập',
-  'kRegisterSuccess': 'Đăng ký tài khoản thành công',
+      'Chúng tôi đã gửi email xác thực đến email đăng ký tài khoản của bạn. Vui lòng xác thực trước khi đăng nhập',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Nhập mã xác minh',
@@ -160,6 +159,7 @@ final Map<String, String> vi = {
 
   // 'update_profile' screen
   'kEditProfile': 'Chỉnh sửa thông tin cá nhân',
+  'kBiikeProfile': 'Nhật ký Biiké',
   'kFullName': 'Họ và tên',
   'kGender': 'Giới tính',
   'kMale': 'Nam',
@@ -180,6 +180,16 @@ final Map<String, String> vi = {
   'kPhoneVerificationDescription': 'được đặt chuyến',
   'kBikeVerification': 'Xác thực xe',
   'kBikeVerificationDescription': 'được nhận chuyến',
+
+  // 'biike_profile' screen
+  'kOnJourneyWithBiike': 'Tại hành trình với Biiké, bạn đã có',
+  'kNoOfRideTrips': 'Chuyến chở',
+  'kNoOfFreeTrips': 'Chuyến ké',
+  'kNoOfKm': 'km được tiết kiệm',
+  'kNoOfGasLitres': 'lít xăng được tiết kiệm',
+  'kThankYouForChoosingBiike':
+      'Cảm ơn bạn đã chọn Biiké và hãy cùng tạo nên những cột mốc tuyệt vời cùng Biiké nhé!',
+  'kFromFPTUniversity': 'từ Đại học FPT',
 
   // 'biker_profile' screen
   'kManageBike': 'Quản lí xe',

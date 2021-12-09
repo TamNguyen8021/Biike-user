@@ -40,7 +40,6 @@ final Map<String, String> en = {
   'kInputPhoneNumber': 'Enter phone number',
   'kSentVerifiedEmail':
       'We sent a verified email to your mailbox. Please verify your account before login',
-  'kRegisterSuccess': 'Your account created successful',
 
   // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
@@ -153,6 +152,7 @@ final Map<String, String> en = {
 
   // 'update_profile' screen
   'kEditProfile': 'Edit profile',
+  'kBiikeProfile': 'Biiké profile',
   'kFullName': 'Full name',
   'kGender': 'Gender',
   'kMale': 'Male',
@@ -173,6 +173,16 @@ final Map<String, String> en = {
   'kPhoneVerificationDescription': 'can book trip',
   'kBikeVerification': 'Bike verification',
   'kBikeVerificationDescription': 'can match trip',
+
+  // 'biike_profile' screen
+  'kOnJourneyWithBiike': 'On your journey with Biiké, you have',
+  'kNoOfRideTrips': 'Ride trips',
+  'kNoOfFreeTrips': 'Free trips',
+  'kNoOfKm': 'km was saved',
+  'kNoOfGasLitres': 'litres of gasoline was saved',
+  'kThankYouForChoosingBiike':
+      'Thank you for choosing Biiké and let\'s create great milestones in the future together!',
+  'kFromFPTUniversity': 'from FPT University',
 
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',

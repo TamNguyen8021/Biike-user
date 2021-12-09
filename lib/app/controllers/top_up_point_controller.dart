@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
@@ -44,17 +44,29 @@ class TopUpPointController extends GetxController {
       if (result) {
         await _walletController.updateWalletPoint();
         Get.back();
-        CommonFunctions().showSuccessDialog(
-            context: context, message: CustomStrings.kTopUpSuccess.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.SUCCES,
+                headerAnimationLoop: false,
+                desc: CustomStrings.kTopUpSuccess.tr)
+            .show();
       } else {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
         Get.back();
-        CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kDevelopError.tr);
       }
     } else {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: response['errorMsg'])
+          .show();
       Get.back();
-      CommonFunctions()
-          .showErrorDialog(context: context, message: response['errorMsg']);
     }
   }
 

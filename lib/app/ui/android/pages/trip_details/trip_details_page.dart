@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
@@ -184,10 +185,13 @@ class TripDetailsPage extends StatelessWidget {
                                       tripId: tripId,
                                       cancelReason: _cancelReason.value);
                                 } else {
-                                  await CommonFunctions().showErrorDialog(
-                                      context: context,
-                                      message: CustomStrings
-                                          .kLetUsKnowYourCancelReason.tr);
+                                  AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.ERROR,
+                                          headerAnimationLoop: false,
+                                          desc: CustomStrings
+                                              .kLetUsKnowYourCancelReason.tr)
+                                      .show();
                                 }
                               }),
                           CustomTextButton(
@@ -278,10 +282,13 @@ class TripDetailsPage extends StatelessWidget {
                               if (controller.userLocation != null) {
                                 controller.showHelpCenter(context: context);
                               } else {
-                                await CommonFunctions().showInfoDialog(
-                                    context: context,
-                                    message: CustomStrings
-                                        .kNeedLocationPermission.tr);
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.INFO_REVERSED,
+                                        headerAnimationLoop: false,
+                                        desc: CustomStrings
+                                            .kNeedLocationPermission.tr)
+                                    .show();
                               }
                             },
                             icon: Icon(
@@ -880,16 +887,15 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                                     CustomDialog(context: context).loadingDialog.dismiss();
                                                                                   } else {
-                                                                                    CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kDevelopError.tr);
+                                                                                    AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                                   }
                                                                                 } else {
-                                                                                  CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kNotArrivedAtPickUpPoint.tr);
+                                                                                  AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kNotArrivedAtPickUpPoint.tr).show();
                                                                                 }
                                                                               });
                                                                         } else {
-                                                                          CommonFunctions().showInfoDialog(
-                                                                              context: context,
-                                                                              message: CustomStrings.kNeedLocationPermission.tr);
+                                                                          AwesomeDialog(context: context, dialogType: DialogType.INFO_REVERSED, headerAnimationLoop: false, desc: CustomStrings.kNeedLocationPermission.tr)
+                                                                              .show();
                                                                         }
                                                                       } else {
                                                                         if (buttonText.value ==
@@ -910,9 +916,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                               tripId: tripId)) {
                                                                             changeToFinishTripButton();
                                                                           } else {
-                                                                            CommonFunctions().showErrorDialog(
-                                                                                context: context,
-                                                                                message: CustomErrorsString.kDevelopError.tr);
+                                                                            AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                           }
                                                                         } else {
                                                                           if (CommonFunctions().isArrivedAtPickUpPoint(
@@ -927,12 +931,10 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                               Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: controller.trip.tripId);
                                                                             } else {
-                                                                              CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kDevelopError.tr);
+                                                                              AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                             }
                                                                           } else {
-                                                                            CommonFunctions().showErrorDialog(
-                                                                                context: context,
-                                                                                message: CustomErrorsString.kNotArrivedAtPickUpPoint.tr);
+                                                                            AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kNotArrivedAtPickUpPoint.tr).show();
                                                                           }
                                                                         }
                                                                       }

@@ -106,4 +106,22 @@ class UserProvider extends CommonProvider {
       return true;
     }
   }
+
+  /// Loads user's achievement from API
+  ///
+  /// Author: TamNTT
+  Future<Map<String, dynamic>> getUserAchievement() async {
+    final response = await get(
+        UrlStrings.userUrl + '${Biike.userId.value}/achievement',
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return Future.error(response.statusText!);
+    } else {
+      return response.body['data'];
+    }
+  }
 }

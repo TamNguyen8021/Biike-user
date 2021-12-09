@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -378,10 +380,12 @@ class DialogConfirm extends HookWidget {
               Get.back(closeOverlays: true);
               onSuccess();
             } else {
-              CommonFunctions().showErrorDialog(
-                context: context,
-                message: 'otp not correct',
-              );
+              AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      headerAnimationLoop: false,
+                      desc: CustomErrorsString.kWrongOtp.tr)
+                  .show();
             }
           },
           child: Text(CustomStrings.kBtnSend.tr),

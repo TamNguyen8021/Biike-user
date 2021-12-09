@@ -14,6 +14,7 @@ abstract class CommonRoutes {
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/editProfile';
   static const ACCOUNT_VERIFICATION = '/accountVerification';
+  static const BIIKE_PROFILE = '/biikeProfile';
   static const VIEW_USER = '/viewUser';
   static const FEEDBACK = '/feedback';
   static const FIND_BIKER = '/findBiker';
