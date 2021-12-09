@@ -113,6 +113,9 @@ final Map<String, String> vi = {
   'kAdd': 'Thêm',
   'kDelete': 'Xóa',
   'kChooseStation': 'Chọn địa điểm',
+  'kAddStationSuccess': 'Thêm trạm thành công',
+  'kEditStationSuccess': 'Chỉnh sửa thông tin trạm thành công',
+  'kDeleteStationSuccess': 'Đã xóa trạm',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',

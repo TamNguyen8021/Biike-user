@@ -7,10 +7,10 @@ import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/data/providers/bike_availability_provider.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/ui/android/pages/cho_now_settings/widgets/pick_up_station_card.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:intl/intl.dart';
 
 class ChoNowSettingsController extends GetxController {
   final _stationProvider = Get.find<StationProvider>();
@@ -18,15 +18,12 @@ class ChoNowSettingsController extends GetxController {
   final PagingController<int, PickUpStationCard> pagingController =
       PagingController(firstPageKey: 0);
 
-  // Rx<String> stationName = CustomStrings.kChooseStation.obs;
   Rx<Station> selectedStation = Station.empty().obs;
   Rxn<TimeOfDay> fromTime = Rxn<TimeOfDay>();
   Rx<String> fromTimeString = CustomStrings.kChooseTime.tr.obs;
   Rxn<TimeOfDay> toTime = Rxn<TimeOfDay>();
   Rx<String> toTimeString = CustomStrings.kChooseTime.tr.obs;
-  // RxList pickUpStations = [].obs;
   Rx<bool> isRideNowStationsLoading = true.obs;
-  // Rx<String> selectedStationName = CustomStrings.kChooseStation.tr.obs;
 
   List<Station> stations = [];
   List<PickUpStationCard> rideNowStations = [];
@@ -92,17 +89,15 @@ class ChoNowSettingsController extends GetxController {
 
     for (var station in response['data']) {
       BikeAvailability bikeAvailability = BikeAvailability.fromJson(station);
+      DateFormat dateFormat = DateFormat.Hm();
 
       PickUpStationCard pickUpStationCard = PickUpStationCard(
           id: bikeAvailability.bikeAvailabilityId!,
           stationId: bikeAvailability.stationId!,
           stationName: bikeAvailability.stationName!,
-          timeRange: bikeAvailability.fromTime!.hour.toString() +
-              ':' +
-              bikeAvailability.fromTime!.minute.toString() +
+          timeRange: dateFormat.format(bikeAvailability.fromTime!) +
               ' - ' +
-              bikeAvailability.toTime!.hour.toString() +
-              bikeAvailability.toTime!.minute.toString());
+              dateFormat.format(bikeAvailability.toTime!));
 
       _tempRideNowStations.add(pickUpStationCard);
       rideNowStations.add(pickUpStationCard);
@@ -134,30 +129,49 @@ class ChoNowSettingsController extends GetxController {
   /// Add a pick up station for Cho Now when user presses 'Add' button
   ///
   /// Author: TamNTT
-  Future<bool> addPickUpStation() async {
-    Biike.logger.d(addPickUpStation);
-    Biike.logger.d(selectedStation.value.stationId);
-    Biike.logger.d(fromTime.value!.hour);
-    Biike.logger.d(toTime.value!.hour);
-    // await _bikeAvailabilityProvider.addRideNowStation(body: {
-    //   'stationId': selectedStation.value.stationId,
-    //   'fromTime':
-    //       DateTime(2021, 1, 1, fromTime.value!.hour, fromTime.value!.minute)
-    //           .toIso8601String(),
-    //   'toTime': DateTime(2021, 1, 1, toTime.value!.hour, toTime.value!.minute)
-    //       .toIso8601String()
-    // });
-    // Get.back();
-    // update();
-    return true;
+  Future<bool> addPickUpStation({required BuildContext context}) async {
+    var result = await _bikeAvailabilityProvider.addRideNowStation(body: {
+      'stationId': selectedStation.value.stationId,
+      'fromTime':
+          DateTime(2021, 1, 1, fromTime.value!.hour, fromTime.value!.minute)
+              .toIso8601String(),
+      'toTime': DateTime(2021, 1, 1, toTime.value!.hour, toTime.value!.minute)
+          .toIso8601String()
+    }).catchError((error) {
+      CommonFunctions.catchExceptionError(error);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
+    });
+
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /// Delete the selected pick up station
   ///
   /// Author: TamNTT
-  Future<bool> deletePickUpStation({required int index}) async {
+  Future<bool> deletePickUpStation(
+      {required int index, required BuildContext context}) async {
     PickUpStationCard station = rideNowStations.elementAt(index);
-    if (await _bikeAvailabilityProvider.deleteRideNowStation(id: station.id)) {
+    bool result = await _bikeAvailabilityProvider
+        .deleteRideNowStation(id: station.id)
+        .catchError((error) {
+      CommonFunctions.catchExceptionError(error);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
+    });
+    if (result) {
       return true;
     } else {
       return false;
@@ -209,31 +223,55 @@ class ChoNowSettingsController extends GetxController {
   }
 
   /// Author: TamNTT
-  bool checkIfStationWereAdded() {
-    Biike.logger.d(checkIfStationWereAdded);
+  bool checkIfFromTimeIsBeforeToTime() {
+    if (fromTime.value!.hour * 60 + fromTime.value!.minute >=
+        toTime.value!.hour * 60 + toTime.value!.minute) {
+      return true;
+    }
+    return false;
+  }
+
+  /// Author: TamNTT
+  bool checkIfTimeIsNotBetween5AMAnd9PM() {
+    if (fromTime.value!.hour * 60 + fromTime.value!.minute < 5 * 60 ||
+        toTime.value!.hour * 60 + toTime.value!.minute > 21 * 60) {
+      return true;
+    }
+    return false;
+  }
+
+  /// Author: TamNTT
+  bool checkIfStationWereAdded({int? id}) {
     for (PickUpStationCard station in rideNowStations) {
-      String stationFromTimeString = station.timeRange.split(' - ')[0];
-      String stationFromTimeHour = stationFromTimeString.split(':')[0];
-      String stationFromTimeMinute = stationFromTimeString.split(':')[1];
-      String stationToTimeString = station.timeRange.split(' - ')[1];
-      String stationToTimeHour = stationToTimeString.split(':')[0];
-      String stationToTimeMinute = stationToTimeString.split(':')[1];
-      TimeOfDay stationFromTime = TimeOfDay(
-          hour: int.tryParse(stationFromTimeHour)!,
-          minute: int.tryParse(stationFromTimeMinute)!);
-      TimeOfDay stationToTime = TimeOfDay(
-          hour: int.tryParse(stationToTimeHour)!,
-          minute: int.tryParse(stationToTimeMinute)!);
-      Biike.logger.d(stationFromTime.hour);
-      Biike.logger.d(stationFromTime.minute);
-      Biike.logger.d(stationToTime.hour);
-      Biike.logger.d(stationToTime.minute);
-      if ((station.stationName == selectedStation.value.name) &&
-          ((fromTime.value!.hour * 60 + fromTime.value!.minute >=
-                  stationFromTime.hour * 60 + stationFromTime.minute) &&
-              (toTime.value!.hour * 60 + toTime.value!.minute <=
-                  stationToTime.hour * 60 + stationToTime.minute))) {
-        return true;
+      if (station.id != id) {
+        String stationFromTimeString = station.timeRange.split(' - ')[0];
+        String stationFromTimeHour = stationFromTimeString.split(':')[0];
+        String stationFromTimeMinute = stationFromTimeString.split(':')[1];
+        String stationToTimeString = station.timeRange.split(' - ')[1];
+        String stationToTimeHour = stationToTimeString.split(':')[0];
+        String stationToTimeMinute = stationToTimeString.split(':')[1];
+        TimeOfDay stationFromTime = TimeOfDay(
+            hour: int.tryParse(stationFromTimeHour)!,
+            minute: int.tryParse(stationFromTimeMinute)!);
+        TimeOfDay stationToTime = TimeOfDay(
+            hour: int.tryParse(stationToTimeHour)!,
+            minute: int.tryParse(stationToTimeMinute)!);
+        int fromTimeToMins = fromTime.value!.hour * 60 + fromTime.value!.minute;
+        int toTimeToMins = toTime.value!.hour * 60 + toTime.value!.minute;
+        int stationFromTimeToMins =
+            stationFromTime.hour * 60 + stationFromTime.minute;
+        int stationToTimeToMins =
+            stationToTime.hour * 60 + stationToTime.minute;
+        if ((station.stationName == selectedStation.value.name)) {
+          if (fromTimeToMins >= stationFromTimeToMins &&
+              fromTimeToMins <= stationToTimeToMins) {
+            return true;
+          }
+          if (toTimeToMins >= stationFromTimeToMins &&
+              toTimeToMins <= stationToTimeToMins) {
+            return true;
+          }
+        }
       }
     }
     return false;

@@ -103,6 +103,9 @@ class CustomStrings {
   static const String kAdd = 'kAdd';
   static const String kDelete = 'kDelete';
   static const String kChooseStation = 'kChooseStation';
+  static const String kAddStationSuccess = 'kAddStationSuccess';
+  static const String kEditStationSuccess = 'kEditStationSuccess';
+  static const String kDeleteStationSuccess = 'kDeleteStationSuccess';
 
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
@@ -465,6 +468,4 @@ class CustomStrings {
   // noti
   static const String kNotification = 'kNotification';
   static const String kAll = 'kAll';
-  
-
 }

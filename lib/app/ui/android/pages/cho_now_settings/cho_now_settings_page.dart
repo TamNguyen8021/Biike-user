@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/cho_now_settings_controller.dart';
@@ -13,7 +12,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
-import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -97,35 +95,34 @@ class ChoNowSettingsPage extends StatelessWidget {
   /// Author: TamNTT
   Future<void> _showAddPickUpStationDialog(
       {required BuildContext context,
-      required ChoNowSettingsController controller,
       String? stationName,
       TimeOfDay? from,
       TimeOfDay? to,
       int? index}) async {
     if (stationName != null) {
-      controller.selectedStation.value.name = stationName;
+      _choNowSettingsController.selectedStation.value.name = stationName;
     }
 
     if (from != null) {
-      controller.fromTime.value = from;
-      controller.fromTimeString.value =
+      _choNowSettingsController.fromTime.value = from;
+      _choNowSettingsController.fromTimeString.value =
           CommonFunctions.convertTimeOfDayToString(
-              context: context, time: controller.fromTime.value!);
+              context: context,
+              time: _choNowSettingsController.fromTime.value!);
     }
 
     if (to != null) {
-      controller.toTime.value = to;
-      controller.toTimeString.value = CommonFunctions.convertTimeOfDayToString(
-          context: context, time: controller.toTime.value!);
+      _choNowSettingsController.toTime.value = to;
+      _choNowSettingsController.toTimeString.value =
+          CommonFunctions.convertTimeOfDayToString(
+              context: context, time: _choNowSettingsController.toTime.value!);
     }
 
     await showDialog(
         context: context,
         builder: (BuildContext context) {
-          CustomDialog customDialog = CustomDialog(context: context);
-
           return FutureBuilder(
-              future: controller.loadStations(),
+              future: _choNowSettingsController.loadStations(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Dialog(
@@ -166,13 +163,14 @@ class ChoNowSettingsPage extends StatelessWidget {
                             ),
                             child: Obx(
                               () => DropdownButtonFormField<Station>(
-                                value: controller.selectedStation.value,
+                                value: _choNowSettingsController
+                                    .selectedStation.value,
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
                                   size: 30,
                                   color: Colors.black,
                                 ),
-                                items: controller.stations
+                                items: _choNowSettingsController.stations
                                     .map<DropdownMenuItem<Station>>(
                                         (Station value) {
                                   return DropdownMenuItem<Station>(
@@ -185,7 +183,8 @@ class ChoNowSettingsPage extends StatelessWidget {
                                   );
                                 }).toList(),
                                 onChanged: (Station? value) {
-                                  controller.selectedStation.value = value!;
+                                  _choNowSettingsController
+                                      .selectedStation.value = value!;
                                 },
                                 decoration: InputDecoration(
                                     labelText: CustomStrings.kChooseStation.tr,
@@ -200,16 +199,21 @@ class ChoNowSettingsPage extends StatelessWidget {
                           Text(CustomStrings.kFrom.tr),
                           Obx(
                             () => ChooseDateTimeButton(
-                                text: controller.fromTimeString.value,
+                                text: _choNowSettingsController
+                                    .fromTimeString.value,
                                 onPressedFunc: () async {
-                                  controller.fromTime.value =
+                                  _choNowSettingsController.fromTime.value =
                                       await CommonFunctions.selectTime(
                                           context: context,
-                                          selectedTime: controller.fromTime);
-                                  controller.fromTimeString.value =
+                                          selectedTime:
+                                              _choNowSettingsController
+                                                  .fromTime);
+                                  _choNowSettingsController
+                                          .fromTimeString.value =
                                       MaterialLocalizations.of(context)
                                           .formatTimeOfDay(
-                                              controller.fromTime.value!,
+                                              _choNowSettingsController
+                                                  .fromTime.value!,
                                               alwaysUse24HourFormat: true);
                                 },
                                 isOnProfilePage: false),
@@ -217,16 +221,19 @@ class ChoNowSettingsPage extends StatelessWidget {
                           Text(CustomStrings.kTo.tr),
                           Obx(
                             () => ChooseDateTimeButton(
-                                text: controller.toTimeString.value,
+                                text: _choNowSettingsController
+                                    .toTimeString.value,
                                 onPressedFunc: () async {
-                                  controller.toTime.value =
+                                  _choNowSettingsController.toTime.value =
                                       await CommonFunctions.selectTime(
                                           context: context,
-                                          selectedTime: controller.toTime);
-                                  controller.toTimeString.value =
+                                          selectedTime:
+                                              _choNowSettingsController.toTime);
+                                  _choNowSettingsController.toTimeString.value =
                                       MaterialLocalizations.of(context)
                                           .formatTimeOfDay(
-                                              controller.toTime.value!,
+                                              _choNowSettingsController
+                                                  .toTime.value!,
                                               alwaysUse24HourFormat: true);
                                 },
                                 isOnProfilePage: false),
@@ -240,21 +247,28 @@ class ChoNowSettingsPage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 16.0),
                                   child: CustomTextButton(
-                                      width: 80,
+                                      width: 100,
                                       backgroundColor: CustomColors.kRed,
                                       foregroundColor: Colors.white,
                                       text: CustomStrings.kDelete.tr,
                                       onPressedFunc: () async {
                                         Get.back();
-                                        customDialog.loadingDialog.show();
 
-                                        if (await controller
+                                        if (await _choNowSettingsController
                                             .deletePickUpStation(
-                                                index: index!)) {
-                                          customDialog.loadingDialog.dismiss();
-                                          controller.update();
+                                                index: index!,
+                                                context: context)) {
+                                          AwesomeDialog(
+                                                  context: context,
+                                                  dialogType: DialogType.SUCCES,
+                                                  headerAnimationLoop: false,
+                                                  desc: CustomStrings
+                                                      .kDeleteStationSuccess.tr)
+                                              .show();
+                                          _choNowSettingsController
+                                              .pagingController
+                                              .refresh();
                                         } else {
-                                          customDialog.loadingDialog.dismiss();
                                           AwesomeDialog(
                                                   context: context,
                                                   dialogType: DialogType.ERROR,
@@ -267,40 +281,85 @@ class ChoNowSettingsPage extends StatelessWidget {
                                       hasBorder: false),
                                 ),
                                 CustomTextButton(
-                                    width: 80,
+                                    width: 100,
                                     backgroundColor: CustomColors.kBlue,
                                     foregroundColor: Colors.white,
                                     text: CustomStrings.kEdit.tr,
                                     onPressedFunc: () async {
-                                      Get.back();
-                                      customDialog.loadingDialog.show();
-
-                                      if (await controller.editPickUpStation(
-                                          index: index!,
-                                          name: controller
-                                              .selectedStation.value.name,
-                                          timeRange: CommonFunctions
-                                                  .convertTimeOfDayToString(
-                                                      context: context,
-                                                      time: controller
-                                                          .fromTime.value!) +
-                                              ' - ' +
-                                              CommonFunctions
-                                                  .convertTimeOfDayToString(
-                                                      context: context,
-                                                      time: controller
-                                                          .toTime.value!))) {
-                                        customDialog.loadingDialog.dismiss();
-                                        controller.update();
-                                      } else {
-                                        customDialog.loadingDialog.dismiss();
+                                      if (_choNowSettingsController
+                                          .checkIfFromTimeIsBeforeToTime()) {
                                         AwesomeDialog(
                                                 context: context,
                                                 dialogType: DialogType.ERROR,
                                                 headerAnimationLoop: false,
                                                 desc: CustomErrorsString
-                                                    .kDevelopError.tr)
+                                                    .kFromTimeMustBeBeforeToTime
+                                                    .tr)
                                             .show();
+                                      } else if (_choNowSettingsController
+                                          .checkIfTimeIsNotBetween5AMAnd9PM()) {
+                                        AwesomeDialog(
+                                                context: context,
+                                                dialogType: DialogType.ERROR,
+                                                headerAnimationLoop: false,
+                                                desc: CustomErrorsString
+                                                    .kCanOnlyAddStationFrom5AMTo9PM
+                                                    .tr)
+                                            .show();
+                                      } else if (_choNowSettingsController
+                                          .checkIfStationWereAdded(
+                                              id: _choNowSettingsController
+                                                  .rideNowStations
+                                                  .elementAt(index!)
+                                                  .id)) {
+                                        AwesomeDialog(
+                                                context: context,
+                                                dialogType: DialogType.ERROR,
+                                                headerAnimationLoop: false,
+                                                desc: CustomErrorsString
+                                                    .kSameStationWereAdded.tr)
+                                            .show();
+                                      } else {
+                                        if (await _choNowSettingsController
+                                            .editPickUpStation(
+                                                index: index,
+                                                name: _choNowSettingsController
+                                                    .selectedStation.value.name,
+                                                timeRange: CommonFunctions
+                                                        .convertTimeOfDayToString(
+                                                            context: context,
+                                                            time:
+                                                                _choNowSettingsController
+                                                                    .fromTime
+                                                                    .value!) +
+                                                    ' - ' +
+                                                    CommonFunctions
+                                                        .convertTimeOfDayToString(
+                                                            context: context,
+                                                            time:
+                                                                _choNowSettingsController
+                                                                    .toTime
+                                                                    .value!))) {
+                                          Get.back();
+                                          AwesomeDialog(
+                                                  context: context,
+                                                  dialogType: DialogType.SUCCES,
+                                                  headerAnimationLoop: false,
+                                                  desc: CustomStrings
+                                                      .kEditStationSuccess.tr)
+                                              .show();
+                                          _choNowSettingsController
+                                              .pagingController
+                                              .refresh();
+                                        } else {
+                                          AwesomeDialog(
+                                                  context: context,
+                                                  dialogType: DialogType.ERROR,
+                                                  headerAnimationLoop: false,
+                                                  desc: CustomErrorsString
+                                                      .kDevelopError.tr)
+                                              .show();
+                                        }
                                       }
                                     },
                                     hasBorder: false),
@@ -310,15 +369,10 @@ class ChoNowSettingsPage extends StatelessWidget {
                                     foregroundColor: Colors.white,
                                     text: CustomStrings.kAdd.tr,
                                     onPressedFunc: () async {
-                                      if (controller
+                                      if (_choNowSettingsController
                                           .checkIfAllFieldsHaveData()) {
-                                        if ((controller.fromTime.value!.hour *
-                                                    60 +
-                                                controller
-                                                    .fromTime.value!.minute) >=
-                                            controller.toTime.value!.hour * 60 +
-                                                controller
-                                                    .toTime.value!.minute) {
+                                        if (_choNowSettingsController
+                                            .checkIfFromTimeIsBeforeToTime()) {
                                           AwesomeDialog(
                                                   context: context,
                                                   dialogType: DialogType.ERROR,
@@ -327,16 +381,8 @@ class ChoNowSettingsPage extends StatelessWidget {
                                                       .kFromTimeMustBeBeforeToTime
                                                       .tr)
                                               .show();
-                                        } else if ((controller.fromTime.value!
-                                                            .hour *
-                                                        60 +
-                                                    controller.fromTime.value!
-                                                        .minute) <
-                                                5 * 60 ||
-                                            controller.toTime.value!.hour * 60 +
-                                                    controller
-                                                        .toTime.value!.minute >
-                                                21 * 60) {
+                                        } else if (_choNowSettingsController
+                                            .checkIfTimeIsNotBetween5AMAnd9PM()) {
                                           AwesomeDialog(
                                                   context: context,
                                                   dialogType: DialogType.ERROR,
@@ -346,9 +392,7 @@ class ChoNowSettingsPage extends StatelessWidget {
                                                       .tr)
                                               .show();
                                         } else {
-                                          Get.back();
-                                          // customDialog.loadingDialog.show();
-                                          if (controller
+                                          if (_choNowSettingsController
                                               .checkIfStationWereAdded()) {
                                             AwesomeDialog(
                                                     context: context,
@@ -360,11 +404,35 @@ class ChoNowSettingsPage extends StatelessWidget {
                                                         .tr)
                                                 .show();
                                           } else {
-                                            var result = await controller
-                                                .addPickUpStation();
+                                            if (await _choNowSettingsController
+                                                .addPickUpStation(
+                                                    context: context)) {
+                                              Get.back();
+                                              AwesomeDialog(
+                                                      context: context,
+                                                      dialogType:
+                                                          DialogType.SUCCES,
+                                                      headerAnimationLoop:
+                                                          false,
+                                                      desc: CustomStrings
+                                                          .kAddStationSuccess
+                                                          .tr)
+                                                  .show();
+                                              _choNowSettingsController
+                                                  .pagingController
+                                                  .refresh();
+                                            } else {
+                                              AwesomeDialog(
+                                                      context: context,
+                                                      dialogType:
+                                                          DialogType.ERROR,
+                                                      headerAnimationLoop:
+                                                          false,
+                                                      desc: CustomErrorsString
+                                                          .kDevelopError.tr)
+                                                  .show();
+                                            }
                                           }
-
-                                          // customDialog.loadingDialog.dismiss();
                                         }
                                       } else {
                                         AwesomeDialog(
@@ -393,7 +461,6 @@ class ChoNowSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomDialog customDialog = CustomDialog(context: context);
     Rx<bool> isChoNowOn = false.obs;
 
     return Scaffold(
@@ -425,8 +492,6 @@ class ChoNowSettingsPage extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data is bool) {
                 isChoNowOn.value = snapshot.data;
-                _choNowSettingsController.pagingController
-                    .notifyPageRequestListeners(0);
 
                 return SingleChildScrollView(
                   child: Padding(
@@ -483,157 +548,136 @@ class ChoNowSettingsPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        GetBuilder<ChoNowSettingsController>(
-                            init: _choNowSettingsController,
-                            builder: (ChoNowSettingsController controller) {
-                              if (isChoNowOn.isTrue) {
-                                return Column(
-                                  children: <Widget>[
-                                    Container(
-                                      height: 45,
-                                      margin:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      padding: const EdgeInsets.only(
-                                          left: 16.0, right: 8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: CustomColors.kLightGray,
-                                          boxShadow: <BoxShadow>[
-                                            BoxShadow(
-                                              color: CustomColors.kDarkGray
-                                                  .withOpacity(0.3),
-                                              // changes position of shadow
-                                              offset: Offset(0, 1.25),
-                                            )
-                                          ]),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Text(CustomStrings.kChoNowStation.tr),
-                                          Icon(
-                                            Icons.keyboard_arrow_down,
-                                            size: 35,
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
+                        Obx(
+                          () => Visibility(
+                              visible: isChoNowOn.value,
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    height: 45,
+                                    margin: const EdgeInsets.only(bottom: 8.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 16.0, right: 8.0),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: CustomColors.kLightGray,
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                            color: CustomColors.kDarkGray
+                                                .withOpacity(0.3),
+                                            // changes position of shadow
+                                            offset: Offset(0, 1.25),
+                                          )
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(CustomStrings.kChoNowStation.tr),
+                                        Icon(
+                                          Icons.keyboard_arrow_down,
+                                          size: 35,
+                                          color: Colors.black,
+                                        ),
+                                      ],
                                     ),
-                                    // PagedListView<int, PickUpStationCard>(
-                                    //   pagingController:
-                                    //       controller.pagingController,
-                                    //   shrinkWrap: true,
-                                    //   builderDelegate:
-                                    //       PagedChildBuilderDelegate<
-                                    //               PickUpStationCard>(
-                                    //           animateTransitions: true,
-                                    //           itemBuilder:
-                                    //               (context, item, index) {
-                                    //             return Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.only(
-                                    //                       bottom: 10.0),
-                                    //               child: GestureDetector(
-                                    //                 child: controller
-                                    //                     .pagingController
-                                    //                     .itemList!
-                                    //                     .elementAt(index),
-                                    //                 onTap: () {
-                                    //                   String
-                                    //                       stationFromTimeString =
-                                    //                       _choNowSettingsController
-                                    //                           .pagingController
-                                    //                           .itemList!
-                                    //                           .elementAt(index)
-                                    //                           .timeRange
-                                    //                           .split(' - ')[0];
-                                    //                   String
-                                    //                       stationFromTimeHour =
-                                    //                       stationFromTimeString
-                                    //                           .split(':')[0];
-                                    //                   String
-                                    //                       stationFromTimeMinute =
-                                    //                       stationFromTimeString
-                                    //                           .split(':')[1];
-                                    //                   String
-                                    //                       stationToTimeString =
-                                    //                       _choNowSettingsController
-                                    //                           .pagingController
-                                    //                           .itemList!
-                                    //                           .elementAt(index)
-                                    //                           .timeRange
-                                    //                           .split(' - ')[1];
-                                    //                   String stationToTimeHour =
-                                    //                       stationToTimeString
-                                    //                           .split(':')[0];
-                                    //                   String
-                                    //                       stationToTimeMinute =
-                                    //                       stationToTimeString
-                                    //                           .split(':')[1];
-                                    //                   TimeOfDay stationFromTime = TimeOfDay(
-                                    //                       hour: int.tryParse(
-                                    //                           stationFromTimeHour)!,
-                                    //                       minute: int.tryParse(
-                                    //                           stationFromTimeMinute)!);
-                                    //                   TimeOfDay stationToTime = TimeOfDay(
-                                    //                       hour: int.tryParse(
-                                    //                           stationToTimeHour)!,
-                                    //                       minute: int.tryParse(
-                                    //                           stationToTimeMinute)!);
+                                  ),
+                                  PagedListView<int, PickUpStationCard>(
+                                    pagingController: _choNowSettingsController
+                                        .pagingController,
+                                    shrinkWrap: true,
+                                    builderDelegate: PagedChildBuilderDelegate<
+                                            PickUpStationCard>(
+                                        animateTransitions: true,
+                                        itemBuilder: (context, item, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 10.0),
+                                            child: GestureDetector(
+                                              child: _choNowSettingsController
+                                                  .pagingController.itemList!
+                                                  .elementAt(index),
+                                              onTap: () {
+                                                String stationFromTimeString =
+                                                    _choNowSettingsController
+                                                        .pagingController
+                                                        .itemList!
+                                                        .elementAt(index)
+                                                        .timeRange
+                                                        .split(' - ')[0];
+                                                String stationFromTimeHour =
+                                                    stationFromTimeString
+                                                        .split(':')[0];
+                                                String stationFromTimeMinute =
+                                                    stationFromTimeString
+                                                        .split(':')[1];
+                                                String stationToTimeString =
+                                                    _choNowSettingsController
+                                                        .pagingController
+                                                        .itemList!
+                                                        .elementAt(index)
+                                                        .timeRange
+                                                        .split(' - ')[1];
+                                                String stationToTimeHour =
+                                                    stationToTimeString
+                                                        .split(':')[0];
+                                                String stationToTimeMinute =
+                                                    stationToTimeString
+                                                        .split(':')[1];
+                                                TimeOfDay stationFromTime = TimeOfDay(
+                                                    hour: int.tryParse(
+                                                        stationFromTimeHour)!,
+                                                    minute: int.tryParse(
+                                                        stationFromTimeMinute)!);
+                                                TimeOfDay
+                                                    stationToTime = TimeOfDay(
+                                                        hour: int.tryParse(
+                                                            stationToTimeHour)!,
+                                                        minute: int.tryParse(
+                                                            stationToTimeMinute)!);
 
-                                    //                   _showAddPickUpStationDialog(
-                                    //                       context: context,
-                                    //                       stationName:
-                                    //                           _choNowSettingsController
-                                    //                               .pagingController
-                                    //                               .itemList!
-                                    //                               .elementAt(
-                                    //                                   index)
-                                    //                               .stationName,
-                                    //                       from: stationFromTime,
-                                    //                       to: stationToTime,
-                                    //                       index: index);
-                                    //                 },
-                                    //               ),
-                                    //             );
-                                    //           },
-                                    //           noItemsFoundIndicatorBuilder:
-                                    //               (BuildContext context) {
-                                    //             return Text(CustomStrings
-                                    //                 .kNoUpcomingTrips.tr);
-                                    //           },
-                                    //           firstPageErrorIndicatorBuilder:
-                                    //               (BuildContext context) {
-                                    //             return LazyLoadingListErrorBuilder(
-                                    //                 onPressed: () {
-                                    //               controller.pagingController
-                                    //                   .refresh();
-                                    //             });
-                                    //           }),
-                                    // ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 25.0),
-                                      child: CustomTextButton(
-                                          width: double.infinity,
-                                          backgroundColor: Colors.white,
-                                          foregroundColor: CustomColors.kBlue,
-                                          text: CustomStrings
-                                              .kAddPickUpStation.tr,
-                                          onPressedFunc: () {
-                                            _showAddPickUpStationDialog(
-                                                context: context,
-                                                controller: controller);
-                                          },
-                                          hasBorder: true),
-                                    ),
-                                  ],
-                                );
-                              } else {
-                                return SizedBox.shrink();
-                              }
-                            }),
+                                                _showAddPickUpStationDialog(
+                                                    context: context,
+                                                    stationName:
+                                                        _choNowSettingsController
+                                                            .pagingController
+                                                            .itemList!
+                                                            .elementAt(index)
+                                                            .stationName,
+                                                    from: stationFromTime,
+                                                    to: stationToTime,
+                                                    index: index);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        firstPageErrorIndicatorBuilder:
+                                            (BuildContext context) {
+                                          return LazyLoadingListErrorBuilder(
+                                              onPressed: () {
+                                            _choNowSettingsController
+                                                .pagingController
+                                                .refresh();
+                                          });
+                                        }),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 25.0),
+                                    child: CustomTextButton(
+                                        width: double.infinity,
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: CustomColors.kBlue,
+                                        text:
+                                            CustomStrings.kAddPickUpStation.tr,
+                                        onPressedFunc: () {
+                                          _showAddPickUpStationDialog(
+                                              context: context);
+                                        },
+                                        hasBorder: true),
+                                  ),
+                                ],
+                              )),
+                        ),
                       ],
                     ),
                   ),
