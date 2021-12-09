@@ -155,6 +155,19 @@ class CustomStrings {
   static const String kChooseBirthDate = 'kChooseBirthDate';
   static const String kEditProfileSuccess = 'kEditProfileSuccess';
 
+  // 'account_verification' screen'
+  static const String kAccountVerification = 'kAccountVerification';
+  static const String kLetsVerifiedAccount = 'kLetsVerifiedAccount';
+  static const String kEmailVerification = 'kEmailVerification';
+  static const String kEmailVerificationDescription =
+      'kEmailVerificationDescription';
+  static const String kPhoneVerification = 'kPhoneVerification';
+  static const String kPhoneVerificationDescription =
+      'kPhoneVerificationDescription';
+  static const String kBikeVerification = 'kBikeVerification';
+  static const String kBikeVerificationDescription =
+      'kBikeVerificationDescription';
+
   // 'biker_profile' screen
   static const String kManageBike = 'kManageBike';
 

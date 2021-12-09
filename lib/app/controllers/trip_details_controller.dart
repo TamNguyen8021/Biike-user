@@ -8,6 +8,7 @@ import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
+import 'package:bikes_user/app/data/models/bike.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
@@ -47,6 +48,7 @@ class TripDetailsController extends GetxController {
   User user = User.empty();
   DepartureStation departureStation = DepartureStation.empty();
   DestinationStation destinationStation = DestinationStation.empty();
+  Bike bike = Bike.empty();
 
   /// Feedback of user
   TripFeedback feedback1 = TripFeedback.empty();
@@ -75,6 +77,7 @@ class TripDetailsController extends GetxController {
     user = User.fromJson(data);
     departureStation = DepartureStation.fromJson(data);
     destinationStation = DestinationStation.fromJson(data);
+    bike = Bike.fromJson(data);
 
     if (data['feedbacks'].length > 0) {
       feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);

@@ -678,23 +678,61 @@ class TripDetailsPage extends StatelessWidget {
                                                                             5.0,
                                                                         top:
                                                                             10.0),
-                                                                child: Text(
-                                                                  controller
-                                                                      .user
-                                                                      .userFullname,
-                                                                  style: TextStyle(
-                                                                      color: CustomColors
-                                                                          .kBlue,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: <
+                                                                      Widget>[
+                                                                    Text(
+                                                                      controller
+                                                                          .user
+                                                                          .userFullname,
+                                                                      style: TextStyle(
+                                                                          color: CustomColors
+                                                                              .kBlue,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                    Text(
+                                                                      controller
+                                                                          .bike
+                                                                          .plateNumber!,
+                                                                      style: TextStyle(
+                                                                          color: CustomColors
+                                                                              .kDarkGray,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
-                                                              UserRating(
-                                                                  score: controller
-                                                                      .user
-                                                                      .userStar
-                                                                      .toString()),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: <
+                                                                    Widget>[
+                                                                  UserRating(
+                                                                      score: controller
+                                                                          .user
+                                                                          .userStar
+                                                                          .toString()),
+                                                                  Text(
+                                                                    controller
+                                                                            .bike
+                                                                            .brand! +
+                                                                        ' - ' +
+                                                                        controller
+                                                                            .bike
+                                                                            .color!,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .bodyText1,
+                                                                  ),
+                                                                ],
+                                                              ),
                                                               Padding(
                                                                 padding: const EdgeInsets
                                                                         .symmetric(

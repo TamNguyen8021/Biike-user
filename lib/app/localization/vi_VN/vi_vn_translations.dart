@@ -170,6 +170,17 @@ final Map<String, String> vi = {
   'kChooseBirthDate': 'Chọn ngày sinh',
   'kEditProfileSuccess': 'Chỉnh sửa thông tin thành công',
 
+  // 'account_verification' screen'
+  'kAccountVerification': 'Xác thực tài khoản',
+  'kLetsVerifiedAccount':
+      'Hãy xác thực tài khoản để những chuyến đi tại Biiké trở nên an toàn hơn.',
+  'kEmailVerification': 'Xác thực email',
+  'kEmailVerificationDescription': 'được truy cập ứng dụng',
+  'kPhoneVerification': 'Xác thực số điện thoại',
+  'kPhoneVerificationDescription': 'được đặt chuyến',
+  'kBikeVerification': 'Xác thực xe',
+  'kBikeVerificationDescription': 'được nhận chuyến',
+
   // 'biker_profile' screen
   'kManageBike': 'Quản lí xe',
 

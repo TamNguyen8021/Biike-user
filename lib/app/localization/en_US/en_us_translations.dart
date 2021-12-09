@@ -163,6 +163,17 @@ final Map<String, String> en = {
   'kChooseBirthDate': 'Choose a date',
   'kEditProfileSuccess': 'Your profile was edited',
 
+  // 'account_verification' screen'
+  'kAccountVerification': 'Account verification',
+  'kLetsVerifiedAccount':
+      'Let\'s verified your account so that every trip with Biiké can be safer.',
+  'kEmailVerification': 'Email verification',
+  'kEmailVerificationDescription': 'can use the application',
+  'kPhoneVerification': 'Phone verification',
+  'kPhoneVerificationDescription': 'can book trip',
+  'kBikeVerification': 'Bike verification',
+  'kBikeVerificationDescription': 'can match trip',
+
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',
 
