@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:bikes_user/app/common/functions/common_provider.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_trace.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -69,8 +68,12 @@ class CommonFunctions {
             SystemChannels.platform
                 .invokeMethod<void>('SystemNavigator.pop')) //exit the app
 
-        : CommonFunctions()
-        .showErrorDialog(context: context, message: errorMessage);
+        : AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: errorMessage)
+            .show();
 
     return Future.value(false);
   }
@@ -109,8 +112,9 @@ class CommonFunctions {
   /// Show a time picker on [context].
   ///
   /// Author: TamNTT
-  Future<TimeOfDay> selectTime({required BuildContext context,
-    required Rx<TimeOfDay?> selectedTime}) async {
+  static Future<TimeOfDay> selectTime(
+      {required BuildContext context,
+      required Rx<TimeOfDay?> selectedTime}) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: selectedTime.value ?? TimeOfDay.now(),
@@ -119,129 +123,6 @@ class CommonFunctions {
     );
 
     return pickedTime!;
-  }
-
-  /// Display a dialog on [context] for success message.
-  ///
-  /// Author: TamNTT
-  Future<void> showSuccessDialog(
-      {required BuildContext context, required String message}) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.white,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/check.svg',
-                      height: 50,
-                    ),
-                  ),
-                  Text(
-                    message.tr,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(fontWeight: FontWeight.normal),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  /// Display a dialog on [context] for error message.
-  ///
-  /// Author: TamNTT
-  Future<void> showErrorDialog(
-      {required BuildContext context, required String message}) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.white,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/error.svg',
-                      height: 50,
-                    ),
-                  ),
-                  Text(
-                    message.tr,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(fontWeight: FontWeight.normal),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  /// Display a dialog on [context] for info message.
-  ///
-  /// Author: TamNTT
-  Future<void> showInfoDialog(
-      {required BuildContext context, required String message}) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.white,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/info.svg',
-                      height: 50,
-                    ),
-                  ),
-                  Text(
-                    message.tr,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(fontWeight: FontWeight.normal),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 
   /// Display a confirm dialog on [context].
@@ -341,11 +222,13 @@ class CommonFunctions {
     if (await canLaunch(googleUrl)) {
       await launch(googleUrl);
     } else {
-      showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
-      FlutterLogs.logError(
-          'Biiké', 'CommonFunctions - openMap()', 'Could not open map');
       logBiike(error: 'Could not open map');
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     }
   }
 
@@ -354,11 +237,13 @@ class CommonFunctions {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
-      FlutterLogs.logError(
-          'Biiké', 'CommonFunctions - openLink()', 'Could not open link');
       logBiike(error: 'Could not open link');
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     }
   }
 
@@ -401,6 +286,23 @@ class CommonFunctions {
     }
 
     return _location.getLocation();
+  }
+
+  /// Convert string to timeOfDate
+  ///
+  /// Author: UyenNLP
+  static TimeOfDay stringToTimeOfDay(String time) {
+    final format = DateFormat.Hm(); //"16:00"
+    return TimeOfDay.fromDateTime(format.parse(time));
+  }
+
+  /// Convert string to timeOfDate
+  ///
+  /// Author: UyenNLP
+  static String convertTimeOfDayToString(
+      {required BuildContext context, required TimeOfDay time}) {
+    return MaterialLocalizations.of(context)
+        .formatTimeOfDay(time, alwaysUse24HourFormat: true);
   }
 
   /// Use haversine formula to calculate distance between 2 coordinates

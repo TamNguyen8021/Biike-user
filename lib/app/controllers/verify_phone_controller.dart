@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
@@ -23,8 +23,12 @@ class VerifyPhoneController extends GetxController {
     if (result) {
       Get.toNamed(CommonRoutes.REGISTER, arguments: {'fullPhone': fullPhone});
     } else {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kWrongOtp.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kWrongOtp.tr)
+          .show();
     }
     _enableLoading(false);
   }
@@ -36,8 +40,12 @@ class VerifyPhoneController extends GetxController {
 
   bool _validate({required BuildContext context, required String otp}) {
     if (otp.trim().isEmpty) {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kEmptyOtp.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kEmptyOtp.tr)
+          .show();
       return false;
     }
     if (otp.trim().length != 6) {

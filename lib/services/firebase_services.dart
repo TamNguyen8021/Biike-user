@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,10 +15,9 @@ class FirebaseServices {
     firebaseServices.firebaseAuth = FirebaseAuth.instance;
     return firebaseServices;
   }
-  
+
   Future<void> sendCode(
       {required String fullPhone, required Function() codeSented}) async {
-        
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: fullPhone,
       verificationCompleted: (PhoneAuthCredential credential) {},
@@ -33,7 +33,6 @@ class FirebaseServices {
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
- 
   }
 
   Future<bool> verifyOtp(String otp) async {
@@ -62,13 +61,21 @@ class FirebaseServices {
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
-        CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kInvalidEmail.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kInvalidEmail.tr)
+            .show();
         return false;
       }
       if (e.code == 'user-not-found') {
-        CommonFunctions().showErrorDialog(
-            context: context, message: CustomErrorsString.kWrongEmail.tr);
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kWrongEmailOrPassword.tr)
+            .show();
         return false;
       }
       return false;

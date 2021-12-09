@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
@@ -184,10 +185,13 @@ class TripDetailsPage extends StatelessWidget {
                                       tripId: tripId,
                                       cancelReason: _cancelReason.value);
                                 } else {
-                                  await CommonFunctions().showErrorDialog(
-                                      context: context,
-                                      message: CustomStrings
-                                          .kLetUsKnowYourCancelReason.tr);
+                                  AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.ERROR,
+                                          headerAnimationLoop: false,
+                                          desc: CustomStrings
+                                              .kLetUsKnowYourCancelReason.tr)
+                                      .show();
                                 }
                               }),
                           CustomTextButton(
@@ -209,10 +213,16 @@ class TripDetailsPage extends StatelessWidget {
         });
   }
 
-  void _onBackPressed({required BuildContext context}) {
+  void _onBackPressed({required BuildContext context}) async {
     // if (_tripDetailsController.isTripStarted.isFalse) {
     if (Get.arguments['route'] == 'home') {
       _homeController.pagingController.refresh();
+    } else if (Get.arguments['route'] == 'getTripSuccess') {
+      await _homeController.searchTrips(
+          date: _homeController.searchDate.value,
+          time: _homeController.searchTime.value,
+          departureId: _homeController.departureStation.value.stationId,
+          destinationId: _homeController.destinationStation.value.stationId);
     } else {
       _tripHistoryController.pagingController.refresh();
     }
@@ -278,10 +288,13 @@ class TripDetailsPage extends StatelessWidget {
                               if (controller.userLocation != null) {
                                 controller.showHelpCenter(context: context);
                               } else {
-                                await CommonFunctions().showInfoDialog(
-                                    context: context,
-                                    message: CustomStrings
-                                        .kNeedLocationPermission.tr);
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.INFO_REVERSED,
+                                        headerAnimationLoop: false,
+                                        desc: CustomStrings
+                                            .kNeedLocationPermission.tr)
+                                    .show();
                               }
                             },
                             icon: Icon(
@@ -678,23 +691,87 @@ class TripDetailsPage extends StatelessWidget {
                                                                             5.0,
                                                                         top:
                                                                             10.0),
-                                                                child: Text(
-                                                                  controller
-                                                                      .user
-                                                                      .userFullname,
-                                                                  style: TextStyle(
-                                                                      color: CustomColors
-                                                                          .kBlue,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: <
+                                                                      Widget>[
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        controller
+                                                                            .user
+                                                                            .userFullname,
+                                                                        overflow:
+                                                                            TextOverflow.ellipsis,
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                CustomColors.kBlue,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
+                                                                    ),
+                                                                    if (Biike.role.value ==
+                                                                            Role
+                                                                                .keer &&
+                                                                        (controller.trip.tripStatus != 5 &&
+                                                                            controller.trip.tripStatus !=
+                                                                                6 &&
+                                                                            controller.trip.tripStatus !=
+                                                                                1)) ...[
+                                                                      Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.only(left: 4.0),
+                                                                        child:
+                                                                            Text(
+                                                                          controller
+                                                                              .bike
+                                                                              .plateNumber!,
+                                                                          style: TextStyle(
+                                                                              color: CustomColors.kDarkGray,
+                                                                              fontWeight: FontWeight.bold),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ],
                                                                 ),
                                                               ),
-                                                              UserRating(
-                                                                  score: controller
-                                                                      .user
-                                                                      .userStar
-                                                                      .toString()),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: <
+                                                                    Widget>[
+                                                                  UserRating(
+                                                                      score: controller
+                                                                          .user
+                                                                          .userStar
+                                                                          .toString()),
+                                                                  if (Biike.role
+                                                                              .value ==
+                                                                          Role
+                                                                              .keer &&
+                                                                      (controller.trip.tripStatus != 5 &&
+                                                                          controller.trip.tripStatus !=
+                                                                              6 &&
+                                                                          controller.trip.tripStatus !=
+                                                                              1)) ...[
+                                                                    Text(
+                                                                      controller
+                                                                              .bike
+                                                                              .brand! +
+                                                                          ' - ' +
+                                                                          controller
+                                                                              .bike
+                                                                              .color!,
+                                                                      style: Theme.of(
+                                                                              context)
+                                                                          .textTheme
+                                                                          .bodyText1,
+                                                                    ),
+                                                                  ],
+                                                                ],
+                                                              ),
                                                               Padding(
                                                                 padding: const EdgeInsets
                                                                         .symmetric(
@@ -842,16 +919,15 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                                     CustomDialog(context: context).loadingDialog.dismiss();
                                                                                   } else {
-                                                                                    CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kDevelopError.tr);
+                                                                                    AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                                   }
                                                                                 } else {
-                                                                                  CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kNotArrivedAtPickUpPoint.tr);
+                                                                                  AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kNotArrivedAtPickUpPoint.tr).show();
                                                                                 }
                                                                               });
                                                                         } else {
-                                                                          CommonFunctions().showInfoDialog(
-                                                                              context: context,
-                                                                              message: CustomStrings.kNeedLocationPermission.tr);
+                                                                          AwesomeDialog(context: context, dialogType: DialogType.INFO_REVERSED, headerAnimationLoop: false, desc: CustomStrings.kNeedLocationPermission.tr)
+                                                                              .show();
                                                                         }
                                                                       } else {
                                                                         if (buttonText.value ==
@@ -872,9 +948,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                               tripId: tripId)) {
                                                                             changeToFinishTripButton();
                                                                           } else {
-                                                                            CommonFunctions().showErrorDialog(
-                                                                                context: context,
-                                                                                message: CustomErrorsString.kDevelopError.tr);
+                                                                            AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                           }
                                                                         } else {
                                                                           if (CommonFunctions().isArrivedAtPickUpPoint(
@@ -889,12 +963,10 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                               Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: controller.trip.tripId);
                                                                             } else {
-                                                                              CommonFunctions().showErrorDialog(context: context, message: CustomErrorsString.kDevelopError.tr);
+                                                                              AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                             }
                                                                           } else {
-                                                                            CommonFunctions().showErrorDialog(
-                                                                                context: context,
-                                                                                message: CustomErrorsString.kNotArrivedAtPickUpPoint.tr);
+                                                                            AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kNotArrivedAtPickUpPoint.tr).show();
                                                                           }
                                                                         }
                                                                       }
@@ -902,50 +974,50 @@ class TripDetailsPage extends StatelessWidget {
                                                             ),
                                                           ),
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  bottom: 16.0),
-                                                          child:
-                                                              CustomElevatedIconButton(
-                                                            width: 180,
-                                                            text: CustomStrings
-                                                                .kCancelTrip.tr,
-                                                            backgroundColor:
-                                                                CustomColors
-                                                                    .kLightGray,
-                                                            foregroundColor:
-                                                                CustomColors
-                                                                    .kDarkGray,
-                                                            elevation: 0.0,
-                                                            icon: Icons.clear,
-                                                            onPressedFunc: () {
-                                                              CommonFunctions()
-                                                                  .showConfirmDialog(
-                                                                      context:
-                                                                          context,
-                                                                      title: CustomStrings
-                                                                          .kConfirmCancelTrip
-                                                                          .tr,
-                                                                      message: CustomStrings
-                                                                          .kViewCancelTripReminder
-                                                                          .tr,
-                                                                      onPressedFunc:
-                                                                          () {
-                                                                        Get.back();
-
-                                                                        _showCancelReasonDialog(
-                                                                            context:
-                                                                                context,
-                                                                            tripId:
-                                                                                Get.arguments['tripId']);
-                                                                      });
-                                                            },
-                                                          ),
-                                                        ),
                                                       ],
                                                     ],
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 16.0),
+                                                      child:
+                                                          CustomElevatedIconButton(
+                                                        width: 180,
+                                                        text: CustomStrings
+                                                            .kCancelTrip.tr,
+                                                        backgroundColor:
+                                                            CustomColors
+                                                                .kLightGray,
+                                                        foregroundColor:
+                                                            CustomColors
+                                                                .kDarkGray,
+                                                        elevation: 0.0,
+                                                        icon: Icons.clear,
+                                                        onPressedFunc: () {
+                                                          CommonFunctions()
+                                                              .showConfirmDialog(
+                                                                  context:
+                                                                      context,
+                                                                  title: CustomStrings
+                                                                      .kConfirmCancelTrip
+                                                                      .tr,
+                                                                  message:
+                                                                      CustomStrings
+                                                                          .kViewCancelTripReminder
+                                                                          .tr,
+                                                                  onPressedFunc:
+                                                                      () {
+                                                                    Get.back();
+
+                                                                    _showCancelReasonDialog(
+                                                                        context:
+                                                                            context,
+                                                                        tripId:
+                                                                            Get.arguments['tripId']);
+                                                                  });
+                                                        },
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),

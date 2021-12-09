@@ -15,14 +15,17 @@ abstract class UserBehavior {
 class UserRepository extends UserBehavior {
   final _repositories = getIt<Repositories>();
 
-  Future<LoginResponse> signin(
-      {required String email,
-      required String password,
-      bool isAdmin = false}) async {
+  Future<LoginResponse> signin({
+    required String email,
+    required String password,
+    bool isAdmin = false,
+    required String fcmToken,
+  }) async {
     return await _repositories.signin(
       email: email,
       password: password,
       isAdmin: isAdmin,
+      fcmToken: fcmToken,
     );
   }
 

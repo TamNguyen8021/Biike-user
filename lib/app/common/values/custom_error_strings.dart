@@ -46,4 +46,14 @@ class CustomErrorsString {
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
   static const String kNoVoucherCode = 'kNoVoucherCode';
   static const String kTripTimeExist = 'kTripTimeExist';
+
+  //Login error message
+  static const String kNoAccount = 'kNoAccount';
+  static const String kWrongAccount = 'kWrongAccount';
+  static const String kUnVerifiedEmail = 'kUnVerifiedEmail';
+  static const String kLoginExceptionError = 'kLoginExceptionError';
+  static const String kEmptyToken = 'kEmptyToken';
+
+  static const String kCanOnlyAddStationFrom5AMTo9PM =
+      'kCanOnlyAddStationFrom5AMTo9PM';
 }

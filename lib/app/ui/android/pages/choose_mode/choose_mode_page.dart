@@ -1,7 +1,7 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
-import 'package:bikes_user/app/data/providers/bike_provider.dart';
 import 'package:bikes_user/app/data/providers/user_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/next_page_button.dart';
@@ -190,6 +190,9 @@ class ChooseModePage extends StatelessWidget {
             ),
             NextPageButton(
               onPressedFunc: () async {
+                CustomDialog customDialog = CustomDialog(context: context);
+                customDialog.loadingDialog.show();
+
                 try {
                   if (Biike.role.value != Role.none) {
                     int role = 1;
@@ -198,26 +201,52 @@ class ChooseModePage extends StatelessWidget {
                       role = 2;
                     }
 
-                    if (await _userProvider.changeRole(role: role)) {
+                    final hasRoleChanged =
+                        await _userProvider.changeRole(role: role);
+
+                    if (hasRoleChanged is bool) {
                       Biike.localAppData.saveRole(Biike.role.value);
+                      customDialog.loadingDialog.dismiss();
                       Get.offAllNamed(CommonRoutes.HOME);
                     } else {
-                      if (await BikeProvider().getBike() == null) {
+                      if (hasRoleChanged.contains('have bike')) {
+                        customDialog.loadingDialog.dismiss();
                         Get.toNamed(CommonRoutes.REQUIRE_ADD_BIKE);
+                      } else if (hasRoleChanged.contains('verified')) {
+                        customDialog.loadingDialog.dismiss();
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.INFO_REVERSED,
+                                headerAnimationLoop: false,
+                                desc:
+                                    CustomStrings.kWaitingAdminVerifiedBike.tr)
+                            .show();
                       } else {
-                        CommonFunctions().showErrorDialog(
-                            context: context,
-                            message: CustomErrorsString.kDevelopError.tr);
+                        customDialog.loadingDialog.dismiss();
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.ERROR,
+                                headerAnimationLoop: false,
+                                desc: CustomErrorsString.kDevelopError.tr)
+                            .show();
                       }
                     }
                   } else {
-                    CommonFunctions().showErrorDialog(
-                        context: context,
-                        message: CustomErrorsString.kNoRoleWereChosen.tr);
+                    AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.ERROR,
+                            headerAnimationLoop: false,
+                            desc: CustomErrorsString.kNoRoleWereChosen.tr)
+                        .show();
                   }
                 } catch (e) {
-                  CommonFunctions()
-                      .showErrorDialog(context: context, message: e.toString());
+                  customDialog.loadingDialog.dismiss();
+                  AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.ERROR,
+                          headerAnimationLoop: false,
+                          desc: e.toString())
+                      .show();
                 }
               },
               backgroundColor: Colors.white,

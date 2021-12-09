@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/ban_list_page.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
@@ -21,8 +21,12 @@ class BanListController extends GetxController {
       data = result.data;
       data.removeWhere((element) => element.isBlock == false);
     } catch (e) {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     } finally {
       update();
     }
@@ -37,8 +41,12 @@ class BanListController extends GetxController {
 
       await repositories.unBlock(blackListItem: blackListItem);
     } catch (e) {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     } finally {
       getBlackList(context: context);
       update();

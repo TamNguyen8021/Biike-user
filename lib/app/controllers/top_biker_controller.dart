@@ -24,17 +24,14 @@ class TopBikerController extends GetxController {
         var index = 0;
         for (var biker in response) {
           User user = User.fromJson(biker);
- 
-          topBiker.add(
-              TopBikerCard(
-                  index: index,
-                  avatarUrl: user.avatar,
-                  name: user.userFullname,
-                  point: biker['maxTotalPoint']
-              )
-          );
 
-          index ++;
+          topBiker.add(TopBikerCard(
+              index: index,
+              avatarUrl: user.avatar,
+              name: user.userFullname,
+              point: biker['maxTotalPoint']));
+
+          index++;
         }
       } catch (e) {
         CommonFunctions.catchExceptionError(e);

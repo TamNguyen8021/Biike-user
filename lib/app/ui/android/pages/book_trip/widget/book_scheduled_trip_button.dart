@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -16,7 +16,12 @@ class BookScheduledTripButton extends StatelessWidget {
     if (result is bool) {
       Get.toNamed(CommonRoutes.FIND_BIKER);
     } else {
-      CommonFunctions().showErrorDialog(context: context, message: result);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: result)
+          .show();
     }
   }
 

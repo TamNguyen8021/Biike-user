@@ -24,7 +24,7 @@ final Map<String, String> en = {
   'kPassword': 'Password',
   'kInputPassword': 'Enter password',
   'kLogin': 'Sign in',
-  'kNoAccount': 'No account yet? ',
+  'kNoAccount': 'No account yet? Please try Sign Up',
   'kRegister': 'Sign up now!',
   'kWrongAccount': 'Your account/password is incorrect, please check again',
   'kUnVerifiedEmail':
@@ -40,7 +40,6 @@ final Map<String, String> en = {
   'kInputPhoneNumber': 'Enter phone number',
   'kSentVerifiedEmail':
       'We sent a verified email to your mailbox. Please verify your account before login',
-  'kRegisterSuccess': 'Your account created successful',
 
 // '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
@@ -105,6 +104,9 @@ final Map<String, String> en = {
   'kAdd': 'Add',
   'kDelete': 'Delete',
   'kChooseStation': 'Choose station',
+  'kAddStationSuccess': 'A new station were added',
+  'kEditStationSuccess': 'Your station info were updated',
+  'kDeleteStationSuccess': 'The station were removed',
 
 // 'top_biker' screen
   'kBikerRank': 'Biker Rank',
@@ -148,6 +150,7 @@ final Map<String, String> en = {
 
 // 'update_profile' screen
   'kEditProfile': 'Edit profile',
+  'kBiikeProfile': 'Biiké profile',
   'kFullName': 'Full name',
   'kGender': 'Gender',
   'kMale': 'Male',
@@ -158,7 +161,28 @@ final Map<String, String> en = {
   'kChooseBirthDate': 'Choose a date',
   'kEditProfileSuccess': 'Your profile was edited',
 
-// 'biker_profile' screen
+  // 'account_verification' screen'
+  'kAccountVerification': 'Account verification',
+  'kLetsVerifiedAccount':
+      'Let\'s verified your account so that every trip with Biiké can be safer.',
+  'kEmailVerification': 'Email verification',
+  'kEmailVerificationDescription': 'can use the application',
+  'kPhoneVerification': 'Phone verification',
+  'kPhoneVerificationDescription': 'can book trip',
+  'kBikeVerification': 'Bike verification',
+  'kBikeVerificationDescription': 'can match trip',
+
+  // 'biike_profile' screen
+  'kOnJourneyWithBiike': 'On your journey with Biiké, you have',
+  'kNoOfRideTrips': 'Ride trips',
+  'kNoOfFreeTrips': 'Free trips',
+  'kNoOfKm': 'km was saved',
+  'kNoOfGasLitres': 'litres of gasoline was saved',
+  'kThankYouForChoosingBiike':
+      'Thank you for choosing Biiké and let\'s create great milestones in the future together!',
+  'kFromFPTUniversity': 'from FPT University',
+
+  // 'biker_profile' screen
   'kManageBike': 'Manage bike',
 
 // 'view_user' screen
@@ -464,4 +488,6 @@ final Map<String, String> en = {
     'kNoVoucherCode':
         'Currently there is out of available voucher code for this voucher, please try again later',
     'kTripTimeExist': 'You have already booked a trip with this timestamp',
+    'kCanOnlyAddStationFrom5AMTo9PM':
+        'You can only add station from 5AM to 9PM',
   });

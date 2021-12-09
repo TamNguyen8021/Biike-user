@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/providers/address_book_provider.dart';
@@ -27,8 +28,7 @@ class AddressBookController extends GetxController {
               name: address['userAddressName'],
               address: address['userAddressDetail'],
               note: address['userAddressNote'],
-              isDefault: address['isDefault'])
-          );
+              isDefault: address['isDefault']));
         }
       } catch (e) {
         CommonFunctions.catchExceptionError(e);
@@ -42,11 +42,13 @@ class AddressBookController extends GetxController {
     if (result) {
       await getAddressBooks();
       Get.back();
-      CommonFunctions()
-          .showInfoDialog(context: context, message: "Xoá địa chỉ thành công!");
     } else {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kDevelopError.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
     }
   }
 }

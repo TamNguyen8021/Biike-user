@@ -1,4 +1,4 @@
-import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/add_address_book_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
@@ -26,8 +26,8 @@ class AddAddressBookPage extends StatelessWidget {
         appBar: AppBar(),
         title: Text(CustomStrings.kAddAddressBook.tr),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 22.0, vertical: 20.0),
@@ -135,15 +135,21 @@ class AddAddressBookPage extends StatelessWidget {
                                 .addAddress()) {
                               Get.back();
                             } else {
-                              CommonFunctions().showErrorDialog(
-                                  context: context,
-                                  message: CustomErrorsString.kDevelopError.tr);
+                              AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.ERROR,
+                                      headerAnimationLoop: false,
+                                      desc: CustomErrorsString.kDevelopError.tr)
+                                  .show();
                             }
                           } else {
-                            CommonFunctions().showErrorDialog(
-                                context: context,
-                                message:
-                                    CustomErrorsString.kNotFillAllFields.tr);
+                            AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.ERROR,
+                                    headerAnimationLoop: false,
+                                    desc:
+                                        CustomErrorsString.kNotFillAllFields.tr)
+                                .show();
                           }
                         },
                         text: CustomStrings.kSave.tr,

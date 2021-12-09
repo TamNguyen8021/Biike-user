@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -6,6 +7,7 @@ import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
 import 'package:bikes_user/network/repositories.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
+import 'package:bikes_user/services/firebase_cloud_message_service.dart';
 import 'package:bikes_user/services/shared_preference_service.dart';
 import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
@@ -28,9 +30,12 @@ class LoginController extends GetxController {
     _enableLoading(true);
 
     try {
-      // sau khi login xong save user info
-      final response =
-          await _userRepository.signin(email: email, password: pass);
+      final _fcmToken = await getIt<FirebaseCloudMessagingService>().token;
+      final response = await _userRepository.signin(
+        email: email,
+        password: pass,
+        fcmToken: _fcmToken,
+      );
 
       if (response.data.idToken.isEmpty) {
         throw (CustomStrings.kEmptyToken);
@@ -63,8 +68,14 @@ class LoginController extends GetxController {
         }
       }
 
-      await CommonFunctions()
-          .showErrorDialog(context: context, message: _errorMessage);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: _errorMessage)
+          .show();
+    } catch (e) {
+      CommonFunctions.catchExceptionError(e);
     } finally {
       _enableLoading(false);
     }
@@ -75,15 +86,22 @@ class LoginController extends GetxController {
       required String email,
       required String pass}) {
     if (!(EmailValidator.validate(email)) || !checkMail(email)) {
-      CommonFunctions().showErrorDialog(
-          context: context,
-          message: CustomErrorsString.kMustLoginWithFPTEmail.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kMustLoginWithFPTEmail.tr)
+          .show();
       return false;
     }
 
     if (pass.trim().length < 1) {
-      CommonFunctions().showErrorDialog(
-          context: context, message: CustomErrorsString.kNoPasswordEnter.tr);
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kNoPasswordEnter.tr)
+          .show();
       return false;
     }
     return true;
