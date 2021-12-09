@@ -711,22 +711,28 @@ class TripDetailsPage extends StatelessWidget {
                                                                             fontWeight: FontWeight.bold),
                                                                       ),
                                                                     ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          left:
-                                                                              4.0),
-                                                                      child:
-                                                                          Text(
-                                                                        controller
-                                                                            .bike
-                                                                            .plateNumber!,
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                CustomColors.kDarkGray,
-                                                                            fontWeight: FontWeight.bold),
+                                                                    if (Biike.role.value ==
+                                                                            Role
+                                                                                .keer &&
+                                                                        (controller.trip.tripStatus != 5 &&
+                                                                            controller.trip.tripStatus !=
+                                                                                6 &&
+                                                                            controller.trip.tripStatus !=
+                                                                                1)) ...[
+                                                                      Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.only(left: 4.0),
+                                                                        child:
+                                                                            Text(
+                                                                          controller
+                                                                              .bike
+                                                                              .plateNumber!,
+                                                                          style: TextStyle(
+                                                                              color: CustomColors.kDarkGray,
+                                                                              fontWeight: FontWeight.bold),
+                                                                        ),
                                                                       ),
-                                                                    ),
+                                                                    ],
                                                                   ],
                                                                 ),
                                                               ),
@@ -741,19 +747,29 @@ class TripDetailsPage extends StatelessWidget {
                                                                           .user
                                                                           .userStar
                                                                           .toString()),
-                                                                  Text(
-                                                                    controller
-                                                                            .bike
-                                                                            .brand! +
-                                                                        ' - ' +
-                                                                        controller
-                                                                            .bike
-                                                                            .color!,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .bodyText1,
-                                                                  ),
+                                                                  if (Biike.role
+                                                                              .value ==
+                                                                          Role
+                                                                              .keer &&
+                                                                      (controller.trip.tripStatus != 5 &&
+                                                                          controller.trip.tripStatus !=
+                                                                              6 &&
+                                                                          controller.trip.tripStatus !=
+                                                                              1)) ...[
+                                                                    Text(
+                                                                      controller
+                                                                              .bike
+                                                                              .brand! +
+                                                                          ' - ' +
+                                                                          controller
+                                                                              .bike
+                                                                              .color!,
+                                                                      style: Theme.of(
+                                                                              context)
+                                                                          .textTheme
+                                                                          .bodyText1,
+                                                                    ),
+                                                                  ],
                                                                 ],
                                                               ),
                                                               Padding(
