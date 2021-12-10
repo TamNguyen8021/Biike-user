@@ -8,38 +8,29 @@ import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
 class MapViewer extends StatelessWidget {
   final Completer<GoogleMapController> completerController;
+  final Set<Marker> markers;
   final List<LatLng> polypoints;
-  final LocationData? userLocation;
-  final String departureName;
-  final String departureCoordinate;
-  final String destinationName;
-  final String destinationCoordinate;
+  final CustomLocation departure;
+  final CustomLocation destination;
   final bool isFullMap;
 
-  MapViewer(
-      {Key? key,
-      required this.isFullMap,
-      required this.completerController,
-      required this.polypoints,
-      this.userLocation,
-      required this.departureName,
-      required this.departureCoordinate,
-      required this.destinationName,
-      required this.destinationCoordinate})
-      : super(key: key);
+  MapViewer({
+    Key? key,
+    required this.markers,
+    required this.isFullMap,
+    required this.completerController,
+    required this.polypoints,
+    required this.departure,
+    required this.destination,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    CustomLocation departure = CustomLocation(coordinate: departureCoordinate);
-    CustomLocation destination =
-        CustomLocation(coordinate: destinationCoordinate);
-
     Rx<bool> isViewRouteInstructionButtonVisible = true.obs;
 
     if (isFullMap) {
@@ -73,24 +64,7 @@ class MapViewer extends StatelessWidget {
                   onMapCreated: (GoogleMapController controller) {
                     completerController.complete(controller);
                   },
-                  markers: <Marker>{
-                    Marker(
-                      markerId: MarkerId('departure'),
-                      position: LatLng(departure.latitude, departure.longitude),
-                      infoWindow: InfoWindow(
-                          title: CustomStrings.kStartLocation.tr,
-                          snippet: departureName),
-                    ),
-                    Marker(
-                        markerId: MarkerId('destination'),
-                        position:
-                            LatLng(destination.latitude, destination.longitude),
-                        infoWindow: InfoWindow(
-                            title: CustomStrings.kEndLocation.tr,
-                            snippet: destinationName),
-                        icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueGreen)),
-                  },
+                  markers: markers.toSet(),
                   polylines: <Polyline>{
                     Polyline(
                         polylineId: PolylineId('route'),

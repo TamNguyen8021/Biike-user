@@ -54,7 +54,7 @@ class VoucherController extends GetxController {
 
   Future<dynamic> updateNearMe() async {
     try {
-      LocationData? userLocation = await CommonFunctions().getCurrentLocation();
+      LocationData? userLocation = await CommonFunctions.getCurrentLocation();
 
       if (userLocation == null) {
         return CustomStrings.kNeedLocationPermission.tr;

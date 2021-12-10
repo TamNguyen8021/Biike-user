@@ -22,12 +22,15 @@ import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/contact_buttons.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_elevated_icon_button.dart';
 import 'package:bikes_user/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:location/location.dart';
 
 /// 'trip_details' screen
 //ignore: must_be_immutable
@@ -218,6 +221,9 @@ class TripDetailsPage extends StatelessWidget {
     if (Get.arguments['route'] == 'home') {
       _homeController.pagingController.refresh();
     } else if (Get.arguments['route'] == 'getTripSuccess') {
+      _homeController.upcomingTrips.clear();
+      _homeController.pagingController.itemList!.clear();
+      _homeController.pagingController.notifyPageRequestListeners(0);
       await _homeController.searchTrips(
           date: _homeController.searchDate.value,
           time: _homeController.searchTime.value,
@@ -267,6 +273,7 @@ class TripDetailsPage extends StatelessWidget {
           init: _tripDetailsController,
           builder: (TripDetailsController controller) {
             return Scaffold(
+              resizeToAvoidBottomInset: false,
               appBar: CustomAppBar(
                 hasShape: true,
                 hasLeading: true,
@@ -284,7 +291,7 @@ class TripDetailsPage extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () async {
                               controller.userLocation =
-                                  await CommonFunctions().getCurrentLocation();
+                                  await CommonFunctions.getCurrentLocation();
                               if (controller.userLocation != null) {
                                 controller.showHelpCenter(context: context);
                               } else {
@@ -325,6 +332,39 @@ class TripDetailsPage extends StatelessWidget {
                   builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
+                      CustomLocation departure = CustomLocation(
+                          coordinate:
+                              controller.departureStation.departureCoordinate);
+                      CustomLocation destination = CustomLocation(
+                          coordinate: controller
+                              .destinationStation.destinationCoordinate);
+
+                      RxSet<Marker> markers = {
+                        Marker(
+                            markerId: MarkerId('departure'),
+                            position:
+                                LatLng(departure.latitude, departure.longitude),
+                            infoWindow: InfoWindow(
+                                title: CustomStrings.kStartLocation.tr,
+                                snippet:
+                                    controller.departureStation.departureName)),
+                        Marker(
+                            markerId: MarkerId('destination'),
+                            position: LatLng(
+                                destination.latitude, destination.longitude),
+                            infoWindow: InfoWindow(
+                                title: CustomStrings.kEndLocation.tr,
+                                snippet: controller
+                                    .destinationStation.destinationName),
+                            icon: BitmapDescriptor.defaultMarkerWithHue(
+                                BitmapDescriptor.hueGreen)),
+                        Marker(
+                          markerId: MarkerId('user'),
+                          position:
+                              LatLng(departure.latitude, departure.longitude),
+                        ),
+                      }.obs;
+
                       return FutureBuilder(
                           future: _tripProvider.isArrivedAtPickUpPoint(
                               tripId: tripId),
@@ -405,28 +445,44 @@ class TripDetailsPage extends StatelessWidget {
                                                     5 &&
                                                 controller.trip.tripStatus !=
                                                     6) ...[
-                                              MapViewer(
+                                              // CustomTextButton(
+                                              //     backgroundColor: Colors.white,
+                                              //     foregroundColor:
+                                              //         CustomColors.kBlue,
+                                              //     text: 'test',
+                                              //     onPressedFunc: () async {
+                                              //       await FirebaseFirestore
+                                              //           .instance
+                                              //           .collection('locations')
+                                              //           .add({
+                                              //         'tripId': tripId,
+                                              //         'userId':
+                                              //             Biike.userId.value,
+                                              //         'position': Geoflutterfire()
+                                              //             .point(
+                                              //                 latitude: controller
+                                              //                     .userLocation!
+                                              //                     .latitude!,
+                                              //                 longitude: controller
+                                              //                     .userLocation!
+                                              //                     .longitude!)
+                                              //             .data,
+                                              //         'time': DateTime.now()
+                                              //       });
+                                              //     },
+                                              //     hasBorder: false),
+                                              Obx(
+                                                () => MapViewer(
                                                   isFullMap: false,
                                                   completerController:
                                                       completerController,
                                                   polypoints:
                                                       controller.polypoints,
-                                                  departureName:
-                                                      _tripDetailsController
-                                                          .departureStation
-                                                          .departureName,
-                                                  departureCoordinate:
-                                                      controller
-                                                          .departureStation
-                                                          .departureCoordinate,
-                                                  destinationName:
-                                                      _tripDetailsController
-                                                          .destinationStation
-                                                          .destinationName,
-                                                  destinationCoordinate:
-                                                      controller
-                                                          .destinationStation
-                                                          .destinationCoordinate),
+                                                  departure: departure,
+                                                  destination: destination,
+                                                  markers: markers.toSet(),
+                                                ),
+                                              ),
                                               Container(
                                                 alignment: Alignment.center,
                                                 child: CustomTextButton(
@@ -444,7 +500,12 @@ class TripDetailsPage extends StatelessWidget {
                                                               .TRIP_DETAILS_FULL_MAP,
                                                           arguments: {
                                                             'tripId': controller
-                                                                .trip.tripId
+                                                                .trip.tripId,
+                                                            'departure':
+                                                                departure,
+                                                            'destination':
+                                                                destination,
+                                                            'markers': markers,
                                                           });
                                                     }),
                                               ),
@@ -892,7 +953,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                       if (isArrivedAtPickUpPoint
                                                                           .isFalse) {
                                                                         controller.userLocation =
-                                                                            await CommonFunctions().getCurrentLocation();
+                                                                            await CommonFunctions.getCurrentLocation();
 
                                                                         if (controller.userLocation !=
                                                                             null) {
@@ -901,7 +962,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                               title: CustomStrings.kConfirmArrivalTitle.tr,
                                                                               message: Biike.role.value == Role.keer ? CustomStrings.kConfirmArrivalMessageForKeer.tr : CustomStrings.kConfirmArrivalMessageForBiker.tr,
                                                                               onPressedFunc: () async {
-                                                                                controller.userLocation = await CommonFunctions().getCurrentLocation();
+                                                                                controller.userLocation = await CommonFunctions.getCurrentLocation();
 
                                                                                 if (CommonFunctions().isArrivedAtPickUpPoint(userLat: controller.userLocation!.latitude!, userLng: controller.userLocation!.longitude!, departureLat: departureLocation.latitude, departureLng: departureLocation.longitude)) {
                                                                                   Get.back();
@@ -931,7 +992,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                         }
                                                                       } else {
                                                                         if (buttonText.value ==
-                                                                            CustomStrings.kStart) {
+                                                                            CustomStrings.kStart.tr) {
                                                                           GoogleMapController
                                                                               googleMapController =
                                                                               await completerController.future;
@@ -946,6 +1007,48 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                           if (await _tripProvider.startTrip(
                                                                               tripId: tripId)) {
+                                                                            FirebaseFirestore
+                                                                                firebaseFirestore =
+                                                                                FirebaseFirestore.instance;
+                                                                            Geoflutterfire
+                                                                                geo =
+                                                                                Geoflutterfire();
+                                                                            Location
+                                                                                location =
+                                                                                Location();
+                                                                            location.onLocationChanged.listen((LocationData
+                                                                                currentLocation) async {
+                                                                              await googleMapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                                                                                target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
+                                                                                zoom: 12,
+                                                                              )));
+
+                                                                              firebaseFirestore.collection('locations').add({
+                                                                                'tripId': tripId,
+                                                                                'userId': Biike.userId.value,
+                                                                                'position': geo.point(latitude: controller.userLocation!.latitude!, longitude: controller.userLocation!.longitude!).data,
+                                                                                'time': DateTime.now()
+                                                                              });
+
+                                                                              QuerySnapshot<Map<String, dynamic>> snapshot = await firebaseFirestore.collection('locations').where('tripId', isEqualTo: tripId).where('userId', isEqualTo: controller.user.userId).limit(1).orderBy('time', descending: true).get();
+
+                                                                              List<QueryDocumentSnapshot> docs = snapshot.docs;
+
+                                                                              for (var doc in docs) {
+                                                                                if (doc.data() != null) {
+                                                                                  var data = doc.data() as Map<String, dynamic>;
+                                                                                  GeoPoint pos = data['position']['geopoint']; // You can get other data in this manner.
+                                                                                  Marker marker = Marker(
+                                                                                    markerId: MarkerId('user'),
+                                                                                    position: LatLng(pos.latitude, pos.longitude),
+                                                                                    icon: await BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(10, 10)), 'assets/images/user-marker-1.png'),
+                                                                                  );
+
+                                                                                  markers.removeWhere((element) => element.markerId.value == 'user');
+                                                                                  markers.add(marker);
+                                                                                }
+                                                                              }
+                                                                            });
                                                                             changeToFinishTripButton();
                                                                           } else {
                                                                             AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
@@ -954,8 +1057,8 @@ class TripDetailsPage extends StatelessWidget {
                                                                           if (CommonFunctions().isArrivedAtPickUpPoint(
                                                                               userLat: controller.userLocation!.latitude!,
                                                                               userLng: controller.userLocation!.longitude!,
-                                                                              departureLat: departureLocation.latitude,
-                                                                              departureLng: departureLocation.longitude)) {
+                                                                              departureLat: destination.latitude,
+                                                                              departureLng: destination.longitude)) {
                                                                             if (await _tripProvider.completeTrip(tripId: tripId)) {
                                                                               if (controller.isLocationShared.isTrue) {
                                                                                 await controller.pathshareProvider.startOrStopLocationSharing(isShared: false, sessionIdentifier: controller.sessionIdentifier);
