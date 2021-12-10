@@ -232,8 +232,18 @@ class UpcomingTripCard extends StatelessWidget {
                                   CustomDialog(context: context);
                               customDialog.loadingDialog.show();
 
-                              bool isSuccess = await _tripProvider.acceptTrip(
-                                  tripId: tripId);
+                              bool isSuccess = await _tripProvider
+                                  .acceptTrip(tripId: tripId)
+                                  .catchError((error) {
+                                customDialog.loadingDialog.dismiss();
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.ERROR,
+                                        headerAnimationLoop: false,
+                                        desc:
+                                            CustomErrorsString.kDevelopError.tr)
+                                    .show();
+                              });
                               if (isSuccess) {
                                 customDialog.loadingDialog.dismiss();
                                 Get.toNamed(CommonRoutes.GET_TRIP_SUCCESS,

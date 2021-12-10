@@ -48,7 +48,7 @@ class ConfirmArrivalButton extends StatelessWidget {
               child: Obx(() => ElevatedButton.icon(
                     onPressed: () async {
                       tripDetailsController.userLocation =
-                          await CommonFunctions().getCurrentLocation();
+                          await CommonFunctions.getCurrentLocation();
 
                       if (tripDetailsController.userLocation != null) {
                         CommonFunctions().showConfirmDialog(
@@ -62,7 +62,7 @@ class ConfirmArrivalButton extends StatelessWidget {
                               await tripDetailsController.getTripDetails(
                                   tripId: tripId);
                               tripDetailsController.userLocation =
-                                  await CommonFunctions().getCurrentLocation();
+                                  await CommonFunctions.getCurrentLocation();
 
                               CustomLocation departureLocation = CustomLocation(
                                   coordinate: tripDetailsController

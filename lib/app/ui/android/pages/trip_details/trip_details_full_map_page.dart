@@ -19,11 +19,6 @@ class TripDetailsFullMapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String _departureCoordinate =
-        _tripDetailsController.departureStation.departureCoordinate;
-    final String _destinationCoordinate =
-        _tripDetailsController.destinationStation.destinationCoordinate;
-
     return GetBuilder(
         init: _tripDetailsController,
         builder: (_) {
@@ -70,15 +65,13 @@ class TripDetailsFullMapPage extends StatelessWidget {
             body: Stack(
               children: <Widget>[
                 MapViewer(
-                    isFullMap: true,
-                    completerController: controller,
-                    polypoints: _tripDetailsController.polypoints,
-                    departureName:
-                        _tripDetailsController.departureStation.departureName,
-                    departureCoordinate: _departureCoordinate,
-                    destinationName: _tripDetailsController
-                        .destinationStation.destinationName,
-                    destinationCoordinate: _destinationCoordinate),
+                  isFullMap: true,
+                  completerController: controller,
+                  polypoints: _tripDetailsController.polypoints,
+                  departure: Get.arguments['departure'],
+                  destination: Get.arguments['destination'],
+                  markers: Get.arguments['markers'],
+                ),
                 Container(
                   alignment: Alignment.bottomCenter,
                   margin: const EdgeInsets.symmetric(

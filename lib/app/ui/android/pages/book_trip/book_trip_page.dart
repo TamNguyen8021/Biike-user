@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/book_trip/widget/ke_now_button.dart';
@@ -76,14 +77,54 @@ class BookTripPage extends StatelessWidget {
                       Obx(() => MapViewer(
                             isFullMap: false,
                             completerController: controller,
-                            departureName:
-                                _bookTripController.departureStation.value.name,
-                            departureCoordinate: _bookTripController
-                                .departureStation.value.coordinate,
-                            destinationName: _bookTripController
-                                .destinationStation.value.name,
-                            destinationCoordinate: _bookTripController
-                                .destinationStation.value.coordinate,
+                            departure: CustomLocation(
+                                coordinate: _bookTripController
+                                    .departureStation.value.coordinate),
+                            destination: CustomLocation(
+                                coordinate: _bookTripController
+                                    .destinationStation.value.coordinate),
+                            markers: {
+                              Marker(
+                                  markerId: MarkerId('departure'),
+                                  position: LatLng(
+                                      CustomLocation(
+                                              coordinate: _bookTripController
+                                                  .departureStation
+                                                  .value
+                                                  .coordinate)
+                                          .latitude,
+                                      CustomLocation(
+                                              coordinate: _bookTripController
+                                                  .departureStation
+                                                  .value
+                                                  .coordinate)
+                                          .longitude),
+                                  infoWindow: InfoWindow(
+                                      title: CustomStrings.kStartLocation.tr,
+                                      snippet: _bookTripController
+                                          .departureStation.value.name)),
+                              Marker(
+                                  markerId: MarkerId('destination'),
+                                  position: LatLng(
+                                      CustomLocation(
+                                              coordinate: _bookTripController
+                                                  .destinationStation
+                                                  .value
+                                                  .coordinate)
+                                          .latitude,
+                                      CustomLocation(
+                                              coordinate: _bookTripController
+                                                  .destinationStation
+                                                  .value
+                                                  .coordinate)
+                                          .longitude),
+                                  infoWindow: InfoWindow(
+                                      title: CustomStrings.kEndLocation.tr,
+                                      snippet: _bookTripController
+                                          .destinationStation.value.name),
+                                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                                      BitmapDescriptor.hueGreen)),
+                            },
                             polypoints: _bookTripController.polypoints.toList(),
                           )),
                       Obx(
