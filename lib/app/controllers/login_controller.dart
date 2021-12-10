@@ -64,7 +64,7 @@ class LoginController extends GetxController {
         }
         if (_errorResult.contains('verified') &&
             _errorResult.contains('email')) {
-          _errorMessage = CustomStrings.kUnVerifiedEmail;
+          _errorMessage = CustomErrorsString.kUnVerifiedEmail.tr;
         }
       }
 
