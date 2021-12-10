@@ -213,7 +213,7 @@ class EditAddressBookPage extends StatelessWidget {
                                             dialogType: DialogType.ERROR,
                                             headerAnimationLoop: false,
                                             desc: CustomErrorsString
-                                                .kDevelopError.tr)
+                                                .kDeleteDafaultAddress.tr)
                                         .show();
                                   }
                                 } else {
