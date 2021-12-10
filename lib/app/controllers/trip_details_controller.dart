@@ -7,6 +7,7 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/url_strings.dart';
 import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/controllers/sos_number_controller.dart';
 import 'package:bikes_user/app/data/enums/trip_status_enum.dart';
 import 'package:bikes_user/app/data/models/bike.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
@@ -19,6 +20,7 @@ import 'package:bikes_user/app/data/providers/pathshare_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/cards/sos_number_card.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/help_center_row.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
@@ -36,6 +38,7 @@ class TripDetailsController extends GetxController {
   final _tripProvider = Get.find<TripProvider>();
   final _homeController = Get.find<HomeController>();
   final _profileController = Get.find<ProfileController>();
+  final _sosNumberController = Get.find<SOSNumberController>();
   final pathshareProvider = Get.find<PathshareProvider>();
   FirebaseRealtimeDatabaseService _databaseService =
       getIt<FirebaseRealtimeDatabaseService>();
@@ -477,32 +480,48 @@ class TripDetailsController extends GetxController {
                     icon: Icons.dialpad,
                     text: CustomStrings.kSOSCenter.tr,
                     isLastRow: false,
-                    onTapFunc: () {
+                    onTapFunc: () async {
                       if (isLocationShared.isTrue) {
-                        final TextEditingController controller =
-                            TextEditingController();
-                        Get.defaultDialog(
-                          content: TextFormField(
-                            controller: controller,
-                            decoration: InputDecoration(
-                              labelText: CustomStrings.kPhoneNo.tr,
-                            ),
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () async {
-                                CommonFunctions().makingSms(
-                                    phoneNo: [controller.text],
-                                    body: '(Nội dung tiếng Việt): ' +
-                                        _shareUrl +
-                                        '\n\n(English content): ' +
-                                        _shareUrl);
-                              },
-                              child: Text(CustomStrings.kBtnSend.tr),
-                            ),
-                          ],
-                        );
+                        List<SOSNumberCard> sosNumbers =
+                            await _sosNumberController.getSOSNumbers();
+                        if (sosNumbers.isEmpty) {
+                          AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.ERROR,
+                                  headerAnimationLoop: false,
+                                  desc: CustomErrorsString.kNoSosNumberSaved.tr)
+                              .show();
+                        } else {
+                          List<String> tempSOSNumbers = [];
+                          _sosNumberController.sosNumbers.forEach((element) {
+                            tempSOSNumbers.add(element.number);
+                          });
+                          CommonFunctions.makingSms(
+                              phoneNo: tempSOSNumbers,
+                              body:
+                                  'Cảnh báo S.O.S từ Biiké: $_shareUrl. ${_profileController.user.userFullname} (${_profileController.user.userPhoneNumber}) có thể đang gặp nguy hiểm. Hãy liên hệ họ ngay.\n\n${_profileController.user.userFullname} (${_profileController.user.userPhoneNumber}) triggered the Emergency button during a Biiké ride. See details here - $_shareUrl. As ${_profileController.user.userFullname}\'s Emergency contact, we suggest you call ${_profileController.user.userFullname} now or the local police.');
+                          // if (await _speedSMSProvider.sendSms(
+                          //     phoneNo: tempSOSNumbers,
+                          //     link: _shareUrl,
+                          //     userName: _profileController.user.userFullname,
+                          //     userPhone:
+                          //         _profileController.user.userPhoneNumber)) {
+                          //   AwesomeDialog(
+                          //           context: context,
+                          //           dialogType: DialogType.SUCCES,
+                          //           headerAnimationLoop: false,
+                          //           desc:
+                          //               CustomStrings.kSendSOSMessageSuccess.tr)
+                          //       .show();
+                          // } else {
+                          //   AwesomeDialog(
+                          //           context: context,
+                          //           dialogType: DialogType.ERROR,
+                          //           headerAnimationLoop: false,
+                          //           desc: CustomErrorsString.kDevelopError.tr)
+                          //       .show();
+                          // }
+                        }
                       } else {
                         AwesomeDialog(
                                 context: context,
