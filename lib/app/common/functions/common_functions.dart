@@ -268,7 +268,7 @@ class CommonFunctions {
   }
 
   /// Author: TamNTT
-  Future<LocationData?> getCurrentLocation() async {
+  static Future<LocationData?> getCurrentLocation() async {
     final _location = Location();
 
     bool _serviceEnabled;

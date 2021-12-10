@@ -457,7 +457,8 @@ final Map<String, String> en = {
     'kCannotGoBackWhenTripStarted':
         'You cannot go back when the trip has started',
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
-    'kSameStationWereAdded': 'A station with the same information were added',
+    'kSameStationWereAdded':
+        'A station with the same name were created in this time range',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
     'kEmailMustNotBeEmpty': 'Email must not be empty',
     'kMustLoginWithFPTEmail': 'Please sign in with FPT email',

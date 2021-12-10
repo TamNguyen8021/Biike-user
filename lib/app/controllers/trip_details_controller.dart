@@ -64,7 +64,7 @@ class TripDetailsController extends GetxController {
 
   @override
   onInit() async {
-    userLocation = await CommonFunctions().getCurrentLocation();
+    userLocation = await CommonFunctions.getCurrentLocation();
     super.onInit();
   }
 

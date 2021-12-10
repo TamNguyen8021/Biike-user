@@ -490,7 +490,8 @@ final Map<String, String> vi = {
         'Không thể quay lại khi chuyến đi đã bắt đầu',
     'kFromTimeMustBeBeforeToTime':
         'Thời gian bắt đầu phải trước thời gian kết thúc',
-    'kSameStationWereAdded': 'Đã có trạm trùng khớp thông tin được thêm vào',
+    'kSameStationWereAdded':
+        'Đã có trạm trùng tên được thiết lập trong khoảng thời gian này',
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
     'kEmailMustNotBeEmpty': 'Vui lòng điền email',

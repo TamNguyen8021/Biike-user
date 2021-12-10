@@ -90,6 +90,11 @@ class GetTripSuccessPage extends StatelessWidget {
                                       CustomDialog(context: context);
 
                                   customDialog.loadingDialog.show();
+                                  _homeController.upcomingTrips.clear();
+                                  _homeController.pagingController.itemList!
+                                      .clear();
+                                  _homeController.pagingController
+                                      .notifyPageRequestListeners(0);
                                   await _homeController.searchTrips(
                                       date: _homeController.searchDate.value,
                                       time: _homeController.searchTime.value,
