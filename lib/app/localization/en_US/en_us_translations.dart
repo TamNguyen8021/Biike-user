@@ -467,6 +467,8 @@ final Map<String, String> en = {
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
     'kSameStationWereAdded':
         'A station with the same name were created in this time range',
+    'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins':
+        'Time range between from time and to time must be at least 15 minutes',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
     'kEmailMustNotBeEmpty': 'Email must not be empty',
     'kMustLoginWithFPTEmail': 'Please sign in with FPT email',

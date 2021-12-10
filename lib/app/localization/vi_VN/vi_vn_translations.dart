@@ -488,6 +488,8 @@ final Map<String, String> vi = {
         'Thời gian bắt đầu phải trước thời gian kết thúc',
     'kSameStationWereAdded':
         'Đã có trạm trùng tên được thiết lập trong khoảng thời gian này',
+    'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins':
+        'Thời gian bắt đầu và thời gian kết thúc phải cách nhau tối thiểu là 15 phút',
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
     'kEmailMustNotBeEmpty': 'Vui lòng điền email',
