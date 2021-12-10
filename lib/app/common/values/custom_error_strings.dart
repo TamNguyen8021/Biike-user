@@ -57,4 +57,5 @@ class CustomErrorsString {
   static const String kCanOnlyAddStationFrom5AMTo9PM =
       'kCanOnlyAddStationFrom5AMTo9PM';
   static const String kExceedMaxTrips = 'kExceedMaxTrips';
+  static const String kChangeModeToBiker = 'kChangeModeToBiker';
 }

@@ -323,10 +323,9 @@ final Map<String, String> vi = {
   'kChooseTime': 'Chọn giờ',
   'kRepeat': 'Lặp lại',
   'kCancel': 'Hủy',
-  'kRuleWhenBookTrip' : 'Quy định khi đặt chuyến',
-  'kRuleBookTrip1':
-      '1.\tKhông được đặt lịch quá 15 chuyến',
-  'kRuleBookTrip2': '2.\tChỉ có thể hủy tối đa 3 chuyến/ngày',
+  'kRuleWhenBookTrip': 'Quy định khi đặt chuyến',
+  'kRuleBookTrip1': '1.\tKhông được đặt lịch quá 15 chuyến',
+  'kRuleBookTrip2': '2.\tChỉ có thể hủy tối đa 5 chuyến/ngày',
 
   // 'bike_manager' screen
   'kBikeVerified': 'Đã xác minh',
@@ -526,5 +525,6 @@ final Map<String, String> vi = {
         'Bạn đã đặt một chuyến trước đó trong khoảng thời gian này rồi',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'Bạn chỉ có thể thêm trạm trong khoảng thời gian từ 5 giờ sáng đến 9 giờ tối',
-    'kExceedMaxTrips' : 'Bạn không thể có quá 15 chuyến lên lịch',
+    'kExceedMaxTrips': 'Bạn không thể có quá 15 chuyến lên lịch',
+    'kChangeModeToBiker': 'Xin chuyển sang Chở ké mode',
   });

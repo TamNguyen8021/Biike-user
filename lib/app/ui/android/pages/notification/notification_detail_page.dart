@@ -1,12 +1,16 @@
 import 'package:back_pressed/back_pressed.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/notification_controller.dart';
+import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:get/get.dart';
@@ -18,19 +22,39 @@ class NotificationDetailPage extends StatelessWidget {
   NotificationDetailPage({Key? key}) : super(key: key);
 
   _moveToRoute(context, String url) {
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
     // move to corresponding page
     if (url.contains('details')) {
       var tripId = _getTripId(url);
+      customDialog.loadingDialog.dismiss();
+
       Get.toNamed(CommonRoutes.TRIP_DETAILS,
           arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
       var tripId = _getTripId(url);
+      customDialog.loadingDialog.dismiss();
+
       _moveToFeedback(context, tripId);
     } else if (url.contains('bikes')) {
-      Get.toNamed(CommonRoutes.MANAGE_BIKE);
+      customDialog.loadingDialog.dismiss();
+
+      if (Biike.role.value == Role.biker)
+        Get.toNamed(CommonRoutes.MANAGE_BIKE);
+      else
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.INFO,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kChangeModeToBiker.tr)
+            .show();
     } else if (url.contains('now')) {
+      customDialog.loadingDialog.dismiss();
+
       Get.toNamed(CommonRoutes.CHO_NOW);
     } else if (url.contains('point')) {
+      customDialog.loadingDialog.dismiss();
+
       Get.toNamed(CommonRoutes.POINT);
     }
   }

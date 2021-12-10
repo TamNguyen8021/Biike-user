@@ -142,18 +142,18 @@ class BookTripPage extends StatelessWidget {
                                 polypoints:
                                     _bookTripController.polypoints.toList(),
                               )),
-                          Obx(() => Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 16.0, bottom: 30.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    ScheduleTripButton(),
-                                    KeNowButton(),
-                                  ],
-                                ),
-                              ))
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 16.0, bottom: 30.0),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                ScheduleTripButton(),
+                                KeNowButton(),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     );

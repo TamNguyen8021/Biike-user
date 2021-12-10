@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
@@ -20,8 +21,12 @@ class ExchangeVoucherButton extends StatelessWidget {
   ExchangeVoucherButton({Key? key, required this.voucher}) : super(key: key);
 
   _exchangeVoucher(BuildContext context) async {
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
+
     if (_walletController.isNotEnoughPoint(
         voucherPoint: voucher.amountOfPoint!)) {
+      customDialog.loadingDialog.dismiss();
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,
@@ -34,6 +39,7 @@ class ExchangeVoucherButton extends StatelessWidget {
     dynamic result =
         await _redemptionController.exchangeVoucher(voucher.voucherId);
     if (result is String) {
+      customDialog.loadingDialog.dismiss();
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,
@@ -42,6 +48,7 @@ class ExchangeVoucherButton extends StatelessWidget {
                   result == '' ? CustomErrorsString.kExchangeFailed.tr : result)
           .show();
     } else {
+      customDialog.loadingDialog.dismiss();
       _walletController.updateWalletPoint();
       int redemptionId = CommonFunctions.getIdFromUrl(
           url: result.headers['location'] as String);

@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -11,11 +12,15 @@ class BookScheduledTripButton extends StatelessWidget {
   final _bookTripController = Get.find<BookTripController>();
 
   Future<void> _bookScheduledTrip(BuildContext context) async {
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
     var result = await _bookTripController.createScheduledTrip();
 
     if (result is bool) {
+      customDialog.loadingDialog.dismiss();
       Get.toNamed(CommonRoutes.FIND_BIKER);
     } else {
+      customDialog.loadingDialog.dismiss();
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,

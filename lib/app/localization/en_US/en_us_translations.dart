@@ -316,7 +316,7 @@ final Map<String, String> en = {
   'kRuleWhenBookTrip' : 'Rules when book trip',
   'kRuleBookTrip1':
       '1.\tYou can\'t have more than 15 scheduled trips at one time',
-  'kRuleBookTrip2': '2.\tYou are allowed to cancel maximum 3 trips per day',
+  'kRuleBookTrip2': '2.\tYou are allowed to cancel maximum 5 trips per day',
 
 // 'bike_manager' screen
   'kBikeVerified': 'Verified',
@@ -492,4 +492,5 @@ final Map<String, String> en = {
     'kCanOnlyAddStationFrom5AMTo9PM':
         'You can only add station from 5AM to 9PM',
   'kExceedMaxTrips' : 'You can\'t have more than 15 scheduled trips at one time.',
+  'kChangeModeToBiker' : 'Please switch to Biker mode first',
   });
