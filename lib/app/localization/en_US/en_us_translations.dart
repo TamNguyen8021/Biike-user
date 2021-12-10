@@ -490,4 +490,5 @@ final Map<String, String> en = {
     'kTripTimeExist': 'You have already booked a trip with this timestamp',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'You can only add station from 5AM to 9PM',
+  'kExceedMaxTrips' : 'You can\'t have more than 15 scheduled trips at one time.',
   });

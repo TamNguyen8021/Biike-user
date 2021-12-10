@@ -26,6 +26,12 @@ class NotificationDetailPage extends StatelessWidget {
           arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
       _moveToFeedback(context, tripId);
+    } else if (url.contains('bikes')) {
+      Get.toNamed(CommonRoutes.MANAGE_BIKE);
+    } else if (url.contains('now')) {
+      Get.toNamed(CommonRoutes.CHO_NOW);
+    } else if (url.contains('point')) {
+      Get.toNamed(CommonRoutes.POINT);
     }
   }
 

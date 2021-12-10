@@ -520,9 +520,10 @@ final Map<String, String> vi = {
     'kNotAllowGetLocation':
         'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
     'kNoVoucherCode':
-        'Hiện đã hết voucher code có thể đổi, xin hãy thu7e3 lại sau.',
+        'Hiện đã hết voucher code có thể đổi, xin hãy thử lại sau.',
     'kTripTimeExist':
         'Bạn đã đặt một chuyến trước đó trong khoảng thời gian này rồi',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'Bạn chỉ có thể thêm trạm trong khoảng thời gian từ 5 giờ sáng đến 9 giờ tối',
+    'kExceedMaxTrips' : 'Bạn không thể có quá 15 chuyến lên lịch',
   });

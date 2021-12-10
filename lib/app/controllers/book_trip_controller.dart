@@ -286,9 +286,11 @@ class BookTripController extends GetxController {
   dynamic _returnMsg(result) {
     if (result is bool) return result;
 
-    if (result.contains('is already existed for Keer with KeerId')) {
+    if (result.contains('is already existed for Keer with KeerId'))
       return CustomErrorsString.kTripTimeExist.tr;
-    }
+
+    if (result.contains('exceeding max number of trip'))
+      return CustomErrorsString.kExceedMaxTrips.tr;
 
     return result;
   }
