@@ -11,30 +11,31 @@ import 'package:get/get.dart';
 /// Manage states of [SOSNumberPage]
 class SOSNumberController extends GetxController {
   final _sosProvider = Get.find<SOSNumberProvider>();
-  final sosNumbersLimit = 3;
+  final int sosNumbersLimit = 3;
+  String userPhoneNo = '';
 
-  RxList<dynamic> sosNumbers = [].obs;
+  RxList sosNumbers = [].obs;
   Rx<bool> isMaximun = false.obs;
 
-  Future<void> getSOSNumbers() async {
+  Future<List<SOSNumberCard>> getSOSNumbers() async {
     sosNumbers.clear();
 
-    dynamic response = await _sosProvider.getSOSNumbers();
+    dynamic response = await _sosProvider.getSOSNumbers().catchError((error) {
+      CommonFunctions.catchExceptionError(error);
+    });
 
     if (response != null) {
-      try {
-        isMaximun.value = response.length == sosNumbersLimit;
+      isMaximun.value = response.length == sosNumbersLimit;
 
-        for (var sosNumber in response) {
-          SOS sos = SOS.fromJson(sosNumber);
+      for (var sosNumber in response) {
+        SOS sos = SOS.fromJson(sosNumber);
 
-          sosNumbers.add(SOSNumberCard(
-              id: sos.sosId!, name: sos.sosName!, number: sos.sosPhone!));
-        }
-      } catch (e) {
-        CommonFunctions.catchExceptionError(e);
+        sosNumbers.add(SOSNumberCard(
+            id: sos.sosId!, name: sos.sosName!, number: sos.sosPhone!));
       }
     }
+
+    return sosNumbers.cast();
   }
 
   Future<void> removeSOSNumber(

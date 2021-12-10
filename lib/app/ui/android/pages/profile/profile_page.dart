@@ -213,7 +213,10 @@ class ProfilePage extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          ProfileButtons(),
+                                          ProfileButtons(
+                                            userPhoneNo: _profileController
+                                                .user.userPhoneNumber,
+                                          ),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 24.0),

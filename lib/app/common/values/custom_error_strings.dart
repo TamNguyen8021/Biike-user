@@ -58,4 +58,10 @@ class CustomErrorsString {
   static const String
       kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins =
       'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins';
+
+  // 'trip_details' screen
+  static const String kNoSosNumberSaved = 'kNoSosNumberSaved';
+
+  // 'add_sos_number' screen
+  static const String kCannotAddYourNumberAsSOS = 'kCannotAddYourNumberAsSOS';
 }

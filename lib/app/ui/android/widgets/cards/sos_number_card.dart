@@ -10,10 +10,7 @@ class SOSNumberCard extends StatelessWidget {
   final String number;
 
   const SOSNumberCard(
-      {Key? key,
-        required this.id,
-        required this.name,
-        required this.number,})
+      {Key? key, required this.id, required this.name, required this.number})
       : super(key: key);
 
   @override
@@ -22,7 +19,7 @@ class SOSNumberCard extends StatelessWidget {
       onTap: () => Get.toNamed(CommonRoutes.EDIT_SOS_NUMBER, arguments: {
         'id': id,
         'name': name,
-        'number': number
+        'number': number,
       }),
       child: Container(
         height: 72,
@@ -35,22 +32,13 @@ class SOSNumberCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                      name,
+                  Text(name,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
-                      )
-                  ),
+                          fontWeight: FontWeight.bold, color: Colors.black)),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
-                    child: Text(
-                        number,
-                        style: TextStyle(
-                            fontSize: 10.0
-                        )
-                    ),
+                    child: Text(number, style: TextStyle(fontSize: 10.0)),
                   )
                 ],
               ),

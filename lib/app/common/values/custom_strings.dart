@@ -308,6 +308,7 @@ class CustomStrings {
   static const String kCity = 'kCity';
   static const String kCountry = 'kCountry';
   static const String kNeedLocationPermission = 'kNeedLocationPermission';
+  static const String kSendSOSMessageSuccess = 'kSendSOSMessageSuccess';
 
   // 'book_trip' screen
   static const String kBookNewTrip = 'kBookNewTrip';
