@@ -52,6 +52,16 @@ class CustomErrorsString {
   static const String kLoginExceptionError = 'kLoginExceptionError';
   static const String kEmptyToken = 'kEmptyToken';
 
+  // 'cho_now_settings' screen
   static const String kCanOnlyAddStationFrom5AMTo9PM =
       'kCanOnlyAddStationFrom5AMTo9PM';
+  static const String
+      kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins =
+      'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins';
+
+  // 'trip_details' screen
+  static const String kNoSosNumberSaved = 'kNoSosNumberSaved';
+
+  // 'add_sos_number' screen
+  static const String kCannotAddYourNumberAsSOS = 'kCannotAddYourNumberAsSOS';
 }

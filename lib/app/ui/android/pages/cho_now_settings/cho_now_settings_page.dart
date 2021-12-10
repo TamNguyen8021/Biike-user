@@ -280,89 +280,133 @@ class ChoNowSettingsPage extends StatelessWidget {
                                       },
                                       hasBorder: false),
                                 ),
-                                CustomTextButton(
-                                    width: 100,
-                                    backgroundColor: CustomColors.kBlue,
-                                    foregroundColor: Colors.white,
-                                    text: CustomStrings.kEdit.tr,
-                                    onPressedFunc: () async {
-                                      if (_choNowSettingsController
-                                          .checkIfFromTimeIsBeforeToTime()) {
-                                        AwesomeDialog(
-                                                context: context,
-                                                dialogType: DialogType.ERROR,
-                                                headerAnimationLoop: false,
-                                                desc: CustomErrorsString
-                                                    .kFromTimeMustBeBeforeToTime
-                                                    .tr)
-                                            .show();
-                                      } else if (_choNowSettingsController
-                                          .checkIfTimeIsNotBetween5AMAnd9PM()) {
-                                        AwesomeDialog(
-                                                context: context,
-                                                dialogType: DialogType.ERROR,
-                                                headerAnimationLoop: false,
-                                                desc: CustomErrorsString
-                                                    .kCanOnlyAddStationFrom5AMTo9PM
-                                                    .tr)
-                                            .show();
-                                      } else if (_choNowSettingsController
-                                          .checkIfStationWereAdded(
-                                              id: _choNowSettingsController
-                                                  .rideNowStations
-                                                  .elementAt(index!)
-                                                  .id)) {
-                                        AwesomeDialog(
-                                                context: context,
-                                                dialogType: DialogType.ERROR,
-                                                headerAnimationLoop: false,
-                                                desc: CustomErrorsString
-                                                    .kSameStationWereAdded.tr)
-                                            .show();
-                                      } else {
-                                        if (await _choNowSettingsController
-                                            .editPickUpStation(
-                                                index: index,
-                                                name: _choNowSettingsController
-                                                    .selectedStation.value.name,
-                                                timeRange: CommonFunctions
-                                                        .convertTimeOfDayToString(
-                                                            context: context,
-                                                            time:
-                                                                _choNowSettingsController
+                                Obx(
+                                  () => CustomTextButton(
+                                      width: 100,
+                                      backgroundColor: _choNowSettingsController
+                                              .isEditButtonDisabled(
+                                                  context: context,
+                                                  index: index!)
+                                              .obs
+                                              .isTrue
+                                          ? CustomColors.kDarkGray
+                                          : CustomColors.kBlue,
+                                      foregroundColor: Colors.white,
+                                      text: CustomStrings.kEdit.tr,
+                                      onPressedFunc: _choNowSettingsController
+                                              .isEditButtonDisabled(
+                                                  context: context,
+                                                  index: index)
+                                              .obs
+                                              .isTrue
+                                          ? () {}
+                                          : () async {
+                                              if (_choNowSettingsController
+                                                  .checkIfFromTimeIsBeforeToTime()) {
+                                                AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.ERROR,
+                                                        headerAnimationLoop:
+                                                            false,
+                                                        desc: CustomErrorsString
+                                                            .kFromTimeMustBeBeforeToTime
+                                                            .tr)
+                                                    .show();
+                                              } else if (_choNowSettingsController
+                                                  .checkIfTimeIsNotBetween5AMAnd9PM()) {
+                                                AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.ERROR,
+                                                        headerAnimationLoop:
+                                                            false,
+                                                        desc: CustomErrorsString
+                                                            .kCanOnlyAddStationFrom5AMTo9PM
+                                                            .tr)
+                                                    .show();
+                                              } else if (_choNowSettingsController
+                                                  .checkIfTimeBetweenFromTimeAndToTimeIsLessThan15Mins()) {
+                                                AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.ERROR,
+                                                        headerAnimationLoop:
+                                                            false,
+                                                        desc: CustomErrorsString
+                                                            .kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins
+                                                            .tr)
+                                                    .show();
+                                              } else if (_choNowSettingsController
+                                                  .checkIfStationWereAdded(
+                                                      id: _choNowSettingsController
+                                                          .rideNowStations
+                                                          .elementAt(index)
+                                                          .id)) {
+                                                AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.ERROR,
+                                                        headerAnimationLoop:
+                                                            false,
+                                                        desc: CustomErrorsString
+                                                            .kSameStationWereAdded
+                                                            .tr)
+                                                    .show();
+                                              } else {
+                                                if (await _choNowSettingsController.editPickUpStation(
+                                                    index: index,
+                                                    name:
+                                                        _choNowSettingsController
+                                                            .selectedStation
+                                                            .value
+                                                            .name,
+                                                    timeRange: CommonFunctions
+                                                            .convertTimeOfDayToString(
+                                                                context:
+                                                                    context,
+                                                                time: _choNowSettingsController
                                                                     .fromTime
                                                                     .value!) +
-                                                    ' - ' +
-                                                    CommonFunctions
-                                                        .convertTimeOfDayToString(
-                                                            context: context,
-                                                            time:
-                                                                _choNowSettingsController
+                                                        ' - ' +
+                                                        CommonFunctions
+                                                            .convertTimeOfDayToString(
+                                                                context:
+                                                                    context,
+                                                                time: _choNowSettingsController
                                                                     .toTime
                                                                     .value!))) {
-                                          Get.back();
-                                          AwesomeDialog(
-                                                  context: context,
-                                                  dialogType: DialogType.SUCCES,
-                                                  headerAnimationLoop: false,
-                                                  desc: CustomStrings
-                                                      .kEditStationSuccess.tr)
-                                              .show();
-                                          _choNowSettingsController
-                                              .pagingController
-                                              .refresh();
-                                        } else {
-                                          AwesomeDialog(
-                                                  context: context,
-                                                  dialogType: DialogType.ERROR,
-                                                  headerAnimationLoop: false,
-                                                  desc: CustomErrorsString
-                                                      .kDevelopError.tr)
-                                              .show();
-                                        }
-                                      }
-                                    },
-                                    hasBorder: false),
+                                                  Get.back();
+                                                  AwesomeDialog(
+                                                          context: context,
+                                                          dialogType:
+                                                              DialogType.SUCCES,
+                                                          headerAnimationLoop:
+                                                              false,
+                                                          desc: CustomStrings
+                                                              .kEditStationSuccess
+                                                              .tr)
+                                                      .show();
+                                                  _choNowSettingsController
+                                                      .pagingController
+                                                      .refresh();
+                                                } else {
+                                                  AwesomeDialog(
+                                                          context: context,
+                                                          dialogType:
+                                                              DialogType.ERROR,
+                                                          headerAnimationLoop:
+                                                              false,
+                                                          desc:
+                                                              CustomErrorsString
+                                                                  .kDevelopError
+                                                                  .tr)
+                                                      .show();
+                                                }
+                                              }
+                                            },
+                                      hasBorder: false),
+                                ),
                               ] else ...[
                                 CustomTextButton(
                                     backgroundColor: CustomColors.kBlue,
@@ -401,6 +445,17 @@ class ChoNowSettingsPage extends StatelessWidget {
                                                     headerAnimationLoop: false,
                                                     desc: CustomErrorsString
                                                         .kSameStationWereAdded
+                                                        .tr)
+                                                .show();
+                                          } else if (_choNowSettingsController
+                                              .checkIfTimeBetweenFromTimeAndToTimeIsLessThan15Mins()) {
+                                            AwesomeDialog(
+                                                    context: context,
+                                                    dialogType:
+                                                        DialogType.ERROR,
+                                                    headerAnimationLoop: false,
+                                                    desc: CustomErrorsString
+                                                        .kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins
                                                         .tr)
                                                 .show();
                                           } else {

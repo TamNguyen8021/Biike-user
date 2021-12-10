@@ -95,16 +95,30 @@ class AddSOSNumberPage extends StatelessWidget {
                     child: CustomElevatedIconHasLoadingButton(
                       onPressedFunc: () async {
                         if (addSOSNumberController.validate()) {
-                          if (await addSOSNumberController.addSOSNumber(
-                              context: context)) {
-                            await sosNumberController.getSOSNumbers();
-                            Get.back();
+                          String tempUserPhoneNo = Get.arguments['userPhoneNo'];
+                          tempUserPhoneNo = tempUserPhoneNo.substring(3);
+
+                          if (!addSOSNumberController.number.value
+                              .contains(tempUserPhoneNo)) {
+                            if (await addSOSNumberController.addSOSNumber(
+                                context: context)) {
+                              await sosNumberController.getSOSNumbers();
+                              Get.back();
+                            } else {
+                              AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.ERROR,
+                                      headerAnimationLoop: false,
+                                      desc: CustomErrorsString.kDevelopError.tr)
+                                  .show();
+                            }
                           } else {
                             AwesomeDialog(
                                     context: context,
                                     dialogType: DialogType.ERROR,
                                     headerAnimationLoop: false,
-                                    desc: CustomErrorsString.kDevelopError.tr)
+                                    desc: CustomErrorsString
+                                        .kCannotAddYourNumberAsSOS.tr)
                                 .show();
                           }
                         } else {

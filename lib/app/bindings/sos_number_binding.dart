@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class SOSNumberBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SOSNumberController>(() => SOSNumberController());
     Get.put(SOSNumberProvider());
+    Get.lazyPut<SOSNumberController>(() => SOSNumberController());
   }
 }

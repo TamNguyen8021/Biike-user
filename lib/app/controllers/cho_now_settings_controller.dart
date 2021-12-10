@@ -241,6 +241,16 @@ class ChoNowSettingsController extends GetxController {
   }
 
   /// Author: TamNTT
+  bool checkIfTimeBetweenFromTimeAndToTimeIsLessThan15Mins() {
+    if ((toTime.value!.hour * 60 + toTime.value!.minute) -
+            (fromTime.value!.hour * 60 + fromTime.value!.minute) <
+        15 * 60) {
+      return true;
+    }
+    return false;
+  }
+
+  /// Author: TamNTT
   bool checkIfStationWereAdded({int? id}) {
     for (PickUpStationCard station in rideNowStations) {
       if (station.id != id) {
@@ -275,5 +285,17 @@ class ChoNowSettingsController extends GetxController {
       }
     }
     return false;
+  }
+
+  bool isEditButtonDisabled(
+      {required BuildContext context, required int index}) {
+    PickUpStationCard stationCard = rideNowStations.elementAt(index);
+    return selectedStation.value.name == stationCard.stationName &&
+        CommonFunctions.convertTimeOfDayToString(
+                context: context, time: fromTime.value!) ==
+            stationCard.timeRange.split(' - ')[0] &&
+        CommonFunctions.convertTimeOfDayToString(
+                context: context, time: toTime.value!) ==
+            stationCard.timeRange.split(' - ')[1];
   }
 }

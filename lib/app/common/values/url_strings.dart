@@ -32,4 +32,8 @@ class UrlStrings {
       'https://pathsha.re/api/professional/v1/';
   static const String pathshareSessionUrl = _pathshareBaseUrl + 'sessions';
   static const String pathshareUserUrl = _pathshareBaseUrl + 'users';
+
+  static const String speedSMSApiKey = '91XVELBULYbgdHqFT2xLAZ3F6q7spR8c';
+  static const String speedSMSSendSMSUrl =
+      'https://api.speedsms.vn/index.php/sms/send';
 }

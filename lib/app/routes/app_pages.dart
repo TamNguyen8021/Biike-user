@@ -128,6 +128,7 @@ class AppPages {
           TripDetailsBinding(),
           PathshareBinding(),
           ImageBinding(),
+          SOSNumberBinding(),
         ]),
     GetPage(
       name: CommonRoutes.REQUIRE_ADD_BIKE,
@@ -202,6 +203,7 @@ class AppPages {
           TripHistoryBinding(),
           ProfileBinding(),
           PathshareBinding(),
+          SOSNumberBinding(),
         ]),
     GetPage(
         name: CommonRoutes.TRIP_DETAILS_FULL_MAP,

@@ -5,7 +5,7 @@ import 'package:bikes_user/main.dart';
 class SOSNumberProvider extends CommonProvider {
   Future<dynamic> getSOSNumbers() async {
     final response = await get(
-        UrlStrings.sos + '/users/${Biike.userId.value}?page=1&limit=100',
+        UrlStrings.sos + '/users/${Biike.userId.value}?page=1&limit=10',
         headers: await headers);
 
     logResponse(response);

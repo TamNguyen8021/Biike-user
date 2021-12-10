@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileButtons extends StatelessWidget {
-  const ProfileButtons({Key? key}) : super(key: key);
+  final String userPhoneNo;
+
+  const ProfileButtons({Key? key, required this.userPhoneNo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +144,8 @@ class ProfileButtons extends StatelessWidget {
             height: 35,
             child: ElevatedButton(
               onPressed: () {
-                Get.toNamed(CommonRoutes.SOS_NUMBER);
+                Get.toNamed(CommonRoutes.SOS_NUMBER,
+                    arguments: {'userPhoneNo': userPhoneNo});
               },
               child: Row(
                 children: <Widget>[

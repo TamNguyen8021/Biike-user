@@ -307,6 +307,7 @@ final Map<String, String> vi = {
   'kCountry': 'Quốc gia',
   'kNeedLocationPermission':
       'Bạn cần cấp quyền truy cập vị trí và bật định vị để sử dụng tính năng này',
+  'kSendSOSMessageSuccess': 'Tin nhắn đã được gửi đến số điện thoại S.O.S',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Tạo chuyến đi ké mới',
@@ -488,6 +489,8 @@ final Map<String, String> vi = {
         'Thời gian bắt đầu phải trước thời gian kết thúc',
     'kSameStationWereAdded':
         'Đã có trạm trùng tên được thiết lập trong khoảng thời gian này',
+    'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins':
+        'Thời gian bắt đầu và thời gian kết thúc phải cách nhau tối thiểu là 15 phút',
     'kNoRoleWereChosen':
         'Bạn hãy chọn làm người đi ké hoặc người chở để tiếp tục sử dụng ứng dụng',
     'kEmailMustNotBeEmpty': 'Vui lòng điền email',
@@ -518,4 +521,7 @@ final Map<String, String> vi = {
         'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'Bạn chỉ có thể thêm trạm trong khoảng thời gian từ 5 giờ sáng đến 9 giờ tối',
+    'kNoSosNumberSaved': 'Bạn chưa cài đặt số điện thoại S.O.S',
+    'kCannotAddYourNumberAsSOS':
+        'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
   });

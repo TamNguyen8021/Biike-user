@@ -302,6 +302,7 @@ final Map<String, String> en = {
   'kCountry': 'Country',
   'kNeedLocationPermission':
       'You need to grant location permission and turn on GPS to use this feature',
+  'kSendSOSMessageSuccess': 'A message were sent to your S.O.S number(s)',
 
   // 'book_trip' screen
   'kBookNewTrip': 'Book a new trip',
@@ -467,6 +468,8 @@ final Map<String, String> en = {
     'kFromTimeMustBeBeforeToTime': 'From time must be before to time',
     'kSameStationWereAdded':
         'A station with the same name were created in this time range',
+    'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins':
+        'Time range between from time and to time must be at least 15 minutes',
     'kNoRoleWereChosen': 'You must choose a role to use our service',
     'kEmailMustNotBeEmpty': 'Email must not be empty',
     'kMustLoginWithFPTEmail': 'Please sign in with FPT email',
@@ -496,4 +499,7 @@ final Map<String, String> en = {
         'Please turn on the permission to access user current location',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'You can only add station from 5AM to 9PM',
+    'kNoSosNumberSaved': 'You did not add any S.O.S number',
+    'kCannotAddYourNumberAsSOS':
+        'Cannot add your phone number to S.O.S numbers',
   });
