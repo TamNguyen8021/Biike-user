@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/providers/redemption_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
@@ -118,7 +119,8 @@ class RedemptionController extends GetxController {
       'voucherId': voucherId
     };
 
-    return await _redemptionProvider.exchangeVoucher(data);
+    var result = await _redemptionProvider.exchangeVoucher(data);
+    return _returnMsg(result);
   }
 
   Future<Map<String, dynamic>> getRedemptionDetailByRedemptionId(
@@ -140,5 +142,17 @@ class RedemptionController extends GetxController {
   void refreshList() {
     yourVoucherPagingController.refresh();
     usedVoucherPagingController.refresh();
+  }
+
+  dynamic _returnMsg(result) {
+    if (result is bool) return result;
+
+    if (result == '') {
+      return CustomErrorsString.kExchangeFailed.tr;
+    } else if (result.contains('no available voucher code for this voucher')) {
+      return CustomErrorsString.kNoVoucherCode.tr;
+    }
+
+    return result;
   }
 }

@@ -49,8 +49,6 @@ class TokenService {
       getIt<Repositories>().setHeaders();
     } on DioError catch (e) {
       Biike.logger.e(e.response?.data ?? 'data is null');
-    } catch (e) {
-      Biike.logger.e(e.toString());
     }
   }
 }

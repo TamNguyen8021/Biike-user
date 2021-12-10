@@ -1,11 +1,16 @@
+import 'package:back_pressed/back_pressed.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/notification_controller.dart';
+import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
+import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bikes_user/app/data/models/notification.dart';
 import 'package:get/get.dart';
@@ -17,14 +22,40 @@ class NotificationDetailPage extends StatelessWidget {
   NotificationDetailPage({Key? key}) : super(key: key);
 
   _moveToRoute(context, String url) {
-    var tripId = _getTripId(url);
-
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
     // move to corresponding page
     if (url.contains('details')) {
+      var tripId = _getTripId(url);
+      customDialog.loadingDialog.dismiss();
+
       Get.toNamed(CommonRoutes.TRIP_DETAILS,
           arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
+      var tripId = _getTripId(url);
+      customDialog.loadingDialog.dismiss();
+
       _moveToFeedback(context, tripId);
+    } else if (url.contains('bikes')) {
+      customDialog.loadingDialog.dismiss();
+
+      if (Biike.role.value == Role.biker)
+        Get.toNamed(CommonRoutes.MANAGE_BIKE);
+      else
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.INFO,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kChangeModeToBiker.tr)
+            .show();
+    } else if (url.contains('now')) {
+      customDialog.loadingDialog.dismiss();
+
+      Get.toNamed(CommonRoutes.CHO_NOW);
+    } else if (url.contains('point')) {
+      customDialog.loadingDialog.dismiss();
+
+      Get.toNamed(CommonRoutes.POINT);
     }
   }
 
@@ -64,85 +95,90 @@ class NotificationDetailPage extends StatelessWidget {
     BiikeNoti notification = Get.arguments;
     DateFormat timeFormat = DateFormat('HH:mm');
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    bool isFail = notification.title!.contains('thất bại');
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: CustomAppBar(
-          hasShape: false,
-          hasLeading: true,
-          onPressedFunc: () {
-            Get.back();
-          },
-          color: CustomColors.kBlue,
-          appBar: AppBar()),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
+    return OnBackPressed(
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: CustomAppBar(
+              hasShape: false,
+              hasLeading: true,
+              onPressedFunc: () {
+                Get.back();
+              },
               color: CustomColors.kBlue,
-              height: 200,
-              width: double.infinity,
-              child: Image.asset(
-                'assets/images/banner-thong-bao.jpg',
-              ),
+              appBar: AppBar()),
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  color: CustomColors.kBlue,
+                  height: 200,
+                  width: double.infinity,
+                  child: Image.asset(
+                    'assets/images/banner-thong-bao.jpg',
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          '${notification.title}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(color: Colors.black),
+                        ),
+                      ),
+                      Text('${timeFormat.format(notification.createdDate!)}',
+                          style: Theme.of(context).textTheme.bodyText1),
+                      Text('${dateFormat.format(notification.createdDate!)}',
+                          style: Theme.of(context).textTheme.bodyText1),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Divider(
+                            color: CustomColors.kDarkGray.withOpacity(0.5)),
+                      ),
+                      Text(
+                        '${notification.content}',
+                        style: Theme.of(context).textTheme.bodyText1!,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Divider(
+                        color: CustomColors.kDarkGray.withOpacity(0.5),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.only(
+                            left: 22.0, right: 22.0, bottom: 10.0),
+                        child: isFail
+                            ? Container()
+                            : CustomTextButton(
+                                backgroundColor: CustomColors.kBlue,
+                                foregroundColor: Colors.white,
+                                text: CustomStrings.kView.tr,
+                                onPressedFunc: () {
+                                  _moveToRoute(context, notification.url!);
+                                },
+                                hasBorder: false),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Text(
-                      '${notification.title}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline2!
-                          .copyWith(color: Colors.black),
-                    ),
-                  ),
-                  Text('${timeFormat.format(notification.createdDate!)}',
-                      style: Theme.of(context).textTheme.bodyText1),
-                  Text('${dateFormat.format(notification.createdDate!)}',
-                      style: Theme.of(context).textTheme.bodyText1),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child:
-                        Divider(color: CustomColors.kDarkGray.withOpacity(0.5)),
-                  ),
-                  Text(
-                    '${notification.content}',
-                    style: Theme.of(context).textTheme.bodyText1!,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Divider(
-                    color: CustomColors.kDarkGray.withOpacity(0.5),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.only(
-                        left: 22.0, right: 22.0, bottom: 10.0),
-                    child: CustomTextButton(
-                        backgroundColor: CustomColors.kBlue,
-                        foregroundColor: Colors.white,
-                        text: CustomStrings.kViewTrip.tr,
-                        onPressedFunc: () {
-                          _moveToRoute(context, notification.url!);
-                        },
-                        hasBorder: false),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
+        perform: () => Get.back());
   }
 }
