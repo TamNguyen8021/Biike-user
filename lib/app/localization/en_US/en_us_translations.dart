@@ -434,7 +434,7 @@ final Map<String, String> en = {
   'kNotification': 'Notification',
   'kNewNotification': 'You have new notification',
   'kDeleteNotification': 'Are you sure you want to delete all notification?',
-
+'kView' : 'View',
   'kAll': 'All',
 }..addAll(<String, String>{
 // Error message

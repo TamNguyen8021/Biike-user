@@ -466,7 +466,9 @@ final Map<String, String> vi = {
 
   // noti
   'kNotification': 'Thông báo',
-
+  'kNewNotification': 'Bạn có thông báo mới',
+  'kDeleteNotification': 'Bạn có chắc là muốn xóa hết tất cả thông báo?',
+  'kView' : 'Xem',
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message

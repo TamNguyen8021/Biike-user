@@ -470,4 +470,5 @@ class CustomStrings {
   static const String kNewNotification = 'kNewNotification';
   static const String kDeleteNotification = 'kDeleteNotification';
   static const String kAll = 'kAll';
+  static const String kView = 'kView';
 }

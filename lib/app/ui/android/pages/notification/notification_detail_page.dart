@@ -95,6 +95,7 @@ class NotificationDetailPage extends StatelessWidget {
     BiikeNoti notification = Get.arguments;
     DateFormat timeFormat = DateFormat('HH:mm');
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    bool isFail = notification.title!.contains('thất bại');
 
     return OnBackPressed(
         child: Scaffold(
@@ -160,14 +161,16 @@ class NotificationDetailPage extends StatelessWidget {
                         width: double.infinity,
                         margin: const EdgeInsets.only(
                             left: 22.0, right: 22.0, bottom: 10.0),
-                        child: CustomTextButton(
-                            backgroundColor: CustomColors.kBlue,
-                            foregroundColor: Colors.white,
-                            text: CustomStrings.kViewTrip.tr,
-                            onPressedFunc: () {
-                              _moveToRoute(context, notification.url!);
-                            },
-                            hasBorder: false),
+                        child: isFail
+                            ? Container()
+                            : CustomTextButton(
+                                backgroundColor: CustomColors.kBlue,
+                                foregroundColor: Colors.white,
+                                text: CustomStrings.kView.tr,
+                                onPressedFunc: () {
+                                  _moveToRoute(context, notification.url!);
+                                },
+                                hasBorder: false),
                       ),
                     ],
                   ),
