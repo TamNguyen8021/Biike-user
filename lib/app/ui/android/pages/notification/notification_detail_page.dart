@@ -18,13 +18,13 @@ class NotificationDetailPage extends StatelessWidget {
   NotificationDetailPage({Key? key}) : super(key: key);
 
   _moveToRoute(context, String url) {
-    var tripId = _getTripId(url);
-
     // move to corresponding page
     if (url.contains('details')) {
+      var tripId = _getTripId(url);
       Get.toNamed(CommonRoutes.TRIP_DETAILS,
           arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
+      var tripId = _getTripId(url);
       _moveToFeedback(context, tripId);
     } else if (url.contains('bikes')) {
       Get.toNamed(CommonRoutes.MANAGE_BIKE);
