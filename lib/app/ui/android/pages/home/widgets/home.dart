@@ -12,7 +12,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dar
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
