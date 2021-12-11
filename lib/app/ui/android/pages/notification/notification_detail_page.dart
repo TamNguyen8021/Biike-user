@@ -39,15 +39,7 @@ class NotificationDetailPage extends StatelessWidget {
     } else if (url.contains('bikes')) {
       customDialog.loadingDialog.dismiss();
 
-      if (Biike.role.value == Role.biker)
-        Get.toNamed(CommonRoutes.MANAGE_BIKE);
-      else
-        AwesomeDialog(
-                context: context,
-                dialogType: DialogType.INFO,
-                headerAnimationLoop: false,
-                desc: CustomErrorsString.kChangeModeToBiker.tr)
-            .show();
+      Get.toNamed(CommonRoutes.MANAGE_BIKE);
     } else if (url.contains('now')) {
       customDialog.loadingDialog.dismiss();
 
@@ -95,7 +87,6 @@ class NotificationDetailPage extends StatelessWidget {
     BiikeNoti notification = Get.arguments;
     DateFormat timeFormat = DateFormat('HH:mm');
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
-    bool isFail = notification.title!.contains('thất bại');
 
     return OnBackPressed(
         child: Scaffold(
@@ -161,16 +152,14 @@ class NotificationDetailPage extends StatelessWidget {
                         width: double.infinity,
                         margin: const EdgeInsets.only(
                             left: 22.0, right: 22.0, bottom: 10.0),
-                        child: isFail
-                            ? Container()
-                            : CustomTextButton(
-                                backgroundColor: CustomColors.kBlue,
-                                foregroundColor: Colors.white,
-                                text: CustomStrings.kView.tr,
-                                onPressedFunc: () {
-                                  _moveToRoute(context, notification.url!);
-                                },
-                                hasBorder: false),
+                        child: CustomTextButton(
+                            backgroundColor: CustomColors.kBlue,
+                            foregroundColor: Colors.white,
+                            text: CustomStrings.kView.tr,
+                            onPressedFunc: () {
+                              _moveToRoute(context, notification.url!);
+                            },
+                            hasBorder: false),
                       ),
                     ],
                   ),
