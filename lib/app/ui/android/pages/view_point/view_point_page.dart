@@ -1,4 +1,5 @@
 import 'package:back_pressed/back_pressed.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/view_point/widget/buy_point_button.dart';
@@ -95,12 +96,19 @@ class ViewPointPage extends StatelessWidget {
                                           return Loading();
                                         }
                                       }),
-                                  Text(
-                                    CustomStrings.kFindMore.tr,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(color: CustomColors.kBlue),
+                                  GestureDetector(
+                                    child: Text(
+                                      CustomStrings.kFindMore.tr,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(color: CustomColors.kBlue),
+                                    ),
+                                    onTap: () {
+                                      CommonFunctions.openLink(
+                                          url: 'https://biike.in/point.html',
+                                          context: context);
+                                    },
                                   ),
                                 ]),
                           ),

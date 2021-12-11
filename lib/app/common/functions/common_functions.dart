@@ -229,7 +229,7 @@ class CommonFunctions {
     }
   }
 
-  Future<void> openLink(
+  static Future<void> openLink(
       {required String url, required BuildContext context}) async {
     if (await canLaunch(url)) {
       await launch(url);

@@ -71,4 +71,8 @@ class CustomErrorsString {
   // 'trip_details' screen
   static const String kYouCanOnlyCancel5TripsPerDay =
       'kYouCanOnlyCancel5TripsPerDay';
+
+  // 'edit_address_book' screen
+  static const String kCannotDeleteDefaultAddress =
+      'kCannotDeleteDefaultAddress';
 }

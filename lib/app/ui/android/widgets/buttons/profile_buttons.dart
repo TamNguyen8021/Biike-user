@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -45,37 +46,37 @@ class ProfileButtons extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: SizedBox(
-            height: 35,
-            child: ElevatedButton(
-              onPressed: () {
-                Get.toNamed(CommonRoutes.ADDRESS_BOOK);
-              },
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Icon(
-                      Icons.import_contacts,
-                      color: CustomColors.kDarkGray,
-                      size: 20,
-                    ),
-                  ),
-                  Text(
-                    CustomStrings.kSavedAddress.tr,
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(CustomColors.kLightGray),
-                  elevation: MaterialStateProperty.all<double>(2.0)),
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(bottom: 8.0),
+        //   child: SizedBox(
+        //     height: 35,
+        //     child: ElevatedButton(
+        //       onPressed: () {
+        //         Get.toNamed(CommonRoutes.ADDRESS_BOOK);
+        //       },
+        //       child: Row(
+        //         children: <Widget>[
+        //           Padding(
+        //             padding: const EdgeInsets.only(right: 8.0),
+        //             child: Icon(
+        //               Icons.import_contacts,
+        //               color: CustomColors.kDarkGray,
+        //               size: 20,
+        //             ),
+        //           ),
+        //           Text(
+        //             CustomStrings.kSavedAddress.tr,
+        //             style: Theme.of(context).textTheme.bodyText2,
+        //           ),
+        //         ],
+        //       ),
+        //       style: ButtonStyle(
+        //           backgroundColor:
+        //               MaterialStateProperty.all<Color>(CustomColors.kLightGray),
+        //           elevation: MaterialStateProperty.all<double>(2.0)),
+        //     ),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: SizedBox(
@@ -175,7 +176,10 @@ class ProfileButtons extends StatelessWidget {
           child: SizedBox(
             height: 35,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                CommonFunctions.openLink(
+                    url: 'http://m.me/biikeapp', context: context);
+              },
               child: Row(
                 children: <Widget>[
                   Padding(

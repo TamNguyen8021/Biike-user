@@ -38,17 +38,26 @@ class AddressBookController extends GetxController {
 
   Future<void> removeAddressBook(
       {required BuildContext context, required int id}) async {
-    bool result = await _addressBookProvider.removeAddressBook(id: id);
-    if (result) {
+    var result = await _addressBookProvider.removeAddressBook(id: id);
+    if (result is bool) {
       await getAddressBooks();
       Get.back();
     } else {
-      AwesomeDialog(
-              context: context,
-              dialogType: DialogType.ERROR,
-              headerAnimationLoop: false,
-              desc: CustomErrorsString.kDevelopError.tr)
-          .show();
+      if (result.contains('default')) {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kCannotDeleteDefaultAddress.tr)
+            .show();
+      } else {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
+      }
     }
   }
 }

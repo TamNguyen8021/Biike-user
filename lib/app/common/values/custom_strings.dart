@@ -430,6 +430,10 @@ class CustomStrings {
   static const String kEnterNote = 'kEnterNote';
   static const String kSetAsDefault = 'kSetAsDefault';
 
+  // 'search_address' screen
+  static const String kEnterAddress = 'kEnterAddress';
+  static const String kFindAddress = 'kFindAddress';
+
   // 'sos_number' screen
   static const String kSOSNumber = 'kSOSNumber';
   static const String kSOSNumberFirstDescription = 'kSOSNumberFirstDescription';

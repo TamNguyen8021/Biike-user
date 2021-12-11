@@ -3,7 +3,6 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/address_book_controller.dart';
 import 'package:bikes_user/app/controllers/edit_address_book_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/address_book_text_action_field.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/address_book_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -92,7 +91,6 @@ class EditAddressBookPage extends StatelessWidget {
                     () => AddressBookTextField(
                         hintText: CustomStrings.kEnterName.tr,
                         isReadOnly: false,
-                        isEditAddressBook: true,
                         initialValue: '${editAddressBookPageController.name}',
                         labelText: CustomStrings.kName.tr,
                         onChangedFunc: (value) {
@@ -125,13 +123,25 @@ class EditAddressBookPage extends StatelessWidget {
                     ],
                   ),
                   Obx(
-                    () => AddressBookTextActionField(
-                        hintText: CustomStrings.kSelectAddress.tr,
-                        isReadOnly: true,
-                        isEditAddressBook: true,
-                        initialValue:
-                            '${editAddressBookPageController.address}',
-                        labelText: CustomStrings.kAddress.tr),
+                    () => AddressBookTextField(
+                      hintText: CustomStrings.kEnterAddress.tr,
+                      isReadOnly: false,
+                      initialValue: '${editAddressBookPageController.address}',
+                      labelText: CustomStrings.kAddress.tr,
+                      onChangedFunc: (String address) {
+                        editAddressBookPageController.address.value = address;
+                        isSaveButtonDisable.value =
+                            editAddressBookPageController.isSaveButtonDisable(
+                                newName:
+                                    editAddressBookPageController.name.value,
+                                newAddress:
+                                    editAddressBookPageController.address.value,
+                                newNote:
+                                    editAddressBookPageController.note.value,
+                                newDefault: editAddressBookPageController
+                                    .isDefault.value);
+                      },
+                    ),
                   ),
                   Row(
                     children: <Widget>[
@@ -148,7 +158,6 @@ class EditAddressBookPage extends StatelessWidget {
                     () => AddressBookTextField(
                         hintText: CustomStrings.kEnterNote.tr,
                         isReadOnly: false,
-                        isEditAddressBook: true,
                         initialValue: '${editAddressBookPageController.note}',
                         labelText: CustomStrings.kNote.tr,
                         onChangedFunc: (value) {

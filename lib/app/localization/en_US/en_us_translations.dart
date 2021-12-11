@@ -404,6 +404,10 @@ final Map<String, String> en = {
   'kSelectAddress': 'Select address',
   'kEnterNote': 'Enter note',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Enter address',
+  'kFindAddress': 'Find address',
+
 // 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
@@ -503,4 +507,5 @@ final Map<String, String> en = {
         'Cannot add your phone number to S.O.S numbers',
     'kYouCanOnlyCancel5TripsPerDay':
         'You can only cancel maximum 5 trips per day',
+    'kCannotDeleteDefaultAddress': 'Cannot delete your default address',
   });

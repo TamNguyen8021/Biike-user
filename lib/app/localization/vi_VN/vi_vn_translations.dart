@@ -420,6 +420,10 @@ final Map<String, String> vi = {
   'kEnterNote': 'Nhập ghi chú',
   'kSetAsDefault': 'Đặt làm mặc định',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Nhập địa chỉ',
+  'kFindAddress': 'Tìm địa chỉ',
+
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
@@ -537,4 +541,5 @@ final Map<String, String> vi = {
         'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
     'kYouCanOnlyCancel5TripsPerDay':
         'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
+    'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',
   });
