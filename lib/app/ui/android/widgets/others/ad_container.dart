@@ -17,33 +17,42 @@ class AdContainer extends HookWidget {
       path: 'assets/images/ads-heiniken.jpg',
     ),
   ];
+  final double heightImage = 120;
   @override
   Widget build(BuildContext context) {
     final indexState = useState(0);
     return Container(
       width: double.infinity,
-      child: Column(
+      height: heightImage,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          CarouselSlider.builder(
-            itemCount: banners.length,
-            itemBuilder: (context, index, realIndex) {
-              final item = banners[index];
-              return GestureDetector(
-                onTap: () {
-                  _launchUniversalLinkIos(item.url);
-                },
-                child: Image.asset(item.path, fit: BoxFit.cover),
-              );
-            },
-            options: CarouselOptions(
-              viewportFraction: 1,
-              enlargeCenterPage: false,
-              autoPlay: true,
-              aspectRatio: 2,
-              onPageChanged: (index, reason) {
-                indexState.value = index;
+          Positioned.fill(
+            child: CarouselSlider.builder(
+              itemCount: banners.length,
+              itemBuilder: (context, index, realIndex) {
+                final item = banners[index];
+                return GestureDetector(
+                  onTap: () {
+                    _launchUniversalLinkIos(item.url);
+                  },
+                  child: Image.asset(
+                    item.path,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: heightImage,
+                  ),
+                );
               },
-              autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+              options: CarouselOptions(
+                viewportFraction: 1,
+                enlargeCenterPage: false,
+                autoPlay: true,
+                onPageChanged: (index, reason) {
+                  indexState.value = index;
+                },
+                autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+              ),
             ),
           ),
           Row(

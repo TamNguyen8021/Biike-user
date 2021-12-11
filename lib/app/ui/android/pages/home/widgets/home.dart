@@ -147,6 +147,7 @@ class Home extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      // AdContainer(),
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 0.0),
@@ -200,6 +201,7 @@ class Home extends StatelessWidget {
                                         currentTime.month &&
                                     firstTripTimeBook.year ==
                                         currentTime.year) ...[
+                                  // Ready to go
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 8.0, top: 20.0),
@@ -247,6 +249,8 @@ class Home extends StatelessWidget {
                                           .upcomingTrips[0].departureStation,
                                       destinationStation: homeController
                                           .upcomingTrips[0].destinationStation),
+                                          // TODO: Ads
+                                  // BUTTON action
                                   if (homeController.upcomingTrips[0].name !=
                                       CustomStrings.kFinding) ...[
                                     Padding(
@@ -286,7 +290,6 @@ class Home extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                AdContainer(),
                                 if (homeController
                                     .upcomingTrips.isNotEmpty) ...[
                                   Padding(
@@ -769,6 +772,17 @@ class Home extends StatelessWidget {
                                                   verificationFailed: () {
                                                     customDialog.loadingDialog
                                                         .dismiss();
+                                                    AwesomeDialog(
+                                                            context: context,
+                                                            dialogType:
+                                                                DialogType
+                                                                    .ERROR,
+                                                            headerAnimationLoop:
+                                                                false,
+                                                            desc: CustomErrorsString
+                                                                .kLoginExceptionError
+                                                                .tr)
+                                                        .show();
                                                   },
                                                 );
                                               } catch (e) {
@@ -896,6 +910,13 @@ class Home extends StatelessWidget {
                               },
                               verificationFailed: () {
                                 customDialog.loadingDialog.dismiss();
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.ERROR,
+                                        headerAnimationLoop: false,
+                                        desc: CustomErrorsString
+                                            .kLoginExceptionError.tr)
+                                    .show();
                               },
                             );
                           } catch (e) {
