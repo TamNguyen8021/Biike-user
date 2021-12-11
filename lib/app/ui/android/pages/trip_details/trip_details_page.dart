@@ -154,7 +154,7 @@ class TripDetailsPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: TextFormField(
-                      maxLines: 10,
+                      maxLines: 5,
                       style: Theme.of(context).textTheme.bodyText1,
                       onChanged: (String text) {
                         _cancelReason.value = text;
@@ -1060,6 +1060,9 @@ class TripDetailsPage extends StatelessWidget {
                                                                             AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                           }
                                                                         } else {
+                                                                          controller.userLocation =
+                                                                              await CommonFunctions.getCurrentLocation();
+
                                                                           if (CommonFunctions().isArrivedAtPickUpPoint(
                                                                               userLat: controller.userLocation!.latitude!,
                                                                               userLng: controller.userLocation!.longitude!,
@@ -1070,7 +1073,7 @@ class TripDetailsPage extends StatelessWidget {
                                                                                 await controller.pathshareProvider.startOrStopLocationSharing(isShared: false, sessionIdentifier: controller.sessionIdentifier);
                                                                               }
 
-                                                                              Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: controller.trip.tripId);
+                                                                              Get.offAndToNamed(CommonRoutes.FEEDBACK, arguments: tripId);
                                                                             } else {
                                                                               AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                             }
