@@ -217,6 +217,8 @@ class ProfilePage extends StatelessWidget {
                                                     .bodyText2,
                                               ),
                                               onPressed: () {
+                                                if (Get.arguments[
+                                                    'isLocationShared']) {}
                                                 LocalAppData().logout();
                                                 Get.offAllNamed(
                                                     CommonRoutes.LOGIN);

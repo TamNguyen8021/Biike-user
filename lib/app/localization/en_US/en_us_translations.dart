@@ -3,8 +3,8 @@ final Map<String, String> en = {
   'kIntroduction': 'Free hitchhiking app',
   'kConfirm': 'Confirm',
 
-//'002.,.2,.3' screen
-  'kSkip': 'Skip>>',
+  //'002.,.2,.3' screen
+  'kSkip': 'Skip',
   'kFree': 'Absolutely free',
   'kFirstDescription':
       'Biiké is a free connect application, you will not have to pay to use our service',
@@ -345,14 +345,21 @@ final Map<String, String> en = {
   'kBikeVolume': 'Volume',
   'kEnterVolume': 'Enter volume',
   'kNumberPlate': 'Number plate',
-  'kNumberPlatePicture': 'Number plate picture',
-  'kPleaseTakeNumberPlatePicture': 'Please take a picture of your number plate',
-  'kBikePicture': 'Bike picture',
-  'kPleaseTakeBikePicture': 'Please take a picture of your bike',
-  'kRegistrationPicture': 'Registration picture',
-  'kPleaseTakeRegistrationPicture':
-      'Please take a picture of your registration',
-  'kTakePicture': 'Take picture',
+  'kNumberPlatePicture': 'Number plate photo',
+  'kPleaseTakeNumberPlatePicture': 'Please take a photo of your number plate',
+  'kBikePicture': 'Bike photo',
+  'kPleaseTakeBikePicture': 'Please take a photo of your bike',
+  'kRegistrationPicture': 'Registration photo',
+  'kPleaseTakeRegistrationPicture': 'Please take a photo of your registration',
+  'kTakePicture': 'Take photo',
+  'kAddBikeSuccess':
+      'Add bike successful.\nPlease wait for admin to vefiry bike!',
+  'kDrivingLicenseBackPicture': 'Driving lisence back photo',
+  'kDrivingLicenseFrontPicture': 'Driving lisence front photo',
+  'kPleaseTakeDrivingLicenseBackPicture':
+      'Please take a photo of the back of your driver\'s lisence',
+  'kPleaseTakeDrivingLicenseFrontPicture':
+      'Please take a photo of the front of your driver\'s lisence',
 
 // 'voucher_detail' screen
   'kGiftDetail': 'Gift details',
@@ -391,9 +398,11 @@ final Map<String, String> en = {
 
 // 'address_book' screen
   'kAddressBook': 'Address Book',
+  'kDefault': 'Default',
 
 // 'edit_address_book' screen
   'kEditAddressBook': 'Edit Address Book',
+  'kDeleteDafaultAddress': 'User can not delete default',
 
 // 'add_address_book' screen
   'kAddAddressBook': 'Add Address Book',
@@ -436,6 +445,15 @@ final Map<String, String> en = {
   'kYouHave': 'You have',
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
+
+  //top up point
+  'kTopUpFromMomo': 'Top up point via Momo wallet',
+  'kEnterPoint': 'Enter exchanges point',
+  'kNeedAmount': 'Enter exchanges money',
+  'kNoted': 'Noted',
+  'kTopUpNoted':
+      'DO NOT apply to transacions at agent stores such as FPT Shop, Circle K, Ministop, F88...',
+  'kTopUpSuccess': 'Top up successful',
 
 // noti
   'kNotification': 'Notification',

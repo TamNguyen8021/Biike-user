@@ -955,8 +955,9 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                         if (controller.userLocation !=
                                                                             null) {
-                                                                          CommonFunctions().showConfirmDialog(
+                                                                          CommonFunctions.showConfirmDialog(
                                                                               context: context,
+                                                                              isCancel: false,
                                                                               title: CustomStrings.kConfirmArrivalTitle.tr,
                                                                               message: Biike.role.value == Role.keer ? CustomStrings.kConfirmArrivalMessageForKeer.tr : CustomStrings.kConfirmArrivalMessageForBiker.tr,
                                                                               onPressedFunc: () async {
@@ -1110,10 +1111,12 @@ class TripDetailsPage extends StatelessWidget {
                                                                         .tr)
                                                                 .show();
                                                           } else {
-                                                            CommonFunctions()
+                                                            CommonFunctions
                                                                 .showConfirmDialog(
                                                                     context:
                                                                         context,
+                                                                    isCancel:
+                                                                        true,
                                                                     title: CustomStrings
                                                                         .kConfirmCancelTrip
                                                                         .tr,

@@ -101,7 +101,10 @@ class Home extends StatelessWidget {
                         _profileController.user.avatar,
                         radius: 12,
                         onTap: () {
-                          Get.toNamed(CommonRoutes.PROFILE);
+                          Get.toNamed(CommonRoutes.PROFILE, arguments: {
+                            'isLocationShared':
+                                tripDetailsController.isLocationShared.value
+                          });
                         },
                       );
                     }
