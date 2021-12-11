@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
   final _feedbackProvider = Get.find<FeedbackProvider>();
-
   final _walletController = Get.find<WalletController>();
 
   RxBool isRated = false.obs;
@@ -81,7 +80,9 @@ class FeedbackController extends GetxController {
 
     await _walletController.updateWalletPoint();
 
-    if (_tip != null && _tip != '' && _walletController.totalWalletPoint < int.parse(_tip)) {
+    if (_tip != null &&
+        _tip != '' &&
+        _walletController.totalWalletPoint < int.parse(_tip)) {
       return CustomErrorsString.kNotEnoughPoint.tr;
     }
     return '';

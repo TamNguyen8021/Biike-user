@@ -92,9 +92,11 @@ class CustomStrings {
 
   // 'cho_now' screen
   static const String kChoNow = 'kChoNow';
-  static const String kChoNowDescription1 = 'kChoNowDescription1';
-  static const String kChoNowDescription2 = 'kChoNowDescription2';
-  static const String kChoNowDescription3 = 'kChoNowDescription3';
+  static const List<String> kChoNowDescription = [
+    'kChoNowDescription1',
+    'kChoNowDescription2',
+    'kChoNowDescription3',
+  ];
   static const String kChoNowSettings = 'kChoNowSettings';
   static const String kTurnOnChoNow = 'kTurnOnChoNow';
   static const String kChoNowStation = 'kChoNowStation';
@@ -110,8 +112,10 @@ class CustomStrings {
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';
   static const String kMonth = 'kMonth';
-  static const String kTopBikerInfoFirstContent = 'kTopBikerInfoFirstContent';
-  static const String kTopBikerInfoSecondContent = 'kTopBikerInfoSecondContent';
+  static const List<String> kTopBikerInfoContents = [
+    'kTopBikerInfoFirstContent',
+    'kTopBikerInfoSecondContent'
+  ];
   static const String kTopBikerInfoThirdContent = 'kTopBikerInfoThirdContent';
   static const String kGotIt = 'kGotIt';
 
@@ -318,6 +322,11 @@ class CustomStrings {
   static const String kChooseTo = 'kChooseTo';
   static const String kBookScheduleTrip = 'kBookScheduleTrip';
   static const String kBookNowTrip = 'kBookNowTrip';
+  static const String kRuleWhenBookTrip = 'kRuleWhenBookTrip';
+  static const List<String> kRulesWhenBookTrip = [
+    'kRuleBookTrip1',
+    'kRuleBookTrip2'
+  ];
 
   // 'book_schedule_trip' screen
   static const String kTime = 'kTime';
@@ -441,15 +450,6 @@ class CustomStrings {
   static const String kBanList = 'kBanList';
   static const String kUnBlock = 'kUnBlock';
 
-  // date
-  static const String kMonday = 'kMonday';
-  static const String kTuesday = 'kTuesday';
-  static const String kWednesday = 'kWednesday';
-  static const String kThursday = 'kThursday';
-  static const String kFriday = 'kFriday';
-  static const String kSaturday = 'kSaturday';
-  static const String kSunday = 'kSunday';
-
   // point
   static const String kPoint = 'kPoint';
   static const String kExchangeVoucher = 'kExchangeVoucher';
@@ -468,5 +468,8 @@ class CustomStrings {
 
   // noti
   static const String kNotification = 'kNotification';
+  static const String kNewNotification = 'kNewNotification';
+  static const String kDeleteNotification = 'kDeleteNotification';
   static const String kAll = 'kAll';
+  static const String kView = 'kView';
 }

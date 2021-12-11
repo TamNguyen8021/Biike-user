@@ -21,7 +21,8 @@ class ViewVoucherButton extends StatelessWidget {
           dynamic data = await _redemptionController
               .getRedemptionDetailByRedemptionId(redemptionId);
 
-          Get.offAndToNamed(CommonRoutes.YOUR_VOUCHER_DETAIL, arguments: data);
+          Get.back(closeOverlays: true);
+          Get.toNamed(CommonRoutes.YOUR_VOUCHER_DETAIL, arguments: data);
         },
         child: Text(
           CustomStrings.kViewAVoucher.tr,

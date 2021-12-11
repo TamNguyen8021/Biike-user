@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/data/enums/role_enum.dart';
@@ -201,8 +202,18 @@ class ChooseModePage extends StatelessWidget {
                       role = 2;
                     }
 
-                    final hasRoleChanged =
-                        await _userProvider.changeRole(role: role);
+                    final hasRoleChanged = await _userProvider
+                        .changeRole(role: role)
+                        .catchError((error) {
+                      CommonFunctions.catchExceptionError(error);
+                      customDialog.loadingDialog.dismiss();
+                      AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.ERROR,
+                              headerAnimationLoop: false,
+                              desc: CustomErrorsString.kDevelopError.tr)
+                          .show();
+                    });
 
                     if (hasRoleChanged is bool) {
                       Biike.localAppData.saveRole(Biike.role.value);

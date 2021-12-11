@@ -124,4 +124,23 @@ class UserProvider extends CommonProvider {
       return response.body['data'];
     }
   }
+
+  /// Update user's phone number verification to true
+  ///
+  /// Author: TamNTT
+  Future<bool> modifyVerification() async {
+    final response = await put(
+        UrlStrings.userUrl + '${Biike.userId.value}/activation',
+        {'isPhoneVerified': true},
+        headers: await headers);
+
+    logResponse(response);
+
+    if (response.status.hasError) {
+      logError(response);
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

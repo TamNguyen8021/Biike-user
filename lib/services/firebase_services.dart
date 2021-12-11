@@ -41,8 +41,11 @@ class FirebaseServices {
         verificationId: _verificationId,
         smsCode: otp,
       );
-      final authCredential =
-          await firebaseAuth.signInWithCredential(phoneAuthCredential);
+      final authCredential = await firebaseAuth
+          .signInWithCredential(phoneAuthCredential)
+          .catchError((error) {
+        CommonFunctions.catchExceptionError(error);
+      });
       if (authCredential.user != null) {
         // success
         return true;

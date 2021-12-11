@@ -153,7 +153,7 @@ class TripProvider extends CommonProvider {
   /// Create a ke-now trip
   ///
   /// Author: UyenNLP
-  Future<dynamic> createKeNowTrip(Map<String, dynamic> data) async {
+  Future<dynamic> createSingleTrip(Map<String, dynamic> data) async {
     final response =
         await post(UrlStrings.tripUrl, data, headers: await headers);
 
@@ -173,7 +173,7 @@ class TripProvider extends CommonProvider {
   /// Create a scheduled trip
   ///
   /// Author: UyenNLP
-  Future<dynamic> createScheduledTrip(Map<String, dynamic> data) async {
+  Future<dynamic> createMultipleTrip(Map<String, dynamic> data) async {
     final response = await post(UrlStrings.tripUrl + 'schedule', data,
         headers: await headers);
 
