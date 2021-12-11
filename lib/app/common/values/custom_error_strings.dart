@@ -44,11 +44,8 @@ class CustomErrorsString {
   static const String kNotTurnOnGPS = 'kNotTurnOnGPS';
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
   static const String kDeleteDafaultAddress = 'kDeleteDafaultAddress';
-<<<<<<< HEAD
-=======
   static const String kNoVoucherCode = 'kNoVoucherCode';
   static const String kTripTimeExist = 'kTripTimeExist';
->>>>>>> 93e3ea9499581c299a4109c84774b59f9602ca5d
 
   //Login error message
   static const String kNoAccount = 'kNoAccount';

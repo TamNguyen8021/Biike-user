@@ -350,18 +350,6 @@ final Map<String, String> en = {
   'kBikePicture': 'Bike photo',
   'kPleaseTakeBikePicture': 'Please take a photo of your bike',
   'kRegistrationPicture': 'Registration photo',
-<<<<<<< HEAD
-  'kPleaseTakeRegistrationPicture':
-      'Please take a photo of your registration',
-  'kTakePicture': 'Take photo',
-  'kAddBikeSuccess': 'Add bike successful.\nPlease wait for admin to vefiry bike!',
-  'kDrivingLicenseBackPicture': 'Driving lisence back photo',
-  'kDrivingLicenseFrontPicture': 'Driving lisence front photo',
-  'kPleaseTakeDrivingLicenseBackPicture': 'Please take a photo of the back of your driver\'s lisence',
-  'kPleaseTakeDrivingLicenseFrontPicture': 'Please take a photo of the front of your driver\'s lisence',
-
-  // 'voucher_detail' screen
-=======
   'kPleaseTakeRegistrationPicture': 'Please take a photo of your registration',
   'kTakePicture': 'Take photo',
   'kAddBikeSuccess':
@@ -374,7 +362,6 @@ final Map<String, String> en = {
       'Please take a photo of the front of your driver\'s lisence',
 
 // 'voucher_detail' screen
->>>>>>> 93e3ea9499581c299a4109c84774b59f9602ca5d
   'kGiftDetail': 'Gift details',
   'kYourVoucher': 'Your vouchers',
   'kVoucherDetail': 'Voucher detail',
@@ -468,17 +455,11 @@ final Map<String, String> en = {
       'DO NOT apply to transacions at agent stores such as FPT Shop, Circle K, Ministop, F88...',
   'kTopUpSuccess': 'Top up successful',
 
-<<<<<<< HEAD
-  // noti
-  'kNotification': 'BiikeNoti',
-
-=======
 // noti
   'kNotification': 'Notification',
   'kNewNotification': 'You have new notification',
   'kDeleteNotification': 'Are you sure you want to delete all notification?',
   'kView': 'View',
->>>>>>> 93e3ea9499581c299a4109c84774b59f9602ca5d
   'kAll': 'All',
 }..addAll(<String, String>{
 // Error message
