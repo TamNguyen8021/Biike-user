@@ -1070,7 +1070,11 @@ class TripDetailsPage extends StatelessWidget {
                                                                                 await controller.pathshareProvider.startOrStopLocationSharing(isShared: false, sessionIdentifier: controller.sessionIdentifier);
                                                                               }
 
-                                                                              Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: controller.trip.tripId);
+                                                                              // Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: controller.trip.tripId);
+                                                                              Get.offAllNamed(CommonRoutes.FEEDBACK, arguments: {
+                                                                                'tripId': controller.trip.tripId,
+                                                                                'isKeer': Biike.userId.value == controller.trip.keerId
+                                                                              });
                                                                             } else {
                                                                               AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
                                                                             }
