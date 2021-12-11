@@ -314,7 +314,7 @@ final Map<String, String> en = {
   'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
   'kCancel': 'Cancel',
-  'kRuleWhenBookTrip' : 'Rules when book trip',
+  'kRuleWhenBookTrip': 'Rules when book trip',
   'kRuleBookTrip1':
       '1.\tYou can\'t have more than 15 scheduled trips at one time',
   'kRuleBookTrip2': '2.\tYou are allowed to cancel maximum 5 trips per day',
@@ -435,7 +435,7 @@ final Map<String, String> en = {
   'kNotification': 'Notification',
   'kNewNotification': 'You have new notification',
   'kDeleteNotification': 'Are you sure you want to delete all notification?',
-'kView' : 'View',
+  'kView': 'View',
   'kAll': 'All',
 }..addAll(<String, String>{
 // Error message
@@ -494,9 +494,12 @@ final Map<String, String> en = {
     'kTripTimeExist': 'You have already booked a trip with this timestamp',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'You can only add station from 5AM to 9PM',
-  'kExceedMaxTrips' : 'You can\'t have more than 15 scheduled trips at one time.',
-  'kChangeModeToBiker' : 'Please switch to Biker mode first',
+    'kExceedMaxTrips':
+        'You can\'t have more than 15 scheduled trips at one time.',
+    'kChangeModeToBiker': 'Please switch to Biker mode first',
     'kNoSosNumberSaved': 'You did not add any S.O.S number',
     'kCannotAddYourNumberAsSOS':
         'Cannot add your phone number to S.O.S numbers',
+    'kBookAnHourPrior':
+        'Please only book trip with start time at lease one hour from now.',
   });

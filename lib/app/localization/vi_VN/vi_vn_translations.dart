@@ -469,7 +469,7 @@ final Map<String, String> vi = {
   'kNotification': 'Thông báo',
   'kNewNotification': 'Bạn có thông báo mới',
   'kDeleteNotification': 'Bạn có chắc là muốn xóa hết tất cả thông báo?',
-  'kView' : 'Xem',
+  'kView': 'Xem',
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message
@@ -535,4 +535,6 @@ final Map<String, String> vi = {
     'kNoSosNumberSaved': 'Bạn chưa cài đặt số điện thoại S.O.S',
     'kCannotAddYourNumberAsSOS':
         'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
+    'kBookAnHourPrior':
+        'Xin hãy đặt chuyến có thời gian bắt đầu sau bây giờ ít nhất một tiếng.',
   });

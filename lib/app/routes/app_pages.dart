@@ -297,7 +297,18 @@ class AppPages {
     GetPage(
         name: CommonRoutes.NOTIFICATION,
         page: () => NotificationPage(),
-        binding: NotificationBinding()),
+        // binding: NotificationBinding(),
+        bindings: <Bindings>[
+          NotificationBinding(),
+          ManageBikeBinding(),
+          BikeBinding(),
+          WalletBinding(),
+          ViewPointBinding(),
+          ChoNowSettingsBinding(),
+          StationBinding(),
+          UserBinding(),
+        ],
+    ),
     GetPage(
         name: CommonRoutes.NOTIFICATION_DETAIL,
         page: () => NotificationDetailPage()),
