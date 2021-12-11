@@ -461,6 +461,20 @@ final Map<String, String> en = {
   'kDeleteNotification': 'Are you sure you want to delete all notification?',
   'kView': 'View',
   'kAll': 'All',
+
+  // month
+  'kJan': 'Jan',
+  'kFeb': 'Feb',
+  'kMar': 'Mar',
+  'kApr': 'Apr',
+  'kMay': 'May',
+  'kJun': 'Jun',
+  'kJul': 'Jul',
+  'kAug': 'Aug',
+  'kSep': 'Sep',
+  'kOct': 'Oct',
+  'kNov': 'Nov',
+  'kDec': 'Dec',
 }..addAll(<String, String>{
 // Error message
     'kError': 'Error!',

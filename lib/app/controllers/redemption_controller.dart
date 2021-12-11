@@ -145,11 +145,13 @@ class RedemptionController extends GetxController {
   }
 
   dynamic _returnMsg(result) {
-    if (result is bool) return result;
+    if (!(result is String)) return result;
 
     if (result == '') {
       return CustomErrorsString.kExchangeFailed.tr;
-    } else if (result.contains('no available voucher code for this voucher')) {
+    }
+
+    if (result.contains('no available voucher code for this voucher')) {
       return CustomErrorsString.kNoVoucherCode.tr;
     }
 
