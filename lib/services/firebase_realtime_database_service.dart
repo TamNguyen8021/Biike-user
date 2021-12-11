@@ -31,7 +31,7 @@ class FirebaseRealtimeDatabaseService {
   getNotifications({required userId, required RxMap data}) {
     _database
         .child('/notification/$userId')
-        .limitToLast(30)
+        .limitToLast(50)
         .onValue
         .listen((event) {
       try {

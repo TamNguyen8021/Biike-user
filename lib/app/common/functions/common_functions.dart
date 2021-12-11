@@ -422,4 +422,36 @@ class CommonFunctions {
           ),
         ),
       );
+
+  static String getMonthText(int month) {
+    switch(month) {
+      case 1:
+        return CustomStrings.kJan.tr;
+      case 2:
+        return CustomStrings.kFeb.tr;
+      case 3:
+        return CustomStrings.kMar.tr;
+      case 4:
+        return CustomStrings.kApr.tr;
+      case 5:
+        return CustomStrings.kMay.tr;
+      case 6:
+        return CustomStrings.kJun.tr;
+      case 7:
+        return CustomStrings.kJul.tr;
+      case 8:
+        return CustomStrings.kAug.tr;
+      case 9:
+        return CustomStrings.kSep.tr;
+      case 10:
+        return CustomStrings.kOct.tr;
+      case 11:
+        return CustomStrings.kNov.tr;
+      case 12:
+        return CustomStrings.kDec.tr;
+      default:
+        return '';
+
+    }
+  }
 }

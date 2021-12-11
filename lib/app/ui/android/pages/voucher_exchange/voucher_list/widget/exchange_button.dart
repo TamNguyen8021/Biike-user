@@ -36,25 +36,31 @@ class ExchangeVoucherButton extends StatelessWidget {
       return;
     }
 
-    dynamic result =
-        await _redemptionController.exchangeVoucher(voucher.voucherId);
-    if (result is String) {
-      customDialog.loadingDialog.dismiss();
-      AwesomeDialog(
-              context: context,
-              dialogType: DialogType.ERROR,
-              headerAnimationLoop: false,
-              desc:
-                  result == '' ? CustomErrorsString.kExchangeFailed.tr : result)
-          .show();
-    } else {
-      customDialog.loadingDialog.dismiss();
-      _walletController.updateWalletPoint();
-      int redemptionId = CommonFunctions.getIdFromUrl(
-          url: result.headers['location'] as String);
+    try {
+      dynamic result =
+      await _redemptionController.exchangeVoucher(voucher.voucherId);
+      if (result is String) {
+        customDialog.loadingDialog.dismiss();
+        AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            headerAnimationLoop: false,
+            desc:
+            result == '' ? CustomErrorsString.kExchangeFailed.tr : result)
+            .show();
+      } else {
+        customDialog.loadingDialog.dismiss();
+        _walletController.updateWalletPoint();
+        int redemptionId = CommonFunctions.getIdFromUrl(
+            url: result.headers['location'] as String);
 
-      _successDialog(redemptionId);
+        _successDialog(redemptionId);
+      }
+    } catch (e) {
+      CommonFunctions.catchExceptionError(e);
+      customDialog.loadingDialog.dismiss();
     }
+
   }
 
   _successDialog(redemptionId) => Get.defaultDialog(
