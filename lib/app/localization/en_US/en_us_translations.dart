@@ -273,7 +273,9 @@ final Map<String, String> en = {
   'kYourLocation': 'Your location',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
-  'kViewCancelTripReminder': 'You can view your canceled trips in history',
+  'kViewCancelTripReminder':
+      'To increase success trip rate, Biiké only allow to cancel maximum 5 trips per day. Please consider when you book and cancel trip.',
+  'kStillCancel': 'Cancel',
   'kLetUsKnowYourCancelReason':
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
@@ -402,6 +404,10 @@ final Map<String, String> en = {
   'kSelectAddress': 'Select address',
   'kEnterNote': 'Enter note',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Enter address',
+  'kFindAddress': 'Find address',
+
 // 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
@@ -475,7 +481,6 @@ final Map<String, String> en = {
     'kPasswordMustAtLeast6': 'Password must be at least 6 characters',
     'kInvalidPhoneNo': 'Invalid phone number',
     'kDuplicateEmailOrPhone': 'The email or phone number was used to sign up',
-    'kWrongOtp': 'Wrong OTP code',
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',
@@ -502,4 +507,7 @@ final Map<String, String> en = {
         'Cannot add your phone number to S.O.S numbers',
     'kBookAnHourPrior':
         'Please only book trip with start time at lease one hour from now.',
+    'kYouCanOnlyCancel5TripsPerDay':
+        'You can only cancel maximum 5 trips per day',
+    'kCannotDeleteDefaultAddress': 'Cannot delete your default address',
   });

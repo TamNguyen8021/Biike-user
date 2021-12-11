@@ -284,7 +284,8 @@ final Map<String, String> vi = {
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
-      'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
+      'Để nâng cao tỉ lệ chuyến thành công. Biiké chỉ cho phép hủy tối đa 5 chuyến mỗi ngày. Hãy cân nhắc thật kỹ khi đặt và hủy chuyến.',
+  'kStillCancel': 'Vẫn hủy',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
   'kHelpCenter': 'Trung tâm trợ giúp',
@@ -419,6 +420,10 @@ final Map<String, String> vi = {
   'kEnterNote': 'Nhập ghi chú',
   'kSetAsDefault': 'Đặt làm mặc định',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Nhập địa chỉ',
+  'kFindAddress': 'Tìm địa chỉ',
+
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
@@ -510,7 +515,6 @@ final Map<String, String> vi = {
     'kPasswordMustAtLeast6': 'Yêu cầu mật khẩu ít nhất 6 kí tự',
     'kInvalidPhoneNo': 'Số điện thoại không hợp lệ',
     'kDuplicateEmailOrPhone': 'Số điện thoại hoặc email đã có người đăng ký',
-    'kWrongOtp': 'Sai mã OTP',
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
     'kNoHistory': 'Không có lịch sử',
@@ -537,4 +541,7 @@ final Map<String, String> vi = {
         'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
     'kBookAnHourPrior':
         'Xin hãy đặt chuyến có thời gian bắt đầu sau bây giờ ít nhất một tiếng.',
+    'kYouCanOnlyCancel5TripsPerDay':
+        'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
+    'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',
   });

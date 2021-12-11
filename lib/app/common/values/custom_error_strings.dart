@@ -31,7 +31,6 @@ class CustomErrorsString {
   static const String kPasswordMustAtLeast6 = 'kPasswordMustAtLeast6';
   static const String kInvalidPhoneNo = 'kInvalidPhoneNo';
   static const String kDuplicateEmailOrPhone = 'kDuplicateEmailOrPhone';
-  static const String kWrongOtp = 'kWrongOtp';
   static const String kEmptyOtp = 'kEmptyOtp';
   static const String kTryAgain = 'kTryAgain';
   static const String kNoHistory = 'kNoHistory';
@@ -69,4 +68,12 @@ class CustomErrorsString {
 
   // 'add_sos_number' screen
   static const String kCannotAddYourNumberAsSOS = 'kCannotAddYourNumberAsSOS';
+
+  // 'trip_details' screen
+  static const String kYouCanOnlyCancel5TripsPerDay =
+      'kYouCanOnlyCancel5TripsPerDay';
+
+  // 'edit_address_book' screen
+  static const String kCannotDeleteDefaultAddress =
+      'kCannotDeleteDefaultAddress';
 }

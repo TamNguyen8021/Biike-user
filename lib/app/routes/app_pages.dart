@@ -99,11 +99,13 @@ class AppPages {
     ),
     GetPage(
         name: CommonRoutes.VERIFY_PHONE,
-        page: () {
-          final phone = Get.arguments['fullPhone'] ?? '';
-          return VerifyPhonePage.initial(phone);
-        },
-        binding: VerifyPhoneBinding()),
+        page: () => VerifyPhonePage(),
+        bindings: <Bindings>[
+          VerifyPhoneBinding(),
+          UserBinding(),
+          ProfileBinding(),
+          HomeBinding(),
+        ]),
     GetPage(
         name: CommonRoutes.REGISTER,
         page: () => RegisterPage(),

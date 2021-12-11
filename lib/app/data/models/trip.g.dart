@@ -21,6 +21,7 @@ Trip _$TripFromJson(Map<String, dynamic> json) {
     json['isSchedule'] as bool?,
     json['cancelPersonId'] as int?,
     json['cancelReason'] as String?,
+    json['isCancellationLimitExceeded'] as bool?,
   );
 }
 

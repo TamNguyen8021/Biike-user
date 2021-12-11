@@ -10,43 +10,32 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 /// The '004.2_verify_phone' screen
 class VerifyPhonePage extends StatelessWidget {
-  static const String routeName = '/verifyPhoneScreen';
-  final String fullPhone;
+  final _verifyPhoneController = Get.find<VerifyPhoneController>();
+  final String fullPhone = Get.arguments['phone'];
 
-  VerifyPhonePage({Key? key, required this.fullPhone}) : super(key: key);
+  VerifyPhonePage({Key? key}) : super(key: key);
 
-  static VerifyPhonePage initial(String fullPhone) {
-    return VerifyPhonePage(
-      fullPhone: fullPhone,
-    );
-  }
-
-  final controllerOtp = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final controllerOtp = TextEditingController();
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 100.0, left: 22.0, right: 22.0),
+      body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
               CustomStrings.kInputVerifyCode.tr,
-              style: Theme.of(context).textTheme.bodyText1!,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 6),
-            Text(
-              fullPhone,
-              style: Theme.of(context).textTheme.bodyText1!,
+              style: Theme.of(context).textTheme.headline1,
               textAlign: TextAlign.center,
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.only(bottom: 5.0, top: 10.0),
+              margin: const EdgeInsets.only(bottom: 10.0, top: 10.0),
               child: PinCodeTextField(
                 appContext: context,
-                controller: controllerOtp,
+                // controller: controllerOtp,
                 length: 6,
                 keyboardType: TextInputType.number,
                 cursorColor: CustomColors.kBlue,
@@ -63,28 +52,30 @@ class VerifyPhonePage extends StatelessWidget {
                   activeColor: CustomColors.kLightGray,
                   inactiveColor: CustomColors.kLightGray,
                 ),
-                onChanged: (code) {},
+                onChanged: (code) {
+                  controllerOtp.text = code;
+                },
                 beforeTextPaste: (text) {
                   return true;
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 2.0),
-                  child: Icon(
-                    Icons.refresh,
-                    color: CustomColors.kDarkGray,
-                  ),
-                ),
-                Text(
-                  CustomStrings.kResendVerifyCode.tr,
-                  style: Theme.of(context).textTheme.bodyText1,
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: <Widget>[
+            //     Padding(
+            //       padding: const EdgeInsets.only(right: 2.0),
+            //       child: Icon(
+            //         Icons.refresh,
+            //         color: CustomColors.kDarkGray,
+            //       ),
+            //     ),
+            //     Text(
+            //       CustomStrings.kResendVerifyCode.tr,
+            //       style: Theme.of(context).textTheme.bodyText1,
+            //     )
+            //   ],
+            // ),
           ],
         ),
       ),
@@ -99,18 +90,20 @@ class VerifyPhonePage extends StatelessWidget {
               foregroundColor: Colors.white,
               hoverColor: CustomColors.kDarkGray,
             ),
-            GetBuilder<VerifyPhoneController>(builder: (controller) {
-              return NextPageButton(
-                onPressedFunc: () => VerifyPhoneController.to.verifyOtp(
-                    context: context,
-                    otp: controllerOtp.text,
-                    fullPhone: fullPhone),
-                backgroundColor: CustomColors.kBlue,
-                foregroundColor: Colors.white,
-                hoverColor: CustomColors.kDarkGray,
-                isLoading: controller.isLoading,
-              );
-            }),
+            GetBuilder<VerifyPhoneController>(
+                init: _verifyPhoneController,
+                builder: (VerifyPhoneController controller) {
+                  return NextPageButton(
+                    onPressedFunc: () => controller.verifyOtp(
+                        context: context,
+                        otp: controllerOtp.text,
+                        fullPhone: fullPhone),
+                    backgroundColor: CustomColors.kBlue,
+                    foregroundColor: Colors.white,
+                    hoverColor: CustomColors.kDarkGray,
+                    isLoading: controller.isLoading,
+                  );
+                }),
           ],
         ),
       ),

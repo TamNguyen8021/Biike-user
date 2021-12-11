@@ -134,7 +134,7 @@ class RegisterPage extends HookWidget {
                                                 fontWeight: FontWeight.bold),
                                       ),
                                       onTap: () async {
-                                        await CommonFunctions().openLink(
+                                        await CommonFunctions.openLink(
                                             url:
                                                 'https://www.biike.in/terms.html',
                                             context: context);
@@ -154,7 +154,7 @@ class RegisterPage extends HookWidget {
                                                 fontWeight: FontWeight.bold),
                                       ),
                                       onTap: () async {
-                                        await CommonFunctions().openLink(
+                                        await CommonFunctions.openLink(
                                             url:
                                                 'https://www.biike.in/privacy.html',
                                             context: context);

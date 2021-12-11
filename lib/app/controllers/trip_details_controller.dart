@@ -202,15 +202,29 @@ class TripDetailsController extends GetxController {
       {required BuildContext context,
       required int tripId,
       required String cancelReason}) async {
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
     Map<String, String> body = {'cancelReason': cancelReason};
-    bool response =
-        await _tripProvider.cancelTrip(tripId: tripId, body: jsonEncode(body));
+    bool response = await _tripProvider
+        .cancelTrip(tripId: tripId, body: jsonEncode(body))
+        .catchError((error) {
+      CommonFunctions.catchExceptionError(error);
+      customDialog.loadingDialog.dismiss();
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              desc: CustomErrorsString.kDevelopError.tr)
+          .show();
+    });
     if (response) {
       // await _sendNoti(tripId: tripId, status: TripStatus.canceled);
-
+      customDialog.loadingDialog.dismiss();
       Get.back(closeOverlays: true);
       Get.back();
-      _homeController.pagingController.refresh();
+      _homeController.upcomingTrips.clear();
+      _homeController.pagingController.itemList!.clear();
+      _homeController.pagingController.notifyPageRequestListeners(0);
       AwesomeDialog(
               context: context,
               dialogType: DialogType.SUCCES,
@@ -218,6 +232,7 @@ class TripDetailsController extends GetxController {
               desc: CustomStrings.kCancelTripSuccess.tr)
           .show();
     } else {
+      customDialog.loadingDialog.dismiss();
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,

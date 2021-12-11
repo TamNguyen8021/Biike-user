@@ -291,6 +291,7 @@ class CustomStrings {
   static const String kYourLocation = 'kYourLocation';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
+  static const String kStillCancel = 'kStillCancel';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';
@@ -428,6 +429,10 @@ class CustomStrings {
   static const String kSelectAddress = 'kSelectAddress';
   static const String kEnterNote = 'kEnterNote';
   static const String kSetAsDefault = 'kSetAsDefault';
+
+  // 'search_address' screen
+  static const String kEnterAddress = 'kEnterAddress';
+  static const String kFindAddress = 'kFindAddress';
 
   // 'sos_number' screen
   static const String kSOSNumber = 'kSOSNumber';
