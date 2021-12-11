@@ -9,13 +9,13 @@ part of 'notification.dart';
 BiikeNoti _$BiikeNotiFromJson(Map<dynamic, dynamic> json) {
   return BiikeNoti(
     receiverId: json['receiverId'] as int?,
-    title: json['title'] as String?,
-    content: json['content'] as String?,
-    url: json['url'] as String?,
+    title: json['title'] as String? ?? '',
+    content: json['content'] as String? ?? '',
+    url: json['url'] as String? ?? '',
     createdDate: json['createdDate'] == null
         ? null
         : DateTime.parse(json['createdDate'] as String),
-    isRead: json['isRead'] as bool?,
+    isRead: json['isRead'] as bool? ?? false,
   );
 }
 

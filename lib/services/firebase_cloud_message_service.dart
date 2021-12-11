@@ -34,7 +34,7 @@ class FirebaseCloudMessagingService {
     /// gives you the msg on which user taps
     /// and it opens the app from terminated state
     _fcm.getInitialMessage().then((msg) {
-      Get.toNamed(CommonRoutes.NOTIFICATION);
+      if (msg != null) Get.toNamed(CommonRoutes.NOTIFICATION);
     });
 
     /// handles msg when app in on the foreground

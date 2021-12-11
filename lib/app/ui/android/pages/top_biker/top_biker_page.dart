@@ -1,5 +1,7 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/top_biker_controller.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_top_bikers.dart';
@@ -34,75 +36,10 @@ class TopBikerPage extends StatelessWidget {
                       CustomStrings.kBikerRank.tr,
                     ),
                     actionWidgets: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 8.0),
-                        child: IconButton(
-                          onPressed: () => showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: Text(CustomStrings.kBikerRank.tr,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline3!
-                                      .copyWith(fontWeight: FontWeight.bold)),
-                              content: Container(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Text(
-                                      CustomStrings
-                                          .kTopBikerInfoFirstContent.tr,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
-                                              fontWeight: FontWeight.normal),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text(
-                                        CustomStrings
-                                            .kTopBikerInfoSecondContent.tr,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
-                                                fontWeight: FontWeight.normal),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text(
-                                        CustomStrings
-                                            .kTopBikerInfoThirdContent.tr,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
-                                                fontWeight: FontWeight.normal),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: CustomTextButton(
-                                          backgroundColor: CustomColors.kBlue,
-                                          foregroundColor: Colors.white,
-                                          text: CustomStrings.kGotIt.tr,
-                                          onPressedFunc: () {
-                                            Get.back();
-                                          },
-                                          hasBorder: false),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          icon: Icon(Icons.lightbulb),
-                        ),
-                      ),
+                      CommonFunctions().lightBulbIcon(
+                          context,
+                          CustomStrings.kBikerRank,
+                          contents: CustomStrings.kTopBikerInfoContents),
                     ],
                   ),
                   body: SingleChildScrollView(

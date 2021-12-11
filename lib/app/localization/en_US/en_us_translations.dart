@@ -1,9 +1,9 @@
 final Map<String, String> en = {
-  // '002.1_welcome_1' screen
+// '002.1_welcome_1' screen
   'kIntroduction': 'Free hitchhiking app',
   'kConfirm': 'Confirm',
 
-  //'002.,.2,.3' screen
+//'002.,.2,.3' screen
   'kSkip': 'Skip>>',
   'kFree': 'Absolutely free',
   'kFirstDescription':
@@ -16,7 +16,7 @@ final Map<String, String> en = {
   'kProtectEnvironment': 'Protects the environment',
   'kStart': 'Start',
 
-  // '003.1_login'
+// '003.1_login'
   'kForgotPassword': 'Forgot password',
   'kSendResetPasswordEmail':
       'Your password has been reset, please check your email',
@@ -32,7 +32,7 @@ final Map<String, String> en = {
   'kLoginExceptionError': 'Something went wrong, please try again',
   'kEmptyToken': 'Server sent empty token',
 
-  // 'register' screen
+// 'register' screen
   'kConfirmTerm': 'By sign up, you aggre with',
   'kAnd': ' and ',
   'kHasAccount': 'Has an account? ',
@@ -41,12 +41,12 @@ final Map<String, String> en = {
   'kSentVerifiedEmail':
       'We sent a verified email to your mailbox. Please verify your account before login',
 
-  // '004.2_verify_phone' screen
+// '004.2_verify_phone' screen
   'kInputVerifyCode': 'Input verification code',
   'kResendVerifyCode': 'Resend the code after 59 seconds',
   'kInvalidPin': 'Invalid code',
 
-  // '004.4_choose_mode' screen
+// '004.4_choose_mode' screen
   'kChooseMode': 'Start using app\nwith the role',
   'kBikerRole': 'Biker',
   'kKeerRole': 'Keer',
@@ -55,7 +55,7 @@ final Map<String, String> en = {
   'kKeerDescription': 'Create your own trips and catch a ride with our Bikers',
   'kRemindWords': 'You can switch to other mode\nduring using our service',
 
-  // 'ke_er_home' screen
+// 'ke_er_home' screen
   'kTopBiker': 'Top Biker on ',
   'kKeerReadyReminder': 'Ready to go!',
   'kReminderMinute': ' minutes ',
@@ -77,13 +77,8 @@ final Map<String, String> en = {
   'kWaitingAdminVerifiedBike':
       'Please waiting for admin to verify your bike to use Biker mode',
 
-  // 'biker_home' screen
   'kNoKeNowTrip': 'No Ride Now trip',
   'kBikerReadyReminder': 'Ready to go!',
-  'kFilter': 'Filter trips',
-  'kSelectHour': 'Hour',
-  'kSelectSourceStation': 'Departure station',
-  'kSelectDestinationStation': 'Destination station',
   'kAccept': 'Accept',
   'kAcceptSuccessful': 'You have accepted this trip',
   'kSearchAgain': 'Clear',
@@ -113,7 +108,7 @@ final Map<String, String> en = {
   'kEditStationSuccess': 'Your station info were updated',
   'kDeleteStationSuccess': 'The station were removed',
 
-  // 'top_biker' screen
+// 'top_biker' screen
   'kBikerRank': 'Biker Rank',
   'kMonth': 'Month ',
   'kTopBikerInfoFirstContent':
@@ -124,10 +119,10 @@ final Map<String, String> en = {
       'The point shown on chart represent the point you\'ve earned from your trips, which does not include top up points.',
   'kGotIt': 'Got it',
 
-  // 'activity' screen
+// 'activity' screen
   'kNoUpcomingTrips': 'No upcoming trips',
 
-  // 'trip_history' screen
+// 'trip_history' screen
   'kHistory': 'History',
   'kKeerHistory': 'Keer',
   'kBikerHistory': 'Biker',
@@ -136,12 +131,12 @@ final Map<String, String> en = {
   'kNoKeerHistoryTrips': 'No history trips as Keer',
   'kNoBikerHistoryTrips': 'No history trips as Biker',
 
-  // bottom tabbar
+// bottom tabbar
   'kHome': 'Home',
   'kKeerActivities': 'Activity',
   'kBikerActivities': 'Activity',
 
-  //'profile' screen
+//'profile' screen
   'kEdit': 'Edit',
   'kSavedAddress': 'Address book',
   'kSettings': 'Settings',
@@ -153,7 +148,7 @@ final Map<String, String> en = {
   'kEmail': 'Email',
   'kLogOut': 'Sign out',
 
-  // 'update_profile' screen
+// 'update_profile' screen
   'kEditProfile': 'Edit profile',
   'kBiikeProfile': 'Biiké profile',
   'kFullName': 'Full name',
@@ -190,7 +185,7 @@ final Map<String, String> en = {
   // 'biker_profile' screen
   'kManageBike': 'Manage bike',
 
-  // 'view_user' screen
+// 'view_user' screen
   'kViewUser': 'View partner profile',
   'kSchool': 'School',
   'kCall': 'Call',
@@ -210,27 +205,27 @@ final Map<String, String> en = {
       'Biiké Team apologize for imperfect user experience. We have received your report and will handle it as soon as possible.',
   'kYouBlockThisPerson': 'This person is blocked',
 
-  // 'block_list' screen
+// 'block_list' screen
   'kEmptyBlockList': 'Your blacklist is empty',
 
-  // 'finding_biker_success' screen
+// 'finding_biker_success' screen
   'kFoundBiker': 'We found your Biker!',
   'kViewTrip': 'View trip details',
 
-  // 'get_trip_success' screen
+// 'get_trip_success' screen
   'kGetTripSuccess': 'Trip was matched successfully!',
 
-  // 'finding_biker' screen
+// 'finding_biker' screen
   'kFindingBiker': 'Looking for Biker',
 
-  // 'finding_biker_fail' screen
+// 'finding_biker_fail' screen
   'kFindBikerFail': 'No Biker found',
   'kTips':
       'You can create schedule trips to improve the chance of matching with Biker!',
   'kBtnExit': 'Exit',
   'kBtnReturn': 'Back',
 
-  // 'feedback' screen
+// 'feedback' screen
   'kTripSuccessBiker': 'Successful trip!',
   'kTripSuccessKeer': 'Successful trip!',
   'kBuyReminder':
@@ -253,14 +248,14 @@ final Map<String, String> en = {
   'kNotFriendly': 'Not friendly',
   'kDisrespect': 'Disrespect',
 
-  // 'biker_point' screen
+// 'biker_point' screen
   'kListVouchers': 'Voucher list',
   'kCanExchange': 'Can be exchange',
   'kExchanged': 'Exchanged',
   'kUsedOrExpired': 'Used/Expired',
   'kNearMe': 'Near me',
 
-  // 'trip_details' screen
+// 'trip_details' screen
   'kTripDetails': 'View trip details',
   'kSupport': 'Help',
   'kNewTrip': 'Created',
@@ -304,7 +299,7 @@ final Map<String, String> en = {
       'You need to grant location permission and turn on GPS to use this feature',
   'kSendSOSMessageSuccess': 'A message were sent to your S.O.S number(s)',
 
-  // 'book_trip' screen
+// 'book_trip' screen
   'kBookNewTrip': 'Book a new trip',
   'kFrom': 'From',
   'kChooseFrom': '-Departure station-',
@@ -313,14 +308,18 @@ final Map<String, String> en = {
   'kBookScheduleTrip': 'Book trip',
   'kBookNowTrip': 'Trip Now',
 
-  // 'book_schedule_trip' screen
+// 'book_schedule_trip' screen
   'kTime': 'Time',
   'kChooseDate': 'Choose date',
   'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
   'kCancel': 'Cancel',
+  'kRuleWhenBookTrip' : 'Rules when book trip',
+  'kRuleBookTrip1':
+      '1.\tYou can\'t have more than 15 scheduled trips at one time',
+  'kRuleBookTrip2': '2.\tYou are allowed to cancel maximum 5 trips per day',
 
-  // 'bike_manager' screen
+// 'bike_manager' screen
   'kBikeVerified': 'Verified',
   'kWaitingVerified': 'Pending verified',
   'kBikeOwner': 'Owner\'s name',
@@ -332,7 +331,7 @@ final Map<String, String> en = {
   'kAreYouSureDeleteBike':
       'After deleting your bike, you will become a Keer. Are you sure you want to delete your bike?',
 
-  // 'add_bike' screen
+// 'add_bike' screen
   'kAddBike': 'Add bike',
   'kPleaseEnterCorrectBikeInfo': 'Please enter correct info',
   'kChangeBike': 'Change bike',
@@ -353,7 +352,7 @@ final Map<String, String> en = {
       'Please take a picture of your registration',
   'kTakePicture': 'Take picture',
 
-  // 'voucher_detail' screen
+// 'voucher_detail' screen
   'kGiftDetail': 'Gift details',
   'kYourVoucher': 'Your vouchers',
   'kVoucherDetail': 'Voucher detail',
@@ -370,10 +369,10 @@ final Map<String, String> en = {
   'kMarkAsUsed': 'Mark as used',
   'kMarkAsUnused': 'Mark as unused',
 
-  // Default area name
+// Default area name
   'fptHCMUni': 'FPT University in HCM',
 
-  // 'app_setting' screen
+// 'app_setting' screen
   'kAppSetting': 'App Setting',
   'kAccountSecurity': 'Account Security',
   'kChangePassword': 'Change Password',
@@ -388,13 +387,13 @@ final Map<String, String> en = {
   'kDevelopBy': 'Develop by Biiké Team,\nFPT University in HCM',
   'kDevelopAt': 'E2a-7, D1 Street, Sai Gon High-Tech Park, Thu Duc City, HCMC',
 
-  // 'address_book' screen
+// 'address_book' screen
   'kAddressBook': 'Address Book',
 
-  // 'edit_address_book' screen
+// 'edit_address_book' screen
   'kEditAddressBook': 'Edit Address Book',
 
-  // 'add_address_book' screen
+// 'add_address_book' screen
   'kAddAddressBook': 'Add Address Book',
   'kName': 'Name',
   'kAddress': 'Address',
@@ -403,7 +402,7 @@ final Map<String, String> en = {
   'kSelectAddress': 'Select address',
   'kEnterNote': 'Enter note',
 
-  // 'sos_number' screen
+// 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
       'Biiké will send SMS which contains information of trip to ',
@@ -412,28 +411,19 @@ final Map<String, String> en = {
   'kSOSNumberThirdDescription': ' to S.O.S numbers',
   'kSOSReachLimit': 'Reach S.O.S phone number limit',
 
-  // 'add_sos_number' screen
+// 'add_sos_number' screen
   'kAddSOSNumber': 'Add S.O.S number',
   'kNumberPhone': 'Number',
   'kEnterNumberPhone': 'Enter number',
 
-  // 'edit_sos_number' screen
+// 'edit_sos_number' screen
   'kEditSOSNumber': 'Edit S.O.S number',
 
-  // 'ban_list' screen
+// 'ban_list' screen
   'kBanList': 'Ban List',
   'kUnBlock': 'Unblock',
 
-  // date
-  'kMonday': 'Mon',
-  'kTuesday': 'Tue',
-  'kWednesday': 'Wed',
-  'kThursday': 'Thu',
-  'kFriday': 'Fri',
-  'kSaturday': 'Sat',
-  'kSunday': 'Sun',
-
-  // point
+// point
   'kPoint': 'Point',
   'kExchangeVoucher': 'Voucher',
   'kBuyPoint': 'Buy point',
@@ -441,12 +431,14 @@ final Map<String, String> en = {
   'kExpired': ' points will be expired in ',
   'kFindMore': 'Learn more',
 
-  // noti
-  'kNotification': 'BiikeNoti',
-
+// noti
+  'kNotification': 'Notification',
+  'kNewNotification': 'You have new notification',
+  'kDeleteNotification': 'Are you sure you want to delete all notification?',
+'kView' : 'View',
   'kAll': 'All',
 }..addAll(<String, String>{
-    // Error message
+// Error message
     'kError': 'Error!',
     'kNotRated': 'Please rate your trip experience',
     'kIncludeBadWords': 'Please don\'t use bad words',
@@ -496,8 +488,13 @@ final Map<String, String> en = {
     'kNotTurnOnGPS': 'Please turn on the GPS',
     'kNotAllowGetLocation':
         'Please turn on the permission to access user current location',
+    'kNoVoucherCode':
+        'Currently there is out of available voucher code for this voucher, please try again later',
+    'kTripTimeExist': 'You have already booked a trip with this timestamp',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'You can only add station from 5AM to 9PM',
+  'kExceedMaxTrips' : 'You can\'t have more than 15 scheduled trips at one time.',
+  'kChangeModeToBiker' : 'Please switch to Biker mode first',
     'kNoSosNumberSaved': 'You did not add any S.O.S number',
     'kCannotAddYourNumberAsSOS':
         'Cannot add your phone number to S.O.S numbers',

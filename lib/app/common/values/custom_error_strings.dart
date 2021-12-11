@@ -43,6 +43,8 @@ class CustomErrorsString {
   static const String kAlreadyFeedbacked = 'kAlreadyFeedbacked';
   static const String kNotTurnOnGPS = 'kNotTurnOnGPS';
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
+  static const String kNoVoucherCode = 'kNoVoucherCode';
+  static const String kTripTimeExist = 'kTripTimeExist';
 
   //Login error message
   static const String kNoAccount = 'kNoAccount';
@@ -54,6 +56,8 @@ class CustomErrorsString {
   // 'cho_now_settings' screen
   static const String kCanOnlyAddStationFrom5AMTo9PM =
       'kCanOnlyAddStationFrom5AMTo9PM';
+  static const String kExceedMaxTrips = 'kExceedMaxTrips';
+  static const String kChangeModeToBiker = 'kChangeModeToBiker';
   static const String
       kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins =
       'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins';

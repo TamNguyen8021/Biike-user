@@ -3,13 +3,14 @@ import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
 import 'package:bikes_user/app/data/models/feedback.dart';
+import 'package:bikes_user/app/data/models/trip.dart';
 import 'package:bikes_user/app/data/providers/feedback_provider.dart';
+import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/main.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
   final _feedbackProvider = Get.find<FeedbackProvider>();
-
   final _walletController = Get.find<WalletController>();
 
   RxBool isRated = false.obs;

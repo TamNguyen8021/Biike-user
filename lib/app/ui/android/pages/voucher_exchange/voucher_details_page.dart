@@ -1,3 +1,4 @@
+import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/voucher_controller.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
@@ -16,35 +17,37 @@ class VoucherDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Voucher voucher = Get.arguments;
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        hasShape: true,
-        hasLeading: true,
-        onPressedFunc: () {
-          Get.back();
-        },
-        appBar: AppBar(),
-        title: Text(CustomStrings.kVoucherDetail.tr),
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            VoucherDetails(voucher: voucher),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Divider(),
-              ),
+    return OnBackPressed(
+        child: Scaffold(
+          appBar: CustomAppBar(
+            hasShape: true,
+            hasLeading: true,
+            onPressedFunc: () {
+              Get.back();
+            },
+            appBar: AppBar(),
+            title: Text(CustomStrings.kVoucherDetail.tr),
+          ),
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                VoucherDetails(voucher: voucher),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Divider(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ExchangeVoucherButton(voucher: voucher),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ExchangeVoucherButton(voucher: voucher),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
+        perform: () => Get.back());
   }
 }
