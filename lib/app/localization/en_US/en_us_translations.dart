@@ -483,7 +483,6 @@ final Map<String, String> en = {
     'kPasswordMustAtLeast6': 'Password must be at least 6 characters',
     'kInvalidPhoneNo': 'Invalid phone number',
     'kDuplicateEmailOrPhone': 'The email or phone number was used to sign up',
-    'kWrongOtp': 'Wrong OTP code',
     'kEmptyOtp': 'Please enter your OTP code',
     'kTryAgain': 'Try again',
     'kNoHistory': 'History empty',

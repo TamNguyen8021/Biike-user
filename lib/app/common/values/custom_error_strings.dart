@@ -31,7 +31,6 @@ class CustomErrorsString {
   static const String kPasswordMustAtLeast6 = 'kPasswordMustAtLeast6';
   static const String kInvalidPhoneNo = 'kInvalidPhoneNo';
   static const String kDuplicateEmailOrPhone = 'kDuplicateEmailOrPhone';
-  static const String kWrongOtp = 'kWrongOtp';
   static const String kEmptyOtp = 'kEmptyOtp';
   static const String kTryAgain = 'kTryAgain';
   static const String kNoHistory = 'kNoHistory';

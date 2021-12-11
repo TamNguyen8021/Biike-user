@@ -505,7 +505,6 @@ final Map<String, String> vi = {
     'kPasswordMustAtLeast6': 'Yêu cầu mật khẩu ít nhất 6 kí tự',
     'kInvalidPhoneNo': 'Số điện thoại không hợp lệ',
     'kDuplicateEmailOrPhone': 'Số điện thoại hoặc email đã có người đăng ký',
-    'kWrongOtp': 'Sai mã OTP',
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
     'kNoHistory': 'Không có lịch sử',
