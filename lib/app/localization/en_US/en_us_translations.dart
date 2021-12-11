@@ -505,6 +505,8 @@ final Map<String, String> en = {
     'kNoSosNumberSaved': 'You did not add any S.O.S number',
     'kCannotAddYourNumberAsSOS':
         'Cannot add your phone number to S.O.S numbers',
+    'kBookAnHourPrior':
+        'Please only book trip with start time at lease one hour from now.',
     'kYouCanOnlyCancel5TripsPerDay':
         'You can only cancel maximum 5 trips per day',
     'kCannotDeleteDefaultAddress': 'Cannot delete your default address',

@@ -539,6 +539,8 @@ final Map<String, String> vi = {
     'kNoSosNumberSaved': 'Bạn chưa cài đặt số điện thoại S.O.S',
     'kCannotAddYourNumberAsSOS':
         'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
+    'kBookAnHourPrior':
+        'Xin hãy đặt chuyến có thời gian bắt đầu sau bây giờ ít nhất một tiếng.',
     'kYouCanOnlyCancel5TripsPerDay':
         'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
     'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',

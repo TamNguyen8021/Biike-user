@@ -292,6 +292,9 @@ class BookTripController extends GetxController {
     if (result.contains('exceeding max number of trip'))
       return CustomErrorsString.kExceedMaxTrips.tr;
 
+    if (result.contains('is less than'))
+      return CustomErrorsString.kBookAnHourPrior.tr;
+
     return result;
   }
 }
