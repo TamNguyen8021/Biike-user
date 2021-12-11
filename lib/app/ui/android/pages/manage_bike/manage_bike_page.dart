@@ -50,8 +50,9 @@ class ManageBikePage extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 10.0),
                           child: IconButton(
                             onPressed: () {
-                              CommonFunctions().showConfirmDialog(
+                              CommonFunctions.showConfirmDialog(
                                   context: context,
+                                  isCancel: false,
                                   title: CustomStrings.kConfirmDeleteBike.tr,
                                   message:
                                       CustomStrings.kAreYouSureDeleteBike.tr,
