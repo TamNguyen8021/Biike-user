@@ -13,6 +13,7 @@ class TopUpPointController extends GetxController {
   Rx<String> point = '0'.obs;
   Rx<String> amount = '0'.obs;
   Rx<String> percent = '0'.obs;
+  Rx<double> percentTransfer = 0.0.obs;
 
   bool isLoading = false;
 
@@ -43,6 +44,7 @@ class TopUpPointController extends GetxController {
       final result = await _topUpPointProvider.createTransaction(body: data);
       if (result) {
         await _walletController.updateWalletPoint();
+        _enableLoading(false);
         Get.back();
         AwesomeDialog(
                 context: context,
@@ -51,6 +53,7 @@ class TopUpPointController extends GetxController {
                 desc: CustomStrings.kTopUpSuccess.tr)
             .show();
       } else {
+        _enableLoading(false);
         AwesomeDialog(
                 context: context,
                 dialogType: DialogType.ERROR,
@@ -60,6 +63,7 @@ class TopUpPointController extends GetxController {
         Get.back();
       }
     } else {
+      _enableLoading(false);
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,
@@ -74,6 +78,7 @@ class TopUpPointController extends GetxController {
     dynamic response = await _topUpPointProvider.getConfigurations();
     if (response != null) {
       percent.value = response;
+      percentTransfer.value = double.parse(response) * 1000;
     }
   }
 }

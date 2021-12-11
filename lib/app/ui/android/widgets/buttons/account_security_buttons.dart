@@ -29,7 +29,7 @@ class AccountSecurityButtons extends StatelessWidget {
                     final email = await LocalAppData().email;
                     AwesomeDialog(
                             context: context,
-                            dialogType: DialogType.SUCCES,
+                            dialogType: DialogType.INFO_REVERSED,
                             headerAnimationLoop: false,
                             desc: CustomStrings.kSendResetPasswordEmail.tr)
                         .show();

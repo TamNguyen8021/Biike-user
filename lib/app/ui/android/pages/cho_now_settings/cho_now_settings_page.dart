@@ -41,6 +41,9 @@ class ChoNowSettingsPage extends StatelessWidget {
           CommonFunctions.convertTimeOfDayToString(
               context: context,
               time: _choNowSettingsController.fromTime.value!);
+    } else {
+      _choNowSettingsController.fromTimeString.value =
+          CustomStrings.kChooseTime.tr;
     }
 
     if (to != null) {
@@ -48,6 +51,9 @@ class ChoNowSettingsPage extends StatelessWidget {
       _choNowSettingsController.toTimeString.value =
           CommonFunctions.convertTimeOfDayToString(
               context: context, time: _choNowSettingsController.toTime.value!);
+    } else {
+      _choNowSettingsController.toTimeString.value =
+          CustomStrings.kChooseTime.tr;
     }
 
     await showDialog(
@@ -142,11 +148,10 @@ class ChoNowSettingsPage extends StatelessWidget {
                                                   .fromTime);
                                   _choNowSettingsController
                                           .fromTimeString.value =
-                                      MaterialLocalizations.of(context)
-                                          .formatTimeOfDay(
-                                              _choNowSettingsController
-                                                  .fromTime.value!,
-                                              alwaysUse24HourFormat: true);
+                                      CommonFunctions.convertTimeOfDayToString(
+                                          context: context,
+                                          time: _choNowSettingsController
+                                              .fromTime.value!);
                                 },
                                 isOnProfilePage: false),
                           ),
@@ -162,11 +167,10 @@ class ChoNowSettingsPage extends StatelessWidget {
                                           selectedTime:
                                               _choNowSettingsController.toTime);
                                   _choNowSettingsController.toTimeString.value =
-                                      MaterialLocalizations.of(context)
-                                          .formatTimeOfDay(
-                                              _choNowSettingsController
-                                                  .toTime.value!,
-                                              alwaysUse24HourFormat: true);
+                                      CommonFunctions.convertTimeOfDayToString(
+                                          context: context,
+                                          time: _choNowSettingsController
+                                              .toTime.value!);
                                 },
                                 isOnProfilePage: false),
                           ),
@@ -462,9 +466,7 @@ class ChoNowSettingsPage extends StatelessWidget {
           CustomStrings.kChoNow.tr,
         ),
         actionWidgets: <Widget>[
-          CommonFunctions().lightBulbIcon(
-              context,
-              CustomStrings.kChoNow,
+          CommonFunctions().lightBulbIcon(context, CustomStrings.kChoNow,
               contents: CustomStrings.kChoNowDescription),
         ],
       ),

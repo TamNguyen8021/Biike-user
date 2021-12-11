@@ -187,8 +187,8 @@ final Map<String, String> vi = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'Tại hành trình với Biiké, bạn đã có',
-  'kNoOfRideTrips': 'Chuyến chở',
-  'kNoOfFreeTrips': 'Chuyến ké',
+  'kNoOfRideTrips': 'Đi ké thành công',
+  'kNoOfFreeTrips': 'Chở ké thành công',
   'kNoOfKm': 'km được tiết kiệm',
   'kNoOfGasLitres': 'lít xăng được tiết kiệm',
   'kThankYouForChoosingBiike':
@@ -479,6 +479,20 @@ final Map<String, String> vi = {
   'kDeleteNotification': 'Bạn có chắc là muốn xóa hết tất cả thông báo?',
   'kView': 'Xem',
   'kAll': 'Tất cả',
+
+  // month
+  'kJan': 'T1',
+  'kFeb': 'T2',
+  'kMar': 'T3',
+  'kApr': 'T4',
+  'kMay': 'T5',
+  'kJun': 'T6',
+  'kJul': 'T7',
+  'kAug': 'T8',
+  'kSep': 'T9',
+  'kOct': 'T10',
+  'kNov': 'T11',
+  'kDec': 'T12',
 }..addAll(<String, String>{
     // Error message
     'kError': 'Thông báo lỗi',

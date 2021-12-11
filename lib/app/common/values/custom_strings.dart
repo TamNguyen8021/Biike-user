@@ -478,4 +478,18 @@ class CustomStrings {
   static const String kDeleteNotification = 'kDeleteNotification';
   static const String kAll = 'kAll';
   static const String kView = 'kView';
+
+  // month
+  static const String kJan = 'kJan';
+  static const String kFeb = 'kFeb';
+  static const String kMar = 'kMar';
+  static const String kApr = 'kApr';
+  static const String kMay = 'kMay';
+  static const String kJun = 'kJun';
+  static const String kJul = 'kJul';
+  static const String kAug = 'kAug';
+  static const String kSep = 'kSep';
+  static const String kOct = 'kOct';
+  static const String kNov = 'kNov';
+  static const String kDec = 'kDec';
 }

@@ -7,6 +7,8 @@ import 'package:bikes_user/app/common/functions/text_utils.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/common/values/momo_constants.dart';
 import 'package:bikes_user/app/controllers/top_up_point_controller.dart';
+import 'package:bikes_user/app/controllers/view_point_controller.dart';
+import 'package:bikes_user/app/controllers/wallet_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
@@ -29,6 +31,8 @@ class MomoPageState extends State<TopUpPointPage> {
   late PaymentResponse _momoPaymentResult;
   String paymentStatus = '';
   final topUpPointController = Get.find<TopUpPointController>();
+  final _walletController = Get.find<WalletController>();
+  final _viewPointController = Get.find<ViewPointController>();
 
   @override
   void initState() {
@@ -38,16 +42,8 @@ class MomoPageState extends State<TopUpPointPage> {
     _momoPay.on(MomoVn.EVENT_PAYMENT_ERROR, _handlePaymentError);
   }
 
-  Future<void> initPlatformState() async {
-    if (!mounted) return;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
-    var percentTransfer =
-        double.parse(topUpPointController.percent.value) * 1000;
-
     return FutureBuilder(
         future: topUpPointController.getConfigurations(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -56,7 +52,9 @@ class MomoPageState extends State<TopUpPointPage> {
                   appBar: CustomAppBar(
                     hasShape: true,
                     hasLeading: true,
-                    onPressedFunc: () {
+                    onPressedFunc: () async {
+                      await _walletController.updateWalletPoint();
+                      _viewPointController.pagingController.refresh();
                       Get.back();
                     },
                     appBar: AppBar(),
@@ -111,8 +109,8 @@ class MomoPageState extends State<TopUpPointPage> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child:
-                                        Text('1000 đ = $percentTransfer điểm'),
+                                    child: Text(
+                                        '1000 đ = ${topUpPointController.percentTransfer.value} điểm'),
                                   )
                                 ],
                               )),

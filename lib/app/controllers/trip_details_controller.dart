@@ -86,6 +86,7 @@ class TripDetailsController extends GetxController {
       feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
       feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
     }
+    update(['helpCenter']);
   }
 
   Future<Map<String, dynamic>> getLocationDetails(

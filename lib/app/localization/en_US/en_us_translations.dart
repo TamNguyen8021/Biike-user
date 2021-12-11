@@ -175,8 +175,8 @@ final Map<String, String> en = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'On your journey with Biiké, you have',
-  'kNoOfRideTrips': 'Ride trips',
-  'kNoOfFreeTrips': 'Free trips',
+  'kNoOfRideTrips': 'Successful ride trips',
+  'kNoOfFreeTrips': 'Successful free trips',
   'kNoOfKm': 'km was saved',
   'kNoOfGasLitres': 'litres of gasoline was saved',
   'kThankYouForChoosingBiike':
@@ -462,6 +462,20 @@ final Map<String, String> en = {
   'kDeleteNotification': 'Are you sure you want to delete all notification?',
   'kView': 'View',
   'kAll': 'All',
+
+  // month
+  'kJan': 'Jan',
+  'kFeb': 'Feb',
+  'kMar': 'Mar',
+  'kApr': 'Apr',
+  'kMay': 'May',
+  'kJun': 'Jun',
+  'kJul': 'Jul',
+  'kAug': 'Aug',
+  'kSep': 'Sep',
+  'kOct': 'Oct',
+  'kNov': 'Nov',
+  'kDec': 'Dec',
 }..addAll(<String, String>{
 // Error message
     'kError': 'Error!',

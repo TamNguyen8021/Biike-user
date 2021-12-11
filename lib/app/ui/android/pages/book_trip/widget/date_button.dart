@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,8 @@ class DateButton extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Text(
-                date.month.toString(),
+                // date.month.toString(),
+                CommonFunctions.getMonthText(date.month),
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!

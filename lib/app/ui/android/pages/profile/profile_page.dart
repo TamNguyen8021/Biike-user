@@ -1,6 +1,8 @@
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/controllers/trip_details_controller.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
+import 'package:bikes_user/app/data/providers/pathshare_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
@@ -216,9 +218,22 @@ class ProfilePage extends StatelessWidget {
                                                     .textTheme
                                                     .bodyText2,
                                               ),
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 if (Get.arguments[
-                                                    'isLocationShared']) {}
+                                                    'isLocationShared']) {
+                                                  final pathshareProvider =
+                                                      Get.find<
+                                                          PathshareProvider>();
+                                                  final tripDetailsController =
+                                                      Get.find<
+                                                          TripDetailsController>();
+                                                  await pathshareProvider
+                                                      .startOrStopLocationSharing(
+                                                          isShared: false,
+                                                          sessionIdentifier:
+                                                              tripDetailsController
+                                                                  .sessionIdentifier);
+                                                }
                                                 LocalAppData().logout();
                                                 Get.offAllNamed(
                                                     CommonRoutes.LOGIN);
