@@ -81,7 +81,7 @@ class CommonFunctions {
   /// Show a date picker on [context].
   ///
   /// Author: TamNTT
-  Future<DateTime> selectDate(
+  static Future<DateTime> selectDate(
       {required BuildContext context,
       required Rx<DateTime?> selectedDate,
       required bool isBirthDatePicker}) async {
@@ -95,7 +95,11 @@ class CommonFunctions {
     }
 
     if (selectedDate.value == null) {
-      selectedDate.value = _currentTime;
+      selectedDate.value = _firstDate;
+    }
+
+    if (isBirthDatePicker) {
+      selectedDate.value = DateTime(_currentTime.year - 18);
     }
 
     final DateTime? pickedDate = await showDatePicker(
@@ -424,7 +428,7 @@ class CommonFunctions {
       );
 
   static String getMonthText(int month) {
-    switch(month) {
+    switch (month) {
       case 1:
         return CustomStrings.kJan.tr;
       case 2:
@@ -451,7 +455,6 @@ class CommonFunctions {
         return CustomStrings.kDec.tr;
       default:
         return '';
-
     }
   }
 }

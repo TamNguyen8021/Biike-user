@@ -475,7 +475,7 @@ class Home extends StatelessWidget {
                                                     onTap: () async {
                                                       homeController.searchDate
                                                               .value =
-                                                          await CommonFunctions().selectDate(
+                                                          await CommonFunctions.selectDate(
                                                               context: context,
                                                               selectedDate:
                                                                   homeController
