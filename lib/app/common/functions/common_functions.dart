@@ -129,8 +129,9 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  Future<void> showConfirmDialog(
+  static Future<void> showConfirmDialog(
       {required BuildContext context,
+      required bool isCancel,
       required String title,
       required String message,
       required Function() onPressedFunc}) async {
@@ -181,7 +182,9 @@ class CommonFunctions {
                           hasBorder: false,
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
-                          text: CustomStrings.kStillCancel.tr,
+                          text: isCancel
+                              ? CustomStrings.kStillCancel.tr
+                              : CustomStrings.kYes.tr,
                           onPressedFunc: onPressedFunc,
                         ),
                       ),

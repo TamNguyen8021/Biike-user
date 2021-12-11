@@ -51,8 +51,9 @@ class ConfirmArrivalButton extends StatelessWidget {
                           await CommonFunctions.getCurrentLocation();
 
                       if (tripDetailsController.userLocation != null) {
-                        CommonFunctions().showConfirmDialog(
+                        CommonFunctions.showConfirmDialog(
                             context: context,
+                            isCancel: false,
                             title: CustomStrings.kConfirmArrivalTitle.tr,
                             message: Biike.role.value == Role.keer
                                 ? CustomStrings.kConfirmArrivalMessageForKeer.tr

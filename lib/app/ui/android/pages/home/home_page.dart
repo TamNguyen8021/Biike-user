@@ -25,8 +25,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnBackPressed(
-      perform: () => CommonFunctions().showConfirmDialog(
+      perform: () => CommonFunctions.showConfirmDialog(
         context: context,
+        isCancel: false,
         title: CustomStrings.kConfirm.tr,
         message: CustomStrings.kConfirmExitApp.tr,
         onPressedFunc: () async {
