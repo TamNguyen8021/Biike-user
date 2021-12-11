@@ -273,7 +273,9 @@ final Map<String, String> en = {
   'kYourLocation': 'Your location',
   'kCancelTripSuccess': 'Your trip was canceled',
   'kConfirmCancelTrip': 'Are you sure you want to cancel this trip?',
-  'kViewCancelTripReminder': 'You can view your canceled trips in history',
+  'kViewCancelTripReminder':
+      'To increase success trip rate, Biiké only allow to cancel maximum 5 trips per day. Please consider when you book and cancel trip.',
+  'kStillCancel': 'Cancel',
   'kLetUsKnowYourCancelReason':
       'Please let us know why you want to cancel this trip',
   'kEnterYourCancelReason': 'Enter your reason here',
@@ -314,7 +316,7 @@ final Map<String, String> en = {
   'kChooseTime': 'Choose time',
   'kRepeat': 'Repeat',
   'kCancel': 'Cancel',
-  'kRuleWhenBookTrip' : 'Rules when book trip',
+  'kRuleWhenBookTrip': 'Rules when book trip',
   'kRuleBookTrip1':
       '1.\tYou can\'t have more than 15 scheduled trips at one time',
   'kRuleBookTrip2': '2.\tYou are allowed to cancel maximum 5 trips per day',
@@ -402,6 +404,10 @@ final Map<String, String> en = {
   'kSelectAddress': 'Select address',
   'kEnterNote': 'Enter note',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Enter address',
+  'kFindAddress': 'Find address',
+
 // 'sos_number' screen
   'kSOSNumber': 'S.O.S number',
   'kSOSNumberFirstDescription':
@@ -435,7 +441,7 @@ final Map<String, String> en = {
   'kNotification': 'Notification',
   'kNewNotification': 'You have new notification',
   'kDeleteNotification': 'Are you sure you want to delete all notification?',
-'kView' : 'View',
+  'kView': 'View',
   'kAll': 'All',
 }..addAll(<String, String>{
 // Error message
@@ -493,9 +499,13 @@ final Map<String, String> en = {
     'kTripTimeExist': 'You have already booked a trip with this timestamp',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'You can only add station from 5AM to 9PM',
-  'kExceedMaxTrips' : 'You can\'t have more than 15 scheduled trips at one time.',
-  'kChangeModeToBiker' : 'Please switch to Biker mode first',
+    'kExceedMaxTrips':
+        'You can\'t have more than 15 scheduled trips at one time.',
+    'kChangeModeToBiker': 'Please switch to Biker mode first',
     'kNoSosNumberSaved': 'You did not add any S.O.S number',
     'kCannotAddYourNumberAsSOS':
         'Cannot add your phone number to S.O.S numbers',
+    'kYouCanOnlyCancel5TripsPerDay':
+        'You can only cancel maximum 5 trips per day',
+    'kCannotDeleteDefaultAddress': 'Cannot delete your default address',
   });

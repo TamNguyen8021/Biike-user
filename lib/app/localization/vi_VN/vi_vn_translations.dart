@@ -284,7 +284,8 @@ final Map<String, String> vi = {
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
-      'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
+      'Để nâng cao tỉ lệ chuyến thành công. Biiké chỉ cho phép hủy tối đa 5 chuyến mỗi ngày. Hãy cân nhắc thật kỹ khi đặt và hủy chuyến.',
+  'kStillCancel': 'Vẫn hủy',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
   'kHelpCenter': 'Trung tâm trợ giúp',
@@ -419,6 +420,10 @@ final Map<String, String> vi = {
   'kEnterNote': 'Nhập ghi chú',
   'kSetAsDefault': 'Đặt làm mặc định',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Nhập địa chỉ',
+  'kFindAddress': 'Tìm địa chỉ',
+
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
@@ -469,7 +474,7 @@ final Map<String, String> vi = {
   'kNotification': 'Thông báo',
   'kNewNotification': 'Bạn có thông báo mới',
   'kDeleteNotification': 'Bạn có chắc là muốn xóa hết tất cả thông báo?',
-  'kView' : 'Xem',
+  'kView': 'Xem',
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message
@@ -534,4 +539,7 @@ final Map<String, String> vi = {
     'kNoSosNumberSaved': 'Bạn chưa cài đặt số điện thoại S.O.S',
     'kCannotAddYourNumberAsSOS':
         'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
+    'kYouCanOnlyCancel5TripsPerDay':
+        'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
+    'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',
   });

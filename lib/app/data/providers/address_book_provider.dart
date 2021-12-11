@@ -29,7 +29,7 @@ class AddressBookProvider extends CommonProvider {
     }
   }
 
-  Future<bool> removeAddressBook({required int id}) async {
+  Future removeAddressBook({required int id}) async {
     final response = await delete(UrlStrings.userUrl + "addresses" + '/$id',
         headers: await headers);
 
@@ -37,7 +37,7 @@ class AddressBookProvider extends CommonProvider {
 
     if (response.hasError) {
       logError(response);
-      return false;
+      return response.bodyString;
     } else {
       return true;
     }

@@ -1,9 +1,7 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/top_biker_controller.dart';
-import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
-import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/lists/list_top_bikers.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker_bottom_sheet.dart';
@@ -37,8 +35,7 @@ class TopBikerPage extends StatelessWidget {
                     ),
                     actionWidgets: <Widget>[
                       CommonFunctions().lightBulbIcon(
-                          context,
-                          CustomStrings.kBikerRank,
+                          context, CustomStrings.kBikerRank,
                           contents: CustomStrings.kTopBikerInfoContents),
                     ],
                   ),
