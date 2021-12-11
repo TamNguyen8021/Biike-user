@@ -42,6 +42,11 @@ class LocalAppData {
     return _pref.getString('phone') ?? '';
   }
 
+  Future<String> get email async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getString('email') ?? '';
+  }
+
   /// Author: van
   /// get isphoneveriied
   Future<bool> get isPhoneVerified async {

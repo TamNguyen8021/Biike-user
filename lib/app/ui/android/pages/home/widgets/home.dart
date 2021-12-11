@@ -229,27 +229,28 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   UpcomingTripCard(
-                                      isSearchedTrip: false,
-                                      tripId: homeController
-                                          .upcomingTrips[0].tripId,
-                                      userId: homeController
-                                          .upcomingTrips[0].userId,
-                                      backgroundColor: CustomColors.kBlue,
-                                      foregroundColor: Colors.white,
-                                      iconColor: Colors.white,
-                                      avatarUrl: homeController
-                                          .upcomingTrips[0].avatarUrl,
-                                      name:
-                                          homeController.upcomingTrips[0].name,
-                                      phoneNo: homeController
-                                          .upcomingTrips[0].phoneNo,
-                                      bookTime: homeController
-                                          .upcomingTrips[0].bookTime,
-                                      departureStation: homeController
-                                          .upcomingTrips[0].departureStation,
-                                      destinationStation: homeController
-                                          .upcomingTrips[0].destinationStation),
-                                          // TODO: Ads
+                                    isSearchedTrip: false,
+                                    tripId:
+                                        homeController.upcomingTrips[0].tripId,
+                                    userId:
+                                        homeController.upcomingTrips[0].userId,
+                                    backgroundColor: CustomColors.kBlue,
+                                    foregroundColor: Colors.white,
+                                    iconColor: Colors.white,
+                                    avatarUrl: homeController
+                                        .upcomingTrips[0].avatarUrl,
+                                    name: homeController.upcomingTrips[0].name,
+                                    phoneNo:
+                                        homeController.upcomingTrips[0].phoneNo,
+                                    bookTime: homeController
+                                        .upcomingTrips[0].bookTime,
+                                    departureStation: homeController
+                                        .upcomingTrips[0].departureStation,
+                                    destinationStation: homeController
+                                        .upcomingTrips[0].destinationStation,
+                                    advertisment: homeController
+                                        .upcomingTrips[0].advertisment,
+                                  ),
                                   // BUTTON action
                                   if (homeController.upcomingTrips[0].name !=
                                       CustomStrings.kFinding) ...[
@@ -378,6 +379,7 @@ class Home extends StatelessWidget {
                                                               .itemList!
                                                               .elementAt(index)
                                                               .departureStation,
+                                                          advertisment: homeController.pagingController.itemList!.elementAt(index).advertisment,
                                                           destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
                                                     );
                                                   }

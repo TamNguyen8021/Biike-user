@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/data/models/login.dart';
 import 'package:bikes_user/app/ui/android/pages/ban_list/model/black_list_response.dart';
+import 'package:bikes_user/models/advertisment_model.dart';
 import 'package:bikes_user/network/config_network.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -44,4 +45,10 @@ abstract class RestClient {
   Future<dynamic> unBlock({
     @Body() required BlackListItem blackListItem,
   });
+
+  @GET(EndPoint.advertisements)
+  Future<AdvertismentModel> getAdvertisements();
+
+  @PUT(EndPoint.advertisementsCount + '/{adsId}' + '/clickCount')
+  Future<dynamic> clickAdsCount({@Path() required String adsId});
 }

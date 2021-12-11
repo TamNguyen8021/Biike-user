@@ -18,6 +18,7 @@ final Map<String, String> en = {
 
 // '003.1_login'
   'kForgotPassword': 'Forgot password',
+  'kResetPassword': 'Reset password',
   'kSendResetPasswordEmail':
       'Your password has been reset, please check your email',
   'kInputEmail': 'Enter email',

@@ -16,6 +16,7 @@ class CustomStrings {
 
   // '003.1_login'
   static const String kForgotPassword = 'kForgotPassword';
+  static const String kResetPassword = 'kResetPassword';
   static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
   static const String kInputEmail = 'kInputEmail';
   static const String kPassword = 'kPassword';

@@ -42,6 +42,6 @@ class CommonProvider extends GetConnect {
             ' ' +
             response.statusText! +
             '\n' +
-            response.body);
+      (response.body ?? '') );
   }
 }

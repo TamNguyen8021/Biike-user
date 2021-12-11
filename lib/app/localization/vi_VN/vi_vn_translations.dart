@@ -18,6 +18,7 @@ final Map<String, String> vi = {
 
   // '003.1_login'
   'kForgotPassword': 'Quên mật khẩu',
+  'kResetPassword': 'Reset mật khẩu',
   'kSendResetPasswordEmail':
       'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
   'kInputEmail': 'Nhập email',

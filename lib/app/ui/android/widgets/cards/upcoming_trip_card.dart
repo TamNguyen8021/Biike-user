@@ -7,8 +7,10 @@ import 'package:bikes_user/app/controllers/home_controller.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/models/advertisment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -31,7 +33,7 @@ class UpcomingTripCard extends StatelessWidget {
   final String bookTime;
   final String departureStation;
   final String destinationStation;
-  final String urlAds;
+  final Advertisment? advertisment;
   UpcomingTripCard({
     Key? key,
     required this.isSearchedTrip,
@@ -46,7 +48,7 @@ class UpcomingTripCard extends StatelessWidget {
     required this.bookTime,
     required this.departureStation,
     required this.destinationStation,
-    this.urlAds = '',
+    this.advertisment,
   }) : super(key: key);
 
   @override
@@ -77,6 +79,7 @@ class UpcomingTripCard extends StatelessWidget {
         }
       },
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: 82,
@@ -303,8 +306,16 @@ class UpcomingTripCard extends StatelessWidget {
                   )
                 ]),
           ),
-          if (urlAds.isNotEmpty) ...[
-            
+          if (advertisment != null) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: AdContainer(
+                advertisment: advertisment!,
+              ),
+            ),
+            Text(advertisment?.title ?? '',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+            Text(advertisment?.brand ?? '', style: TextStyle()),
           ]
         ],
       ),

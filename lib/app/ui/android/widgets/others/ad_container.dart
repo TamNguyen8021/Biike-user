@@ -1,22 +1,19 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
-import 'package:bikes_user/app/ui/android/pages/home/banner/banner.dart';
+import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/models/advertisment_model.dart';
+import 'package:bikes_user/network/repositories.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AdContainer extends HookWidget {
-  AdContainer({Key? key}) : super(key: key);
-  final banners = [
-    BannerItem(
-      url: 'https://flutter.dev',
-      path: 'assets/images/facebook-featured-img.jpg',
-    ),
-    BannerItem(
-      url: 'https://pub.dev',
-      path: 'assets/images/ads-heiniken.jpg',
-    ),
-  ];
+  AdContainer({
+    Key? key,
+    required this.advertisment,
+  }) : super(key: key);
+  final Advertisment advertisment;
+
   final double heightImage = 120;
   @override
   Widget build(BuildContext context) {
@@ -29,18 +26,37 @@ class AdContainer extends HookWidget {
         children: [
           Positioned.fill(
             child: CarouselSlider.builder(
-              itemCount: banners.length,
+              itemCount: advertisment.advertisementImages.length,
               itemBuilder: (context, index, realIndex) {
-                final item = banners[index];
+                final item = advertisment.advertisementImages[index];
+
                 return GestureDetector(
-                  onTap: () {
-                    _launchUniversalLinkIos(item.url);
+                  onTap: () async {
+                    _launchUniversalLinkIos(advertisment.advertisementUrl);
+
+                    final _repositories = getIt<Repositories>();
+                    try {
+                      await _repositories.clickAdsCount(
+                          adsId: advertisment.advertisementId.toString());
+                    } catch (e) {}
                   },
-                  child: Image.asset(
-                    item.path,
-                    fit: BoxFit.cover,
+                  child: Image.network(
+                    item.advertisementImageUrl,
+                    cacheHeight: 300,
+                    cacheWidth: 300,
                     width: double.infinity,
                     height: heightImage,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Text('Lỗi hình ảnh');
+                    },
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return SizedBox(
+                        width: double.infinity,
+                        height: heightImage,
+                      );
+                    },
                   ),
                 );
               },
@@ -57,7 +73,8 @@ class AdContainer extends HookWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: banners.asMap().entries.map((entry) {
+            children:
+                advertisment.advertisementImages.asMap().entries.map((entry) {
               return Container(
                 width: 10.0,
                 height: 10.0,
@@ -82,10 +99,12 @@ class AdContainer extends HookWidget {
         await launch(
           url,
           forceSafariVC: true,
-          forceWebView: true,
+          forceWebView: false,
+          enableJavaScript: true,
         );
       } else {
         // show thong bao khong mo duoc
+        print('can not open $url');
       }
     } catch (error) {
       // loi ngoai le

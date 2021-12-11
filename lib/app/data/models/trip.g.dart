@@ -39,4 +39,5 @@ Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'isSchedule': instance.isSchedule,
       'cancelPersonId': instance.cancelPersonId,
       'cancelReason': instance.cancelReason,
+      'isCancellationLimitExceeded': instance.isCancellationLimitExceeded,
     };

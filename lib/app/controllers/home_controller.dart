@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:collection/collection.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
@@ -15,6 +18,8 @@ import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/ui/android/widgets/cards/upcoming_trip_card.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/models/advertisment_model.dart';
+import 'package:bikes_user/network/repositories.dart';
 import 'package:bikes_user/repos/user/user_repository.dart';
 import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +34,7 @@ class HomeController extends GetxController {
   final _firebaseService = getIt<FirebaseServices>();
   final _tripProvider = Get.find<TripProvider>();
   final _stationProvider = Get.find<StationProvider>();
+  final _repositories = getIt<Repositories>();
   final PagingController<int, dynamic> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -52,11 +58,13 @@ class HomeController extends GetxController {
   int _currentPage = 1;
   int _limit = 10;
 
+  final List<Advertisment> _advertisments = [];
   @override
   onInit() {
     pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
+
     super.onInit();
   }
 
@@ -103,6 +111,7 @@ class HomeController extends GetxController {
     isUpcomingTripsLoading.value = true;
     _tempUpcomingTrips.clear();
 
+    await _fetchAdvertisments();
     Map<String, dynamic> response = await _tripProvider.getUpcomingTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
@@ -125,18 +134,20 @@ class HomeController extends GetxController {
       }
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
-          isSearchedTrip: false,
-          tripId: trip.tripId,
-          userId: user.userId,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          iconColor: iconColor,
-          avatarUrl: user.avatar,
-          name: user.userFullname,
-          phoneNo: user.userPhoneNumber,
-          bookTime: trip.bookTime,
-          departureStation: startingStation.departureName,
-          destinationStation: destinationStation.destinationName);
+        isSearchedTrip: false,
+        tripId: trip.tripId,
+        userId: user.userId,
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        iconColor: iconColor,
+        avatarUrl: user.avatar,
+        name: user.userFullname,
+        phoneNo: user.userPhoneNumber,
+        bookTime: trip.bookTime,
+        departureStation: startingStation.departureName,
+        destinationStation: destinationStation.destinationName,
+        advertisment: _getRandomAds(i),
+      );
 
       _tempUpcomingTrips.add(upcomingTripCard);
       upcomingTrips.add(upcomingTripCard);
@@ -157,6 +168,7 @@ class HomeController extends GetxController {
     isSearchTripLoading.value = true;
     upcomingTripsForBiker.clear();
 
+    await _fetchAdvertisments();
     Map<String, dynamic> response = await _tripProvider.searchTrips(
         page: _currentPage,
         limit: _limit,
@@ -173,16 +185,19 @@ class HomeController extends GetxController {
       DestinationStation destinationStation = DestinationStation.fromJson(item);
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
-          isSearchedTrip: true,
-          tripId: trip.tripId,
-          userId: user.userId,
-          avatarUrl: user.avatar,
-          name: user.userFullname,
-          phoneNo: user.userPhoneNumber,
-          bookTime: trip.bookTime,
-          departureStation: startingStation.departureName,
-          destinationStation: destinationStation.destinationName);
-
+        isSearchedTrip: true,
+        tripId: trip.tripId,
+        userId: user.userId,
+        avatarUrl: user.avatar,
+        name: user.userFullname,
+        phoneNo: user.userPhoneNumber,
+        bookTime: trip.bookTime,
+        departureStation: startingStation.departureName,
+        destinationStation: destinationStation.destinationName,
+        advertisment: _getRandomAds(_advertisments.isEmpty
+            ? 0
+            : Random().nextInt(_advertisments.length)),
+      );
       upcomingTripsForBiker.add(upcomingTripCard);
     }
 
@@ -356,6 +371,27 @@ class HomeController extends GetxController {
       return;
     }
     onSuccess();
+  }
+
+  _fetchAdvertisments() async {
+    try {
+      _advertisments.clear();
+      final ads = await _repositories.getAdvertisements();
+      _advertisments.addAll(ads.data);
+      _advertisments.shuffle();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Advertisment? _getRandomAds(int index) {
+    if (_advertisments.isEmpty) {
+      return null;
+    }
+    if (index < _advertisments.length) {
+      return _advertisments[index];
+    }
+    return null;
   }
 }
 
