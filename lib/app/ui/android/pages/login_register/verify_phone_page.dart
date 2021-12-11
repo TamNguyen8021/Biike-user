@@ -49,8 +49,10 @@ class VerifyPhonePage extends StatelessWidget {
                     .copyWith(fontSize: 40.sp),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.underline,
-                  activeColor: CustomColors.kLightGray,
-                  inactiveColor: CustomColors.kLightGray,
+                  activeColor: CustomColors.kBlue,
+                  inactiveColor: CustomColors.kBlue,
+                  activeFillColor: Colors.red,
+                  inactiveFillColor: Colors.blue,
                 ),
                 onChanged: (code) {
                   controllerOtp.text = code;
@@ -60,22 +62,6 @@ class VerifyPhonePage extends StatelessWidget {
                 },
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: <Widget>[
-            //     Padding(
-            //       padding: const EdgeInsets.only(right: 2.0),
-            //       child: Icon(
-            //         Icons.refresh,
-            //         color: CustomColors.kDarkGray,
-            //       ),
-            //     ),
-            //     Text(
-            //       CustomStrings.kResendVerifyCode.tr,
-            //       style: Theme.of(context).textTheme.bodyText1,
-            //     )
-            //   ],
-            // ),
           ],
         ),
       ),

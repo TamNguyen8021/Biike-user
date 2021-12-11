@@ -746,9 +746,10 @@ class Home extends StatelessWidget {
                                                   CustomDialog(
                                                       context: context);
                                               customDialog.loadingDialog.show();
-                                              final _firebaseService =
-                                                  getIt<FirebaseServices>();
-                                              await _firebaseService.sendCode(
+                                              try {
+                                                final _firebaseService =
+                                                    getIt<FirebaseServices>();
+                                                await _firebaseService.sendCode(
                                                   fullPhone: _profileController
                                                       .user.userPhoneNumber,
                                                   codeSented: () {
@@ -764,7 +765,26 @@ class Home extends StatelessWidget {
                                                                   .userPhoneNumber,
                                                           'from': 'home'
                                                         });
-                                                  });
+                                                  },
+                                                  verificationFailed: () {
+                                                    customDialog.loadingDialog
+                                                        .dismiss();
+                                                  },
+                                                );
+                                              } catch (e) {
+                                                customDialog.loadingDialog
+                                                    .dismiss();
+                                                AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.ERROR,
+                                                        headerAnimationLoop:
+                                                            false,
+                                                        desc: CustomErrorsString
+                                                            .kLoginExceptionError
+                                                            .tr)
+                                                    .show();
+                                              }
                                             } else {
                                               await homeController.searchTrips(
                                                   date: homeController
@@ -859,9 +879,10 @@ class Home extends StatelessWidget {
                         if (!_profileController.user.isPhoneVerified!) {
                           CustomDialog customDialog =
                               CustomDialog(context: context);
-                          customDialog.loadingDialog.show();
-                          final _firebaseService = getIt<FirebaseServices>();
-                          await _firebaseService.sendCode(
+                          try {
+                            customDialog.loadingDialog.show();
+                            final _firebaseService = getIt<FirebaseServices>();
+                            await _firebaseService.sendCode(
                               fullPhone:
                                   _profileController.user.userPhoneNumber,
                               codeSented: () {
@@ -872,7 +893,21 @@ class Home extends StatelessWidget {
                                           .user.userPhoneNumber,
                                       'from': 'home'
                                     });
-                              });
+                              },
+                              verificationFailed: () {
+                                customDialog.loadingDialog.dismiss();
+                              },
+                            );
+                          } catch (e) {
+                            customDialog.loadingDialog.dismiss();
+                            AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.ERROR,
+                                    headerAnimationLoop: false,
+                                    desc: CustomErrorsString
+                                        .kLoginExceptionError.tr)
+                                .show();
+                          }
                         } else {
                           Get.toNamed(CommonRoutes.BOOK_TRIP);
                         }

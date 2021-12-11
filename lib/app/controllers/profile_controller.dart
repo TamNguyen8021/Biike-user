@@ -132,11 +132,22 @@ class ProfileController extends GetxController {
     final phone = await LocalAppData().phone;
     final isPhoneVerified = await LocalAppData().isPhoneVerified;
     if (!isPhoneVerified) {
-      await _firebaseService.sendCode(
-          fullPhone: phone,
-          codeSented: () {
-            Get.toNamed(CommonRoutes.VERIFY_PHONE);
-          });
+      try {
+        await _firebaseService.sendCode(
+            fullPhone: phone,
+            codeSented: () {
+              Get.toNamed(CommonRoutes.VERIFY_PHONE);
+            },
+            verificationFailed: () {});
+      } catch (e) {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kLoginExceptionError.tr)
+            .show();
+      }
+
       return;
     }
     onSuccess();

@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/destination_station.dart';
 import 'package:bikes_user/app/data/models/departure_station.dart';
@@ -317,23 +318,41 @@ class HomeController extends GetxController {
     final userId = await LocalAppData().userId;
     final isPhoneVerified = await LocalAppData().isPhoneVerified;
     if (!isPhoneVerified) {
-      await _firebaseService.sendCode(
-          fullPhone: phone,
-          codeSented: () {
-            showDialog<bool>(
-              context: context,
-              builder: (context) {
-                return DialogConfirm(
-                  firebaseService: _firebaseService,
-                  onSuccess: () {
-                    LocalAppData().setIsPhoneVerified(true);
-                    _userRepository.verifyUser(userId.toString(), true);
-                    onSuccess();
-                  },
-                );
-              },
-            );
-          });
+      try {
+        await _firebaseService.sendCode(
+            fullPhone: phone,
+            codeSented: () {
+              showDialog<bool>(
+                context: context,
+                builder: (context) {
+                  return DialogConfirm(
+                    firebaseService: _firebaseService,
+                    onSuccess: () {
+                      LocalAppData().setIsPhoneVerified(true);
+                      _userRepository.verifyUser(userId.toString(), true);
+                      onSuccess();
+                    },
+                  );
+                },
+              );
+            },
+            verificationFailed: () {
+              AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      headerAnimationLoop: false,
+                      desc: CustomErrorsString.kLoginExceptionError.tr)
+                  .show();
+            });
+      } catch (e) {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kLoginExceptionError.tr)
+            .show();
+      }
+
       return;
     }
     onSuccess();
