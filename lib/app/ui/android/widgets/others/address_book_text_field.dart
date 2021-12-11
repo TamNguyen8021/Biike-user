@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class AddressBookTextField extends StatelessWidget {
   final bool isReadOnly;
-  final bool isEditAddressBook;
   final String initialValue;
   final String labelText;
   final String hintText;
@@ -11,13 +10,11 @@ class AddressBookTextField extends StatelessWidget {
 
   const AddressBookTextField(
       {Key? key,
-        required this.isReadOnly,
-        required this.isEditAddressBook,
-        required this.initialValue,
-        required this.labelText,
-        required this.hintText,
-        this.onChangedFunc
-      })
+      required this.isReadOnly,
+      required this.initialValue,
+      required this.labelText,
+      required this.hintText,
+      this.onChangedFunc})
       : super(key: key);
 
   @override
@@ -29,26 +26,20 @@ class AddressBookTextField extends StatelessWidget {
         initialValue: initialValue,
         onChanged: onChangedFunc,
         textAlignVertical: TextAlignVertical.center,
-        style: TextStyle( 
+        style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 14.0,
-            color: CustomColors.kDarkGray
-        ),
+            color: CustomColors.kDarkGray),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: CustomColors.kDarkGray.withOpacity(0.3)
-          ),
+          hintStyle: TextStyle(color: CustomColors.kDarkGray.withOpacity(0.3)),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
           enabledBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
-            borderRadius: BorderRadius.all(
-                const Radius.circular(5.0)),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+            borderRadius: BorderRadius.all(const Radius.circular(5.0)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.white, width: 0.0),
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
             borderRadius: const BorderRadius.all(
               const Radius.circular(5.0),
             ),

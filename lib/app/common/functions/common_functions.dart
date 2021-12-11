@@ -129,8 +129,9 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  Future<void> showConfirmDialog(
+  static Future<void> showConfirmDialog(
       {required BuildContext context,
+      required bool isCancel,
       required String title,
       required String message,
       required Function() onPressedFunc}) async {
@@ -169,7 +170,7 @@ class CommonFunctions {
                             hasBorder: false,
                             backgroundColor: CustomColors.kLightGray,
                             foregroundColor: CustomColors.kDarkGray,
-                            text: CustomStrings.kNo.tr,
+                            text: CustomStrings.kBtnExit.tr,
                             onPressedFunc: () {
                               Get.back();
                             }),
@@ -181,7 +182,9 @@ class CommonFunctions {
                           hasBorder: false,
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
-                          text: CustomStrings.kYes.tr,
+                          text: isCancel
+                              ? CustomStrings.kStillCancel.tr
+                              : CustomStrings.kYes.tr,
                           onPressedFunc: onPressedFunc,
                         ),
                       ),
@@ -229,7 +232,7 @@ class CommonFunctions {
     }
   }
 
-  Future<void> openLink(
+  static Future<void> openLink(
       {required String url, required BuildContext context}) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -325,7 +328,7 @@ class CommonFunctions {
     double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     double d = r * c; // in kilometres
 
-    if (d < 0.5) {
+    if (d <= 0.5) {
       return true;
     }
     return false;
@@ -361,7 +364,8 @@ class CommonFunctions {
   }
 
   static moveToNotiPageWhenHasNoti(String? title, String? body) {
-    Get.snackbar(title ?? 'Notification', body ?? 'You have new notification',
+    Get.snackbar(title ?? CustomStrings.kNotification.tr,
+        body ?? CustomStrings.kNewNotification.tr,
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
         onTap: (_) => Get.toNamed(CommonRoutes.NOTIFICATION),
@@ -369,4 +373,53 @@ class CommonFunctions {
         duration: Duration(seconds: 3),
         backgroundColor: CustomColors.kBlue);
   }
+
+  Widget lightBulbIcon(context, String title,
+          {List<String> contents = const <String>[]}) =>
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+        child: IconButton(
+          icon: Icon(Icons.lightbulb),
+          onPressed: () => showDialog(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              title: Text(title.tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
+              content: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    for (var content in contents)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0, bottom: 7.0),
+                        child: Text(
+                          content.tr,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(
+                                  fontSize: 14, color: CustomColors.kDarkGray),
+                        ),
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: CustomTextButton(
+                          backgroundColor: CustomColors.kBlue,
+                          foregroundColor: Colors.white,
+                          text: CustomStrings.kGotIt.tr,
+                          onPressedFunc: () => Get.back(),
+                          hasBorder: false),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
 }

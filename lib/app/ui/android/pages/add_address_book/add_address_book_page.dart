@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/controllers/add_address_book_controller.dart';
 import 'package:bikes_user/app/ui/android/pages/manage_bike/widgets/custom_elevated_icon_has_loading_button.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/address_book_text_action_field.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/address_book_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -55,7 +54,6 @@ class AddAddressBookPage extends StatelessWidget {
                       () => AddressBookTextField(
                         hintText: CustomStrings.kEnterName.tr,
                         isReadOnly: false,
-                        isEditAddressBook: true,
                         initialValue: '${addAddressBookPageController.name}',
                         labelText: CustomStrings.kName.tr,
                         onChangedFunc: (value) {
@@ -79,13 +77,15 @@ class AddAddressBookPage extends StatelessWidget {
                       ],
                     ),
                     Obx(
-                      () => AddressBookTextActionField(
-                          hintText: CustomStrings.kSelectAddress.tr,
-                          isReadOnly: true,
-                          isEditAddressBook: true,
-                          initialValue:
-                              '${addAddressBookPageController.address}',
-                          labelText: CustomStrings.kAddress.tr),
+                      () => AddressBookTextField(
+                        hintText: CustomStrings.kEnterAddress.tr,
+                        isReadOnly: false,
+                        initialValue: '${addAddressBookPageController.address}',
+                        labelText: CustomStrings.kAddress.tr,
+                        onChangedFunc: (String address) {
+                          addAddressBookPageController.address.value = address;
+                        },
+                      ),
                     ),
                     Row(
                       children: <Widget>[
@@ -102,7 +102,6 @@ class AddAddressBookPage extends StatelessWidget {
                       () => AddressBookTextField(
                         hintText: CustomStrings.kEnterNote.tr,
                         isReadOnly: false,
-                        isEditAddressBook: true,
                         initialValue: '${addAddressBookPageController.note}',
                         labelText: CustomStrings.kNote.tr,
                         onChangedFunc: (value) {

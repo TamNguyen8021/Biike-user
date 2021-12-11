@@ -1,12 +1,10 @@
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/controllers/wallet_controller.dart';
-import 'package:bikes_user/app/data/enums/role_enum.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/user_rating_and_score.dart';
-import 'package:bikes_user/main.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/ui/android/widgets/appbars/custom_appbar.dart';
@@ -122,17 +120,8 @@ class ProfilePage extends StatelessWidget {
                                                     size: 25,
                                                   ),
                                                   onTap: () {
-                                                    Get.toNamed(
-                                                        CommonRoutes
-                                                            .ACCOUNT_VERIFICATION,
-                                                        arguments: {
-                                                          'isPhoneVerified':
-                                                              controller.user
-                                                                  .isPhoneVerified,
-                                                          'isBikeVerified':
-                                                              controller.user
-                                                                  .isBikeVerified
-                                                        });
+                                                    Get.toNamed(CommonRoutes
+                                                        .ACCOUNT_VERIFICATION);
                                                   },
                                                 ),
                                               ],
@@ -174,30 +163,30 @@ class ProfilePage extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
-                                                if (Biike.role.value ==
-                                                    Role.biker) ...[
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 8.0),
-                                                    child:
-                                                        CustomElevatedIconButton(
-                                                      width: 135,
-                                                      onPressedFunc: () =>
-                                                          Get.toNamed(
-                                                              CommonRoutes
-                                                                  .MANAGE_BIKE),
-                                                      text: CustomStrings
-                                                          .kManageBike.tr,
-                                                      elevation: 0.0,
-                                                      icon: Icons.two_wheeler,
-                                                      backgroundColor:
-                                                          CustomColors.kBlue,
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
+                                                // if (Biike.role.value ==
+                                                //     Role.biker) ...[
+                                                //   Padding(
+                                                //     padding:
+                                                //         const EdgeInsets.only(
+                                                //             right: 8.0),
+                                                //     child:
+                                                //         CustomElevatedIconButton(
+                                                //       width: 135,
+                                                //       onPressedFunc: () =>
+                                                //           Get.toNamed(
+                                                //               CommonRoutes
+                                                //                   .MANAGE_BIKE),
+                                                //       text: CustomStrings
+                                                //           .kManageBike.tr,
+                                                //       elevation: 0.0,
+                                                //       icon: Icons.two_wheeler,
+                                                //       backgroundColor:
+                                                //           CustomColors.kBlue,
+                                                //       foregroundColor:
+                                                //           Colors.white,
+                                                //     ),
+                                                //   ),
+                                                // ],
                                                 CustomElevatedIconButton(
                                                   width: 135,
                                                   onPressedFunc: () =>
@@ -228,6 +217,8 @@ class ProfilePage extends StatelessWidget {
                                                     .bodyText2,
                                               ),
                                               onPressed: () {
+                                                if (Get.arguments[
+                                                    'isLocationShared']) {}
                                                 LocalAppData().logout();
                                                 Get.offAllNamed(
                                                     CommonRoutes.LOGIN);

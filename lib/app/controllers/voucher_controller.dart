@@ -17,6 +17,7 @@ class VoucherController extends GetxController {
 
   Rx<VoucherCategory> category = VoucherCategory.empty().obs;
   RxBool isNearMeSelected = false.obs;
+  String _userCoordinate = '';
 
   Map<String, dynamic> pagination = {};
   int _currentPage = 1;
@@ -59,12 +60,14 @@ class VoucherController extends GetxController {
       if (userLocation == null) {
         return CustomStrings.kNeedLocationPermission.tr;
       }
+      isNearMeSelected.value = !isNearMeSelected.value;
+      if (isNearMeSelected.isFalse) {
+        _userCoordinate = '';
+      } else {
+        _userCoordinate = '${userLocation.latitude},${userLocation.longitude}';
+      }
 
-      // Position position = await Geolocator.getCurrentPosition(
-      //     desiredAccuracy: LocationAccuracy.high);
-      // isNearMeSelected.value = !isNearMeSelected.value;
-
-      //TODO send user current location
+      pagingController.refresh();
     } catch (e) {
       CommonFunctions.catchExceptionError(e);
       return CustomStrings.kNeedLocationPermission.tr;
@@ -79,7 +82,8 @@ class VoucherController extends GetxController {
         limit: _limit,
         cateId: this.category.value.voucherCategoryId! < 0
             ? 0
-            : this.category.value.voucherCategoryId);
+            : this.category.value.voucherCategoryId,
+        userCoordinate: _userCoordinate);
     pagination = response['_meta'];
 
     return response['data'];

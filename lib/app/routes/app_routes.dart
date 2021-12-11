@@ -30,6 +30,7 @@ abstract class CommonRoutes {
   static const APP_SETTING = '/appSetting';
   static const ADDRESS_BOOK = '/addressBook';
   static const ADD_ADDRESS_BOOK = '/addAddressBook';
+  static const SEARCH_ADDRESS = '/searchAddress';
   static const EDIT_ADDRESS_BOOK = '/editAddressBook';
   static const SOS_NUMBER = '/sosNumber';
   static const ADD_SOS_NUMBER = '/addSOSNumber';
