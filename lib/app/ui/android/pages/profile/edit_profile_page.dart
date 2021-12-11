@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:back_pressed/back_pressed.dart';
+import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
+import 'package:bikes_user/app/ui/android/widgets/buttons/choose_date_time_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/profile_text_field.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
@@ -182,33 +184,33 @@ class EditProfilePage extends StatelessWidget {
                                       _profileController.user.birthDate);
                         },
                       ),
-                      // Obx(
-                      //   () => ChooseDateTimeButton(
-                      //       isOnProfilePage: true,
-                      //       text: birthDateText.value,
-                      //       width: double.infinity,
-                      //       onPressedFunc: () async {
-                      //         DateTime _tempBirthDate = await CommonFunctions()
-                      //             .selectDate(
-                      //                 context: context,
-                      //                 selectedDate:
-                      //                     _profileController.birthDate,
-                      //                 isBirthDatePicker: true);
-                      //         _profileController.birthDate.value =
-                      //             _tempBirthDate;
-                      //         _profileController.user.birthDate =
-                      //             _tempBirthDate.toString();
-                      //         birthDateText.value = DateFormat('dd-MM-yyyy')
-                      //             .format(_tempBirthDate);
-                      //         isSaveButtonDisable.value =
-                      //             _profileController.isSaveButtonDisable(
-                      //                 newName:
-                      //                     _profileController.user.userFullname,
-                      //                 newGender: _profileController.user.gender,
-                      //                 newBirthDate:
-                      //                     _profileController.user.birthDate);
-                      //       }),
-                      // ),
+                      Obx(
+                        () => ChooseDateTimeButton(
+                            isOnProfilePage: true,
+                            text: birthDateText.value,
+                            width: double.infinity,
+                            onPressedFunc: () async {
+                              DateTime _tempBirthDate =
+                                  await CommonFunctions.selectDate(
+                                      context: context,
+                                      selectedDate:
+                                          _profileController.birthDate,
+                                      isBirthDatePicker: true);
+                              _profileController.birthDate.value =
+                                  _tempBirthDate;
+                              _profileController.user.birthDate =
+                                  _tempBirthDate.toString();
+                              birthDateText.value = DateFormat('dd-MM-yyyy')
+                                  .format(_tempBirthDate);
+                              isSaveButtonDisable.value =
+                                  _profileController.isSaveButtonDisable(
+                                      newName:
+                                          _profileController.user.userFullname,
+                                      newGender: _profileController.user.gender,
+                                      newBirthDate:
+                                          _profileController.user.birthDate);
+                            }),
+                      ),
                       Obx(
                         () => Padding(
                           padding: const EdgeInsets.only(top: 16.0),

@@ -244,7 +244,7 @@ class ChoNowSettingsController extends GetxController {
   bool checkIfTimeBetweenFromTimeAndToTimeIsLessThan15Mins() {
     if ((toTime.value!.hour * 60 + toTime.value!.minute) -
             (fromTime.value!.hour * 60 + fromTime.value!.minute) <
-        15 * 60) {
+        15) {
       return true;
     }
     return false;

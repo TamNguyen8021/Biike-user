@@ -280,50 +280,57 @@ class TripDetailsPage extends StatelessWidget {
                 },
                 appBar: AppBar(),
                 title: Text(CustomStrings.kTripDetails.tr),
-                actionWidgets: controller.trip.tripStatus != 5 &&
-                        controller.trip.tripStatus != 6
-                    ? <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16.0, horizontal: 22.0),
-                          child: ElevatedButton.icon(
-                            onPressed: () async {
-                              controller.userLocation =
-                                  await CommonFunctions.getCurrentLocation();
-                              if (controller.userLocation != null) {
-                                controller.showHelpCenter(context: context);
-                              } else {
-                                AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.INFO_REVERSED,
-                                        headerAnimationLoop: false,
-                                        desc: CustomStrings
-                                            .kNeedLocationPermission.tr)
-                                    .show();
-                              }
-                            },
-                            icon: Icon(
-                              Icons.support,
-                              color: CustomColors.kBlue,
+                actionWidgets: [
+                  GetBuilder<TripDetailsController>(
+                      id: 'helpCenter',
+                      init: controller,
+                      builder: (TripDetailsController controller) {
+                        if (controller.trip.tripStatus != 5 &&
+                            controller.trip.tripStatus != 6) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 22.0),
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                controller.userLocation =
+                                    await CommonFunctions.getCurrentLocation();
+                                if (controller.userLocation != null) {
+                                  controller.showHelpCenter(context: context);
+                                } else {
+                                  AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.INFO_REVERSED,
+                                          headerAnimationLoop: false,
+                                          desc: CustomStrings
+                                              .kNeedLocationPermission.tr)
+                                      .show();
+                                }
+                              },
+                              icon: Icon(
+                                Icons.support,
+                                color: CustomColors.kBlue,
+                              ),
+                              label: Text(
+                                CustomStrings.kSupport.tr,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(color: CustomColors.kBlue),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                              ),
                             ),
-                            label: Text(
-                              CustomStrings.kSupport.tr,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(color: CustomColors.kBlue),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                            ),
-                          ),
-                        ),
-                      ]
-                    : null,
+                          );
+                        } else {
+                          return SizedBox.shrink();
+                        }
+                      }),
+                ],
               ),
               body: FutureBuilder(
                   future: controller.getTripDetails(tripId: tripId),

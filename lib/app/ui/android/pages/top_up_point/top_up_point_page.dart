@@ -42,16 +42,8 @@ class MomoPageState extends State<TopUpPointPage> {
     _momoPay.on(MomoVn.EVENT_PAYMENT_ERROR, _handlePaymentError);
   }
 
-  Future<void> initPlatformState() async {
-    if (!mounted) return;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
-    var percentTransfer =
-        double.parse(topUpPointController.percent.value) * 1000;
-
     return FutureBuilder(
         future: topUpPointController.getConfigurations(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -117,8 +109,8 @@ class MomoPageState extends State<TopUpPointPage> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child:
-                                        Text('1000 đ = $percentTransfer điểm'),
+                                    child: Text(
+                                        '1000 đ = ${topUpPointController.percentTransfer.value} điểm'),
                                   )
                                 ],
                               )),
