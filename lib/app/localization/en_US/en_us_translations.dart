@@ -4,7 +4,7 @@ final Map<String, String> en = {
   'kConfirm': 'Confirm',
 
   //'002.,.2,.3' screen
-  'kSkip': 'Skip>>',
+  'kSkip': 'Skip',
   'kFree': 'Absolutely free',
   'kFirstDescription':
       'Biiké is a free connect application, you will not have to pay to use our service',

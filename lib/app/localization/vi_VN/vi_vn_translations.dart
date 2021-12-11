@@ -4,7 +4,7 @@ final Map<String, String> vi = {
   'kConfirm': 'Xác nhận',
 
   //'002.,.2,.3' screen
-  'kSkip': 'Bỏ qua>>',
+  'kSkip': 'Bỏ qua',
   'kFree': 'Hoàn toàn miễn phí',
   'kFirstDescription':
       'Biiké là nền tảng kết nối hoàn toàn miễn phí, bạn không cần phải trả bất kỳ chi phí gì để sử dụng app',
