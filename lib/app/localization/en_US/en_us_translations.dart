@@ -175,8 +175,8 @@ final Map<String, String> en = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'On your journey with Biiké, you have',
-  'kNoOfRideTrips': 'Successful ride trips',
-  'kNoOfFreeTrips': 'Successful free trips',
+  'kNoOfRideTrips': 'success trips as Keer',
+  'kNoOfFreeTrips': 'success rides as Biker',
   'kNoOfKm': 'km was saved',
   'kNoOfGasLitres': 'litres of gasoline was saved',
   'kThankYouForChoosingBiike':

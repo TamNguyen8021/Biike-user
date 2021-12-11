@@ -187,8 +187,8 @@ final Map<String, String> vi = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'Tại hành trình với Biiké, bạn đã có',
-  'kNoOfRideTrips': 'Đi ké thành công',
-  'kNoOfFreeTrips': 'Chở ké thành công',
+  'kNoOfRideTrips': 'chuyến đi ké thành công',
+  'kNoOfFreeTrips': 'chuyến chở ké thành công',
   'kNoOfKm': 'km được tiết kiệm',
   'kNoOfGasLitres': 'lít xăng được tiết kiệm',
   'kThankYouForChoosingBiike':
