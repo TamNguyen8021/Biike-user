@@ -2,7 +2,6 @@ import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_objects/custom_location.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
-import 'package:bikes_user/app/data/enums/date_enum.dart';
 import 'package:bikes_user/app/data/models/station.dart';
 import 'package:bikes_user/app/data/providers/station_provider.dart';
 import 'package:bikes_user/app/data/providers/trip_provider.dart';
@@ -21,19 +20,16 @@ class BookTripController extends GetxController {
   RxList<Station> listDepartureStation = <Station>[].obs;
   RxList<Station> listDestinationStation = <Station>[].obs;
 
-  Rx<DateTime> selectedDate = DateTime.now().obs;
-  Rx<bool> isDateSelected = false.obs;
   Rx<TimeOfDay> selectedTime = TimeOfDay.now().obs;
   Rx<bool> isTimeSelected = false.obs;
-  Rx<bool> isRepeated = false.obs;
 
   Rx<String> roadDistance = ''.obs;
   Rx<String> roadDuration = ''.obs;
 
   RxList<LatLng> polypoints = <LatLng>[].obs;
 
-  /// Thứ
-  List<Date> _dateList = [];
+  List<DateTime> dateList = [];
+  List<DateTime> _selectedDateList = [];
 
   /// Initialize BookTrip screen
   ///
@@ -43,10 +39,14 @@ class BookTripController extends GetxController {
     listDestinationStation.value =
         List.filled(1, Station.boilerplate(CustomStrings.kChooseTo.tr));
     destinationStation.value = listDestinationStation[0];
+
+    DateTime today = DateTime.now();
+    dateList = List.generate(DateTime.daysPerWeek,
+        (index) => DateTime(today.year, today.month, today.day + index));
   }
 
   /// Change data of the departure station
-  ///
+  ///p
   /// Author: UyenNLP
   Future<void> updateDepartureStation(value) async {
     departureStation.value = value;
@@ -94,36 +94,18 @@ class BookTripController extends GetxController {
   /// Add to a repeated date list
   ///
   /// Author: UyenNLP
-  void addToDateList(Date date) {
-    if (!_dateList.contains(date)) {
-      _dateList.add(date);
+  void addToDateList(DateTime date) {
+    if (!_selectedDateList.contains(date)) {
+      _selectedDateList.add(date);
     }
   }
 
   /// Remove from a repeated date list
   ///
   /// Author: UyenNLP
-  void removeFromDateList(Date date) {
-    if (_dateList.contains(date)) {
-      _dateList.remove(date);
-    }
-  }
-
-  /// Select specific date to book a scheduled trip
-  ///
-  /// Author: TamNTT
-  Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate.value,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-      helpText: CustomStrings.kChooseDate.tr,
-      cancelText: CustomStrings.kCancel.tr,
-    );
-    if (picked != null && picked != selectedDate.value) {
-      isDateSelected.value = true;
-      selectedDate.value = picked;
+  void removeFromDateList(DateTime date) {
+    if (_selectedDateList.contains(date)) {
+      _selectedDateList.remove(date);
     }
   }
 
@@ -143,21 +125,6 @@ class BookTripController extends GetxController {
     }
   }
 
-  /// Set date from selected tag
-  ///
-  /// Author: UyenNLP
-  void setTimeFromTag(String date) {
-    isTimeSelected.value = true;
-    selectedTime.value = CommonFunctions.stringToTimeOfDay(date);
-  }
-
-  /// Change value to repeat that scheduled trip or not
-  ///
-  /// Author: TamNTT
-  void changeRepeat() {
-    isRepeated.value = !isRepeated.value;
-  }
-
   /// Ké-er book a ké-now trip
   ///
   /// Author: UyenNLP
@@ -174,92 +141,78 @@ class BookTripController extends GetxController {
     var data =
         _getJsonData(isScheduled: false, bookTime: bookTime.toIso8601String());
 
-    return await _tripProvider.createKeNowTrip(data);
+    var result = await _tripProvider.createSingleTrip(data);
+
+    return _returnMsg(result);
   }
 
   /// Ké-er book a scheduled trip
   ///
   /// Author: UyenNLP
   Future<dynamic> createScheduledTrip() async {
-    DateTime startDate = DateTime(
-        selectedDate.value.year,
-        selectedDate.value.month,
-        selectedDate.value.day,
-        selectedTime.value.hour,
-        selectedTime.value.minute);
-
-    String check = _checkValidBeforeScheduleTrip(startDate);
+    String check = _checkValidBeforeScheduleTrip();
     if (check != '') {
       return check;
     }
 
-    DateTime endDate = _getEndDate(startDate);
-
     var data = _getJsonData(
         isScheduled: true,
-        bookTime: _getListOfDates(startDate, endDate)
-            .map((e) => e.toIso8601String())
-            .toList());
+        bookTime: _selectedDateList.length > 1
+            ? _getListOfDates().map((e) => e.toIso8601String()).toList()
+            : DateTime(
+                    _selectedDateList.first.year,
+                    _selectedDateList.first.month,
+                    _selectedDateList.first.day,
+                    selectedTime.value.hour,
+                    selectedTime.value.minute)
+                .toIso8601String());
 
-    return await _tripProvider.createScheduledTrip(data);
-        // : _tripProvider.createKeNowTrip(data);
+    var result = _selectedDateList.length > 1
+        ? await _tripProvider.createMultipleTrip(data)
+        : await _tripProvider.createSingleTrip(data);
+
+    return _returnMsg(result);
   }
 
   /// Get list of dates with the same name of date as listDate contains
   ///
   /// Author: UyenNLP
-  List<DateTime> _getListOfDates(DateTime start, DateTime end) {
-    if (!isRepeated.value) {
-      return [start];
-    }
-
-    List<DateTime> listOfDays = [];
-    final numberOfDate = end.difference(start).inDays + 1;
-    List.generate(numberOfDate, (i) => _filterDate(listOfDays, start, i));
-
-    return listOfDays;
-  }
-
-  /// Add a date with the same name of date as listDate contains
-  ///
-  /// Author: UyenNLP
-  dynamic _filterDate(List list, DateTime date, int iteration) {
-    DateTime result = DateTime(
-        date.year, date.month, date.day + (iteration), date.hour, date.minute);
-
-    if (_dateList.contains(Date.values[result.weekday])) {
-      return list.add(result);
-    }
+  List<DateTime> _getListOfDates() {
+    var now = DateTime.now();
+    return _selectedDateList
+        .map((date) => DateTime(date.year, date.month, date.day,
+            selectedTime.value.hour, selectedTime.value.minute))
+        .where((date) => date.isAfter(now))
+        .toList();
   }
 
   /// Check if valid
   ///
   /// Author: UyenNLP
-  String _checkValidBeforeScheduleTrip(DateTime date) {
-    if (!isDateSelected.value || !isTimeSelected.value)
+  String _checkValidBeforeScheduleTrip() {
+    if (!isTimeSelected.value || _selectedDateList.length == 0)
       return CustomErrorsString.kNotFillAllFields.tr;
 
-    if (!_isAvailable(date))
-      return CustomErrorsString.kNotAvailableTimeRange.tr;
+    if (!_isAvailable()) return CustomErrorsString.kNotAvailableTimeRange.tr;
 
-    // Is repeated
-    if (isRepeated.value) {
-      if (_dateList.isEmpty) return CustomErrorsString.kNotFillAllFields.tr;
-    } else {
+    if (_selectedDateList.length == 1) {
+      DateTime date = DateTime(
+          _selectedDateList.first.year,
+          _selectedDateList.first.month,
+          _selectedDateList.first.day,
+          selectedTime.value.hour,
+          selectedTime.value.minute);
       if (date.isBefore(DateTime.now()))
         return CustomErrorsString.kNotAfterNow.tr;
     }
-
     return '';
   }
 
-  /// Check if valid
+  /// Check if valid when book ke-now
   ///
   /// Author: UyenNLP
   String _checkValidBeforeKeNow(DateTime date) {
-    if (!_isAvailable(date)) {
-      return CustomErrorsString.kNotAvailableTimeRange.tr;
-    }
+    if (!_isAvailable()) return CustomErrorsString.kNotAvailableTimeRange.tr;
 
     if (departureStation.value.stationId == -1 ||
         destinationStation.value.stationId == -1) {
@@ -272,14 +225,16 @@ class BookTripController extends GetxController {
   /// If selected time in the available time range
   ///
   /// Author: UyenNLP
-  bool _isAvailable(DateTime date) {
+  bool _isAvailable() {
     TimeOfDay startTime = TimeOfDay(hour: 6, minute: 00);
     TimeOfDay endTime = TimeOfDay(hour: 21, minute: 00);
 
-    return ((date.hour > startTime.hour) ||
-            (date.hour == startTime.hour && date.minute >= startTime.minute)) &&
-        ((date.hour < endTime.hour) ||
-            (date.hour == endTime.hour && date.minute <= endTime.minute));
+    return ((selectedTime.value.hour > startTime.hour) ||
+            (selectedTime.value.hour == startTime.hour &&
+                selectedTime.value.minute >= startTime.minute)) &&
+        ((selectedTime.value.hour < endTime.hour) ||
+            (selectedTime.value.hour == endTime.hour &&
+                selectedTime.value.minute <= endTime.minute));
   }
 
   /// Get a full list of station from db
@@ -314,19 +269,6 @@ class BookTripController extends GetxController {
     destinationStation.value = listDestinationStation[0];
   }
 
-  /// Get end date when selected repeated
-  ///
-  /// Author: UyenNLP
-  _getEndDate(DateTime startDate) {
-    // get duration from the startDate to end of that week
-    var duration = DateTime.daysPerWeek - startDate.weekday;
-
-    return startDate.add(Duration(
-        days: duration > 1 // not on weekend
-            ? duration + DateTime.daysPerWeek // add 1 more week
-            : duration + 2 * DateTime.daysPerWeek)); // else add 2 more weeks
-  }
-
   /// Get data to attach to body of api
   ///
   /// Author: UyenNLP
@@ -339,5 +281,20 @@ class BookTripController extends GetxController {
       'BookTime': bookTime,
       'IsScheduled': isScheduled
     };
+  }
+
+  dynamic _returnMsg(result) {
+    if (result is bool) return result;
+
+    if (result.contains('is already existed for Keer with KeerId'))
+      return CustomErrorsString.kTripTimeExist.tr;
+
+    if (result.contains('exceeding max number of trip'))
+      return CustomErrorsString.kExceedMaxTrips.tr;
+
+    if (result.contains('is less than'))
+      return CustomErrorsString.kBookAnHourPrior.tr;
+
+    return result;
   }
 }

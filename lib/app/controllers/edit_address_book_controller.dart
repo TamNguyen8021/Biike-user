@@ -6,7 +6,7 @@ class EditAddressBookController extends GetxController {
   final _addressBookProvider = Get.find<AddressBookProvider>();
 
   Rx<String> name = ''.obs;
-  Rx<String> address = '1426/39, Nguyễn Duy Trinh'.obs;
+  Rx<String> address = ''.obs;
   Rx<String> note = ''.obs;
   Rx<bool> isDefault = false.obs;
 

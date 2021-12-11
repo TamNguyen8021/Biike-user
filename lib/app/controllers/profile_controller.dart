@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/enums/image_type_enum.dart';
@@ -8,8 +9,10 @@ import 'package:bikes_user/app/data/models/user.dart';
 import 'package:bikes_user/app/data/providers/image_provider.dart'
     as imageProvider;
 import 'package:bikes_user/app/data/providers/user_provider.dart';
+import 'package:bikes_user/app/routes/app_routes.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/main.dart';
+import 'package:bikes_user/services/firebase_services.dart';
 import 'package:bikes_user/services/token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +20,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileController extends GetxController {
+  final _firebaseService = getIt<FirebaseServices>();
   final _userProvider = Get.find<UserProvider>();
   final _imageProvider = Get.find<imageProvider.ImageProvider>();
 
@@ -121,5 +125,20 @@ class ProfileController extends GetxController {
           .show();
       return false;
     }
+  }
+
+  verifyPhone(
+      {required BuildContext context, required Function() onSuccess}) async {
+    final phone = await LocalAppData().phone;
+    final isPhoneVerified = await LocalAppData().isPhoneVerified;
+    if (!isPhoneVerified) {
+      await _firebaseService.sendCode(
+          fullPhone: phone,
+          codeSented: () {
+            Get.toNamed(CommonRoutes.VERIFY_PHONE);
+          });
+      return;
+    }
+    onSuccess();
   }
 }

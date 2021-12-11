@@ -31,7 +31,6 @@ class CustomErrorsString {
   static const String kPasswordMustAtLeast6 = 'kPasswordMustAtLeast6';
   static const String kInvalidPhoneNo = 'kInvalidPhoneNo';
   static const String kDuplicateEmailOrPhone = 'kDuplicateEmailOrPhone';
-  static const String kWrongOtp = 'kWrongOtp';
   static const String kEmptyOtp = 'kEmptyOtp';
   static const String kTryAgain = 'kTryAgain';
   static const String kNoHistory = 'kNoHistory';
@@ -45,6 +44,11 @@ class CustomErrorsString {
   static const String kNotTurnOnGPS = 'kNotTurnOnGPS';
   static const String kNotAllowGetLocation = 'kNotAllowGetLocation';
   static const String kDeleteDafaultAddress = 'kDeleteDafaultAddress';
+<<<<<<< HEAD
+=======
+  static const String kNoVoucherCode = 'kNoVoucherCode';
+  static const String kTripTimeExist = 'kTripTimeExist';
+>>>>>>> 93e3ea9499581c299a4109c84774b59f9602ca5d
 
   //Login error message
   static const String kNoAccount = 'kNoAccount';
@@ -56,13 +60,24 @@ class CustomErrorsString {
   // 'cho_now_settings' screen
   static const String kCanOnlyAddStationFrom5AMTo9PM =
       'kCanOnlyAddStationFrom5AMTo9PM';
+  static const String kExceedMaxTrips = 'kExceedMaxTrips';
+  static const String kChangeModeToBiker = 'kChangeModeToBiker';
   static const String
       kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins =
       'kTimeBetweenFromTimeAndToTimeMustBeEqualOrGreaterThan15Mins';
+  static const String kBookAnHourPrior = 'kBookAnHourPrior';
 
   // 'trip_details' screen
   static const String kNoSosNumberSaved = 'kNoSosNumberSaved';
 
   // 'add_sos_number' screen
   static const String kCannotAddYourNumberAsSOS = 'kCannotAddYourNumberAsSOS';
+
+  // 'trip_details' screen
+  static const String kYouCanOnlyCancel5TripsPerDay =
+      'kYouCanOnlyCancel5TripsPerDay';
+
+  // 'edit_address_book' screen
+  static const String kCannotDeleteDefaultAddress =
+      'kCannotDeleteDefaultAddress';
 }

@@ -16,8 +16,9 @@ class VoucherCard extends StatelessWidget {
 
   ImageProvider _getImage(voucher) {
     if (voucher.voucherImages.length > 0) {
-      return NetworkImage(
-          voucher.voucherImages.elementAt(0)!.voucherImageUrl.toString());
+      var imageLink =
+          voucher.voucherImages.elementAt(0)!.voucherImageUrl.toString();
+      if (imageLink != '') return NetworkImage(imageLink);
     }
     return AssetImage('assets/images/voucher-banh-mi.jpg');
   }
@@ -75,39 +76,41 @@ class VoucherCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
-                  isExchanged ?
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4.0),
-                    child: Text(
-                      CustomStrings.kHsd.tr +
-                          DateFormat('dd/MM/yyyy').format(voucher.endDate),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: CustomColors.kOrange),
-                    ),
-                  ) : Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 4.0),
-                        child: Text(
-                          voucher.amountOfPoint.toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(color: CustomColors.kOrange),
+                  isExchanged
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 4.0),
+                          child: Text(
+                            CustomStrings.kHsd.tr +
+                                DateFormat('dd/MM/yyyy')
+                                    .format(voucher.endDate),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(color: CustomColors.kOrange),
+                          ),
+                        )
+                      : Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(right: 4.0),
+                              child: Text(
+                                voucher.amountOfPoint.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(color: CustomColors.kOrange),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: SvgPicture.asset(
+                                'assets/images/crown.svg',
+                                color: CustomColors.kOrange,
+                                height: 12,
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 2.0),
-                        child: SvgPicture.asset(
-                          'assets/images/crown.svg',
-                          color: CustomColors.kOrange,
-                          height: 12,
-                        ),
-                      )
-                    ],
-                  ),
                 ],
               )
             ],

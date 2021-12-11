@@ -11,13 +11,15 @@ import 'package:get/get.dart';
 
 /// Manage states of [AddressBookPage]
 class AddressBookController extends GetxController {
+  final _addressBookProvider = Get.find<AddressBookProvider>();
+  final _userProvider = Get.find<UserProvider>();
   RxList<dynamic> addressBooks = [].obs;
 
   Future<void> getAddressBooks() async {
     addressBooks.clear();
 
     dynamic response =
-        await UserProvider().getProfile(userId: Biike.userId.value);
+        await _userProvider.getProfile(userId: Biike.userId.value);
     if (response != null) {
       try {
         for (var address in response['userAddresses']) {
@@ -36,17 +38,26 @@ class AddressBookController extends GetxController {
 
   Future<void> removeAddressBook(
       {required BuildContext context, required int id}) async {
-    bool result = await AddressBookProvider().removeAddressBook(id: id);
-    if (result) {
+    var result = await _addressBookProvider.removeAddressBook(id: id);
+    if (result is bool) {
       await getAddressBooks();
       Get.back();
     } else {
-      AwesomeDialog(
-              context: context,
-              dialogType: DialogType.ERROR,
-              headerAnimationLoop: false,
-              desc: CustomErrorsString.kDevelopError.tr)
-          .show();
+      if (result.contains('default')) {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kCannotDeleteDefaultAddress.tr)
+            .show();
+      } else {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kDevelopError.tr)
+            .show();
+      }
     }
   }
 }

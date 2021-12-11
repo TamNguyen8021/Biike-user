@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/book_trip_controller.dart';
@@ -12,11 +13,15 @@ class KeNowButton extends StatelessWidget {
   final _bookTripController = Get.find<BookTripController>();
 
   _bookKeNowTrip(BuildContext context) async {
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
     dynamic result = await _bookTripController.createKeNowTrip();
 
     if (result is bool) {
+      customDialog.loadingDialog.dismiss();
       Get.toNamed(CommonRoutes.FIND_BIKER);
     } else {
+      customDialog.loadingDialog.dismiss();
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,

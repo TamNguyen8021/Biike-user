@@ -99,11 +99,13 @@ class AppPages {
     ),
     GetPage(
         name: CommonRoutes.VERIFY_PHONE,
-        page: () {
-          final phone = Get.arguments['fullPhone'] ?? '';
-          return VerifyPhonePage.initial(phone);
-        },
-        binding: VerifyPhoneBinding()),
+        page: () => VerifyPhonePage(),
+        bindings: <Bindings>[
+          VerifyPhoneBinding(),
+          UserBinding(),
+          ProfileBinding(),
+          HomeBinding(),
+        ]),
     GetPage(
         name: CommonRoutes.REGISTER,
         page: () => RegisterPage(),
@@ -297,7 +299,18 @@ class AppPages {
     GetPage(
         name: CommonRoutes.NOTIFICATION,
         page: () => NotificationPage(),
-        binding: NotificationBinding()),
+        // binding: NotificationBinding(),
+        bindings: <Bindings>[
+          NotificationBinding(),
+          ManageBikeBinding(),
+          BikeBinding(),
+          WalletBinding(),
+          ViewPointBinding(),
+          ChoNowSettingsBinding(),
+          StationBinding(),
+          UserBinding(),
+        ],
+    ),
     GetPage(
         name: CommonRoutes.NOTIFICATION_DETAIL,
         page: () => NotificationDetailPage()),

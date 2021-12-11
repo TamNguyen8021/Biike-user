@@ -284,7 +284,8 @@ final Map<String, String> vi = {
   'kCancelTripSuccess': 'Hủy chuyến thành công',
   'kConfirmCancelTrip': 'Bạn có chắc chắn muốn hủy chuyến?',
   'kViewCancelTripReminder':
-      'Bạn có thể xem lại các chuyến đã hủy trong lịch sử',
+      'Để nâng cao tỉ lệ chuyến thành công. Biiké chỉ cho phép hủy tối đa 5 chuyến mỗi ngày. Hãy cân nhắc thật kỹ khi đặt và hủy chuyến.',
+  'kStillCancel': 'Vẫn hủy',
   'kLetUsKnowYourCancelReason': 'Vui lòng cho biết lí do bạn hủy chuyến',
   'kEnterYourCancelReason': 'Nhập lí do hủy chuyến của bạn tại đây',
   'kHelpCenter': 'Trung tâm trợ giúp',
@@ -324,6 +325,9 @@ final Map<String, String> vi = {
   'kChooseTime': 'Chọn giờ',
   'kRepeat': 'Lặp lại',
   'kCancel': 'Hủy',
+  'kRuleWhenBookTrip': 'Quy định khi đặt chuyến',
+  'kRuleBookTrip1': '1.\tKhông được đặt lịch quá 15 chuyến',
+  'kRuleBookTrip2': '2.\tChỉ có thể hủy tối đa 5 chuyến/ngày',
 
   // 'bike_manager' screen
   'kBikeVerified': 'Đã xác minh',
@@ -417,6 +421,10 @@ final Map<String, String> vi = {
   'kEnterNote': 'Nhập ghi chú',
   'kSetAsDefault': 'Đặt làm mặc định',
 
+  // 'search_address' screen
+  'kEnterAddress': 'Nhập địa chỉ',
+  'kFindAddress': 'Tìm địa chỉ',
+
   // 'sos_number' screen
   'kSOSNumber': 'Số điện thoại S.O.S',
   'kSOSNumberFirstDescription':
@@ -466,7 +474,9 @@ final Map<String, String> vi = {
 
   // noti
   'kNotification': 'Thông báo',
-
+  'kNewNotification': 'Bạn có thông báo mới',
+  'kDeleteNotification': 'Bạn có chắc là muốn xóa hết tất cả thông báo?',
+  'kView': 'Xem',
   'kAll': 'Tất cả',
 }..addAll(<String, String>{
     // Error message
@@ -507,7 +517,6 @@ final Map<String, String> vi = {
     'kPasswordMustAtLeast6': 'Yêu cầu mật khẩu ít nhất 6 kí tự',
     'kInvalidPhoneNo': 'Số điện thoại không hợp lệ',
     'kDuplicateEmailOrPhone': 'Số điện thoại hoặc email đã có người đăng ký',
-    'kWrongOtp': 'Sai mã OTP',
     'kEmptyOtp': 'Vui lòng nhập mã OTP',
     'kTryAgain': 'Thử lại',
     'kNoHistory': 'Không có lịch sử',
@@ -521,9 +530,20 @@ final Map<String, String> vi = {
     'kNotTurnOnGPS': 'Xin hãy bật GPS',
     'kNotAllowGetLocation':
         'Xin hãy bật cho phép Biiké lấy vị trí hiện tại của người dùng',
+    'kNoVoucherCode':
+        'Hiện đã hết voucher code có thể đổi, xin hãy thử lại sau.',
+    'kTripTimeExist':
+        'Bạn đã đặt một chuyến trước đó trong khoảng thời gian này rồi',
     'kCanOnlyAddStationFrom5AMTo9PM':
         'Bạn chỉ có thể thêm trạm trong khoảng thời gian từ 5 giờ sáng đến 9 giờ tối',
+    'kExceedMaxTrips': 'Bạn không thể có quá 15 chuyến lên lịch',
+    'kChangeModeToBiker': 'Xin chuyển sang Chở ké mode',
     'kNoSosNumberSaved': 'Bạn chưa cài đặt số điện thoại S.O.S',
     'kCannotAddYourNumberAsSOS':
         'Không thể dùng số điện thoại của bạn làm số điện thoại S.O.S',
+    'kBookAnHourPrior':
+        'Xin hãy đặt chuyến có thời gian bắt đầu sau bây giờ ít nhất một tiếng.',
+    'kYouCanOnlyCancel5TripsPerDay':
+        'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
+    'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',
   });

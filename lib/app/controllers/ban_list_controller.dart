@@ -10,8 +10,6 @@ import 'package:get/get.dart';
 
 /// Manage states of [BanListPage]
 class BanListController extends GetxController {
-  static BanListController get to => Get.find<BanListController>();
-
   final repositories = getIt<Repositories>();
   List<BlackListItem> data = [];
 
