@@ -291,6 +291,7 @@ class CustomStrings {
   static const String kYourLocation = 'kYourLocation';
   static const String kCancelTripSuccess = 'kCancelTripSuccess';
   static const String kConfirmCancelTrip = 'kConfirmCancelTrip';
+  static const String kStillCancel = 'kStillCancel';
   static const String kViewCancelTripReminder = 'kViewCancelTripReminder';
   static const String kLetUsKnowYourCancelReason = 'kLetUsKnowYourCancelReason';
   static const String kEnterYourCancelReason = 'kEnterYourCancelReason';

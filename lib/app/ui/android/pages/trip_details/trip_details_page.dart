@@ -133,8 +133,7 @@ class TripDetailsPage extends StatelessWidget {
   /// Display a dialog on [context] to enter cancel reason.
   ///
   /// Author: TamNTT
-  Future<void> _showCancelReasonDialog(
-      {required BuildContext context, required int tripId}) async {
+  Future<void> _showCancelReasonDialog({required BuildContext context}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -151,6 +150,7 @@ class TripDetailsPage extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     CustomStrings.kLetUsKnowYourCancelReason.tr,
+                    textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   Padding(
@@ -1007,12 +1007,12 @@ class TripDetailsPage extends StatelessWidget {
 
                                                                           if (await _tripProvider.startTrip(
                                                                               tripId: tripId)) {
-                                                                            FirebaseFirestore
-                                                                                firebaseFirestore =
-                                                                                FirebaseFirestore.instance;
-                                                                            Geoflutterfire
-                                                                                geo =
-                                                                                Geoflutterfire();
+                                                                            // FirebaseFirestore
+                                                                            //     firebaseFirestore =
+                                                                            //     FirebaseFirestore.instance;
+                                                                            // Geoflutterfire
+                                                                            //     geo =
+                                                                            //     Geoflutterfire();
                                                                             Location
                                                                                 location =
                                                                                 Location();
@@ -1023,31 +1023,31 @@ class TripDetailsPage extends StatelessWidget {
                                                                                 zoom: 12,
                                                                               )));
 
-                                                                              firebaseFirestore.collection('locations').add({
-                                                                                'tripId': tripId,
-                                                                                'userId': Biike.userId.value,
-                                                                                'position': geo.point(latitude: controller.userLocation!.latitude!, longitude: controller.userLocation!.longitude!).data,
-                                                                                'time': DateTime.now()
-                                                                              });
+                                                                              // firebaseFirestore.collection('locations').add({
+                                                                              //   'tripId': tripId,
+                                                                              //   'userId': Biike.userId.value,
+                                                                              //   'position': geo.point(latitude: controller.userLocation!.latitude!, longitude: controller.userLocation!.longitude!).data,
+                                                                              //   'time': DateTime.now()
+                                                                              // });
 
-                                                                              QuerySnapshot<Map<String, dynamic>> snapshot = await firebaseFirestore.collection('locations').where('tripId', isEqualTo: tripId).where('userId', isEqualTo: controller.user.userId).limit(1).orderBy('time', descending: true).get();
+                                                                              // QuerySnapshot<Map<String, dynamic>> snapshot = await firebaseFirestore.collection('locations').where('tripId', isEqualTo: tripId).where('userId', isEqualTo: controller.user.userId).limit(1).orderBy('time', descending: true).get();
 
-                                                                              List<QueryDocumentSnapshot> docs = snapshot.docs;
+                                                                              // List<QueryDocumentSnapshot> docs = snapshot.docs;
 
-                                                                              for (var doc in docs) {
-                                                                                if (doc.data() != null) {
-                                                                                  var data = doc.data() as Map<String, dynamic>;
-                                                                                  GeoPoint pos = data['position']['geopoint']; // You can get other data in this manner.
-                                                                                  Marker marker = Marker(
-                                                                                    markerId: MarkerId('user'),
-                                                                                    position: LatLng(pos.latitude, pos.longitude),
-                                                                                    icon: await BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(10, 10)), 'assets/images/user-marker-1.png'),
-                                                                                  );
+                                                                              // for (var doc in docs) {
+                                                                              //   if (doc.data() != null) {
+                                                                              //     var data = doc.data() as Map<String, dynamic>;
+                                                                              //     GeoPoint pos = data['position']['geopoint']; // You can get other data in this manner.
+                                                                              //     Marker marker = Marker(
+                                                                              //       markerId: MarkerId('user'),
+                                                                              //       position: LatLng(pos.latitude, pos.longitude),
+                                                                              //       icon: await BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(10, 10)), 'assets/images/user-marker-1.png'),
+                                                                              //     );
 
-                                                                                  markers.removeWhere((element) => element.markerId.value == 'user');
-                                                                                  markers.add(marker);
-                                                                                }
-                                                                              }
+                                                                              //     markers.removeWhere((element) => element.markerId.value == 'user');
+                                                                              //     markers.add(marker);
+                                                                              //   }
+                                                                              // }
                                                                             });
                                                                             changeToFinishTripButton();
                                                                           } else {
@@ -1097,27 +1097,41 @@ class TripDetailsPage extends StatelessWidget {
                                                         elevation: 0.0,
                                                         icon: Icons.clear,
                                                         onPressedFunc: () {
-                                                          CommonFunctions()
-                                                              .showConfirmDialog(
-                                                                  context:
-                                                                      context,
-                                                                  title: CustomStrings
-                                                                      .kConfirmCancelTrip
-                                                                      .tr,
-                                                                  message:
-                                                                      CustomStrings
-                                                                          .kViewCancelTripReminder
-                                                                          .tr,
-                                                                  onPressedFunc:
-                                                                      () {
-                                                                    Get.back();
+                                                          if (controller.trip
+                                                              .isCancellationLimitExceeded!) {
+                                                            AwesomeDialog(
+                                                                    context:
+                                                                        context,
+                                                                    dialogType:
+                                                                        DialogType
+                                                                            .ERROR,
+                                                                    headerAnimationLoop:
+                                                                        false,
+                                                                    desc: CustomErrorsString
+                                                                        .kYouCanOnlyCancel5TripsPerDay
+                                                                        .tr)
+                                                                .show();
+                                                          } else {
+                                                            CommonFunctions()
+                                                                .showConfirmDialog(
+                                                                    context:
+                                                                        context,
+                                                                    title: CustomStrings
+                                                                        .kConfirmCancelTrip
+                                                                        .tr,
+                                                                    message:
+                                                                        CustomStrings
+                                                                            .kViewCancelTripReminder
+                                                                            .tr,
+                                                                    onPressedFunc:
+                                                                        () {
+                                                                      Get.back();
 
-                                                                    _showCancelReasonDialog(
-                                                                        context:
-                                                                            context,
-                                                                        tripId:
-                                                                            Get.arguments['tripId']);
-                                                                  });
+                                                                      _showCancelReasonDialog(
+                                                                          context:
+                                                                              context);
+                                                                    });
+                                                          }
                                                         },
                                                       ),
                                                     ),

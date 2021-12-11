@@ -33,6 +33,7 @@ class Trip {
   bool? isSchedule;
   int? cancelPersonId;
   String? cancelReason;
+  bool? isCancellationLimitExceeded;
 
   Trip(
       this.tripId,
@@ -47,7 +48,8 @@ class Trip {
       this.plateNumber,
       this.isSchedule,
       this.cancelPersonId,
-      this.cancelReason);
+      this.cancelReason,
+      this.isCancellationLimitExceeded);
 
   Trip.empty() {
     this.tripId = -1;

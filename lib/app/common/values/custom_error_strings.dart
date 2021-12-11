@@ -67,4 +67,8 @@ class CustomErrorsString {
 
   // 'add_sos_number' screen
   static const String kCannotAddYourNumberAsSOS = 'kCannotAddYourNumberAsSOS';
+
+  // 'trip_details' screen
+  static const String kYouCanOnlyCancel5TripsPerDay =
+      'kYouCanOnlyCancel5TripsPerDay';
 }

@@ -60,13 +60,12 @@ class CommonFunctions {
       {required BuildContext context, String? errorMessage}) {
     errorMessage == null
         ? Get.defaultDialog(
-        title: 'Confirm',
-        middleText: 'Do you want to exit the app?',
-        middleTextStyle: TextStyle(color: Colors.black),
-        textCancel: CustomStrings.kCancel.tr,
-        textConfirm: 'Yes',
-        onConfirm: () =>
-            SystemChannels.platform
+            title: 'Confirm',
+            middleText: 'Do you want to exit the app?',
+            middleTextStyle: TextStyle(color: Colors.black),
+            textCancel: CustomStrings.kCancel.tr,
+            textConfirm: 'Yes',
+            onConfirm: () => SystemChannels.platform
                 .invokeMethod<void>('SystemNavigator.pop')) //exit the app
 
         : AwesomeDialog(
@@ -82,9 +81,10 @@ class CommonFunctions {
   /// Show a date picker on [context].
   ///
   /// Author: TamNTT
-  Future<DateTime> selectDate({required BuildContext context,
-    required Rx<DateTime?> selectedDate,
-    required bool isBirthDatePicker}) async {
+  Future<DateTime> selectDate(
+      {required BuildContext context,
+      required Rx<DateTime?> selectedDate,
+      required bool isBirthDatePicker}) async {
     DateTime _currentTime = DateTime.now();
     DateTime _firstDate = DateTime(_currentTime.year - 90);
     DateTime _lastDate = DateTime(_currentTime.year - 18, 12, 31);
@@ -129,17 +129,18 @@ class CommonFunctions {
   /// Display a confirm dialog on [context].
   ///
   /// Author: TamNTT
-  Future<void> showConfirmDialog({required BuildContext context,
-    required String title,
-    required String message,
-    required Function() onPressedFunc}) async {
+  Future<void> showConfirmDialog(
+      {required BuildContext context,
+      required String title,
+      required String message,
+      required Function() onPressedFunc}) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
             backgroundColor: Colors.white,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -147,20 +148,14 @@ class CommonFunctions {
                 children: <Widget>[
                   Text(
                     title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline6,
+                    style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.center,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0, bottom: 30.0),
                     child: Text(
                       message,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .bodyText1,
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -174,7 +169,7 @@ class CommonFunctions {
                             hasBorder: false,
                             backgroundColor: CustomColors.kLightGray,
                             foregroundColor: CustomColors.kDarkGray,
-                            text: CustomStrings.kNo.tr,
+                            text: CustomStrings.kBtnExit.tr,
                             onPressedFunc: () {
                               Get.back();
                             }),
@@ -186,7 +181,7 @@ class CommonFunctions {
                           hasBorder: false,
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
-                          text: CustomStrings.kYes.tr,
+                          text: CustomStrings.kStillCancel.tr,
                           onPressedFunc: onPressedFunc,
                         ),
                       ),
@@ -208,15 +203,16 @@ class CommonFunctions {
 
     return indexOfQuestionMark != -1 // not found
         ? int.tryParse(
-        url.substring(indexOfForwardSlash + 1, indexOfQuestionMark)) ??
-        -1
+                url.substring(indexOfForwardSlash + 1, indexOfQuestionMark)) ??
+            -1
         : int.tryParse(url.substring(indexOfForwardSlash + 1)) ?? -1;
   }
 
-  Future<void> openMap({required String keyword,
-    required double? latitude,
-    required double? longitude,
-    required BuildContext context}) async {
+  Future<void> openMap(
+      {required String keyword,
+      required double? latitude,
+      required double? longitude,
+      required BuildContext context}) async {
     String googleUrl =
         'https://www.google.com/maps/search/$keyword/@$latitude,$longitude';
 
@@ -251,11 +247,12 @@ class CommonFunctions {
   /// Get polypoints to draw route on map
   ///
   /// Author: TamNTT
-  Future<void> getRoutePoints({required List<LatLng> polypoints,
-    required double startLat,
-    required double startLng,
-    required double endLat,
-    required double endLng}) async {
+  Future<void> getRoutePoints(
+      {required List<LatLng> polypoints,
+      required double startLat,
+      required double startLng,
+      required double endLat,
+      required double endLng}) async {
     polypoints.clear();
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
@@ -383,8 +380,8 @@ class CommonFunctions {
           onPressed: () => showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               title: Text(title.tr,
                   style: Theme.of(context)
                       .textTheme
@@ -412,8 +409,7 @@ class CommonFunctions {
                           backgroundColor: CustomColors.kBlue,
                           foregroundColor: Colors.white,
                           text: CustomStrings.kGotIt.tr,
-                          onPressedFunc: () =>
-                            Get.back(),
+                          onPressedFunc: () => Get.back(),
                           hasBorder: false),
                     )
                   ],
