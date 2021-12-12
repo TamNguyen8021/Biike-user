@@ -145,7 +145,7 @@ class HomeController extends GetxController {
         bookTime: trip.bookTime,
         departureStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
-        advertisment: _getRandomAds(i),
+        // advertisment: getRandomAds(i),
       );
 
       _tempUpcomingTrips.add(upcomingTripCard);
@@ -193,7 +193,7 @@ class HomeController extends GetxController {
         bookTime: trip.bookTime,
         departureStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
-        advertisment: _getRandomAds(_advertisments.isEmpty
+        advertisment: getRandomAds(_advertisments.isEmpty
             ? 0
             : Random().nextInt(_advertisments.length)),
       );
@@ -383,7 +383,7 @@ class HomeController extends GetxController {
     }
   }
 
-  Advertisment? _getRandomAds(int index) {
+  Advertisment? getRandomAds(int index) {
     if (_advertisments.isEmpty) {
       return null;
     }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
@@ -12,6 +14,7 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dar
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
@@ -51,6 +54,7 @@ class Home extends StatelessWidget {
     DateTime currentTime = DateTime.now();
     String timeLeft = '';
     Rx<bool> isPageFirstLoad = true.obs;
+    int randomIndex = Random().nextInt(10);
 
     return FutureBuilder(
         future: _profileController.getProfile(),
@@ -272,6 +276,30 @@ class Home extends StatelessWidget {
                                         ],
                                       ),
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16.0),
+                                      child: AdContainer(
+                                        advertisment: homeController
+                                            .getRandomAds(randomIndex)!,
+                                      ),
+                                    ),
+                                    Text(
+                                        homeController
+                                                .getRandomAds(randomIndex)
+                                                ?.title ??
+                                            '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3),
+                                    Text(
+                                        homeController
+                                                .getRandomAds(randomIndex)
+                                                ?.brand ??
+                                            '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1),
                                   ],
                                 ],
                               ]
