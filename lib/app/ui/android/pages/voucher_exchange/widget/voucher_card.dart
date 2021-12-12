@@ -59,7 +59,7 @@ class VoucherCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                      CustomStrings.kBrand.tr + voucher.brand,
+                      voucher.brand,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
