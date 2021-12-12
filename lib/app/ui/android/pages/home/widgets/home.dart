@@ -276,35 +276,38 @@ class Home extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 16.0),
-                                      child: AdContainer(
-                                        advertisment: homeController
-                                            .getRandomAds(randomIndex)!,
-                                      ),
-                                    ),
-                                    Text(
-                                        homeController
-                                                .getRandomAds(randomIndex)
-                                                ?.title ??
-                                            '',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3),
-                                    Text(
-                                        homeController
-                                                .getRandomAds(randomIndex)
-                                                ?.brand ??
-                                            '',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1),
                                   ],
                                 ],
                               ]
                             ]),
                       ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                      //   child: Column(
+                      //     children: <Widget>[
+                      //       Padding(
+                      //         padding:
+                      //             const EdgeInsets.symmetric(vertical: 16.0),
+                      //         child: AdContainer(
+                      //           advertisment:
+                      //               homeController.getRandomAds(randomIndex)!,
+                      //         ),
+                      //       ),
+                      //       Text(
+                      //           homeController
+                      //                   .getRandomAds(randomIndex)
+                      //                   ?.title ??
+                      //               '',
+                      //           style: Theme.of(context).textTheme.headline3),
+                      //       Text(
+                      //           homeController
+                      //                   .getRandomAds(randomIndex)
+                      //                   ?.brand ??
+                      //               '',
+                      //           style: Theme.of(context).textTheme.bodyText1),
+                      //     ],
+                      //   ),
+                      // ),
                       if (homeController.upcomingTrips.isNotEmpty ||
                           Biike.role.value == Role.biker) ...[
                         Padding(
