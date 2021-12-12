@@ -88,7 +88,7 @@ class VerifyPhoneController extends GetxController {
   }
 
   bool _validate({required BuildContext context, required String otp}) {
-    if (otp.trim().isEmpty) {
+    if (otp.trim().length != 6) {
       AwesomeDialog(
               context: context,
               dialogType: DialogType.ERROR,
@@ -97,9 +97,7 @@ class VerifyPhoneController extends GetxController {
           .show();
       return false;
     }
-    if (otp.trim().length != 6) {
-      return false;
-    }
+
     return true;
   }
 }

@@ -16,6 +16,7 @@ class CustomStrings {
 
   // '003.1_login'
   static const String kForgotPassword = 'kForgotPassword';
+  static const String kResetPassword = 'kResetPassword';
   static const String kSendResetPasswordEmail = 'kSendResetPasswordEmail';
   static const String kInputEmail = 'kInputEmail';
   static const String kPassword = 'kPassword';
@@ -457,6 +458,7 @@ class CustomStrings {
 
   // point
   static const String kPoint = 'kPoint';
+  static const String kPointLowerCase = 'kPointLowerCase';
   static const String kExchangeVoucher = 'kExchangeVoucher';
   static const String kBuyPoint = 'kBuyPoint';
   static const String kYouHave = 'kYouHave';

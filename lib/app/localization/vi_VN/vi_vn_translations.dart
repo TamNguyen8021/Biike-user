@@ -18,6 +18,7 @@ final Map<String, String> vi = {
 
   // '003.1_login'
   'kForgotPassword': 'Quên mật khẩu',
+  'kResetPassword': 'Reset mật khẩu',
   'kSendResetPasswordEmail':
       'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
   'kInputEmail': 'Nhập email',
@@ -186,8 +187,8 @@ final Map<String, String> vi = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'Tại hành trình với Biiké, bạn đã có',
-  'kNoOfRideTrips': 'Đi ké thành công',
-  'kNoOfFreeTrips': 'Chở ké thành công',
+  'kNoOfRideTrips': 'chuyến đi ké thành công',
+  'kNoOfFreeTrips': 'chuyến chở ké thành công',
   'kNoOfKm': 'km được tiết kiệm',
   'kNoOfGasLitres': 'lít xăng được tiết kiệm',
   'kThankYouForChoosingBiike':
@@ -457,6 +458,7 @@ final Map<String, String> vi = {
 
   // point
   'kPoint': 'Điểm',
+  'kPointLowerCase': 'điểm',
   'kExchangeVoucher': 'Đổi quà',
   'kBuyPoint': 'Nạp điểm',
   'kYouHave': 'Bạn có',
@@ -539,7 +541,7 @@ final Map<String, String> vi = {
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
     'kNotArrivedAtPickUpPoint': 'Bạn chưa đến trạm',
     'kOutOfDate': 'Đã hết hạn',
-    'kTripCanceled': 'Chuyến đi này đã bị hủy',
+    'kTripCanceled': 'Đã hủy',
     'kAlreadyFeedbacked': 'Bạn đã gửi feedback chuyến đi này.',
     'kNotTurnOnGPS': 'Xin hãy bật GPS',
     'kNotAllowGetLocation':

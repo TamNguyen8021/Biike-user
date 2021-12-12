@@ -1,7 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/functions/local_app_data.dart';
 import 'package:bikes_user/app/controllers/app_setting_controller.dart';
-import 'package:bikes_user/app/ui/android/pages/login_register/forgot_password.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
+import 'package:bikes_user/injectable/injectable.dart';
+import 'package:bikes_user/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,11 +24,22 @@ class AccountSecurityButtons extends StatelessWidget {
               child: SizedBox(
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: () => {Get.dialog(ForgotPasswordDialog())},
+                  onPressed: () async {
+                    final firebaseService = getIt<FirebaseServices>();
+                    final email = await LocalAppData().email;
+                    AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.INFO_REVERSED,
+                            headerAnimationLoop: false,
+                            desc: CustomStrings.kSendResetPasswordEmail.tr)
+                        .show();
+                    firebaseService.resetPasswordWithEmail(
+                        context: context, email: email);
+                  },
                   child: Row(
                     children: <Widget>[
                       Text(
-                        CustomStrings.kForgotPassword.tr,
+                        CustomStrings.kResetPassword.tr,
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ],

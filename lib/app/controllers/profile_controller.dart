@@ -56,18 +56,20 @@ class ProfileController extends GetxController {
   ///
   /// Author: TamNTT
   Future<void> getProfile() async {
-    var data = await _userProvider.getProfile(userId: Biike.userId.value);
-    user = User.fromJson(data);
+    try {
+      var data = await _userProvider.getProfile(userId: Biike.userId.value);
+      user = User.fromJson(data);
 
-    if (user.birthDate != null) {
-      birthDate.value = DateTime.tryParse(user.birthDate!);
-    }
+      if (user.birthDate != null) {
+        birthDate.value = DateTime.tryParse(user.birthDate!);
+      }
 
-    tempName = user.userFullname;
-    tempGender = user.gender;
-    tempBirthDate = user.birthDate;
-    avatarUrl.value = user.avatar;
-    update();
+      tempName = user.userFullname;
+      tempGender = user.gender;
+      tempBirthDate = user.birthDate;
+      avatarUrl.value = user.avatar;
+      update();
+    } catch (e) {}
   }
 
   bool isSaveButtonDisable(
@@ -132,11 +134,22 @@ class ProfileController extends GetxController {
     final phone = await LocalAppData().phone;
     final isPhoneVerified = await LocalAppData().isPhoneVerified;
     if (!isPhoneVerified) {
-      await _firebaseService.sendCode(
-          fullPhone: phone,
-          codeSented: () {
-            Get.toNamed(CommonRoutes.VERIFY_PHONE);
-          });
+      try {
+        await _firebaseService.sendCode(
+            fullPhone: phone,
+            codeSented: () {
+              Get.toNamed(CommonRoutes.VERIFY_PHONE);
+            },
+            verificationFailed: () {});
+      } catch (e) {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: CustomErrorsString.kLoginExceptionError.tr)
+            .show();
+      }
+
       return;
     }
     onSuccess();

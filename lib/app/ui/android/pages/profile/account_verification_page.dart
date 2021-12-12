@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:bikes_user/app/common/values/custom_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/profile_controller.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -260,7 +262,8 @@ class AccountVerificationPage extends StatelessWidget {
                             CustomDialog(context: context);
                         customDialog.loadingDialog.show();
                         final _firebaseService = getIt<FirebaseServices>();
-                        await _firebaseService.sendCode(
+                        try {
+                          await _firebaseService.sendCode(
                             fullPhone: _profileController.user.userPhoneNumber,
                             codeSented: () {
                               customDialog.loadingDialog.dismiss();
@@ -270,7 +273,21 @@ class AccountVerificationPage extends StatelessWidget {
                                         _profileController.user.userPhoneNumber,
                                     'from': 'accountVerification'
                                   });
-                            });
+                            },
+                            verificationFailed: () {
+                              customDialog.loadingDialog.dismiss();
+                            },
+                          );
+                        } catch (e) {
+                          customDialog.loadingDialog.dismiss();
+                          AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.ERROR,
+                                  headerAnimationLoop: false,
+                                  desc: CustomErrorsString
+                                      .kLoginExceptionError.tr)
+                              .show();
+                        }
                       }
                     },
                   ),

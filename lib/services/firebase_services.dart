@@ -17,11 +17,14 @@ class FirebaseServices {
   }
 
   Future<void> sendCode(
-      {required String fullPhone, required Function() codeSented}) async {
+      {required String fullPhone,
+      required Function() codeSented,
+      required Function() verificationFailed}) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: fullPhone,
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
+        verificationFailed();
         if (e.code == 'invalid-phone-number') {
           CommonFunctions.logBiike(
               error: 'The provided phone number is not valid.');

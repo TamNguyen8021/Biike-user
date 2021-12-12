@@ -110,7 +110,8 @@ class MomoPageState extends State<TopUpPointPage> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                        '1000 đ = ${topUpPointController.percentTransfer.value} điểm'),
+                                        '1000 đ = ${topUpPointController.percentTransfer.value} ' +
+                                            CustomStrings.kPoint.tr),
                                   )
                                 ],
                               )),

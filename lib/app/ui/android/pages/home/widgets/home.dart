@@ -12,7 +12,6 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/create_trip_button.dar
 import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/buttons/switch_role_button.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/LazyLoadingListErrorBuilder.dart';
-import 'package:bikes_user/app/ui/android/widgets/others/ad_container.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/app/ui/android/widgets/others/top_biker.dart';
 import 'package:bikes_user/app/ui/android/widgets/painters/tooltip_painter.dart';
@@ -147,6 +146,7 @@ class Home extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      // AdContainer(),
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 0.0),
@@ -200,6 +200,7 @@ class Home extends StatelessWidget {
                                         currentTime.month &&
                                     firstTripTimeBook.year ==
                                         currentTime.year) ...[
+                                  // Ready to go
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 8.0, top: 20.0),
@@ -227,26 +228,29 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   UpcomingTripCard(
-                                      isSearchedTrip: false,
-                                      tripId: homeController
-                                          .upcomingTrips[0].tripId,
-                                      userId: homeController
-                                          .upcomingTrips[0].userId,
-                                      backgroundColor: CustomColors.kBlue,
-                                      foregroundColor: Colors.white,
-                                      iconColor: Colors.white,
-                                      avatarUrl: homeController
-                                          .upcomingTrips[0].avatarUrl,
-                                      name:
-                                          homeController.upcomingTrips[0].name,
-                                      phoneNo: homeController
-                                          .upcomingTrips[0].phoneNo,
-                                      bookTime: homeController
-                                          .upcomingTrips[0].bookTime,
-                                      departureStation: homeController
-                                          .upcomingTrips[0].departureStation,
-                                      destinationStation: homeController
-                                          .upcomingTrips[0].destinationStation),
+                                    isSearchedTrip: false,
+                                    tripId:
+                                        homeController.upcomingTrips[0].tripId,
+                                    userId:
+                                        homeController.upcomingTrips[0].userId,
+                                    backgroundColor: CustomColors.kBlue,
+                                    foregroundColor: Colors.white,
+                                    iconColor: Colors.white,
+                                    avatarUrl: homeController
+                                        .upcomingTrips[0].avatarUrl,
+                                    name: homeController.upcomingTrips[0].name,
+                                    phoneNo:
+                                        homeController.upcomingTrips[0].phoneNo,
+                                    bookTime: homeController
+                                        .upcomingTrips[0].bookTime,
+                                    departureStation: homeController
+                                        .upcomingTrips[0].departureStation,
+                                    destinationStation: homeController
+                                        .upcomingTrips[0].destinationStation,
+                                    advertisment: homeController
+                                        .upcomingTrips[0].advertisment,
+                                  ),
+                                  // BUTTON action
                                   if (homeController.upcomingTrips[0].name !=
                                       CustomStrings.kFinding) ...[
                                     Padding(
@@ -286,7 +290,6 @@ class Home extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                AdContainer(),
                                 if (homeController
                                     .upcomingTrips.isNotEmpty) ...[
                                   Padding(
@@ -375,6 +378,7 @@ class Home extends StatelessWidget {
                                                               .itemList!
                                                               .elementAt(index)
                                                               .departureStation,
+                                                          advertisment: homeController.pagingController.itemList!.elementAt(index).advertisment,
                                                           destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
                                                     );
                                                   }
@@ -746,9 +750,10 @@ class Home extends StatelessWidget {
                                                   CustomDialog(
                                                       context: context);
                                               customDialog.loadingDialog.show();
-                                              final _firebaseService =
-                                                  getIt<FirebaseServices>();
-                                              await _firebaseService.sendCode(
+                                              try {
+                                                final _firebaseService =
+                                                    getIt<FirebaseServices>();
+                                                await _firebaseService.sendCode(
                                                   fullPhone: _profileController
                                                       .user.userPhoneNumber,
                                                   codeSented: () {
@@ -764,7 +769,37 @@ class Home extends StatelessWidget {
                                                                   .userPhoneNumber,
                                                           'from': 'home'
                                                         });
-                                                  });
+                                                  },
+                                                  verificationFailed: () {
+                                                    customDialog.loadingDialog
+                                                        .dismiss();
+                                                    AwesomeDialog(
+                                                            context: context,
+                                                            dialogType:
+                                                                DialogType
+                                                                    .ERROR,
+                                                            headerAnimationLoop:
+                                                                false,
+                                                            desc: CustomErrorsString
+                                                                .kLoginExceptionError
+                                                                .tr)
+                                                        .show();
+                                                  },
+                                                );
+                                              } catch (e) {
+                                                customDialog.loadingDialog
+                                                    .dismiss();
+                                                AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.ERROR,
+                                                        headerAnimationLoop:
+                                                            false,
+                                                        desc: CustomErrorsString
+                                                            .kLoginExceptionError
+                                                            .tr)
+                                                    .show();
+                                              }
                                             } else {
                                               await homeController.searchTrips(
                                                   date: homeController
@@ -859,9 +894,10 @@ class Home extends StatelessWidget {
                         if (!_profileController.user.isPhoneVerified!) {
                           CustomDialog customDialog =
                               CustomDialog(context: context);
-                          customDialog.loadingDialog.show();
-                          final _firebaseService = getIt<FirebaseServices>();
-                          await _firebaseService.sendCode(
+                          try {
+                            customDialog.loadingDialog.show();
+                            final _firebaseService = getIt<FirebaseServices>();
+                            await _firebaseService.sendCode(
                               fullPhone:
                                   _profileController.user.userPhoneNumber,
                               codeSented: () {
@@ -872,7 +908,28 @@ class Home extends StatelessWidget {
                                           .user.userPhoneNumber,
                                       'from': 'home'
                                     });
-                              });
+                              },
+                              verificationFailed: () {
+                                customDialog.loadingDialog.dismiss();
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.ERROR,
+                                        headerAnimationLoop: false,
+                                        desc: CustomErrorsString
+                                            .kLoginExceptionError.tr)
+                                    .show();
+                              },
+                            );
+                          } catch (e) {
+                            customDialog.loadingDialog.dismiss();
+                            AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.ERROR,
+                                    headerAnimationLoop: false,
+                                    desc: CustomErrorsString
+                                        .kLoginExceptionError.tr)
+                                .show();
+                          }
                         } else {
                           Get.toNamed(CommonRoutes.BOOK_TRIP);
                         }
