@@ -85,6 +85,8 @@ final Map<String, String> en = {
   'kSearchAgain': 'Clear',
   'kSearch': 'Search',
   'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
+  'kSelectSourceStation': 'Select departure',
+  'kSelectDestinationStation': 'Select destination',
 
   // 'require_add_bike' screen
   'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker mode',
@@ -175,8 +177,8 @@ final Map<String, String> en = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'On your journey with Biiké, you have',
-  'kNoOfRideTrips': 'success trips as Keer',
-  'kNoOfFreeTrips': 'success rides as Biker',
+  'kNoOfRideTrips': 'successful trips as Keer',
+  'kNoOfFreeTrips': 'successful rides as Biker',
   'kNoOfKm': 'km was saved',
   'kNoOfGasLitres': 'litres of gasoline was saved',
   'kThankYouForChoosingBiike':
@@ -388,7 +390,7 @@ final Map<String, String> en = {
   'kChangePassword': 'Change Password',
   'kLoginByFingerprint': 'Login by Fingerprint',
   'kLanguage': 'Language',
-  'kCurrentLanguage': 'English',
+  'kCurrentLanguage': 'English (beta)',
   'kOther': 'Other',
   'kFollowOnFacebook': 'Follow Biiké on Facebook',
   'kWebsite': 'Website',
@@ -436,11 +438,12 @@ final Map<String, String> en = {
   'kEditSOSNumber': 'Edit S.O.S number',
 
 // 'ban_list' screen
-  'kBanList': 'Ban List',
+  'kBanList': 'Blacklist',
   'kUnBlock': 'Unblock',
 
 // point
   'kPoint': 'Point',
+  'kPointLowerCase': 'point',
   'kExchangeVoucher': 'Voucher',
   'kBuyPoint': 'Buy point',
   'kYouHave': 'You have',
@@ -522,7 +525,6 @@ final Map<String, String> en = {
         'Report reason must not be empty or contains inappropriate words',
     'kNotArrivedAtPickUpPoint': 'You are not at the pick up point',
     'kOutOfDate': 'Out of date',
-    'kTripCanceled': 'The trip is canceled',
     'kAlreadyFeedbacked': 'You have sent feedback for this trip.',
     'kNotTurnOnGPS': 'Please turn on the GPS',
     'kNotAllowGetLocation':

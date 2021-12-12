@@ -458,6 +458,7 @@ class CustomStrings {
 
   // point
   static const String kPoint = 'kPoint';
+  static const String kPointLowerCase = 'kPointLowerCase';
   static const String kExchangeVoucher = 'kExchangeVoucher';
   static const String kBuyPoint = 'kBuyPoint';
   static const String kYouHave = 'kYouHave';

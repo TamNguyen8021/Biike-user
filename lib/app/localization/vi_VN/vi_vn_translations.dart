@@ -458,6 +458,7 @@ final Map<String, String> vi = {
 
   // point
   'kPoint': 'Điểm',
+  'kPointLowerCase': 'điểm',
   'kExchangeVoucher': 'Đổi quà',
   'kBuyPoint': 'Nạp điểm',
   'kYouHave': 'Bạn có',
@@ -540,7 +541,7 @@ final Map<String, String> vi = {
         'Nội dung báo cáo không được bỏ trống hoặc chứa từ ngữ không phù hợp thuần phong mỹ tục',
     'kNotArrivedAtPickUpPoint': 'Bạn chưa đến trạm',
     'kOutOfDate': 'Đã hết hạn',
-    'kTripCanceled': 'Chuyến đi này đã bị hủy',
+    'kTripCanceled': 'Đã hủy',
     'kAlreadyFeedbacked': 'Bạn đã gửi feedback chuyến đi này.',
     'kNotTurnOnGPS': 'Xin hãy bật GPS',
     'kNotAllowGetLocation':
