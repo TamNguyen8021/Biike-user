@@ -381,6 +381,7 @@ final Map<String, String> en = {
   'kShowVoucherCode': 'Show code',
   'kMarkAsUsed': 'Mark as used',
   'kMarkAsUnused': 'Mark as unused',
+  'kApplicablePlaces': 'Applicable places',
 
 // Default area name
   'fptHCMUni': 'FPT University in HCM',
@@ -546,4 +547,5 @@ final Map<String, String> en = {
     'kYouCanOnlyCancel5TripsPerDay':
         'You can only cancel maximum 5 trips per day',
     'kCannotDeleteDefaultAddress': 'Cannot delete your default address',
+    'kCannotNegative': 'Tip cannot be negative',
   });

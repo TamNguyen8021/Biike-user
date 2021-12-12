@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:bikes_user/app/common/values/custom_dialog.dart';
 import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/controllers/redemption_controller.dart';
@@ -24,9 +25,12 @@ class MarkUsedButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () async {
               if (isOutOfDate) return;
+              CustomDialog customDialog = CustomDialog(context: context);
+              customDialog.loadingDialog.show();
 
               dynamic result = await _redemptionController
                   .editVoucherUsage(redemption.redemptionId);
+              customDialog.loadingDialog.dismiss();
               if (result is String) {
                 AwesomeDialog(
                         context: context,

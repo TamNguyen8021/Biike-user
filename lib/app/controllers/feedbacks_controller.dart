@@ -85,6 +85,11 @@ class FeedbackController extends GetxController {
         _walletController.totalWalletPoint < int.parse(_tip)) {
       return CustomErrorsString.kNotEnoughPoint.tr;
     }
+
+    int? tipValue = int.tryParse(_tip);
+    if (tipValue != null && tipValue < 0)
+      return CustomErrorsString.kCannotNegative.tr;
+
     return '';
   }
 
@@ -95,7 +100,9 @@ class FeedbackController extends GetxController {
         tripId: tripId,
         feedbackContent: _feedbackContent ?? '',
         tripStar: _star.round(),
-        tripTip: (_tip == null || _tip == '') ? null : _tip,
+        tripTip: (_tip == null || _tip == '' || int.parse(_tip) == 0)
+            ? null
+            : int.parse(_tip),
         criteria: _criteria.isEmpty ? '' : _criteria.toString(),
         createdDate: DateTime.now());
 
