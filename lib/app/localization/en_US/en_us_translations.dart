@@ -381,6 +381,7 @@ final Map<String, String> en = {
   'kShowVoucherCode': 'Show code',
   'kMarkAsUsed': 'Mark as used',
   'kMarkAsUnused': 'Mark as unused',
+  'kApplicablePlaces': 'Applicable places',
 
 // Default area name
   'fptHCMUni': 'FPT University in HCM',

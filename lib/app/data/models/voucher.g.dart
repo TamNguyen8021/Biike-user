@@ -19,12 +19,12 @@ Voucher _$VoucherFromJson(Map<String, dynamic> json) {
     amountOfPoint: json['amountOfPoint'] as int?,
     description: json['description'] as String,
     termsAndConditions: json['termsAndConditions'] as String,
-    voucherAddresses: (json['voucherAddresses'] as List<dynamic>)
-        .map((e) =>
+    voucherAddresses: (json['voucherAddresses'] as List<dynamic>?)
+        ?.map((e) =>
             e == null ? null : Address.fromJson(e as Map<String, dynamic>))
         .toList(),
-    voucherImages: (json['voucherImages'] as List<dynamic>)
-        .map((e) =>
+    voucherImages: (json['voucherImages'] as List<dynamic>?)
+        ?.map((e) =>
             e == null ? null : VoucherImage.fromJson(e as Map<String, dynamic>))
         .toList(),
   );

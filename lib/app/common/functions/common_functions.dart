@@ -376,7 +376,7 @@ class CommonFunctions {
         onTap: (_) => Get.toNamed(CommonRoutes.NOTIFICATION),
         isDismissible: true,
         duration: Duration(seconds: 3),
-        backgroundColor: CustomColors.kBlue);
+        backgroundColor: CustomColors.kDarkGray);
   }
 
   Widget lightBulbIcon(context, String title,

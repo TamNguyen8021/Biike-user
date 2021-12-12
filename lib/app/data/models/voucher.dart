@@ -22,8 +22,8 @@ class Voucher {
   int? amountOfPoint;
   String description;
   String termsAndConditions;
-  List<Address?> voucherAddresses;
-  List<VoucherImage?> voucherImages;
+  List<Address?>? voucherAddresses;
+  List<VoucherImage?>? voucherImages;
 
   Voucher(
       {required this.voucherId,

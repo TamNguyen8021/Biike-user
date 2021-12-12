@@ -32,6 +32,7 @@ class YourVoucherDetailPage extends StatelessWidget {
     return OnBackPressed(
       perform: () => _onBackPressed(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(
           hasShape: true,
           hasLeading: true,
@@ -45,11 +46,9 @@ class YourVoucherDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               VoucherDetails(voucher: voucher),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Divider(),
-                ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Divider(),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),

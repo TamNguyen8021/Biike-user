@@ -19,39 +19,39 @@ class NotificationDetailPage extends StatelessWidget {
   NotificationDetailPage({Key? key}) : super(key: key);
 
   _moveToRoute(context, String url) {
-    CustomDialog customDialog = CustomDialog(context: context);
-    customDialog.loadingDialog.show();
+
     // move to corresponding page
     if (url.contains('details')) {
       var tripId = _getTripId(url);
-      customDialog.loadingDialog.dismiss();
 
       Get.toNamed(CommonRoutes.TRIP_DETAILS,
           arguments: {'tripId': tripId, 'route': 'home'});
     } else if (url.contains('feedbacks')) {
       var tripId = _getTripId(url);
-      customDialog.loadingDialog.dismiss();
 
       _moveToFeedback(context, tripId);
     } else if (url.contains('bikes')) {
-      customDialog.loadingDialog.dismiss();
 
       Get.toNamed(CommonRoutes.MANAGE_BIKE);
     } else if (url.contains('now')) {
       int tripId = _getTripId(url);
-      customDialog.loadingDialog.dismiss();
 
       Get.toNamed(CommonRoutes.CHO_NOW, arguments: {'tripId': tripId});
     } else if (url.contains('point')) {
-      customDialog.loadingDialog.dismiss();
 
       Get.toNamed(CommonRoutes.POINT);
     }
   }
 
   _moveToFeedback(context, tripId) async {
+    CustomDialog customDialog = CustomDialog(context: context);
+    customDialog.loadingDialog.show();
+
     String isMoveToFeedBack =
         await _notificationController.isMoveToFeedBack(tripId);
+
+    customDialog.loadingDialog.dismiss();
+
     if (isMoveToFeedBack == '') {
       Get.toNamed(CommonRoutes.FEEDBACK, arguments: {
         'tripId': tripId,

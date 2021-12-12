@@ -54,7 +54,6 @@ class FirebaseCloudMessagingService {
     FirebaseMessaging.onMessageOpenedApp.listen((msg) {
       if (msg.notification != null) {
         Biike.logger.d(msg.notification!.title);
-        CommonFunctions.logBiike(error: msg.notification!.body);
         Get.toNamed(CommonRoutes.NOTIFICATION);
       }
     });

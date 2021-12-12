@@ -396,6 +396,7 @@ class CustomStrings {
   static const String kShowVoucherCode = 'kShowVoucherCode';
   static const String kMarkAsUsed = 'kMarkAsUsed';
   static const String kMarkAsUnused = 'kMarkAsUnused';
+  static const String kApplicablePlaces = 'kApplicablePlaces';
 
   // Default area name
   static const String fptHCMUni = 'fptHCMUni';

@@ -386,6 +386,7 @@ final Map<String, String> vi = {
   'kShowVoucherCode': 'Hiện mã',
   'kMarkAsUsed': 'Đánh dấu đã dùng',
   'kMarkAsUnused': 'Đánh dấu chưa dùng',
+  'kApplicablePlaces': 'Địa điểm áp dụng',
 
   // Default area name
   'fptHCMUni': 'Đại học FPT TP.HCM',

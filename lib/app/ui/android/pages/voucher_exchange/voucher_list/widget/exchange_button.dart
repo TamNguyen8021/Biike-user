@@ -39,8 +39,9 @@ class ExchangeVoucherButton extends StatelessWidget {
     try {
       dynamic result =
       await _redemptionController.exchangeVoucher(voucher.voucherId);
+      customDialog.loadingDialog.dismiss();
+
       if (result is String) {
-        customDialog.loadingDialog.dismiss();
         AwesomeDialog(
             context: context,
             dialogType: DialogType.ERROR,
@@ -49,7 +50,6 @@ class ExchangeVoucherButton extends StatelessWidget {
             result == '' ? CustomErrorsString.kExchangeFailed.tr : result)
             .show();
       } else {
-        customDialog.loadingDialog.dismiss();
         _walletController.updateWalletPoint();
         int redemptionId = CommonFunctions.getIdFromUrl(
             url: result.headers['location'] as String);
