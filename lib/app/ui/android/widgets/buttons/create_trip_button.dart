@@ -9,10 +9,22 @@ class CreateTripButton extends StatelessWidget {
   final Function() createTrip;
   @override
   Widget build(BuildContext context) {
+    DateTime currentTime = DateTime.now();
+    DateTime lowestBoundLimitTime =
+        DateTime(currentTime.year, currentTime.month, currentTime.day, 5);
+    DateTime highestBoundLimitTime =
+        DateTime(currentTime.year, currentTime.month, currentTime.day, 21);
+
     return FloatingActionButton(
       elevation: 1.0,
-      onPressed: createTrip,
-      backgroundColor: CustomColors.kOrange,
+      onPressed: currentTime.isBefore(lowestBoundLimitTime) &&
+              currentTime.isAfter(highestBoundLimitTime)
+          ? null
+          : createTrip,
+      backgroundColor: currentTime.isBefore(lowestBoundLimitTime) &&
+              currentTime.isAfter(highestBoundLimitTime)
+          ? CustomColors.kDarkGray
+          : CustomColors.kOrange,
       child: Icon(
         Icons.add,
         size: 50,

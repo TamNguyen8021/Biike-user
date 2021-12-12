@@ -46,29 +46,27 @@ class BookScheduleTripPage extends StatelessWidget {
                         .headline6!
                         .copyWith(fontWeight: FontWeight.normal),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Wrap(
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(0)),
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(1)),
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(2)),
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(3)),
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(4)),
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(5)),
-                          DateButton(
-                              date: _bookTripController.dateList.elementAt(6)),
-                        ],
-                      ),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(top: 8.0, bottom: 20.0),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceEvenly,
+                      children: <Widget>[
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(0)),
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(1)),
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(2)),
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(3)),
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(4)),
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(5)),
+                        DateButton(
+                            date: _bookTripController.dateList.elementAt(6)),
+                      ],
                     ),
                   ),
                   Text(
