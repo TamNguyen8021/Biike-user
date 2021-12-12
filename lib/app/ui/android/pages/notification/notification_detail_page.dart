@@ -38,9 +38,10 @@ class NotificationDetailPage extends StatelessWidget {
 
       Get.toNamed(CommonRoutes.MANAGE_BIKE);
     } else if (url.contains('now')) {
+      int tripId = _getTripId(url);
       customDialog.loadingDialog.dismiss();
 
-      Get.toNamed(CommonRoutes.CHO_NOW);
+      Get.toNamed(CommonRoutes.CHO_NOW, arguments: {'tripId': tripId});
     } else if (url.contains('point')) {
       customDialog.loadingDialog.dismiss();
 
@@ -72,7 +73,9 @@ class NotificationDetailPage extends StatelessWidget {
         ? 'details'
         : url.contains('feedbacks')
             ? 'feedbacks'
-            : '';
+            : url.contains('now')
+                ? 'now'
+                : '';
     if (remove != '' && url.contains(remove)) {
       url = url.substring(0, url.length - remove.length - 1);
     }

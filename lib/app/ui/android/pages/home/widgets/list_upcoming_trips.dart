@@ -32,6 +32,7 @@ class ListUpcomingTrips extends StatelessWidget {
             child: UpcomingTripCard(
                 isSearchedTrip:
                     listUpcomingTrips.elementAt(index).isSearchedTrip,
+                isTripNow: listUpcomingTrips.elementAt(index).isTripNow,
                 tripId: listUpcomingTrips.elementAt(index).tripId,
                 userId: listUpcomingTrips.elementAt(index).userId,
                 avatarUrl: listUpcomingTrips.elementAt(index).avatarUrl,

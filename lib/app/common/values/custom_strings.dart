@@ -109,6 +109,7 @@ class CustomStrings {
   static const String kAddStationSuccess = 'kAddStationSuccess';
   static const String kEditStationSuccess = 'kEditStationSuccess';
   static const String kDeleteStationSuccess = 'kDeleteStationSuccess';
+  static const String kAutoCancelAfter = 'kAutoCancelAfter';
 
   // 'top_biker' screen
   static const String kBikerRank = 'kBikerRank';

@@ -110,6 +110,7 @@ final Map<String, String> en = {
   'kAddStationSuccess': 'A new station were added',
   'kEditStationSuccess': 'Your station info were updated',
   'kDeleteStationSuccess': 'The station were removed',
+  'kAutoCancelAfter': 'Auto cancel after ',
 
 // 'top_biker' screen
   'kBikerRank': 'Biker Rank',

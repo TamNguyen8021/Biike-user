@@ -149,7 +149,6 @@ class Home extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      // AdContainer(),
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 0.0),
@@ -192,8 +191,8 @@ class Home extends StatelessWidget {
                                           )
                                         ],
                                       )),
-                                  onTap: () =>
-                                      Get.toNamed(CommonRoutes.CHO_NOW),
+                                  onTap: () => Get.toNamed(CommonRoutes.CHO_NOW,
+                                      arguments: {'tripId': null}),
                                 )
                               ],
                               TopBiker(),
@@ -232,6 +231,7 @@ class Home extends StatelessWidget {
                                   ),
                                   UpcomingTripCard(
                                     isSearchedTrip: false,
+                                    isTripNow: false,
                                     tripId:
                                         homeController.upcomingTrips[0].tripId,
                                     userId:
@@ -250,8 +250,6 @@ class Home extends StatelessWidget {
                                         .upcomingTrips[0].departureStation,
                                     destinationStation: homeController
                                         .upcomingTrips[0].destinationStation,
-                                    advertisment: homeController
-                                        .upcomingTrips[0].advertisment,
                                   ),
                                   // BUTTON action
                                   if (homeController.upcomingTrips[0].name !=
@@ -323,7 +321,7 @@ class Home extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Loading();
+                              return SizedBox(height: 150, child: Loading());
                             }
                           }),
                       if (homeController.upcomingTrips.isNotEmpty ||
@@ -392,6 +390,7 @@ class Home extends StatelessWidget {
                                                               bottom: 10.0),
                                                       child: UpcomingTripCard(
                                                           isSearchedTrip: false,
+                                                          isTripNow: false,
                                                           tripId: homeController
                                                               .pagingController
                                                               .itemList!
@@ -427,7 +426,6 @@ class Home extends StatelessWidget {
                                                               .itemList!
                                                               .elementAt(index)
                                                               .departureStation,
-                                                          advertisment: homeController.pagingController.itemList!.elementAt(index).advertisment,
                                                           destinationStation: homeController.pagingController.itemList!.elementAt(index).destinationStation),
                                                     );
                                                   }

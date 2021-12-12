@@ -88,6 +88,7 @@ dependencies:
   share_plus: ^3.0.4
   file_picker: ^4.2.7
   cloud_firestore: ^2.5.4
+  flutter_countdown_timer: ^4.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bikes_user/app/common/functions/common_functions.dart';
 import 'package:bikes_user/app/common/functions/local_app_data.dart';
@@ -133,6 +131,7 @@ class HomeController extends GetxController {
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
         isSearchedTrip: false,
+        isTripNow: false,
         tripId: trip.tripId,
         userId: user.userId,
         backgroundColor: backgroundColor,
@@ -183,6 +182,7 @@ class HomeController extends GetxController {
 
       UpcomingTripCard upcomingTripCard = UpcomingTripCard(
         isSearchedTrip: true,
+        isTripNow: false,
         tripId: trip.tripId,
         userId: user.userId,
         avatarUrl: user.avatar,
@@ -191,8 +191,6 @@ class HomeController extends GetxController {
         bookTime: trip.bookTime,
         departureStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
-        advertisment: getRandomAds(
-            advertisments.isEmpty ? 0 : Random().nextInt(advertisments.length)),
       );
       upcomingTripsForBiker.add(upcomingTripCard);
     }

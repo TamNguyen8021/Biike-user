@@ -70,6 +70,7 @@ class Activity extends StatelessWidget {
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: UpcomingTripCard(
                                     isSearchedTrip: false,
+                                    isTripNow: false,
                                     tripId: homeController
                                         .pagingController.itemList!
                                         .elementAt(index)

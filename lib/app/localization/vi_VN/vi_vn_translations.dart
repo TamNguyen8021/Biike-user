@@ -18,7 +18,7 @@ final Map<String, String> vi = {
 
   // '003.1_login'
   'kForgotPassword': 'Quên mật khẩu',
-  'kResetPassword': 'Reset mật khẩu',
+  'kResetPassword': 'Đặt lại mật khẩu',
   'kSendResetPasswordEmail':
       'Chúng tôi đã gửi email thay đổi mật khẩu, vui lòng kiểm tra email',
   'kInputEmail': 'Nhập email',
@@ -117,6 +117,7 @@ final Map<String, String> vi = {
   'kAddStationSuccess': 'Thêm trạm thành công',
   'kEditStationSuccess': 'Chỉnh sửa thông tin trạm thành công',
   'kDeleteStationSuccess': 'Đã xóa trạm',
+  'kAutoCancelAfter': 'Tự động hủy sau ',
 
   // 'top_biker' screen
   'kBikerRank': 'Bảng xếp hạng Biker',
