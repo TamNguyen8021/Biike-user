@@ -19,6 +19,10 @@ Voucher _$VoucherFromJson(Map<String, dynamic> json) {
     amountOfPoint: json['amountOfPoint'] as int?,
     description: json['description'] as String,
     termsAndConditions: json['termsAndConditions'] as String,
+    voucherAddresses: (json['voucherAddresses'] as List<dynamic>)
+        .map((e) =>
+            e == null ? null : Address.fromJson(e as Map<String, dynamic>))
+        .toList(),
     voucherImages: (json['voucherImages'] as List<dynamic>)
         .map((e) =>
             e == null ? null : VoucherImage.fromJson(e as Map<String, dynamic>))
@@ -38,5 +42,6 @@ Map<String, dynamic> _$VoucherToJson(Voucher instance) => <String, dynamic>{
       'amountOfPoint': instance.amountOfPoint,
       'description': instance.description,
       'termsAndConditions': instance.termsAndConditions,
+      'voucherAddresses': instance.voucherAddresses,
       'voucherImages': instance.voucherImages,
     };

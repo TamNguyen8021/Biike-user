@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/data/models/address.dart';
 import 'package:bikes_user/app/data/models/voucher_image.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -21,6 +22,7 @@ class Voucher {
   int? amountOfPoint;
   String description;
   String termsAndConditions;
+  List<Address?> voucherAddresses;
   List<VoucherImage?> voucherImages;
 
   Voucher(
@@ -35,6 +37,7 @@ class Voucher {
       this.amountOfPoint,
       required this.description,
       required this.termsAndConditions,
+      required this.voucherAddresses,
       required this.voucherImages});
 
   /// A necessary factory constructor for creating a new Voucher instance
