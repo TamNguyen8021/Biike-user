@@ -564,4 +564,5 @@ final Map<String, String> vi = {
     'kYouCanOnlyCancel5TripsPerDay':
         'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
     'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',
+    'kCannotNegative': 'Thưởng thêm không thể là số âm',
   });

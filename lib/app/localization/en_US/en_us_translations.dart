@@ -547,4 +547,5 @@ final Map<String, String> en = {
     'kYouCanOnlyCancel5TripsPerDay':
         'You can only cancel maximum 5 trips per day',
     'kCannotDeleteDefaultAddress': 'Cannot delete your default address',
+    'kCannotNegative': 'Tip cannot be negative',
   });

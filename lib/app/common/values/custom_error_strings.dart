@@ -77,4 +77,7 @@ class CustomErrorsString {
   // 'edit_address_book' screen
   static const String kCannotDeleteDefaultAddress =
       'kCannotDeleteDefaultAddress';
+
+  // feedback
+  static const String kCannotNegative = 'kCannotNegative';
 }
