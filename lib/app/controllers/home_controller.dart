@@ -57,7 +57,7 @@ class HomeController extends GetxController {
   int _currentPage = 1;
   int _limit = 10;
 
-  final List<Advertisment> _advertisments = [];
+  final List<Advertisment> advertisments = [];
   @override
   onInit() {
     pagingController.addPageRequestListener((pageKey) {
@@ -110,7 +110,6 @@ class HomeController extends GetxController {
     isUpcomingTripsLoading.value = true;
     _tempUpcomingTrips.clear();
 
-    await _fetchAdvertisments();
     Map<String, dynamic> response = await _tripProvider.getUpcomingTrips(
         userId: Biike.userId.value, page: _currentPage, limit: _limit);
     pagination = response['_meta'];
@@ -167,7 +166,6 @@ class HomeController extends GetxController {
     isSearchTripLoading.value = true;
     upcomingTripsForBiker.clear();
 
-    await _fetchAdvertisments();
     Map<String, dynamic> response = await _tripProvider.searchTrips(
         page: _currentPage,
         limit: _limit,
@@ -193,9 +191,8 @@ class HomeController extends GetxController {
         bookTime: trip.bookTime,
         departureStation: startingStation.departureName,
         destinationStation: destinationStation.destinationName,
-        advertisment: getRandomAds(_advertisments.isEmpty
-            ? 0
-            : Random().nextInt(_advertisments.length)),
+        advertisment: getRandomAds(
+            advertisments.isEmpty ? 0 : Random().nextInt(advertisments.length)),
       );
       upcomingTripsForBiker.add(upcomingTripCard);
     }
@@ -372,23 +369,23 @@ class HomeController extends GetxController {
     onSuccess();
   }
 
-  _fetchAdvertisments() async {
+  fetchAdvertisments() async {
     try {
-      _advertisments.clear();
+      advertisments.clear();
       final ads = await _repositories.getAdvertisements();
-      _advertisments.addAll(ads.data);
-      _advertisments.shuffle();
+      advertisments.addAll(ads.data);
+      advertisments.shuffle();
     } catch (e) {
       print(e);
     }
   }
 
   Advertisment? getRandomAds(int index) {
-    if (_advertisments.isEmpty) {
+    if (advertisments.isEmpty) {
       return null;
     }
-    if (index < _advertisments.length) {
-      return _advertisments[index];
+    if (index < advertisments.length) {
+      return advertisments[index];
     }
     return null;
   }

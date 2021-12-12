@@ -54,7 +54,6 @@ class Home extends StatelessWidget {
     DateTime currentTime = DateTime.now();
     String timeLeft = '';
     Rx<bool> isPageFirstLoad = true.obs;
-    int randomIndex = Random().nextInt(10);
 
     return FutureBuilder(
         future: _profileController.getProfile(),
@@ -281,33 +280,52 @@ class Home extends StatelessWidget {
                               ]
                             ]),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 22.0),
-                      //   child: Column(
-                      //     children: <Widget>[
-                      //       Padding(
-                      //         padding:
-                      //             const EdgeInsets.symmetric(vertical: 16.0),
-                      //         child: AdContainer(
-                      //           advertisment:
-                      //               homeController.getRandomAds(randomIndex)!,
-                      //         ),
-                      //       ),
-                      //       Text(
-                      //           homeController
-                      //                   .getRandomAds(randomIndex)
-                      //                   ?.title ??
-                      //               '',
-                      //           style: Theme.of(context).textTheme.headline3),
-                      //       Text(
-                      //           homeController
-                      //                   .getRandomAds(randomIndex)
-                      //                   ?.brand ??
-                      //               '',
-                      //           style: Theme.of(context).textTheme.bodyText1),
-                      //     ],
-                      //   ),
-                      // ),
+                      FutureBuilder(
+                          future: homeController.fetchAdvertisments(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              int randomIndex = Random()
+                                  .nextInt(homeController.advertisments.length);
+
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 22.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16.0),
+                                      child: AdContainer(
+                                        advertisment: homeController
+                                            .getRandomAds(randomIndex)!,
+                                      ),
+                                    ),
+                                    Text(
+                                        homeController
+                                                .getRandomAds(randomIndex)
+                                                ?.title ??
+                                            '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3),
+                                    Text(
+                                        homeController
+                                                .getRandomAds(randomIndex)
+                                                ?.brand ??
+                                            '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              return Loading();
+                            }
+                          }),
                       if (homeController.upcomingTrips.isNotEmpty ||
                           Biike.role.value == Role.biker) ...[
                         Padding(

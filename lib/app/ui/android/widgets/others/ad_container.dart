@@ -1,4 +1,5 @@
 import 'package:bikes_user/app/common/functions/common_functions.dart';
+import 'package:bikes_user/app/ui/android/widgets/others/loading.dart';
 import 'package:bikes_user/injectable/injectable.dart';
 import 'package:bikes_user/models/advertisment_model.dart';
 import 'package:bikes_user/network/repositories.dart';
@@ -14,7 +15,7 @@ class AdContainer extends HookWidget {
   }) : super(key: key);
   final Advertisment advertisment;
 
-  final double heightImage = 120;
+  final double heightImage = 150;
   @override
   Widget build(BuildContext context) {
     final indexState = useState(0);
@@ -25,7 +26,7 @@ class AdContainer extends HookWidget {
         height: heightImage,
         child: Stack(
           alignment: Alignment.bottomCenter,
-          children: [
+          children: <Widget>[
             Positioned.fill(
               child: CarouselSlider.builder(
                 itemCount: advertisment.advertisementImages.length,
@@ -34,7 +35,8 @@ class AdContainer extends HookWidget {
 
                   return GestureDetector(
                     onTap: () async {
-                      _launchUniversalLinkIos(advertisment.advertisementUrl);
+                      CommonFunctions.openLink(
+                          context: context, url: advertisment.advertisementUrl);
 
                       final _repositories = getIt<Repositories>();
                       try {
@@ -51,20 +53,19 @@ class AdContainer extends HookWidget {
                       errorBuilder: (context, error, stackTrace) {
                         return Text('Lỗi hình ảnh');
                       },
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return SizedBox(
-                          width: double.infinity,
-                          height: heightImage,
-                        );
+                            width: double.infinity,
+                            height: heightImage,
+                            child: Loading());
                       },
                     ),
                   );
                 },
                 options: CarouselOptions(
                   viewportFraction: 1,
-                  enlargeCenterPage: false,
                   autoPlay: true,
                   onPageChanged: (index, reason) {
                     indexState.value = index;
@@ -73,45 +74,31 @@ class AdContainer extends HookWidget {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:
-                  advertisment.advertisementImages.asMap().entries.map((entry) {
-                return Container(
-                  width: 10.0,
-                  height: 10.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: indexState.value == entry.key
-                        ? Colors.grey
-                        : Colors.black,
-                  ),
-                );
-              }).toList(),
-            ),
+            if (advertisment.advertisementImages.length > 1) ...[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: advertisment.advertisementImages
+                    .asMap()
+                    .entries
+                    .map((entry) {
+                  return Container(
+                    width: 10.0,
+                    height: 10.0,
+                    margin:
+                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: indexState.value == entry.key
+                          ? Colors.grey
+                          : Colors.black,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
           ],
         ),
       ),
     );
-  }
-
-  Future<void> _launchUniversalLinkIos(String url) async {
-    try {
-      if (await canLaunch(url)) {
-        await launch(
-          url,
-          forceSafariVC: true,
-          forceWebView: false,
-          enableJavaScript: true,
-        );
-      } else {
-        // show thong bao khong mo duoc
-        print('can not open $url');
-      }
-    } catch (error) {
-      // loi ngoai le
-      CommonFunctions.catchExceptionError(error);
-    }
   }
 }
