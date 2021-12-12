@@ -1,6 +1,7 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_image.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,15 +14,6 @@ class VoucherCard extends StatelessWidget {
 
   VoucherCard({Key? key, required this.data, this.isExchanged = false})
       : super(key: key);
-
-  ImageProvider _getImage(voucher) {
-    if (voucher.voucherImages.length > 0) {
-      var imageLink =
-          voucher.voucherImages.elementAt(0)!.voucherImageUrl.toString();
-      if (imageLink != '') return NetworkImage(imageLink);
-    }
-    return AssetImage('assets/images/voucher-banh-mi.jpg');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +44,7 @@ class VoucherCard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25.0),
-                  child: Image(
-                    image: _getImage(voucher),
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.fill,
-                  ),
+                  child: VoucherImages(voucher: voucher, isIcon: true),
                 ),
               ),
               Column(

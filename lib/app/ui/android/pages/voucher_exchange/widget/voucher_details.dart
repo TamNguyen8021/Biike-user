@@ -1,5 +1,6 @@
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
+import 'package:bikes_user/app/ui/android/pages/voucher_exchange/widget/voucher_image.dart';
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,30 +16,11 @@ class VoucherDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
-        // scrollDirection: Axis.horizontal,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            voucher.voucherImages != null &&
-                    voucher.voucherImages!.length > 1 &&
-                    voucher.voucherImages!.elementAt(1) != null
-                ? Image(
-                    image: NetworkImage(voucher.voucherImages!
-                        .elementAt(1)!
-                        .voucherImageUrl
-                        .toString()),
-                    width: double.infinity,
-                    height: 150,
-                    fit: BoxFit.fill,
-                  ) // img from link
-                : Image(
-                    image:
-                        AssetImage('assets/images/facebook-featured-img.jpg'),
-                    width: double.infinity,
-                    height: 150,
-                    fit: BoxFit.fill,
-                  ), // img from asset package
+            VoucherImages(voucher: voucher, isIcon: false),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 22.0, vertical: 16.0),
