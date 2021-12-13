@@ -57,10 +57,10 @@ class LoginController extends GetxController {
 
       if (_errorResult is String) {
         if (_errorResult.contains('EMAIL_NOT_FOUND')) {
-          _errorMessage = CustomStrings.kNoAccount;
+          _errorMessage = CustomStrings.kNoAccount.tr;
         }
         if (_errorResult.contains('INVALID_PASSWORD')) {
-          _errorMessage = CustomStrings.kWrongAccount;
+          _errorMessage = CustomStrings.kWrongAccount.tr;
         }
         if (_errorResult.contains('verified') &&
             _errorResult.contains('email')) {
