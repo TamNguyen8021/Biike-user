@@ -1,4 +1,3 @@
-import 'package:bikes_user/app/data/models/voucher_image.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 /// This allows the `Address` class to access private members in
@@ -16,11 +15,12 @@ class Address {
   String? addressCoordinate;
   DateTime? createdDate;
 
-  Address({required this.addressId,
-    required this.addressName,
-    required this.addressDetail,
-    required this.addressCoordinate,
-    required this.createdDate});
+  Address(
+      {required this.addressId,
+      required this.addressName,
+      required this.addressDetail,
+      required this.addressCoordinate,
+      required this.createdDate});
 
   /// A necessary factory constructor for creating a new Address instance
   /// from a map. Pass the map to the generated `_$AddressFromJson()` constructor.

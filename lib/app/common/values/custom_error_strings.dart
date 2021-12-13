@@ -80,4 +80,7 @@ class CustomErrorsString {
 
   // feedback
   static const String kCannotNegative = 'kCannotNegative';
+
+  // cho_now
+  static const String kChangeToBikerToSeeTripNow = 'kChangeToBikerToSeeTripNow';
 }

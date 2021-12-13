@@ -188,8 +188,8 @@ final Map<String, String> vi = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'Tại hành trình với Biiké, bạn đã có',
-  'kNoOfRideTrips': 'chuyến đi ké thành công',
-  'kNoOfFreeTrips': 'chuyến chở ké thành công',
+  'kNoOfRideTrips': 'chuyến chở ké thành công',
+  'kNoOfFreeTrips': 'chuyến đi ké thành công',
   'kNoOfKm': 'km được tiết kiệm',
   'kNoOfGasLitres': 'lít xăng được tiết kiệm',
   'kThankYouForChoosingBiike':
@@ -565,4 +565,6 @@ final Map<String, String> vi = {
         'Bạn chỉ được hủy tối đa 5 chuyến mỗi ngày',
     'kCannotDeleteDefaultAddress': 'Không thể xóa địa chỉ mặc định',
     'kCannotNegative': 'Thưởng thêm không thể là số âm',
+    'kChangeToBikerToSeeTripNow':
+        'Xin hãy đổi sang Chở mode để xem chuyến Ké now',
   });

@@ -46,79 +46,92 @@ class ConfirmArrivalButton extends StatelessWidget {
               height: 35,
               width: 185,
               child: Obx(() => ElevatedButton.icon(
-                    onPressed: () async {
-                      tripDetailsController.userLocation =
-                          await CommonFunctions.getCurrentLocation();
+                    onPressed: isArrivedAtPickUpPoint
+                        ? () {}
+                        : () async {
+                            tripDetailsController.userLocation =
+                                await CommonFunctions.getCurrentLocation();
 
-                      if (tripDetailsController.userLocation != null) {
-                        CommonFunctions.showConfirmDialog(
-                            context: context,
-                            isCancel: false,
-                            title: CustomStrings.kConfirmArrivalTitle.tr,
-                            message: Biike.role.value == Role.keer
-                                ? CustomStrings.kConfirmArrivalMessageForKeer.tr
-                                : CustomStrings
-                                    .kConfirmArrivalMessageForBiker.tr,
-                            onPressedFunc: () async {
-                              await tripDetailsController.getTripDetails(
-                                  tripId: tripId);
-                              tripDetailsController.userLocation =
-                                  await CommonFunctions.getCurrentLocation();
+                            if (tripDetailsController.userLocation != null) {
+                              CommonFunctions.showConfirmDialog(
+                                  context: context,
+                                  isCancel: false,
+                                  title: CustomStrings.kConfirmArrivalTitle.tr,
+                                  message: Biike.role.value == Role.keer
+                                      ? CustomStrings
+                                          .kConfirmArrivalMessageForKeer.tr
+                                      : CustomStrings
+                                          .kConfirmArrivalMessageForBiker.tr,
+                                  onPressedFunc: () async {
+                                    await tripDetailsController.getTripDetails(
+                                        tripId: tripId);
+                                    tripDetailsController.userLocation =
+                                        await CommonFunctions
+                                            .getCurrentLocation();
 
-                              CustomLocation departureLocation = CustomLocation(
-                                  coordinate: tripDetailsController
-                                      .departureStation.departureCoordinate);
+                                    CustomLocation departureLocation =
+                                        CustomLocation(
+                                            coordinate: tripDetailsController
+                                                .departureStation
+                                                .departureCoordinate);
 
-                              if (CommonFunctions().isArrivedAtPickUpPoint(
-                                  userLat: tripDetailsController
-                                      .userLocation!.latitude!,
-                                  userLng: tripDetailsController
-                                      .userLocation!.longitude!,
-                                  departureLat: departureLocation.latitude,
-                                  departureLng: departureLocation.longitude)) {
-                                Get.back();
+                                    if (CommonFunctions()
+                                        .isArrivedAtPickUpPoint(
+                                            userLat: tripDetailsController
+                                                .userLocation!.latitude!,
+                                            userLng: tripDetailsController
+                                                .userLocation!.longitude!,
+                                            departureLat:
+                                                departureLocation.latitude,
+                                            departureLng:
+                                                departureLocation.longitude)) {
+                                      Get.back();
 
-                                CustomDialog(context: context)
-                                    .loadingDialog
-                                    .show();
+                                      CustomDialog(context: context)
+                                          .loadingDialog
+                                          .show();
 
-                                if (await _tripProvider
-                                    .markArrivedAtPickUpPoint(tripId: tripId)) {
-                                  buttonColor.value = CustomColors.kDarkGray;
-                                  buttonText.value =
-                                      CustomStrings.kArriveAtDestination.tr;
+                                      if (await _tripProvider
+                                          .markArrivedAtPickUpPoint(
+                                              tripId: tripId)) {
+                                        isArrivedAtPickUpPoint = true;
+                                        buttonColor.value =
+                                            CustomColors.kDarkGray;
+                                        buttonText.value = CustomStrings
+                                            .kArriveAtDestination.tr;
 
-                                  CustomDialog(context: context)
-                                      .loadingDialog
-                                      .dismiss();
-                                } else {
-                                  AwesomeDialog(
-                                          context: context,
-                                          dialogType: DialogType.ERROR,
-                                          headerAnimationLoop: false,
-                                          desc: CustomErrorsString
-                                              .kDevelopError.tr)
-                                      .show();
-                                }
-                              } else {
-                                AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.ERROR,
-                                        headerAnimationLoop: false,
-                                        desc: CustomErrorsString
-                                            .kNotArrivedAtPickUpPoint.tr)
-                                    .show();
-                              }
-                            });
-                      } else {
-                        AwesomeDialog(
-                                context: context,
-                                dialogType: DialogType.INFO_REVERSED,
-                                headerAnimationLoop: false,
-                                desc: CustomStrings.kNeedLocationPermission.tr)
-                            .show();
-                      }
-                    },
+                                        CustomDialog(context: context)
+                                            .loadingDialog
+                                            .dismiss();
+                                      } else {
+                                        AwesomeDialog(
+                                                context: context,
+                                                dialogType: DialogType.ERROR,
+                                                headerAnimationLoop: false,
+                                                desc: CustomErrorsString
+                                                    .kDevelopError.tr)
+                                            .show();
+                                      }
+                                    } else {
+                                      AwesomeDialog(
+                                              context: context,
+                                              dialogType: DialogType.ERROR,
+                                              headerAnimationLoop: false,
+                                              desc: CustomErrorsString
+                                                  .kNotArrivedAtPickUpPoint.tr)
+                                          .show();
+                                    }
+                                  });
+                            } else {
+                              AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.INFO_REVERSED,
+                                      headerAnimationLoop: false,
+                                      desc: CustomStrings
+                                          .kNeedLocationPermission.tr)
+                                  .show();
+                            }
+                          },
                     icon: Icon(Icons.done_all, size: 25),
                     label: Text(
                       buttonText.value,

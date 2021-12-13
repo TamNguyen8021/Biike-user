@@ -593,6 +593,8 @@ class ChoNowSettingsPage extends StatelessWidget {
                                                         .show();
                                                   });
                                                   if (isSuccess) {
+                                                    isCountDownEnd.value = true;
+                                                    controller.update();
                                                     customDialog.loadingDialog
                                                         .dismiss();
                                                     AwesomeDialog(

@@ -178,8 +178,8 @@ final Map<String, String> en = {
 
   // 'biike_profile' screen
   'kOnJourneyWithBiike': 'On your journey with Biiké, you have',
-  'kNoOfRideTrips': 'successful trips as Keer',
-  'kNoOfFreeTrips': 'successful rides as Biker',
+  'kNoOfRideTrips': 'successful trips as Biker',
+  'kNoOfFreeTrips': 'successful rides as Keer',
   'kNoOfKm': 'km was saved',
   'kNoOfGasLitres': 'litres of gasoline was saved',
   'kThankYouForChoosingBiike':
@@ -548,4 +548,6 @@ final Map<String, String> en = {
         'You can only cancel maximum 5 trips per day',
     'kCannotDeleteDefaultAddress': 'Cannot delete your default address',
     'kCannotNegative': 'Tip cannot be negative',
+    'kChangeToBikerToSeeTripNow':
+        'Please change to Biker mode to view this Trip Now',
   });
