@@ -280,7 +280,7 @@ class TripProvider extends CommonProvider {
   /// Mark a trip as started based on [tripId].
   ///
   /// Author: TamNTT
-  Future<bool> startTrip({required int tripId}) async {
+  Future<dynamic> startTrip({required int tripId}) async {
     final response = await put(UrlStrings.tripUrl + '$tripId/startTime', {},
         headers: await headers);
 
@@ -288,7 +288,7 @@ class TripProvider extends CommonProvider {
 
     if (response.status.hasError) {
       logError(response);
-      return false;
+      return response.bodyString;
     } else {
       return true;
     }

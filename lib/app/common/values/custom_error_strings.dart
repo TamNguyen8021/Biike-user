@@ -73,6 +73,8 @@ class CustomErrorsString {
   // 'trip_details' screen
   static const String kYouCanOnlyCancel5TripsPerDay =
       'kYouCanOnlyCancel5TripsPerDay';
+  static const String kCannotStartTripBecauseAnotherPersonNotArrived =
+      'kCannotStartTripBecauseAnotherPersonNotArrived';
 
   // 'edit_address_book' screen
   static const String kCannotDeleteDefaultAddress =

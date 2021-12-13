@@ -1011,8 +1011,11 @@ class TripDetailsPage extends StatelessWidget {
                                                                                 12,
                                                                           )));
 
-                                                                          if (await _tripProvider.startTrip(
-                                                                              tripId: tripId)) {
+                                                                          var result =
+                                                                              await _tripProvider.startTrip(tripId: tripId);
+
+                                                                          if (result
+                                                                              is bool) {
                                                                             // FirebaseFirestore
                                                                             //     firebaseFirestore =
                                                                             //     FirebaseFirestore.instance;
@@ -1057,7 +1060,11 @@ class TripDetailsPage extends StatelessWidget {
                                                                             });
                                                                             changeToFinishTripButton();
                                                                           } else {
-                                                                            AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
+                                                                            if (result.contain('arrived')) {
+                                                                              AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kCannotStartTripBecauseAnotherPersonNotArrived.tr).show();
+                                                                            } else {
+                                                                              AwesomeDialog(context: context, dialogType: DialogType.ERROR, headerAnimationLoop: false, desc: CustomErrorsString.kDevelopError.tr).show();
+                                                                            }
                                                                           }
                                                                         } else {
                                                                           controller.userLocation =

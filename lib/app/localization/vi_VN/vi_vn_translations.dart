@@ -567,4 +567,6 @@ final Map<String, String> vi = {
     'kCannotNegative': 'Thưởng thêm không thể là số âm',
     'kChangeToBikerToSeeTripNow':
         'Xin hãy đổi sang Chở mode để xem chuyến Ké now',
+    'kCannotStartTripBecauseAnotherPersonNotArrived':
+        'Không thể bắt đầu chuyến đi vì người kia chưa đến điểm đón',
   });

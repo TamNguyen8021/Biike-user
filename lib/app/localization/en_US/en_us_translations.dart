@@ -550,4 +550,6 @@ final Map<String, String> en = {
     'kCannotNegative': 'Tip cannot be negative',
     'kChangeToBikerToSeeTripNow':
         'Please change to Biker mode to view this Trip Now',
+    'kCannotStartTripBecauseAnotherPersonNotArrived':
+        'Cannot start trip because your partner has not arrived at the station yet',
   });
