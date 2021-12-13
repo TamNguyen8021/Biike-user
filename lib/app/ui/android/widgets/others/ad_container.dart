@@ -65,7 +65,7 @@ class AdContainer extends HookWidget {
                 },
                 options: CarouselOptions(
                   viewportFraction: 1,
-                  autoPlay: true,
+                  autoPlay: false,
                   onPageChanged: (index, reason) {
                     indexState.value = index;
                   },
