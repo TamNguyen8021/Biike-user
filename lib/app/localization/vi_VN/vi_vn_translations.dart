@@ -160,7 +160,7 @@ final Map<String, String> vi = {
   'kLogOut': 'Đăng xuất',
 
   // 'block_list' screen
-  'kEmptyBlockList': 'Chưa có ai xui xẻo bị block',
+  'kEmptyBlockList': 'Danh sách hạn chế trống',
 
   // 'update_profile' screen
   'kEditProfile': 'Chỉnh sửa thông tin cá nhân',
