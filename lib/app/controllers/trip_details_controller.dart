@@ -297,7 +297,7 @@ class TripDetailsController extends GetxController {
   void _shareLink(
       {required BuildContext context,
       required CustomDialog customDialog}) async {
-    customDialog.loadingDialog.show();
+    // customDialog.loadingDialog.show();
     if (isLocationShared.isFalse) {
       if (Biike.pathshareUserToken.isEmpty ||
           Biike.pathshareUserIdentifier.isEmpty) {
@@ -311,38 +311,58 @@ class TripDetailsController extends GetxController {
             .savePathshareUserIdentifier(Biike.pathshareUserIdentifier);
       }
 
-      if (await pathshareProvider.createUserLocation(
-          userLat: userLocation!.latitude!,
-          userLng: userLocation!.longitude!)) {
-        if (sessionIdentifier.isEmpty ||
-            DateTime.now()
-                .subtract(Duration(hours: 1))
-                .isAfter(_lastTimeSharedLocation!)) {
-          Map<String, dynamic> data = await pathshareProvider.createSession();
-          if (data.isNotEmpty) {
-            isLocationShared.value = true;
-            sessionIdentifier = data['session']['identifier'];
-            _shareUrl = data['session']['users'][0]['invitation_url'];
-            if (_lastTimeSharedLocation == null) {
-              _lastTimeSharedLocation = DateTime.now();
-            }
-            customDialog.loadingDialog.dismiss();
-          } else {
-            customDialog.loadingDialog.dismiss();
-
-            AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.ERROR,
-                    headerAnimationLoop: false,
-                    desc: CustomErrorsString.kDevelopError.tr)
-                .show();
+      if (sessionIdentifier.isEmpty ||
+          DateTime.now()
+              .subtract(Duration(hours: 1))
+              .isAfter(_lastTimeSharedLocation!)) {
+        Map<String, dynamic> data = await pathshareProvider.createSession();
+        if (data.isNotEmpty) {
+          isLocationShared.value = true;
+          sessionIdentifier = data['session']['identifier'];
+          _shareUrl = data['session']['users'][0]['invitation_url'];
+          if (_lastTimeSharedLocation == null) {
+            _lastTimeSharedLocation = DateTime.now();
           }
+          customDialog.loadingDialog.dismiss();
         } else {
+          customDialog.loadingDialog.dismiss();
+
+          AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.ERROR,
+                  headerAnimationLoop: false,
+                  desc: CustomErrorsString.kDevelopError.tr)
+              .show();
+        }
+      } else {
+        userLocation = await CommonFunctions.getCurrentLocation();
+        if (await pathshareProvider.createUserLocation(
+            userLat: userLocation!.latitude!,
+            userLng: userLocation!.longitude!)) {
           isLocationShared.value =
               await pathshareProvider.startOrStopLocationSharing(
                   isShared: true, sessionIdentifier: sessionIdentifier);
           customDialog.loadingDialog.dismiss();
+        } else {
+          customDialog.loadingDialog.dismiss();
+
+          AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.ERROR,
+                  headerAnimationLoop: false,
+                  desc: CustomErrorsString.kDevelopError.tr)
+              .show();
         }
+      }
+    } else {
+      userLocation = await CommonFunctions.getCurrentLocation();
+      if (await pathshareProvider.createUserLocation(
+          userLat: userLocation!.latitude!,
+          userLng: userLocation!.longitude!)) {
+        isLocationShared.value =
+            await pathshareProvider.startOrStopLocationSharing(
+                isShared: true, sessionIdentifier: sessionIdentifier);
+        customDialog.loadingDialog.dismiss();
       } else {
         customDialog.loadingDialog.dismiss();
 
