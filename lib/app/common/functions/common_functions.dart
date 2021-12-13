@@ -10,6 +10,7 @@ import 'package:bikes_user/app/ui/android/widgets/buttons/custom_text_button.dar
 import 'package:bikes_user/app/ui/theme/custom_colors.dart';
 import 'package:bikes_user/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
@@ -430,5 +431,27 @@ class CommonFunctions {
       default:
         return '';
     }
+  }
+
+  Future<bool> onBackPressed(
+      {required BuildContext context, String? errorMessage}) {
+    errorMessage == null
+        ? Get.defaultDialog(
+            title: 'Confirm',
+            middleText: 'Do you want to exit the app?',
+            middleTextStyle: TextStyle(color: Colors.black),
+            textCancel: CustomStrings.kCancel.tr,
+            textConfirm: 'Yes',
+            onConfirm: () => SystemChannels.platform
+                .invokeMethod<void>('SystemNavigator.pop')) //exit the app
+
+        : AwesomeDialog(
+                context: context,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                desc: errorMessage)
+            .show();
+
+    return Future.value(false);
   }
 }
