@@ -77,20 +77,16 @@ class ConfirmArrivalButton extends StatelessWidget {
                                   departureLat: departureLocation.latitude,
                                   departureLng: departureLocation.longitude)) {
                                 Get.back();
-
-                                CustomDialog(context: context)
-                                    .loadingDialog
-                                    .show();
+                                
+                                CustomDialog customDialog = CustomDialog(context: context);
+                                customDialog.loadingDialog.show();
 
                                 if (await _tripProvider
                                     .markArrivedAtPickUpPoint(tripId: tripId)) {
                                   buttonColor.value = CustomColors.kDarkGray;
                                   buttonText.value =
                                       CustomStrings.kArriveAtDestination.tr;
-
-                                  CustomDialog(context: context)
-                                      .loadingDialog
-                                      .dismiss();
+                                  customDialog.loadingDialog.dismiss();
                                 } else {
                                   AwesomeDialog(
                                           context: context,

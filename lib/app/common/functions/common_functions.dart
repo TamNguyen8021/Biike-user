@@ -439,4 +439,27 @@ class CommonFunctions {
         return '';
     }
   }
+
+  Future<bool> onBackPressed(
+      {required BuildContext context, String? errorMessage}) {
+    errorMessage == null
+        ? Get.defaultDialog(
+        title: 'Confirm',
+        middleText: 'Do you want to exit the app?',
+        middleTextStyle: TextStyle(color: Colors.black),
+        textCancel: CustomStrings.kCancel.tr,
+        textConfirm: 'Yes',
+        onConfirm: () =>
+            SystemChannels.platform
+                .invokeMethod<void>('SystemNavigator.pop')) //exit the app
+
+        : AwesomeDialog(
+        context: context,
+        dialogType: DialogType.ERROR,
+        headerAnimationLoop: false,
+        desc: errorMessage)
+        .show();
+
+    return Future.value(false);
+  }
 }
