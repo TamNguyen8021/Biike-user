@@ -44,13 +44,13 @@ class RegisterController extends GetxController {
     try {
       _enableLoading(true);
       await _userRepo.signup(name, email, formatPhone(phone), pass);
+      Get.offAndToNamed(CommonRoutes.LOGIN);
       AwesomeDialog(
               context: context,
               dialogType: DialogType.INFO_REVERSED,
               headerAnimationLoop: false,
               desc: CustomStrings.kSentVerifiedEmail.tr)
           .show();
-      Get.offAndToNamed(CommonRoutes.LOGIN);
     } catch (error) {
       if (error is DioError && error.response?.statusCode == 400) {
         AwesomeDialog(
