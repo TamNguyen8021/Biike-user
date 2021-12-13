@@ -20,7 +20,7 @@ class CriteriaButton extends StatelessWidget {
             onPressed: () {
               isSelected.value = !isSelected.value;
               _feedbackController.updateCriteria(text,
-                  isRemove: isSelected.value);
+                  isAdd: isSelected.value);
               _feedbackController.isResetCriteriaField.value = false;
             },
             child: Row(

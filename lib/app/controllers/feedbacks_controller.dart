@@ -49,8 +49,8 @@ class FeedbackController extends GetxController {
     _feedbackContent = feedbackContent;
   }
 
-  void updateCriteria(String criteria, {isRemove = false}) {
-    if (isRemove == true) {
+  void updateCriteria(String criteria, {isAdd = false}) {
+    if (isAdd == false) {
       _criteria.remove(criteria);
       return;
     }
@@ -86,7 +86,7 @@ class FeedbackController extends GetxController {
       return CustomErrorsString.kNotEnoughPoint.tr;
     }
 
-    int? tipValue = int.tryParse(_tip);
+    int? tipValue = (_tip != null ? int.tryParse(_tip) : null);
     if (tipValue != null && tipValue < 0)
       return CustomErrorsString.kCannotNegative.tr;
 
@@ -103,7 +103,7 @@ class FeedbackController extends GetxController {
         tripTip: (_tip == null || _tip == '' || int.parse(_tip) == 0)
             ? null
             : int.parse(_tip),
-        criteria: _criteria.isEmpty ? '' : _criteria.toString(),
+        criteria: _criteria.isEmpty ? '' : _criteria.join(', '),
         createdDate: DateTime.now());
 
     return await _feedbackProvider.sendFeedback(feedback);
