@@ -309,6 +309,7 @@ class AppPages {
         ChoNowSettingsBinding(),
         StationBinding(),
         UserBinding(),
+        HomeBinding(),
       ],
     ),
     GetPage(
