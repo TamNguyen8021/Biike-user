@@ -52,7 +52,7 @@ class LoginController extends GetxController {
       getIt<Repositories>().setHeaders();
       Get.toNamed(CommonRoutes.CHOOSE_MODE);
     } on DioError catch (e) {
-      var _errorMessage = CustomStrings.kLoginExceptionError;
+      var _errorMessage = CustomErrorsString.kDevelopError.tr;
       final _errorResult = e.response?.data;
 
       if (_errorResult is String) {

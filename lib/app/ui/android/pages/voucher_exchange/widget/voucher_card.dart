@@ -1,3 +1,4 @@
+import 'package:bikes_user/app/common/values/custom_error_strings.dart';
 import 'package:bikes_user/app/common/values/custom_strings.dart';
 import 'package:bikes_user/app/data/models/voucher.dart';
 import 'package:bikes_user/app/routes/app_routes.dart';
@@ -27,9 +28,7 @@ class VoucherCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
           decoration: BoxDecoration(
-              color: now.isAfter(voucher.endDate)
-                  ? CustomColors.kDarkGray
-                  : CustomColors.kLightGray,
+              color: CustomColors.kLightGray,
               borderRadius: BorderRadius.circular(5),
               boxShadow: <BoxShadow>[
                 BoxShadow(
@@ -47,59 +46,64 @@ class VoucherCard extends StatelessWidget {
                   child: VoucherImages(voucher: voucher, isIcon: true),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    voucher.voucherName,
-                    style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      voucher.brand,
-                      style: Theme.of(context).textTheme.bodyText1,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      voucher.voucherName,
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      overflow: TextOverflow.fade,
                     ),
-                  ),
-                  isExchanged
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 4.0),
-                          child: Text(
-                            CustomStrings.kHsd.tr +
-                                DateFormat('dd/MM/yyyy')
-                                    .format(voucher.endDate),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(color: CustomColors.kOrange),
-                          ),
-                        )
-                      : Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: Text(
-                                voucher.amountOfPoint.toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(color: CustomColors.kOrange),
-                              ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        voucher.brand,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ),
+                    isExchanged
+                        ? Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+                            child: Text(
+                              now.isBefore(voucher.endDate)
+                                  ? CustomStrings.kHsd.tr +
+                                      DateFormat('dd/MM/yyyy')
+                                          .format(voucher.endDate)
+                                  : CustomErrorsString.kOutOfDate.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(color: CustomColors.kOrange),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 2.0),
-                              child: SvgPicture.asset(
-                                'assets/images/crown.svg',
-                                color: CustomColors.kOrange,
-                                height: 12,
+                          )
+                        : Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: Text(
+                                  voucher.amountOfPoint.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(color: CustomColors.kOrange),
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                ],
-              )
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 2.0),
+                                child: SvgPicture.asset(
+                                  'assets/images/crown.svg',
+                                  color: CustomColors.kOrange,
+                                  height: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                  ],
+                ),
+              ),
             ],
           ),
         ));
