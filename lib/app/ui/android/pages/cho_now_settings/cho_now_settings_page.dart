@@ -495,154 +495,140 @@ class ChoNowSettingsPage extends StatelessWidget {
                               AsyncSnapshot<dynamic> snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
-                              if (controller.trip.bikerId == null &&
-                                  DateTime.parse(controller.trip.bookTime)
-                                      .isBefore(DateTime.now())) {
-                                CountdownTimerController
-                                    countdownTimerController =
-                                    CountdownTimerController(
-                                        endTime: DateTime.now()
-                                                .millisecondsSinceEpoch +
-                                            1000 * 60 * 3,
-                                        onEnd: () {
-                                          isCountDownEnd.value = true;
-                                          controller.update();
-                                        });
+                              CountdownTimerController
+                                  countdownTimerController =
+                                  CountdownTimerController(
+                                      endTime: DateTime.now()
+                                              .millisecondsSinceEpoch +
+                                          1000 * 60 * 3,
+                                      onEnd: () {
+                                        isCountDownEnd.value = true;
+                                        controller.update();
+                                      });
 
-                                return Column(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 22.0, vertical: 16.0),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 8.0),
-                                            child: UpcomingTripCard(
-                                                isSearchedTrip: false,
-                                                isTripNow: true,
-                                                tripId: controller.trip.tripId,
-                                                userId: controller.user.userId,
-                                                avatarUrl:
-                                                    controller.user.avatar,
-                                                name: controller
-                                                    .user.userFullname,
-                                                phoneNo: controller
-                                                    .user.userPhoneNumber,
-                                                bookTime:
-                                                    controller.trip.bookTime,
-                                                departureStation: controller
-                                                    .departureStation
-                                                    .departureName,
-                                                destinationStation: controller
-                                                    .destinationStation
-                                                    .destinationName),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                              CountdownTimer(
-                                                controller:
-                                                    countdownTimerController,
-                                                textStyle: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1,
-                                                widgetBuilder: (context, time) {
-                                                  if (time == null)
-                                                    return SizedBox.shrink();
-                                                  return Text(
-                                                    CustomStrings
-                                                            .kAutoCancelAfter
-                                                            .tr +
-                                                        time.min.toString() +
-                                                        ':' +
-                                                        time.sec.toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1,
-                                                  );
-                                                },
-                                              ),
-                                              CustomTextButton(
-                                                  backgroundColor:
-                                                      CustomColors.kBlue,
-                                                  foregroundColor: Colors.white,
-                                                  text:
-                                                      CustomStrings.kAccept.tr,
-                                                  onPressedFunc: () async {
-                                                    CustomDialog customDialog =
-                                                        CustomDialog(
-                                                            context: context);
+                              return Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 22.0, vertical: 16.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
+                                          child: UpcomingTripCard(
+                                              isSearchedTrip: false,
+                                              isTripNow: true,
+                                              tripId: controller.trip.tripId,
+                                              userId: controller.user.userId,
+                                              avatarUrl: controller.user.avatar,
+                                              name:
+                                                  controller.user.userFullname,
+                                              phoneNo: controller
+                                                  .user.userPhoneNumber,
+                                              bookTime:
+                                                  controller.trip.bookTime,
+                                              departureStation: controller
+                                                  .departureStation
+                                                  .departureName,
+                                              destinationStation: controller
+                                                  .destinationStation
+                                                  .destinationName),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            CountdownTimer(
+                                              controller:
+                                                  countdownTimerController,
+                                              textStyle: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
+                                              widgetBuilder: (context, time) {
+                                                if (time == null)
+                                                  return SizedBox.shrink();
+                                                return Text(
+                                                  CustomStrings
+                                                          .kAutoCancelAfter.tr +
+                                                      time.min.toString() +
+                                                      ':' +
+                                                      time.sec.toString(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
+                                                );
+                                              },
+                                            ),
+                                            CustomTextButton(
+                                                backgroundColor:
+                                                    CustomColors.kBlue,
+                                                foregroundColor: Colors.white,
+                                                text: CustomStrings.kAccept.tr,
+                                                onPressedFunc: () async {
+                                                  CustomDialog customDialog =
+                                                      CustomDialog(
+                                                          context: context);
+                                                  customDialog.loadingDialog
+                                                      .show();
+
+                                                  bool isSuccess =
+                                                      await _tripProvider
+                                                          .acceptTrip(
+                                                              tripId: controller
+                                                                  .trip.tripId)
+                                                          .catchError((error) {
                                                     customDialog.loadingDialog
+                                                        .dismiss();
+                                                    AwesomeDialog(
+                                                            context: context,
+                                                            dialogType:
+                                                                DialogType
+                                                                    .ERROR,
+                                                            headerAnimationLoop:
+                                                                false,
+                                                            desc: CustomErrorsString
+                                                                .kDevelopError
+                                                                .tr)
                                                         .show();
-
-                                                    bool isSuccess =
-                                                        await _tripProvider
-                                                            .acceptTrip(
-                                                                tripId:
-                                                                    controller
-                                                                        .trip
-                                                                        .tripId)
-                                                            .catchError(
-                                                                (error) {
-                                                      customDialog.loadingDialog
-                                                          .dismiss();
-                                                      AwesomeDialog(
-                                                              context: context,
-                                                              dialogType:
-                                                                  DialogType
-                                                                      .ERROR,
-                                                              headerAnimationLoop:
-                                                                  false,
-                                                              desc: CustomErrorsString
-                                                                  .kDevelopError
-                                                                  .tr)
-                                                          .show();
-                                                    });
-                                                    if (isSuccess) {
-                                                      isCountDownEnd.value =
-                                                          true;
-                                                      controller.update();
-                                                      customDialog.loadingDialog
-                                                          .dismiss();
-                                                      AwesomeDialog(
-                                                        context: context,
-                                                        dialogType:
-                                                            DialogType.SUCCES,
-                                                        headerAnimationLoop:
-                                                            false,
-                                                        desc: CustomStrings
-                                                            .kAcceptSuccessful
-                                                            .tr,
-                                                      ).show();
-                                                    } else {
-                                                      customDialog.loadingDialog
-                                                          .dismiss();
-                                                      AwesomeDialog(
-                                                        context: context,
-                                                        dialogType:
-                                                            DialogType.ERROR,
-                                                        headerAnimationLoop:
-                                                            false,
-                                                        desc: CustomErrorsString
-                                                            .kDevelopError.tr,
-                                                      ).show();
-                                                    }
-                                                  },
-                                                  hasBorder: false),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                  });
+                                                  if (isSuccess) {
+                                                    isCountDownEnd.value = true;
+                                                    controller.update();
+                                                    customDialog.loadingDialog
+                                                        .dismiss();
+                                                    AwesomeDialog(
+                                                      context: context,
+                                                      dialogType:
+                                                          DialogType.SUCCES,
+                                                      headerAnimationLoop:
+                                                          false,
+                                                      desc: CustomStrings
+                                                          .kAcceptSuccessful.tr,
+                                                    ).show();
+                                                  } else {
+                                                    customDialog.loadingDialog
+                                                        .dismiss();
+                                                    AwesomeDialog(
+                                                      context: context,
+                                                      dialogType:
+                                                          DialogType.ERROR,
+                                                      headerAnimationLoop:
+                                                          false,
+                                                      desc: CustomErrorsString
+                                                          .kDevelopError.tr,
+                                                    ).show();
+                                                  }
+                                                },
+                                                hasBorder: false),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    Divider(),
-                                  ],
-                                );
-                              } else {
-                                return SizedBox.shrink();
-                              }
+                                  ),
+                                  Divider(),
+                                ],
+                              );
                             } else {
                               return Loading();
                             }
