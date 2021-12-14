@@ -45,8 +45,6 @@ class AdContainer extends HookWidget {
                     },
                     child: Image.network(
                       item.advertisementImageUrl,
-                      cacheHeight: 300,
-                      cacheWidth: 300,
                       width: double.infinity,
                       height: heightImage,
                       errorBuilder: (context, error, stackTrace) {
