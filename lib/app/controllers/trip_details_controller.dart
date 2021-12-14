@@ -317,8 +317,26 @@ class TripDetailsController extends GetxController {
               .isAfter(_lastTimeSharedLocation!)) {
         Map<String, dynamic> data = await pathshareProvider.createSession();
         if (data.isNotEmpty) {
-          isLocationShared.value = true;
           sessionIdentifier = data['session']['identifier'];
+          userLocation = await CommonFunctions.getCurrentLocation();
+          if (await pathshareProvider.createUserLocation(
+              userLat: userLocation!.latitude!,
+              userLng: userLocation!.longitude!)) {
+            isLocationShared.value =
+                await pathshareProvider.startOrStopLocationSharing(
+                    isShared: true, sessionIdentifier: sessionIdentifier);
+            customDialog.loadingDialog.dismiss();
+          } else {
+            customDialog.loadingDialog.dismiss();
+
+            AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.ERROR,
+                    headerAnimationLoop: false,
+                    desc: CustomErrorsString.kDevelopError.tr)
+                .show();
+          }
+          // isLocationShared.value = true;
           _shareUrl = data['session']['users'][0]['invitation_url'];
           if (_lastTimeSharedLocation == null) {
             _lastTimeSharedLocation = DateTime.now();
