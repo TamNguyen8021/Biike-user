@@ -9,8 +9,8 @@ class VoucherImages extends StatelessWidget {
       : super(key: key);
 
   AssetImage get _placeholder => isIcon
-      ? AssetImage('assets/images/voucher-trong.jpg')
-      : AssetImage('assets/images/voucher-ngoai.jpg');
+      ? AssetImage('assets/images/voucher-ngoai.jpg')
+      : AssetImage('assets/images/voucher-trong.jpg');
 
   double get _height => isIcon ? 100 : 150;
   double get _width => isIcon ? 100 : double.infinity;
