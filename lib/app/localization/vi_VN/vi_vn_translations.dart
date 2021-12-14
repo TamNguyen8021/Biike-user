@@ -227,7 +227,7 @@ final Map<String, String> vi = {
   'kGetTripSuccess': 'Nhận chở thành công!',
 
   // 'finding_biker' screen
-  'kFindingBiker': 'Đang tìm người chở',
+  'kFindingBiker': 'Đang tìm người chở',
 
   // 'finding_biker_fail' screen
   'kFindBikerFail': 'Không tìm thấy người chở ké',
