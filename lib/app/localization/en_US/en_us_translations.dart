@@ -80,13 +80,15 @@ final Map<String, String> en = {
 
   'kNoKeNowTrip': 'No Ride Now trip',
   'kBikerReadyReminder': 'Ready to go!',
+  'kFilter': 'Filter trips',
+  'kSelectHour': 'Hour',
+  'kSelectSourceStation': 'Select departure',
+  'kSelectDestinationStation': 'Select destination',
   'kAccept': 'Accept',
   'kAcceptSuccessful': 'You have accepted this trip',
   'kSearchAgain': 'Clear',
   'kSearch': 'Search',
   'kTripCanOnlySearchFrom5AMTo9PM': 'You can only find trips from 5AM to 9PM',
-  'kSelectSourceStation': 'Select departure',
-  'kSelectDestinationStation': 'Select destination',
 
   // 'require_add_bike' screen
   'kNeedAddBikeToBecomeBiker': 'You need to add bike to use Biker mode',
