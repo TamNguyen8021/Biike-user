@@ -17,11 +17,11 @@ class CreateTripButton extends StatelessWidget {
 
     return FloatingActionButton(
       elevation: 1.0,
-      onPressed: currentTime.isBefore(lowestBoundLimitTime) &&
+      onPressed: currentTime.isBefore(lowestBoundLimitTime) ||
               currentTime.isAfter(highestBoundLimitTime)
           ? null
           : createTrip,
-      backgroundColor: currentTime.isBefore(lowestBoundLimitTime) &&
+      backgroundColor: currentTime.isBefore(lowestBoundLimitTime) ||
               currentTime.isAfter(highestBoundLimitTime)
           ? CustomColors.kDarkGray
           : CustomColors.kOrange,
