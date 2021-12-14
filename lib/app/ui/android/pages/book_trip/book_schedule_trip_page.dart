@@ -40,7 +40,7 @@ class BookScheduleTripPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    CustomStrings.kTime.tr,
+                    CustomStrings.kChooseDate.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline6!
@@ -70,7 +70,7 @@ class BookScheduleTripPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    CustomStrings.kTime.tr,
+                    CustomStrings.kChooseTime.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline6!
