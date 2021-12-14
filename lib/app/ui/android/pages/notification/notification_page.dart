@@ -13,7 +13,9 @@ class NotificationPage extends StatelessWidget {
   final _homeController = Get.find<HomeController>();
 
   _onBackPressed() {
-    _homeController.pagingController.refresh();
+    _homeController.upcomingTrips.clear();
+    _homeController.pagingController.itemList!.clear();
+    _homeController.pagingController.notifyPageRequestListeners(0);
     Get.back();
   }
 
