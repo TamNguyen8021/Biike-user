@@ -83,8 +83,14 @@ class TripDetailsController extends GetxController {
     bike = Bike.fromJson(data);
 
     if (data['feedbacks'].length > 0) {
-      feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
-      feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
+      TripFeedback _feedback1 = TripFeedback.fromJson(data['feedbacks'][0]);
+      if (_feedback1.userId == Biike.userId.value) {
+        feedback1 = _feedback1;
+        feedback2 = TripFeedback.fromJson(data['feedbacks'][1]);
+      } else {
+        feedback2 = _feedback1;
+        feedback1 = TripFeedback.fromJson(data['feedbacks'][1]);
+      }
     }
     update(['helpCenter']);
   }
